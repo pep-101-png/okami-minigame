@@ -11,8 +11,38 @@ export const ink = new THREE.MeshBasicMaterial({
   color: "#302b29",
   side: THREE.BackSide,
 });
+let wash;
+function washTexture() {
+  const c = document.createElement("canvas");
+  c.width = c.height = 256;
+  const ctx = c.getContext("2d");
+  ctx.fillStyle = "#fff9e8";
+  ctx.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 500; i++) {
+    ctx.fillStyle = `rgba(76,57,30,${0.01 + Math.random() * 0.035})`;
+    ctx.beginPath();
+    ctx.ellipse(
+      Math.random() * 256,
+      Math.random() * 256,
+      8 + Math.random() * 30,
+      2 + Math.random() * 12,
+      Math.random() * 3,
+      0,
+      Math.PI * 2,
+    );
+    ctx.fill();
+  }
+  for (let i = 0; i < 9000; i++) {
+    ctx.fillStyle = "rgba(44,30,15,.07)";
+    ctx.fillRect(Math.random() * 256, Math.random() * 256, 1, 1);
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
 export function paint(color) {
-  return new THREE.MeshToonMaterial({ color, gradientMap: ramp });
+  wash ??= washTexture();
+  return new THREE.MeshToonMaterial({ color, gradientMap: ramp, map: wash });
 }
 export function outline(mesh, width = 0.035) {
   const shell = new THREE.Mesh(mesh.geometry, ink);

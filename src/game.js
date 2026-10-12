@@ -2,12 +2,17 @@ import * as THREE from "three";
 import { wolf, demon } from "./models.js";
 import { animateWolf } from "./animation.js";
 import { Effects } from "./effects.js";
+import { ATTACKS } from "./combat.js";
 export class Game {
   constructor(scene, input, world, onEnd) {
     Object.assign(this, { scene, input, world, onEnd });
     this.player = wolf();
     scene.add(this.player.root);
-    this.player.root.position.set(0, 0, 6);
+    this.player.root.position.set(0, 0, 12);
+    this.hitStop = 0;
+    this.dialogue = null;
+    this.nearNpc = null;
+    this.victory = false;
     this.hp = 100;
     this.kills = 0;
     this.enemies = [];
@@ -34,7 +39,7 @@ export class Game {
       [7, 1],
     ]) {
       const mesh = demon();
-      mesh.position.set(x, 0, z);
+      mesh.position.set(x + 26, 0, z);
       scene.add(mesh);
       const canvas = document.createElement("canvas");
       canvas.width = 128;
@@ -48,6 +53,7 @@ export class Game {
       mesh.add(bar);
       const e = {
         mesh,
+        home: mesh.position.clone(),
         hp: 5,
         maxHp: 5,
         cooldown: 1,
@@ -73,10 +79,19 @@ export class Game {
     e.texture.needsUpdate = true;
   }
   collide(pos, r = 0.5) {
-    const len = Math.hypot(pos.x, pos.z);
-    if (len > 11.3) {
-      pos.x *= 11.3 / len;
-      pos.z *= 11.3 / len;
+    const b = this.world.bounds;
+    pos.x = THREE.MathUtils.clamp(pos.x, b.minX + r, b.maxX - r);
+    pos.z = THREE.MathUtils.clamp(pos.z, b.minZ + r, b.maxZ - r);
+    for (const box of this.world.boxes) {
+      const dx = pos.x - box.x,
+        dz = pos.z - box.z,
+        hx = box.halfX + r,
+        hz = box.halfZ + r;
+      if (Math.abs(dx) < hx && Math.abs(dz) < hz) {
+        if (hx - Math.abs(dx) < hz - Math.abs(dz))
+          pos.x = box.x + (dx >= 0 ? hx : -hx);
+        else pos.z = box.z + (dz >= 0 ? hz : -hz);
+      }
     }
     for (const o of this.world.obstacles) {
       const dx = pos.x - o.x,
@@ -91,7 +106,21 @@ export class Game {
   }
   startAttack() {
     this.combo = this.comboWindow > 0 ? (this.combo % 3) + 1 : 1;
-    this.attackDuration = [0, 0.3, 0.32, 0.43][this.combo];
+    this.attackDuration = ATTACKS[this.combo].duration;
+    const near = this.enemies
+      .filter(
+        (e) =>
+          e.hp > 0 && e.mesh.position.distanceTo(this.player.root.position) < 4,
+      )
+      .sort(
+        (a, b) =>
+          a.mesh.position.distanceTo(this.player.root.position) -
+          b.mesh.position.distanceTo(this.player.root.position),
+      )[0];
+    if (near) {
+      const d = near.mesh.position.clone().sub(this.player.root.position);
+      this.player.root.rotation.y = Math.atan2(-d.x, -d.z);
+    }
     this.attackTime = this.attackDuration;
     this.comboWindow = 0.8;
     this.didHit = false;
@@ -108,13 +137,14 @@ export class Game {
       const diff = e.mesh.position.clone().sub(root.position);
       diff.y = 0;
       if (
-        diff.length() < 3.5 &&
-        diff.normalize().dot(forward) > 0.5 &&
+        diff.length() < ATTACKS[this.combo].range &&
+        diff.normalize().dot(forward) > ATTACKS[this.combo].arc &&
         root.position.y < 1.6
       ) {
-        e.hp = Math.max(0, e.hp - (this.combo === 3 ? 3 : 1));
+        e.hp = Math.max(0, e.hp - ATTACKS[this.combo].damage);
         e.mesh.position.addScaledVector(forward, this.combo === 3 ? 1.4 : 0.45);
-        e.stun = 0.35;
+        e.stun = this.combo === 3 ? 0.8 : 0.4;
+        this.hitStop = this.combo === 3 ? 0.075 : 0.04;
         e.state = "approach";
         e.cooldown = 0.8;
         this.effects.burst(e.mesh.position, 16);
@@ -123,12 +153,39 @@ export class Game {
           e.mesh.visible = false;
           this.kills++;
           this.effects.burst(e.mesh.position, 20, "#e7b743");
-          if (this.kills === this.enemies.length) this.end(true);
+          if (this.kills === this.enemies.length) {
+            this.victory = true;
+            this.end(true);
+          }
         }
       }
     }
   }
   update(dt) {
+    this.world.update(dt, this.time);
+    this.nearNpc =
+      this.world.npcs.find(
+        (n) => n.root.position.distanceTo(this.player.root.position) < 2.5,
+      ) || null;
+    if (this.input.consume("interact") && this.active) {
+      if (this.dialogue) {
+        this.dialogue.line++;
+        if (this.dialogue.line >= this.dialogue.npc.lines.length)
+          this.dialogue = null;
+      } else if (this.nearNpc) this.dialogue = { npc: this.nearNpc, line: 0 };
+    }
+    if (this.dialogue) {
+      this.input.consume("attack");
+      this.input.consume("jump");
+      this.input.consume("dash");
+      this.velocity.set(0, 0, 0);
+      this.speed = 0;
+      return;
+    }
+    if (this.hitStop > 0) {
+      this.hitStop = Math.max(0, this.hitStop - dt);
+      return;
+    }
     this.time += dt;
     this.effects.update(dt);
     for (const p of this.world.petals.children) {
@@ -156,7 +213,7 @@ export class Game {
       "jumpBuffer",
     ])
       this[key] = Math.max(0, this[key] - dt);
-    if (this.input.consume("attack")) this.attackBuffer = 0.25;
+    if (this.input.consume("attack")) this.attackBuffer = 0.38;
     if (this.input.consume("jump")) this.jumpBuffer = 0.15;
     let x =
         Number(this.input.keys.has("KeyD")) -
@@ -170,6 +227,8 @@ export class Game {
         .normalize()
         .applyAxisAngle(new THREE.Vector3(0, 1, 0), this.input.yaw);
     if (this.input.consume("dash") && this.dashCooldown === 0) {
+      this.attackTime = 0;
+      this.attackBuffer = 0;
       this.dashTime = 0.22;
       this.dashCooldown = 0.8;
       this.invulnerable = 0.28;
@@ -177,7 +236,7 @@ export class Game {
     }
     const dashing = this.dashTime > 0;
     this.dashTime = Math.max(0, this.dashTime - dt);
-    if (direction.lengthSq() && !dashing) {
+    if (direction.lengthSq() && !dashing && this.attackTime <= 0) {
       const angle = Math.atan2(-direction.x, -direction.z);
       root.rotation.y +=
         Math.atan2(
@@ -218,14 +277,17 @@ export class Game {
     if (this.attackTime > 0) {
       this.attackTime = Math.max(0, this.attackTime - dt);
       phase = 1 - this.attackTime / this.attackDuration;
-      if (phase > 0.24 && phase < 0.65) {
+      if (
+        phase > ATTACKS[this.combo].hit - 0.12 &&
+        phase < ATTACKS[this.combo].hit + 0.13
+      ) {
         const f = new THREE.Vector3(0, 0, -1).applyAxisAngle(
           new THREE.Vector3(0, 1, 0),
           root.rotation.y,
         );
-        root.position.addScaledVector(f, dt * (this.combo === 3 ? 5 : 2.5));
+        root.position.addScaledVector(f, dt * ATTACKS[this.combo].lunge);
       }
-      if (phase > 0.33 && !this.didHit) {
+      if (phase > ATTACKS[this.combo].hit && !this.didHit) {
         this.didHit = true;
         this.strike();
       }
@@ -238,10 +300,22 @@ export class Game {
       air: root.position.y > 0.05,
       attack: this.attackTime > 0 ? phase : 0,
       dash: dashing,
+      combo: this.combo,
     });
     for (let i = 0; i < this.enemies.length; i++) {
       const e = this.enemies[i];
       if (e.hp <= 0) continue;
+      if (
+        root.position.x < 15 ||
+        root.position.distanceTo(e.mesh.position) > 15
+      ) {
+        const home = e.home.clone().sub(e.mesh.position);
+        if (home.length() > 0.2)
+          e.mesh.position.addScaledVector(home.normalize(), dt * 2);
+        e.state = "approach";
+        e.cooldown = 0.8;
+        continue;
+      }
       e.cooldown = Math.max(0, e.cooldown - dt);
       e.stun = Math.max(0, e.stun - dt);
       if (e.stun > 0) continue;

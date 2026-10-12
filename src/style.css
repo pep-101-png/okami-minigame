@@ -262,3 +262,42 @@ body {
     sans-serif;
   gap: 15px;
 }
+#talk-prompt {
+  position: fixed;
+  left: 50%;
+  bottom: 110px;
+  transform: translateX(-50%);
+  font: 14px Georgia;
+  color: #3d3024;
+  background: #f3e2bbdd;
+  padding: 10px 20px;
+  pointer-events: none;
+}
+#talk-prompt:empty {
+  display: none;
+}
+#dialogue {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  bottom: 65px;
+  transform: translateX(-50%);
+  width: min(620px, 90vw);
+  padding: 24px 30px;
+  background: #f1e2c0f5;
+  border: 2px solid #65503d;
+  box-shadow: 8px 8px 0 #43352533;
+  color: #443329;
+}
+#dialogue strong {
+  color: #a8392a;
+  font-size: 18px;
+}
+#dialogue p {
+  font-size: 17px;
+  line-height: 1.6;
+}
+#dialogue small {
+  font: 11px Arial;
+  letter-spacing: 2px;
+}

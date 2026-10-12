@@ -6,12 +6,16 @@ A procedural Three.js arena minigame inspired by Japanese ink painting and folkl
 
 Node.js 22.12+ or 24 recommended. Run `npm ci`, then `npm run dev`. Run `npm run build` for production, and `npm run preview` to serve the build.
 
-Enter the grove, then use WASD to move relative to the camera, mouse to look, Space to jump, and left click or J to thrust. Chain attacks within one second for a three-hit combo. The third thrust deals triple damage. Hold Shift to run and press K to dodge with a brief invulnerability window. Enemies telegraph lunges with a windup and glowing health bar. Attacks and jumps are buffered for more responsive input. Restore all five spirits to win; losing all vitality ends the run. Escape releases the cursor. A desktop browser with WebGL is required.
+Enter Windflower Village. Use WASD to move relative to the fixed 2.5D camera; Space jumps, Shift runs, and K dodges. Press E near a villager to talk, then E to advance or close the conversation. Four villagers live along the main street, and one walks between waypoints. Buildings and stalls have collision boundaries.
+
+Follow the east road to the spirit grove. Left click or J chains a quick thrust, turning sweep, and lunging finisher with distinct windups, hit timing, arcs, damage, recoil, and brief impact pauses. The village is safe: spirits remain in the grove. Restore all five spirits to win, then choose Continue Exploring to keep walking around. Losing all vitality allows a restart. A desktop browser with WebGL 2 is required.
 
 ## Modules
 
 - `src/models.js`: procedural wolf, mouth-held side-handle spear, and spirits.
-- `src/world.js`: arena, obstacles, lighting, torii, lanterns, blossoms.
+- `src/world.js`: spirit grove, lighting, torii, lanterns, blossoms.
+- `src/town.js`: village architecture, NPCs, conversations, routes, building colliders.
+- `src/combat.js`: data-driven combo timings, arcs, damage, and lunges.
 - `src/input.js`: keyboard and pointer-lock camera input.
 - `src/game.js`: movement, gravity, collisions, combat, health, win/loss.
 - `src/animation.js`: articulated gait, jump poses, head-led thrusts.

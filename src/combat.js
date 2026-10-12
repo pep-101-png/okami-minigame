@@ -1,0 +1,30 @@
+export const ATTACKS = [
+  null,
+  {
+    name: "FIRST • QUICK THRUST",
+    duration: 0.32,
+    hit: 0.3,
+    damage: 1,
+    range: 3.5,
+    arc: 0.65,
+    lunge: 2.8,
+  },
+  {
+    name: "SECOND • TURNING SWEEP",
+    duration: 0.48,
+    hit: 0.48,
+    damage: 2,
+    range: 3.1,
+    arc: -0.25,
+    lunge: 0.8,
+  },
+  {
+    name: "THIRD • LUNGING FINISH",
+    duration: 0.64,
+    hit: 0.52,
+    damage: 3,
+    range: 4,
+    arc: 0.5,
+    lunge: 7,
+  },
+];

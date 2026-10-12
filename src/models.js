@@ -19,7 +19,7 @@ export function part(
   return m;
 }
 function ellipsoid(parent, material, pos, scale) {
-  const m = part(parent, new THREE.SphereGeometry(1, 20, 14), material, pos);
+  const m = part(parent, new THREE.SphereGeometry(1, 8, 6), material, pos);
   m.scale.set(...scale);
   return m;
 }
@@ -31,14 +31,14 @@ export function wolf() {
     red = mat("#cf312c"),
     black = mat("#252723"),
     gold = mat("#daa949");
-  ellipsoid(body, white, [0, 1.05, 0.1], [0.32, 0.42, 0.83]);
-  ellipsoid(body, white, [0, 1.2, -0.45], [0.37, 0.49, 0.42]);
-  ellipsoid(body, white, [0, 1.12, 0.65], [0.29, 0.35, 0.35]);
+  ellipsoid(body, white, [0, 1.17, 0.08], [0.21, 0.23, 0.72]);
+  ellipsoid(body, white, [0, 1.2, -0.45], [0.27, 0.38, 0.34]);
+  ellipsoid(body, white, [0, 1.12, 0.65], [0.22, 0.28, 0.3]);
   const head = new THREE.Group();
   head.position.set(0, 1.55, -0.68);
   body.add(head);
-  ellipsoid(head, white, [0, 0, -0.08], [0.29, 0.33, 0.37]);
-  ellipsoid(head, white, [0, -0.12, -0.43], [0.19, 0.16, 0.34]);
+  ellipsoid(head, white, [0, 0, -0.08], [0.23, 0.25, 0.3]);
+  ellipsoid(head, white, [0, -0.12, -0.43], [0.13, 0.115, 0.36]);
   ellipsoid(head, black, [0, -0.06, -0.7], [0.12, 0.085, 0.09]);
   for (const s of [-1, 1]) {
     const ear = part(
@@ -77,10 +77,10 @@ export function wolf() {
       "#cf312c",
       0.035,
     );
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
       const tuft = part(
         body,
-        new THREE.ConeGeometry(0.14, 0.47, 5),
+        new THREE.ConeGeometry(0.09, 0.35, 4),
         white,
         [s * (0.22 + i * 0.015), 1.48 - i * 0.16, -0.44 + i * 0.15],
         [0.75, 0, s * 0.55],
