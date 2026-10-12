@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { mat, part } from "./models.js";
-import { paperTexture, stroke } from "./art.js";
+import { paperTexture, stroke, paintedTexture, seededRandom } from "./art.js";
 function blossomTexture() {
   const c = document.createElement("canvas");
   c.width = c.height = 256;
@@ -29,26 +29,29 @@ function blossomTexture() {
     ctx.lineWidth = 0.7;
     ctx.stroke();
   }
-  return new THREE.CanvasTexture(c);
+  const texture = new THREE.CanvasTexture(c);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return texture;
 }
 export function createWorld(scene) {
   scene.background = new THREE.Color("#e9dec0");
   scene.fog = new THREE.Fog("#e9dec0", 24, 65);
-  scene.add(new THREE.HemisphereLight("#fff6df", "#857859", 1.1));
-  const sun = new THREE.DirectionalLight("#fff0cc", 1.3);
+  scene.add(new THREE.HemisphereLight("#fff7dd", "#647547", 1.55));
+  const sun = new THREE.DirectionalLight("#ffe8b6", 1.7);
   sun.position.set(-12, 23, -8);
   sun.castShadow = true;
-  sun.shadow.mapSize.set(1024, 1024);
+  sun.shadow.mapSize.set(2048, 2048);
   Object.assign(sun.shadow.camera, {
-    left: -23,
-    right: 23,
-    top: 23,
-    bottom: -23,
+    left: -42,
+    right: 42,
+    top: 42,
+    bottom: -42,
   });
   sun.shadow.bias = -0.0005;
+  sun.shadow.normalBias = 0.035;
   scene.add(sun);
-  const ground = mat("#c7bf86");
-  ground.map = paperTexture();
+  const ground = mat("#7f9c4e");
+  ground.map = paintedTexture("grass").clone();
   ground.map.repeat.set(12, 12);
   part(
     scene,
@@ -58,7 +61,7 @@ export function createWorld(scene) {
     undefined,
     false,
   );
-  const arena = mat("#e6d6aa");
+  const arena = mat("#d9bd7d");
   arena.map = paperTexture();
   arena.map.repeat.set(5, 5);
   part(
@@ -73,20 +76,21 @@ export function createWorld(scene) {
     const ring = part(
       scene,
       new THREE.TorusGeometry(11.5 + i * 0.1, 0.016, 3, 128),
-      mat("#6b6850"),
+      mat("#8a854d"),
       [0, 0.025, 0],
       [Math.PI / 2, 0, 0],
       false,
     );
   }
   const obstacles = [];
-  const red = mat("#be3b2a"),
-    wood = mat("#423b30"),
-    stone = mat("#aaa383");
+  const red = mat("#bd442b", "wood"),
+    wood = mat("#423b30", "wood"),
+    stone = mat("#aaa383", "stone");
   const gate = new THREE.Group();
   gate.position.set(0, 0, -14);
   scene.add(gate);
   for (const s of [-1, 1]) {
+    obstacles.push({ x: s * 2, z: -14, r: 0.32 });
     part(gate, new THREE.CylinderGeometry(0.19, 0.27, 4.8, 12), red, [
       s * 2,
       2.4,
@@ -127,7 +131,7 @@ export function createWorld(scene) {
     [-5, -19, 0.9],
     [8, -20, 1],
   ]) {
-    obstacles.push({ x, z, r: 0.55 });
+    obstacles.push({ x, z, r: 0.55 * scale });
     const tree = new THREE.Group();
     tree.position.set(x, 0, z);
     tree.scale.setScalar(scale);
@@ -170,6 +174,7 @@ export function createWorld(scene) {
     [-13, 1],
     [13, 1],
   ]) {
+    obstacles.push({ x, z, r: 0.37 });
     part(scene, new THREE.BoxGeometry(0.7, 0.22, 0.7), stone, [x, 0.11, z]);
     part(scene, new THREE.CylinderGeometry(0.16, 0.24, 1.2, 8), stone, [
       x,
@@ -253,17 +258,18 @@ export function createWorld(scene) {
   }
   const petals = new THREE.Group();
   scene.add(petals);
+  const random = seededRandom(413);
   for (let i = 0; i < 45; i++)
     part(
       petals,
       new THREE.PlaneGeometry(0.13, 0.07),
       new THREE.MeshBasicMaterial({ color: "#d99085", side: THREE.DoubleSide }),
       [
-        (Math.random() - 0.5) * 34,
-        Math.random() * 7,
-        (Math.random() - 0.5) * 34,
+        (random() - 0.5) * 34,
+        random() * 7,
+        (random() - 0.5) * 34,
       ],
-      [Math.random() * 3, 0, Math.random() * 3],
+      [random() * 3, 0, random() * 3],
       false,
     );
   return { obstacles, petals };

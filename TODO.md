@@ -15,13 +15,13 @@ This is the persistent plan for future work. Update the checkboxes and notes as 
 
 - The published `sunward-minigame` game version has a village, four NPCs, dialogue, a fixed camera, an eastern combat grove, and a three-hit combo.
 - The user considers the town version an improvement, but has rejected the wolf's shape and animations, including the later custom Blender draft.
-- The latest custom wolf code and model are local, unpushed drafts. Their successful build and gameplay checks do not establish acceptable visual quality.
+- The rejected formula-built wolf was archived. This run replaces it with a licensed artist-rigged canine foundation and adapted painted wolf interpretation. Technical checks do not establish that the user likes its visual style.
 - `wolf-design-review` contains screenshots and a motion preview of the rejected draft, not an approved design.
 - This chat interface does not display outgoing screenshots reliably and does not provide usable project downloads. Use GitHub browser previews for review.
 
 ## Priority order
 
-Work through these seven priorities in the user's order. Review the wolf first before spending more effort on later visual polish or new activities.
+Work through these seven priorities in the user's order. The user authorized autonomous revisions, testing and publishing without further approval for this run. Later feedback still determines artistic acceptance.
 
 ## 1. Wolf animations and style
 
@@ -92,7 +92,7 @@ Work through these seven priorities in the user's order. Review the wolf first b
 - [ ] Collect feedback and revise; do not mark a rejected draft as an accepted improvement.
 - [ ] Verify dependency installation, production build, local asset loading, and browser rendering.
 - [ ] Verify movement, jumping/landing, dodge, NPC dialogue, collisions, combo timing/damage, enemy attacks/reactions, effects/audio, win/loss, restart, and continued exploration after winning.
-- [ ] Push the game update after the user has reviewed the visuals and motion.
+- [ ] Publish the autonomously authorized update after meaningful validation; provide review media and keep subjective visual acceptance distinct.
 - [ ] Provide the branch/download link and short Windows setup instructions, including the known Node path and esbuild script approval if npm requires it.
 
 ## Delivery notes
@@ -103,3 +103,7 @@ Work through these seven priorities in the user's order. Review the wolf first b
 - User's Node folder: `C:\Users\giuse\Desktop\node-v24.21.0-win-x64`.
 - Keep the user's working download until a replacement has been tested successfully.
 - Save changes to this list without accidentally committing the unapproved local wolf/game drafts.
+
+## Autonomous run implementation notes
+
+The latest run implements movement/action blending, 3-stage combat windows and cancels, articulated enemy attacks and staged deaths, original sound/painted effects, richer town surfaces/NPCs, and a flower/shrine activity. See the build log and validation report for what was actually checked. These notes do not mark all visual goals as artistically accepted.

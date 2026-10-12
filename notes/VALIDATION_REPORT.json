@@ -1,0 +1,3453 @@
+{
+  "startedUTC": "2026-10-12T19:37:04.622Z",
+  "baseURL": "http://127.0.0.1:4173",
+  "output": "/workspace/validation-artifacts/2026-10-12T19-37-04-622Z-97337",
+  "checks": [
+    {
+      "name": "production startup and locally loaded skinned wolf",
+      "pass": true,
+      "milliseconds": 5790,
+      "detail": {
+        "active": true,
+        "bootHidden": true,
+        "skinnedMeshes": [
+          {
+            "name": "PaintedWolf",
+            "bones": 24,
+            "vertices": 1728
+          },
+          {
+            "name": "",
+            "bones": 24,
+            "vertices": 1728
+          }
+        ],
+        "localModels": [
+          {
+            "url": "http://127.0.0.1:4173/models/sunward-wolf.glb",
+            "bytes": 358188
+          }
+        ]
+      }
+    },
+    {
+      "name": "visible rendered frame with useful color variation",
+      "pass": true,
+      "milliseconds": 12351,
+      "detail": {
+        "width": 1440,
+        "height": 900,
+        "litRatio": 0.9943827160493827,
+        "colorBuckets": 313,
+        "playerBounds": {
+          "centerNDC": [
+            -0.006967171812116029,
+            -0.024983632668665032,
+            0.9891921197477686
+          ],
+          "sizeMeters": [
+            0.8603743955830767,
+            1.6955630224261058,
+            3.3606304439074552
+          ],
+          "visible": true,
+          "crop": {
+            "x": 580,
+            "y": 335,
+            "width": 256,
+            "height": 268
+          }
+        }
+      }
+    },
+    {
+      "name": "animation clip data drives changing finite bone transforms",
+      "pass": true,
+      "milliseconds": 15,
+      "detail": {
+        "clips": [
+          {
+            "name": "Run",
+            "seconds": 1.1333333253860474,
+            "tracks": 72,
+            "samples": 837,
+            "finite": true
+          },
+          {
+            "name": "Idle",
+            "seconds": 3.4000000953674316,
+            "tracks": 72,
+            "samples": 2063,
+            "finite": true
+          },
+          {
+            "name": "Walk",
+            "seconds": 0.699999988079071,
+            "tracks": 72,
+            "samples": 564,
+            "finite": true
+          },
+          {
+            "name": "Thrust",
+            "seconds": 0.46666666865348816,
+            "tracks": 72,
+            "samples": 326,
+            "finite": true
+          },
+          {
+            "name": "Sweep",
+            "seconds": 0.6333333253860474,
+            "tracks": 72,
+            "samples": 396,
+            "finite": true
+          },
+          {
+            "name": "Finish",
+            "seconds": 0.8666666746139526,
+            "tracks": 72,
+            "samples": 494,
+            "finite": true
+          },
+          {
+            "name": "Jump",
+            "seconds": 0.6666666865348816,
+            "tracks": 72,
+            "samples": 391,
+            "finite": true
+          },
+          {
+            "name": "Dodge",
+            "seconds": 0.2666666805744171,
+            "tracks": 72,
+            "samples": 235,
+            "finite": true
+          },
+          {
+            "name": "Land",
+            "seconds": 0.23333333432674408,
+            "tracks": 72,
+            "samples": 228,
+            "finite": true
+          }
+        ],
+        "boneCount": 24,
+        "samples": {
+          "Walk": {
+            "changedComponents": 60,
+            "largestChange": 1.8299838693370898,
+            "finite": true,
+            "reasonableScale": true
+          },
+          "Run": {
+            "changedComponents": 60,
+            "largestChange": 7.8931703938436755,
+            "finite": true,
+            "reasonableScale": true
+          },
+          "Thrust": {
+            "changedComponents": 22,
+            "largestChange": 0.4899642751560833,
+            "finite": true,
+            "reasonableScale": true
+          },
+          "Sweep": {
+            "changedComponents": 25,
+            "largestChange": 0.08790914221606308,
+            "finite": true,
+            "reasonableScale": true
+          },
+          "Finish": {
+            "changedComponents": 23,
+            "largestChange": 1.5021758793012907,
+            "finite": true,
+            "reasonableScale": true
+          }
+        },
+        "weaponSamples": {
+          "Walk": {
+            "tip": [
+              -0.2822701475740292,
+              1.196846108385643,
+              8.4590073950543
+            ],
+            "heel": [
+              -0.2956453885164748,
+              1.1437527404292154,
+              11.438504215164242
+            ],
+            "length": 2.9799998496369895
+          },
+          "Run": {
+            "tip": [
+              -0.2999970938712996,
+              1.2164522784607206,
+              8.55277117825596
+            ],
+            "heel": [
+              -0.29999889076342146,
+              0.8491277261386617,
+              11.510045353378134
+            ],
+            "length": 2.9799996432191675
+          },
+          "Thrust": {
+            "tip": [
+              -0.2999999527764759,
+              1.5925772428937093,
+              8.553531595135091
+            ],
+            "heel": [
+              -0.29999998478554435,
+              1.3964420876499446,
+              11.52707009262533
+            ],
+            "length": 2.980000032748155
+          },
+          "Sweep": {
+            "tip": [
+              -1.0333978168823674,
+              1.2926000052914168,
+              8.679946729999306
+            ],
+            "heel": [
+              -0.3849983146431761,
+              1.2926002265154504,
+              11.58855102481084
+            ],
+            "length": 2.980000144010094
+          },
+          "Finish": {
+            "tip": [
+              -0.29999991662421643,
+              1.8865343150130232,
+              8.593459673531095
+            ],
+            "heel": [
+              -0.29999997878229273,
+              1.4412087040119217,
+              11.539997586118346
+            ],
+            "length": 2.9800000956589825
+          }
+        },
+        "weapon": {
+          "attachedToHead": true,
+          "shaftGripDot": 1.1670312221769663e-8
+        }
+      }
+    },
+    {
+      "name": "real WASD keyboard inputs move in camera-relative directions",
+      "pass": true,
+      "milliseconds": 153,
+      "detail": [
+        {
+          "key": "KeyW",
+          "distance": 1.1164076570849912,
+          "projection": 1.1164076570849912,
+          "state": "Walk",
+          "speed": 3.5831479180562034
+        },
+        {
+          "key": "KeyS",
+          "distance": 1.1164076570849912,
+          "projection": 1.1164076570849912,
+          "state": "Walk",
+          "speed": 3.5831479180562034
+        },
+        {
+          "key": "KeyA",
+          "distance": 1.11640765708499,
+          "projection": 1.1164076570849901,
+          "state": "Walk",
+          "speed": 3.58314791805607
+        },
+        {
+          "key": "KeyD",
+          "distance": 1.11640765708499,
+          "projection": 1.1164076570849901,
+          "state": "Walk",
+          "speed": 3.58314791805607
+        }
+      ]
+    },
+    {
+      "name": "walk-run-idle blending and real frames stay stable",
+      "pass": true,
+      "milliseconds": 1586,
+      "detail": {
+        "walk": {
+          "speed": 3.539779550508615,
+          "state": "Walk"
+        },
+        "run": {
+          "speed": 6.438505747648889,
+          "state": "Run"
+        },
+        "idle": {
+          "speed": 0.000041175745495891654,
+          "state": "Idle"
+        },
+        "live": {
+          "frames": 40,
+          "position": [
+            -0.22494461543034372,
+            0,
+            11.700073846092875
+          ],
+          "actions": [
+            {
+              "name": "Walk",
+              "weight": 1,
+              "time": 0.15302354791179829
+            }
+          ],
+          "finite": true,
+          "normalized": true,
+          "softwareRendering": {
+            "sampledFrames": 13,
+            "averageFrameMs": 189.73076923076923,
+            "fps": 5.270626393675249
+          }
+        }
+      }
+    },
+    {
+      "name": "jump and dodge use physical inputs with grounded recovery",
+      "pass": true,
+      "milliseconds": 155,
+      "detail": {
+        "airborne": {
+          "y": 0.6689583333333335,
+          "state": "Jump"
+        },
+        "contact": {
+          "y": 0,
+          "state": "Land"
+        },
+        "landed": {
+          "y": 0,
+          "state": "Idle"
+        },
+        "dodge": {
+          "z": 11.105324553963841,
+          "state": "Dodge",
+          "immune": 0.2399999999999998,
+          "cooldown": 0.7000000000000003
+        },
+        "recovered": {
+          "state": "Idle",
+          "cooldown": 0
+        }
+      }
+    },
+    {
+      "name": "buildings, trees and town bounds prevent penetration",
+      "pass": true,
+      "milliseconds": 146,
+      "detail": {
+        "boxes": [
+          {
+            "box": {
+              "x": -8,
+              "z": 15,
+              "halfX": 2.7,
+              "halfZ": 2.2
+            },
+            "resolved": [
+              -8,
+              0,
+              17.63
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": 8,
+              "z": 15,
+              "halfX": 2.7,
+              "halfZ": 2.2
+            },
+            "resolved": [
+              8,
+              0,
+              17.63
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": -9,
+              "z": 6,
+              "halfX": 3.2,
+              "halfZ": 2.2
+            },
+            "resolved": [
+              -9,
+              0,
+              8.63
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": 9,
+              "z": 6,
+              "halfX": 2.7,
+              "halfZ": 2.2
+            },
+            "resolved": [
+              9,
+              0,
+              8.63
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": -9,
+              "z": -5,
+              "halfX": 2.7,
+              "halfZ": 2.7
+            },
+            "resolved": [
+              -9,
+              0,
+              -1.8699999999999997
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": 9,
+              "z": -9,
+              "halfX": 3.2,
+              "halfZ": 2.2
+            },
+            "resolved": [
+              9,
+              0,
+              -6.369999999999999
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": -8,
+              "z": -18,
+              "halfX": 3.2,
+              "halfZ": 2.7
+            },
+            "resolved": [
+              -8,
+              0,
+              -14.87
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": 8,
+              "z": -20,
+              "halfX": 2.7,
+              "halfZ": 2.7
+            },
+            "resolved": [
+              8,
+              0,
+              -16.87
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": 0,
+              "z": -25,
+              "halfX": 4.2,
+              "halfZ": 2.2
+            },
+            "resolved": [
+              0,
+              0,
+              -22.37
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": -16.7,
+              "z": -5,
+              "halfX": 3.75,
+              "halfZ": 0.35
+            },
+            "resolved": [
+              -16.7,
+              0,
+              -4.22
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": -4.8,
+              "z": 0,
+              "halfX": 1.2,
+              "halfZ": 0.7
+            },
+            "resolved": [
+              -4.8,
+              0,
+              1.13
+            ],
+            "outside": true
+          },
+          {
+            "box": {
+              "x": 4.8,
+              "z": 0,
+              "halfX": 1.2,
+              "halfZ": 0.7
+            },
+            "resolved": [
+              4.8,
+              0,
+              1.13
+            ],
+            "outside": true
+          }
+        ],
+        "trees": [
+          {
+            "obstacle": {
+              "x": 24,
+              "z": -14,
+              "r": 0.32
+            },
+            "resolved": [
+              24.75,
+              0,
+              -14
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 28,
+              "z": -14,
+              "r": 0.32
+            },
+            "resolved": [
+              28.75,
+              0,
+              -14
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 16,
+              "z": -8,
+              "r": 0.6050000000000001
+            },
+            "resolved": [
+              17.035,
+              0,
+              -8
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 37,
+              "z": -8,
+              "r": 0.66
+            },
+            "resolved": [
+              38.09,
+              0,
+              -8
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 12,
+              "z": 5,
+              "r": 0.55
+            },
+            "resolved": [
+              12.98,
+              0,
+              5
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 40,
+              "z": 6,
+              "r": 0.55
+            },
+            "resolved": [
+              40.98,
+              0,
+              6
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 21,
+              "z": -19,
+              "r": 0.49500000000000005
+            },
+            "resolved": [
+              21.925,
+              0,
+              -19
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 34,
+              "z": -20,
+              "r": 0.55
+            },
+            "resolved": [
+              34.98,
+              0,
+              -20
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 20,
+              "z": -11,
+              "r": 0.37
+            },
+            "resolved": [
+              20.8,
+              0,
+              -11
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 32,
+              "z": -11,
+              "r": 0.37
+            },
+            "resolved": [
+              32.8,
+              0,
+              -11
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 13,
+              "z": 1,
+              "r": 0.37
+            },
+            "resolved": [
+              13.8,
+              0,
+              1
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 39,
+              "z": 1,
+              "r": 0.37
+            },
+            "resolved": [
+              39.8,
+              0,
+              1
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -3.9,
+              "z": -20,
+              "r": 0.3
+            },
+            "resolved": [
+              -3.17,
+              0,
+              -20
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 3.9,
+              "z": -20,
+              "r": 0.3
+            },
+            "resolved": [
+              4.63,
+              0,
+              -20
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -3.9,
+              "z": 19,
+              "r": 0.3
+            },
+            "resolved": [
+              -3.17,
+              0,
+              19
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 3.9,
+              "z": 19,
+              "r": 0.3
+            },
+            "resolved": [
+              4.63,
+              0,
+              19
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 15,
+              "z": -3.8,
+              "r": 0.3
+            },
+            "resolved": [
+              15.73,
+              0,
+              -3.8
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 15,
+              "z": 3.8,
+              "r": 0.3
+            },
+            "resolved": [
+              15.73,
+              0,
+              3.8
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -26,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              -26
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -23.3,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              -23.3
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -20.6,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              -20.6
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -17.9,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              -17.9
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -15.2,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              -15.2
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -12.5,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              -12.5
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -9.799999999999997,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              -9.799999999999997
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -7.099999999999998,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              -7.099999999999998
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -4.399999999999999,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.15378876302277,
+              0,
+              -3.992975688921512
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": -1.6999999999999993,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              -1.6999999999999993
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 1,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              1
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 3.700000000000003,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              3.700000000000003
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 6.400000000000006,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              6.400000000000006
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 9.100000000000001,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              9.100000000000001
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 11.800000000000004,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              11.800000000000004
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 14.5,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              14.5
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 17.200000000000003,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              17.200000000000003
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 19.900000000000006,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              19.900000000000006
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 22.6,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              22.6
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -19.9,
+              "z": 25.300000000000004,
+              "r": 0.42
+            },
+            "resolved": [
+              -19.049999999999997,
+              0,
+              25.300000000000004
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": -12.45,
+              "z": -5,
+              "r": 1.02
+            },
+            "resolved": [
+              -11,
+              0,
+              -5
+            ],
+            "outside": true
+          },
+          {
+            "obstacle": {
+              "x": 12,
+              "z": 0,
+              "r": 0.12
+            },
+            "resolved": [
+              12.55,
+              0,
+              0
+            ],
+            "outside": true
+          }
+        ],
+        "bounds": {
+          "minX": -20,
+          "maxX": 44,
+          "minZ": -27,
+          "maxZ": 27
+        },
+        "boundaryPosition": [
+          43.57,
+          0,
+          -26.57
+        ],
+        "inside": true,
+        "highSpeedWallContact": {
+          "position": [
+            -8,
+            0,
+            18.12
+          ],
+          "outside": true
+        }
+      }
+    },
+    {
+      "name": "NPC dialogue opens, advances, holds movement and closes",
+      "pass": true,
+      "milliseconds": 2929,
+      "detail": {
+        "npc": "Hana · gardener",
+        "advancesToClose": 3,
+        "movementHeld": true
+      }
+    },
+    {
+      "name": "village remains safe and grove enemies return to their leash",
+      "pass": true,
+      "milliseconds": 39,
+      "detail": {
+        "hp": 100,
+        "enemies": [
+          {
+            "x": 18.304595147701914,
+            "home": [
+              21,
+              0,
+              -5
+            ],
+            "state": "approach"
+          },
+          {
+            "x": 19.484636700094654,
+            "home": [
+              31,
+              0,
+              -5
+            ],
+            "state": "approach"
+          },
+          {
+            "x": 17.860339948088942,
+            "home": [
+              26,
+              0,
+              -9
+            ],
+            "state": "approach"
+          },
+          {
+            "x": 18.66114470663365,
+            "home": [
+              19,
+              0,
+              1
+            ],
+            "state": "approach"
+          },
+          {
+            "x": 19.437012109480964,
+            "home": [
+              33,
+              0,
+              1
+            ],
+            "state": "approach"
+          }
+        ],
+        "active": true
+      }
+    },
+    {
+      "name": "physical buffered combo progresses one-two-three and resets",
+      "pass": true,
+      "milliseconds": 4146,
+      "detail": {
+        "attacks": [
+          {
+            "combo": 1,
+            "remaining": 0.45166666666666666,
+            "duration": 0.46,
+            "animation": "Thrust",
+            "hit": false,
+            "buffered": true
+          },
+          {
+            "combo": 2,
+            "remaining": 0.62,
+            "duration": 0.62,
+            "animation": "Sweep",
+            "hit": false,
+            "buffered": true
+          },
+          {
+            "combo": 3,
+            "remaining": 0.86,
+            "duration": 0.86,
+            "animation": "Finish",
+            "hit": false
+          }
+        ],
+        "reset": 1
+      }
+    },
+    {
+      "name": "attack timing and directional cones distinguish thrust/sweep/finish",
+      "pass": true,
+      "milliseconds": 50,
+      "detail": {
+        "attacks": [
+          {
+            "combo": 1,
+            "duration": 0.46,
+            "hitFraction": 0.4,
+            "activeWindow": [
+              0.35,
+              0.49
+            ],
+            "before": [
+              20,
+              20,
+              20
+            ],
+            "after": [
+              19,
+              20,
+              20
+            ],
+            "definition": {
+              "name": "I · REED THRUST",
+              "duration": 0.46,
+              "hit": 0.4,
+              "active": [
+                0.35,
+                0.49
+              ],
+              "link": 0.77,
+              "cancel": 0.55,
+              "damage": 1,
+              "range": 3.3,
+              "arc": 0.8,
+              "lunge": 3.2,
+              "movement": 0.18,
+              "knockback": 0.6,
+              "stagger": 0.42,
+              "hitStop": 0.038
+            }
+          },
+          {
+            "combo": 2,
+            "duration": 0.62,
+            "hitFraction": 0.46,
+            "activeWindow": [
+              0.3,
+              0.62
+            ],
+            "before": [
+              20,
+              20,
+              20
+            ],
+            "after": [
+              18,
+              18,
+              20
+            ],
+            "definition": {
+              "name": "II · CRESCENT SWEEP",
+              "duration": 0.62,
+              "hit": 0.46,
+              "active": [
+                0.3,
+                0.62
+              ],
+              "link": 0.8,
+              "cancel": 0.64,
+              "damage": 2,
+              "range": 3.15,
+              "arc": 0.32,
+              "lunge": 1.3,
+              "movement": 0.14,
+              "knockback": 0.95,
+              "stagger": 0.58,
+              "hitStop": 0.054
+            }
+          },
+          {
+            "combo": 3,
+            "duration": 0.86,
+            "hitFraction": 0.49,
+            "activeWindow": [
+              0.42,
+              0.59
+            ],
+            "before": [
+              20,
+              20,
+              20
+            ],
+            "after": [
+              17,
+              20,
+              20
+            ],
+            "definition": {
+              "name": "III · SUNWARD LUNGE",
+              "duration": 0.86,
+              "hit": 0.49,
+              "active": [
+                0.42,
+                0.59
+              ],
+              "link": 0.89,
+              "cancel": 0.72,
+              "damage": 3,
+              "range": 3.8,
+              "arc": 0.82,
+              "lunge": 8.5,
+              "movement": 0.06,
+              "knockback": 1.85,
+              "stagger": 0.85,
+              "hitStop": 0.078
+            }
+          }
+        ],
+        "wallBlocked": {
+          "hp": 20,
+          "clearShot": false
+        }
+      }
+    },
+    {
+      "name": "buffered contact combo preserves hit pauses and dodge recovery",
+      "pass": true,
+      "milliseconds": 6120,
+      "detail": {
+        "contacts": [
+          {
+            "combo": 1,
+            "hp": 49,
+            "hitStop": 0.038,
+            "phase": 0.3623188405797113,
+            "animation": "Thrust"
+          },
+          {
+            "combo": 2,
+            "hp": 47,
+            "hitStop": 0.054,
+            "phase": 0.3091397849462363,
+            "animation": "Sweep"
+          },
+          {
+            "combo": 3,
+            "hp": 44,
+            "hitStop": 0.078,
+            "phase": 0.42635658914728536,
+            "animation": "Finish"
+          }
+        ],
+        "cancelled": {
+          "state": "Dodge",
+          "attackTime": 0,
+          "dashTime": 0.24666666666666662
+        }
+      }
+    },
+    {
+      "name": "enemy windup-lunge-recovery animation and damage",
+      "pass": true,
+      "milliseconds": 6533,
+      "detail": {
+        "states": [
+          "windup",
+          "lunge",
+          "recover",
+          "approach"
+        ],
+        "hp": 85,
+        "enemyPosition": [
+          26,
+          0,
+          0.48259413871078
+        ],
+        "transforms": [
+          {
+            "state": "windup",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.7470460401962088,
+              0.6053123999142098,
+              0.23369510037430205,
+              -0.1445880783408819,
+              0,
+              0.68,
+              -0.19,
+              -0.6247229993897961,
+              0.07787213235384227,
+              0.7756996164368395,
+              -0.04412720358035682,
+              -0.32,
+              0.44,
+              -0.015,
+              0.9444596146765063,
+              0.05968052935956758,
+              0.020380059736555288,
+              -0.322519648743455,
+              0,
+              -0.43,
+              0,
+              0.7959687337058476,
+              0,
+              0,
+              -0.6053377362784427,
+              0.32,
+              0.44,
+              -0.015,
+              -0.04554936599106206,
+              0.0031369634620733115,
+              -0.06863513500704224,
+              -0.9965965246581061,
+              0,
+              -0.43,
+              0,
+              0.4667682530183029,
+              0,
+              0,
+              -0.8843796684536803,
+              -0.19,
+              -0.09,
+              0.015,
+              0.13841980516890262,
+              0,
+              0,
+              0.9903736454172248,
+              0,
+              -0.38,
+              0,
+              -0.28486508798665183,
+              0,
+              0,
+              0.958567619756873,
+              0,
+              -0.33,
+              0,
+              0.1494381324734737,
+              0,
+              0,
+              0.9887710779360612,
+              0.19,
+              -0.09,
+              0.015,
+              0.05996400647939392,
+              0,
+              0,
+              0.9982005399352072,
+              0,
+              -0.38,
+              0,
+              -0.2178618231583289,
+              0,
+              0,
+              0.9759796237678987,
+              0,
+              -0.33,
+              0,
+              0.15894614102391125,
+              0,
+              0,
+              0.9872872551864563
+            ]
+          },
+          {
+            "state": "windup",
+            "joints": [
+              0,
+              0,
+              0,
+              0.5399897436385809,
+              -0.4643047592164316,
+              -0.5148486831213241,
+              0.47724522084809784,
+              0,
+              0.68,
+              -0.19,
+              -0.04149266627085171,
+              0.6748761207487084,
+              0.045803425759166974,
+              -0.7353384434922704,
+              -0.32,
+              0.44,
+              -0.015,
+              0.8623792669762186,
+              0.055084327230760635,
+              0.03208008449223348,
+              -0.5022335960109255,
+              0,
+              -0.43,
+              0,
+              0.20261596265661178,
+              0,
+              0,
+              0.9792582762870756,
+              0.32,
+              0.44,
+              -0.015,
+              0.9216096446494759,
+              -0.06478517559995368,
+              -0.026834032621464846,
+              -0.38173089815316236,
+              0,
+              -0.43,
+              0,
+              -0.050320803319606824,
+              0,
+              0,
+              -0.9987331058662616,
+              -0.19,
+              -0.09,
+              0.015,
+              0.034479342854286506,
+              0,
+              0,
+              0.9994054106899445,
+              0,
+              -0.38,
+              0,
+              -0.18867872287125062,
+              0,
+              0,
+              0.9820388686481171,
+              0,
+              -0.33,
+              0,
+              0.1547064816712424,
+              0,
+              0,
+              0.9879604772099466,
+              0.19,
+              -0.09,
+              0.015,
+              0.057723537563479595,
+              0,
+              0,
+              0.9983326065050453,
+              0,
+              -0.38,
+              0,
+              -0.24202334009364207,
+              0,
+              0,
+              0.9702704276900936,
+              0,
+              -0.33,
+              0,
+              0.18561235047112623,
+              0,
+              0,
+              0.9826230484537719
+            ]
+          },
+          {
+            "state": "windup",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.6438984892522599,
+              0.6584080505136409,
+              0.38537399639578207,
+              0.05814170155256665,
+              0,
+              0.68,
+              -0.19,
+              -0.009723348119174892,
+              0.917191728404819,
+              0.09855285943757179,
+              0.38594316128649353,
+              -0.32,
+              0.44,
+              -0.015,
+              0.1878898338422077,
+              0.012172271902048662,
+              -0.06349230743638018,
+              0.980060188474103,
+              0,
+              -0.43,
+              0,
+              -0.21205976633044157,
+              0,
+              0,
+              0.977256698878999,
+              0.32,
+              0.44,
+              -0.015,
+              0.19226709649467338,
+              -0.01378854851579023,
+              0.07019035240532752,
+              0.9787321155273038,
+              0,
+              -0.43,
+              0,
+              0.9068874935058189,
+              0,
+              0,
+              0.42137284454830887,
+              -0.19,
+              -0.09,
+              0.015,
+              0.05082913187600435,
+              0,
+              0,
+              0.9987073642227395,
+              0,
+              -0.38,
+              0,
+              -0.22590310302987218,
+              0,
+              0,
+              0.9741497770063261,
+              0,
+              -0.33,
+              0,
+              0.17609590511426684,
+              0,
+              0,
+              0.9843730147672615,
+              0.19,
+              -0.09,
+              0.015,
+              0.04860443820118324,
+              0,
+              0,
+              0.9988181058566907,
+              0,
+              -0.38,
+              0,
+              -0.24642157269840526,
+              0,
+              0,
+              0.9691627358234759,
+              0,
+              -0.33,
+              0,
+              0.19902471818460538,
+              0,
+              0,
+              0.9799944701637547
+            ]
+          },
+          {
+            "state": "windup",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.7291467485829255,
+              -0.32173152884812733,
+              0.6035596882171189,
+              0.023442379044136208,
+              0,
+              0.68,
+              -0.19,
+              -0.43976018500135067,
+              -0.28181106358155755,
+              0.08072725609837525,
+              0.8489267425717231,
+              -0.32,
+              0.44,
+              -0.015,
+              -0.38244680262018255,
+              -0.025197610007879047,
+              0.06072221393277058,
+              -0.9216356852632134,
+              0,
+              -0.43,
+              0,
+              0.9936355940807643,
+              0,
+              0,
+              -0.11264238179196437,
+              0.32,
+              0.44,
+              -0.015,
+              0.23178939448035646,
+              -0.016938740095494873,
+              -0.07088812680145883,
+              -0.9700317670927006,
+              0,
+              -0.43,
+              0,
+              -0.531787048974862,
+              0,
+              0,
+              -0.8468781107943503,
+              -0.19,
+              -0.09,
+              0.015,
+              0.10733635178001862,
+              0,
+              0,
+              0.9942227655744743,
+              0,
+              -0.38,
+              0,
+              -0.31449079613624337,
+              0,
+              0,
+              0.9492605222727803,
+              0,
+              -0.33,
+              0,
+              0.21078374773273878,
+              0,
+              0,
+              0.9775327164303715,
+              0.19,
+              -0.09,
+              0.015,
+              0.03372974768612134,
+              0,
+              0,
+              0.9994309901744245,
+              0,
+              -0.38,
+              0,
+              -0.24722451236909834,
+              0,
+              0,
+              0.9689582243233511,
+              0,
+              -0.33,
+              0,
+              0.21440112276761464,
+              0,
+              0,
+              0.9767456979971738
+            ]
+          },
+          {
+            "state": "windup",
+            "joints": [
+              0,
+              0,
+              0,
+              0.14746266906068659,
+              -0.844257067705899,
+              -0.1708448333857115,
+              -0.4861037006314021,
+              0,
+              0.68,
+              -0.19,
+              -0.3144377102050864,
+              0.6605961652001219,
+              -0.6308754467047681,
+              0.2583366092309308,
+              -0.32,
+              0.44,
+              -0.015,
+              0.9010986101291102,
+              0.06049868291994344,
+              -0.028762839023001877,
+              0.42840857050212555,
+              0,
+              -0.43,
+              0,
+              0.683428547554017,
+              0,
+              0,
+              -0.7300174110171666,
+              0.32,
+              0.44,
+              -0.015,
+              0.260177912102946,
+              -0.019340135400986235,
+              0.07156241120172295,
+              0.962710877948005,
+              0,
+              -0.43,
+              0,
+              -0.7065334908073685,
+              0,
+              0,
+              -0.707679607144048,
+              -0.19,
+              -0.09,
+              0.015,
+              0.17732328880304732,
+              0,
+              0,
+              0.9841526564756461,
+              0,
+              -0.38,
+              0,
+              -0.41904437684611545,
+              0,
+              0,
+              0.9079657538881358,
+              0,
+              -0.33,
+              0,
+              0.2514001630543038,
+              0,
+              0,
+              0.9678832357346983,
+              0.19,
+              -0.09,
+              0.015,
+              0.016156514747212858,
+              0,
+              0,
+              0.9998694749972233,
+              0,
+              -0.38,
+              0,
+              -0.24737117789843494,
+              0,
+              0,
+              0.9689207915743892,
+              0,
+              -0.33,
+              0,
+              0.23168450671679947,
+              0,
+              0,
+              0.9727909792691302
+            ]
+          },
+          {
+            "state": "windup",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.6810294745994927,
+              -0.05908522886936163,
+              0.7198330024826798,
+              0.12061608098825069,
+              0,
+              0.68,
+              -0.19,
+              0.753728365805152,
+              0.21496593141970494,
+              0.1996447335613398,
+              0.5880690259406418,
+              -0.32,
+              0.44,
+              -0.015,
+              0.9406585618895611,
+              0.06443478169460833,
+              -0.02276942997091143,
+              0.33240213884785796,
+              0,
+              -0.43,
+              0,
+              -0.5179842955540394,
+              0,
+              0,
+              -0.8553901271112413,
+              0.32,
+              0.44,
+              -0.015,
+              0.8867961888522461,
+              -0.0668987322913712,
+              -0.034399849426106716,
+              -0.4559975103160105,
+              0,
+              -0.43,
+              0,
+              -0.74725250423224,
+              0,
+              0,
+              -0.6645402131689596,
+              -0.19,
+              -0.09,
+              0.015,
+              0.24411534771671695,
+              0,
+              0,
+              0.9697462023690252,
+              0,
+              -0.38,
+              0,
+              -0.5147887826655458,
+              0,
+              0,
+              0.8573170412640387,
+              0,
+              -0.33,
+              0,
+              0.2899302193804487,
+              0,
+              0,
+              0.9570477876731156,
+              0.19,
+              -0.09,
+              0.015,
+              -0.0006963892391350628,
+              0,
+              0,
+              0.9999997575209844,
+              0,
+              -0.38,
+              0,
+              -0.2473979706620105,
+              0,
+              0,
+              0.9689139508296487,
+              0,
+              -0.33,
+              0,
+              0.2480726519221996,
+              0,
+              0,
+              0.9687414306037949
+            ]
+          },
+          {
+            "state": "windup",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.21504809961124155,
+              -0.1250141934222206,
+              -0.048190240682372695,
+              0.9673693539695993,
+              0,
+              0.68,
+              -0.19,
+              0.13038464907834227,
+              0.14995678335538679,
+              0.012646696992322522,
+              0.9799759524935331,
+              -0.32,
+              0.44,
+              -0.015,
+              0.10188092612214358,
+              0.007123399751944493,
+              -0.06938388610255687,
+              0.992348431962169,
+              0,
+              -0.43,
+              0,
+              -0.3068252364824607,
+              0,
+              0,
+              0.9517658715553327,
+              0.32,
+              0.44,
+              -0.015,
+              0.25197205295513353,
+              -0.01923845459358603,
+              0.07365903157445718,
+              0.9647353592887217,
+              0,
+              -0.43,
+              0,
+              -0.24717624889049358,
+              0,
+              0,
+              0.9689705372117486,
+              -0.19,
+              -0.09,
+              0.015,
+              0.2935733398628279,
+              0,
+              0,
+              0.9559365533976534,
+              0,
+              -0.38,
+              0,
+              -0.582786375101317,
+              0,
+              0,
+              0.8126254001668094,
+              0,
+              -0.33,
+              0,
+              0.31854164599712764,
+              0,
+              0,
+              0.9479088668038931,
+              0.19,
+              -0.09,
+              0.015,
+              -0.01334301152855907,
+              0,
+              0,
+              0.9999109780592214,
+              0,
+              -0.38,
+              0,
+              -0.24740286523804422,
+              0,
+              0,
+              0.9689127010582564,
+              0,
+              -0.33,
+              0,
+              0.26030905429521417,
+              0,
+              0,
+              0.9655253472860934
+            ]
+          },
+          {
+            "state": "lunge",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.06801293347237626,
+              -0.22622211209859697,
+              0.00408864651061182,
+              0.9716898063928855,
+              0,
+              0.68,
+              -0.19,
+              0.031734526487769185,
+              0.12360963013196188,
+              0.0026313346091664117,
+              0.9918198703622604,
+              -0.32,
+              0.44,
+              -0.015,
+              0.13377770306324607,
+              0.009544427140237826,
+              -0.07052159266663308,
+              0.9884528997587331,
+              0,
+              -0.43,
+              0,
+              0.03742336762584141,
+              0,
+              0,
+              0.9992995004279454,
+              0.32,
+              0.44,
+              -0.015,
+              0.02452910629609916,
+              -0.0018897204207486593,
+              0.0767890635615268,
+              0.996743794371648,
+              0,
+              -0.43,
+              0,
+              0.09351200430629907,
+              0,
+              0,
+              0.9956181522303712,
+              -0.19,
+              -0.09,
+              0.015,
+              0.35878554319281514,
+              0,
+              0,
+              0.9334200201387565,
+              0,
+              -0.38,
+              0,
+              -0.5198356806028831,
+              0,
+              0,
+              0.8542662729922897,
+              0,
+              -0.33,
+              0,
+              0.17872664267034666,
+              0,
+              0,
+              0.9838987687764358,
+              0.19,
+              -0.09,
+              0.015,
+              -0.20594520610920294,
+              0,
+              0,
+              0.9785635248059463,
+              0,
+              -0.38,
+              0,
+              -0.1550158335164326,
+              0,
+              0,
+              0.9879119856339459,
+              0,
+              -0.33,
+              0,
+              0.3551485779457069,
+              0,
+              0,
+              0.9348098670762639
+            ]
+          },
+          {
+            "state": "lunge",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.21114527856423682,
+              -0.12151436351729492,
+              0.02693333265555075,
+              0.9694980796221739,
+              0,
+              0.68,
+              -0.19,
+              0.09296278296785986,
+              0.06003138507440662,
+              0.0027382467498977105,
+              0.9938544439673527,
+              -0.32,
+              0.44,
+              -0.015,
+              0.35005873923129,
+              0.02545905488700392,
+              -0.06792172944694293,
+              0.9339150680233168,
+              0,
+              -0.43,
+              0,
+              0.05584814534281689,
+              0,
+              0,
+              0.9984392743986825,
+              0.32,
+              0.44,
+              -0.015,
+              0.48426733293065216,
+              -0.03752053404049454,
+              0.06752317686271592,
+              0.8715032876403367,
+              0,
+              -0.43,
+              0,
+              0.06202067426777528,
+              0,
+              0,
+              0.9980748649091262,
+              -0.19,
+              -0.09,
+              0.015,
+              0.3838529778461483,
+              0,
+              0,
+              0.9233942231780771,
+              0,
+              -0.38,
+              0,
+              -0.4797331812539897,
+              0,
+              0,
+              0.8774144259151012,
+              0,
+              -0.33,
+              0,
+              0.10618470804409492,
+              0,
+              0,
+              0.9943464224190633,
+              0.19,
+              -0.09,
+              0.015,
+              -0.2949806124622354,
+              0,
+              0,
+              0.9555032382317731,
+              0,
+              -0.38,
+              0,
+              -0.10994244832894902,
+              0,
+              0,
+              0.9939379548319082,
+              0,
+              -0.33,
+              0,
+              0.3982427920632181,
+              0,
+              0,
+              0.9172800436996831
+            ]
+          },
+          {
+            "state": "lunge",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.2862562023006626,
+              0.07925320244575426,
+              -0.019020233963570617,
+              0.9546803377290565,
+              0,
+              0.68,
+              -0.19,
+              0.126769907120004,
+              -0.035102141045946285,
+              -0.008828486210208698,
+              0.9912715511775834,
+              -0.32,
+              0.44,
+              -0.015,
+              0.464965076364825,
+              0.034415160818062625,
+              -0.06530093601314649,
+              0.882246486092592,
+              0,
+              -0.43,
+              0,
+              0.05921218049425267,
+              0,
+              0,
+              0.9982454195643053,
+              0.32,
+              0.44,
+              -0.015,
+              0.6603747467445951,
+              -0.05127997001871102,
+              0.05800159187309038,
+              0.7469346516778289,
+              0,
+              -0.43,
+              0,
+              0.05626011636695299,
+              0,
+              0,
+              0.9984161453554209,
+              -0.19,
+              -0.09,
+              0.015,
+              0.38840269468266686,
+              0,
+              0,
+              0.9214897431676834,
+              0,
+              -0.38,
+              0,
+              -0.47229343346073005,
+              0,
+              0,
+              0.8814413835927349,
+              0,
+              -0.33,
+              0,
+              0.09285934610727498,
+              0,
+              0,
+              0.9956792364213132,
+              0.19,
+              -0.09,
+              0.015,
+              -0.3109982188126093,
+              0,
+              0,
+              0.9504104944156416,
+              0,
+              -0.38,
+              0,
+              -0.10168097105808926,
+              0,
+              0,
+              0.9948170586216765,
+              0,
+              -0.33,
+              0,
+              0.4060249952517217,
+              0,
+              0,
+              0.9138619716515396
+            ]
+          },
+          {
+            "state": "recover",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.2662793620909195,
+              0.1597957055367541,
+              -0.03791734385457528,
+              0.949801510238575,
+              0,
+              0.68,
+              -0.19,
+              0.06752412935116282,
+              -0.015371684553510224,
+              -0.006657238986998789,
+              0.9975770067711187,
+              -0.32,
+              0.44,
+              -0.015,
+              0.3781008377789177,
+              0.028419987605098312,
+              -0.06935672906187428,
+              0.9227251513366506,
+              0,
+              -0.43,
+              0,
+              0.0786523522352834,
+              0,
+              0,
+              0.9969021052680433,
+              0.32,
+              0.44,
+              -0.015,
+              0.6061834688594353,
+              -0.04701269996344495,
+              0.061389400302431056,
+              0.7915571676475407,
+              0,
+              -0.43,
+              0,
+              0.14558562425387697,
+              0,
+              0,
+              0.9893456554766938,
+              -0.19,
+              -0.09,
+              0.015,
+              0.3506945163768454,
+              0,
+              0,
+              0.9364899124834237,
+              0,
+              -0.38,
+              0,
+              -0.4256501117246491,
+              0,
+              0,
+              0.9048878286223071,
+              0,
+              -0.33,
+              0,
+              0.08127783644358258,
+              0,
+              0,
+              0.9966914835108456,
+              0.19,
+              -0.09,
+              0.015,
+              -0.0801914957451055,
+              0,
+              0,
+              0.9967794761180443,
+              0,
+              -0.38,
+              0,
+              -0.17182220341305166,
+              0,
+              0,
+              0.9851279766681504,
+              0,
+              -0.33,
+              0,
+              0.25026773185287804,
+              0,
+              0,
+              0.9681766689985954
+            ]
+          },
+          {
+            "state": "recover",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.24430881904325047,
+              0.16026354159357276,
+              -0.03234458888360506,
+              0.9558151629596217,
+              0,
+              0.68,
+              -0.19,
+              0.03676209194326377,
+              0.011612495492128064,
+              -0.006294212994366804,
+              0.9992367494378807,
+              -0.32,
+              0.44,
+              -0.015,
+              0.31338354363151383,
+              0.023858474747046075,
+              -0.07206548310628676,
+              0.9465876049834782,
+              0,
+              -0.43,
+              0,
+              0.0878285177351207,
+              0,
+              0,
+              0.9961356089772374,
+              0.32,
+              0.44,
+              -0.015,
+              0.5451168995470818,
+              -0.04207740619350889,
+              0.06443950771291629,
+              0.8348201049099861,
+              0,
+              -0.43,
+              0,
+              0.18388229675719397,
+              0,
+              0,
+              0.9829482697168246,
+              -0.19,
+              -0.09,
+              0.015,
+              0.3241608364946131,
+              0,
+              0,
+              0.9460019831285306,
+              0,
+              -0.38,
+              0,
+              -0.3987950225711327,
+              0,
+              0,
+              0.9170400918021467,
+              0,
+              -0.33,
+              0,
+              0.07999239895639797,
+              0,
+              0,
+              0.9967954735597471,
+              0.19,
+              -0.09,
+              0.015,
+              0.034366808120627805,
+              0,
+              0,
+              0.9994092867787451,
+              0,
+              -0.38,
+              0,
+              -0.2057877964787152,
+              0,
+              0,
+              0.9785966394896495,
+              0,
+              -0.33,
+              0,
+              0.17203499196973038,
+              0,
+              0,
+              0.985090839231578
+            ]
+          },
+          {
+            "state": "recover",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.21986143331483243,
+              0.14363018633527605,
+              -0.02264741604088081,
+              0.9646338239252824,
+              0,
+              0.68,
+              -0.19,
+              0.031094483032911163,
+              0.019311434445901228,
+              -0.007011905731168665,
+              0.9993052760806254,
+              -0.32,
+              0.44,
+              -0.015,
+              0.26894451570273853,
+              0.02067701406898221,
+              -0.07381451473553216,
+              0.9601003728657586,
+              0,
+              -0.43,
+              0,
+              0.08950407039399068,
+              0,
+              0,
+              0.9959864564254414,
+              0.32,
+              0.44,
+              -0.015,
+              0.47983984454736384,
+              -0.036741055829335595,
+              0.06692381534879961,
+              0.8740280437952017,
+              0,
+              -0.43,
+              0,
+              0.18058626441378808,
+              0,
+              0,
+              0.9835591497744675,
+              -0.19,
+              -0.09,
+              0.015,
+              0.30190952521530035,
+              0,
+              0,
+              0.9533365820025328,
+              0,
+              -0.38,
+              0,
+              -0.38422816181536545,
+              0,
+              0,
+              0.9232381706082051,
+              0,
+              -0.33,
+              0,
+              0.08756436474521105,
+              0,
+              0,
+              0.9961588638499221,
+              0.19,
+              -0.09,
+              0.015,
+              0.05529026534428629,
+              0,
+              0,
+              0.9984703233237122,
+              0,
+              -0.38,
+              0,
+              -0.21196734686702123,
+              0,
+              0,
+              0.9772767488598897,
+              0,
+              -0.33,
+              0,
+              0.15760921460111943,
+              0,
+              0,
+              0.9875015622634823
+            ]
+          },
+          {
+            "state": "recover",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.1876021070162519,
+              0.11740304490969662,
+              -0.011338981563926641,
+              0.9751376323299638,
+              0,
+              0.68,
+              -0.19,
+              0.030024882441007476,
+              0.023254764998691876,
+              -0.007560768659252281,
+              0.99924999730625,
+              -0.32,
+              0.44,
+              -0.015,
+              0.2166852124533274,
+              0.016768978302430806,
+              -0.07531368713882358,
+              0.9731876327822423,
+              0,
+              -0.43,
+              0,
+              0.08981013903744028,
+              0,
+              0,
+              0.9959589042355491,
+              0.32,
+              0.44,
+              -0.015,
+              0.39203732232268085,
+              -0.02968380709715681,
+              0.069420626528706,
+              0.9168458900571257,
+              0,
+              -0.43,
+              0,
+              0.16618660074431224,
+              0,
+              0,
+              0.9860943229392666,
+              -0.19,
+              -0.09,
+              0.015,
+              0.2743361471443713,
+              0,
+              0,
+              0.9616338587892909,
+              0,
+              -0.38,
+              0,
+              -0.36857047083385336,
+              0,
+              0,
+              0.9295998106870029,
+              0,
+              -0.33,
+              0,
+              0.09940701365373474,
+              0,
+              0,
+              0.9950468560004831,
+              0.19,
+              -0.09,
+              0.015,
+              0.05911028607650281,
+              0,
+              0,
+              0.9982514583410104,
+              0,
+              -0.38,
+              0,
+              -0.21309534185270537,
+              0,
+              0,
+              0.9770314095671022,
+              0,
+              -0.33,
+              0,
+              0.15497012964489906,
+              0,
+              0,
+              0.9879191560638164
+            ]
+          },
+          {
+            "state": "recover",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.15041799230872605,
+              0.08618758973240034,
+              -0.0011246369361724573,
+              0.9848577877834409,
+              0,
+              0.68,
+              -0.19,
+              0.02980130200636534,
+              0.026248072241632458,
+              -0.007856659917033498,
+              0.999180261012632,
+              -0.32,
+              0.44,
+              -0.015,
+              0.1576759009942083,
+              0.012240903008212421,
+              -0.07642634174374059,
+              0.9844528860371516,
+              0,
+              -0.43,
+              0,
+              0.08986605182044498,
+              0,
+              0,
+              0.9959538607436617,
+              0.32,
+              0.44,
+              -0.015,
+              0.2881472534441447,
+              -0.021513818954541002,
+              0.07127941126495975,
+              0.9546871537086418,
+              0,
+              -0.43,
+              0,
+              0.14823655308791156,
+              0,
+              0,
+              0.9889519322639573,
+              -0.19,
+              -0.09,
+              0.015,
+              0.2430457895230118,
+              0,
+              0,
+              0.9700148164822721,
+              0,
+              -0.38,
+              0,
+              -0.35122390776242707,
+              0,
+              0,
+              0.9362914966056726,
+              0,
+              -0.33,
+              0,
+              0.11313068841614908,
+              0,
+              0,
+              0.9935801162153398,
+              0.19,
+              -0.09,
+              0.015,
+              0.059808049083641956,
+              0,
+              0,
+              0.9982098963969495,
+              0,
+              -0.38,
+              0,
+              -0.21330137731994803,
+              0,
+              0,
+              0.9769864494625364,
+              0,
+              -0.33,
+              0,
+              0.15448789223236348,
+              0,
+              0,
+              0.9879946817435818
+            ]
+          },
+          {
+            "state": "recover",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.1130608998283483,
+              0.054476403634760126,
+              0.006215092097658324,
+              0.9920740531871826,
+              0,
+              0.68,
+              -0.19,
+              0.029740369242414837,
+              0.0287731875975139,
+              -0.007883944574891433,
+              0.9991123347906096,
+              -0.32,
+              0.44,
+              -0.015,
+              0.09880926010345426,
+              0.0076683112159500735,
+              -0.07699362625904183,
+              0.9920936995245894,
+              0,
+              -0.43,
+              0,
+              0.0898762661340923,
+              0,
+              0,
+              0.9959529390416968,
+              0.32,
+              0.44,
+              -0.015,
+              0.1817399022933744,
+              -0.013347856249594186,
+              0.07202108812867503,
+              0.980614809959903,
+              0,
+              -0.43,
+              0,
+              0.13015910029201305,
+              0,
+              0,
+              0.9914931208088,
+              -0.19,
+              -0.09,
+              0.015,
+              0.21183330846668552,
+              0,
+              0,
+              0.9773058116188904,
+              0,
+              -0.38,
+              0,
+              -0.33400220901026023,
+              0,
+              0,
+              0.9425722913263823,
+              0,
+              -0.33,
+              0,
+              0.12675409301858256,
+              0,
+              0,
+              0.991934171154032,
+              0.19,
+              -0.09,
+              0.015,
+              0.05993551574194068,
+              0,
+              0,
+              0.9982022510256865,
+              0,
+              -0.38,
+              0,
+              -0.21333901558070203,
+              0,
+              0,
+              0.9769782312984547,
+              0,
+              -0.33,
+              0,
+              0.1543997914227389,
+              0,
+              0,
+              0.9880084536119186
+            ]
+          },
+          {
+            "state": "recover",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.08084326375567191,
+              0.026984505810428352,
+              0.010198347781537508,
+              0.9963092877485508,
+              0,
+              0.68,
+              -0.19,
+              0.029719227645836066,
+              0.030891952274038303,
+              -0.0076401344566449855,
+              0.9990515918301307,
+              -0.32,
+              0.44,
+              -0.015,
+              0.04826005475304479,
+              0.003731047203578852,
+              -0.07699092491535504,
+              0.9958561361374825,
+              0,
+              -0.43,
+              0,
+              0.08987813211988399,
+              0,
+              0,
+              0.995952770650617,
+              0.32,
+              0.44,
+              -0.015,
+              0.08904368526225917,
+              -0.0064207106955766514,
+              0.071633513069949,
+              0.99342772077003,
+              0,
+              -0.43,
+              0,
+              0.1146440170750925,
+              0,
+              0,
+              0.9934066384662859,
+              -0.19,
+              -0.09,
+              0.015,
+              0.18500161323317457,
+              0,
+              0,
+              0.9827382169739421,
+              0,
+              -0.38,
+              0,
+              -0.3192137852472413,
+              0,
+              0,
+              0.947682731354818,
+              0,
+              -0.33,
+              0,
+              0.1383807520135143,
+              0,
+              0,
+              0.990379102905637,
+              0.19,
+              -0.09,
+              0.015,
+              0.05995880169476071,
+              0,
+              0,
+              0.9982008525839519,
+              0,
+              -0.38,
+              0,
+              -0.21334589143661215,
+              0,
+              0,
+              0.9769767298186366,
+              0,
+              -0.33,
+              0,
+              0.15438369672371802,
+              0,
+              0,
+              0.988010968656684
+            ]
+          },
+          {
+            "state": "recover",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.059205706013204004,
+              0.008475277794575886,
+              0.01144103579061883,
+              0.9981442564789023,
+              0,
+              0.68,
+              -0.19,
+              0.02971665696394487,
+              0.032593927751184686,
+              -0.007131979419427345,
+              0.9990013468670593,
+              -0.32,
+              0.44,
+              -0.015,
+              0.014410864898446922,
+              0.0011061238412943034,
+              -0.07652313727455749,
+              0.9969630449141963,
+              0,
+              -0.43,
+              0,
+              0.08987847300471015,
+              0,
+              0,
+              0.9959527398879635,
+              0.32,
+              0.44,
+              -0.015,
+              0.026613826031508383,
+              -0.0018815589208294144,
+              0.07049741953300429,
+              0.9971550921693072,
+              0,
+              -0.43,
+              0,
+              0.1042570097798623,
+              0,
+              0,
+              0.994550388824901,
+              -0.19,
+              -0.09,
+              0.015,
+              0.16699661441021538,
+              0,
+              0,
+              0.9859574690500224,
+              0,
+              -0.38,
+              0,
+              -0.30929099277164074,
+              0,
+              0,
+              0.9509674451790308,
+              0,
+              -0.33,
+              0,
+              0.14613942067386537,
+              0,
+              0,
+              0.9892640040581215,
+              0.19,
+              -0.09,
+              0.015,
+              0.059963055651158316,
+              0,
+              0,
+              0.9982005970530052,
+              0,
+              -0.38,
+              0,
+              -0.2133471475410591,
+              0,
+              0,
+              0.9769764555177844,
+              0,
+              -0.33,
+              0,
+              0.15438075648295652,
+              0,
+              0,
+              0.9880114280856017
+            ]
+          },
+          {
+            "state": "approach",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.051683906338185856,
+              0.0020104588614696657,
+              0.011013286158960777,
+              0.9986007407411496,
+              0,
+              0.68,
+              -0.19,
+              0.029729075218261625,
+              0.03386011980746795,
+              -0.006374967470333349,
+              0.9989639804132295,
+              -0.32,
+              0.44,
+              -0.015,
+              0.038579134512917376,
+              0.0029305521543423825,
+              -0.07568717301442017,
+              0.9963807074032446,
+              0,
+              -0.43,
+              0,
+              0.0970526668246168,
+              0,
+              0,
+              0.9952792471775095,
+              0.32,
+              0.44,
+              -0.015,
+              -0.031017218775373664,
+              0.002148529907135184,
+              0.0690699456951672,
+              0.9971272027982916,
+              0,
+              -0.43,
+              0,
+              0.14712290519419396,
+              0,
+              0,
+              0.989118218802596,
+              -0.19,
+              -0.09,
+              0.015,
+              0.1607381475640985,
+              0,
+              0,
+              0.9869970860735416,
+              0,
+              -0.38,
+              0,
+              -0.3058413596904364,
+              0,
+              0,
+              0.952082487341672,
+              0,
+              -0.33,
+              0,
+              0.14882855547171092,
+              0,
+              0,
+              0.9888630143130058,
+              0.19,
+              -0.09,
+              0.015,
+              0.059963832778786544,
+              0,
+              0,
+              0.998200550369753,
+              0,
+              -0.38,
+              0,
+              -0.21334737701060794,
+              0,
+              0,
+              0.9769764054073637,
+              0,
+              -0.33,
+              0,
+              0.1543802193492649,
+              0,
+              0,
+              0.9880115120147502
+            ]
+          },
+          {
+            "state": "approach",
+            "joints": [
+              0,
+              0,
+              0,
+              -0.050289031725061634,
+              0.0007614717190252975,
+              0.009896626325693842,
+              0.9986853810066244,
+              0,
+              0.68,
+              -0.19,
+              0.02975516104536417,
+              0.03467482340199511,
+              -0.005392833018158007,
+              0.9989410414860543,
+              -0.32,
+              0.44,
+              -0.015,
+              0.047783258957450565,
+              0.0035817151932526106,
+              -0.07466197411128024,
+              0.9960569868744891,
+              0,
+              -0.43,
+              0,
+              0.09932547702625337,
+              0,
+              0,
+              0.9950549982857768,
+              0.32,
+              0.44,
+              -0.015,
+              -0.04642304844874032,
+              0.0031507342178997894,
+              0.06764092168708506,
+              0.9966241413692204,
+              0,
+              -0.43,
+              0,
+              0.1611266030596879,
+              0,
+              0,
+              0.9869337453884358,
+              -0.19,
+              -0.09,
+              0.015,
+              0.15957763112857073,
+              0,
+              0,
+              0.9871853826123004,
+              0,
+              -0.38,
+              0,
+              -0.30520164248860804,
+              0,
+              0,
+              0.9522877492765808,
+              0,
+              -0.33,
+              0,
+              0.14932677703170394,
+              0,
+              0,
+              0.9887879012514887,
+              0.19,
+              -0.09,
+              0.015,
+              0.05996397474719639,
+              0,
+              0,
+              0.9982005418414266,
+              0,
+              -0.38,
+              0,
+              -0.21334741893091252,
+              0,
+              0,
+              0.9769763962530097,
+              0,
+              -0.33,
+              0,
+              0.15438012122378428,
+              0,
+              0,
+              0.9880115273471912
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "defeat UI and restart reset combat without stale state",
+      "pass": true,
+      "milliseconds": 2604,
+      "detail": {
+        "hp": 100,
+        "active": true,
+        "kills": 0,
+        "combo": 0,
+        "attackTime": 0,
+        "invulnerable": 0,
+        "enemies": [
+          {
+            "visible": true,
+            "dead": false,
+            "finished": false,
+            "opacity": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "visible": true,
+            "dead": false,
+            "finished": false,
+            "opacity": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "visible": true,
+            "dead": false,
+            "finished": false,
+            "opacity": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "visible": true,
+            "dead": false,
+            "finished": false,
+            "opacity": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "visible": true,
+            "dead": false,
+            "finished": false,
+            "opacity": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "win occurs after five deaths then permits further exploration",
+      "pass": true,
+      "milliseconds": 3284,
+      "detail": {
+        "kills": 5,
+        "victory": true,
+        "active": false,
+        "dying": [
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": true,
+            "deathTime": 0
+          },
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": true,
+            "deathTime": 0
+          },
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": true,
+            "deathTime": 0
+          },
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": true,
+            "deathTime": 0
+          },
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": true,
+            "deathTime": 0
+          }
+        ],
+        "enemies": [
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": false,
+            "finished": true,
+            "deathTime": 1.3083333333333311
+          },
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": false,
+            "finished": true,
+            "deathTime": 1.3083333333333311
+          },
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": false,
+            "finished": true,
+            "deathTime": 1.3083333333333311
+          },
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": false,
+            "finished": true,
+            "deathTime": 1.3083333333333311
+          },
+          {
+            "hp": 0,
+            "state": "dead",
+            "visible": false,
+            "finished": true,
+            "deathTime": 1.3083333333333311
+          }
+        ]
+      }
+    },
+    {
+      "name": "collectible flowers and shrine offering form a complete activity",
+      "pass": true,
+      "milliseconds": 5814,
+      "detail": {
+        "flowers": [
+          {
+            "id": "garden",
+            "position": [
+              -3,
+              0,
+              7
+            ]
+          },
+          {
+            "id": "mill",
+            "position": [
+              -15,
+              0,
+              -13
+            ]
+          },
+          {
+            "id": "shrine",
+            "position": [
+              2,
+              0,
+              -12
+            ]
+          }
+        ],
+        "collected": {
+          "count": 3,
+          "flags": [
+            true,
+            true,
+            true
+          ]
+        },
+        "shrinePosition": [
+          0,
+          0,
+          -20
+        ],
+        "reward": {
+          "offered": true,
+          "hp": 120,
+          "maxHp": 120,
+          "bloomsHidden": true
+        },
+        "healing": {
+          "hp": 120,
+          "maxHp": 120
+        }
+      }
+    },
+    {
+      "name": "audio starts after a gesture and mute toggles cleanly",
+      "pass": true,
+      "milliseconds": 4629,
+      "detail": {
+        "before": "false",
+        "after": "true",
+        "restored": "false",
+        "title": null,
+        "audio": {
+          "unlocked": true,
+          "state": "running",
+          "volume": 0.45,
+          "maxVoices": 28
+        },
+        "synthesis": {
+          "hit": true,
+          "swing": true,
+          "voices": 5,
+          "voiceLimit": 28,
+          "mutedPlay": false,
+          "masterGain": 0.44999998807907104
+        }
+      }
+    },
+    {
+      "name": "resize updates canvas and retains rendered scene",
+      "pass": true,
+      "milliseconds": 2762,
+      "detail": {
+        "width": 900,
+        "height": 640,
+        "clientWidth": 900,
+        "clientHeight": 640
+      }
+    },
+    {
+      "name": "blocked WebGL shows useful visible startup error",
+      "pass": true,
+      "milliseconds": 1917,
+      "detail": {
+        "message": "3D rendering is unavailable in this browser. Enable hardware acceleration and use a browser with WebGL 2 support, then reload."
+      }
+    },
+    {
+      "name": "no JavaScript, request, or external dependency failures",
+      "pass": true,
+      "milliseconds": 0,
+      "detail": {
+        "browserErrors": 0,
+        "requestFailures": 0,
+        "externalRequests": 0
+      }
+    }
+  ],
+  "browserErrors": [],
+  "failedRequests": [],
+  "responsesWithErrors": [],
+  "externalRequests": [],
+  "screenshots": [
+    "/workspace/validation-artifacts/2026-10-12T19-37-04-622Z-97337/gameplay-canvas.png",
+    "/workspace/validation-artifacts/2026-10-12T19-37-04-622Z-97337/wolf-gameplay-crop.png",
+    "/workspace/validation-artifacts/2026-10-12T19-37-04-622Z-97337/village-gameplay.png",
+    "/workspace/validation-artifacts/2026-10-12T19-37-04-622Z-97337/npc-dialogue-closed.png",
+    "/workspace/validation-artifacts/2026-10-12T19-37-04-622Z-97337/combat-combo.png",
+    "/workspace/validation-artifacts/2026-10-12T19-37-04-622Z-97337/resized-900x640.png",
+    "/workspace/validation-artifacts/2026-10-12T19-37-04-622Z-97337/webgl-unavailable.png"
+  ],
+  "finishedUTC": "2026-10-12T19:38:06.602Z",
+  "finishedSydney": "Tuesday, 13 October 2026 at 6:38:06 am AEDT",
+  "durationSeconds": 62.023,
+  "passed": 20,
+  "failed": 0
+}

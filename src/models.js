@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 import { paint, outline, stroke } from "./art.js";
 export const mat = paint;
 export function part(
@@ -18,233 +19,148 @@ export function part(
   if (lined) outline(m);
   return m;
 }
-function ellipsoid(parent, material, pos, scale) {
-  const m = part(parent, new THREE.SphereGeometry(1, 8, 6), material, pos);
-  m.scale.set(...scale);
-  return m;
-}
-export function wolf() {
-  const root = new THREE.Group(),
-    body = new THREE.Group();
-  root.add(body);
-  const white = mat("#fff6dd"),
-    red = mat("#cf312c"),
-    black = mat("#252723"),
-    gold = mat("#daa949");
-  ellipsoid(body, white, [0, 1.17, 0.08], [0.21, 0.23, 0.72]);
-  ellipsoid(body, white, [0, 1.2, -0.45], [0.27, 0.38, 0.34]);
-  ellipsoid(body, white, [0, 1.12, 0.65], [0.22, 0.28, 0.3]);
-  const head = new THREE.Group();
-  head.position.set(0, 1.55, -0.68);
-  body.add(head);
-  ellipsoid(head, white, [0, 0, -0.08], [0.23, 0.25, 0.3]);
-  ellipsoid(head, white, [0, -0.12, -0.43], [0.13, 0.115, 0.36]);
-  ellipsoid(head, black, [0, -0.06, -0.7], [0.12, 0.085, 0.09]);
-  for (const s of [-1, 1]) {
-    const ear = part(
-      head,
-      new THREE.ConeGeometry(0.15, 0.47, 3),
-      white,
-      [s * 0.2, 0.34, 0.01],
-      [0.1, 0, s * -0.17],
-    );
-    ear.scale.z = 0.65;
-    part(
-      head,
-      new THREE.ConeGeometry(0.085, 0.27, 3),
-      red,
-      [s * 0.2, 0.35, -0.045],
-      [0.1, 0, s * -0.17],
-    );
-    ellipsoid(head, black, [s * 0.25, 0.015, -0.27], [0.035, 0.045, 0.085]);
-    stroke(
-      head,
-      [
-        [s * 0.26, 0.09, -0.28],
-        [s * 0.28, 0.13, -0.13],
-        [s * 0.27, 0.08, 0.01],
-      ],
-      "#282520",
-      0.025,
-    );
-    stroke(
-      head,
-      [
-        [s * 0.2, -0.04, -0.37],
-        [s * 0.3, -0.1, -0.15],
-        [s * 0.26, -0.2, -0.04],
-      ],
-      "#cf312c",
-      0.035,
-    );
-    for (let i = 0; i < 2; i++) {
-      const tuft = part(
-        body,
-        new THREE.ConeGeometry(0.09, 0.35, 4),
-        white,
-        [s * (0.22 + i * 0.015), 1.48 - i * 0.16, -0.44 + i * 0.15],
-        [0.75, 0, s * 0.55],
-      );
-      tuft.scale.z = 0.55;
+export { wolf } from "./wolf.js";
+// Hand shaped rings keep the sentinel's silhouette coherent rather than a stack
+// of primitive spheres. These assets are intentionally original and local.
+function sculpt(rings, sides = 8) {
+  const vertices = [], indices = [];
+  for (const [y, width, depth, z = 0] of rings) {
+    for (let i = 0; i < sides; i++) {
+      const a = (i / sides) * Math.PI * 2;
+      vertices.push(Math.cos(a) * width, y, Math.sin(a) * depth + z);
     }
-    stroke(
-      body,
-      [
-        [s * 0.31, 1.27, -0.4],
-        [s * 0.38, 1.05, -0.3],
-        [s * 0.34, 0.92, -0.08],
-        [s * 0.33, 1.17, 0.03],
-      ],
-      "#cf312c",
-      0.037,
-    );
   }
-  stroke(
-    head,
-    [
-      [0, 0.28, -0.18],
-      [0, 0.22, -0.35],
-      [0, 0.11, -0.4],
-    ],
-    "#cf312c",
-    0.04,
-  );
-  const legs = [];
-  for (const x of [-0.23, 0.23])
-    for (const z of [-0.48, 0.62]) {
-      const front = z < 0,
-        leg = new THREE.Group();
-      leg.position.set(x, 0.97, z);
-      body.add(leg);
-      ellipsoid(leg, white, [0, -0.18, 0], [0.12, 0.3, 0.14]);
-      const knee = new THREE.Group();
-      knee.position.set(0, -0.4, 0);
-      leg.add(knee);
-      part(
-        knee,
-        new THREE.CylinderGeometry(0.075, 0.055, 0.39, 10),
-        white,
-        [0, -0.17, 0.03],
-        [front ? -0.06 : 0.25, 0, 0],
-      );
-      ellipsoid(knee, white, [0, -0.36, -0.07], [0.115, 0.08, 0.19]);
-      part(
-        knee,
-        new THREE.CylinderGeometry(0.079, 0.079, 0.09, 10),
-        red,
-        [0, -0.23, 0.03],
-      );
-      leg.userData.knee = knee;
-      legs.push(leg);
+  for (let j = 0; j < rings.length - 1; j++) for (let i = 0; i < sides; i++) {
+    const a = j * sides + i, b = j * sides + (i + 1) % sides;
+    indices.push(a, b, a + sides, b, b + sides, a + sides);
+  }
+  for (let i = 1; i < sides - 1; i++) {
+    indices.push(0, i + 1, i);
+    const o = (rings.length - 1) * sides;
+    indices.push(o, o + i, o + i + 1);
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  return geometry;
+}
+function joint(parent, position) {
+  const group = new THREE.Group();
+  group.position.set(...position);
+  parent.add(group);
+  return group;
+}
+function limb(parent, length, top, bottom, material) {
+  return part(parent, sculpt([[0, top, top * 0.78], [-length * 0.65, bottom * 1.2, bottom], [-length, bottom, bottom * 0.8]]), material);
+}
+function ribbon(parent, material, points, width = 0.12) {
+  const vertices = [], indices = [];
+  points.forEach(([x, y, z], i) => vertices.push(x - width * (1 - i / (points.length * 1.1)), y, z, x + width * (1 - i / (points.length * 1.1)), y - .03, z));
+  for (let i = 0; i < points.length - 1; i++) indices.push(i * 2, i * 2 + 1, i * 2 + 2, i * 2 + 1, i * 2 + 3, i * 2 + 2);
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(vertices, 3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  return part(parent, geometry, material, [0, 0, 0], [0, 0, 0], false);
+}
+function batchFixedParts(root) {
+  const groups=[];
+  root.traverse(object=>{if(object.isGroup)groups.push(object);});
+  for(const group of groups) {
+    const batches=new Map(), originals=[];
+    const collect=(mesh,matrix)=>{
+      const material=mesh.material;
+      const key=[material.type,material.color?.getHexString(),material.map?.uuid,material.side,material.transparent,material.opacity].join("|");
+      if(!batches.has(key))batches.set(key,{material,geometries:[]});
+      let geometry=mesh.geometry.index?mesh.geometry.toNonIndexed():mesh.geometry.clone();
+      if(!geometry.getAttribute("uv"))geometry.setAttribute("uv",new THREE.Float32BufferAttribute(new Float32Array(geometry.getAttribute("position").count*2),2));
+      geometry.applyMatrix4(matrix);
+      batches.get(key).geometries.push(geometry);
+    };
+    for(const mesh of [...group.children]) {
+      if(!mesh.isMesh||mesh.userData.dynamic)continue;
+      mesh.updateMatrix();collect(mesh,mesh.matrix);originals.push(mesh);
+      for(const shell of mesh.children)if(shell.isMesh&&shell.userData.outline) {
+        shell.updateMatrix();collect(shell,new THREE.Matrix4().multiplyMatrices(mesh.matrix,shell.matrix));
+      }
     }
-  const tail = new THREE.Group();
-  tail.position.set(0, 1.22, 0.8);
-  body.add(tail);
-  stroke(
-    tail,
-    [
-      [0, 0, 0],
-      [0, 0.2, 0.25],
-      [0, 0.48, 0.38],
-      [0, 0.7, 0.25],
-      [0, 0.76, 0.04],
-    ],
-    "#fff6dd",
-    0.13,
-  );
-  stroke(
-    tail,
-    [
-      [0.01, 0.43, 0.38],
-      [0.01, 0.67, 0.27],
-      [0.01, 0.71, 0.12],
-    ],
-    "#cf312c",
-    0.04,
-  );
-  const spear = new THREE.Group();
-  head.add(spear);
-  spear.position.set(0, -0.22, -0.51);
-  part(
-    spear,
-    new THREE.CylinderGeometry(0.035, 0.035, 2.7, 10),
-    mat("#624326"),
-    [0.37, 0, -0.42],
-    [Math.PI / 2, 0, 0],
-  );
-  part(
-    spear,
-    new THREE.CylinderGeometry(0.048, 0.048, 0.76, 10),
-    black,
-    [0, 0, 0.03],
-    [0, 0, Math.PI / 2],
-  );
-  const blade = part(
-    spear,
-    new THREE.ConeGeometry(0.15, 0.66, 4),
-    mat("#e8e3bc"),
-    [0.37, 0, -2.05],
-    [-Math.PI / 2, 0, Math.PI / 4],
-  );
-  blade.scale.z = 0.25;
-  part(
-    spear,
-    new THREE.TorusGeometry(0.1, 0.025, 6, 16),
-    gold,
-    [0.37, 0, -1.7],
-  );
-  const ribbon = stroke(
-    spear,
-    [
-      [0.38, 0, -1.65],
-      [0.5, -0.15, -1.45],
-      [0.63, -0.2, -1.3],
-    ],
-    "#cf312c",
-    0.035,
-  );
-  return { root, body, head, legs, tail, spear, ribbon };
+    // A single part already draws efficiently; leave its outline hierarchy.
+    if(originals.length<2) {
+      for(const {geometries} of batches.values())for(const geometry of geometries)geometry.dispose();
+      continue;
+    }
+    for(const {material,geometries} of batches.values()) {
+      const geometry=mergeGeometries(geometries,false);
+      const mesh=new THREE.Mesh(geometry,material);
+      mesh.castShadow=material.side!==THREE.BackSide;mesh.receiveShadow=mesh.castShadow;
+      group.add(mesh);
+      for(const source of geometries)source.dispose();
+    }
+    for(const mesh of originals){group.remove(mesh);mesh.geometry.dispose();}
+  }
 }
 export function demon() {
-  const root = new THREE.Group(),
-    m = mat("#39564d"),
-    red = mat("#c73727");
-  ellipsoid(root, m, [0, 0.85, 0], [0.44, 0.65, 0.35]);
-  const face = ellipsoid(
-    root,
-    mat("#e5d6aa"),
-    [0, 1.25, -0.31],
-    [0.37, 0.43, 0.14],
-  );
-  for (const s of [-1, 1]) {
-    part(
-      root,
-      new THREE.ConeGeometry(0.1, 0.57, 7),
-      red,
-      [s * 0.24, 1.72, -0.05],
-      [0, 0, s * -0.4],
-    );
-    stroke(
-      root,
-      [
-        [s * 0.1, 1.32, -0.45],
-        [s * 0.23, 1.35, -0.44],
-      ],
-      "#2c2926",
-      0.035,
-    );
-    ellipsoid(root, m, [s * 0.4, 0.75, 0], [0.12, 0.4, 0.13]);
-    ellipsoid(root, m, [s * 0.23, 0.24, 0], [0.12, 0.25, 0.15]);
+  const root = new THREE.Group();
+  root.name = "Reed Sentinel";
+  const visual = joint(root, [0, 0, 0]);
+  const green = mat("#697c51"), bark = mat("#726142"), mask = mat("#ecdfb5"), red = mat("#bd4936"), dark = mat("#302d2b"), cloak = mat("#59604e");
+  cloak.side = THREE.DoubleSide;
+  const pelvis = joint(visual, [0, .85, .06]);
+  const torso = joint(pelvis, [0, 0, 0]);
+  part(torso, sculpt([[-.12, .22, .18], [.08, .25, .2], [.34, .38, .23, -.04], [.55, .32, .19, -.09], [.63, .13, .12, -.1]]), green);
+  // A tied sash and uneven mantle define a hunched torso and waist.
+  part(pelvis, sculpt([[-.06, .26, .22], [.04, .265, .225], [.1, .23, .2]]), red);
+  const mantle = joint(torso, [0, .44, .16]);
+  for (let i = -2; i <= 2; i++) ribbon(mantle, cloak, [[i * .125, .12, 0], [i * .14, -.16, .09], [i * .15, -.49 - (i % 2 ? .1 : 0), .16]], .09);
+  // Mask has an angular forehead, pronounced cheek planes and a narrow chin.
+  const head = joint(torso, [0, .68, -.19]);
+  const faceShape = new THREE.Shape();
+  faceShape.moveTo(-.24, .2); faceShape.lineTo(-.3, .03); faceShape.lineTo(-.21, -.22); faceShape.lineTo(0, -.35); faceShape.lineTo(.21, -.22); faceShape.lineTo(.3, .03); faceShape.lineTo(.24, .2); faceShape.lineTo(0, .3); faceShape.closePath();
+  const face = part(head, new THREE.ExtrudeGeometry(faceShape, {depth:.12, bevelEnabled:true, bevelThickness:.03, bevelSize:.035, bevelSegments:1, steps:1}), mask, [0, 0, -.16]);
+  face.rotation.y = Math.PI;
+  part(head,new THREE.ConeGeometry(.055,.16,4),mask,[0,-.035,-.353],[-Math.PI/2,0,Math.PI/4]);
+  const eyes = [];
+  for (const side of [-1, 1]) {
+    stroke(head, [[side * .065,.045,-.336],[side * .14,.092,-.338],[side * .23,.10,-.32]], "#302d2b", .024);
+    const eye = part(head, new THREE.BoxGeometry(.095,.023,.013), new THREE.MeshBasicMaterial({color:"#e8aa52"}), [side * .14,.035,-.347], [0,0,side * .12], false);
+    eye.userData.dynamic=true;
+    eyes.push(eye);
+    stroke(head, [[side * .205,-.095,-.333],[side * .13,-.17,-.335],[side * .045,-.185,-.338]], "#9c3d31", .018);
+    const antler = joint(head, [side * .2, .2, 0]);
+    stroke(antler, [[0,0,0],[side * .05,.17,.02],[side * .09,.34,.04],[side * .18,.47,.03]], "#443c31", .035);
+    stroke(antler, [[side * .075,.28,.025],[side * .19,.29,-.02],[side * .22,.35,-.055]], "#443c31", .025);
+    ribbon(antler, red, [[side * .09,.25,-.01],[side * .12,.03,-.03],[side * .2,-.14,-.02]], .033);
   }
-  stroke(
-    root,
-    [
-      [-0.15, 1.08, -0.45],
-      [0, 1.04, -0.46],
-      [0.15, 1.08, -0.45],
-    ],
-    "#c73727",
-    0.03,
-  );
+  stroke(head, [[-.095,-.23,-.335],[0,-.255,-.338],[.095,-.23,-.335]], "#302d2b", .018);
+  const arms = [], legs = [];
+  for (const side of [-1, 1]) {
+    const shoulder = joint(torso, [side * .32, .44, -.015]);
+    shoulder.rotation.z = side * .16;
+    limb(shoulder,.43,.125,.075,green);
+    const elbow = joint(shoulder, [0,-.43,0]);
+    limb(elbow,.42,.083,.045,bark);
+    const hand = joint(elbow, [0,-.42,0]);
+    part(hand, sculpt([[.03,.07,.055],[-.12,.067,.035],[-.2,.018,.025]]), bark);
+    for (const finger of [-1, 1]) part(hand, new THREE.ConeGeometry(.023,.11,4), mask, [finger * .04,-.19,-.025], [Math.PI-.2,0,finger * .1]);
+    arms.push({shoulder, elbow, hand, side});
+    const hip = joint(pelvis, [side * .19, -.09, .015]);
+    limb(hip,.38,.12,.068,green);
+    const knee = joint(hip, [0,-.38,0]);
+    limb(knee,.33,.071,.038,bark);
+    const foot = joint(knee, [0,-.33,0]);
+    part(foot, sculpt([[-.005,.058,.1,-.045],[-.065,.063,.15,-.08],[-.09,.055,.12,-.08]]), dark);
+    legs.push({hip,knee,foot,side});
+  }
+  const club = joint(arms[1].hand, [.015,-.075,-.03]);
+  club.rotation.set(-.3,0,-.35);
+  part(club,new THREE.CylinderGeometry(.04,.045,.64,7),bark,[0,.18,0]);
+  part(club,sculpt([[.34,.075,.065],[.46,.11,.09],[.77,.095,.08],[.85,.045,.055]]),dark);
+  part(club,new THREE.CylinderGeometry(.117,.117,.055,7),red,[0,.52,0]);
+  const talisman = joint(torso, [0,.3,-.255]);
+  ribbon(talisman,mask, [[0,.03,0],[0,-.14,-.01],[0,-.29,.02]], .055);
+  stroke(talisman, [[-.025,-.055,-.01],[.024,-.087,-.017],[-.02,-.125,-.016]], "#bd4936", .013);
+  batchFixedParts(root);
+  root.userData.rig = {visual,pelvis,torso,head,mantle,arms,legs,eyes,club,talisman};
   return root;
 }

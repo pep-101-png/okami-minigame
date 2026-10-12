@@ -4,18 +4,27 @@ import { Input } from "./input.js";
 import { createTown } from "./town.js";
 import { ATTACKS } from "./combat.js";
 import { Game } from "./game.js";
-import { requestPointer } from "./pointer.js";
+import { loadWolf } from "./wolf.js";
 import { FollowCamera } from "./camera.js";
 import { createPainterlyRenderer } from "./rendering.js";
-document.querySelector("#app").innerHTML =
-  `<div id="hud"><div class="eyebrow">A SPIRIT'S JOURNEY</div><div class="title">Sunward</div><div class="subtitle">THE CRIMSON GUARDIAN</div><div class="health-wrap"><div class="row"><span>VITALITY</span><span id="hp">100 / 100</span></div><div class="bar"><div class="fill" id="health"></div></div></div><div class="quest"><div class="eyebrow">WINDFLOWER VILLAGE</div><strong>Explore · restore the grove</strong><small id="count">0 / 5 spirits restored</small></div><div class="center" id="combo">守護 • PROTECT THE GROVE</div><div class="controls"><span><b>W A S D</b> Move</span><span><b>E</b> Talk</span><span><b>SPACE</b> Jump · <b>SHIFT</b> Run · <b>K</b> Dodge</span><span><b>CLICK / J</b> Spear combo</span><span>2.5D · Fixed camera</span></div><div class="badge">ACT I / DAWN</div></div><div id="overlay"><div class="panel"><div class="eyebrow">THE SACRED GROVE CALLS</div><h1>A light in the mist.</h1><p>Explore Windflower Village. Meet the villagers with E, then follow the road east to the spirit grove. Chain a thrust, a turning sweep, and a lunging finish. Shift runs; K dodges.</p><button id="start">ENTER THE VILLAGE →</button></div></div>`;
-const dialoguePanel = document.createElement("div");
-dialoguePanel.id = "dialogue";
-dialoguePanel.className = "hidden";
-document.body.append(dialoguePanel);
-const prompt = document.createElement("div");
-prompt.id = "talk-prompt";
-document.body.append(prompt);
+
+await loadWolf();
+document.querySelector("#app").innerHTML = `
+  <div id="hud">
+    <div class="eyebrow">A SPIRIT'S JOURNEY</div><div class="title">Sunward</div>
+    <div class="subtitle">THE CRIMSON GUARDIAN</div>
+    <div class="health-wrap"><div class="row"><span>VITALITY</span><span id="hp">100 / 100</span></div><div class="bar"><div class="fill" id="health"></div></div></div>
+    <button id="sound-toggle" type="button" aria-pressed="false">SOUND ON · M</button>
+    <div class="quest"><div class="eyebrow">WINDFLOWER VILLAGE</div><strong>Restore the eastern grove</strong><small id="count">0 / 5 spirits restored</small><small id="task-summary">Windflowers · 0 / 3</small></div>
+    <div class="center" id="combo">守護 · PROTECT THE GROVE</div>
+    <div class="controls"><span><b>W A S D</b> Move</span><span><b>E</b> Interact</span><span><b>SPACE</b> Jump · <b>SHIFT</b> Run</span><span><b>K</b> Dodge · <b>J / CLICK</b> Combo</span><span>Wheel · Zoom &nbsp; Esc · Pause</span></div>
+    <div class="badge">ACT I / DAWN</div>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="overlay"><div class="panel"><div class="eyebrow">THE SACRED GROVE CALLS</div><h1>A light in the mist.</h1><p>Walk the painted streets of Windflower. Talk to Hana in the garden, collect three windflowers for the northern shrine, and follow the road east to restore five restless spirits.</p><p>Press again during each strike to prepare the next. Watch the spirits wind up, then dodge their charge.</p><button id="start">ENTER THE VILLAGE →</button></div></div>
+  <div id="pause-panel" class="hidden"><div class="panel"><div class="eyebrow">A MOMENT OF STILLNESS</div><h1>Paused.</h1><p>WASD moves · Shift runs · Space jumps.<br>J or click attacks · K dodges · E interacts.<br>Mouse wheel zooms · M toggles sound.</p><label class="volume-control" for="volume">Sound volume <input id="volume" type="range" min="0" max="100" value="45"></label><button id="resume">RETURN TO THE VILLAGE →</button></div></div>
+  <div id="dialogue" class="hidden"></div><div id="talk-prompt"></div>`;
+const ui = Object.fromEntries(["overlay","hp","health","count","combo","dialogue","talk-prompt","toast","task-summary","sound-toggle","pause-panel"].map((id) => [id,document.getElementById(id)]));
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(innerWidth, innerHeight);
 renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
@@ -23,72 +32,72 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.NoToneMapping;
 document.body.prepend(renderer.domElement);
-const scene = new THREE.Scene(),
-  camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 100);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 140);
 const input = new Input(renderer.domElement);
 const world = createTown(scene);
 const followCamera = new FollowCamera(camera, input);
 const painterly = createPainterlyRenderer(renderer, scene, camera);
-const overlay = document.querySelector("#overlay");
 const game = new Game(scene, input, world, (win) => {
-  overlay.classList.remove("hidden");
-  overlay.querySelector(".panel").innerHTML =
-    `<div class="eyebrow">${win ? "THE LIGHT RETURNS" : "THE GROVE STILL CALLS"}</div><h1>${win ? "Dawn is restored." : "Rise once more."}</h1><p>${win ? "The shadows fade. Beneath the blossoms, the sacred grove breathes again." : "Your spirit endures. Keep your distance, chain your thrusts, and leap over attacks."}</p><button id="restart">RETURN TO THE GROVE →</button>`;
-  document.querySelector("#restart").textContent = win
-    ? "CONTINUE EXPLORING →"
-    : "TRY AGAIN →";
-  document.querySelector("#restart").onclick = () => {
-    if (win) {
-      overlay.classList.add("hidden");
-      game.active = true;
-    } else location.reload();
+  ui.overlay.classList.remove("hidden");
+  ui.overlay.querySelector(".panel").innerHTML = `<div class="eyebrow">${win ? "THE LIGHT RETURNS" : "THE GROVE STILL CALLS"}</div><h1>${win ? "Dawn is restored." : "Rise once more."}</h1><p>${win ? "The five spirits are at peace. Return to the village, finish your windflower offering, or rest beneath the blossoms." : "Your spirit endures. Offer windflowers at the northern shrine for extra vitality. Dodge the golden windup, then step in during recovery."}</p><button id="restart">${win ? "CONTINUE EXPLORING →" : "TRY AGAIN →"}</button>`;
+  document.getElementById("restart").onclick = () => {
+    ui.overlay.classList.add("hidden");
+    input.clear();
+    if (win) game.active = true;
+    else game.reset();
   };
 });
+game.cameraImpact = (strength) => followCamera.impact(strength);
 renderer.domElement.addEventListener("webglcontextlost", (event) => {
   event.preventDefault();
-  window.showGameError(
-    "The graphics connection was lost. Reload the page to restore the grove.",
-  );
+  window.showGameError?.("The graphics connection was lost. Reload the page to restore the village.");
 });
-document.querySelector("#start").onclick = () => {
+document.getElementById("start").onclick = () => {
   game.active = true;
-  overlay.classList.add("hidden");
+  input.clear();
+  ui.overlay.classList.add("hidden");
+  game.audio.unlock();
 };
+document.getElementById("resume").onclick = () => { game.paused=false; input.clear(); };
+document.getElementById("volume").oninput = (event) => game.audio.setVolume(Number(event.target.value)/100);
+ui["sound-toggle"].onclick = () => { game.audio.unlock(); game.audio.toggleMute(); };
+window.addEventListener("blur", () => {
+  if (game.active) game.paused = true;
+});
 let previous = performance.now();
+let displayedDialogue = null;
 function frame(now) {
   const dt = Math.min((now - previous) / 1000, 0.05);
   previous = now;
   game.update(dt);
-  followCamera.update(game.player.root, dt, game.speed);
-  document.querySelector("#hp").textContent = `${game.hp} / 100`;
-  document.querySelector("#health").style.width = `${game.hp}%`;
-  document.querySelector("#count").textContent =
-    `${game.kills} / 5 spirits restored`;
-  document.querySelector("#combo").textContent =
-    game.attackTime > 0
-      ? ATTACKS[game.combo].name
-      : game.player.root.position.x > 15
-        ? "SPIRIT GROVE · COMBAT"
-        : "WINDFLOWER · SAFE HAVEN";
-  prompt.textContent =
-    game.active && !game.dialogue && game.nearNpc
-      ? `E · Talk to ${game.nearNpc.name}`
-      : "";
-  dialoguePanel.classList.toggle("hidden", !game.dialogue);
-  if (game.dialogue) {
-    dialoguePanel.replaceChildren();
-    const name = document.createElement("strong"),
-      text = document.createElement("p"),
-      hint = document.createElement("small");
+  followCamera.update(game.player.root, dt, game.speed, game.velocity);
+  ui.hp.textContent = `${game.hp} / ${game.maxHp}`;
+  ui.health.style.width = `${(game.hp/game.maxHp)*100}%`;
+  ui.count.textContent = `${game.kills} / ${game.enemies.length} spirits restored`;
+  ui["task-summary"].textContent = game.activities.summary;
+  ui.combo.textContent = game.attackTime > 0 ? ATTACKS[game.combo].name : game.player.root.position.x > 15 ? game.victory ? "SPIRIT GROVE · AT PEACE" : "SPIRIT GROVE · WATCH THE WINDUP" : "WINDFLOWER · SAFE HAVEN";
+  const nearestActivity = game.nearActivity && (!game.nearNpc || game.nearActivity.root.position.distanceTo(game.player.root.position) < game.nearNpc.root.position.distanceTo(game.player.root.position));
+  ui["talk-prompt"].textContent = game.active && !game.dialogue && !game.paused && game.player.root.position.x < 15 ? nearestActivity ? game.activities.prompt(game.nearActivity) : game.nearNpc ? `E · Talk to ${game.nearNpc.name}` : "" : "";
+  ui.toast.textContent = game.toast.timer > 0 && game.active && !game.dialogue && !game.paused ? game.toast.text : "";
+  ui.dialogue.classList.toggle("hidden", !game.dialogue);
+  const dialogueKey = game.dialogue ? `${game.dialogue.npc.name}:${game.dialogue.line}` : null;
+  if (dialogueKey && dialogueKey !== displayedDialogue) {
+    ui.dialogue.replaceChildren();
+    const name = document.createElement("strong"), text = document.createElement("p"), hint = document.createElement("small");
     name.textContent = game.dialogue.npc.name;
-    text.textContent = game.dialogue.npc.lines[game.dialogue.line];
-    hint.textContent = "E · Continue / close";
-    dialoguePanel.append(name, text, hint);
+    text.textContent = game.dialogue.lines[game.dialogue.line];
+    hint.textContent = game.dialogue.line === game.dialogue.lines.length-1 ? "E · Close" : "E · Continue";
+    ui.dialogue.append(name,text,hint);
   }
+  displayedDialogue = dialogueKey;
+  ui["pause-panel"].classList.toggle("hidden", !game.paused);
+  ui["sound-toggle"].textContent = game.audio.muted ? "SOUND OFF · M" : "SOUND ON · M";
+  ui["sound-toggle"].setAttribute("aria-pressed",String(game.audio.muted));
   painterly.render();
   requestAnimationFrame(frame);
 }
-camera.position.set(0, 6, 13);
+camera.position.set(9, 8, 24);
 requestAnimationFrame(frame);
 window.addEventListener("resize", () => {
   camera.aspect = innerWidth / innerHeight;
@@ -96,5 +105,9 @@ window.addEventListener("resize", () => {
   renderer.setSize(innerWidth, innerHeight);
   painterly.resize(innerWidth, innerHeight);
 });
-// Read-only state exposed for automated smoke checks and future debugging.
+// Inspectable state for browser checks; no hidden autoplay or remote assets.
 window.__game = game;
+window.__combat = ATTACKS;
+window.__camera = camera;
+window.__renderer = renderer;
+window.__view = { scene, camera, renderer, painterly, followCamera };

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Sunward • The Crimson Guardian</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <style>
     body { margin: 0; background: #adc5c6; }
     #boot { position: fixed; inset: 0; z-index: 100; display: grid; place-content: center; padding: 32px; text-align: center; background: #243c45; color: #fff4d9; font: 16px/1.7 Georgia, serif; }
@@ -14,6 +15,7 @@
 <body>
   <div id="boot"><h1>Sunward</h1><p id="boot-message">Preparing the sacred grove…</p></div>
   <div id="app"></div>
+  <a href="./credits.html" target="_blank" rel="noopener" style="position:fixed;right:14px;bottom:9px;z-index:30;color:#51402c;font:10px Arial;text-decoration:none">Asset credits</a>
   <script>
     window.showGameError = function (message) {
       const boot = document.getElementById('boot');
