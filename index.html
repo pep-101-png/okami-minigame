@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sunward • The Crimson Guardian</title>
+  <style>
+    body { margin: 0; background: #adc5c6; }
+    #boot { position: fixed; inset: 0; z-index: 100; display: grid; place-content: center; padding: 32px; text-align: center; background: #243c45; color: #fff4d9; font: 16px/1.7 Georgia, serif; }
+    #boot h1 { font-size: 42px; font-weight: normal; }
+    #boot p { max-width: 540px; }
+  </style>
+</head>
+<body>
+  <div id="boot"><h1>Sunward</h1><p id="boot-message">Preparing the sacred grove…</p></div>
+  <div id="app"></div>
+  <script>
+    window.showGameError = function (message) {
+      const boot = document.getElementById('boot');
+      boot.style.display = 'grid';
+      document.getElementById('boot-message').textContent = message;
+    };
+    window.addEventListener('error', function (event) {
+      window.showGameError('The game could not start: ' + (event.message || 'a game file failed to load. Refresh this page.'));
+    });
+    window.setTimeout(function () {
+      if (!window.__game) window.showGameError('The game has not loaded. Open it through the Vite development server, then refresh. If this continues, check that this browser supports WebGL 2.');
+    }, 15000);
+  </script>
+  <script type="module" src="./src/bootstrap.js"></script>
+</body>
+</html>
