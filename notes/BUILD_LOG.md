@@ -51,3 +51,9 @@ Rejected draft generators and temporary source inspection files were preserved o
 - The full report is `notes/VALIDATION_REPORT.json`; actual final screenshots are `notes/previews/`.
 - Added local asset attribution and a Windows start helper that finds the portable Desktop Node folder, installs missing dependencies and handles esbuild setup if required. The Windows helper was reviewed but not executed on a Windows machine here; the standard npm commands remain available.
 - The production build passes. Its large-chunk notice is advisory. Artistic quality remains for the user to judge; this is a testable revised prototype, not a claim of perfection or multiple polished overnight releases.
+
+## Saved completion
+
+- Revised game commit `d481bfe` published successfully at **2026-10-13 06:40:04 Australia/Sydney (AEDT)** /2026-10-12 19:40:04UTC.
+- Pre-interruption working span approximately24minutes; resumed validation/delivery span approximately7minutes. The overnight gap was inactive, not development time.
+- All changes are saved in GitHub branch `sunward-minigame`. The game can be downloaded and tested without keeping this chat open.
