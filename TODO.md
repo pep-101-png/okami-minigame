@@ -19,54 +19,81 @@ This is the persistent plan for future work. Update the checkboxes and notes as 
 - `wolf-design-review` contains screenshots and a motion preview of the rejected draft, not an approved design.
 - This chat interface does not display outgoing screenshots reliably and does not provide usable project downloads. Use GitHub browser previews for review.
 
-## 1. Choose a better wolf foundation — highest priority
+## Priority order
 
-- [ ] Collect clear side, front, and movement references for lean wolf anatomy and the desired painted interpretation.
-- [ ] Find a well-designed rigged wolf with an actual walk/run animation demo, or commission/model one with comparable quality.
-- [ ] Verify the model's anatomy, proportions, skeleton, animation quality, format, and cost before integrating it.
-- [ ] Verify the license permits including the model and animations in this GitHub-distributed project; compiled-game permission alone is insufficient for distributing source assets.
-- [ ] Resolve access to the candidate asset's authoritative page. Previous model-site requests were blocked; no replacement asset has been verified or selected.
-- [ ] Show the user the candidate model and its existing motion demo in a browser before another major implementation pass.
-- [ ] Record the chosen asset/source, license, required attribution, and the user's feedback here.
+Work through these seven priorities in the user's order. Review the wolf first before spending more effort on later visual polish or new activities.
 
-## 2. Wolf appearance and animation
+## 1. Wolf animations and style
 
-- [ ] Create a coherent silhouette: defined chest, tucked waist, shaped shoulders and hips, tapered muzzle, pointed ears, long legs, bent rear hocks, and a flowing tail.
-- [ ] Apply painted ivory fur, expressive ink features, and red brush markings that follow the body surface.
-- [ ] Remove visible primitive seams, floating markings, distorted skinning, and texture/shadow artifacts.
-- [ ] Implement a readable walk with planted paws, natural leg articulation, and weight transfer.
-- [ ] Implement a distinct run/gallop with coordinated spine, shoulder, hip, head, and tail motion.
-- [ ] Blend idle, walk, run, turns, stopping, jumping, landing, dodge, and combat without abrupt pose changes or excessive foot sliding.
-- [ ] Check motion from the actual gameplay camera as well as a close side view.
+- [ ] Choose a well-designed rigged wolf with a verified walk/run animation demo; no replacement asset has been approved yet.
+- [ ] Verify anatomy, proportions, skeleton, animation quality, format, cost, and permission to redistribute the asset with this GitHub project.
+- [ ] Resolve access to the authoritative asset page; previous model-site requests were blocked.
+- [ ] Show the candidate model and motion demo to the user before integration, and record the chosen source and feedback here.
+- [ ] Create a lean canine silhouette: defined chest, tucked waist, shaped shoulders and hips, tapered muzzle, pointed ears, long legs, bent rear hocks, and a flowing tail.
+- [ ] Apply painted ivory fur, expressive ink features, and red brush markings that follow the surface.
+- [ ] Remove primitive seams, floating markings, distorted skinning, and texture/shadow artifacts.
+- [ ] Create fluid idle, walk, run/gallop, turn, stop, jump, land, and dodge animations with planted paws and coordinated spine, shoulder, hip, head, and tail motion.
+- [ ] Blend movement states smoothly and check them from the gameplay camera and a close side view.
 
-## 3. Combat rhythm and responsiveness
+## 2. Combat animations
 
-- [ ] Improve the quick opening thrust with anticipation, a deliberate step, contact, and recovery.
-- [ ] Improve the second attack into a planted pivot and sweeping strike with a visibly different arc.
-- [ ] Improve the finisher with a readable windup, whole-body lunge, impact, landing, and recoil.
-- [ ] Keep the spear grip attached naturally to the mouth throughout every pose.
-- [ ] Tune input buffering, combo links, movement during attacks, and dodge cancellation against the animation timing.
-- [ ] Align hit detection, range, direction, and damage with the visible weapon motion.
-- [ ] Tune brief impact pauses, enemy stagger, knockback, attack cues, and effects so combat feels responsive.
+- [ ] Give the opening thrust a readable windup, deliberate step, contact, and recovery.
+- [ ] Give the second attack a planted pivot and sweeping strike with a distinct arc.
+- [ ] Give the finisher a committed windup, whole-body lunge, impact, landing, and recoil.
+- [ ] Keep the perpendicular spear handle held naturally in the mouth throughout every pose.
+- [ ] Tune input buffering, combo links, movement during attacks, and dodge cancellation so the attacks flow together.
+- [ ] Match hit timing, range, direction, and damage to the visible weapon motion.
 
-## 4. Painted town and exploration
+## 3. Enemy animations
 
-- [ ] Improve watercolor surface textures and brushwork rather than relying on an outline/grain filter alone.
-- [ ] Refine the village composition using the supplied reference: warm timber houses, curved roof silhouettes, greenery, paths, and recognizable landmarks.
-- [ ] Keep the town larger than the combat arena, with connected streets and space to explore.
-- [ ] Improve NPC designs, readable dialogue/name labels, and walking/idle behavior.
-- [ ] Keep the village safe and the combat grove accessible; allow exploration after victory.
-- [ ] Check the controlled camera for blocked views, readable character scale, and consistent movement controls.
+- [ ] Improve enemy idle and movement with believable steps and weight shifts.
+- [ ] Add distinct anticipation, attack, and recovery poses so attacks can be read and avoided.
+- [ ] Add directional hit reactions, stagger, and knockback that respond to the wolf's strikes.
+- [ ] Add a defeat animation before the enemy disappears.
+- [ ] Blend enemy states smoothly and keep their animation timing consistent with hit detection and AI.
 
-## 5. Review, validation, and delivery
+## 4. Special effects and sound
 
-- [ ] Capture actual in-engine screenshots and a looping motion preview showing walk, run, turns, and all three attacks.
+- [ ] Add enemy death effects with a painted spirit release or ink dissolution, timed to the defeat animation.
+- [ ] Add spear trails, impact marks, particles, and brief impact pauses that make successful hits clear.
+- [ ] Add weapon swing/air sounds and distinct hit, heavy-hit, and enemy-defeat sounds.
+- [ ] Add footsteps, jump/landing, and dodge sounds that match the animations and surface contact.
+- [ ] Add suitable town ambience and simple volume/mute controls.
+- [ ] Keep effects readable, avoid excessive screen shake or visual clutter, and test overlapping sounds.
+- [ ] Start browser audio after a user interaction; use original or appropriately licensed sound assets.
+
+## 5. General town tidy-up
+
+- [ ] Improve house proportions, curved roofs, painted timber details, streets, greenery, and landmarks using the supplied reference.
+- [ ] Replace repetitive or awkward placements with a more intentional village layout.
+- [ ] Improve NPC designs, walking/idle behavior, dialogue presentation, and readable name labels.
+- [ ] Fix clipping, blocked camera views, floating objects, awkward collisions, and unclear routes.
+- [ ] Keep the village safe, the eastern combat grove easy to find, and exploration available after victory.
+
+## 6. More watercolor paint style
+
+- [ ] Put watercolor washes, pigment variation, and brush detail on the surfaces themselves.
+- [ ] Use visible paper grain and irregular ink lines while keeping important shapes readable.
+- [ ] Match the reference's warm architecture, green terrain, saturated blue sky, and strong painted silhouettes.
+- [ ] Make the wolf, enemies, NPCs, buildings, terrain, and effects look consistent with one another.
+- [ ] Reduce the dull washed-out look and avoid using screen filters as the only source of painted detail.
+
+## 7. More things to do
+
+- [ ] Agree on the first additional activities after the wolf, combat, enemies, effects, town, and art direction have improved.
+- [ ] Consider NPC side quests, discoveries/collectibles, town interactions, and optional combat challenges; these are candidates, not committed features yet.
+- [ ] Add clear goals, useful rewards, and feedback for the selected activities.
+- [ ] Keep new systems modular and preserve the existing exploration and combat loop.
+
+## Review, validation, and delivery
+
+- [ ] Capture actual in-engine screenshots and a looping motion preview for each significant visual or animation revision.
 - [ ] Upload review media separately so the user can inspect it on GitHub without downloading or installing the game.
-- [ ] Collect feedback and revise; do not label a rejected draft as a completed improvement.
-- [ ] Verify dependency installation, production build, local model loading, and browser rendering.
-- [ ] Verify movement, jump/landing, dodge, NPC dialogue, building collisions, combo timing/damage, enemy attacks, win/loss, restart, and continued exploration after winning.
+- [ ] Collect feedback and revise; do not mark a rejected draft as an accepted improvement.
+- [ ] Verify dependency installation, production build, local asset loading, and browser rendering.
+- [ ] Verify movement, jumping/landing, dodge, NPC dialogue, collisions, combo timing/damage, enemy attacks/reactions, effects/audio, win/loss, restart, and continued exploration after winning.
 - [ ] Push the game update after the user has reviewed the visuals and motion.
-- [ ] Provide the new branch/download link and short Windows setup instructions, including the known Node path and esbuild script approval if npm requires it.
+- [ ] Provide the branch/download link and short Windows setup instructions, including the known Node path and esbuild script approval if npm requires it.
 
 ## Delivery notes
 
