@@ -1,20 +1,250 @@
-import * as THREE from 'three';
-export const mat=(color)=>new THREE.MeshStandardMaterial({color,roughness:.85});
-export function part(parent,geo,material,pos=[0,0,0],rot=[0,0,0]){const m=new THREE.Mesh(geo,material);m.position.set(...pos);m.rotation.set(...rot);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m;}
-export function wolf(){
- const root=new THREE.Group(),body=new THREE.Group();root.add(body);const white=mat('#eee9d9'),red=mat('#b83135'),black=mat('#24343a'),gold=mat('#bba067');
- part(body,new THREE.SphereGeometry(1,12,8),white,[0,.95,0]).scale.set(.42,.47,.9);
- part(body,new THREE.SphereGeometry(.45,12,8),white,[0,1.35,-.68]).scale.set(.8,1.1,1);
- part(body,new THREE.BoxGeometry(.42,.26,.55),white,[0,1.25,-1.05]);part(body,new THREE.BoxGeometry(.32,.16,.16),black,[0,1.28,-1.36]);
- for(const s of [-1,1]){part(body,new THREE.ConeGeometry(.18,.47,4),white,[s*.24,1.87,-.65],[0,0,s*-.18]);part(body,new THREE.ConeGeometry(.095,.28,3),red,[s*.24,1.88,-.70]);part(body,new THREE.SphereGeometry(.055,8,6),black,[s*.32,1.48,-.93]);part(body,new THREE.BoxGeometry(.035,.12,.38),red,[s*.355,1.32,-.78],[0,0,s*.3]);part(body,new THREE.BoxGeometry(.045,.35,.55),red,[s*.405,1.07,.05],[.25,0,0]);}
- const legs=[];for(const x of [-.29,.29])for(const z of [-.52,.56]){const leg=new THREE.Group();leg.position.set(x,.8,z);body.add(leg);part(leg,new THREE.CylinderGeometry(.1,.075,.65,6),white,[0,-.30,0]);part(leg,new THREE.BoxGeometry(.19,.14,.28),white,[0,-.66,-.05]);part(leg,new THREE.CylinderGeometry(.105,.105,.11,6),red,[0,-.46,0]);legs.push(leg);}
- const tail=part(body,new THREE.ConeGeometry(.22,.9,7),white,[0,1.2,.98],[.85,0,0]);
- const spear=new THREE.Group();spear.position.set(0,1.2,-1.25);body.add(spear);
- // Side handle crosses the mouth along X; the long shaft points forward along -Z.
- part(spear,new THREE.CylinderGeometry(.045,.045,2.7,8),mat('#654937'),[.42,0,-.55],[Math.PI/2,0,0]);
- part(spear,new THREE.CylinderGeometry(.055,.055,.85,8),black,[.04,0,.15],[0,0,Math.PI/2]);
- part(spear,new THREE.ConeGeometry(.16,.65,4),mat('#d1dce0'),[.42,0,-2.22],[-Math.PI/2,0,0]);
- part(spear,new THREE.TorusGeometry(.10,.025,5,12),gold,[.42,0,-1.77]);
- return {root,body,legs,tail,spear};
+import * as THREE from "three";
+import { paint, outline, stroke } from "./art.js";
+export const mat = paint;
+export function part(
+  parent,
+  geo,
+  material,
+  pos = [0, 0, 0],
+  rot = [0, 0, 0],
+  lined = true,
+) {
+  const m = new THREE.Mesh(geo, material);
+  m.position.set(...pos);
+  m.rotation.set(...rot);
+  m.castShadow = true;
+  m.receiveShadow = true;
+  parent.add(m);
+  if (lined) outline(m);
+  return m;
 }
-export function demon(){const root=new THREE.Group(),m=mat('#3b5362'),red=mat('#ff8864');part(root,new THREE.IcosahedronGeometry(.62,1),m,[0,.8,0]).scale.set(1,1.2,.85);part(root,new THREE.BoxGeometry(.72,.45,.18),mat('#d6cbb2'),[0,1.18,-.49]);for(const s of [-1,1]){part(root,new THREE.ConeGeometry(.12,.45,5),red,[s*.28,1.65,0],[0,0,s*-.3]);part(root,new THREE.BoxGeometry(.16,.055,.07),red,[s*.19,1.24,-.60]);part(root,new THREE.CylinderGeometry(.12,.15,.4,5),m,[s*.3,.24,0]);}return root;}
+function ellipsoid(parent, material, pos, scale) {
+  const m = part(parent, new THREE.SphereGeometry(1, 20, 14), material, pos);
+  m.scale.set(...scale);
+  return m;
+}
+export function wolf() {
+  const root = new THREE.Group(),
+    body = new THREE.Group();
+  root.add(body);
+  const white = mat("#fff6dd"),
+    red = mat("#cf312c"),
+    black = mat("#252723"),
+    gold = mat("#daa949");
+  ellipsoid(body, white, [0, 1.05, 0.1], [0.32, 0.42, 0.83]);
+  ellipsoid(body, white, [0, 1.2, -0.45], [0.37, 0.49, 0.42]);
+  ellipsoid(body, white, [0, 1.12, 0.65], [0.29, 0.35, 0.35]);
+  const head = new THREE.Group();
+  head.position.set(0, 1.55, -0.68);
+  body.add(head);
+  ellipsoid(head, white, [0, 0, -0.08], [0.29, 0.33, 0.37]);
+  ellipsoid(head, white, [0, -0.12, -0.43], [0.19, 0.16, 0.34]);
+  ellipsoid(head, black, [0, -0.06, -0.7], [0.12, 0.085, 0.09]);
+  for (const s of [-1, 1]) {
+    const ear = part(
+      head,
+      new THREE.ConeGeometry(0.15, 0.47, 3),
+      white,
+      [s * 0.2, 0.34, 0.01],
+      [0.1, 0, s * -0.17],
+    );
+    ear.scale.z = 0.65;
+    part(
+      head,
+      new THREE.ConeGeometry(0.085, 0.27, 3),
+      red,
+      [s * 0.2, 0.35, -0.045],
+      [0.1, 0, s * -0.17],
+    );
+    ellipsoid(head, black, [s * 0.25, 0.015, -0.27], [0.035, 0.045, 0.085]);
+    stroke(
+      head,
+      [
+        [s * 0.26, 0.09, -0.28],
+        [s * 0.28, 0.13, -0.13],
+        [s * 0.27, 0.08, 0.01],
+      ],
+      "#282520",
+      0.025,
+    );
+    stroke(
+      head,
+      [
+        [s * 0.2, -0.04, -0.37],
+        [s * 0.3, -0.1, -0.15],
+        [s * 0.26, -0.2, -0.04],
+      ],
+      "#cf312c",
+      0.035,
+    );
+    for (let i = 0; i < 3; i++) {
+      const tuft = part(
+        body,
+        new THREE.ConeGeometry(0.14, 0.47, 5),
+        white,
+        [s * (0.22 + i * 0.015), 1.48 - i * 0.16, -0.44 + i * 0.15],
+        [0.75, 0, s * 0.55],
+      );
+      tuft.scale.z = 0.55;
+    }
+    stroke(
+      body,
+      [
+        [s * 0.31, 1.27, -0.4],
+        [s * 0.38, 1.05, -0.3],
+        [s * 0.34, 0.92, -0.08],
+        [s * 0.33, 1.17, 0.03],
+      ],
+      "#cf312c",
+      0.037,
+    );
+  }
+  stroke(
+    head,
+    [
+      [0, 0.28, -0.18],
+      [0, 0.22, -0.35],
+      [0, 0.11, -0.4],
+    ],
+    "#cf312c",
+    0.04,
+  );
+  const legs = [];
+  for (const x of [-0.23, 0.23])
+    for (const z of [-0.48, 0.62]) {
+      const front = z < 0,
+        leg = new THREE.Group();
+      leg.position.set(x, 0.97, z);
+      body.add(leg);
+      ellipsoid(leg, white, [0, -0.18, 0], [0.12, 0.3, 0.14]);
+      const knee = new THREE.Group();
+      knee.position.set(0, -0.4, 0);
+      leg.add(knee);
+      part(
+        knee,
+        new THREE.CylinderGeometry(0.075, 0.055, 0.39, 10),
+        white,
+        [0, -0.17, 0.03],
+        [front ? -0.06 : 0.25, 0, 0],
+      );
+      ellipsoid(knee, white, [0, -0.36, -0.07], [0.115, 0.08, 0.19]);
+      part(
+        knee,
+        new THREE.CylinderGeometry(0.079, 0.079, 0.09, 10),
+        red,
+        [0, -0.23, 0.03],
+      );
+      leg.userData.knee = knee;
+      legs.push(leg);
+    }
+  const tail = new THREE.Group();
+  tail.position.set(0, 1.22, 0.8);
+  body.add(tail);
+  stroke(
+    tail,
+    [
+      [0, 0, 0],
+      [0, 0.2, 0.25],
+      [0, 0.48, 0.38],
+      [0, 0.7, 0.25],
+      [0, 0.76, 0.04],
+    ],
+    "#fff6dd",
+    0.13,
+  );
+  stroke(
+    tail,
+    [
+      [0.01, 0.43, 0.38],
+      [0.01, 0.67, 0.27],
+      [0.01, 0.71, 0.12],
+    ],
+    "#cf312c",
+    0.04,
+  );
+  const spear = new THREE.Group();
+  head.add(spear);
+  spear.position.set(0, -0.22, -0.51);
+  part(
+    spear,
+    new THREE.CylinderGeometry(0.035, 0.035, 2.7, 10),
+    mat("#624326"),
+    [0.37, 0, -0.42],
+    [Math.PI / 2, 0, 0],
+  );
+  part(
+    spear,
+    new THREE.CylinderGeometry(0.048, 0.048, 0.76, 10),
+    black,
+    [0, 0, 0.03],
+    [0, 0, Math.PI / 2],
+  );
+  const blade = part(
+    spear,
+    new THREE.ConeGeometry(0.15, 0.66, 4),
+    mat("#e8e3bc"),
+    [0.37, 0, -2.05],
+    [-Math.PI / 2, 0, Math.PI / 4],
+  );
+  blade.scale.z = 0.25;
+  part(
+    spear,
+    new THREE.TorusGeometry(0.1, 0.025, 6, 16),
+    gold,
+    [0.37, 0, -1.7],
+  );
+  const ribbon = stroke(
+    spear,
+    [
+      [0.38, 0, -1.65],
+      [0.5, -0.15, -1.45],
+      [0.63, -0.2, -1.3],
+    ],
+    "#cf312c",
+    0.035,
+  );
+  return { root, body, head, legs, tail, spear, ribbon };
+}
+export function demon() {
+  const root = new THREE.Group(),
+    m = mat("#39564d"),
+    red = mat("#c73727");
+  ellipsoid(root, m, [0, 0.85, 0], [0.44, 0.65, 0.35]);
+  const face = ellipsoid(
+    root,
+    mat("#e5d6aa"),
+    [0, 1.25, -0.31],
+    [0.37, 0.43, 0.14],
+  );
+  for (const s of [-1, 1]) {
+    part(
+      root,
+      new THREE.ConeGeometry(0.1, 0.57, 7),
+      red,
+      [s * 0.24, 1.72, -0.05],
+      [0, 0, s * -0.4],
+    );
+    stroke(
+      root,
+      [
+        [s * 0.1, 1.32, -0.45],
+        [s * 0.23, 1.35, -0.44],
+      ],
+      "#2c2926",
+      0.035,
+    );
+    ellipsoid(root, m, [s * 0.4, 0.75, 0], [0.12, 0.4, 0.13]);
+    ellipsoid(root, m, [s * 0.23, 0.24, 0], [0.12, 0.25, 0.15]);
+  }
+  stroke(
+    root,
+    [
+      [-0.15, 1.08, -0.45],
+      [0, 1.04, -0.46],
+      [0.15, 1.08, -0.45],
+    ],
+    "#c73727",
+    0.03,
+  );
+  return root;
+}

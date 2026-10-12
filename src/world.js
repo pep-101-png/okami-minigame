@@ -1,17 +1,270 @@
-import * as THREE from 'three';
-import {mat,part} from './models.js';
-export function createWorld(scene){
- scene.background=new THREE.Color('#adc5c6');scene.fog=new THREE.Fog('#adc5c6',22,65);
- scene.add(new THREE.HemisphereLight('#fff3d5','#445b69',2));const sun=new THREE.DirectionalLight('#ffe8bd',3);sun.position.set(-12,23,-8);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-23,right:23,top:23,bottom:-23});scene.add(sun);
- const earth=mat('#8a9b84'),stone=mat('#9ba9a2'),red=mat('#9f3c32'),wood=mat('#3d4440');
- part(scene,new THREE.CylinderGeometry(18,19,1,64),earth,[0,-.55,0]);part(scene,new THREE.CylinderGeometry(12,12,.08,64),mat('#c6c8af'),[0,-.02,0]);
- for(let i=0;i<36;i++){const a=i*Math.PI/18;part(scene,new THREE.BoxGeometry(1.8,.12,.65),stone,[Math.sin(a)*12,.02,Math.cos(a)*12],[0,a,0]);}
- const obstacles=[];
- function torii(x,z,scale=1){const g=new THREE.Group();g.position.set(x,0,z);g.scale.setScalar(scale);scene.add(g);for(const s of [-1,1]){part(g,new THREE.CylinderGeometry(.19,.25,4.5,8),red,[s*2,2.25,0]);part(g,new THREE.BoxGeometry(.65,.3,.65),wood,[s*2,.15,0]);obstacles.push({x:x+s*2*scale,z,r:.35*scale});}part(g,new THREE.BoxGeometry(5.8,.32,.48),wood,[0,4.65,0]);part(g,new THREE.BoxGeometry(5.2,.3,.32),red,[0,4.3,0]);part(g,new THREE.BoxGeometry(4.8,.2,.25),red,[0,3.55,0]);part(g,new THREE.BoxGeometry(.42,.75,.28),mat('#c5a15e'),[0,3.95,0]);}
- torii(0,-14);torii(-14,1,.8);
- for(const [x,z] of [[-9,-8],[10,-6],[-11,8],[11,9]]){obstacles.push({x,z,r:.8});part(scene,new THREE.CylinderGeometry(.18,.45,3,7),wood,[x,1.5,z]);for(let j=0;j<5;j++){part(scene,new THREE.IcosahedronGeometry(1.6,1),mat(j%2?'#d7a2aa':'#e8bbc1'),[x+Math.sin(j*2)*1.1,3.4+(j%2)*.5,z+Math.cos(j*2)]).scale.set(1,.6,1);} }
- for(const [x,z] of [[-6,-11],[6,-11],[-8,5],[8,5]]){part(scene,new THREE.BoxGeometry(.65,.25,.65),stone,[x,.12,z]);part(scene,new THREE.CylinderGeometry(.14,.2,1.2,6),stone,[x,.8,z]);part(scene,new THREE.BoxGeometry(.6,.65,.6),mat('#edcf8f'),[x,1.65,z]);part(scene,new THREE.ConeGeometry(.65,.4,4),wood,[x,2.15,z],[0,Math.PI/4,0]);}
- for(let i=0;i<20;i++){const a=i*2.4;part(scene,new THREE.ConeGeometry(5+(i%3),10+(i%4)*3,5),mat('#738f91'),[Math.sin(a)*40,3,Math.cos(a)*40]);}
- const petals=new THREE.Group();scene.add(petals);for(let i=0;i<90;i++)part(petals,new THREE.PlaneGeometry(.13,.08),new THREE.MeshBasicMaterial({color:'#f5ccd1',side:THREE.DoubleSide}),[(Math.random()-.5)*34,Math.random()*8,(Math.random()-.5)*34],[Math.random()*3,0,Math.random()*3]);
- return {obstacles,petals};
+import * as THREE from "three";
+import { mat, part } from "./models.js";
+import { paperTexture, stroke } from "./art.js";
+function blossomTexture() {
+  const c = document.createElement("canvas");
+  c.width = c.height = 256;
+  const ctx = c.getContext("2d");
+  for (let i = 0; i < 70; i++) {
+    const a = i * 2.399,
+      r = Math.sqrt(i / 70) * 105,
+      x = 128 + Math.cos(a) * r,
+      y = 128 + Math.sin(a) * r;
+    ctx.fillStyle = i % 3 ? "#eeb6ab" : "#fae1c1";
+    ctx.beginPath();
+    for (let p = 0; p < 5; p++) {
+      const b = (p * Math.PI * 2) / 5;
+      ctx.ellipse(
+        x + Math.cos(b) * 8,
+        y + Math.sin(b) * 8,
+        9,
+        6,
+        b,
+        0,
+        Math.PI * 2,
+      );
+    }
+    ctx.fill();
+    ctx.strokeStyle = "#92565355";
+    ctx.lineWidth = 0.7;
+    ctx.stroke();
+  }
+  return new THREE.CanvasTexture(c);
+}
+export function createWorld(scene) {
+  scene.background = new THREE.Color("#e9dec0");
+  scene.fog = new THREE.Fog("#e9dec0", 24, 65);
+  scene.add(new THREE.HemisphereLight("#fff6df", "#857859", 1.1));
+  const sun = new THREE.DirectionalLight("#fff0cc", 1.3);
+  sun.position.set(-12, 23, -8);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(1024, 1024);
+  Object.assign(sun.shadow.camera, {
+    left: -23,
+    right: 23,
+    top: 23,
+    bottom: -23,
+  });
+  sun.shadow.bias = -0.0005;
+  scene.add(sun);
+  const ground = mat("#c7bf86");
+  ground.map = paperTexture();
+  ground.map.repeat.set(12, 12);
+  part(
+    scene,
+    new THREE.CylinderGeometry(22, 23, 0.8, 96),
+    ground,
+    [0, -0.45, 0],
+    undefined,
+    false,
+  );
+  const arena = mat("#e6d6aa");
+  arena.map = paperTexture();
+  arena.map.repeat.set(5, 5);
+  part(
+    scene,
+    new THREE.CircleGeometry(12, 96),
+    arena,
+    [0, 0.01, 0],
+    [-Math.PI / 2, 0, 0],
+    false,
+  );
+  for (let i = 0; i < 3; i++) {
+    const ring = part(
+      scene,
+      new THREE.TorusGeometry(11.5 + i * 0.1, 0.016, 3, 128),
+      mat("#6b6850"),
+      [0, 0.025, 0],
+      [Math.PI / 2, 0, 0],
+      false,
+    );
+  }
+  const obstacles = [];
+  const red = mat("#be3b2a"),
+    wood = mat("#423b30"),
+    stone = mat("#aaa383");
+  const gate = new THREE.Group();
+  gate.position.set(0, 0, -14);
+  scene.add(gate);
+  for (const s of [-1, 1]) {
+    part(gate, new THREE.CylinderGeometry(0.19, 0.27, 4.8, 12), red, [
+      s * 2,
+      2.4,
+      0,
+    ]);
+    part(gate, new THREE.CylinderGeometry(0.28, 0.31, 0.6, 12), wood, [
+      s * 2,
+      0.3,
+      0,
+    ]);
+  }
+  stroke(
+    gate,
+    [
+      [-3.2, 5.05, 0],
+      [-2, 4.85, 0],
+      [0, 4.82, 0],
+      [2, 4.85, 0],
+      [3.2, 5.05, 0],
+    ],
+    "#39342b",
+    0.16,
+  );
+  part(gate, new THREE.BoxGeometry(5.4, 0.22, 0.28), red, [0, 4.5, 0]);
+  part(gate, new THREE.BoxGeometry(4.8, 0.18, 0.22), red, [0, 3.65, 0]);
+  part(
+    gate,
+    new THREE.BoxGeometry(0.4, 0.7, 0.25),
+    mat("#d4ae5e"),
+    [0, 4.02, 0],
+  );
+  const blossoms = blossomTexture();
+  for (const [x, z, scale] of [
+    [-10, -8, 1.1],
+    [11, -8, 1.2],
+    [-14, 5, 1],
+    [14, 6, 1],
+    [-5, -19, 0.9],
+    [8, -20, 1],
+  ]) {
+    obstacles.push({ x, z, r: 0.55 });
+    const tree = new THREE.Group();
+    tree.position.set(x, 0, z);
+    tree.scale.setScalar(scale);
+    scene.add(tree);
+    stroke(
+      tree,
+      [
+        [0, 0, 0],
+        [0.2, 1.3, 0],
+        [-0.1, 2.5, 0.1],
+        [0.4, 3.7, 0.2],
+      ],
+      "#534336",
+      0.17,
+    );
+    for (let j = 0; j < 5; j++) {
+      const a = j * 2.4,
+        end = [Math.sin(a) * 1.6, 3.4 + j * 0.12, Math.cos(a) * 1.3];
+      stroke(
+        tree,
+        [[0, 2.1, 0], [end[0] * 0.5, 2.9, end[2] * 0.5], end],
+        "#534336",
+        0.08,
+      );
+      const foliage = new THREE.Sprite(
+        new THREE.SpriteMaterial({
+          map: blossoms,
+          transparent: true,
+          depthWrite: false,
+        }),
+      );
+      foliage.position.set(...end);
+      foliage.scale.set(3.3, 2.5, 1);
+      tree.add(foliage);
+    }
+  }
+  for (const [x, z] of [
+    [-6, -11],
+    [6, -11],
+    [-13, 1],
+    [13, 1],
+  ]) {
+    part(scene, new THREE.BoxGeometry(0.7, 0.22, 0.7), stone, [x, 0.11, z]);
+    part(scene, new THREE.CylinderGeometry(0.16, 0.24, 1.2, 8), stone, [
+      x,
+      0.8,
+      z,
+    ]);
+    part(scene, new THREE.BoxGeometry(0.6, 0.6, 0.6), mat("#f3d39a"), [
+      x,
+      1.6,
+      z,
+    ]);
+    part(
+      scene,
+      new THREE.ConeGeometry(0.6, 0.35, 4),
+      wood,
+      [x, 2.1, z],
+      [0, Math.PI / 4, 0],
+    );
+  }
+  // Flat, layered mountain silhouettes resemble ink washes rather than solid cones.
+  for (let layer = 0; layer < 3; layer++)
+    for (let i = 0; i < 9; i++) {
+      const shape = new THREE.Shape();
+      const width = 9 + layer * 4,
+        height = 5 + Math.sin(i * 3.7) * 3 + layer * 3;
+      shape.moveTo(-width, 0);
+      shape.lineTo(-width * 0.35, height * 0.48);
+      shape.lineTo(-width * 0.1, height);
+      shape.lineTo(width * 0.3, height * 0.6);
+      shape.lineTo(width, 0);
+      const m = new THREE.Mesh(
+        new THREE.ShapeGeometry(shape),
+        new THREE.MeshBasicMaterial({
+          color: ["#989f83", "#b6b79b", "#d0ccb0"][layer],
+          side: THREE.DoubleSide,
+        }),
+      );
+      const a = (i * Math.PI * 2) / 9;
+      m.position.set(
+        Math.sin(a) * (29 + layer * 9),
+        -0.5,
+        Math.cos(a) * (29 + layer * 9),
+      );
+      m.rotation.y = a;
+      scene.add(m);
+    }
+  // Brush grass, flower banks, and scattered painted stepping stones.
+  for (let i = 0; i < 100; i++) {
+    const a = i * 2.399,
+      r = 12.8 + (i % 7) * 0.8,
+      x = Math.sin(a) * r,
+      z = Math.cos(a) * r;
+    stroke(
+      scene,
+      [
+        [x, 0, z],
+        [x + 0.12, 0.28, z],
+        [x + 0.3, 0.42, z],
+      ],
+      i % 3 ? "#66734a" : "#b7984d",
+      0.018,
+    );
+    if (i % 4 === 0)
+      part(
+        scene,
+        new THREE.SphereGeometry(0.22, 8, 6),
+        mat("#d67f79"),
+        [x, 0.12, z],
+        undefined,
+        false,
+      ).scale.set(1, 0.35, 1);
+  }
+  for (let i = 0; i < 6; i++) {
+    const m = part(
+      scene,
+      new THREE.CylinderGeometry(0.65, 0.7, 0.1, 7),
+      stone,
+      [Math.sin(i) * 0.3, 0.03, -12 - i * 0.9],
+    );
+    m.scale.z = 0.65;
+  }
+  const petals = new THREE.Group();
+  scene.add(petals);
+  for (let i = 0; i < 45; i++)
+    part(
+      petals,
+      new THREE.PlaneGeometry(0.13, 0.07),
+      new THREE.MeshBasicMaterial({ color: "#d99085", side: THREE.DoubleSide }),
+      [
+        (Math.random() - 0.5) * 34,
+        Math.random() * 7,
+        (Math.random() - 0.5) * 34,
+      ],
+      [Math.random() * 3, 0, Math.random() * 3],
+      false,
+    );
+  return { obstacles, petals };
 }

@@ -4,5 +4,7 @@ export function requestPointer(canvas) {
   try {
     const result = canvas.requestPointerLock?.();
     result?.catch(() => {});
-  } catch { /* Drag-to-look remains available. */ }
+  } catch {
+    /* Drag-to-look remains available. */
+  }
 }
