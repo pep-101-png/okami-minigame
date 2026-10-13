@@ -1,0 +1,7 @@
+{
+  "baseline_branch": "wolf-foundation-review",
+  "baseline_commit": "9175cb1",
+  "checked_existing_tracked_files": 75,
+  "all_sha256_unchanged": true,
+  "method": "SHA-256 manifest captured before adding the separate 2D project; no existing game file modified."
+}

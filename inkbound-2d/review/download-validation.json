@@ -1,0 +1,11 @@
+{
+  "extracted_archive_boots_without_node_modules": true,
+  "browser_started_game": true,
+  "keyboard_movement_verified": true,
+  "audio_context_running": true,
+  "browser_errors": [],
+  "compiled_js": "index-D0_3FeeP.js",
+  "compiled_sha256": "bbe01ef92cc2131538e1254b92d851424d7ab9a597d341def92d8f9bb1cc36d2",
+  "windows_batch_executed": false,
+  "physical_controller_tested": false
+}

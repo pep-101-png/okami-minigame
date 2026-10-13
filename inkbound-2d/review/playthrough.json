@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-13T10:27:41.135Z",
+  "events": [
+    {
+      "msg": "Reached river alive",
+      "x": 1761,
+      "hp": 8,
+      "ink": 100,
+      "state": "playing"
+    },
+    {
+      "msg": "Willow restored and river gate opened",
+      "x": 1761,
+      "hp": 8,
+      "ink": 66,
+      "state": "playing"
+    },
+    {
+      "msg": "Armoured spirit defeated",
+      "x": 3359,
+      "hp": 8,
+      "ink": 100,
+      "state": "playing"
+    },
+    {
+      "msg": "Grove imp defeated",
+      "x": 3359,
+      "hp": 8,
+      "ink": 100,
+      "state": "playing"
+    },
+    {
+      "msg": "Flying spirit defeated",
+      "x": 3969,
+      "hp": 8,
+      "ink": 76,
+      "state": "playing"
+    },
+    {
+      "msg": "Brute defeated",
+      "x": 4317,
+      "hp": 4,
+      "ink": 100,
+      "state": "playing"
+    },
+    {
+      "msg": "Grove restored",
+      "x": 3900,
+      "hp": 8,
+      "ink": 78,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss awakened",
+      "x": 5099,
+      "hp": 8,
+      "ink": 100,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 0 \u00b7 HP 34",
+      "x": 5634,
+      "hp": 8,
+      "ink": 100,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 1 \u00b7 HP 29",
+      "x": 5401,
+      "hp": 6,
+      "ink": 89,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 2 \u00b7 HP 23",
+      "x": 5587,
+      "hp": 6,
+      "ink": 72,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 3 \u00b7 HP 18",
+      "x": 5457,
+      "hp": 4,
+      "ink": 60,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 4 \u00b7 HP 12",
+      "x": 5624,
+      "hp": 4,
+      "ink": 44,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 5 \u00b7 HP 6",
+      "x": 5413,
+      "hp": 2,
+      "ink": 32,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 6 \u00b7 HP 0",
+      "x": 5677,
+      "hp": 2,
+      "ink": 16,
+      "state": "playing"
+    },
+    {
+      "msg": "Chapter finished",
+      "x": 6352,
+      "hp": 2,
+      "ink": 25,
+      "state": "won"
+    }
+  ],
+  "method": "Real keyboard/mouse playthrough from start to victory. No game-state edits, teleporting, health changes, or enemy fixtures.",
+  "target": "http://127.0.0.1:5192",
+  "result": "passed"
+}

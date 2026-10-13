@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-13T10:22:29.396Z",
+  "target": "http://127.0.0.1:5192",
+  "results": [
+    {
+      "name": "Drawn gesture recognition: line, oval, zigzag, spiral and curved water",
+      "status": "passed"
+    },
+    {
+      "name": "Keyboard acceleration, sprint and turning",
+      "status": "passed"
+    },
+    {
+      "name": "Jump rises and lands; double jump stays locked initially",
+      "status": "passed"
+    },
+    {
+      "name": "Riverbank step-up preserves ground collision while walking across connected terrain",
+      "status": "passed"
+    },
+    {
+      "name": "Buffered three-hit light combo defeats a reacting spirit",
+      "status": "passed"
+    },
+    {
+      "name": "Melee resumes pursuit after recovery; ledge archer aims at grounded wolf",
+      "status": "passed"
+    },
+    {
+      "name": "Dodge immunity and damage recovery prevent repeated contact damage",
+      "status": "passed"
+    },
+    {
+      "name": "Brush freezes simulation; mouse Bloom restores willow and unlocks abilities",
+      "status": "passed"
+    },
+    {
+      "name": "Water stroke fills basin, opens gate, and unlocked double jump works",
+      "status": "passed"
+    },
+    {
+      "name": "Mouse Wind gust rings chime and reflects incoming projectiles",
+      "status": "passed"
+    },
+    {
+      "name": "Armour blocks melee; ink-cut exposes seal for heavy damage",
+      "status": "passed"
+    },
+    {
+      "name": "Grove Bloom requires cleared spirits, then changes world and unlocks blade",
+      "status": "passed"
+    },
+    {
+      "name": "Actual spiral summons timed bomb and breaks ancient wall",
+      "status": "passed"
+    },
+    {
+      "name": "Boss introduction, brush seal break and lower-health phase change",
+      "status": "passed"
+    },
+    {
+      "name": "Boss defeat opens chapter ending; reaching shrine wins; retry resets",
+      "status": "passed"
+    },
+    {
+      "name": "Virtual standard gamepad maps jump and analogue brush drawing",
+      "status": "passed"
+    },
+    {
+      "name": "Pause freezes physics; local audio runs; browser has no runtime errors",
+      "status": "passed"
+    }
+  ],
+  "errors": [],
+  "note": "Real keyboard/mouse integration checks with isolated position/enemy fixtures. Not a no-assistance full playthrough."
+}

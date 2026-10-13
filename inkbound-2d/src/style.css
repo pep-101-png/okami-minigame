@@ -1,0 +1,203 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: #e9ddc7;
+  color: #302f29;
+  font-family: Georgia, "Times New Roman", serif;
+  overflow: hidden;
+}
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  touch-action: none;
+}
+#ui {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #eee2c9ee, #eee2c962);
+}
+.card {
+  width: min(650px, 90vw);
+  padding: 38px 44px;
+  background: #f5eddaed;
+  border: 1px solid #92775b77;
+  box-shadow: 0 10px 70px #43332320;
+}
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 5px;
+  color: #98664b;
+}
+h1 {
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1;
+  margin: 20px 0;
+  color: #303d35;
+}
+p {
+  line-height: 1.7;
+  color: #5e5d4c;
+}
+button {
+  pointer-events: auto;
+  cursor: pointer;
+  border: 1px solid #6a5743;
+  background: #304a43;
+  color: #f5e8ce;
+  padding: 14px 25px;
+  font: 15px Georgia;
+  margin: 8px 8px 0 0;
+}
+button:hover {
+  background: #b54840;
+}
+button:focus-visible {
+  outline: 3px solid #c78a50;
+  outline-offset: 3px;
+}
+.keys {
+  font: 12px/1.8 system-ui;
+  letter-spacing: 0.4px;
+  color: #6a6756;
+}
+.hud {
+  position: absolute;
+  left: 30px;
+  top: 24px;
+  width: 245px;
+  padding: 12px 16px;
+  background: #f5ebd5d9;
+  border-left: 3px solid #b24236;
+  box-shadow: 0 4px 30px #46332214;
+}
+.brand {
+  font-size: 22px;
+  letter-spacing: 4px;
+}
+.small {
+  font: 11px system-ui;
+  letter-spacing: 1px;
+  margin-top: 8px;
+}
+.meter {
+  display: flex;
+  gap: 5px;
+  margin-top: 9px;
+}
+.heart {
+  height: 12px;
+  width: 26px;
+  background: #b34438;
+  transform: skew(-12deg);
+}
+.heart.empty {
+  background: #bbad99;
+}
+.ink {
+  height: 5px;
+  background: #bcb09a;
+  margin: 12px 0 8px;
+}
+.ink i {
+  display: block;
+  height: 100%;
+  background: #385e63;
+}
+.objective {
+  position: absolute;
+  right: 25px;
+  top: 30px;
+  text-align: right;
+  max-width: 320px;
+  font: 13px/1.7 Georgia;
+  color: #394941;
+  background: #f1e6cfb8;
+  padding: 12px 18px;
+  border-right: 2px solid #96704b;
+}
+.help {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font: 11px system-ui;
+  letter-spacing: 0.6px;
+  background: #f5ebd5ae;
+  padding: 8px;
+}
+.toast {
+  position: absolute;
+  top: 24%;
+  left: 15%;
+  right: 15%;
+  text-align: center;
+  font-size: 24px;
+  color: #304a43;
+  text-shadow: 0 2px #f8efd7;
+  transition: opacity 0.3s;
+}
+.boss {
+  position: absolute;
+  bottom: 65px;
+  left: 25%;
+  width: 50%;
+  text-align: center;
+  font-size: 16px;
+  background: #e8d6bcbd;
+  padding: 10px;
+}
+.boss .track {
+  height: 8px;
+  background: #b9a58d;
+  margin-top: 8px;
+}
+.boss i {
+  display: block;
+  background: #973b39;
+  height: 100%;
+}
+.brush-note {
+  position: absolute;
+  bottom: 90px;
+  left: 15%;
+  right: 15%;
+  text-align: center;
+  background: #f6ecd6de;
+  padding: 12px;
+  font-size: 16px;
+}
+.hidden {
+  display: none !important;
+}
+@media (max-width: 700px) {
+  .hud {
+    left: 10px;
+    top: 10px;
+    width: 190px;
+  }
+  .objective {
+    right: 10px;
+    top: 10px;
+    width: 190px;
+    font-size: 11px;
+  }
+  .card {
+    padding: 24px;
+  }
+  .help {
+    font-size: 9px;
+  }
+}
