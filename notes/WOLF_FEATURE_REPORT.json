@@ -1,5 +1,5 @@
 {
-  "started": "2026-10-13T08:05:29.185Z",
+  "started": "2026-10-13T08:44:41.229Z",
   "checks": [
     {
       "name": "two visible layered eye meshes are attached outside the head surface",
@@ -11,7 +11,7 @@
           "children": 5,
           "scale": [
             1,
-            0.9999999999999918,
+            1,
             1
           ],
           "world": [
@@ -26,7 +26,7 @@
           "children": 5,
           "scale": [
             1,
-            0.9999999999999918,
+            1,
             1
           ],
           "world": [
@@ -43,7 +43,7 @@
       "details": {
         "combo": 1,
         "kind": null,
-        "time": 0.41000000000000003
+        "time": 0.48999999999999994
       }
     },
     {
@@ -80,7 +80,7 @@
         "kind": "heavy",
         "state": "HeavyArc",
         "data": {
-          "name": "HEAVY · SKY CLEAVER",
+          "name": "HEAVY I · SKY CLEAVER",
           "clip": "HeavyArc",
           "duration": 0.78,
           "hit": 0.51,
@@ -88,7 +88,7 @@
             0.41,
             0.64
           ],
-          "link": 1,
+          "link": 0.8,
           "cancel": 0.78,
           "damage": 3,
           "range": 3.5,
@@ -130,20 +130,20 @@
           "state": "ChargeLight",
           "z": 11.20359769747029,
           "q": [
-            2.3988016492547228e-8,
-            9.199483451730084e-7,
-            0.114983942163071,
-            0.9933673604788873
+            6.293467419993754e-8,
+            9.179953031893696e-7,
+            0.15680159153700554,
+            0.9876301476304559
           ]
         },
         "after": {
           "state": "ChargeLight",
           "z": 10.920409485624011,
           "q": [
-            2.85228820790526e-7,
-            8.790003104477584e-7,
-            0.39337894142428653,
-            0.919376451070862
+            3.874259644140675e-7,
+            8.483341562271712e-7,
+            0.5007450913208951,
+            0.8655948145866504
           ]
         }
       }
@@ -235,7 +235,7 @@
           }
         ],
         "voice": "Hurt",
-        "voices": 17,
+        "voices": 23,
         "hp": 99
       }
     },
@@ -243,9 +243,9 @@
       "name": "running flowers/leaves emit locally, remain bounded and expire",
       "pass": true,
       "details": {
-        "count": 49,
-        "flowers": 15,
-        "leaves": 30,
+        "count": 106,
+        "flowers": 34,
+        "leaves": 51,
         "limit": 240
       }
     },
@@ -290,7 +290,7 @@
       "name": "layered mane has substantial varied geometry and flowing tips",
       "pass": true,
       "details": {
-        "count": 29,
+        "count": 35,
         "finite": true
       }
     },
@@ -373,20 +373,20 @@
       ]
     },
     {
-      "name": "apex pose folds forepaws clear of the ground and keeps limbs beside the body",
+      "name": "apex pose moderately flexes the legs without packing the paws against the belly",
       "pass": true,
       "details": {
         "state": "JumpRise",
         "paws": [
           [
-            -0.1607120220866787,
-            0.7344910901372543,
-            0.41378073993242204
+            -0.16163179550059592,
+            0.18490278097880286,
+            -0.03448845103315534
           ],
           [
-            0.163282792508714,
-            0.7356951412633537,
-            0.41674844260154487
+            0.16276948908119174,
+            0.18699006241570904,
+            -0.03400922117369376
           ]
         ]
       }
@@ -395,8 +395,8 @@
       "name": "charged pounce and overhead heavy differ substantially from their normal counterparts",
       "pass": true,
       "details": {
-        "pounce": 0.08472044945494078,
-        "heavy": 0.3176432379627302
+        "pounce": 0.1488199849853205,
+        "heavy": 0.2811522182100322
       }
     },
     {
@@ -418,9 +418,104 @@
       "name": "stun bark reaches the output bus with measurable energy",
       "pass": true,
       "details": {
-        "peak": 0.6864309310913086,
+        "peak": 0.7299909591674805,
         "context": "running",
         "error": null
+      }
+    },
+    {
+      "name": "physical right clicks buffer a unique two-hit heavy string and stop after the return",
+      "pass": true,
+      "details": {
+        "follow": {
+          "kind": "heavyFinish",
+          "state": "HeavyReturn",
+          "queued": false
+        },
+        "end": {
+          "time": 0,
+          "window": 0,
+          "pending": null
+        }
+      }
+    },
+    {
+      "name": "the two heavy hits deal three then four damage once each to a reachable target",
+      "pass": true,
+      "details": [
+        {
+          "hp": 17,
+          "kind": "heavy"
+        },
+        {
+          "hp": 13,
+          "kind": "heavyFinish"
+        }
+      ]
+    },
+    {
+      "name": "heavy continuation after recovery and dodge cancellation reset the heavy string",
+      "pass": true,
+      "details": {
+        "kind": null,
+        "window": 0,
+        "queue": false
+      }
+    },
+    {
+      "name": "posed ground attacks keep the body and both ends of the spear above the floor",
+      "pass": true,
+      "details": [
+        {
+          "clip": "Thrust",
+          "min": 0.01199999999999976,
+          "tip": 1.4247898862975064,
+          "heel": 1.1599032022142866
+        },
+        {
+          "clip": "Sweep",
+          "min": 0.0119999999999999,
+          "tip": 1.3848542292412194,
+          "heel": 1.1732057816666335
+        },
+        {
+          "clip": "Finish",
+          "min": 0.011999999999999733,
+          "tip": 1.4028723070353204,
+          "heel": 1.0947868001384957
+        },
+        {
+          "clip": "HeavyArc",
+          "min": 0.011999999999999816,
+          "tip": 0.10990943873414949,
+          "heel": 1.0959422374696477
+        },
+        {
+          "clip": "HeavyReturn",
+          "min": 0.011999999999999789,
+          "tip": 1.0525658857596683,
+          "heel": 1.0052408926427878
+        },
+        {
+          "clip": "ChargedHeavy",
+          "min": 0.01199999999999976,
+          "tip": 0.10538267844025062,
+          "heel": 1.10113367079254
+        }
+      ]
+    },
+    {
+      "name": "fur roots follow deformed skin with correlated wind and fixed joining vertices",
+      "pass": true,
+      "details": {
+        "count": 35,
+        "attachment": {
+          "attached": 35,
+          "total": 35,
+          "maxError": 4.311326371230795e-15
+        },
+        "rootFixed": true,
+        "tipMoves": true
       }
     },
     {
@@ -429,7 +524,7 @@
     }
   ],
   "errors": [],
-  "finished": "2026-10-13T08:05:50.498Z",
-  "passed": 22,
+  "finished": "2026-10-13T08:44:54.849Z",
+  "passed": 27,
   "failed": 0
 }

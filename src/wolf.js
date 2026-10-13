@@ -11,7 +11,8 @@ export async function loadWolf() {
   );
   if (!coat) {
     asset.scene.traverse((o) => {
-      if (o.isMesh && o.material.map && !coat) coat = wolfPaint(o.material.map);
+      if (o.isMesh && o.material.map && !coat)
+        coat = wolfPaint(o.material.map, o.geometry);
     });
   }
   return asset;
@@ -164,63 +165,8 @@ export function wolf() {
   neutralAction.play();
   mixer.update(0);
   body.updateMatrixWorld(true);
-  const fur = createWolfFur(body);
-  const crestCanvas = document.createElement("canvas");
-  crestCanvas.width = crestCanvas.height = 256;
-  const crestCtx = crestCanvas.getContext("2d");
-  crestCtx.fillStyle = "#fff9e6";
-  crestCtx.beginPath();
-  crestCtx.arc(128, 128, 121, 0, Math.PI * 2);
-  crestCtx.fill();
-  crestCtx.strokeStyle = "#30372c";
-  crestCtx.lineWidth = 5;
-  crestCtx.stroke();
-  crestCtx.strokeStyle = "#b82e29";
-  crestCtx.lineWidth = 7;
-  crestCtx.beginPath();
-  for (let i = 0; i < 180; i++) {
-    const t = i / 179,
-      a = t * Math.PI * 5,
-      r = 8 + t * 89;
-    const x = 128 + Math.cos(a) * r,
-      y = 128 + Math.sin(a) * r;
-    if (!i) crestCtx.moveTo(x, y);
-    else crestCtx.lineTo(x, y);
-  }
-  crestCtx.stroke();
-  const crestMap = new THREE.CanvasTexture(crestCanvas);
-  crestMap.colorSpace = THREE.SRGBColorSpace;
+  const fur = createWolfFur(body, sourceSkin);
   for (const sign of [-1, 1]) {
-    const bone = body.getObjectByName("b_Spine02_03");
-    const carrier = new THREE.Group();
-    bone.add(carrier);
-    carrier.position.copy(
-      new THREE.Vector3(sign * 15, 55, 23)
-        .applyMatrix4(body.matrixWorld)
-        .applyMatrix4(bone.matrixWorld.clone().invert()),
-    );
-    const rotation = new THREE.Quaternion();
-    bone.getWorldQuaternion(rotation);
-    carrier.quaternion.copy(
-      rotation
-        .invert()
-        .multiply(
-          new THREE.Quaternion().setFromAxisAngle(
-            new THREE.Vector3(0, 1, 0),
-            (sign * Math.PI) / 2,
-          ),
-        ),
-    );
-    carrier.scale.setScalar(1 / 0.023);
-    const crest = new THREE.Mesh(
-      new THREE.CircleGeometry(0.235, 24),
-      new THREE.MeshToonMaterial({
-        map: crestMap,
-        transparent: true,
-        side: THREE.DoubleSide,
-      }),
-    );
-    carrier.add(crest);
     const brow = new THREE.Mesh(
       new THREE.PlaneGeometry(3.5, 0.45),
       new THREE.MeshBasicMaterial({ color: "#b82e29", side: THREE.DoubleSide }),
@@ -554,8 +500,26 @@ export function wolf() {
     const blink = Math.pow(Math.max(0, Math.cos(mixer.time * 1.05 + 1.2)), 70);
     for (const eye of eyes)
       eye.scale.y = Math.max(0.08, 1 - blink * (charge ? 0.65 : 0.91));
-    fur.update(mixer.time, speed);
+    body.position.y = air
+      ? 0
+      : THREE.MathUtils.damp(body.position.y, 0, 12, dt);
+    if (!air && attack > 0) {
+      body.position.y = 0;
+      root.updateMatrixWorld(true);
+      sourceSkin.skeleton.update();
+      let lowest = Infinity;
+      const vertex = new THREE.Vector3();
+      for (let i = 0; i < sourceSkin.geometry.attributes.position.count; i++) {
+        sourceSkin
+          .getVertexPosition(i, vertex)
+          .applyMatrix4(sourceSkin.matrixWorld);
+        lowest = Math.min(lowest, vertex.y);
+      }
+      body.position.y = Math.max(0, root.position.y + 0.012 - lowest);
+      result.groundLift = body.position.y;
+    }
     result.updateDetails();
+    fur.update(mixer.time, speed, dt, turnDelta);
     result.lastAttackPhase = attack;
     // Modest secondary leaning follows steering, not the animation's foot contacts.
     body.rotation.z = THREE.MathUtils.damp(
@@ -577,7 +541,18 @@ export function wolf() {
     let pitch = 0,
       roll = 0;
     if (state === "HeavyArc" || state === "ChargedHeavy")
-      pitch = -Math.sin(attack * Math.PI * 2) * 0.72;
+      pitch = -Math.sin(attack * Math.PI * 2) * 0.48;
+    if (state === "HeavyReturn")
+      pitch = 0.18 - Math.sin(attack * Math.PI) * 0.65;
+    if (state === "Thrust") {
+      roll = Math.sin(attack * Math.PI * 2) * 0.16;
+      pitch = -Math.sin(attack * Math.PI) * 0.12;
+    }
+    if (state === "Sweep") roll = Math.sin(attack * Math.PI * 2) * 0.28;
+    if (state === "Finish") {
+      pitch = -Math.sin(attack * Math.PI) * 0.28;
+      roll = Math.sin(attack * Math.PI) * 0.18;
+    }
     if (state === "ChargedThrust") {
       pitch = Math.sin(attack * Math.PI) * 0.16;
       roll = Math.sin(attack * Math.PI * 2) * 0.22;
@@ -586,6 +561,17 @@ export function wolf() {
       pitch = 0.5 * Math.sin((Math.min(1, attack * 2) * Math.PI) / 2);
     spear.rotation.x = THREE.MathUtils.damp(spear.rotation.x, pitch, 22, dt);
     spear.rotation.z = THREE.MathUtils.damp(spear.rotation.z, roll, 20, dt);
+    // The mouth remains the pivot: solve a safe weapon angle rather than lowering its blade through the floor.
+    if (!air && attack > 0) {
+      for (let i = 0; i < 8; i++) {
+        root.updateMatrixWorld(true);
+        const tip = spear.localToWorld(new THREE.Vector3(0.3, 0, 2.18));
+        const heel = spear.localToWorld(new THREE.Vector3(0.3, 0, -0.97));
+        const low = tip.y < heel.y ? tip : heel;
+        if (low.y >= root.position.y + 0.06) break;
+        spear.rotation.x += tip.y < heel.y ? -0.065 : 0.065;
+      }
+    }
   };
   return result;
 }

@@ -547,7 +547,7 @@ try {
     },
   );
   await check(
-    "apex pose folds forepaws clear of the ground and keeps limbs beside the body",
+    "apex pose moderately flexes the legs without packing the paws against the belly",
     async () => {
       await reset();
       await page.keyboard.press("Space");
@@ -564,7 +564,9 @@ try {
         });
         return { state: p.state, paws };
       });
-      assert(d.paws.every((v) => v[1] > 0.45 && Math.abs(v[0]) < 0.4));
+      assert(
+        d.paws.every((v) => v[1] > 0.18 && v[1] < 0.65 && Math.abs(v[0]) < 0.4),
+      );
       return d;
     },
   );
@@ -673,6 +675,190 @@ try {
         return { peak, context: a.context.state, error: a.sampleError || null };
       });
       assert(d.peak > 0.035 && d.context === "running" && !d.error);
+      return d;
+    },
+  );
+  await check(
+    "physical right clicks buffer a unique two-hit heavy string and stop after the return",
+    async () => {
+      await reset();
+      await mouse("right");
+      await step(0.04);
+      await page.mouse.up({ button: "right" });
+      await step(0.06);
+      assert.equal(await page.evaluate(() => __game.specialAttack), "heavy");
+      await mouse("right");
+      await step(0.04);
+      await page.mouse.up({ button: "right" });
+      await step(0.06);
+      assert(await page.evaluate(() => __game.queuedHeavy));
+      await step(0.55);
+      const follow = await page.evaluate(() => ({
+        kind: __game.specialAttack,
+        state: __game.player.state,
+        queued: __game.queuedHeavy,
+      }));
+      assert.equal(follow.kind, "heavyFinish");
+      assert.equal(follow.state, "HeavyReturn");
+      assert(!follow.queued);
+      await mouse("right");
+      await step(0.04);
+      await page.mouse.up({ button: "right" });
+      await step(1);
+      const end = await page.evaluate(() => ({
+        time: __game.attackTime,
+        window: __game.heavyWindow,
+        pending: __game.abilities.pending,
+      }));
+      assert.equal(end.time, 0);
+      assert.equal(end.window, 0);
+      assert(!end.pending);
+      return { follow, end };
+    },
+  );
+  await check(
+    "the two heavy hits deal three then four damage once each to a reachable target",
+    async () => {
+      await reset();
+      const rows = await page.evaluate(() => {
+        const g = __game;
+        g.player.root.position.set(26, 0, 0);
+        g.player.root.rotation.y = 0;
+        const e = g.enemies[0];
+        e.hp = 20;
+        e.mesh.position.set(26, 0, -2);
+        g.startSpecialAttack("heavy");
+        g.abilities.request("heavy");
+        const rows = [];
+        let last = 20;
+        for (let i = 0; i < 140; i++) {
+          g.update(1 / 60);
+          if (e.hp !== last) {
+            rows.push({ hp: e.hp, kind: g.specialAttack });
+            last = e.hp;
+          }
+        }
+        return rows;
+      });
+      assert.deepEqual(rows, [
+        { hp: 17, kind: "heavy" },
+        { hp: 13, kind: "heavyFinish" },
+      ]);
+      return rows;
+    },
+  );
+  await check(
+    "heavy continuation after recovery and dodge cancellation reset the heavy string",
+    async () => {
+      await reset();
+      await mouse("right");
+      await step(0.04);
+      await page.mouse.up({ button: "right" });
+      await step(0.84);
+      assert(await page.evaluate(() => __game.heavyWindow > 0));
+      await mouse("right");
+      await step(0.04);
+      await page.mouse.up({ button: "right" });
+      await step(0.04);
+      assert.equal(
+        await page.evaluate(() => __game.specialAttack),
+        "heavyFinish",
+      );
+      await page.keyboard.press("KeyK");
+      await step(0.04);
+      const d = await page.evaluate(() => ({
+        kind: __game.specialAttack,
+        window: __game.heavyWindow,
+        queue: __game.queuedHeavy,
+      }));
+      assert.equal(d.kind, null);
+      assert.equal(d.window, 0);
+      assert(!d.queue);
+      return d;
+    },
+  );
+  await check(
+    "posed ground attacks keep the body and both ends of the spear above the floor",
+    async () => {
+      await reset();
+      const d = await page.evaluate(() => {
+        const m = __game.player;
+        let skin;
+        m.body.traverse((o) => {
+          if (o.isSkinnedMesh && !skin) skin = o;
+        });
+        const rows = [];
+        for (const clip of [
+          "Thrust",
+          "Sweep",
+          "Finish",
+          "HeavyArc",
+          "HeavyReturn",
+          "ChargedHeavy",
+        ]) {
+          m.state = null;
+          m.mixer.stopAllAction();
+          let min = 100,
+            tip = 100,
+            heel = 100;
+          for (let f = 1; f < 25; f++) {
+            m.animate({
+              dt: 1 / 30,
+              speed: 0,
+              air: false,
+              attack: f / 25,
+              attackClip: clip,
+              dash: false,
+            });
+            m.root.updateMatrixWorld(true);
+            skin.skeleton.update();
+            for (let i = 0; i < skin.geometry.attributes.position.count; i++) {
+              const v = skin
+                .getVertexPosition(i, m.root.position.clone())
+                .applyMatrix4(skin.matrixWorld);
+              min = Math.min(min, v.y);
+            }
+            const ends = m.weaponEndpoints();
+            tip = Math.min(tip, ends.tip.y);
+            heel = Math.min(heel, ends.heel.y);
+          }
+          rows.push({ clip, min, tip, heel });
+        }
+        m.state = null;
+        m.mixer.stopAllAction();
+        return rows;
+      });
+      assert(
+        d.every((r) => r.min >= -0.005 && r.tip > 0.035 && r.heel > 0.035),
+      );
+      return d;
+    },
+  );
+  await check(
+    "fur roots follow deformed skin with correlated wind and fixed joining vertices",
+    async () => {
+      const d = await page.evaluate(() => {
+        const f = __game.player.fur;
+        const mesh = f.ribbons[0],
+          p = mesh.geometry.attributes.position;
+        f.update(0, 0);
+        const root = [p.getX(0), p.getY(0), p.getZ(0)],
+          tip = [p.getX(30), p.getY(30), p.getZ(30)];
+        f.update(0.9, 6.8);
+        const next = [p.getX(30), p.getY(30), p.getZ(30)];
+        return {
+          count: f.ribbons.length,
+          attachment: f.attachmentStats(),
+          rootFixed: root.every(
+            (v, i) => Math.abs(v - [p.getX(0), p.getY(0), p.getZ(0)][i]) < 1e-7,
+          ),
+          tipMoves: tip.some((v, i) => Math.abs(v - next[i]) > 0.003),
+        };
+      });
+      assert(d.count >= 30 && d.rootFixed && d.tipMoves);
+      assert(
+        d.attachment.attached >= d.count * 0.7 && d.attachment.maxError < 0.006,
+      );
       return d;
     },
   );

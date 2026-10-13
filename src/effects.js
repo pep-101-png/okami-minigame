@@ -105,6 +105,8 @@ export class Effects {
       grow: options.grow ?? 0,
       owned: options.owned ?? false,
       opacity: mesh.material.opacity,
+      wind: options.wind ?? 0,
+      phase: Math.random() * Math.PI * 2,
     });
     return mesh;
   }
@@ -363,7 +365,46 @@ export class Effects {
     flower.rotation.set(-Math.PI / 2, 0, Math.random() * Math.PI * 2);
     const size = 0.26 + Math.random() * 0.22;
     flower.scale.set(size, size, 1);
-    this.add(flower, 2.1, new THREE.Vector3(), { grow: 0.2 });
+    this.add(flower, 3.2, new THREE.Vector3(), { grow: 0.1 });
+    const sprig = new THREE.Mesh(
+      this.geometry,
+      new THREE.MeshBasicMaterial({
+        color: "#779a57",
+        map: this.leafMap,
+        transparent: true,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+        opacity: 0.9,
+      }),
+    );
+    sprig.position.copy(flower.position);
+    sprig.position.y = 0.13;
+    sprig.scale.set(0.23, 0.32, 1);
+    sprig.rotation.y = Math.random() * Math.PI;
+    this.add(sprig, 2.5, new THREE.Vector3(), { wind: 0.07 });
+    const bloom = flower.clone();
+    bloom.material = flower.material.clone();
+    bloom.position.y = 0.25;
+    bloom.scale.multiplyScalar(0.68);
+    bloom.rotation.x = -Math.PI * 0.28;
+    this.add(bloom, 2.6, new THREE.Vector3(), { wind: 0.07, grow: 0.08 });
+    this.chip(
+      position.clone().add(new THREE.Vector3(0, 0.25, 0)),
+      "#f4b8c6",
+      [0.12, 0.065],
+      1.4,
+      forward
+        .clone()
+        .multiplyScalar(-0.65)
+        .add(
+          new THREE.Vector3(
+            (Math.random() - 0.5) * 0.7,
+            0.45,
+            (Math.random() - 0.5) * 0.7,
+          ),
+        ),
+      { spin: 1.2, gravity: 0.2, wind: 0.3 },
+    );
     for (let i = 0; i < 2; i++) {
       const leaf = new THREE.Mesh(
         this.geometry,
@@ -397,7 +438,7 @@ export class Effects {
               (Math.random() - 0.5) * 0.5,
             ),
           ),
-        { spin: 0.6 + Math.random() * 1.1, gravity: 0.25 },
+        { spin: 0.6 + Math.random() * 1.1, gravity: 0.25, wind: 0.25 },
       );
     }
   }
@@ -541,6 +582,10 @@ export class Effects {
       }
       p.velocity.y -= dt * p.gravity;
       p.mesh.position.addScaledVector(p.velocity, dt);
+      if (p.wind) {
+        p.mesh.position.x += Math.sin(p.life * 3 + p.phase) * p.wind * dt;
+        p.mesh.rotation.y += Math.cos(p.life * 2 + p.phase) * p.wind * dt;
+      }
       p.mesh.rotation.z += dt * p.spin;
       p.mesh.rotation.x += dt * p.spin * 0.23;
       if (p.grow) p.mesh.scale.multiplyScalar(Math.max(0.01, 1 + dt * p.grow));

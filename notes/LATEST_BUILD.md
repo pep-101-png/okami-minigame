@@ -1,47 +1,47 @@
-# Wolf and spear revision — 13 October 2026
+# Connected combat and wolf motion — 13 October 2026
 
-This replaces the rejected nine-feature draft. The user's Shiranui illustration guided the leaner muzzle/shoulder silhouette, larger swept mane and painted spiral emblems. This is an adapted original canine interpretation; artistic acceptance remains pending.
+The next build revises the user's reopened items 1–9. Approved eyes, vocal sound clips and spear artwork remain in place.
 
-## Watch before installing
+## Watch the next build before downloading
 
-![Wolf motion preview](previews/wolf-revision-motion.gif)
+![Actual game: connected combos, jump and blossom trail](previews/connected-combos.gif)
 
-Eight-second loop: walk, run, tucked jump, charged pounce, overhead heavy, aerial spike and recovery. Captured from the actual in-engine model review stage using the game's animation controller. Review-stage jump height is staged; actual input/physics, collision, damage, audio and impact effects were tested separately in the game. The GIF has no audio.
+This is an actual game capture, stepped at 20 simulation frames per second, with a close-up review camera and scripted keyboard equivalents of left/right clicks. The enemies were moved out of the clearing to keep the wolf visible. It shows the complete three-hit normal string, the two-hit heavy string, the progressive jump and running effects. GIF playback has no sound and is reduced to 15 fps for download size. Functional gameplay checks use the regular game camera and inputs.
 
-## Ten requested changes
+## Changes for this playtest
 
-1. Narrower eye shapes, restrained iris/highlight, painted brow accents.
-2. Real dog bark and licensed wolf vocal clips replace oscillator vocals. First-use decoding queues the vocal; stun bark has verified output energy. Damage uses varied hurt cries. Credits and audio licenses are included.
-3. Varied flower color/scale and softer leaf motion.
-4. Charged normal coils low, then pounces with raised forepaws, separately from the normal thrust.
-5. Heavy raises the spear overhead and cleaves downward; charged heavy drives a stronger ground break.
-6. Aerial attack briefly tucks, dives nose-down and deals a radial landing hit with dedicated slam audio, expanding rings, dust and painted debris.
-7. Jump poses preserve the artist rig's natural limb bends, fold the paws at the apex and reach toward landing. Stale action weights are cleared.
-8. Broader muzzle/shoulders, narrower loin, shorter ears and bold spiral shoulder emblems.
-9. Twenty-nine larger layered mane/shoulder/ankle/tail tufts with ink edges, red detail and varied flowing tips replace the tiny wisps.
-10. Leaf-shaped spectral blade, wrapped grip, metal collars, moving tassels, attack-specific spear pitch, pale trails and drifting spectral flecks.
+- Normal combo: stepping Reed Crosscut → weight-shifting Crescent Sweep → springing Sunward Vault, with shoulder/hip turns, forepaw asymmetry, anticipation and follow-through.
+- Heavy combo: overhead Sky Cleaver → Rising Tempest return, connected by an early buffered press or a short recovery window. The string ends after two hits. Holding still produces the charged heavy.
+- Body/weapon contact: reduced excessive downward bends, posed-skin ground support, and a safe spear angle while preserving its mouth grip.
+- Jump: considerably less leg folding; gradual flex on ascent, continuous apex, gradual reach on descent and landing absorption.
+- Charged/aerial polish: counterbalance/recoil, gentler dive entry tuck and retained distinct slam with grounded recovery.
+- Anatomy: rounded torso cross section and shoulder/neck shaping; welded coincident source vertices so body shading can actually blend across triangles, while retaining source UVs and skin weights.
+- Red paint: tapered curved shoulder/flank/leg spirals projected onto the mesh's own UV triangles, replacing straight atlas bands and attached cream shoulder badges.
+- Fur: more integrated chest/neck layers, roots attached to deforming skin triangles, fading joins and correlated wind with tip/turn lag.
+- Running effects: sprouting green sprigs, elevated blossoms, ground flowers, floating petals and wind-drifting leaves.
 
 ## Controls
 
 | Input | Action |
 | --- | --- |
-| Tap left click / J | Normal combo |
+| Tap left click / J three times | Connected normal combo |
+| Tap right click / L twice | Connected heavy combo |
 | Hold/release left click / J | Charged pounce |
-| Tap right click / L | Overhead Sky Cleaver |
-| Hold/release right click / L | Charged Sunbreak |
-| Click / J in a jump | Tucked Falling Star spike/slam |
-| B | Guardian Bark stun, 6-second recovery |
-| V | Voice selected in Pause |
-| Escape | Pause, volume and voice options |
+| Hold/release right click / L | Charged ground break |
+| Click / J during jump | Aerial spike/slam |
+| Space | Jump |
+| B | Guardian bark stun |
+| V | Selected voice |
+| Escape | Pause/volume/voice options |
 
-Production build passed. **42 browser checks passed: 20 general + 22 wolf.** New regressions inspect folded paw positions, distinguish heavy/charged bone poses, measure audible bark output, and verify aerial damage/sound/rings happen once on landing. These demonstrate functional behavior; visual quality still needs the user's review.
+Production build passed. **47 browser checks passed: 20 general + 27 wolf/combat.** Coverage includes both heavy inputs/continuation/reset, real 3-then-4 heavy damage, full posed-body/spear floor clearance, moderate apex leg flex, deforming-skin fur attachments and unchanged audio/eyes behavior. [General report](VALIDATION_REPORT.json) · [Wolf/combat report](WOLF_FEATURE_REPORT.json) · [Build log](BUILD_LOG.md).
 
-[General report](VALIDATION_REPORT.json) · [Wolf report](WOLF_FEATURE_REPORT.json) · [Build log](BUILD_LOG.md).
+The functional checks establish behavior; the user's playtest determines whether the animation and appearance now meet their expectations.
 
-## Still previews
+![Curved markings in the actual game](previews/wolf-markings.png)
 
-![Wolf and spear close-up](previews/wolf-eyes.png)
+![Heavy return strike](previews/heavy-return.png)
 
-![Tucked jump — model review stage](previews/wolf-jump.png)
+![Gradual jump flex](previews/flowing-jump.png)
 
-![Actual gameplay running foliage](previews/wolf-running.png)
+![Fuller blossom trail](previews/blossom-trail.png)

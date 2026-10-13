@@ -126,3 +126,19 @@ The previous nine-feature build was rejected for insufficient visual/animation q
 8. Broaden muzzle/shoulders, narrow loin, shorten fox ears, add painted spiral shoulder emblems.
 9. Replace tiny wisps with a substantial layered, ink-edged mane, shoulder/ankle/tail tufts and varied flowing tips, guided by the user's Shiranui reference.
 10. Leaf-shaped spectral spear blade, metal collars, wrapped grip, animated tassels, attack-specific pitch and pale spectral trails.
+
+## Next-build feedback pass: connected combat and integrated wolf
+
+Approved and retained: eyes, sound effects, item 10 spear artwork/spectral effects. Reopened numbers 1 and 2 now refer to combat, not eyes/audio.
+
+1. Three-hit normal combo: stepping crosscut, counter-sweep, springing diagonal vault; larger shoulder/hip/leg participation, anticipation and recovery.
+2. Two-hit heavy combo: overhead cleaver into rising return, buffered and recovery-window continuation; stop after two hits; dodge clears its state.
+3. Running trail: sprouting green sprigs, elevated blossoms, ground flowers and wind-drifting petals/leaves.
+4. Heavy penetration: soften the downward body pose, support the posed skin above ground and limit the weapon angle at the mouth pivot.
+5. Charged polish: recoil/counterbalance and safe floor contact.
+6. Aerial polish: reduced entry tuck, existing distinct spike/landing recovery and once-only slam.
+7. Jump: gradual moderate leg flex, continuous apex pose, progressively reaching paws on descent.
+8. Model/markings: sculpt rounded torso/shoulders; weld source triangles for actual smooth normals; replace atlas bands/badges with tapered curved markings projected onto the actual mesh UVs.
+9. Fur: embedded, fading skin-triangle roots; neck/chest layers; correlated spatial wind and turning lag instead of independently oscillating fixed ornaments.
+
+These are revisions for the next playtest. Visual acceptance remains pending.

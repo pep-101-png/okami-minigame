@@ -125,6 +125,17 @@ export class WolfAbilities {
     const g = this.game;
     if (kind === "aerial" && g.aerialUsed) return;
     if (g.dashTime > 0) return;
+    if (kind === "heavy" && g.attackTime > 0 && g.specialAttack === "heavy") {
+      g.queuedHeavy = true;
+      return;
+    }
+    // A two-hit heavy string ends after its return strike, without an accidental third hit.
+    if (
+      kind === "heavy" &&
+      g.attackTime > 0 &&
+      g.specialAttack === "heavyFinish"
+    )
+      return;
     this.pending = { kind, level };
   }
   bark() {
@@ -195,8 +206,8 @@ export class WolfAbilities {
     )
       return;
     this.foliageDistance += moved;
-    while (this.foliageDistance > 0.34) {
-      this.foliageDistance -= 0.34;
+    while (this.foliageDistance > 0.3) {
+      this.foliageDistance -= 0.3;
       const p = g.player.root.position
         .clone()
         .addScaledVector(g.forward(), -0.5);

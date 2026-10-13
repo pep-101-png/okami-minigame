@@ -50,6 +50,8 @@ export class Game {
     this.attackDuration = 1;
     this.attackPhase = 0;
     this.combo = 0;
+    this.heavyWindow = 0;
+    this.queuedHeavy = false;
     this.comboWindow = 0;
     this.queuedCombo = false;
     this.hitTargets = new Set();
@@ -227,6 +229,7 @@ export class Game {
     return this.currentAttack || ATTACKS[this.combo] || ATTACKS[1];
   }
   startSpecialAttack(kind, level = 0) {
+    if (kind === "heavy" && this.heavyWindow > 0) kind = "heavyFinish";
     if (kind === "aerial" && this.aerialUsed) return false;
     this.startAttack(1);
     this.specialAttack = kind;
@@ -281,6 +284,8 @@ export class Game {
     this.attackDuration = data.duration;
     this.attackTime = data.duration;
     this.attackPhase = 0.001;
+    this.heavyWindow = 0;
+    this.queuedHeavy = false;
     this.comboWindow = 0;
     this.queuedCombo = false;
     this.hitTargets.clear();
@@ -351,6 +356,8 @@ export class Game {
     this.attackTime = 0;
     this.attackPhase = 0;
     this.attackBuffer = 0;
+    this.heavyWindow = 0;
+    this.queuedHeavy = false;
     this.comboWindow = 0;
     this.queuedCombo = false;
   }
@@ -499,6 +506,7 @@ export class Game {
     for (const name of [
       "invulnerable",
       "comboWindow",
+      "heavyWindow",
       "dashCooldown",
       "attackBuffer",
       "dodgeBuffer",
@@ -708,11 +716,18 @@ export class Game {
         this.strike(THREE.MathUtils.lerp(a, b, i / 2));
       this.emitTrail(phase);
     }
-    if (this.queuedCombo && phase >= data.link) {
+    if (
+      this.queuedHeavy &&
+      this.specialAttack === "heavy" &&
+      phase >= data.link
+    ) {
+      this.startSpecialAttack("heavyFinish");
+    } else if (this.queuedCombo && phase >= data.link) {
       this.startAttack(
         this.specialAttack ? 1 : this.combo === 3 ? 1 : this.combo + 1,
       );
     } else if (this.attackTime === 0) {
+      this.heavyWindow = this.specialAttack === "heavy" ? COMBO_GRACE : 0;
       this.comboWindow =
         this.specialAttack || this.combo === 3 ? 0 : COMBO_GRACE;
       this.attackPhase = 0;

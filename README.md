@@ -73,3 +73,5 @@ The script verifies its locally included source binary's checksum before import.
 [Development priorities](TODO.md) remain the guide for further iteration. [Build log](notes/BUILD_LOG.md) records actual revisions, interruption and validation; technical success is not a claim of artistic perfection.
 
 Wolf revision controls remain: hold/release left click for the coiled charged pounce, right click for overhead cleaver, hold/release right click for charged ground break, click in the air for tucked spear dive/slam. B is the recorded stun bark; V plays the vocal selected in Pause. The spear has an original spectral leaf blade, animated tassels and pale attack trails. Recorded-audio licenses are listed in Credits and THIRD_PARTY.md.
+
+Latest combat revision: tap left click/J three times to connect Reed Crosscut, Crescent Sweep and Sunward Vault. Tap right click/L twice for Sky Cleaver into Rising Tempest; the second press can be buffered during the first strike or entered within its brief recovery window. Holding/releasing either button still selects the charged attack. Eyes, vocal audio and spear artwork remain the approved versions.

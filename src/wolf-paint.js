@@ -1,7 +1,7 @@
 import * as THREE from "three";
 // A local hand-drawn atlas overlays the source UV layout with ivory washes and brush marks.
 // The artist source palette supplies the tiny eye/nose masks; its original orange is replaced.
-export function wolfPaint(source) {
+export function wolfPaint(source, geometry) {
   const c = document.createElement("canvas");
   c.width = c.height = 1024;
   const ctx = c.getContext("2d", { willReadFrequently: true });
@@ -29,83 +29,131 @@ export function wolfPaint(source) {
     }
   }
   ctx.putImageData(image, 0, 0);
-  function brush(points, width = 19) {
-    ctx.strokeStyle = "#be322c";
-    ctx.lineWidth = width;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.beginPath();
-    ctx.moveTo(...points[0]);
-    for (let i = 1; i < points.length; i++) ctx.lineTo(...points[i]);
-    ctx.stroke();
-    ctx.strokeStyle = "#aa2825";
-    ctx.lineWidth = width * 0.18;
-    ctx.stroke();
-  }
-  brush(
-    [
-      [455, 387],
-      [437, 423],
-      [440, 481],
-      [388, 523],
-      [359, 478],
-    ],
-    14,
+  // Project curved, tapered calligraphy onto the mesh's own UV triangles.
+  // This keeps markings on the flank instead of arbitrary straight atlas bands.
+  const mesh = new THREE.Mesh(
+    geometry,
+    new THREE.MeshBasicMaterial({ side: THREE.DoubleSide }),
   );
-  brush(
-    [
-      [211, 708],
-      [239, 752],
-      [236, 807],
-      [288, 849],
-      [320, 795],
-    ],
-    14,
-  );
-  brush(
-    [
-      [556, 416],
-      [531, 443],
-      [559, 466],
-      [584, 459],
-    ],
-    12,
-  );
-  brush(
-    [
-      [86, 726],
-      [112, 753],
-      [86, 775],
-      [59, 767],
-    ],
-    12,
-  );
-  // Brush cuffs in each leg's UV island and a tail accent.
-  for (const [x, y] of [
-    [83, 156],
-    [199, 160],
-    [431, 153],
-    [554, 155],
-    [792, 468],
-    [926, 465],
-  ])
-    brush(
-      [
-        [x - 20, y],
-        [x, y + 10],
-        [x + 25, y - 2],
-      ],
-      13,
+  mesh.updateMatrixWorld(true);
+  const ray = new THREE.Raycaster();
+  function paintedCurve(points, width = 9) {
+    const curve = new THREE.CatmullRomCurve3(
+      points.map((p) => new THREE.Vector3(...p)),
     );
-  brush(
+    for (const side of [-1, 1]) {
+      let previous = null;
+      for (let i = 0; i <= 180; i++) {
+        const t = i / 180,
+          p = curve.getPoint(t);
+        ray.set(
+          new THREE.Vector3(side * 100, p.y, p.z),
+          new THREE.Vector3(-side, 0, 0),
+        );
+        const hit = ray.intersectObject(mesh, false)[0];
+        if (!hit?.uv) {
+          previous = null;
+          continue;
+        }
+        const uv = new THREE.Vector2(
+          hit.uv.x * 1024,
+          (source.flipY ? 1 - hit.uv.y : hit.uv.y) * 1024,
+        );
+        if (previous && uv.distanceTo(previous) < 80) {
+          ctx.strokeStyle = "#b92f2b";
+          ctx.lineCap = "round";
+          ctx.lineWidth =
+            width * (0.12 + 0.88 * Math.pow(Math.sin(Math.PI * t), 0.65));
+          ctx.beginPath();
+          ctx.moveTo(previous.x, previous.y);
+          ctx.lineTo(uv.x, uv.y);
+          ctx.stroke();
+        }
+        previous = uv;
+      }
+    }
+  }
+  // Long sweeping shoulder/flank strokes and fine trailing flame branches.
+  paintedCurve(
     [
-      [799, 667],
-      [825, 700],
-      [853, 707],
-      [876, 682],
+      [0, 59, 22],
+      [0, 56, 14],
+      [0, 51, 1],
+      [0, 48, -12],
+      [0, 45, -24],
     ],
-    14,
+    12,
   );
+  paintedCurve(
+    [
+      [0, 53, 23],
+      [0, 48, 15],
+      [0, 43, 1],
+      [0, 44, -15],
+      [0, 49, -28],
+    ],
+    7,
+  );
+  paintedCurve(
+    [
+      [0, 55, 17],
+      [0, 59, 6],
+      [0, 56, -8],
+      [0, 52, -21],
+    ],
+    5,
+  );
+  paintedCurve(
+    [
+      [0, 44, 14],
+      [0, 40, 3],
+      [0, 41, -10],
+    ],
+    4,
+  );
+  // Open spirals flow into the other strokes; no solid rings around the limbs.
+  for (const [cy, cz, r] of [
+    [49, -17, 6],
+    [52, 15, 4],
+  ]) {
+    const pts = [];
+    for (let i = 0; i < 26; i++) {
+      const t = i / 25,
+        a = t * Math.PI * 3.9,
+        rr = r * (1 - t);
+      pts.push([0, cy + Math.sin(a) * rr, cz + Math.cos(a) * rr]);
+    }
+    paintedCurve(pts, 6);
+  }
+  for (const z of [21, -31]) {
+    paintedCurve(
+      [
+        [0, 31, z - 2],
+        [0, 25, z + 2],
+        [0, 20, z + 1],
+        [0, 17, z - 3],
+      ],
+      6,
+    );
+    paintedCurve(
+      [
+        [0, 27, z],
+        [0, 24, z - 3],
+        [0, 22, z],
+        [0, 24, z + 2],
+      ],
+      4,
+    );
+  }
+  paintedCurve(
+    [
+      [0, 58, 61],
+      [0, 64, 54],
+      [0, 66, 44],
+    ],
+    6,
+  );
+  mesh.material.dispose();
   // Very light pigment blooms, generated with the same seed every load.
   ctx.globalCompositeOperation = "source-atop";
   for (let i = 0; i < 160; i++) {

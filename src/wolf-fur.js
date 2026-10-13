@@ -1,6 +1,7 @@
 import * as THREE from "three";
+import { skinAnchor, skinPoint } from "./wolf-surface.js";
 /** Layered, ink-edged mane tufts with fixed roots and delayed tip motion. */
-export function createWolfFur(body) {
+export function createWolfFur(body, skin) {
   const canvas = document.createElement("canvas");
   canvas.width = 128;
   canvas.height = 512;
@@ -45,12 +46,22 @@ export function createWolfFur(body) {
     ctx.bezierCurveTo(25 + i * 5, 160, 50 + i * 2, 340, 64, 512);
     ctx.stroke();
   }
+  ctx.globalCompositeOperation = "destination-in";
+  const rootFade = ctx.createLinearGradient(0, 0, 0, 512);
+  rootFade.addColorStop(0, "rgba(255,255,255,0)");
+  rootFade.addColorStop(0.16, "white");
+  rootFade.addColorStop(1, "white");
+  ctx.fillStyle = rootFade;
+  ctx.fillRect(0, 0, 128, 512);
   const map = new THREE.CanvasTexture(canvas);
   map.colorSpace = THREE.SRGBColorSpace;
   const material = new THREE.MeshBasicMaterial({
     map,
     color: "#fffbea",
     side: THREE.DoubleSide,
+    transparent: true,
+    alphaTest: 0.08,
+    depthWrite: false,
   });
   const ribbons = [],
     strands = [];
@@ -60,20 +71,29 @@ export function createWolfFur(body) {
     for (let i = 0; i < 6; i++)
       anchors.push([
         "b_Neck_04",
-        [sign * (8 + i * 1.5), 67 - i * 2.4, 37 - i * 3],
-        0.56 + i * 0.085,
-        0.12 + i * 0.012,
+        [sign * (8 + i * 1.5), 62 - i * 2.8, 34 - i * 3.6],
+        0.48 + (i % 3) * 0.11,
+        0.085 + (i % 3) * 0.018,
         sign * (0.18 + i * 0.055),
         0.04 - i * 0.06,
       ]);
     for (let i = 0; i < 4; i++)
       anchors.push([
         "b_Spine02_03",
-        [sign * (11 + i * 0.8), 55 - i * 2, 14 - i * 5],
-        0.76 + i * 0.12,
-        0.14,
+        [sign * (11 + i * 0.8), 52 - i * 2, 22 - i * 4],
+        0.5 + i * 0.1,
+        0.1,
         sign * (0.28 + i * 0.045),
         -0.26 - i * 0.065,
+      ]);
+    for (let i = 0; i < 3; i++)
+      anchors.push([
+        "b_Neck_04",
+        [sign * 9, 46 - i * 2, 32 - i * 4],
+        0.3 + i * 0.045,
+        0.09,
+        sign * 0.12,
+        -0.17,
       ]);
     anchors.push([
       sign < 0 ? "b_RightForeArm_07" : "b_LeftForeArm_010",
@@ -93,11 +113,31 @@ export function createWolfFur(body) {
         0.01 + i * 0.01,
       ]);
   }
-  anchors.push(["b_Neck_04", [0, 71, 34], 0.8, 0.11, 0, 0.02]);
+  anchors.push(["b_Neck_04", [0, 64, 28], 0.66, 0.08, 0, 0.0]);
   body.updateMatrixWorld(true);
   for (const [boneName, anchor, length, width, spread, lift] of anchors) {
     const bone = body.getObjectByName(boneName);
     if (!bone) continue;
+    const sign = Math.sign(anchor[0]);
+    const origin = new THREE.Vector3(
+      sign ? sign * 100 : 0,
+      sign ? anchor[1] : 100,
+      anchor[2],
+    ).applyMatrix4(body.matrixWorld);
+    const direction = new THREE.Vector3(
+      sign ? -sign : 0,
+      sign ? 0 : -1,
+      0,
+    ).transformDirection(body.matrixWorld);
+    let surface = skinAnchor(skin, origin, direction);
+    if (!surface)
+      surface = skinAnchor(
+        skin,
+        new THREE.Vector3(sign * 5, 100, anchor[2]).applyMatrix4(
+          body.matrixWorld,
+        ),
+        new THREE.Vector3(0, -1, 0).transformDirection(body.matrixWorld),
+      );
     const carrier = new THREE.Group();
     bone.add(carrier);
     carrier.position.copy(
@@ -114,10 +154,11 @@ export function createWolfFur(body) {
       uv = [],
       indices = [],
       segments = 18,
-      phase = strands.length * 1.91;
+      phase = anchor[2] * 0.04 + sign * 0.08;
     for (let i = 0; i <= segments; i++) {
       const t = i / segments,
-        w = width * Math.pow(1 - t, 0.75) * (1 + 0.12 * Math.sin(t * 24));
+        w =
+          width * (0.45 + 0.55 * Math.sin(Math.PI * t)) * Math.pow(1 - t, 0.8);
       const x = spread * t + Math.sin(t * Math.PI) * spread * 0.25;
       const y = lift * t + Math.sin(t * Math.PI) * 0.065;
       positions.push(
@@ -147,26 +188,72 @@ export function createWolfFur(body) {
     ribbon.frustumCulled = false;
     carrier.add(ribbon);
     ribbons.push(ribbon);
-    strands.push({ geometry, base: positions, phase, length });
+    strands.push({
+      geometry,
+      base: positions,
+      phase,
+      length,
+      surface,
+      carrier,
+      bone,
+    });
   }
-  let flow = 0;
+  let flow = 0,
+    sway = 0;
   return {
     ribbons,
-    update(time, speed) {
-      flow = THREE.MathUtils.lerp(flow, Math.min(1, speed / 6.8), 0.12);
+    attachmentStats() {
+      body.updateWorldMatrix(true, true);
+      skin.skeleton.update();
+      let maxError = 0,
+        attached = 0;
+      for (const strand of strands)
+        if (strand.surface) {
+          attached++;
+          const { point, normal } = skinPoint(skin, strand.surface);
+          const expected = point.addScaledVector(normal, -0.016);
+          strand.carrier.updateWorldMatrix(true, false);
+          maxError = Math.max(
+            maxError,
+            strand.carrier
+              .getWorldPosition(new THREE.Vector3())
+              .distanceTo(expected),
+          );
+        }
+      return { attached, total: strands.length, maxError };
+    },
+    update(time, speed, dt = 1 / 60, turn = 0) {
+      body.updateWorldMatrix(true, true);
+      skin.skeleton.update();
+      flow = THREE.MathUtils.damp(flow, Math.min(1, speed / 6.8), 5, dt);
+      sway = THREE.MathUtils.damp(
+        sway,
+        THREE.MathUtils.clamp(turn, -1, 1) * 0.12,
+        4,
+        dt,
+      );
       for (const strand of strands) {
+        if (strand.surface) {
+          const { point, normal } = skinPoint(skin, strand.surface);
+          // Embed the feather root into the coat; the alpha ramp conceals its joining edge.
+          strand.carrier.position.copy(
+            point
+              .addScaledVector(normal, -0.016)
+              .applyMatrix4(strand.bone.matrixWorld.clone().invert()),
+          );
+        }
         const p = strand.geometry.attributes.position;
         for (let i = 0; i < p.count; i++) {
           const t = Math.floor(i / 2) / 18,
             tip = t * t;
-          const wave = Math.sin(
-            time * (2.1 + flow * 2.5) - t * 4.2 + strand.phase,
-          );
+          const wave = Math.sin(time * 1.7 - t * 3.3 + strand.phase);
           p.setXYZ(
             i,
-            strand.base[i * 3] + wave * 0.07 * tip * (0.35 + flow),
+            strand.base[i * 3] + (wave * 0.045 * (0.65 + flow) - sway) * tip,
             strand.base[i * 3 + 1] +
-              Math.sin(time * 2.8 - t * 5 + strand.phase) * 0.055 * tip +
+              Math.sin(time * 1.7 - t * 3.3 + strand.phase + 0.6) *
+                0.045 *
+                tip +
               flow * 0.07 * tip,
             strand.base[i * 3 + 2],
           );
