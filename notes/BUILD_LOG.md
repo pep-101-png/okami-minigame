@@ -57,3 +57,23 @@ Rejected draft generators and temporary source inspection files were preserved o
 - Revised game commit `d481bfe` published successfully at **2026-10-13 06:40:04 Australia/Sydney (AEDT)** /2026-10-12 19:40:04UTC.
 - Pre-interruption working span approximately24minutes; resumed validation/delivery span approximately7minutes. The overnight gap was inactive, not development time.
 - All changes are saved in GitHub branch `sunward-minigame`. The game can be downloaded and tested without keeping this chat open.
+
+## Wolf feature pass — 13 October 2026
+
+All nine requested wolf additions were implemented for testing:
+
+1. Amber/ink eyes with pupils, highlights and blinks. Ray projection and barycentric skin tracking keep them on the animated face; the close-up confirms visible eyes.
+2. Original stylized vocal synthesis: soft bark, growl, howl, damage whimper, and a louder B bark with forward/cover-aware stun and a six-second cooldown.
+3. Ground blossoms and airborne leaves during running, with bounded effect counts and expiry.
+4. Hold/release normal attacks, charge feedback, increasing damage, and a distinct charged thrust.
+5. Right-click heavy arc and charged radial Sunbreak, with separate authored clips and hit windows.
+6. One aerial dive per jump, with falling motion, hit/recovery and landing effects.
+7. Rise/fall/landing clips keyed to vertical motion rather than a single clamped jump loop.
+8. Face, charge stance, control feedback and pose refinements; moving while charging layers lower-body gait beneath the windup.
+9. Sparse painted silk fur ribbons with animated tips, attached to neck/body/tail joints.
+
+Visual/testing revisions corrected buried/misaligned eyes, reversed fur texture coordinates, a cooldown fixture's exact-time assertion, and leg motion while charging.
+
+Final production build passed. Final checks: **20/20 gameplay regressions +18/18 wolf feature checks =38passed,0failed**. Reports are `VALIDATION_REPORT.json` and `WOLF_FEATURE_REPORT.json`. New test coverage includes physical left/right hold-release events, actual charged damage/geometry, bark direction/cover/cooldown, finite nonzero vocal waveforms, foliage lifetime, charge cancellation and movement, aerial recovery and finite animation tracks.
+
+Artistic quality and vocal realism remain subject to player feedback; the vocals are generated locally, not recordings of a real wolf.

@@ -1,0 +1,377 @@
+{
+  "started": "2026-10-13T06:57:40.673Z",
+  "checks": [
+    {
+      "name": "two visible layered eye meshes are attached outside the head surface",
+      "pass": true,
+      "details": [
+        {
+          "name": "Wolf eye left",
+          "visible": true,
+          "children": 4,
+          "scale": [
+            1,
+            0.9999999999999991,
+            1
+          ],
+          "world": [
+            0.09698001067110631,
+            1.4614048611725166,
+            10.698406338417845
+          ]
+        },
+        {
+          "name": "Wolf eye right",
+          "visible": true,
+          "children": 4,
+          "scale": [
+            1,
+            0.9999999999999991,
+            1
+          ],
+          "world": [
+            -0.0969800021153885,
+            1.4614048604875065,
+            10.698406338637282
+          ]
+        }
+      ]
+    },
+    {
+      "name": "quick physical left click retains the normal combo",
+      "pass": true,
+      "details": {
+        "combo": 1,
+        "kind": null,
+        "time": 0.41000000000000003
+      }
+    },
+    {
+      "name": "left hold is a charge and release selects charged thrust",
+      "pass": true,
+      "details": {
+        "d": {
+          "charging": true,
+          "ratio": 0.5217391304347828,
+          "state": "ChargeLight",
+          "attack": 0
+        },
+        "release": {
+          "kind": "chargedLight",
+          "clip": "ChargedThrust",
+          "damage": 2
+        }
+      }
+    },
+    {
+      "name": "full light charge scales damage and hit window drives a real hit",
+      "pass": true,
+      "details": {
+        "kind": "chargedLight",
+        "damage": 4,
+        "hp": 1,
+        "hit": true
+      }
+    },
+    {
+      "name": "physical right click is a distinct heavy attack",
+      "pass": true,
+      "details": {
+        "kind": "heavy",
+        "state": "HeavyArc",
+        "data": {
+          "name": "HEAVY · MOON ARC",
+          "clip": "HeavyArc",
+          "duration": 0.78,
+          "hit": 0.51,
+          "active": [
+            0.41,
+            0.64
+          ],
+          "link": 1,
+          "cancel": 0.78,
+          "damage": 3,
+          "range": 3.5,
+          "arc": 0.05,
+          "lunge": 1.8,
+          "movement": 0.07,
+          "knockback": 1.4,
+          "stagger": 0.95,
+          "hitStop": 0.068,
+          "heavy": true,
+          "sweep": true
+        }
+      }
+    },
+    {
+      "name": "full right hold releases charged heavy with stronger damage and radial geometry",
+      "pass": true,
+      "details": {
+        "kind": "chargedHeavy",
+        "state": "ChargedHeavy",
+        "damage": 6,
+        "radial": true
+      }
+    },
+    {
+      "name": "charged heavy hits forward and rear targets through its real active window",
+      "pass": true,
+      "details": {
+        "front": 0,
+        "rear": 0,
+        "hits": 2
+      }
+    },
+    {
+      "name": "charging while moving blends real leg motion with the upper-body windup",
+      "pass": true,
+      "details": {
+        "before": {
+          "state": "ChargeLight",
+          "z": 11.20359769747029,
+          "q": [
+            3.808927643459744e-8,
+            9.194385753801966e-7,
+            0.13014072890668144,
+            0.9914955452062602
+          ]
+        },
+        "after": {
+          "state": "ChargeLight",
+          "z": 10.920409485624011,
+          "q": [
+            3.0496326503941724e-7,
+            8.734121422038749e-7,
+            0.4139406992987876,
+            0.9103038882164627
+          ]
+        }
+      }
+    },
+    {
+      "name": "charge cancels on dodge and late mouse release cannot fire an attack",
+      "pass": true
+    },
+    {
+      "name": "bark stuns visible forward enemies without damage, respects cover/backward direction and cooldown",
+      "pass": true,
+      "details": {
+        "front": 1.6166666666666667,
+        "back": 0,
+        "hp": 5,
+        "cooldown": 5.983333333333333,
+        "waves": 9
+      }
+    },
+    {
+      "name": "bark does not stun through solid cover",
+      "pass": true,
+      "details": {
+        "stun": 0
+      }
+    },
+    {
+      "name": "three vocal options and damage whimper synthesize nonempty audio",
+      "pass": true,
+      "details": {
+        "waves": [
+          {
+            "seconds": 0.26,
+            "peak": 0.48389726877212524,
+            "rms": 0.1463153801950424,
+            "finite": true
+          },
+          {
+            "seconds": 0.85,
+            "peak": 0.4543461501598358,
+            "rms": 0.1324166230315113,
+            "finite": true
+          },
+          {
+            "seconds": 1.65,
+            "peak": 0.3478275239467621,
+            "rms": 0.13014304345247554,
+            "finite": true
+          },
+          {
+            "seconds": 0.5500226757369614,
+            "peak": 0.3517107367515564,
+            "rms": 0.129711924722744,
+            "finite": true
+          },
+          {
+            "seconds": 0.5500226757369614,
+            "peak": 0.3517107367515564,
+            "rms": 0.129711924722744,
+            "finite": true
+          }
+        ],
+        "sounds": [
+          {
+            "name": "barkSoft",
+            "accepted": true,
+            "added": 1
+          },
+          {
+            "name": "growl",
+            "accepted": true,
+            "added": 1
+          },
+          {
+            "name": "howl",
+            "accepted": true,
+            "added": 1
+          },
+          {
+            "name": "whimper",
+            "accepted": true,
+            "added": 1
+          }
+        ],
+        "voice": "Hurt",
+        "voices": 22,
+        "hp": 99
+      }
+    },
+    {
+      "name": "running flowers/leaves emit locally, remain bounded and expire",
+      "pass": true,
+      "details": {
+        "count": 50,
+        "flowers": 15,
+        "leaves": 30,
+        "limit": 240
+      }
+    },
+    {
+      "name": "jump has distinct rise/fall poses and a landing, not a frozen airborne loop",
+      "pass": true,
+      "details": {
+        "rise": {
+          "state": "JumpRise",
+          "y": 0.8925000000000003,
+          "v": 4.550000000000003
+        },
+        "fall": {
+          "state": "JumpFall",
+          "y": 1.2600000000000013,
+          "v": -1.749999999999997
+        },
+        "land": {
+          "state": "Land",
+          "y": 0
+        }
+      }
+    },
+    {
+      "name": "clicking during a jump triggers one aerial dive and impact recovery",
+      "pass": true,
+      "details": {
+        "d": {
+          "kind": "aerial",
+          "used": true,
+          "state": "AirStrike",
+          "v": -3.3000000000000003
+        },
+        "landed": {
+          "y": 0,
+          "landed": true
+        }
+      }
+    },
+    {
+      "name": "silk fur ribbons animate through local time uniforms with bounded geometry",
+      "pass": true,
+      "details": {
+        "count": 6,
+        "finite": true
+      }
+    },
+    {
+      "name": "all new authored action clips contain real finite animation tracks",
+      "pass": true,
+      "details": [
+        {
+          "name": "ChargedThrust",
+          "duration": 0.8333333134651184,
+          "tracks": 72,
+          "finite": true
+        },
+        {
+          "name": "HeavyArc",
+          "duration": 0.7666666507720947,
+          "tracks": 72,
+          "finite": true
+        },
+        {
+          "name": "ChargedHeavy",
+          "duration": 1.0666667222976685,
+          "tracks": 72,
+          "finite": true
+        },
+        {
+          "name": "AirStrike",
+          "duration": 0.7333333492279053,
+          "tracks": 72,
+          "finite": true
+        },
+        {
+          "name": "ChargeLight",
+          "duration": 0.3333333432674408,
+          "tracks": 27,
+          "finite": true
+        },
+        {
+          "name": "ChargeHeavy",
+          "duration": 0.4333333373069763,
+          "tracks": 27,
+          "finite": true
+        },
+        {
+          "name": "JumpRise",
+          "duration": 0.4333333373069763,
+          "tracks": 72,
+          "finite": true
+        },
+        {
+          "name": "JumpFall",
+          "duration": 0.36666667461395264,
+          "tracks": 72,
+          "finite": true
+        },
+        {
+          "name": "Bark",
+          "duration": 0.5333333611488342,
+          "tracks": 72,
+          "finite": true
+        },
+        {
+          "name": "Growl",
+          "duration": 0.8999999761581421,
+          "tracks": 72,
+          "finite": true
+        },
+        {
+          "name": "Howl",
+          "duration": 1.7000000476837158,
+          "tracks": 72,
+          "finite": true
+        },
+        {
+          "name": "Hurt",
+          "duration": 0.46666666865348816,
+          "tracks": 72,
+          "finite": true
+        }
+      ]
+    },
+    {
+      "name": "no browser JavaScript/shader failures",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "finished": "2026-10-13T06:57:53.280Z",
+  "passed": 18,
+  "failed": 0
+}

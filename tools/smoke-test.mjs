@@ -213,7 +213,7 @@ try {
       p.mixer.stopAllAction(); p.state = null;
       return { clips, boneCount: bones.length, samples, weaponSamples, weapon: { attachedToHead, shaftGripDot: shaftAxis.dot(gripAxis) } };
     });
-    const required = ["Idle", "Walk", "Run", "Jump", "Land", "Dodge", "Thrust", "Sweep", "Finish"];
+    const required = ["Idle", "Walk", "Run", "JumpRise", "JumpFall", "Land", "Dodge", "Thrust", "Sweep", "Finish"];
     for (const name of required) {
       const clip = data.clips.find(c => c.name === name);
       assert(clip && clip.seconds > 0.15 && clip.tracks >= 8 && clip.finite, `${name} has missing/invalid animation data`);
@@ -289,7 +289,7 @@ try {
     const dodge = await page.evaluate(() => ({ z: __game.player.root.position.z, state: __game.player.state, immune: __game.invulnerable, cooldown: __game.dashCooldown }));
     await step(1);
     const recovered = await page.evaluate(() => ({ state: __game.player.state, cooldown: __game.dashCooldown }));
-    assert(airborne.y > 0.3 && airborne.state === "Jump", "Jump did not leave ground/enter Jump animation");
+    assert(airborne.y > 0.3 && ["JumpRise","JumpFall"].includes(airborne.state), "Jump did not leave ground/enter Jump animation");
     assert(landed.y < 0.001 && ["Idle", "Land"].includes(landed.state), "Wolf did not recover onto ground");
     assert(dodge.z < 11.5 && dodge.state === "Dodge" && dodge.immune > 0, "Dodge did not move or protect the wolf");
     assert(recovered.cooldown === 0 && recovered.state === "Idle", "Dodge recovery/cooldown did not finish");

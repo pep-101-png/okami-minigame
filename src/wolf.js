@@ -3,6 +3,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { clone } from "three/addons/utils/SkeletonUtils.js";
 import { paint } from "./art.js";
 import { wolfPaint } from "./wolf-paint.js";
+import { createWolfFur } from "./wolf-fur.js";
 let asset, coat;
 export async function loadWolf() {
   asset ??= await new GLTFLoader().loadAsync(
@@ -62,19 +63,100 @@ export function wolf() {
     head.add(detail);
     return detail;
   }
+  const eyes = [],
+    eyeAnchors = [];
+  const sourceSkin = (() => {
+    let m;
+    body.traverse((o) => {
+      if (o.isSkinnedMesh && !m) m = o;
+    });
+    return m;
+  })();
+  sourceSkin.skeleton.update();
   for (const sign of [-1, 1]) {
-    headDetail(
-      [sign * 9.8, 65.8, 49.2],
-      new THREE.SphereGeometry(1.05, 8, 5),
-      "#25231d",
-      [0.55, 0.52, 1],
+    const origin = new THREE.Vector3(sign * 45, 63.2, 56.0).applyMatrix4(
+        body.matrixWorld,
+      ),
+      direction = new THREE.Vector3(-sign, 0, 0).transformDirection(
+        body.matrixWorld,
+      );
+    const hits = new THREE.Raycaster(origin, direction).intersectObject(
+      sourceSkin,
+      false,
     );
-    headDetail(
-      [sign * 10.25, 65.9, 49.7],
-      new THREE.SphereGeometry(0.35, 6, 4),
-      "#b89a47",
+    const point =
+      hits[0]?.point.clone() ||
+      new THREE.Vector3(sign * 10, 63.2, 56.0).applyMatrix4(body.matrixWorld);
+    const outward =
+      hits[0]?.face?.normal
+        .clone()
+        .applyMatrix3(
+          new THREE.Matrix3().getNormalMatrix(sourceSkin.matrixWorld),
+        )
+        .normalize() ||
+      new THREE.Vector3(sign, 0, 0).transformDirection(body.matrixWorld);
+    const surfacePoint = point.clone();
+    point.addScaledVector(outward, 0.02);
+    const eye = new THREE.Group();
+    eye.name = sign < 0 ? "Wolf eye left" : "Wolf eye right";
+    head.add(eye);
+    eye.position.copy(point.applyMatrix4(head.matrixWorld.clone().invert()));
+    const headRotation = new THREE.Quaternion();
+    head.getWorldQuaternion(headRotation);
+    const look = new THREE.Quaternion().setFromUnitVectors(
+      new THREE.Vector3(0, 0, 1),
+      outward,
     );
+    eye.quaternion.copy(headRotation.invert().multiply(look));
+    const shape = new THREE.Shape();
+    shape.moveTo(-2.4, 0);
+    shape.quadraticCurveTo(-0.7, 1.35, 2.4, 0.05);
+    shape.quadraticCurveTo(0.8, -1, -2.4, 0);
+    const lid = new THREE.Mesh(
+      new THREE.ShapeGeometry(shape),
+      new THREE.MeshBasicMaterial({ color: "#231e19", side: THREE.DoubleSide }),
+    );
+    eye.add(lid);
+    const iris = new THREE.Mesh(
+      new THREE.CircleGeometry(0.9, 20),
+      new THREE.MeshBasicMaterial({ color: "#c89843" }),
+    );
+    iris.scale.set(0.8, 1, 1);
+    iris.position.set(0.25, 0, 0.12);
+    eye.add(iris);
+    const pupil = new THREE.Mesh(
+      new THREE.CircleGeometry(0.49, 16),
+      new THREE.MeshBasicMaterial({ color: "#151917" }),
+    );
+    pupil.scale.x = 0.62;
+    pupil.position.set(0.26, 0, 0.2);
+    eye.add(pupil);
+    const glint = new THREE.Mesh(
+      new THREE.CircleGeometry(0.22, 12),
+      new THREE.MeshBasicMaterial({ color: "#fffbe7" }),
+    );
+    glint.position.set(0.04, 0.32, 0.25);
+    eye.add(glint);
+    eyes.push(eye);
+    if (hits[0]?.face) {
+      const face = hits[0].face,
+        a = sourceSkin.getVertexPosition(face.a, new THREE.Vector3()),
+        b = sourceSkin.getVertexPosition(face.b, new THREE.Vector3()),
+        c = sourceSkin.getVertexPosition(face.c, new THREE.Vector3()),
+        local = surfacePoint
+          .clone()
+          .applyMatrix4(sourceSkin.matrixWorld.clone().invert());
+      const weights = THREE.Triangle.getBarycoord(
+        local,
+        a,
+        b,
+        c,
+        new THREE.Vector3(),
+      );
+      eyeAnchors.push({ eye, indices: [face.a, face.b, face.c], weights });
+    }
   }
+  const fur = createWolfFur(body);
   const skins = [];
   body.traverse((o) => {
     if (o.isSkinnedMesh) skins.push(o);
@@ -143,13 +225,34 @@ export function wolf() {
   const mixer = new THREE.AnimationMixer(body),
     actions = {};
   for (const clip of asset.animations) {
-    const action = mixer.clipAction(clip);
+    const upperCharge = ["ChargeLight", "ChargeHeavy"].includes(clip.name);
+    const playClip = upperCharge
+      ? new THREE.AnimationClip(
+          clip.name,
+          clip.duration,
+          clip.tracks.filter(
+            (t) => !/UpperArm|ForeArm|Hand|Leg|Foot|Hip/.test(t.name),
+          ),
+        )
+      : clip;
+    const action = mixer.clipAction(playClip);
     actions[clip.name] = action;
     if (!["Idle", "Walk", "Run"].includes(clip.name)) {
       action.setLoop(THREE.LoopOnce, 1);
       action.clampWhenFinished = true;
     }
   }
+  const chargeStride = mixer.clipAction(
+    new THREE.AnimationClip(
+      "ChargeStride",
+      actions.Walk.getClip().duration,
+      actions.Walk.getClip().tracks.filter((t) =>
+        /UpperArm|ForeArm|Hand|Leg|Foot|Hip/.test(t.name),
+      ),
+    ),
+  );
+  let strideWeight = 0;
+  chargeStride.play().setEffectiveWeight(0);
   const result = {
     root,
     body,
@@ -162,6 +265,8 @@ export function wolf() {
     legs: [],
     tail: body.getObjectByName("b_Tail01_012"),
     previousAir: false,
+    eyes,
+    fur,
     footfalls: [],
     landing: 0,
     lastAttackPhase: 0,
@@ -181,6 +286,39 @@ export function wolf() {
     if (previous && previous !== next) previous.crossFadeTo(next, fade, false);
     result.state = nextState;
   }
+  result.updateDetails = () => {
+    root.updateMatrixWorld(true);
+    sourceSkin.skeleton.update();
+    for (const anchor of eyeAnchors) {
+      const points = anchor.indices.map((i) =>
+        sourceSkin
+          .getVertexPosition(i, new THREE.Vector3())
+          .applyMatrix4(sourceSkin.matrixWorld),
+      );
+      const normal = THREE.Triangle.getNormal(...points, new THREE.Vector3());
+      const p = points[0]
+        .clone()
+        .multiplyScalar(anchor.weights.x)
+        .addScaledVector(points[1], anchor.weights.y)
+        .addScaledVector(points[2], anchor.weights.z)
+        .addScaledVector(normal, 0.02);
+      anchor.eye.position.copy(
+        p.applyMatrix4(head.matrixWorld.clone().invert()),
+      );
+      const headRotation = new THREE.Quaternion();
+      head.getWorldQuaternion(headRotation);
+      anchor.eye.quaternion.copy(
+        headRotation
+          .invert()
+          .multiply(
+            new THREE.Quaternion().setFromUnitVectors(
+              new THREE.Vector3(0, 0, 1),
+              normal,
+            ),
+          ),
+      );
+    }
+  };
   result.animate = ({
     dt,
     speed,
@@ -190,24 +328,36 @@ export function wolf() {
     combo = 1,
     turnDelta = 0,
     verticalVelocity = 0,
+    attackClip = null,
+    charge = null,
+    voice = null,
+    landing = 0,
   }) => {
-    if (result.previousAir && !air) result.landing = 0.18;
+    if (result.previousAir && !air) result.landing = 0.26;
     result.previousAir = air;
     result.landing = Math.max(0, result.landing - dt);
     const state =
       attack > 0
-        ? ["", "Thrust", "Sweep", "Finish"][combo]
+        ? attackClip || ["", "Thrust", "Sweep", "Finish"][combo]
         : dash
           ? "Dodge"
           : air
-            ? "Jump"
-            : result.landing > 0
-              ? "Land"
-              : speed > 6.2
-                ? "Run"
-                : speed > 0.18
-                  ? "Walk"
-                  : "Idle";
+            ? verticalVelocity >= -0.25
+              ? "JumpRise"
+              : "JumpFall"
+            : charge
+              ? charge.kind === "heavy"
+                ? "ChargeHeavy"
+                : "ChargeLight"
+              : voice && speed < 0.6
+                ? voice.clip
+                : result.landing > 0
+                  ? "Land"
+                  : speed > 6.2
+                    ? "Run"
+                    : speed > 0.18
+                      ? "Walk"
+                      : "Idle";
     const restartAttack =
       attack > 0 &&
       state === result.state &&
@@ -223,15 +373,63 @@ export function wolf() {
       action.setEffectiveTimeScale(
         THREE.MathUtils.clamp(speed / 3.1, 0.8, 2.4),
       );
-    const before=action.time/action.getClip().duration;
+    strideWeight = THREE.MathUtils.damp(
+      strideWeight,
+      charge && speed > 0.18 && !air && attack <= 0 ? 1 : 0,
+      14,
+      dt,
+    );
+    chargeStride
+      .setEffectiveWeight(strideWeight)
+      .setEffectiveTimeScale(THREE.MathUtils.clamp(speed / 2.45, 0.25, 1.5));
+    const before = action.time / action.getClip().duration;
     mixer.update(dt);
-    const after=action.time/action.getClip().duration;
-    result.footfalls=[];
-    if((state==="Walk"||state==="Run")&&speed>.3&&!air){const contacts=state==="Walk"?[.17,.67]:[.53,.95];for(let i=0;i<contacts.length;i++){const phase=contacts[i];if((after>=before&&phase>before&&phase<=after)||(after<before&&(phase>before||phase<=after))){root.updateMatrixWorld(true);const foot=body.getObjectByName(i?"b_RightHand_08":"b_LeftHand_011");const p=foot.getWorldPosition(new THREE.Vector3());p.y=root.position.y+.015;result.footfalls.push(p);}}}
+    const after = action.time / action.getClip().duration;
+    result.footfalls = [];
+    if ((state === "Walk" || state === "Run") && speed > 0.3 && !air) {
+      const contacts = state === "Walk" ? [0.17, 0.67] : [0.53, 0.95];
+      for (let i = 0; i < contacts.length; i++) {
+        const phase = contacts[i];
+        if (
+          (after >= before && phase > before && phase <= after) ||
+          (after < before && (phase > before || phase <= after))
+        ) {
+          root.updateMatrixWorld(true);
+          const foot = body.getObjectByName(
+            i ? "b_RightHand_08" : "b_LeftHand_011",
+          );
+          const p = foot.getWorldPosition(new THREE.Vector3());
+          p.y = root.position.y + 0.015;
+          result.footfalls.push(p);
+        }
+      }
+    }
     if (attack > 0) {
       action.time = attack * action.getClip().duration;
       mixer.update(0);
     }
+    if (air && attack <= 0 && !dash) {
+      const phase =
+        state === "JumpRise"
+          ? THREE.MathUtils.clamp(1 - verticalVelocity / 7.7, 0.05, 0.95)
+          : THREE.MathUtils.clamp(-verticalVelocity / 7.7, 0.05, 0.95);
+      action.time = phase * action.getClip().duration;
+      mixer.update(0);
+    }
+    if (charge && attack <= 0 && !air) {
+      action.time =
+        Math.min(0.95, 0.2 + charge.ratio * 0.75) * action.getClip().duration;
+      mixer.update(0);
+    }
+    if (voice && state === voice.clip) {
+      action.time = voice.phase * action.getClip().duration;
+      mixer.update(0);
+    }
+    const blink = Math.pow(Math.max(0, Math.cos(mixer.time * 1.05 + 1.2)), 70);
+    for (const eye of eyes)
+      eye.scale.y = Math.max(0.08, 1 - blink * (charge ? 0.65 : 0.91));
+    fur.update(mixer.time, speed);
+    result.updateDetails();
     result.lastAttackPhase = attack;
     // Modest secondary leaning follows steering, not the animation's foot contacts.
     body.rotation.z = THREE.MathUtils.damp(

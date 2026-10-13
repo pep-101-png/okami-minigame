@@ -33,17 +33,23 @@ npm run dev
 
 - **WASD:** move relative to the fixed camera. **Shift:** run.
 - **Space:** jump. **K:** directional dodge.
-- **J / left click:** quick thrust → turning sweep → lunging finish. Press again during a strike to queue the next; startup and recovery permit dodge cancellation.
+- **Tap left click / J:** quick thrust → turning sweep → lunging finish. Hold and release for a charged Dawn Thrust; charging longer increases its damage.
+- **Tap right click / L:** Moon Arc heavy sweep. Hold and release for charged Sunbreak, a wider heavy strike with its own animation. Right click does not open the browser menu in the game canvas.
+- **Left click / J while jumping:** Falling Star aerial dive.
+- **B:** loud Guardian Bark, stunning nearby forward spirits for 1.65 seconds; six-second cooldown. Cover blocks the stun.
+- **V:** selected vocal sound. Choose growl, soft bark, or howl from the pause menu. Damage produces a whimper.
 - **E:** talk, collect a nearby windflower, or offer flowers at the northern shrine.
 - **Mouse wheel:** camera zoom. **Escape:** pause. **M / sound button:** mute sound.
 
 Talk to Hana, collect three windflowers around the village, then offer them at the northern shrine for a vitality upgrade. The village is safe. Follow the east road to the grove and restore its five restless spirits; enemies wind up their attacks and stagger when hit. You can continue exploring after victory or retry after defeat without reloading the page.
 
-The local model, textures, and original synthesized audio need no external requests during play. Audio starts only after a player gesture. A desktop browser with WebGL 2 is required.
+The wolf has visible amber-and-ink eyes that follow the animated face, sparse silky fur wisps, and blossoms/leaves trailing behind during running. Jumping uses separate rise, fall, and landing poses; charging while moving layers leg animation under the windup.
+
+The local model, textures, and original synthesized audio (including stylized canine vocals) need no external requests during play. Audio starts only after a player gesture. A desktop browser with WebGL 2 is required.
 
 ## Development and checks
 
-`npm run build` creates the production build. `npm run preview -- --port 4173` serves it. In a second terminal, `npm run test:smoke` runs the browser integration suite. On a machine without installed Chromium, run `npx playwright install chromium` first. See [validation instructions](tools/VALIDATION.md).
+`npm run build` creates the production build. `npm run preview -- --port 4173` serves it. In a second terminal, `npm run test:smoke` runs the browser integration suite. On a machine without installed Chromium, run `npx playwright install chromium` first. Use `npm run test:wolf` for the charged attack, bark, voice, foliage, eye, fur and aerial-attack checks. See [validation instructions](tools/VALIDATION.md).
 
 The model adaptation can be rebuilt with Blender 4.3.2:
 
@@ -55,7 +61,8 @@ The script verifies its locally included source binary's checksum before import.
 
 ## Modules
 
-- `src/wolf.js`, `src/wolf-paint.js`, `src/animation.js`: local model loading, painted atlas, skin outlines, action blending, contact-driven footfalls and mouth-held spear.
+- `src/wolf.js`, `src/wolf-paint.js`, `src/wolf-fur.js`, `src/animation.js`: local model loading, painted atlas, skin outlines, action blending, contact-driven footfalls, face tracking, silk wisps and mouth-held spear.
+- `src/wolf-abilities.js`: hold/release charges, bark stun/cooldown, vocal options, and running foliage.
 - `src/combat.js`, `src/game.js`: attack windows, swept hits, input queues, dodge cancellation, movement, collision, enemy behavior and game lifecycle.
 - `src/models.js`, `src/enemy.js`: articulated reed sentinels and their animation/death state.
 - `src/effects.js`, `src/audio.js`: bounded painted impact/trail/death effects and original WebAudio cues.

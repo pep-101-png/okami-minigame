@@ -107,3 +107,7 @@ Work through these seven priorities in the user's order. The user authorized aut
 ## Autonomous run implementation notes
 
 The latest run implements movement/action blending, 3-stage combat windows and cancels, articulated enemy attacks and staged deaths, original sound/painted effects, richer town surfaces/NPCs, and a flower/shrine activity. See the build log and validation report for what was actually checked. These notes do not mark all visual goals as artistically accepted.
+
+## Wolf-focused feature pass
+
+Implemented for testing: visible animated eyes; growl/soft-bark/howl options and damage whimper; B bark stun; flowers/leaves during running; hold/release charged normal and heavy attacks; distinct right-click heavy animation; aerial dive; rise/fall/landing poses; sparse animated silk fur. Player feedback still determines the next anatomy/style and animation polish.

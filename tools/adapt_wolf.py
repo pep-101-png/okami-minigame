@@ -68,6 +68,34 @@ def pose(name,t):
    global_rotate(B(side+'Leg01'),(1,0,0),wind*-.10+drive*.13)
   if name=='Sweep':
    global_rotate(B('LeftUpperArm'),(0,0,1),yaw*-.15);global_rotate(B('RightUpperArm'),(0,0,1),yaw*-.15)
+ elif name in ['ChargedThrust','HeavyArc','ChargedHeavy','AirStrike']:
+  contact={'ChargedThrust':.44,'HeavyArc':.51,'ChargedHeavy':.52,'AirStrike':.49}[name]
+  smooth=lambda a,b,x:(lambda u:u*u*(3-2*u))(max(0,min(1,(x-a)/(b-a))))
+  ready=math.sin(min(t/(contact-.15),1)*math.pi/2)*(1-smooth(contact-.15,contact,t))
+  drive=smooth(contact-.15,contact,t)*(1-smooth(contact+.17,1,t))
+  if name=='ChargedThrust':
+   global_rotate(chest,(1,0,0),ready*.22-drive*.19);global_rotate(neck,(1,0,0),-ready*.12+drive*.1);global_rotate(back,(1,0,0),ready*.08-drive*.1)
+  elif name in ['HeavyArc','ChargedHeavy']:
+   twist=math.sin((t-.17)*math.pi*2)*(.85 if name=='HeavyArc' else 1.15)*envelope
+   global_rotate(hip,(0,0,1),twist*.24);global_rotate(chest,(0,0,1),twist*.5);global_rotate(neck,(0,0,1),twist*.3);global_rotate(back,(0,0,1),twist*.32)
+   global_rotate(head,(1,0,0),ready*-.16+drive*.22)
+  else:
+   global_rotate(chest,(1,0,0),-.35*envelope);global_rotate(back,(1,0,0),-.15*envelope);global_rotate(neck,(1,0,0),-.18*envelope)
+  hip.location=hip.bone.matrix_local.to_quaternion().inverted()@Vector((0,0,-ready*(4 if name=='ChargedHeavy' else 2)))
+  for side in ['Left','Right']:
+   global_rotate(B(side+'UpperArm'),(1,0,0),ready*-.22+drive*.30);global_rotate(B(side+'ForeArm'),(1,0,0),ready*.28-drive*.10)
+   global_rotate(B(side+'Leg01'),(1,0,0),ready*.20-drive*.17);global_rotate(B(side+'Leg02'),(1,0,0),ready*-.25)
+ elif name in ['ChargeLight','ChargeHeavy']:
+  weight=t*t*(3-2*t);global_rotate(chest,(1,0,0),weight*.15);global_rotate(neck,(1,0,0),-weight*.12);global_rotate(head,(1,0,0),weight*-.08)
+  hip.location=hip.bone.matrix_local.to_quaternion().inverted()@Vector((0,0,-weight*(3.4 if name=='ChargeHeavy' else 1.5)))
+  for side in ['Left','Right']:global_rotate(B(side+'UpperArm'),(1,0,0),weight*-.08);global_rotate(B(side+'ForeArm'),(1,0,0),weight*.18)
+ elif name in ['Bark','Growl','Howl','Hurt']:
+  pulse=math.sin(t*math.pi);global_rotate(neck,(1,0,0),pulse*({'Bark':.16,'Growl':-.10,'Howl':.45,'Hurt':-.15}[name]));global_rotate(head,(1,0,0),pulse*({'Bark':.13,'Growl':-.08,'Howl':.3,'Hurt':.15}[name]));global_rotate(chest,(1,0,0),pulse*.03)
+ elif name in ['JumpRise','JumpFall']:
+  tuck=t if name=='JumpRise' else 1-t
+  global_rotate(chest,(1,0,0),-.1*tuck);global_rotate(back,(1,0,0),.045*tuck);global_rotate(neck,(1,0,0),.04*tuck)
+  for side in ['Left','Right']:
+   global_rotate(B(side+'UpperArm'),(1,0,0),-.40*tuck);global_rotate(B(side+'ForeArm'),(1,0,0),.62*tuck);global_rotate(B(side+'Leg01'),(1,0,0),.34*tuck);global_rotate(B(side+'Leg02'),(1,0,0),-.55*tuck)
  elif name in ['Jump','Dodge','Land']:
   crouch=envelope*(.7 if name=='Land' else 1)
   global_rotate(chest,(1,0,0),-.09*crouch);global_rotate(back,(1,0,0),.07*crouch)
@@ -75,7 +103,7 @@ def pose(name,t):
    global_rotate(B(side+'UpperArm'),(1,0,0),-.30*crouch);global_rotate(B(side+'ForeArm'),(1,0,0),.50*crouch);global_rotate(B(side+'Leg01'),(1,0,0),.22*crouch);global_rotate(B(side+'Leg02'),(1,0,0),-.34*crouch)
   if name=='Land':hip.location=hip.bone.matrix_local.to_quaternion().inverted()@Vector((0,0,-3*crouch))
  for i,token in enumerate(['Tail01','Tail02','Tail03']):global_rotate(B(token),(0,0,1),math.sin(t*math.pi*2-i*.6)*.035*envelope)
-for name,duration in [('Thrust',.46),('Sweep',.62),('Finish',.86),('Jump',.65),('Dodge',.28),('Land',.22)]:
+for name,duration in [('Thrust',.46),('Sweep',.62),('Finish',.86),('Jump',.65),('Dodge',.28),('Land',.28),('JumpRise',.42),('JumpFall',.36),('ChargedThrust',.82),('HeavyArc',.78),('ChargedHeavy',1.08),('AirStrike',.74),('ChargeLight',.35),('ChargeHeavy',.42),('Bark',.55),('Growl',.9),('Howl',1.7),('Hurt',.45)]:
  action=bpy.data.actions.new(name);rig.animation_data.action=action;frames=round(duration*fps)
  for f in range(frames+1):
   pose(name,f/frames)

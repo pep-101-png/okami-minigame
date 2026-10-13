@@ -78,5 +78,6 @@ window.review.sample = (name, seconds) => {
   action.reset().setEffectiveWeight(1).play();
   action.time = seconds;
   model.mixer.update(0);
+  model.updateDetails?.();
   painterly.render();
 };

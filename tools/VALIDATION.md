@@ -13,3 +13,7 @@ The suite writes a unique timestamped directory under the ignored `.test-artifac
 Coverage includes local skinned-model loading, useful scene pixels, finite articulated animation samples, real keyboard movement and action events, a live-frame animation check, collisions, NPC dialogue, village enemy leashing, buffered three-hit combat, directional hit geometry, enemy attack damage, defeat/restart, victory/continued exploration, flower collection/shrine offering, sound mute, resizing, useful startup errors when WebGL is blocked, and absence of JavaScript errors or external asset requests.
 
 The harness pauses requestAnimationFrame only while applying reproducible fixed steps through the actual Game.update loop. It resumes real rendering for visual evidence and live-frame checks. The only intentional browser error occurs in a separate tab where WebGL is deliberately disabled.
+
+## Wolf feature suite
+
+Run `npm run test:wolf` against the same production preview. It tests physical left/right mouse holds and releases, charged damage, heavy arcs, moving while charging, dodge cancellation, bark direction/cover/cooldown, finite nonzero vocal PCM buffers, running foliage lifetime, jump rise/fall and aerial recovery, face meshes, silk geometry and the new authored clips. Reports are saved with a `wolf-` prefix.
