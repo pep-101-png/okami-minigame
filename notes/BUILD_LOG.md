@@ -77,3 +77,5 @@ Visual/testing revisions corrected buried/misaligned eyes, reversed fur texture 
 Final production build passed. Final checks: **20/20 gameplay regressions +18/18 wolf feature checks =38passed,0failed**. Reports are `VALIDATION_REPORT.json` and `WOLF_FEATURE_REPORT.json`. New test coverage includes physical left/right hold-release events, actual charged damage/geometry, bark direction/cover/cooldown, finite nonzero vocal waveforms, foliage lifetime, charge cancellation and movement, aerial recovery and finite animation tracks.
 
 Artistic quality and vocal realism remain subject to player feedback; the vocals are generated locally, not recordings of a real wolf.
+
+Wolf feature update `b815b33` published successfully at **13 October 2026,18:07:57 Australia/Sydney (AEDT)** /07:07:57UTC. The testable download is saved on `sunward-minigame`.
