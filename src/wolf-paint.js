@@ -59,7 +59,7 @@ export function wolfPaint(source, geometry) {
           hit.uv.x * 1024,
           (source.flipY ? 1 - hit.uv.y : hit.uv.y) * 1024,
         );
-        if (previous && uv.distanceTo(previous) < 80) {
+        if (previous && uv.distanceTo(previous) < 25) {
           ctx.strokeStyle = "#b92f2b";
           ctx.lineCap = "round";
           ctx.lineWidth =

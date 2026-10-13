@@ -12,47 +12,25 @@ for o in list(bpy.data.objects):
  if o.name.startswith('Icosphere'):bpy.data.objects.remove(o,do_unlink=True)
 rig=next(o for o in bpy.data.objects if o.type=='ARMATURE');fox=next(o for o in bpy.data.objects if o.type=='MESH')
 rig.name='SunwardWolfRig';fox.name='PaintedWolf'
-# Refine the fox source into the wolf interpretation without changing its skin bind.
-# The legs and skeleton are preserved, so the artist's planted locomotion remains intact.
+# Build a new connected anatomical surface; source mesh supplies rig weight correspondence.
+exec(compile(open('tools/sculpt_wolf.py').read(),'tools/sculpt_wolf.py','exec'))
+# Add shoulder blades as real parent controls while preserving limb rest matrices.
+bpy.context.view_layer.objects.active=rig
+bpy.ops.object.mode_set(mode='EDIT')
+for side,sign in [('Left',1),('Right',-1)]:
+ scap=rig.data.edit_bones.new('b_'+side+'Scapula')
+ scap.head=(sign*7,-13,53);scap.tail=(sign*7,-21,47)
+ scap.parent=next(b for b in rig.data.edit_bones if 'Spine02' in b.name)
+ arm=next(b for b in rig.data.edit_bones if side+'UpperArm' in b.name);arm.parent=scap
+mane=rig.data.edit_bones.new('b_ManeFlow');mane.head=(0,-30,62);mane.tail=(0,-10,55)
+mane.parent=next(b for b in rig.data.edit_bones if 'Neck' in b.name)
+bpy.ops.object.mode_set(mode='OBJECT')
+vg=fox.vertex_groups.new(name='b_ManeFlow')
 for v in fox.data.vertices:
- x,y,z=v.co
- if y>43: # reduce the very large fox tail, keeping a tapered flowing shape
-  v.co.x*=.72
-  centre=52-(y-40)*.47
-  v.co.z=centre+(z-centre)*.73
- elif -25<y<30 and z>34: # wider chest, tucked abdomen, level upper silhouette
-  v.co.x*=1.02
-  tuck=math.exp(-((y-10)/16)**2)*math.exp(-((z-35)/11)**2)*5
-  v.co.z+=tuck
- if y<-25 and z>70:v.co.z=70+(z-70)*.70 # pointed, slightly shorter ears
-# Broader muzzle and strong shoulder line, narrower loin: a lean canine silhouette.
-for v in fox.data.vertices:
- x,y,z=v.co
- if y < -45 and 46 < z < 65: v.co.x *= 1.22
- if -28 < y < -6 and 38 < z < 61: v.co.x *= 1.16
- if 4 < y < 25 and 35 < z < 58: v.co.x *= .91
-# Sculpt an arched shoulder line and rounded neck/haunch surfaces rather than a boxy flank.
-for v in fox.data.vertices:
- x,y,z=v.co
- if -31<y<30 and z>32:
-  shoulder=math.exp(-((y+15)/13)**2)
-  v.co.z += 2.8*shoulder*math.exp(-((z-56)/15)**2) - 1.7*(abs(x)/18)**1.5*math.exp(-((z-55)/10)**2)
- if -39<y<-17 and z>42: v.co.x*=1.12
-# Round the torso cross section while keeping the tucked waist and long legs.
-for v in fox.data.vertices:
- x,y,z=v.co
- if -27<y<29 and z>34:
-  radius=math.sqrt((x/15.5)**2+((z-47.5)/16.5)**2)
-  if radius>1:
-   v.co.x=x/radius;v.co.z=47.5+(z-47.5)/radius
-# The source has separate vertices for every triangle. Weld shared positions so
-# smooth normals can actually soften the body; UVs remain per face corner.
-bm=bmesh.new();bm.from_mesh(fox.data)
-bmesh.ops.remove_doubles(bm,verts=list(bm.verts),dist=.0001)
-bm.to_mesh(fox.data);bm.free()
-fox.data.update()
-# Ensure shading is clean; low-poly planes are intentional, not overlapping primitives.
-for p in fox.data.polygons:p.use_smooth=p.center.z>30
+ if -32<v.co.y<10 and v.co.z>45 and abs(v.co.x)>12:
+  w=min(.6,(abs(v.co.x)-12)*.25)
+  for g in list(v.groups):fox.vertex_groups[g.group].add([v.index],g.weight*(1-w),'REPLACE')
+  vg.add([v.index],w,'REPLACE')
 # Preserve imported animations. Rename Survey to Idle and export each NLA track once.
 clips={}
 for action in list(bpy.data.actions):
@@ -65,6 +43,39 @@ fps=30;bpy.context.scene.render.fps=fps
 for action in clips.values():
  for fc in action.fcurves:
   for kp in fc.keyframe_points:kp.co.x*=30/24;kp.handle_left.x*=30/24;kp.handle_right.x*=30/24
+# Shoulder glide adds weight transfer above the inherited artist foot cycles.
+for name in ['Walk','Run']:
+ action=clips[name];rig.animation_data.action=action
+ end=round(action.frame_range[1])
+ for f in range(end+1):
+  bpy.context.scene.frame_set(f)
+  for side,shift in [('Left',0),('Right',math.pi)]:
+   pb=rig.pose.bones['b_'+side+'Scapula'];pb.rotation_mode='QUATERNION'
+   pb.rotation_quaternion=Quaternion((0,0,1),math.sin(f/max(1,end)*math.tau+shift)*(.045 if name=='Walk' else .075))
+   pb.keyframe_insert(data_path='rotation_quaternion',frame=f)
+rig.animation_data.action=None
+# A diagonal trot is retimed from the artist walk's limb curves, using measured
+# foot-contact phases; it fills the old abrupt walk-to-gallop speed gap.
+rig.animation_data.action=clips['Walk'];walk_end=float(clips['Walk'].frame_range[1]);samples=[]
+foot_names=['b_LeftHand_011','b_RightHand_08','b_LeftFoot02_018','b_RightFoot02_022'];heights={n:[] for n in foot_names}
+for i in range(61):
+ f=i/60*walk_end;bpy.context.scene.frame_set(int(f),subframe=f-int(f))
+ samples.append({pb.name:(pb.rotation_quaternion.copy(),pb.location.copy(),pb.scale.copy()) for pb in rig.pose.bones})
+ for n in foot_names:heights[n].append(rig.pose.bones[n].head.z)
+phase={n:min(range(60),key=lambda i:heights[n][i])/60 for n in foot_names}
+shifts={'Left':phase['b_LeftFoot02_018']-phase['b_RightHand_08'],'Right':phase['b_RightFoot02_022']-phase['b_LeftHand_011']}
+trot=bpy.data.actions.new('Trot');rig.animation_data.action=trot
+for f in range(round(walk_end)+1):
+ u=f/round(walk_end)
+ for pb in rig.pose.bones:
+  shift=0
+  for side in ['Left','Right']:
+   if side+'Leg' in pb.name or side+'Foot' in pb.name:shift=shifts[side]
+  sample=((u+shift)%1)*60;lo=int(sample);a=sample-lo
+  q,l,sc=samples[lo][pb.name];q2,l2,sc2=samples[lo+1][pb.name]
+  pb.rotation_quaternion=q.slerp(q2,a);pb.location=l.lerp(l2,a);pb.scale=sc.lerp(sc2,a)
+  pb.keyframe_insert(data_path='rotation_quaternion',frame=f);pb.keyframe_insert(data_path='location',frame=f);pb.keyframe_insert(data_path='scale',frame=f)
+clips['Trot']=trot;rig.animation_data.action=None
 # Additional deliberate whole-body clips are authored as key poses then sampled by glTF.
 B=lambda name:next(pb for pb in rig.pose.bones if name in pb.name)
 hip=B('Hip');back=B('Spine01');chest=B('Spine02');neck=B('Neck');head=B('Head')
@@ -91,7 +102,14 @@ def global_rotate(pb,axis,angle):
 def pose(name,t):
  reset();envelope=math.sin(t*math.pi)
  smooth=lambda a,b,x:(lambda u:u*u*(3-2*u))(max(0,min(1,(x-a)/(b-a))))
- if name in ['Thrust','Sweep','Finish']:
+ if name=='Idle':
+  breath=math.sin(t*math.tau)
+  global_rotate(chest,(1,0,0),breath*.012)
+  global_rotate(neck,(1,0,0),-.12+breath*.016)
+  global_rotate(head,(1,0,0),-.035)
+  global_rotate(head,(0,0,1),math.sin(t*math.tau)*.035)
+  hip.location+=hip.bone.matrix_local.to_quaternion().inverted()@Vector((0,0,breath*.2))
+ elif name in ['Thrust','Sweep','Finish']:
   contact={'Thrust':.40,'Sweep':.46,'Finish':.49}[name]
   wind=smooth(0,contact-.14,t)*(1-smooth(contact-.14,contact,t))
   drive=smooth(contact-.14,contact,t)*(1-smooth(.70,1,t))
@@ -186,7 +204,8 @@ def pose(name,t):
    global_rotate(B(side+'UpperArm'),(1,0,0),-.30*crouch);global_rotate(B(side+'ForeArm'),(1,0,0),.50*crouch);global_rotate(B(side+'Leg01'),(1,0,0),.22*crouch);global_rotate(B(side+'Leg02'),(1,0,0),-.34*crouch)
   if name=='Land':hip.location=hip.bone.matrix_local.to_quaternion().inverted()@Vector((0,0,-3*crouch))
  for i,token in enumerate(['Tail01','Tail02','Tail03']):global_rotate(B(token),(0,0,1),math.sin(t*math.pi*2-i*.6)*.035*envelope)
-for name,duration in [('Thrust',.54),('Sweep',.68),('Finish',.90),('Jump',.65),('Dodge',.28),('Land',.28),('JumpRise',.42),('JumpFall',.36),('ChargedThrust',.82),('HeavyArc',.78),('HeavyReturn',.92),('ChargedHeavy',1.08),('AirStrike',.74),('ChargeLight',.35),('ChargeHeavy',.42),('Bark',.55),('Growl',.9),('Howl',1.7),('Hurt',.45)]:
+clips['Idle'].name='SourceSurvey'
+for name,duration in [('Idle',3.2),('Thrust',.54),('Sweep',.68),('Finish',.90),('Jump',.65),('Dodge',.28),('Land',.28),('JumpRise',.42),('JumpFall',.36),('ChargedThrust',.82),('HeavyArc',.78),('HeavyReturn',.92),('ChargedHeavy',1.08),('AirStrike',.74),('ChargeLight',.35),('ChargeHeavy',.42),('Bark',.55),('Growl',.9),('Howl',1.7),('Hurt',.45)]:
  action=bpy.data.actions.new(name);rig.animation_data.action=action;frames=round(duration*fps)
  for f in range(frames+1):
   pose(name,f/frames)

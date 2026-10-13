@@ -29,7 +29,8 @@ export function wolf() {
       o.castShadow = true;
       o.receiveShadow = true;
       const m = paint("#fffaf0");
-      m.map = coat;
+      m.map = o.name.includes("WolfNose") ? null : coat;
+      if (o.name.includes("WolfNose")) m.color.set("#282621");
       m.side = THREE.FrontSide;
       o.material = m;
     }
@@ -80,7 +81,7 @@ export function wolf() {
   })();
   sourceSkin.skeleton.update();
   for (const sign of [-1, 1]) {
-    const origin = new THREE.Vector3(sign * 45, 63.2, 56.0).applyMatrix4(
+    const origin = new THREE.Vector3(sign * 45, 68.0, 49.0).applyMatrix4(
         body.matrixWorld,
       ),
       direction = new THREE.Vector3(-sign, 0, 0).transformDirection(
@@ -301,7 +302,7 @@ export function wolf() {
       : clip;
     const action = mixer.clipAction(playClip);
     actions[clip.name] = action;
-    if (!["Idle", "Walk", "Run"].includes(clip.name)) {
+    if (!["Idle", "Walk", "Trot", "Run"].includes(clip.name)) {
       action.setLoop(THREE.LoopOnce, 1);
       action.clampWhenFinished = true;
     }
@@ -422,11 +423,13 @@ export function wolf() {
                 ? voice.clip
                 : result.landing > 0
                   ? "Land"
-                  : speed > 6.2
+                  : speed > 5.6
                     ? "Run"
-                    : speed > 0.18
-                      ? "Walk"
-                      : "Idle";
+                    : speed > 2.5
+                      ? "Trot"
+                      : speed > 0.18
+                        ? "Walk"
+                        : "Idle";
     const restartAttack =
       attack > 0 &&
       state === result.state &&
@@ -440,6 +443,10 @@ export function wolf() {
     if (state === "Walk")
       action.setEffectiveTimeScale(
         THREE.MathUtils.clamp(speed / 2.45, 0.45, 2.4),
+      );
+    else if (state === "Trot")
+      action.setEffectiveTimeScale(
+        THREE.MathUtils.clamp(speed / 3.1, 0.7, 1.8),
       );
     else if (state === "Run")
       action.setEffectiveTimeScale(
@@ -503,7 +510,7 @@ export function wolf() {
     body.position.y = air
       ? 0
       : THREE.MathUtils.damp(body.position.y, 0, 12, dt);
-    if (!air && attack > 0) {
+    if (!air) {
       body.position.y = 0;
       root.updateMatrixWorld(true);
       sourceSkin.skeleton.update();

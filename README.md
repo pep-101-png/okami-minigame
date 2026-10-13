@@ -1,3 +1,9 @@
+# Wolf-only foundation review branch
+
+This branch opens the isolated wolf viewer rather than the town. See [screenshots and movement preview](notes/foundation/REVIEW.md). Run `npm run dev` or the existing `START-GAME.cmd` launcher to inspect the viewer locally. Build: `npm run build`. Viewer checks: `npm run test:foundation` against a running production preview on port 4173.
+
+The playable game remains on `sunward-minigame`. The game instructions below describe that branch; its full-game test suites are not the selected workflow for this review branch.
+
 # Sunward — The Crimson Guardian
 
 A playable Three.js + Vite town and combat minigame inspired by Japanese painted fantasy art. Explore Windflower Village with a controlled 2.5D camera, talk to villagers, gather windflowers, restore a shrine, and cleanse the eastern spirit grove.

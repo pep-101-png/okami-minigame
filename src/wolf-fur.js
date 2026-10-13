@@ -68,20 +68,20 @@ export function createWolfFur(body, skin) {
   const anchors = [];
   // A broad crown and layered cheek/neck mane, followed by shoulder, ankle and tail streamers.
   for (const sign of [-1, 1]) {
-    for (let i = 0; i < 6; i++)
+    for (let i = 0; i < 4; i++)
       anchors.push([
         "b_Neck_04",
         [sign * (8 + i * 1.5), 62 - i * 2.8, 34 - i * 3.6],
-        0.48 + (i % 3) * 0.11,
-        0.085 + (i % 3) * 0.018,
+        0.25 + (i % 3) * 0.07,
+        0.05 + (i % 3) * 0.012,
         sign * (0.18 + i * 0.055),
         0.04 - i * 0.06,
       ]);
-    for (let i = 0; i < 4; i++)
+    for (let i = 0; i < 3; i++)
       anchors.push([
         "b_Spine02_03",
         [sign * (11 + i * 0.8), 52 - i * 2, 22 - i * 4],
-        0.5 + i * 0.1,
+        0.3 + i * 0.08,
         0.1,
         sign * (0.28 + i * 0.045),
         -0.26 - i * 0.065,
@@ -103,11 +103,11 @@ export function createWolfFur(body, skin) {
       sign * 0.13,
       -0.04,
     ]);
-    for (let i = 0; i < 3; i++)
+    for (let i = 0; i < 2; i++)
       anchors.push([
         "b_Tail02_013",
         [sign * (2 + i), 43 - i * 2, -57 - i * 6],
-        0.6 + i * 0.12,
+        0.38 + i * 0.08,
         0.09,
         sign * 0.18,
         0.01 + i * 0.01,
