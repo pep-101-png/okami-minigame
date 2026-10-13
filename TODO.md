@@ -111,3 +111,18 @@ The latest run implements movement/action blending, 3-stage combat windows and c
 ## Wolf-focused feature pass
 
 Implemented for testing: visible animated eyes; growl/soft-bark/howl options and damage whimper; B bark stun; flowers/leaves during running; hold/release charged normal and heavy attacks; distinct right-click heavy animation; aerial dive; rise/fall/landing poses; sparse animated silk fur. Player feedback still determines the next anatomy/style and animation polish.
+
+## Player review: wolf revision checklist (13 October 2026)
+
+The previous nine-feature build was rejected for insufficient visual/animation quality. This revision is implemented for playtesting; subjective acceptance remains pending.
+
+1. Refine visible eyes: narrower lids, restrained iris/highlight and painted brows.
+2. Replace artificial vocals with local recorded bark/growl/cry cues; prevent the initial bark from disappearing during decoding.
+3. Vary flower scale/color and soften leaf flutter.
+4. Charged normal: low coil into a forepaw-raised pounce, separate windup and recovery.
+5. Heavy: vertical overhead cleaver; charged heavy: deeper ground-breaking version.
+6. Aerial: brief tuck/hang, nose-down spear spike, radial landing impact, dedicated slam audio and shockwaves.
+7. Keep authored knee/hock bends; tuck paws at apex, reach on descent, absorb landing.
+8. Broaden muzzle/shoulders, narrow loin, shorten fox ears, add painted spiral shoulder emblems.
+9. Replace tiny wisps with a substantial layered, ink-edged mane, shoulder/ankle/tail tufts and varied flowing tips, guided by the user's Shiranui reference.
+10. Leaf-shaped spectral spear blade, metal collars, wrapped grip, animated tassels, attack-specific pitch and pale spectral trails.

@@ -69,6 +69,8 @@ export class WolfAbilities {
         this.chargeEffect -= dt;
         if (this.chargeEffect <= 0) {
           this.chargeEffect = 0.14;
+          const weapon = g.player.weaponEndpoints?.();
+          if (weapon) g.effects.spectralWeapon(weapon.tip);
           g.effects.chargeAura(
             g.player.root.position,
             this.chargeRatio,

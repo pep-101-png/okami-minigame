@@ -1,5 +1,5 @@
 {
-  "started": "2026-10-13T06:57:40.673Z",
+  "started": "2026-10-13T08:05:29.185Z",
   "checks": [
     {
       "name": "two visible layered eye meshes are attached outside the head surface",
@@ -8,31 +8,31 @@
         {
           "name": "Wolf eye left",
           "visible": true,
-          "children": 4,
+          "children": 5,
           "scale": [
             1,
-            0.9999999999999991,
+            0.9999999999999918,
             1
           ],
           "world": [
-            0.09698001067110631,
-            1.4614048611725166,
-            10.698406338417845
+            0.10238056920502514,
+            1.4138094120389881,
+            10.683503296480321
           ]
         },
         {
           "name": "Wolf eye right",
           "visible": true,
-          "children": 4,
+          "children": 5,
           "scale": [
             1,
-            0.9999999999999991,
+            0.9999999999999918,
             1
           ],
           "world": [
-            -0.0969800021153885,
-            1.4614048604875065,
-            10.698406338637282
+            -0.11167157087837142,
+            1.4126118839897441,
+            10.684102453363792
           ]
         }
       ]
@@ -80,7 +80,7 @@
         "kind": "heavy",
         "state": "HeavyArc",
         "data": {
-          "name": "HEAVY · MOON ARC",
+          "name": "HEAVY · SKY CLEAVER",
           "clip": "HeavyArc",
           "duration": 0.78,
           "hit": 0.51,
@@ -92,14 +92,14 @@
           "cancel": 0.78,
           "damage": 3,
           "range": 3.5,
-          "arc": 0.05,
+          "arc": 0.6,
           "lunge": 1.8,
           "movement": 0.07,
           "knockback": 1.4,
           "stagger": 0.95,
           "hitStop": 0.068,
           "heavy": true,
-          "sweep": true
+          "sweep": false
         }
       }
     },
@@ -130,20 +130,20 @@
           "state": "ChargeLight",
           "z": 11.20359769747029,
           "q": [
-            3.808927643459744e-8,
-            9.194385753801966e-7,
-            0.13014072890668144,
-            0.9914955452062602
+            2.3988016492547228e-8,
+            9.199483451730084e-7,
+            0.114983942163071,
+            0.9933673604788873
           ]
         },
         "after": {
           "state": "ChargeLight",
           "z": 10.920409485624011,
           "q": [
-            3.0496326503941724e-7,
-            8.734121422038749e-7,
-            0.4139406992987876,
-            0.9103038882164627
+            2.85228820790526e-7,
+            8.790003104477584e-7,
+            0.39337894142428653,
+            0.919376451070862
           ]
         }
       }
@@ -171,38 +171,44 @@
       }
     },
     {
-      "name": "three vocal options and damage whimper synthesize nonempty audio",
+      "name": "recorded canine vocals decode and play through the audible master bus",
       "pass": true,
       "details": {
         "waves": [
           {
-            "seconds": 0.26,
-            "peak": 0.48389726877212524,
-            "rms": 0.1463153801950424,
+            "seconds": 0.47931972789115646,
+            "peak": 0.8438238501548767,
+            "rms": 0.12513512300366594,
             "finite": true
           },
           {
-            "seconds": 0.85,
-            "peak": 0.4543461501598358,
-            "rms": 0.1324166230315113,
+            "seconds": 0.9729024943310658,
+            "peak": 0.9639577865600586,
+            "rms": 0.128971775575144,
             "finite": true
           },
           {
-            "seconds": 1.65,
-            "peak": 0.3478275239467621,
-            "rms": 0.13014304345247554,
+            "seconds": 0.9431065759637188,
+            "peak": 0.841427743434906,
+            "rms": 0.11732704808508074,
             "finite": true
           },
           {
-            "seconds": 0.5500226757369614,
-            "peak": 0.3517107367515564,
-            "rms": 0.129711924722744,
+            "seconds": 0.35011337868480724,
+            "peak": 0.9938821792602539,
+            "rms": 0.21791940296364035,
             "finite": true
           },
           {
-            "seconds": 0.5500226757369614,
-            "peak": 0.3517107367515564,
-            "rms": 0.129711924722744,
+            "seconds": 0.46929705215419504,
+            "peak": 0.9414277076721191,
+            "rms": 0.21100108477524437,
+            "finite": true
+          },
+          {
+            "seconds": 1.1800907029478458,
+            "peak": 0.9002025127410889,
+            "rms": 0.178148994871026,
             "finite": true
           }
         ],
@@ -229,7 +235,7 @@
           }
         ],
         "voice": "Hurt",
-        "voices": 22,
+        "voices": 17,
         "hp": 99
       }
     },
@@ -237,7 +243,7 @@
       "name": "running flowers/leaves emit locally, remain bounded and expire",
       "pass": true,
       "details": {
-        "count": 50,
+        "count": 49,
         "flowers": 15,
         "leaves": 30,
         "limit": 240
@@ -271,19 +277,20 @@
           "kind": "aerial",
           "used": true,
           "state": "AirStrike",
-          "v": -3.3000000000000003
+          "v": 0
         },
         "landed": {
           "y": 0,
-          "landed": true
+          "landed": true,
+          "state": "Land"
         }
       }
     },
     {
-      "name": "silk fur ribbons animate through local time uniforms with bounded geometry",
+      "name": "layered mane has substantial varied geometry and flowing tips",
       "pass": true,
       "details": {
-        "count": 6,
+        "count": 29,
         "finite": true
       }
     },
@@ -366,12 +373,63 @@
       ]
     },
     {
+      "name": "apex pose folds forepaws clear of the ground and keeps limbs beside the body",
+      "pass": true,
+      "details": {
+        "state": "JumpRise",
+        "paws": [
+          [
+            -0.1607120220866787,
+            0.7344910901372543,
+            0.41378073993242204
+          ],
+          [
+            0.163282792508714,
+            0.7356951412633537,
+            0.41674844260154487
+          ]
+        ]
+      }
+    },
+    {
+      "name": "charged pounce and overhead heavy differ substantially from their normal counterparts",
+      "pass": true,
+      "details": {
+        "pounce": 0.08472044945494078,
+        "heavy": 0.3176432379627302
+      }
+    },
+    {
+      "name": "aerial slam damages on landing once and produces its dedicated sound and rings",
+      "pass": true,
+      "details": {
+        "hp": 17,
+        "y": 0,
+        "sounds": [
+          {
+            "name": "slam",
+            "y": 0
+          }
+        ],
+        "rings": 3
+      }
+    },
+    {
+      "name": "stun bark reaches the output bus with measurable energy",
+      "pass": true,
+      "details": {
+        "peak": 0.6864309310913086,
+        "context": "running",
+        "error": null
+      }
+    },
+    {
       "name": "no browser JavaScript/shader failures",
       "pass": true
     }
   ],
   "errors": [],
-  "finished": "2026-10-13T06:57:53.280Z",
-  "passed": 18,
+  "finished": "2026-10-13T08:05:50.498Z",
+  "passed": 22,
   "failed": 0
 }

@@ -1,4 +1,4 @@
-/** Original Web Audio synthesis: all sounds are generated locally. */
+/** Local recorded canine vocals and original synthesized world/weapon sounds. */
 export class AudioController {
   constructor() {
     this.context = this.ctx = null;
@@ -9,6 +9,31 @@ export class AudioController {
     this.voices = 0;
     this.maxVoices = 28;
     this.lastSound = new Map();
+    this.samples = {};
+    this.sampleFiles = {
+      bark: ["bark.ogg"],
+      growl: ["wolf-growl-1.ogg", "wolf-growl-2.ogg"],
+      whimper: ["wolf-hit-1.ogg", "wolf-hit-2.ogg"],
+      howl: ["wolf-howl.ogg"],
+    };
+    this.sampleBytes = Promise.all(
+      Object.entries(this.sampleFiles).map(async ([kind, files]) => [
+        kind,
+        await Promise.all(
+          files.map(async (file) => {
+            const response = await fetch(
+              `${import.meta.env.BASE_URL}audio/${file}`,
+            );
+            if (!response.ok)
+              throw new Error(`Wolf audio could not load: ${file}`);
+            return response.arrayBuffer();
+          }),
+        ),
+      ]),
+    );
+    this.sampleBytes.catch((error) => {
+      this.sampleError = error.message;
+    });
     this.ambientTime = 0;
     this.chimeTime = 16;
     this.unlockGesture = () => {
@@ -52,6 +77,22 @@ export class AudioController {
       }
       if (this.context.state === "suspended") await this.context.resume();
       this.unlocked = this.context.state === "running";
+      if (this.unlocked && !this.samplesReady) {
+        this.samplesReady = this.sampleBytes
+          .then(async (entries) => {
+            for (const [kind, files] of entries)
+              this.samples[kind] = await Promise.all(
+                files.map((bytes) =>
+                  this.context.decodeAudioData(bytes.slice(0)),
+                ),
+              );
+            return true;
+          })
+          .catch((error) => {
+            this.sampleError = error.message;
+            return false;
+          });
+      }
       if (this.unlocked) {
         document.removeEventListener("pointerdown", this.unlockGesture);
         document.removeEventListener("keydown", this.unlockGesture);
@@ -202,79 +243,55 @@ export class AudioController {
   }
 
   vocal(kind, { strong = false, pan = 0 } = {}) {
-    const duration =
-      { bark: 0.26, growl: 0.85, whimper: 0.55, howl: 1.65 }[kind] || 0.26;
-    const buffer = this.context.createBuffer(
-        1,
-        Math.ceil(duration * this.context.sampleRate),
-        this.context.sampleRate,
-      ),
-      data = buffer.getChannelData(0);
-    let phase = 0,
-      seed = 217,
-      brown = 0;
-    for (let i = 0; i < data.length; i++) {
-      const t = i / this.context.sampleRate,
-        u = t / duration;
-      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-      const noise = (seed / 4294967296) * 2 - 1;
-      brown = (brown + noise * 0.05) / 1.05;
-      const f =
-        kind === "growl"
-          ? 78 + 13 * Math.sin(t * 35)
-          : kind === "whimper"
-            ? 460 - 180 * u + 30 * Math.sin(t * 48)
-            : kind === "howl"
-              ? 190 + 160 * Math.sin(u * Math.PI * 0.85) + 6 * Math.sin(t * 38)
-              : 150 - 65 * u;
-      phase += (f / this.context.sampleRate) * Math.PI * 2;
-      const voiced =
-        Math.sin(phase) +
-        0.35 * Math.sin(phase * 2) +
-        0.15 * Math.sin(phase * 3);
-      const gate =
-        kind === "growl"
-          ? 0.65 + 0.35 * Math.sin(t * 45)
-          : kind === "bark"
-            ? Math.pow(1 - u, 0.6)
-            : Math.sin(Math.PI * u);
-      data[i] =
-        (voiced * 0.24 +
-          noise * (kind === "bark" ? 0.2 : 0.04) +
-          brown * (kind === "growl" ? 0.45 : 0.13)) *
-        gate;
+    const clips = this.samples[kind];
+    // A first bark during initial decoding must still sound once decoding finishes.
+    if (!clips?.length) {
+      void this.unlock()
+        .then(() => this.samplesReady)
+        .then((ready) => {
+          if (ready && !this.muted) this.vocal(kind, { strong, pan });
+        });
+      return;
     }
     const source = this.context.createBufferSource();
-    source.buffer = buffer;
-    const filter = this.context.createBiquadFilter();
-    filter.type = "bandpass";
-    filter.Q.value = 0.65;
-    filter.frequency.setValueAtTime(
-      kind === "whimper"
-        ? 1100
-        : kind === "howl"
-          ? 760
-          : kind === "growl"
-            ? 330
-            : 850,
-      this.context.currentTime,
+    source.buffer = clips[Math.floor(Math.random() * clips.length)];
+    source.playbackRate.value = strong ? 0.9 : 0.96 + Math.random() * 0.08;
+    const duration = source.buffer.duration / source.playbackRate.value;
+    // Reserve headroom for important vocals rather than letting footstep voices swallow a bark.
+    const gain = this.context.createGain();
+    const start = this.context.currentTime;
+    gain.gain.setValueAtTime(
+      strong ? 0.95 : kind === "whimper" ? 0.8 : 0.75,
+      start,
     );
-    filter.frequency.exponentialRampToValueAtTime(
-      kind === "whimper" ? 700 : kind === "growl" ? 230 : 520,
-      this.context.currentTime + duration,
+    gain.gain.setValueAtTime(
+      gain.gain.value,
+      start + Math.max(0.01, duration - 0.08),
     );
-    this.connectVoice(
-      source,
-      filter,
-      duration,
-      strong ? 0.9 : kind === "whimper" ? 0.6 : 0.65,
-      { pan, attack: kind === "bark" ? 0.006 : 0.04 },
-    );
+    gain.gain.linearRampToValueAtTime(0, start + duration);
+    const panner = this.context.createStereoPanner();
+    panner.pan.value = pan;
+    source.connect(gain);
+    gain.connect(panner);
+    panner.connect(this.master);
+    this.voices++;
+    source.onended = () => {
+      source.disconnect();
+      gain.disconnect();
+      panner.disconnect();
+      this.voices--;
+    };
+    source.start(start);
   }
 
   play(name, { combo = 1, heavy = false, speed = 0, pan = 0 } = {}) {
-    if (!this.unlocked || this.muted || this.context?.state !== "running")
+    if (this.muted) return false;
+    if (!this.unlocked || this.context?.state !== "running") {
+      void this.unlock().then((ready) => {
+        if (ready) this.play(name, { combo, heavy, speed, pan });
+      });
       return false;
+    }
     const now = this.context.currentTime;
     const interval =
       {
@@ -295,6 +312,19 @@ export class AudioController {
       if (name === "barkStun") {
         this.noise(0.18, 0.18, 420, { endFrequency: 180, type: "lowpass" });
       }
+    } else if (name === "slam") {
+      this.tone(150, 34, 0.38, 0.48, { ...location, attack: 0.002 });
+      this.noise(0.38, 0.55, 1900, {
+        ...location,
+        endFrequency: 180,
+        type: "lowpass",
+        attack: 0.002,
+      });
+      this.noise(0.55, 0.2, 850, {
+        ...location,
+        endFrequency: 120,
+        delay: 0.035,
+      });
     } else if (name === "chargeReady") {
       this.tone(heavy ? 220 : 660, heavy ? 300 : 990, 0.26, 0.08, {
         type: "triangle",

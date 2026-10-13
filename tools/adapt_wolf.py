@@ -21,10 +21,16 @@ for v in fox.data.vertices:
   centre=52-(y-40)*.47
   v.co.z=centre+(z-centre)*.73
  elif -25<y<30 and z>34: # wider chest, tucked abdomen, level upper silhouette
-  v.co.x*=1.10
+  v.co.x*=1.02
   tuck=math.exp(-((y-10)/16)**2)*math.exp(-((z-35)/11)**2)*5
   v.co.z+=tuck
- if y<-25 and z>70:v.co.z=70+(z-70)*.86 # pointed, slightly shorter ears
+ if y<-25 and z>70:v.co.z=70+(z-70)*.70 # pointed, slightly shorter ears
+# Broader muzzle and strong shoulder line, narrower loin: a lean canine silhouette.
+for v in fox.data.vertices:
+ x,y,z=v.co
+ if y < -45 and 46 < z < 65: v.co.x *= 1.22
+ if -28 < y < -6 and 38 < z < 61: v.co.x *= 1.16
+ if 4 < y < 25 and 35 < z < 58: v.co.x *= .91
 fox.data.update()
 # Ensure shading is clean; low-poly planes are intentional, not overlapping primitives.
 for p in fox.data.polygons:p.use_smooth=False
@@ -43,11 +49,26 @@ for action in clips.values():
 # Additional deliberate whole-body clips are authored as key poses then sampled by glTF.
 B=lambda name:next(pb for pb in rig.pose.bones if name in pb.name)
 hip=B('Hip');back=B('Spine01');chest=B('Spine02');neck=B('Neck');head=B('Head')
+# Average the authored walk cycle to obtain a natural neutral posture.
+# Identity rotations erased the artist's knee/hock bends in the old action clips.
+rig.animation_data.action=clips['Walk']
+neutral={}
+for pb in rig.pose.bones:
+ samples=[];locations=[]
+ for f in range(32):
+  bpy.context.scene.frame_set(round(f*clips['Walk'].frame_range[1]/31))
+  q=pb.rotation_quaternion.copy()
+  if samples and q.dot(samples[0])<0:q.negate()
+  samples.append(q);locations.append(pb.location.copy())
+ q=Quaternion(tuple(sum(v[i] for v in samples)/len(samples) for i in range(4)));q.normalize()
+ neutral[pb.name]=(q, sum(locations,Vector())/len(locations))
+rig.animation_data.action=None
 def reset():
- for pb in rig.pose.bones:pb.rotation_mode='QUATERNION';pb.rotation_quaternion=(1,0,0,0);pb.location=(0,0,0);pb.scale=(1,1,1)
+ for pb in rig.pose.bones:
+  pb.rotation_mode='QUATERNION';pb.rotation_quaternion=neutral[pb.name][0];pb.location=neutral[pb.name][1];pb.scale=(1,1,1)
 def global_rotate(pb,axis,angle):
  # Convert an armature-space bend to the bone's actual local axes.
- basis=pb.bone.matrix_local.to_quaternion();local=basis.inverted()@Vector(axis);pb.rotation_quaternion=Quaternion(local,angle)
+ basis=pb.bone.matrix_local.to_quaternion();local=basis.inverted()@Vector(axis);pb.rotation_quaternion=Quaternion(local,angle) @ neutral[pb.name][0]
 def pose(name,t):
  reset();envelope=math.sin(t*math.pi)
  if name in ['Thrust','Sweep','Finish']:
@@ -69,22 +90,33 @@ def pose(name,t):
   if name=='Sweep':
    global_rotate(B('LeftUpperArm'),(0,0,1),yaw*-.15);global_rotate(B('RightUpperArm'),(0,0,1),yaw*-.15)
  elif name in ['ChargedThrust','HeavyArc','ChargedHeavy','AirStrike']:
-  contact={'ChargedThrust':.44,'HeavyArc':.51,'ChargedHeavy':.52,'AirStrike':.49}[name]
   smooth=lambda a,b,x:(lambda u:u*u*(3-2*u))(max(0,min(1,(x-a)/(b-a))))
-  ready=math.sin(min(t/(contact-.15),1)*math.pi/2)*(1-smooth(contact-.15,contact,t))
-  drive=smooth(contact-.15,contact,t)*(1-smooth(contact+.17,1,t))
-  if name=='ChargedThrust':
-   global_rotate(chest,(1,0,0),ready*.22-drive*.19);global_rotate(neck,(1,0,0),-ready*.12+drive*.1);global_rotate(back,(1,0,0),ready*.08-drive*.1)
-  elif name in ['HeavyArc','ChargedHeavy']:
-   twist=math.sin((t-.17)*math.pi*2)*(.85 if name=='HeavyArc' else 1.15)*envelope
-   global_rotate(hip,(0,0,1),twist*.24);global_rotate(chest,(0,0,1),twist*.5);global_rotate(neck,(0,0,1),twist*.3);global_rotate(back,(0,0,1),twist*.32)
-   global_rotate(head,(1,0,0),ready*-.16+drive*.22)
-  else:
-   global_rotate(chest,(1,0,0),-.35*envelope);global_rotate(back,(1,0,0),-.15*envelope);global_rotate(neck,(1,0,0),-.18*envelope)
-  hip.location=hip.bone.matrix_local.to_quaternion().inverted()@Vector((0,0,-ready*(4 if name=='ChargedHeavy' else 2)))
-  for side in ['Left','Right']:
-   global_rotate(B(side+'UpperArm'),(1,0,0),ready*-.22+drive*.30);global_rotate(B(side+'ForeArm'),(1,0,0),ready*.28-drive*.10)
-   global_rotate(B(side+'Leg01'),(1,0,0),ready*.20-drive*.17);global_rotate(B(side+'Leg02'),(1,0,0),ready*-.25)
+  wind=smooth(0,.28,t)*(1-smooth(.30,.44,t));hit=smooth(.30,.44,t)*(1-smooth(.60,1,t))
+  if name=='ChargedThrust': # coil low, then spring with raised forepaws and extended spear
+   global_rotate(back,(1,0,0),wind*.28-hit*.18);global_rotate(chest,(1,0,0),wind*.34-hit*.35)
+   global_rotate(neck,(1,0,0),-wind*.3+hit*.18);global_rotate(head,(1,0,0),-wind*.14+hit*.1)
+   hip.location+=hip.bone.matrix_local.to_quaternion().inverted()@Vector((0,0,-wind*7+hit*3))
+   for side in ['Left','Right']:
+    global_rotate(B(side+'UpperArm'),(1,0,0),-wind*.45-hit*.62);global_rotate(B(side+'ForeArm'),(1,0,0),wind*.72+hit*.3)
+    global_rotate(B(side+'Leg01'),(1,0,0),wind*.42-hit*.5);global_rotate(B(side+'Leg02'),(1,0,0),-wind*.66+hit*.2)
+  elif name in ['HeavyArc','ChargedHeavy']: # vertical overhead chop; no horizontal sweep
+   strength=1.25 if name=='ChargedHeavy' else 1
+   lift=smooth(0,.30,t)*(1-smooth(.32,.52,t));chop=smooth(.32,.52,t)*(1-smooth(.67,1,t))
+   global_rotate(back,(1,0,0),(-lift*.22+chop*.28)*strength)
+   global_rotate(chest,(1,0,0),(-lift*.55+chop*.35)*strength)
+   global_rotate(neck,(1,0,0),(-lift*.82+chop*.68)*strength)
+   global_rotate(head,(1,0,0),-lift*.3+chop*.26)
+   hip.location+=hip.bone.matrix_local.to_quaternion().inverted()@Vector((0,0,lift*3-chop*6))
+   for side in ['Left','Right']:
+    global_rotate(B(side+'UpperArm'),(1,0,0),-lift*.65+chop*.25);global_rotate(B(side+'ForeArm'),(1,0,0),lift*.85+chop*.42)
+    global_rotate(B(side+'Leg01'),(1,0,0),lift*.16+chop*.38);global_rotate(B(side+'Leg02'),(1,0,0),-chop*.58)
+  else: # held tucked corkscrew into nose-down spike, then landing crouch
+   tuck=1-smooth(.18,.45,t);dive=smooth(.18,.45,t)*(1-smooth(.68,1,t))
+   global_rotate(hip,(1,0,0),dive*.65);global_rotate(back,(1,0,0),dive*.24)
+   global_rotate(chest,(1,0,0),dive*.34);global_rotate(neck,(1,0,0),dive*.38)
+   for side in ['Left','Right']:
+    global_rotate(B(side+'UpperArm'),(1,0,0),tuck*.85+dive*.16);global_rotate(B(side+'ForeArm'),(1,0,0),tuck*1.20+dive*.45)
+    global_rotate(B(side+'Leg01'),(1,0,0),-tuck*.70+dive*.36);global_rotate(B(side+'Leg02'),(1,0,0),-tuck*.95-dive*.52)
  elif name in ['ChargeLight','ChargeHeavy']:
   weight=t*t*(3-2*t);global_rotate(chest,(1,0,0),weight*.15);global_rotate(neck,(1,0,0),-weight*.12);global_rotate(head,(1,0,0),weight*-.08)
   hip.location=hip.bone.matrix_local.to_quaternion().inverted()@Vector((0,0,-weight*(3.4 if name=='ChargeHeavy' else 1.5)))
@@ -92,10 +124,13 @@ def pose(name,t):
  elif name in ['Bark','Growl','Howl','Hurt']:
   pulse=math.sin(t*math.pi);global_rotate(neck,(1,0,0),pulse*({'Bark':.16,'Growl':-.10,'Howl':.45,'Hurt':-.15}[name]));global_rotate(head,(1,0,0),pulse*({'Bark':.13,'Growl':-.08,'Howl':.3,'Hurt':.15}[name]));global_rotate(chest,(1,0,0),pulse*.03)
  elif name in ['JumpRise','JumpFall']:
-  tuck=t if name=='JumpRise' else 1-t
-  global_rotate(chest,(1,0,0),-.1*tuck);global_rotate(back,(1,0,0),.045*tuck);global_rotate(neck,(1,0,0),.04*tuck)
+  # Keep knees folded through apex; only reach down during late descent.
+  tuck=(.65+.35*t) if name=='JumpRise' else (1-.45*t)
+  global_rotate(chest,(1,0,0),-.18*tuck);global_rotate(back,(1,0,0),.08*tuck);global_rotate(neck,(1,0,0),.09*tuck)
   for side in ['Left','Right']:
-   global_rotate(B(side+'UpperArm'),(1,0,0),-.40*tuck);global_rotate(B(side+'ForeArm'),(1,0,0),.62*tuck);global_rotate(B(side+'Leg01'),(1,0,0),.34*tuck);global_rotate(B(side+'Leg02'),(1,0,0),-.55*tuck)
+   global_rotate(B(side+'UpperArm'),(1,0,0), .85*tuck);global_rotate(B(side+'ForeArm'),(1,0,0),1.20*tuck)
+   global_rotate(B(side+'Hand'),(1,0,0),-1.35*tuck)
+   global_rotate(B(side+'Leg01'),(1,0,0),-.70*tuck);global_rotate(B(side+'Leg02'),(1,0,0),-1.0*tuck)
  elif name in ['Jump','Dodge','Land']:
   crouch=envelope*(.7 if name=='Land' else 1)
   global_rotate(chest,(1,0,0),-.09*crouch);global_rotate(back,(1,0,0),.07*crouch)

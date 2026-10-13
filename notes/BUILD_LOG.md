@@ -79,3 +79,13 @@ Final production build passed. Final checks: **20/20 gameplay regressions +18/18
 Artistic quality and vocal realism remain subject to player feedback; the vocals are generated locally, not recordings of a real wolf.
 
 Wolf feature update `b815b33` published successfully at **13 October 2026,18:07:57 Australia/Sydney (AEDT)** /07:07:57UTC. The testable download is saved on `sunward-minigame`.
+
+## Wolf feedback revision and spear item 10 — 13 October 2026
+
+Implementation began around 18:40 Sydney AEDT. The prior nine-feature draft was rejected: synthetic/missing vocals, similar attack motions, airborne straight limbs, insufficient anatomy changes and tiny wisps. User supplied a Shiranui illustration and added spear presentation/animation/spectral effects as item 10.
+
+Revisions: averaged artist-authored locomotion to retain a natural neutral limb posture for new actions; cleared stale blending actions; rebuilt charged pounce/overhead cleaver/nose-down aerial poses; revised airborne tuck/reach; recorded bark and licensed canine audio with first-use decode queuing; physical landing-only radial slam with sound/rings/debris; broader muzzle/shoulders and narrow loin/shorter ears; 29 varied ink-edged flowing tufts and spiral emblems; flowers/leaves polish; spectral leaf blade, wrapped grip/collars, animated tassels and trails/flecks.
+
+Multiple screenshot inspections identified and corrected initially straight jump paws, wrong upward dive direction, fur attachment posture and edge-on fur layers. Captured an eight-second model-stage motion loop and refreshed actual-game stills. Production build passed. Final functional checks: general 20/20, wolf 22/22, including output-energy bark, pose difference, apex paw positions and once-only grounded slam damage/audio/rings. No JS/shader/request failures. No claim of artistic perfection or user acceptance.
+
+Implementation and final wolf regression checks finished 13 October 2026 19:06:24 AEDT (08:06:24 UTC), approximately 26 minutes after work began. A final landing-pose check prevents the dive from continuing below the ground. This was an active revision session, not overnight background work.

@@ -81,3 +81,5 @@ window.review.sample = (name, seconds) => {
   model.updateDetails?.();
   painterly.render();
 };
+
+window.review.render = () => painterly.render();

@@ -356,19 +356,15 @@ try {
     return { stun };
   });
   await check(
-    "three vocal options and damage whimper synthesize nonempty audio",
+    "recorded canine vocals decode and play through the audible master bus",
     async () => {
       await reset();
-      const d = await page.evaluate(() => {
+      const d = await page.evaluate(async () => {
         const g = __game,
           sounds = [];
-        const buffers = [],
-          create = g.audio.context.createBuffer.bind(g.audio.context);
-        g.audio.context.createBuffer = (...args) => {
-          const buffer = create(...args);
-          buffers.push(buffer);
-          return buffer;
-        };
+        await g.audio.unlock();
+        await g.audio.samplesReady;
+        const buffers = Object.values(g.audio.samples).flat();
         for (const name of ["barkSoft", "growl", "howl", "whimper"]) {
           g.audio.lastSound.delete(name);
           const before = g.audio.voices;
@@ -380,7 +376,6 @@ try {
         g.input.voice = true;
         g.update(0.01);
         g.damagePlayer(1, g.forward());
-        g.audio.context.createBuffer = create;
         const waves = buffers.map((buffer) => {
           let peak = 0,
             sum = 0,
@@ -408,7 +403,7 @@ try {
       assert(d.sounds.every((s) => s.accepted && s.added > 0));
       assert(
         d.waves.length >= 4 &&
-          d.waves.every((w) => w.finite && w.rms > 0.01 && w.peak < 1),
+          d.waves.every((w) => w.finite && w.rms > 0.01 && w.peak <= 1),
       );
       assert.equal(d.voice, "Hurt");
       assert.equal(d.hp, 99);
@@ -486,18 +481,24 @@ try {
       }));
       assert.equal(d.kind, "aerial");
       assert.equal(d.state, "AirStrike");
-      assert(d.used && d.v < 0);
+      assert(d.used && d.v <= 0);
+      await step(0.16);
+      assert(
+        await page.evaluate(() => __game.velocityY < -9 || __game.aerialLanded),
+      );
       await step(0.4);
       const landed = await page.evaluate(() => ({
         y: __game.player.root.position.y,
         landed: __game.aerialLanded,
+        state: __game.player.state,
       }));
       assert(landed.y === 0 && landed.landed);
+      assert.equal(landed.state, "Land");
       return { d, landed };
     },
   );
   await check(
-    "silk fur ribbons animate through local time uniforms with bounded geometry",
+    "layered mane has substantial varied geometry and flowing tips",
     async () => {
       const d = await page.evaluate(() => ({
         count: __game.player.fur.ribbons.length,
@@ -505,7 +506,7 @@ try {
           [...r.geometry.attributes.position.array].every(Number.isFinite),
         ),
       }));
-      assert(d.count >= 4 && d.finite);
+      assert(d.count >= 25 && d.finite);
       return d;
     },
   );
@@ -542,6 +543,136 @@ try {
         names,
       );
       assert(d.every((c) => c.duration > 0.1 && c.tracks > 10 && c.finite));
+      return d;
+    },
+  );
+  await check(
+    "apex pose folds forepaws clear of the ground and keeps limbs beside the body",
+    async () => {
+      await reset();
+      await page.keyboard.press("Space");
+      await step(0.34);
+      const d = await page.evaluate(() => {
+        const p = __game.player;
+        p.root.updateMatrixWorld(true);
+        const paws = ["b_LeftHand_011", "b_RightHand_08"].map((name) => {
+          const bone = p.body.getObjectByName(name);
+          return bone
+            .getWorldPosition(p.root.position.clone())
+            .sub(p.root.position)
+            .toArray();
+        });
+        return { state: p.state, paws };
+      });
+      assert(d.paws.every((v) => v[1] > 0.45 && Math.abs(v[0]) < 0.4));
+      return d;
+    },
+  );
+  await check(
+    "charged pounce and overhead heavy differ substantially from their normal counterparts",
+    async () => {
+      const d = await page.evaluate(() => {
+        const p = __game.player;
+        const sample = (name, phase) => {
+          p.mixer.stopAllAction();
+          const a = p.actions[name];
+          a.reset().play();
+          a.time = a.getClip().duration * phase;
+          p.mixer.update(0);
+          return ["b_Spine02_03", "b_Neck_04", "b_LeftUpperArm_09"].map((n) =>
+            p.body.getObjectByName(n).quaternion.toArray(),
+          );
+        };
+        const delta = (a, b) =>
+          a.reduce(
+            (sum, q, i) =>
+              sum +
+              Math.min(
+                q.reduce((s, v, k) => s + (v - b[i][k]) ** 2, 0),
+                q.reduce((s, v, k) => s + (v + b[i][k]) ** 2, 0),
+              ),
+            0,
+          );
+        return {
+          pounce: delta(sample("Thrust", 0.26), sample("ChargedThrust", 0.26)),
+          heavy: delta(sample("Sweep", 0.26), sample("HeavyArc", 0.26)),
+        };
+      });
+      assert(d.pounce > 0.03 && d.heavy > 0.15);
+      return d;
+    },
+  );
+  await check(
+    "aerial slam damages on landing once and produces its dedicated sound and rings",
+    async () => {
+      await reset();
+      await page.evaluate(() => {
+        const g = __game;
+        g.player.root.position.set(26, 1.2, 0);
+        g.player.root.rotation.y = 0;
+        g.enemies[0].hp = 20;
+        g.enemies[0].mesh.position.set(26, 0, -1.8);
+        g.enemies[0].stun = 100;
+        g.__slamSounds = [];
+        g.__originalPlay = g.audio.play.bind(g.audio);
+        g.audio.play = (name, ...args) => {
+          if (name === "slam")
+            g.__slamSounds.push({ name, y: g.player.root.position.y });
+          return g.__originalPlay(name, ...args);
+        };
+        g.startSpecialAttack("aerial");
+      });
+      await step(0.1);
+      assert.equal(await page.evaluate(() => __game.enemies[0].hp), 20);
+      await step(0.4);
+      const d = await page.evaluate(() => {
+        const g = __game;
+        const result = {
+          hp: g.enemies[0].hp,
+          y: g.player.root.position.y,
+          sounds: g.__slamSounds,
+          rings: g.effects.items.filter(
+            (p) => p.mesh.geometry.type === "RingGeometry",
+          ).length,
+        };
+        g.audio.play = g.__originalPlay;
+        delete g.__originalPlay;
+        return result;
+      });
+      assert.equal(d.hp, 17);
+      assert.equal(d.y, 0);
+      assert.equal(d.sounds.length, 1);
+      assert.equal(d.sounds[0].y, 0);
+      assert(d.rings >= 3);
+      return d;
+    },
+  );
+  await check(
+    "stun bark reaches the output bus with measurable energy",
+    async () => {
+      await reset();
+      const d = await page.evaluate(async () => {
+        const a = __game.audio;
+        await a.unlock();
+        await a.samplesReady;
+        a.setMuted(false);
+        a.setVolume(0.6);
+        const analyser = a.context.createAnalyser();
+        analyser.fftSize = 1024;
+        a.master.connect(analyser);
+        a.lastSound.delete("barkStun");
+        a.play("barkStun");
+        const wave = new Float32Array(1024);
+        let peak = 0;
+        for (let i = 0; i < 20; i++) {
+          await new Promise((r) => setTimeout(r, 20));
+          analyser.getFloatTimeDomainData(wave);
+          for (const v of wave) peak = Math.max(peak, Math.abs(v));
+        }
+        a.master.disconnect(analyser);
+        return { peak, context: a.context.state, error: a.sampleError || null };
+      });
+      assert(d.peak > 0.035 && d.context === "running" && !d.error);
       return d;
     },
   );

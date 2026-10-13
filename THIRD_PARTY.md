@@ -20,3 +20,9 @@ Changes made for Sunward: adjusted torso/ear/tail proportions; ivory watercolor 
 The reproducible adaptation script and original source binary are in `tools/adapt_wolf.py` and `tools/source/fox-reference.glb`. The script verifies the binary's SHA-256 before importing it. The adapted file is `public/models/sunward-wolf.glb`.
 
 All town geometry, painted procedural surface textures, enemy geometry, UI, effects, and synthesized sound cues are original project content. No commercial Ōkami assets are included.
+
+## Recorded canine audio (wolf revision)
+
+`public/audio/bark.ogg` is a cropped, faded, loudness-normalized excerpt of `4-182395-A-0.wav` from the ESC-10 subset of [ESC-50](https://github.com/karolpiczak/ESC-50). Original recording **Big_dog_bark_01.aiff**, **pgonsilva**, [Freesound 182395](https://freesound.org/people/pgonsilva/sounds/182395/), CC BY; ESC-10 is distributed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). The unmodified dataset excerpt is retained in `tools/source/audio/big-dog.wav`. Source attribution is preserved in `tools/source/audio/ATTRIBUTION.md`. These are recorded dog vocals, not original synthesized vocals or recordings from Ōkami.
+
+The unmodified `wolf-growl-1.ogg`, `wolf-growl-2.ogg`, `wolf-hit-1.ogg`, and `wolf-hit-2.ogg`, plus `wolf-howl.ogg` (renamed from `wolf-die-3.ogg`), come from [Battle for Wesnoth](https://github.com/wesnoth/wesnoth/tree/master/data/core/sounds). **Lari Nieminen (zookeeper)**, GNU GPL v2 or later, per the upstream `copyrights.csv`. The GPL applies to these separately distributed audio assets; its text is included at `public/licenses/wesnoth-audio-GPL-2.txt`. Original Ogg audio is included without content modifications; the game varies playback gain/rate. The howl cue uses a wolf cry recording from that pack. Source filenames and checksums are recorded in the audio attribution file. Attribution does not imply endorsement.

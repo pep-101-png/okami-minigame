@@ -89,6 +89,7 @@ export class Effects {
     this.flowerMap = brushTexture("flower");
     this.trailLast = null;
     this.trailAge = 0;
+    this.spectralAge = 0;
     this.limit = 240;
   }
   add(mesh, life, velocity = new THREE.Vector3(), options = {}) {
@@ -313,12 +314,12 @@ export class Effects {
       const mesh = new THREE.Mesh(
         geometry,
         new THREE.MeshBasicMaterial({
-          color: combo === 3 ? "#f1cf86" : "#e8d8ad",
+          color: combo === 3 ? "#9ae9e0" : "#cfefdd",
           map: this.strokeMap,
           side: THREE.DoubleSide,
           transparent: true,
           depthWrite: false,
-          opacity: combo === 3 ? 0.6 : 0.36,
+          opacity: combo === 3 ? 0.7 : 0.46,
         }),
       );
       this.add(mesh, 0.16, new THREE.Vector3(), { owned: true });
@@ -326,11 +327,28 @@ export class Effects {
     this.trailLast = { tip: tip.clone(), heel: heel.clone(), combo };
     this.trailAge = 0;
   }
+  spectralWeapon(position) {
+    if (this.spectralAge < 0.075) return;
+    this.spectralAge = 0;
+    for (let i = 0; i < 2; i++)
+      this.chip(
+        position,
+        i ? "#efffea" : "#94dfd8",
+        [0.09, 0.035],
+        0.35 + Math.random() * 0.25,
+        new THREE.Vector3(
+          (Math.random() - 0.5) * 0.6,
+          0.35 + Math.random() * 0.3,
+          (Math.random() - 0.5) * 0.6,
+        ),
+        { spin: 0.6, grow: 0.4, opacity: 0.6 },
+      );
+  }
   foliage(position, forward) {
     const flower = new THREE.Mesh(
       this.geometry,
       new THREE.MeshBasicMaterial({
-        color: "#f2a6a8",
+        color: ["#efb4c0", "#fff0db", "#de9baf"][Math.floor(Math.random() * 3)],
         map: this.flowerMap,
         side: THREE.DoubleSide,
         transparent: true,
@@ -343,7 +361,8 @@ export class Effects {
     flower.position.z += (Math.random() - 0.5) * 0.45;
     flower.position.y = 0.035;
     flower.rotation.set(-Math.PI / 2, 0, Math.random() * Math.PI * 2);
-    flower.scale.set(0.38, 0.26, 1);
+    const size = 0.26 + Math.random() * 0.22;
+    flower.scale.set(size, size, 1);
     this.add(flower, 2.1, new THREE.Vector3(), { grow: 0.2 });
     for (let i = 0; i < 2; i++) {
       const leaf = new THREE.Mesh(
@@ -378,7 +397,7 @@ export class Effects {
               (Math.random() - 0.5) * 0.5,
             ),
           ),
-        { spin: 2.5, gravity: 0.35 },
+        { spin: 0.6 + Math.random() * 1.1, gravity: 0.25 },
       );
     }
   }
@@ -454,6 +473,32 @@ export class Effects {
       );
     }
   }
+  slam(position) {
+    this.groundWash(position, "#423c32", 3.3, 0.65);
+    this.groundWash(position, "#f0c46b", 2.5, 0.45);
+    for (let i = 0; i < 3; i++) {
+      const geometry = new THREE.RingGeometry(0.65, 0.73, 48);
+      const mesh = new THREE.Mesh(
+        geometry,
+        new THREE.MeshBasicMaterial({
+          color: i ? "#e9c777" : "#fff4cf",
+          transparent: true,
+          opacity: 0.7,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+        }),
+      );
+      mesh.position.copy(position);
+      mesh.position.y += 0.05 + i * 0.025;
+      mesh.rotation.x = -Math.PI / 2;
+      this.add(mesh, 0.42 + i * 0.08, new THREE.Vector3(), {
+        grow: 4.3,
+        owned: true,
+      });
+    }
+    this.burst(position, 28, "#bdb098");
+    this.landingBloom(position);
+  }
   landingBloom(position) {
     this.dust(position, { count: 9 });
     for (let i = 0; i < 8; i++) {
@@ -485,6 +530,7 @@ export class Effects {
   }
   update(dt) {
     this.trailAge += dt;
+    this.spectralAge += dt;
     if (this.trailAge > 0.1) this.trailLast = null;
     for (let i = this.items.length - 1; i >= 0; i--) {
       const p = this.items[i];

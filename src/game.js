@@ -242,7 +242,7 @@ export class Game {
     if (kind === "aerial") {
       this.aerialUsed = true;
       this.aerialLanded = false;
-      this.velocityY = Math.min(this.velocityY, -2.6);
+      this.velocityY = 0;
       this.audio.play("growl");
     }
     return true;
@@ -582,15 +582,23 @@ export class Game {
       this.audio.play("jump");
     }
     const wasAirborne = root.position.y > 0;
-    this.velocityY -= 21 * dt;
+    if (
+      this.specialAttack === "aerial" &&
+      this.attackTime > 0 &&
+      !this.aerialLanded
+    ) {
+      this.velocityY =
+        this.attackPhase < 0.18 ? 0 : Math.min(this.velocityY, -12);
+    } else this.velocityY -= 21 * dt;
     root.position.y = Math.max(0, root.position.y + this.velocityY * dt);
     if (root.position.y === 0) {
       this.velocityY = 0;
       if (wasAirborne) {
         if (this.specialAttack === "aerial" && !this.aerialLanded) {
           this.aerialLanded = true;
-          this.effects.landingBloom(root.position);
-          this.strike(this.attackPhase);
+          this.effects.slam(root.position);
+          this.audio.play("slam");
+          this.strike(Math.max(0.22, Math.min(0.82, this.attackPhase)));
         }
         this.aerialUsed = false;
         this.landing = 0.16;
@@ -688,11 +696,11 @@ export class Game {
       phase >= data.hit
     ) {
       this.attackBurstPlayed = true;
-      this.effects.landingBloom(this.player.root.position);
-      this.audio.play("barkSoft");
+      this.effects.slam(this.player.root.position);
+      this.audio.play("slam");
     }
     const active = phase >= data.active[0] && previousPhase <= data.active[1];
-    if (active) {
+    if (active && (!data.aerial || this.player.root.position.y < 0.08)) {
       // A few arc samples also keep fast animation frames from skipping victims.
       const a = Math.max(previousPhase, data.active[0]);
       const b = Math.min(phase, data.active[1]);
@@ -715,6 +723,7 @@ export class Game {
     // If the character supplies exact weapon endpoints, prefer the rig pose.
     const endpoints = this.player.weaponEndpoints?.();
     if (endpoints) {
+      this.effects.spectralWeapon(endpoints.tip);
       this.effects.trail(
         endpoints.tip,
         endpoints.heel,

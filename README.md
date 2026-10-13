@@ -45,7 +45,7 @@ Talk to Hana, collect three windflowers around the village, then offer them at t
 
 The wolf has visible amber-and-ink eyes that follow the animated face, sparse silky fur wisps, and blossoms/leaves trailing behind during running. Jumping uses separate rise, fall, and landing poses; charging while moving layers leg animation under the windup.
 
-The local model, textures, and original synthesized audio (including stylized canine vocals) need no external requests during play. Audio starts only after a player gesture. A desktop browser with WebGL 2 is required.
+The local model, textures, and recorded canine vocals and original synthesized weapon/world audio need no external requests during play. Audio starts only after a player gesture. A desktop browser with WebGL 2 is required.
 
 ## Development and checks
 
@@ -71,3 +71,5 @@ The script verifies its locally included source binary's checksum before import.
 - `src/input.js`, `src/camera.js`, `src/main.js`: controls, smooth fixed camera, HUD and startup.
 
 [Development priorities](TODO.md) remain the guide for further iteration. [Build log](notes/BUILD_LOG.md) records actual revisions, interruption and validation; technical success is not a claim of artistic perfection.
+
+Wolf revision controls remain: hold/release left click for the coiled charged pounce, right click for overhead cleaver, hold/release right click for charged ground break, click in the air for tucked spear dive/slam. B is the recorded stun bark; V plays the vocal selected in Pause. The spear has an original spectral leaf blade, animated tassels and pale attack trails. Recorded-audio licenses are listed in Credits and THIRD_PARTY.md.
