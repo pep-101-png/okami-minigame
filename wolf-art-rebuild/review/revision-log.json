@@ -1,0 +1,42 @@
+[
+  {
+    "pass": "r1",
+    "result": "Rejected: separate mane layers read as fins.",
+    "render_sha256": "1ee8994ea0dfee3b07dc8f5256f67896c1e3c575b80756edff6e54772a340ee4"
+  },
+  {
+    "pass": "r2",
+    "result": "Rejected: stock tail deformation produced a broad paddle.",
+    "render_sha256": "76adea0bcec8b322567c31feb38a261ecfc7c27c2aeb693f70e4a0ad75fc33a8"
+  },
+  {
+    "pass": "r3",
+    "result": "Rejected: voxel fusion produced fragmented contours.",
+    "render_sha256": "50661a5e23fcf26d0f063afabd16d402f4d17b68c850dab5ab95825c616d4f23"
+  },
+  {
+    "pass": "r4",
+    "result": "Rejected: surface cleanup removed necessary anatomy.",
+    "render_sha256": "80749ab981563f7b07c657de7036ae4cf798b3cd032044be33581f6b2495b36b"
+  },
+  {
+    "pass": "r5",
+    "result": "Rejected: repaired normals did not resolve voxel fusion.",
+    "render_sha256": "7ff8525800aa356cd7012d27331a0a5cedd86be01c6e04eb2d8b275c183f9aae"
+  },
+  {
+    "pass": "r6",
+    "result": "Selected structural approach: exact fusion preserves the uploaded anatomy.",
+    "render_sha256": "2f11deffe7f15f627bbdf893b8f0e984654d85e1fbad4a81cef31afc47c15b2a"
+  },
+  {
+    "pass": "r7",
+    "result": "Selected: cleaner tail root, fuller curl, clearer surface ornaments.",
+    "render_sha256": "85e78f50c0ef088915736a1944c207639b9f6d1cd94e67bf34a4cddf1f9d5457"
+  },
+  {
+    "pass": "final",
+    "result": "Normal-map seam cleanup, full render and exported rig checks.",
+    "render_sha256": "8c4fa048eea9d9775fdc77995b482cbf4c4f291d2cb1c7c202c502b258252caf"
+  }
+]
