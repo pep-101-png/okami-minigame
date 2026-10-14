@@ -1,0 +1,344 @@
+{
+  "finished_sydney": "2026-10-14T21:49:52.421327+11:00",
+  "unique_model_exports": 10,
+  "approved_idle_animation_preserved": true,
+  "revisions": [
+    {
+      "pass": 1,
+      "asset_sha256": "22cfde3a0a725cd6ece1560ed6258d86d271b59cffcdadb0b98c24b333f29e35",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2060,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_max_vertex_change_metres": 0.2443823952357034,
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.5785791995590515,
+          "edge_spikes_over_3x": 6
+        },
+        "Walk": {
+          "max_edge_stretch": 2.9260717952192725,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 2.288043465679731,
+          "edge_spikes_over_3x": 0
+        },
+        "AirStrike": {
+          "max_edge_stretch": 7.8056172642141,
+          "edge_spikes_over_3x": 43
+        },
+        "Bark": {
+          "max_edge_stretch": 3.7424348901192235,
+          "edge_spikes_over_3x": 2
+        }
+      },
+      "extra_fur_joints": 0,
+      "extra_tail_joints": 0,
+      "review": "Repair continuous limb weights, including ankle ornaments."
+    },
+    {
+      "pass": 2,
+      "asset_sha256": "0d0aadf6cdc57b56f234e22196dd471146f705681185e7c8f69adf314de841f9",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2060,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_max_vertex_change_metres": 0.2443823952357034,
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.5384861307896687,
+          "edge_spikes_over_3x": 7
+        },
+        "Walk": {
+          "max_edge_stretch": 2.9260717952192725,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 2.288043465679731,
+          "edge_spikes_over_3x": 0
+        },
+        "AirStrike": {
+          "max_edge_stretch": 7.8056172642141,
+          "edge_spikes_over_3x": 43
+        },
+        "Bark": {
+          "max_edge_stretch": 3.7424348901192235,
+          "edge_spikes_over_3x": 2
+        }
+      },
+      "extra_fur_joints": 0,
+      "extra_tail_joints": 0,
+      "review": "Bound the running posture and recovery to avoid body collisions."
+    },
+    {
+      "pass": 3,
+      "asset_sha256": "ddea01e285de3c04f466d5ae2e3c2bf693ca1826533d3ccb53775ac98d5811a6",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2060,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_max_vertex_change_metres": 0.2443823952357034,
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 6.874891758386539,
+          "edge_spikes_over_3x": 21
+        },
+        "Walk": {
+          "max_edge_stretch": 5.086903576837466,
+          "edge_spikes_over_3x": 14
+        },
+        "Jump": {
+          "max_edge_stretch": 4.056455505452956,
+          "edge_spikes_over_3x": 17
+        },
+        "AirStrike": {
+          "max_edge_stretch": 7.8056172642141,
+          "edge_spikes_over_3x": 52
+        },
+        "Bark": {
+          "max_edge_stretch": 3.7424348901192235,
+          "edge_spikes_over_3x": 2
+        }
+      },
+      "extra_fur_joints": 0,
+      "extra_tail_joints": 0,
+      "review": "Review lower walking steps; reject an experimental broad root smoothing pass."
+    },
+    {
+      "pass": 4,
+      "asset_sha256": "f2476f2318be165ae5bc69a345d206582ddb86612b30f2ff8ae0eb60960382b6",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2060,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_change_before_preserved_viewer_bindings_metres": 0.2443823952357034,
+      "viewer_idle_bindings": "original approved weights embedded",
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.5384861307896687,
+          "edge_spikes_over_3x": 7
+        },
+        "Walk": {
+          "max_edge_stretch": 2.9260717952192725,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 3.670451835892853,
+          "edge_spikes_over_3x": 1
+        },
+        "AirStrike": {
+          "max_edge_stretch": 7.805629617226368,
+          "edge_spikes_over_3x": 43
+        },
+        "Bark": {
+          "max_edge_stretch": 3.7424346921601885,
+          "edge_spikes_over_3x": 2
+        }
+      },
+      "extra_fur_joints": 0,
+      "extra_tail_joints": 0,
+      "review": "Rebuild a head/shoulder-led jump, retaining the better skin gradients."
+    },
+    {
+      "pass": 5,
+      "asset_sha256": "d18d3cbe641b7d84e7cfc5e3ec47c5ed7d2dc41946bea6ea71c99092acbc1da5",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2060,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_change_before_preserved_viewer_bindings_metres": 0.2443823952357034,
+      "viewer_idle_bindings": "original approved weights embedded",
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.5384861307896687,
+          "edge_spikes_over_3x": 7
+        },
+        "Walk": {
+          "max_edge_stretch": 2.9260717952192725,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 3.670451835892853,
+          "edge_spikes_over_3x": 1
+        },
+        "AirStrike": {
+          "max_edge_stretch": 7.805629617226368,
+          "edge_spikes_over_3x": 43
+        },
+        "Bark": {
+          "max_edge_stretch": 3.7424346921601885,
+          "edge_spikes_over_3x": 2
+        }
+      },
+      "extra_fur_joints": 0,
+      "extra_tail_joints": 0,
+      "review": "Apply the same mechanics to Jump Rise, Jump Fall and Land."
+    },
+    {
+      "pass": 6,
+      "asset_sha256": "6ee35513b6b0b56c5da82656111cfcfbc6a15dc7c52e19d3bfe4bf90d3c6bbcb",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2060,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_change_before_preserved_viewer_bindings_metres": 0.2443823952357034,
+      "viewer_idle_bindings": "original approved weights embedded",
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.5384861307896687,
+          "edge_spikes_over_3x": 7
+        },
+        "Walk": {
+          "max_edge_stretch": 2.9260717952192725,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 3.670451835892853,
+          "edge_spikes_over_3x": 1
+        },
+        "AirStrike": {
+          "max_edge_stretch": 4.486996777308555,
+          "edge_spikes_over_3x": 6
+        },
+        "Bark": {
+          "max_edge_stretch": 3.742426338062447,
+          "edge_spikes_over_3x": 2
+        }
+      },
+      "extra_fur_joints": 0,
+      "extra_tail_joints": 0,
+      "review": "Author slow downward Air Strike; later correct head-axis direction during final review."
+    },
+    {
+      "pass": 7,
+      "asset_sha256": "a5ebb4623c4061efad944ff70b811648f531369b14f7672c7012ee33a2a669ee",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2060,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_change_before_preserved_viewer_bindings_metres": 0.2443823952357034,
+      "viewer_idle_bindings": "original approved weights embedded",
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.5384861307896687,
+          "edge_spikes_over_3x": 7
+        },
+        "Walk": {
+          "max_edge_stretch": 2.9260717952192725,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 3.670451835892853,
+          "edge_spikes_over_3x": 1
+        },
+        "AirStrike": {
+          "max_edge_stretch": 4.486996777308555,
+          "edge_spikes_over_3x": 6
+        },
+        "Bark": {
+          "max_edge_stretch": 3.8569563880033497,
+          "edge_spikes_over_3x": 9
+        }
+      },
+      "extra_fur_joints": 0,
+      "extra_tail_joints": 0,
+      "review": "Create a braced Bark stance with a real jaw hinge."
+    },
+    {
+      "pass": 8,
+      "asset_sha256": "6e2867843118a66d173b61235b7261e3f7def6613a16a31b639a339b91610338",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2060,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_change_before_preserved_viewer_bindings_metres": 0.2443823952357034,
+      "viewer_idle_bindings": "original approved weights embedded",
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.5384861307896687,
+          "edge_spikes_over_3x": 7
+        },
+        "Walk": {
+          "max_edge_stretch": 2.9260717952192725,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 3.670451835892853,
+          "edge_spikes_over_3x": 1
+        },
+        "AirStrike": {
+          "max_edge_stretch": 4.486996777308555,
+          "edge_spikes_over_3x": 6
+        },
+        "Bark": {
+          "max_edge_stretch": 3.8569563880033497,
+          "edge_spikes_over_3x": 9
+        }
+      },
+      "extra_fur_joints": 0,
+      "extra_tail_joints": 0,
+      "review": "Keep red ink off shoulder ornaments; surface-fit frontal eyes, red wraps and brows."
+    },
+    {
+      "pass": 9,
+      "asset_sha256": "4b42f726aaaa8993dc8088bd53460026919f9d8dd879364bea1769a06daee2eb",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2057,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_change_before_preserved_viewer_bindings_metres": 0.056074096907552926,
+      "viewer_idle_bindings": "original approved weights embedded",
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.5384861307896687,
+          "edge_spikes_over_3x": 7
+        },
+        "Walk": {
+          "max_edge_stretch": 2.176351992888746,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 3.670451835892853,
+          "edge_spikes_over_3x": 1
+        },
+        "AirStrike": {
+          "max_edge_stretch": 4.486996777308555,
+          "edge_spikes_over_3x": 6
+        },
+        "Bark": {
+          "max_edge_stretch": 3.8569563880033497,
+          "edge_spikes_over_3x": 9
+        }
+      },
+      "extra_fur_joints": 16,
+      "extra_tail_joints": 0,
+      "review": "Add sixteen downstream fur joints and protect tail-root bindings."
+    },
+    {
+      "pass": 10,
+      "asset_sha256": "d4f8a9cf64461386b7b7ebe8aceeb4cc590783fa9c2b2b2c06c92b4a5d517e7c",
+      "original_rest_mesh_sha256": "2825dcafec28f1ecae1941ee87334a9fcdcff90e6b3884627f1fdb6273d68ce5",
+      "rebound_vertices": 2057,
+      "idle_animation_hash": "453eb85d9e939cd9264ab30b68ad8fab07a1a779e5b3d5b550d14601af6dfc23",
+      "idle_change_before_preserved_viewer_bindings_metres": 0.05607408185878457,
+      "viewer_idle_bindings": "original approved weights embedded",
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.5384861307896687,
+          "edge_spikes_over_3x": 7
+        },
+        "Walk": {
+          "max_edge_stretch": 2.176351992888746,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 3.6704454849521544,
+          "edge_spikes_over_3x": 1
+        },
+        "AirStrike": {
+          "max_edge_stretch": 4.486991882256917,
+          "edge_spikes_over_3x": 6
+        },
+        "Bark": {
+          "max_edge_stretch": 3.85695698559323,
+          "edge_spikes_over_3x": 9
+        }
+      },
+      "extra_fur_joints": 16,
+      "extra_tail_joints": 3,
+      "review": "Subdivide only the existing tail surface, add three weighted tip joints, refine takeoff/landing, correct slam direction and polish the face."
+    }
+  ]
+}

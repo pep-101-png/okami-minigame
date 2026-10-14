@@ -1,0 +1,11 @@
+{
+  "finished_sydney": "2026-10-14T21:52:45.441849+11:00",
+  "unique_revisions": 10,
+  "development_and_production_tests": "passed",
+  "idle_vertex_difference_metres": 0,
+  "tail_joints": 7,
+  "archive_bytes": 14569046,
+  "archive_sha256": "26b8d18c6cd3b47d976f5e4b15f58b179c81fb4236bc5bbdfd553dea4cac6fd6",
+  "remaining_attacks": "deferred as requested",
+  "existing_game_files_modified": false
+}
