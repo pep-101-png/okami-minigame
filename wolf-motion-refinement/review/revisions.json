@@ -1,0 +1,60 @@
+{
+  "exports": [
+    {
+      "revision": 1,
+      "model_sha256": "4cf0f38555ce9d242d2f4901a335a6fbdff10cbd1422988dc9a612be63cc6ae6",
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 3.2113374264082264,
+          "edge_spikes_over_3x": 1
+        },
+        "Walk": {
+          "max_edge_stretch": 2.1030374804407166,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 5.098506135878601,
+          "edge_spikes_over_3x": 5
+        },
+        "AirStrike": {
+          "max_edge_stretch": 4.172919046650243,
+          "edge_spikes_over_3x": 4
+        },
+        "Bark": {
+          "max_edge_stretch": 3.9868551039758997,
+          "edge_spikes_over_3x": 10
+        }
+      },
+      "finding": "Stronger jump exposed another seam and local-axis shoulder lift did not sufficiently lead the head."
+    },
+    {
+      "revision": 2,
+      "model_sha256": "8f95791b4abf7c85ac97981ba46503c2be9e8231b91fff69bbf79f330b0f64cc",
+      "stretch": {
+        "Run": {
+          "max_edge_stretch": 2.742461213535443,
+          "edge_spikes_over_3x": 0
+        },
+        "Walk": {
+          "max_edge_stretch": 2.1030374804407166,
+          "edge_spikes_over_3x": 0
+        },
+        "Jump": {
+          "max_edge_stretch": 2.633901458194221,
+          "edge_spikes_over_3x": 0
+        },
+        "AirStrike": {
+          "max_edge_stretch": 2.4097441437680027,
+          "edge_spikes_over_3x": 0
+        },
+        "Bark": {
+          "max_edge_stretch": 2.314032557922123,
+          "edge_spikes_over_3x": 0
+        }
+      },
+      "changes": "World-space shoulder lift; eight targeted weight-refinement iterations across run, jump and bark."
+    }
+  ],
+  "finished_utc": "2026-10-14T11:21:22.678129+00:00",
+  "games_preserved": true
+}

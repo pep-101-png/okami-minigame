@@ -1,0 +1,114 @@
+{
+  "idleError": 0,
+  "matched": 35880,
+  "bindError": 0,
+  "jump": {
+    "0.07": {
+      "head": 1.3709974567779917,
+      "body": 0.8725889296170289,
+      "fore": 0.17002923643869233
+    },
+    "0.14": {
+      "head": 1.594799542964993,
+      "body": 0.8686790235846557,
+      "fore": 0.2539057959011132
+    },
+    "0.22": {
+      "head": 1.7461760828482684,
+      "body": 1.1586376383798782,
+      "fore": 0.47096478936024716
+    },
+    "0.5": {
+      "head": 2.354461731386066,
+      "body": 1.8067183780670166,
+      "fore": 1.1739919181479976
+    },
+    "0.9": {
+      "head": 1.2307082341843123,
+      "body": 0.823655617913101,
+      "fore": 0.156004939048421
+    }
+  },
+  "air": [
+    {
+      "t": 0.05,
+      "head": 1.8715696324896813,
+      "forwardY": -0.09980552627394498,
+      "body": 1.4599742237056854
+    },
+    {
+      "t": 0.25,
+      "head": 1.4525485062979495,
+      "forwardY": -0.4725572304346224,
+      "body": 1.2373091950054282
+    },
+    {
+      "t": 0.45,
+      "head": 1.216688494307714,
+      "forwardY": -0.5488695214638319,
+      "body": 1.0475792544401206
+    },
+    {
+      "t": 0.65,
+      "head": 1.251650125961812,
+      "forwardY": -0.2211895933214008,
+      "body": 0.8892448556506952
+    },
+    {
+      "t": 0.85,
+      "head": 1.349551954343684,
+      "forwardY": -0.003894900101134809,
+      "body": 0.8916347633297423
+    }
+  ],
+  "bark": {
+    "jawAngle": 0.24710020108101952,
+    "bodyDrop": 0.2225768816920103,
+    "frontWidth": 0.5497053216722413
+  },
+  "walkClearance": 0.09727093146355828,
+  "maxStretch": {
+    "Run": 2.738227426863717,
+    "Walk": 2.095372768794642,
+    "Jump": 2.740313593458527,
+    "AirStrike": 2.9041844618085944,
+    "Bark": 2.541964103982507
+  },
+  "segmentedFur": true,
+  "tailCounts": 12,
+  "spineCount": 4,
+  "tailUsage": {
+    "tailFlow": 19.316416490415577,
+    "tailSilk": 16.902187518193386,
+    "tailMidFlow": 47.4583433009102,
+    "tailMidSilk": 19.861546885222197,
+    "tailTipFlow": 57.73197816348693,
+    "tailTipSilk": 28.065008902398404,
+    "tailEndFlow": 230.56039946517558,
+    "tailEndSilk": 176.53867216840445
+  },
+  "finite": {
+    "Idle": true,
+    "Walk": true,
+    "Run": true,
+    "Jump": true,
+    "JumpRise": true,
+    "JumpFall": true,
+    "Land": true,
+    "AirStrike": true,
+    "Bark": true,
+    "ChargedHeavy": true,
+    "ChargedThrust": true,
+    "ChargeHeavy": true,
+    "ChargeLight": true,
+    "Dodge": true,
+    "Finish": true,
+    "Growl": true,
+    "HeavyArc": true,
+    "HeavyReturn": true,
+    "Howl": true,
+    "Hurt": true,
+    "Sweep": true,
+    "Thrust": true
+  }
+}
