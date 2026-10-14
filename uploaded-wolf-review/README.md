@@ -21,3 +21,16 @@ The upper eye placement replaces the earlier cheek-level eyes. The coat now has 
 `fur-tones.png` is the baked coat atlas embedded in the GLB, so the colour treatment survives export. `vermilion-markings.png` is the editable projected paint mask. Blender also includes a subtle procedural fur bump; that bump is not exported. `face-detail.png` provides a closer view; regenerate it with `blender -b --python uploaded-wolf-review/render_detail.py`.
 
 References: the user-supplied Ōkami/Shiranui illustrations and the uploaded model's painted source textures. Live access to the Ōkami reference wiki was blocked during this pass.
+
+## Face and gait rebuild
+
+Based on the additional user-supplied side-view artwork and in-game reference:
+
+- Removed the separate spherical nose and eye objects. The original muzzle tip is pigmented; the narrow ink eyes are part of the baked coat texture.
+- Replaced parallel flank stripes with a chest flame, shoulder spiral and a single pointed flank sweep.
+- Added separate upper-leg, lower-leg and paw joints, with calibrated IK, level paws during stance, and four staggered contact/recovery phases.
+- Tail vertices and the tail ornament no longer inherit rear-leg weights.
+- Baked evaluated joint motion into Idle/Walk clips and verified contact ankle height in the reimported GLB. These are in-place loops; movement integration must match ground speed.
+- Blender preview uses black ink contours. The GLB includes coat colours, markings, skin weights and baked joint clips; game-side outlines still require a renderer setup.
+
+The current model remains isolated from both games.

@@ -49,35 +49,37 @@ def smoothpath(control):
   for j in range(35):
    t=j/35;v=.5*((2*p1)+(-p0+p2)*t+(2*p0-5*p1+4*p2-p3)*t*t+(-p0+3*p1-3*p2+p3)*t*t*t);result.append(tuple(v))
  result.append(control[-1]);return result
-for side in [-1,1]:
+# Tapered ink shapes use the surface itself: no eyeball or nose meshes.
+def polygon(points,color):
+ draw.polygon([((y+4.5)/9*2048,(1-z/5.6)*1280) for y,z in points],fill=color)
+for side in [1]:
  points=[]
- for i in range(240):
-  a=i/239*math.tau*1.22;r=.06+.52*i/239;points.append((-1.35+r*math.cos(a),3.85+r*math.sin(a)))
- ribbon('Shoulder - broad vermilion spiral',points,.17,side)
+ for i in range(260):
+  a=i/259*math.tau*1.10;r=.045+.43*i/259;points.append((-1.12+r*math.cos(a),3.83+r*math.sin(a)))
+ ribbon('Flank spiral',points,.105,side)
  for name,controls,width in [
- ('Brow rising flame',[(-3.56,4.60),(-3.32,4.80),(-3.00,4.94),(-2.78,5.13)],.17),
- ('Eye swept mask',[(-3.5,4.58),(-3.28,4.50),(-3.01,4.61),(-2.83,4.77)],.13),
- ('Cheek tapered stroke',[(-3.56,4.33),(-3.37,4.32),(-3.12,4.40),(-2.90,4.57)],.12),
- ('Back flame',[(-1.0,4.25),(-.35,4.08),(.65,3.91),(1.55,3.83),(2.20,4.00)],.16),
- ('Flank returning flame',[(-.15,3.75),(.60,3.59),(1.25,3.46),(1.75,3.62),(1.50,3.78)],.12),
- ('Forepaw curved paint',[(-2.20,.48),(-2.06,.70),(-1.91,.55),(-1.85,.31)],.09),
- ('Hindpaw curved paint',[(1.75,.39),(1.85,.68),(2.02,.60),(2.12,.36)],.09)]:ribbon(name,smoothpath(controls),width,side)
- # Upper eye placement, seated against the actual head surface.
- eye_y=-3.20;eye_z=4.64
- hit=bvh.ray_cast(Vector((side*4,eye_y,eye_z)),Vector((-side,0,0)))[0]
- if hit:
-  for label,shift,scale,color in [('Eye ink',.018,(.022,.12,.047),(.012,.009,.006,1)),('Eye amber',.036,(.012,.047,.034),(.60,.27,.018,1)),('Eye pupil',.048,(.008,.016,.031),(.006,.005,.004,1)),('Eye glint',.052,(.007,.011,.008),(.95,.91,.72,1))]:
-   pos=(hit.x+side*shift,eye_y+(.017 if label=='Eye glint' else 0),eye_z+(.012 if label=='Eye glint' else 0))
-   bpy.ops.mesh.primitive_uv_sphere_add(segments=24,ring_count=16,location=pos);o=bpy.context.object;o.name=label;o.scale=scale;bpy.ops.object.transform_apply(location=True,rotation=True,scale=True);mat=bpy.data.materials.new(label);mat.diffuse_color=color;o.data.materials.append(mat);meshes.append(o)
+ ('Chest ascending flame',[(-2.02,3.10),(-1.91,3.56),(-1.64,3.94),(-1.36,4.16)],.13),
+ ('Flank sickle',[(-.25,3.36),(.24,3.28),(.71,3.39),(1.12,3.70)],.13),
+ ('Foreleg sweep',[(-1.63,.35),(-1.36,.57),(-1.20,.83),(-1.23,1.04)],.085),
+ ('Hock sweep',[(1.83,.29),(2.06,.48),(2.13,.79),(2.03,.96)],.075)]:ribbon(name,smoothpath(controls),width,side)
+ # Forked, angular eye mask and forehead flame; no three parallel cheek bars.
+ polygon([(-3.62,4.46),(-3.37,4.63),(-3.20,4.83),(-2.87,5.04),(-3.08,4.80),(-3.21,4.67),(-3.46,4.49)],(185,22,10,255))
+ polygon([(-3.44,4.49),(-3.18,4.52),(-2.91,4.75),(-3.07,4.46),(-3.24,4.37)],(185,22,10,255))
+ polygon([(-3.24,4.84),(-3.13,4.96),(-2.98,5.08),(-3.01,4.86),(-3.11,4.76)],(185,22,10,255))
+ # Small ink almond, inclined with the brow and painted flush to the head.
+ polygon([(-3.40,4.58),(-3.30,4.64),(-3.12,4.64),(-3.24,4.57),(-3.34,4.56)],(15,13,10,255))
+
 # Paint projected onto the real surface; no raised geometry or shadow gaps.
 mask.save(root/'vermilion-markings.png');paint_image=bpy.data.images.load(str(root/'vermilion-markings.png'));paint_image.pack()
 paint_tex=nodes.new('ShaderNodeTexImage');paint_tex.image=paint_image;paint_tex.extension='CLIP'
 position=nodes.new('ShaderNodeSeparateXYZ');links.new(geo.outputs['Position'],position.inputs[0]);uv=nodes.new('ShaderNodeCombineXYZ')
 for component,offset,span,target_socket in [('Y',4.5,9,'X'),('Z',0,5.6,'Y')]:
  add=nodes.new('ShaderNodeMath');add.operation='ADD';add.inputs[1].default_value=offset;links.new(position.outputs[component],add.inputs[0]);divide=nodes.new('ShaderNodeMath');divide.operation='DIVIDE';divide.inputs[1].default_value=span;links.new(add.outputs[0],divide.inputs[0]);links.new(divide.outputs[0],uv.inputs[target_socket])
-links.new(uv.outputs[0],paint_tex.inputs[0]);ink_mix=nodes.new('ShaderNodeMixRGB');ink_mix.inputs[2].default_value=(.48,.009,.003,1);links.new(paint_tex.outputs['Alpha'],ink_mix.inputs[0]);links.new(mix.outputs[0],ink_mix.inputs[1]);links.new(ink_mix.outputs[0],bs.inputs['Base Color'])
-# Nose pigment placed on the tip, rather than darkening the entire muzzle.
-bpy.ops.mesh.primitive_uv_sphere_add(segments=24,ring_count=16,location=(0,-4.15,4.10));nose=bpy.context.object;nose.name='Ink nose';nose.scale=(.20,.10,.14);bpy.ops.object.transform_apply(location=True,rotation=True,scale=True);ink=bpy.data.materials.new('Nose charcoal');ink.diffuse_color=(.025,.02,.017,1);nose.data.materials.append(ink);meshes.append(nose)
+links.new(uv.outputs[0],paint_tex.inputs[0]);ink_mix=nodes.new('ShaderNodeMixRGB');links.new(paint_tex.outputs['Alpha'],ink_mix.inputs[0]);links.new(paint_tex.outputs['Color'],ink_mix.inputs[2]);links.new(mix.outputs[0],ink_mix.inputs[1]);links.new(ink_mix.outputs[0],bs.inputs['Base Color'])
+# Pigment on the original muzzle tip, not an added spherical nose.
+y_tip=nodes.new('ShaderNodeMath');y_tip.operation='LESS_THAN';y_tip.inputs[1].default_value=-4.06;links.new(position.outputs['Y'],y_tip.inputs[0])
+z_tip=nodes.new('ShaderNodeMath');z_tip.operation='GREATER_THAN';z_tip.inputs[1].default_value=4.03;links.new(position.outputs['Z'],z_tip.inputs[0])
+nose_mask=nodes.new('ShaderNodeMath');nose_mask.operation='MULTIPLY';links.new(y_tip.outputs[0],nose_mask.inputs[0]);links.new(z_tip.outputs[0],nose_mask.inputs[1]);nose_mix=nodes.new('ShaderNodeMixRGB');nose_mix.inputs[2].default_value=(.016,.012,.009,1);links.new(nose_mask.outputs[0],nose_mix.inputs[0]);links.new(ink_mix.outputs[0],nose_mix.inputs[1]);links.new(nose_mix.outputs[0],bs.inputs['Base Color'])
 
 # A genuine deforming skeleton, with independent upper/lower leg articulation.
 bpy.ops.object.armature_add();rig=bpy.context.object;rig.name='DivineWolfRig';bpy.ops.object.mode_set(mode='EDIT');rig.data.edit_bones.remove(rig.data.edit_bones[0])
@@ -88,44 +90,81 @@ def bone(name,head,tail,parent=None):
 bone('body',(0,1,3),(0,-1.5,3))
 bone('head',(0,-1.9,3.4),(0,-3.4,4.2),'body')
 bone('tail',(0,2.4,3),(0,3.8,2.6),'body')
-for side,x in [('L',.72),('R',-.72)]:
- for leg,y in [('fore',-2),('hind',2)]:
-  bone(leg+side,(x,y,2.8),(x,y,1.5),'body');bone(leg+'Shin'+side,(x,y,1.5),(x,y,.4),leg+side)
+leg_specs={}
+for side,x in [('L',.61),('R',-.61)]:
+ for leg in ['fore','hind']:
+  name=leg+side
+  if leg=='fore':joints=[(x,-1.42,3.02),(x,-1.20,1.68),(x,-1.36,.46),(x,-1.76,.18)]
+  else:joints=[(x,2.35,3.08),(x,1.80,1.94),(x,2.22,.68),(x,1.82,.18)]
+  bone(name,joints[0],joints[1],'body');bone(leg+'Shin'+side,joints[1],joints[2],name);bone(leg+'Paw'+side,joints[2],joints[3],leg+'Shin'+side)
+  level=bone(name+'Level',joints[2],joints[3]);level.use_deform=False
+  target=bone(name+'Target',joints[2],(x,joints[2][1],joints[2][2]+.2));target.use_deform=False
+  pole=bone(name+'Pole',(x,(4 if leg=='fore' else -5),1.5),(x,(4 if leg=='fore' else -5),1.8));pole.use_deform=False
+  leg_specs[name]=(joints,leg,side)
 bpy.ops.object.mode_set(mode='OBJECT')
+# Smooth anatomical joint zones; toes follow their own paw bone.
+def smoothstep(v):
+ t=max(0,min(1,v));return t*t*(3-2*t)
 for o in meshes:
- groups={b.name:o.vertex_groups.new(name=b.name) for b in rig.data.bones}
+ groups={b.name:o.vertex_groups.new(name=b.name) for b in rig.data.bones if b.use_deform}
  for v in o.data.vertices:
-  x,y,z=v.co;side='L' if x>=0 else 'R'
-  weights={'body':1}
-  if z<2.6 and abs(x)>.28 and abs(y)>1:
-   leg='fore' if y<0 else 'hind';t=max(0,min(1,(2.8-z)/.55));k=max(0,min(1,(1.75-z)/.45));weights={'body':1-t,leg+side:t*(1-k),leg+'Shin'+side:t*k}
-  elif y<-2.1 and z>2.8:
-   t=min(1,(-y-2.1)/.65);weights={'body':1-t,'head':t}
-  elif y>2.6:
-   t=min(1,(y-2.6)/.6);weights={'body':1-t,'tail':t}
+  x,y,z=v.co;side='L' if x>=0 else 'R';weights={'body':1}
+  if o.name=='Object_7' or y>2.85:
+   weights={'tail':1}
+  elif z<2.95 and abs(x)>.26 and (y<-1.00 or y>1.30):
+   leg='fore' if y<0 else 'hind';attach=smoothstep((2.95-z)/.60)
+   knee=1.68 if leg=='fore' else 1.94;lower=smoothstep((knee+.22-z)/.48);paw=smoothstep((.66-z)/.35)
+   weights={'body':1-attach,leg+side:attach*(1-lower),leg+'Shin'+side:attach*lower*(1-paw),leg+'Paw'+side:attach*lower*paw}
+  elif y<-2.10 and z>2.8:
+   t=smoothstep((-y-2.10)/.65);weights={'body':1-t,'head':t}
+  elif y>2.75 and z>1:
+   t=smoothstep((y-2.75)/.55);weights={'body':1-t,'tail':t}
   for n,w in weights.items():
    if w>0:groups[n].add([v.index],w,'REPLACE')
  mod=o.modifiers.new('Wolf skeleton','ARMATURE');mod.object=rig;o.parent=rig
-# Idle breathing / head and tail movement, followed by an articulated walk loop.
-for name,duration in [('Idle',80),('Walk',32)]:
- rig.animation_data_create();act=bpy.data.actions.new(name);rig.animation_data.action=act
+for name,(joints,leg,side) in leg_specs.items():
+ ik=rig.pose.bones[leg+'Shin'+side].constraints.new('IK');ik.target=rig;ik.subtarget=name+'Target';ik.chain_count=2;ik.pole_target=rig;ik.pole_subtarget=name+'Pole';ik.pole_angle=-math.pi/2
+ # Calibrate pole rotation against the imported rest pose instead of guessing it.
+ best=(float('inf'),0)
+ for angle in [-math.pi,-math.pi/2,0,math.pi/2]:
+  ik.pole_angle=angle;bpy.context.view_layer.update();distance=(rig.pose.bones[leg+'Shin'+side].head-Vector(joints[1])).length
+  if distance<best[0]:best=(distance,angle)
+ ik.pole_angle=best[1]
+ level=rig.pose.bones[leg+'Paw'+side].constraints.new('COPY_ROTATION');level.target=rig;level.subtarget=name+'Level';level.target_space='WORLD';level.owner_space='WORLD'
+ print('REST_JOINT_ERROR',name,best[0])
+# Feet push back on the ground, then flex and recover during the swing.
+for clip,duration in [('Idle',96),('Walk',48)]:
+ rig.animation_data_create();action=bpy.data.actions.new(clip);rig.animation_data.action=action
  for f in range(1,duration+2):
-  phase=(f-1)/duration*math.tau
+  cycle=(f-1)/duration;phase=cycle*math.tau
+  for b in rig.pose.bones:b.rotation_mode='XYZ';b.rotation_euler=(0,0,0);b.location=(0,0,0)
+  rig.pose.bones['body'].location.z=-.12+.025*math.sin(phase*2) if clip=='Walk' else .012*math.sin(phase)
+  rig.pose.bones['body'].rotation_euler.x=.012*math.sin(phase*2)
+  rig.pose.bones['head'].rotation_euler.x=.018*math.sin(phase+.6)
+  rig.pose.bones['tail'].rotation_euler.z=.065*math.sin(phase-.7)
+  for name,(joints,leg,side) in leg_specs.items():
+   offset={('fore','L'):0,('hind','R'):.16,('fore','R'):.5,('hind','L'):.66}[(leg,side)]
+   t=(cycle+offset)%1
+   stride=.95 if leg=='fore' else .84
+   if clip=='Walk':
+    if t<.62:
+     u=t/.62;dy=-stride/2+stride*u;lift=0;curl=0
+    else:
+     u=(t-.62)/.38;ease=u*u*(3-2*u);dy=stride/2-stride*ease;lift=.43*math.sin(math.pi*u)**1.3;curl=.55*math.sin(math.pi*u)
+    target=rig.pose.bones[name+'Target'];target.location=target.bone.matrix_local.to_3x3().inverted() @ Vector((0,dy,lift))
+    # Paw counter-rotation keeps the sole level during contact.
+    rig.pose.bones[name+'Level'].rotation_euler.x=-curl
+   for suffix in ['Target','Pole','Level']:
+    b=rig.pose.bones[name+suffix];b.keyframe_insert('location',frame=f);b.keyframe_insert('rotation_euler',frame=f)
   for b in rig.pose.bones:
-   b.rotation_mode='XYZ';b.rotation_euler=(0,0,0);b.location=(0,0,0)
-  rig.pose.bones['body'].location.y=.035*math.sin(phase*2)
-  rig.pose.bones['head'].rotation_euler.x=.025*math.sin(phase)
-  rig.pose.bones['tail'].rotation_euler.z=.08*math.sin(phase)
-  if name=='Walk':
-   for side in ['L','R']:
-    for leg in ['fore','hind']:
-     p=phase+(math.pi if (side=='R')^(leg=='hind') else 0)
-     rig.pose.bones[leg+side].rotation_euler.x=.35*math.sin(p)
-     rig.pose.bones[leg+'Shin'+side].rotation_euler.x=.42*max(0,math.cos(p))
-  for b in rig.pose.bones:
-   b.keyframe_insert('rotation_euler',frame=f);b.keyframe_insert('location',frame=f)
- track=rig.animation_data.nla_tracks.new();track.name=name;track.strips.new(name,1,act);track.mute=True
-rig.animation_data.action=bpy.data.actions['Walk']
+   if b.bone.use_deform:b.keyframe_insert('rotation_euler',frame=f);b.keyframe_insert('location',frame=f)
+ # Bake evaluated IK into ordinary joint keys for portable GLB animation.
+ bpy.context.view_layer.objects.active=rig;rig.select_set(True)
+ bpy.ops.nla.bake(frame_start=1,frame_end=duration+1,step=1,only_selected=False,visual_keying=True,clear_constraints=False,use_current_action=True,bake_types={'POSE'})
+ track=rig.animation_data.nla_tracks.new();track.name=clip;strip=track.strips.new(clip,1,action);track.mute=True
+for b in rig.pose.bones:
+ for constraint in list(b.constraints):b.constraints.remove(constraint)
+rig.animation_data.action=bpy.data.actions['Idle']
 # Bake the coat into a portable texture so GLB and Blender carry the same tones.
 coat=[o for o in meshes if o.data.materials[0]==fur]
 bpy.ops.object.select_all(action='DESELECT')
@@ -147,6 +186,8 @@ bpy.ops.export_scene.gltf(filepath=str(root/'colored-rigged.glb'),use_selection=
 scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=96;scene.cycles.use_denoising=False
 scene.world.use_nodes=True;scene.world.node_tree.nodes['Background'].inputs[0].default_value=(.55,.55,.55,1);scene.world.node_tree.nodes['Background'].inputs[1].default_value=.28
 scene.view_settings.view_transform='AgX'
+scene.render.use_freestyle=True;scene.render.line_thickness=1.5
+line=scene.view_layers[0].freestyle_settings.linesets[0];line.select_crease=False;line.select_contour=False;line.select_external_contour=True;line.linestyle.color=(.024,.021,.018)
 bpy.ops.mesh.primitive_plane_add(size=200,location=(0,0,-.05));floor=bpy.context.object;m=bpy.data.materials.new('Backdrop');m.diffuse_color=(.25,.28,.3,1);floor.data.materials.append(m)
 for pos,power in [((5,-6,10),1700),((-5,1,8),650)]:
  bpy.ops.object.light_add(type='AREA',location=pos);l=bpy.context.object;l.data.energy=power;l.data.size=5;l.rotation_euler=(Vector((0,0,2.5))-l.location).to_track_quat('-Z','Y').to_euler()
@@ -154,7 +195,8 @@ bpy.ops.object.camera_add(location=(13,-7,7));camera=bpy.context.object;camera.r
 scene.render.resolution_x=1000;scene.render.resolution_y=800;scene.render.resolution_percentage=100
 scene.frame_set(1);scene.render.filepath=str(root/'colored-preview.png');bpy.ops.render.render(write_still=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(root/'colored-rigged.blend'))
-scene.render.resolution_x=500;scene.render.resolution_y=400;scene.cycles.samples=8
-for f in range(1,33,2):
- scene.frame_set(f);scene.render.filepath=str(Path('/tmp')/f'polished-walk-{f:02}.png');bpy.ops.render.render(write_still=True)
+rig.animation_data.action=bpy.data.actions['Walk']
+scene.render.resolution_x=600;scene.render.resolution_y=480;scene.cycles.samples=12
+for f in range(1,49):
+ scene.frame_set(f);scene.render.filepath=str(Path('/tmp')/f'rebuilt-walk-{f:02}.png');bpy.ops.render.render(write_still=True)
 print('COLOR_AND_RIG_COMPLETE')
