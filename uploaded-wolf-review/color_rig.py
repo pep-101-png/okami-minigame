@@ -32,7 +32,7 @@ for obj in meshes:
 bvh=BVHTree.FromPolygons(verts_all,polys_all)
 red=bpy.data.materials.new('Vermilion ink');red.diffuse_color=(.72,.015,.006,1)
 from PIL import Image,ImageDraw
-mask=Image.new('RGBA',(2048,1280),(0,0,0,0));draw=ImageDraw.Draw(mask)
+mask=Image.new('RGBA',(4096,2560),(0,0,0,0));draw=ImageDraw.Draw(mask)
 def ribbon(name,points,width,side):
  if side<0:return
  left=[];right=[]
@@ -40,7 +40,7 @@ def ribbon(name,points,width,side):
   t=i/max(1,len(points)-1);w=width*(.025+.975*math.sin(math.pi*t)**.65)
   prev=Vector(points[max(0,i-1)]);nxt=Vector(points[min(len(points)-1,i+1)]);d=(nxt-prev).normalized();normal=Vector((-d.y,d.x))
   for sign,edge in [(-1,left),(1,right)]:
-   q=Vector((y,z))+normal*w*sign/2;edge.append(((q.x+4.5)/9*2048,(1-q.y/5.6)*1280))
+   q=Vector((y,z))+normal*w*sign/2;edge.append(((q.x+4.5)/9*4096,(1-q.y/5.6)*2560))
  draw.polygon(left+right[::-1],fill=(185,22,10,255))
 def smoothpath(control):
  result=[]
@@ -51,14 +51,14 @@ def smoothpath(control):
  result.append(control[-1]);return result
 # Tapered ink shapes use the surface itself: no eyeball or nose meshes.
 def polygon(points,color):
- draw.polygon([((y+4.5)/9*2048,(1-z/5.6)*1280) for y,z in points],fill=color)
+ draw.polygon([((y+4.5)/9*4096,(1-z/5.6)*2560) for y,z in points],fill=color)
 for side in [1]:
  points=[]
  for i in range(260):
-  a=i/259*math.tau*1.10;r=.045+.43*i/259;points.append((-1.12+r*math.cos(a),3.83+r*math.sin(a)))
- ribbon('Flank spiral',points,.105,side)
+  a=i/259*math.tau*1.10;r=.045+.46*i/259;points.append((-1.12+r*math.cos(a),3.83+r*math.sin(a)))
+ ribbon('Flank spiral',points,.10,side)
  for name,controls,width in [
- ('Chest ascending flame',[(-2.02,3.10),(-1.91,3.56),(-1.64,3.94),(-1.36,4.16)],.13),
+ ('Chest ascending flame',[(-2.02,3.10),(-1.91,3.56),(-1.64,3.94),(-1.36,4.16)],.12),
  ('Flank sickle',[(-.25,3.36),(.24,3.28),(.71,3.39),(1.12,3.70)],.13),
  ('Foreleg sweep',[(-1.63,.35),(-1.36,.57),(-1.20,.83),(-1.23,1.04)],.085),
  ('Hock sweep',[(1.83,.29),(2.06,.48),(2.13,.79),(2.03,.96)],.075)]:ribbon(name,smoothpath(controls),width,side)
@@ -67,7 +67,7 @@ for side in [1]:
  polygon([(-3.44,4.49),(-3.18,4.52),(-2.91,4.75),(-3.07,4.46),(-3.24,4.37)],(185,22,10,255))
  polygon([(-3.24,4.84),(-3.13,4.96),(-2.98,5.08),(-3.01,4.86),(-3.11,4.76)],(185,22,10,255))
  # Small ink almond, inclined with the brow and painted flush to the head.
- polygon([(-3.40,4.58),(-3.30,4.64),(-3.12,4.64),(-3.24,4.57),(-3.34,4.56)],(15,13,10,255))
+ polygon([(y-.04,z+.035) for y,z in [(-3.40,4.58),(-3.30,4.64),(-3.12,4.64),(-3.24,4.57),(-3.34,4.56)]],(15,13,10,255))
 
 # Paint projected onto the real surface; no raised geometry or shadow gaps.
 mask.save(root/'vermilion-markings.png');paint_image=bpy.data.images.load(str(root/'vermilion-markings.png'));paint_image.pack()
@@ -138,9 +138,9 @@ for clip,duration in [('Idle',96),('Walk',48)]:
  for f in range(1,duration+2):
   cycle=(f-1)/duration;phase=cycle*math.tau
   for b in rig.pose.bones:b.rotation_mode='XYZ';b.rotation_euler=(0,0,0);b.location=(0,0,0)
-  rig.pose.bones['body'].location.z=-.12+.025*math.sin(phase*2) if clip=='Walk' else .012*math.sin(phase)
-  rig.pose.bones['body'].rotation_euler.x=.012*math.sin(phase*2)
-  rig.pose.bones['head'].rotation_euler.x=.018*math.sin(phase+.6)
+  rig.pose.bones['body'].location.z=-.12+.015*math.sin(phase*2) if clip=='Walk' else .012*math.sin(phase)
+  rig.pose.bones['body'].rotation_euler.x=.008*math.sin(phase*2)
+  rig.pose.bones['head'].rotation_euler.x=.012*math.sin(phase*2+.6)
   rig.pose.bones['tail'].rotation_euler.z=.065*math.sin(phase-.7)
   for name,(joints,leg,side) in leg_specs.items():
    offset={('fore','L'):0,('hind','R'):.16,('fore','R'):.5,('hind','L'):.66}[(leg,side)]
@@ -150,7 +150,7 @@ for clip,duration in [('Idle',96),('Walk',48)]:
     if t<.62:
      u=t/.62;dy=-stride/2+stride*u;lift=0;curl=0
     else:
-     u=(t-.62)/.38;ease=u*u*(3-2*u);dy=stride/2-stride*ease;lift=.43*math.sin(math.pi*u)**1.3;curl=.55*math.sin(math.pi*u)
+     u=(t-.62)/.38;v=.38/.62;dy=stride*(.5-3*u*u+2*u*u*u+v*(2*u*u*u-3*u*u+u));lift=(.31 if leg=='fore' else .27)*math.sin(math.pi*u)**2;curl=.32*math.sin(math.pi*u)**2
     target=rig.pose.bones[name+'Target'];target.location=target.bone.matrix_local.to_3x3().inverted() @ Vector((0,dy,lift))
     # Paw counter-rotation keeps the sole level during contact.
     rig.pose.bones[name+'Level'].rotation_euler.x=-curl
@@ -186,8 +186,8 @@ bpy.ops.export_scene.gltf(filepath=str(root/'colored-rigged.glb'),use_selection=
 scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=96;scene.cycles.use_denoising=False
 scene.world.use_nodes=True;scene.world.node_tree.nodes['Background'].inputs[0].default_value=(.55,.55,.55,1);scene.world.node_tree.nodes['Background'].inputs[1].default_value=.28
 scene.view_settings.view_transform='AgX'
-scene.render.use_freestyle=True;scene.render.line_thickness=1.5
-line=scene.view_layers[0].freestyle_settings.linesets[0];line.select_crease=False;line.select_contour=False;line.select_external_contour=True;line.linestyle.color=(.024,.021,.018)
+scene.render.use_freestyle=True;scene.render.line_thickness=1.3
+line=scene.view_layers[0].freestyle_settings.linesets[0];line.select_crease=False;line.select_contour=False;line.select_external_contour=True;line.linestyle.color=(.04,.035,.03);line.linestyle.alpha=.90
 bpy.ops.mesh.primitive_plane_add(size=200,location=(0,0,-.05));floor=bpy.context.object;m=bpy.data.materials.new('Backdrop');m.diffuse_color=(.25,.28,.3,1);floor.data.materials.append(m)
 for pos,power in [((5,-6,10),1700),((-5,1,8),650)]:
  bpy.ops.object.light_add(type='AREA',location=pos);l=bpy.context.object;l.data.energy=power;l.data.size=5;l.rotation_euler=(Vector((0,0,2.5))-l.location).to_track_quat('-Z','Y').to_euler()
@@ -198,5 +198,5 @@ bpy.ops.wm.save_as_mainfile(filepath=str(root/'colored-rigged.blend'))
 rig.animation_data.action=bpy.data.actions['Walk']
 scene.render.resolution_x=600;scene.render.resolution_y=480;scene.cycles.samples=12
 for f in range(1,49):
- scene.frame_set(f);scene.render.filepath=str(Path('/tmp')/f'rebuilt-walk-{f:02}.png');bpy.ops.render.render(write_still=True)
+ scene.frame_set(f);scene.render.filepath=str(Path('/tmp')/f'soft-walk-{f:02}.png');bpy.ops.render.render(write_still=True)
 print('COLOR_AND_RIG_COMPLETE')

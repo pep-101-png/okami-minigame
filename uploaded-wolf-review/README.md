@@ -34,3 +34,9 @@ Based on the additional user-supplied side-view artwork and in-game reference:
 - Blender preview uses black ink contours. The GLB includes coat colours, markings, skin weights and baked joint clips; game-side outlines still require a renderer setup.
 
 The current model remains isolated from both games.
+
+## Small soft-ink refinement
+
+The ink eye moved only 0.04 units toward the muzzle and 0.035 units upward, keeping its shape. Paint-mask resolution doubled, with a slightly broader, cleaner shoulder spiral and a narrower chest stroke. Preview contours now use thinner warm-black strokes at 90% opacity.
+
+Walk recovery now matches stance velocity at both transitions. Paw lift and curl are smaller, with eased lift-off and landing; body bob and head motion are reduced. Exported stance ankle height was rechecked after these adjustments. The 48-frame preview runs at approximately 24 fps.
