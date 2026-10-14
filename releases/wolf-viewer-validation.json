@@ -1,0 +1,10 @@
+{
+  "finished_sydney": "2026-10-14T20:04:38.569891+11:00",
+  "archive_bytes": 14633904,
+  "archive_sha256": "c99898c41b1d583452eb3a85a6e1555c7c38e8b9b9f4c13a240031bc0bb21900",
+  "unique_revisions": 10,
+  "existing_game_files_modified": false,
+  "rest_mesh_unchanged": true,
+  "browser_check": "passed in development and production",
+  "animation_count": 22
+}

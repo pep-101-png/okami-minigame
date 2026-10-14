@@ -1,0 +1,155 @@
+{
+  "choices": [
+    "Idle",
+    "Walk",
+    "Run",
+    "Jump",
+    "JumpRise",
+    "JumpFall",
+    "Land",
+    "AirStrike",
+    "Bark",
+    "ChargedHeavy",
+    "ChargedThrust",
+    "ChargeHeavy",
+    "ChargeLight",
+    "Dodge",
+    "Finish",
+    "Growl",
+    "HeavyArc",
+    "HeavyReturn",
+    "Howl",
+    "Hurt",
+    "Sweep",
+    "Thrust"
+  ],
+  "clips": [
+    "Idle",
+    "Walk",
+    "Run",
+    "Jump",
+    "JumpRise",
+    "JumpFall",
+    "Land",
+    "AirStrike",
+    "Bark",
+    "ChargedHeavy",
+    "ChargedThrust",
+    "ChargeHeavy",
+    "ChargeLight",
+    "Dodge",
+    "Finish",
+    "Growl",
+    "HeavyArc",
+    "HeavyReturn",
+    "Howl",
+    "Hurt",
+    "Sweep",
+    "Thrust"
+  ],
+  "finite": {
+    "Idle": true,
+    "Walk": true,
+    "Run": true,
+    "Jump": true,
+    "JumpRise": true,
+    "JumpFall": true,
+    "Land": true,
+    "AirStrike": true,
+    "Bark": true,
+    "ChargedHeavy": true,
+    "ChargedThrust": true,
+    "ChargeHeavy": true,
+    "ChargeLight": true,
+    "Dodge": true,
+    "Finish": true,
+    "Growl": true,
+    "HeavyArc": true,
+    "HeavyReturn": true,
+    "Howl": true,
+    "Hurt": true,
+    "Sweep": true,
+    "Thrust": true
+  },
+  "loops": {
+    "Idle": 5.0500552975507595e-9,
+    "Walk": 1.5163627364866983e-7,
+    "Run": 1.6918682579913913e-7,
+    "Jump": 1.203982891162525e-7
+  },
+  "contacts": {
+    "Walk": {
+      "slip_metres_per_frame": 0.000007167300531574217,
+      "ankle_error_metres": 0.0024591257764630947,
+      "samples": 66,
+      "byLeg": {
+        "hindR": 16,
+        "foreR": 16,
+        "foreL": 17,
+        "hindL": 17
+      }
+    },
+    "Run": {
+      "slip_metres_per_frame": 0.000007521770361895719,
+      "ankle_error_metres": 0.002442750408902461,
+      "samples": 20,
+      "byLeg": {
+        "hindR": 5,
+        "hindL": 5,
+        "foreR": 5,
+        "foreL": 5
+      }
+    }
+  },
+  "tail": {
+    "Idle": 0.4830416436793467,
+    "Idlemotion": 0.036902591505091224,
+    "Walk": 0.5393016666701527,
+    "Walkmotion": 0.07986686157904957,
+    "Run": 0.9903886964707995,
+    "Runmotion": 0.12205764501424193
+  },
+  "fur": {
+    "Idle": [
+      0.042129246341715894,
+      0.04911531639208394,
+      0.026560100741092878,
+      0.04029920758403107,
+      0.020885288373622572,
+      0.027321851354650872,
+      0.040325881748012014,
+      0.03679149554720351
+    ],
+    "Walk": [
+      0.06609914950045961,
+      0.07695992621433578,
+      0.04167391052261188,
+      0.06319104952173525,
+      0.0326527718362323,
+      0.042686741722397656,
+      0.06323394177955285,
+      0.057610406326908434
+    ],
+    "Run": [
+      0.09741364440511058,
+      0.11323709702359963,
+      0.06142035025022803,
+      0.09305822586954324,
+      0.04790875304788779,
+      0.06257205421940683,
+      0.09312948290095499,
+      0.08469538112221484
+    ],
+    "Jump": [
+      0.07352352079765649,
+      0.08309896791976751,
+      0.04663525275799603,
+      0.06973974999756898,
+      0.03359319710903124,
+      0.04705440053937293,
+      0.06957959896911863,
+      0.05981959207683932
+    ]
+  },
+  "jumpRise": 1.1114276176096967
+}

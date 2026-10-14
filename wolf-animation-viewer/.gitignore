@@ -1,0 +1,8 @@
+node_modules/
+dist/
+authoring/baseline.blend
+*.blend1
+review/drafts/
+
+authoring/baseline-markings.png
+authoring/fur-pass-09.png
