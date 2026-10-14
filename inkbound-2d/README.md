@@ -1,10 +1,10 @@
 # Inkbound — The River Remembers
 
-An original 2D side-scrolling divine-wolf action-adventure prototype. This is a **separate project**. It neither imports nor modifies the existing Three.js game, assets, launcher, or package files. Branch: `inkbound-2d-prototype`.
+An original 2D side-scrolling divine-wolf action-adventure prototype. This is a **separate project**. It neither imports nor modifies the existing Three.js game, assets, launcher, or package files. Painted revision branch: `inkbound-painted-wolf`. The previous 2D build stays on `inkbound-2d-prototype`; the 3D game stays on `sunward-minigame`.
 
 ## Play on Windows
 
-Extract the standalone ZIP into a **new folder**, then double-click **START-2D-GAME.cmd** inside `inkbound-2d`. Keep its CMD window open. It finds an installed Node.js or your portable `Desktop\node-v*-win-x64` folder, runs the included compiled game on port 5180 using only Node. **The standalone ZIP does not need npm installation.** If running a source checkout without `dist/`, the launcher instead installs this project's dependencies, checks esbuild, and starts Vite. Your old game's START-GAME.cmd still belongs to the old game.
+Extract the standalone ZIP into a **new folder**, then double-click **START-2D-GAME.cmd** inside `inkbound-2d`. Keep its CMD window open. It finds an installed Node.js or your portable `Desktop\node-v*-win-x64` folder, runs the included compiled game on port 5190 using only Node. **The standalone ZIP does not need npm installation.** If running a source checkout without `dist/`, the launcher instead installs this project's dependencies, checks esbuild, and starts Vite. Your old game's START-GAME.cmd still belongs to the old game.
 
 If using CMD manually, open a terminal **in this folder**, then:
 
@@ -72,7 +72,9 @@ The enemy roster includes pursuing mask spirits, swooping moth spirits, a projec
 
 ## Art and audio
 
-All game visuals are original local Canvas 2D paths, articulated limb geometry, washes, paper grain, particles and layered parallax. The wolf uses two-bone limb articulation, distinct grounded/airborne endpoints, attack body poses, breathing, tail motion, expressive eyes and flowing divine ribbons. This is high-resolution illustrated vector artwork with a paper treatment, **not a claim that a traditional artist painted a sprite sheet**. There are no external fonts, models, textures, Blender steps or copied Ōkami assets.
+The painted revision uses local PNG animation atlases: **32 wolf poses**, **32 spirit poses**, **16 environment props**, and a painted landscape. These are AI-assisted painted assets generated using the supplied reference, not a claim of traditional hand-authored animation. Sprite silhouettes are separated from their sheet neighbours at load time so taller poses, flames and antlers remain intact. Gameplay and animation selection remain modular. The old vector renderer is retained as source history/fallback, rather than being the normal wolf artwork.
+
+Double-click `START-WOLF-STUDIO.cmd` to open only the wolf viewer. The animation viewer at `/wolf-studio.html` isolates idle, walk, run, sprint, jump, combo, heavy, air strike, hurt and brush poses. The game uses fixed 60 Hz simulation to preserve movement and combat timing across changing render rates. The level's props and backgrounds share the painted treatment. No remote model/font/music downloads or Blender step are required.
 
 All music and effects are locally synthesized original placeholders using Web Audio. Audio starts after the Play button; M mutes it. The audio module is isolated so recordings and a composed score can replace these placeholders later.
 
@@ -94,7 +96,7 @@ npm test
 
 Tests require Chromium (`CHROMIUM_PATH` can override its location). In the cloud Chromium is `/usr/bin/chromium`. The browser tests use real keyboard/mouse events, with isolated position/enemy fixtures for focused checks. Their report distinguishes those checks from the full-route playthrough. See `review/validation.json`, `review/playthrough.json`, and `review/REVIEW.md`.
 
-The original game's preservation is checked with a SHA-256 manifest of **every previously tracked file**, captured before this project was added. The new branch adds only files below `inkbound-2d/`.
+The original game's preservation is checked with a SHA-256 manifest of **every previously tracked file**, captured before this project was added. This revision changes only `inkbound-2d/`. Both previous branches remain available; existing 3D files are unchanged.
 
 ## Prototype boundaries
 

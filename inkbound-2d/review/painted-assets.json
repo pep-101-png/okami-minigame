@@ -1,0 +1,14 @@
+{
+  "wolf_poses": 32,
+  "spirit_poses": 32,
+  "painted_props": 16,
+  "art_method": "AI-assisted painted sheets generated from supplied visual reference; timed sprite playback in game",
+  "sha256": {
+    "props.png": "881e31e00c5b672d15c26db96e2d2643f9e44bfc43ba5a2f47002521f566f6ae",
+    "spirits-walk.png": "68df6aa86d5451218efe25ad158f2c343b06109c2aeddcb2f6d37cec2936012f",
+    "spirits.png": "e9bf3800439e3343eeb5f70601bf1242bcb12a312437986201fdde38c5441483",
+    "wolf-motion.png": "535ba41ad9f0737e7f5926bcdd59172b236c4102e53c1a1d43e8d8b39119737d",
+    "landscape.png": "08caf4a65975fdfb2f712595c73ded54ba2f66eb57501531afad8f775d83f8f4",
+    "wolf-actions.png": "3ecbf5a3ab7b79bdcb97c586c3b9272d823d75422556eaa90b89e0b0f823a76c"
+  }
+}

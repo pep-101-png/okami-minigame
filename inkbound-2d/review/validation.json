@@ -1,9 +1,13 @@
 {
-  "date": "2026-10-13T10:22:29.396Z",
-  "target": "http://127.0.0.1:5192",
+  "date": "2026-10-14T01:59:09.958Z",
+  "target": "http://127.0.0.1:5198",
   "results": [
     {
       "name": "Drawn gesture recognition: line, oval, zigzag, spiral and curved water",
+      "status": "passed"
+    },
+    {
+      "name": "Painted character, spirit and prop atlases load with every frame intact",
       "status": "passed"
     },
     {

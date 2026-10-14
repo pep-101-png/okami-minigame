@@ -1,0 +1,56 @@
+{
+  "extracted_zip_runs_without_node_modules": true,
+  "game": {
+    "x": 419.9264509002202,
+    "state": "playing",
+    "art": {
+      "wolf-motion": {
+        "width": 1254,
+        "height": 1254,
+        "frames": 16,
+        "missing": 0
+      },
+      "wolf-actions": {
+        "width": 1254,
+        "height": 1254,
+        "frames": 16,
+        "missing": 0
+      },
+      "spirits": {
+        "width": 1254,
+        "height": 1254,
+        "frames": 16,
+        "missing": 0
+      },
+      "props": {
+        "width": 1254,
+        "height": 1254,
+        "frames": 16,
+        "missing": 0
+      },
+      "spirits-walk": {
+        "width": 1254,
+        "height": 1254,
+        "frames": 16,
+        "missing": 0
+      },
+      "landscape": {
+        "width": 2052,
+        "height": 766,
+        "frames": 1,
+        "missing": 0
+      }
+    }
+  },
+  "studio": {
+    "mode": "Defeat",
+    "dead": true
+  },
+  "studio_image_requests": [
+    "http://127.0.0.1:5200/art/wolf-motion.png",
+    "http://127.0.0.1:5200/art/wolf-actions.png"
+  ],
+  "errors": [],
+  "windows_batch_executed": false,
+  "physical_controller_tested": false
+}

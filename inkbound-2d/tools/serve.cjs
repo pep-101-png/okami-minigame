@@ -4,7 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
 const root = path.resolve(__dirname, "../dist");
-const port = Number(process.env.PORT) || 5180;
+const port = Number(process.env.PORT) || 5190;
 const mime = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
@@ -28,8 +28,14 @@ const server = http.createServer((req, res) => {
     res.end("Invalid path");
     return;
   }
-  let filename = path.resolve(root, "." + (url === "/" ? "/index.html" : url));
-  if (filename !== root && !filename.startsWith(root + path.sep)) {
+  const activeRoot = url.startsWith("/art/")
+    ? path.resolve(__dirname, "../public")
+    : root;
+  let filename = path.resolve(
+    activeRoot,
+    "." + (url === "/" ? "/index.html" : url),
+  );
+  if (filename !== activeRoot && !filename.startsWith(activeRoot + path.sep)) {
     res.writeHead(403);
     res.end("Forbidden");
     return;
@@ -59,7 +65,10 @@ server.on("error", (error) => {
   process.exitCode = 1;
 });
 server.listen(port, "127.0.0.1", () => {
-  const address = "http://localhost:" + port;
+  const address =
+    "http://localhost:" +
+    port +
+    (process.env.START_PAGE === "studio" ? "/wolf-studio.html" : "");
   console.log(
     "\nINKBOUND · The River Remembers\n" +
       address +

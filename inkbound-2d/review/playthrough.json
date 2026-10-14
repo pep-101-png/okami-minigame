@@ -1,116 +1,123 @@
 {
-  "date": "2026-10-13T10:27:41.135Z",
+  "date": "2026-10-14T01:46:58.669Z",
   "events": [
     {
       "msg": "Reached river alive",
-      "x": 1761,
+      "x": 1745,
       "hp": 8,
       "ink": 100,
       "state": "playing"
     },
     {
       "msg": "Willow restored and river gate opened",
-      "x": 1761,
+      "x": 1745,
       "hp": 8,
       "ink": 66,
       "state": "playing"
     },
     {
       "msg": "Armoured spirit defeated",
-      "x": 3359,
-      "hp": 8,
+      "x": 3384,
+      "hp": 7,
       "ink": 100,
       "state": "playing"
     },
     {
       "msg": "Grove imp defeated",
-      "x": 3359,
-      "hp": 8,
+      "x": 3384,
+      "hp": 7,
       "ink": 100,
       "state": "playing"
     },
     {
       "msg": "Flying spirit defeated",
-      "x": 3969,
-      "hp": 8,
-      "ink": 76,
+      "x": 4016,
+      "hp": 7,
+      "ink": 78,
       "state": "playing"
     },
     {
       "msg": "Brute defeated",
-      "x": 4317,
-      "hp": 4,
+      "x": 4242,
+      "hp": 5,
       "ink": 100,
       "state": "playing"
     },
     {
       "msg": "Grove restored",
-      "x": 3900,
+      "x": 3894,
       "hp": 8,
       "ink": 78,
       "state": "playing"
     },
     {
       "msg": "Boss awakened",
-      "x": 5099,
+      "x": 5096,
       "hp": 8,
       "ink": 100,
       "state": "playing"
     },
     {
       "msg": "Boss exchange 0 \u00b7 HP 34",
-      "x": 5634,
+      "x": 5580,
       "hp": 8,
-      "ink": 100,
+      "ink": 80,
       "state": "playing"
     },
     {
-      "msg": "Boss exchange 1 \u00b7 HP 29",
-      "x": 5401,
-      "hp": 6,
-      "ink": 89,
+      "msg": "Boss exchange 1 \u00b7 HP 28",
+      "x": 5443,
+      "hp": 8,
+      "ink": 62,
       "state": "playing"
     },
     {
-      "msg": "Boss exchange 2 \u00b7 HP 23",
-      "x": 5587,
-      "hp": 6,
-      "ink": 72,
-      "state": "playing"
-    },
-    {
-      "msg": "Boss exchange 3 \u00b7 HP 18",
-      "x": 5457,
-      "hp": 4,
-      "ink": 60,
-      "state": "playing"
-    },
-    {
-      "msg": "Boss exchange 4 \u00b7 HP 12",
-      "x": 5624,
-      "hp": 4,
+      "msg": "Boss exchange 2 \u00b7 HP 22",
+      "x": 5598,
+      "hp": 8,
       "ink": 44,
       "state": "playing"
     },
     {
-      "msg": "Boss exchange 5 \u00b7 HP 6",
-      "x": 5413,
-      "hp": 2,
-      "ink": 32,
+      "msg": "Boss exchange 3 \u00b7 HP 16",
+      "x": 5455,
+      "hp": 8,
+      "ink": 27,
       "state": "playing"
     },
     {
-      "msg": "Boss exchange 6 \u00b7 HP 0",
-      "x": 5677,
-      "hp": 2,
+      "msg": "Boss exchange 4 \u00b7 HP 10",
+      "x": 5587,
+      "hp": 8,
+      "ink": 10,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 5 \u00b7 HP 6",
+      "x": 5450,
+      "hp": 8,
       "ink": 16,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 6 \u00b7 HP 2",
+      "x": 5592,
+      "hp": 8,
+      "ink": 22,
+      "state": "playing"
+    },
+    {
+      "msg": "Boss exchange 7 \u00b7 HP -3",
+      "x": 5449,
+      "hp": 8,
+      "ink": 17,
       "state": "playing"
     },
     {
       "msg": "Chapter finished",
       "x": 6352,
-      "hp": 2,
-      "ink": 25,
+      "hp": 8,
+      "ink": 29,
       "state": "won"
     }
   ],

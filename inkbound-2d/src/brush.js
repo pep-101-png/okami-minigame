@@ -121,8 +121,8 @@ export class Brush {
         if (
           !e.dead &&
           nearLine(
-            { x: e.x, y: e.y - (e.type === "boss" ? 90 : 40) },
-            e.type === "boss" ? 95 : 48,
+            { x: e.x, y: e.y - (e.type === "boss" ? 160 : 40) },
+            e.type === "boss" ? 150 : 48,
           )
         ) {
           if (e.type === "boss" && !w.bossAwake) continue;

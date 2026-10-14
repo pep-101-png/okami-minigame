@@ -220,7 +220,7 @@ export class Game {
       this.particles = this.particles.filter((p) => p.life > 0);
     }
     this.renderer.updateCamera(this, dt);
-    this.renderHUD();
+    if (!this.deferHUD) this.renderHUD();
     this.input.end();
   }
   objective() {
@@ -255,7 +255,7 @@ export class Game {
           "Read the spirits’ golden tells, dodge their attacks, and use ink to break guarded seals.",
         won: "The grove blooms, the river runs clear, and the guardian is free. You have completed this first chapter.",
       }[this.state];
-      overlay = `<div class="overlay"><div class="card"><div class="eyebrow">INKBOUND · CHAPTER ONE</div><h1>${title}</h1><p>${detail}</p><div class="keys">A / D · Move &nbsp; SHIFT · Sprint &nbsp; CTRL · Walk &nbsp; SPACE · Jump<br>J / Left click · Combo &nbsp; L / Right click · Heavy &nbsp; K · Dodge<br>B / TAB · Draw with the brush &nbsp; Q / 1–3 · Weapon &nbsp; ESC · Pause<br>Brush: line = cut · circle = bloom · zigzag = wind · spiral = bomb<br>Controller: left stick move · A jump · X/Y attack · B dodge<br>RB brush · right stick draws · RT holds the brush</div><button id="play">${this.state === "title" ? "FOLLOW THE RIVER →" : this.state === "paused" ? "RESUME →" : "PLAY AGAIN →"}</button><button id="mute">${this.audio.muted ? "SOUND OFF" : "SOUND ON"}</button></div></div>`;
+      overlay = `<div class="overlay"><div class="card"><div class="eyebrow">INKBOUND · CHAPTER ONE</div><h1>${title}</h1><p>${detail}</p><div class="keys">A / D · Move &nbsp; SHIFT · Sprint &nbsp; CTRL · Walk &nbsp; SPACE · Jump<br>J / Left click · Combo &nbsp; L / Right click · Heavy &nbsp; K · Dodge<br>B / TAB · Draw with the brush &nbsp; Q / 1–3 · Weapon &nbsp; ESC · Pause<br>Brush: line = cut · circle = bloom · zigzag = wind · spiral = bomb<br>Controller: left stick move · A jump · X/Y attack · B dodge<br>RB brush · right stick draws · RT holds the brush</div><button id="play">${this.state === "title" ? "FOLLOW THE RIVER →" : this.state === "paused" ? "RESUME →" : "PLAY AGAIN →"}</button><button id="mute">${this.audio.muted ? "SOUND OFF" : "SOUND ON"}</button><p><a href="/wolf-studio.html">Inspect wolf animations →</a></p></div></div>`;
     }
     root.innerHTML = `<div class="hud"><div class="brand">INKBOUND <span style="color:#b3483a">❀</span></div><div class="meter" id="health"></div><div class="ink"><i id="ink-fill"></i></div><div class="small" id="weapon"></div></div><div class="objective" id="objective"></div><div class="toast" id="toast"></div><div class="help">A D · move &nbsp; SHIFT · sprint &nbsp; SPACE · jump &nbsp; J / L · attacks &nbsp; K · dodge &nbsp; B · brush &nbsp; Q · weapon &nbsp; ESC · pause</div><div class="boss hidden" id="boss">KUROBANE · BROKEN RIVER GUARDIAN<div class="track"><i id="boss-fill"></i></div></div><div class="brush-note ${this.brush.active ? "" : "hidden"}">Time rests on the paper. Draw → release to cast. B to return.<br><small>Line: slash · Circle: bloom · Zigzag: wind · Spiral: bomb · River → basin: water</small></div>${overlay}`;
     document.querySelector("#play")?.addEventListener("click", () => {

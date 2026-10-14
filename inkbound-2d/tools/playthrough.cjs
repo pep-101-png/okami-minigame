@@ -145,26 +145,43 @@ const fs = require("fs");
   await go(5100);
   await log("Boss awakened");
   await page.waitForTimeout(2500);
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 28; i++) {
     let e = await ev(() =>
       inkbound.game.world.enemies.find((e) => e.type === "boss"),
     );
     if (e.dead) break;
-    const idx = 8;
-    if ((await ev(() => inkbound.game.player.ink)) > 27) {
-      await cutEnemy(idx);
-      await cutEnemy(idx);
-    } else if (e.exposed < 0.9) await cutEnemy(idx);
+    let p = await ev(() => ({
+      x: inkbound.game.player.x,
+      ink: inkbound.game.player.ink,
+    }));
+    await go(e.x + (p.x < e.x ? -135 : 135), false);
+    e = await ev(() =>
+      inkbound.game.world.enemies.find((e) => e.type === "boss"),
+    );
+    p = await ev(() => ({
+      x: inkbound.game.player.x,
+      ink: inkbound.game.player.ink,
+    }));
+    if (Math.abs(e.x - p.x) > 195) {
+      await page.keyboard.press("Space");
+      await page.keyboard.press("KeyK");
+      await page.waitForTimeout(260);
+      continue;
+    }
+    const face = e.x > p.x ? "KeyD" : "KeyA";
+    await page.keyboard.down(face);
+    await page.waitForTimeout(35);
+    await page.keyboard.up(face);
+    if (p.ink > 27) {
+      await cutEnemy(8);
+      await cutEnemy(8);
+    } else if (e.exposed < 0.9) await cutEnemy(8);
     e = await ev(() =>
       inkbound.game.world.enemies.find((e) => e.type === "boss"),
     );
     if (e.dead) break;
-    await go(e.x - 100, false);
-    await page.keyboard.down("KeyD");
-    await page.waitForTimeout(35);
-    await page.keyboard.up("KeyD");
     await page.keyboard.press("KeyL");
-    await page.waitForTimeout(420);
+    await page.waitForTimeout(450);
     await page.keyboard.press("KeyK");
     await page.waitForTimeout(330);
     await log(

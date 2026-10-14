@@ -97,6 +97,21 @@ await test("Drawn gesture recognition: line, oval, zigzag, spiral and curved wat
     "water",
   );
 });
+await test("Painted character, spirit and prop atlases load with every frame intact", async () => {
+  await fresh();
+  const stats = await ev(() => inkbound.artStatus());
+  for (const name of [
+    "wolf-motion",
+    "wolf-actions",
+    "spirits",
+    "spirits-walk",
+    "props",
+  ]) {
+    assert.equal(stats[name].frames, 16);
+    assert.equal(stats[name].missing, 0);
+  }
+  assert.equal(stats.landscape.frames, 1);
+});
 await test("Keyboard acceleration, sprint and turning", async () => {
   await fresh();
   const x = await ev(() => inkbound.game.player.x);
@@ -233,11 +248,17 @@ await test("Water stroke fills basin, opens gate, and unlocked double jump works
   await page.keyboard.press("KeyB");
   await fixture(2200);
   await page.keyboard.press("Digit2");
+  await page.waitForFunction(() => inkbound.game.player.weapon === 1);
   assert.equal(await ev(() => inkbound.game.player.weapon), 1);
   await page.keyboard.down("Space");
   await page.waitForTimeout(160);
   await page.keyboard.up("Space");
   await page.keyboard.press("Space");
+  await page.waitForFunction(
+    () => inkbound.game.player.jumps === 2,
+    undefined,
+    { timeout: 1500 },
+  );
   assert.equal(await ev(() => inkbound.game.player.jumps), 2);
 });
 await test("Mouse Wind gust rings chime and reflects incoming projectiles", async () => {
@@ -325,7 +346,7 @@ await test("Actual spiral summons timed bomb and breaks ancient wall", async () 
   await draw(spiral(4730, 505));
   assert.equal(await ev(() => inkbound.game.world.bombs.length), 1);
   await page.keyboard.press("KeyB");
-  await page.waitForTimeout(1300);
+  await page.waitForFunction(() => inkbound.game.world.wall.broken);
   assert(await ev(() => inkbound.game.world.wall.broken));
 });
 await test("Boss introduction, brush seal break and lower-health phase change", async () => {

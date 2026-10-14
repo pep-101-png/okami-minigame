@@ -1,4 +1,11 @@
 import { drawWolf } from "./wolf-art.js";
+import {
+  drawPaintedWolf,
+  drawPaintedEnemy,
+  drawPaintedBackdrop,
+  drawPaintedProp,
+  drawPaintedLedge,
+} from "./painted-art.js";
 import { clamp, damp, lerp, seeded } from "./math.js";
 const INK = "#3b3d34";
 function path(c, d, fill, stroke = INK, width = 2) {
@@ -114,7 +121,7 @@ export class Renderer {
     c.save();
     if (p.hurt > 0 && Math.floor(p.hurt * 16) % 2) c.globalAlpha = 0.55;
     ellipse(c, p.x, p.y + 5, 55, 6, "#29382c25");
-    drawWolf(c, p, g.time);
+    if (!drawPaintedWolf(c, p, g.time)) drawWolf(c, p, g.time);
     c.restore();
     this.weapon(c, p, g.time);
     for (const pr of g.world.projectiles) {
@@ -160,6 +167,7 @@ export class Renderer {
     if (g.brush.active) this.brush(c, g);
   }
   background(c, g, curse) {
+    if (drawPaintedBackdrop(c, this.camera, g.time, curse)) return;
     const cx = this.camera.x;
     const sky = c.createLinearGradient(0, 0, 0, 720);
     sky.addColorStop(0, curse ? "#c2bdc0" : "#e6dbc1");
@@ -240,6 +248,7 @@ export class Renderer {
     c.restore();
   }
   pagoda(c, x, y, s = 1) {
+    if (drawPaintedProp(c, 5, x, y, 260 * s)) return;
     c.save();
     c.translate(x, y);
     c.scale(s, s);
@@ -273,6 +282,16 @@ export class Renderer {
     c.restore();
   }
   tree(c, tree, t, corrupt = false) {
+    if (
+      drawPaintedProp(
+        c,
+        tree.restored ? 0 : 1,
+        tree.x,
+        tree.y,
+        tree.restored ? 290 : 240,
+      )
+    )
+      return;
     c.save();
     c.translate(tree.x, tree.y);
     const live = tree.restored;
@@ -399,6 +418,7 @@ export class Renderer {
           );
         }
       } else {
+        if (drawPaintedLedge(c, p)) continue;
         path(
           c,
           `M ${p.x} ${p.y} L ${p.x + p.w} ${p.y} L ${p.x + p.w - 18} ${p.y + 25} L ${p.x + 20} ${p.y + 36} Z`,
@@ -456,9 +476,7 @@ export class Renderer {
     if (left < 720) {
       this.pagoda(c, 390, 575, 0.75);
       this.torii(c, 80, 575, 0.75);
-      path(c, "M 535 575 L 535 507 L 630 507 L 630 575 Z", "#d0b08a", INK, 2);
-      path(c, "M 518 510 L 575 467 L 648 510 Z", "#576951", INK, 2);
-      path(c, "M 552 573 L 552 534 L 569 534 L 569 573 Z", "#675444", INK, 1);
+      drawPaintedProp(c, 4, 580, 575, 180);
     }
     if (right > 5000) {
       this.torii(c, 5050, 580, 1.15);
@@ -547,26 +565,17 @@ export class Renderer {
     ellipse(c, 0, 0, 32, 8, "#add7c555");
     path(c, "M 0 -36 q -13 19 0 29 q 13 -10 0 -29 Z", "#80c0c0", "#3d6c6d", 1);
     c.restore();
-    if (!w.wall.broken) {
-      c.save();
-      c.translate(w.wall.x, w.wall.y);
-      path(
-        c,
-        "M -30 0 L -34 -105 L -15 -127 L 18 -114 L 34 -82 L 30 0 Z",
-        "#8e8f7c",
-        INK,
-        2,
-      );
-      path(c, "M -8 -119 L 4 -80 L -13 -57 L 7 -30 L -2 0", null, "#484d47", 2);
-      path(
-        c,
-        "M -10 -62 q -17 -20 0 -31 q 18 -10 21 8 q 0 17 -17 11",
-        null,
-        "#b6896d",
-        2,
-      );
-      c.restore();
-    }
+    if (!w.wall.broken) drawPaintedProp(c, 14, w.wall.x, w.wall.y, 125);
+    for (let x = 40; x < 6700; x += 280)
+      if (x > left && x < right) {
+        c.save();
+        const cursed = x > 3290 && x < 5000 && !w.restored;
+        if (cursed) c.filter = "grayscale(1) brightness(.65)";
+        drawPaintedProp(c, 7, x, groundLevel(w, x) + 32, 130, 60);
+        if (!cursed)
+          drawPaintedProp(c, 12, x + 90, groundLevel(w, x) + 3, 125, 44);
+        c.restore();
+      }
     // Plants are seeded per location, and visibly recolour after restoration.
     const plantRng = seeded(7);
     for (let x = 90; x < 6600; x += 38) {
@@ -634,6 +643,7 @@ export class Renderer {
     }
   }
   torii(c, x, y, s) {
+    if (drawPaintedProp(c, 2, x, y, 270 * s)) return;
     c.save();
     c.translate(x, y);
     c.scale(s, s);
@@ -661,7 +671,8 @@ export class Renderer {
     c.save();
     c.translate(item.x, item.y + Math.sin(t * 2 + item.x) * 5);
     wash(c, 0, 0, 15, 10, "#e1ba67");
-    if (item.kind === "treasure") {
+    if (item.kind === "treasure" && drawPaintedProp(c, 15, 0, 12, 45)) {
+    } else if (item.kind === "treasure") {
       path(c, "M -17 -9 L 17 -9 L 17 11 L -17 11 Z", "#b8874d", INK, 1.5);
       path(c, "M -17 -9 Q 0 -21 17 -9 Z", "#d0a65b", INK, 1.5);
       path(c, "M -4 -13 L 4 -13 L 4 8 L -4 8 Z", "#e3c67b", INK, 1);
@@ -672,6 +683,48 @@ export class Renderer {
     c.restore();
   }
   enemy(c, e, g) {
+    if (drawPaintedEnemy(c, e)) {
+      if (!e.dead) {
+        if (e.state === "tell") {
+          c.fillStyle = "#d99a44";
+          c.font = "bold 26px Georgia";
+          c.fillText("!", e.x - 6, e.y - (e.type === "boss" ? 375 : 160));
+          c.strokeStyle = "#d8a75a";
+          c.lineWidth = 3;
+          c.beginPath();
+          c.ellipse(
+            e.x,
+            e.y + 2,
+            e.type === "boss" ? 110 : 54,
+            7,
+            0,
+            0,
+            Math.PI * 2,
+          );
+          c.stroke();
+        }
+        if (e.type === "armour" || e.type === "boss") {
+          let yy = e.y - (e.type === "boss" ? 145 : 85);
+          c.fillStyle = e.exposed > 0 ? "#e8bb73" : "#9672a1";
+          c.beginPath();
+          c.arc(e.x, yy, 10, 0, Math.PI * 2);
+          c.fill();
+          c.strokeStyle = "#f8dfae";
+          c.lineWidth = 2;
+          c.beginPath();
+          c.moveTo(e.x - 6, yy);
+          c.lineTo(e.x + 6, yy);
+          c.stroke();
+        }
+        if (e.hp < e.maxHp && e.type !== "boss") {
+          c.fillStyle = "#76695c55";
+          c.fillRect(e.x - 25, e.y - 175, 50, 3);
+          c.fillStyle = "#af5149";
+          c.fillRect(e.x - 25, e.y - 175, (50 * e.hp) / e.maxHp, 3);
+        }
+      }
+      return;
+    }
     if (e.dead && e.death > 1) return;
     c.save();
     c.translate(e.x, e.y);
@@ -848,7 +901,7 @@ export class Renderer {
       pulse = Math.sin(q * Math.PI),
       dir = p.facing;
     c.save();
-    c.translate(p.x, p.y - 48);
+    c.translate(p.x, p.y - 115);
     c.scale(dir, 1);
     c.globalAlpha = clamp(pulse * 1.6, 0, 1);
     let angle = (-1.6 + q * 3.8) * (a.combo === 2 ? -1 : 1);
