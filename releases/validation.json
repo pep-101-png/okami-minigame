@@ -1,0 +1,46 @@
+{
+  "finished_utc": "2026-10-14T07:58:22.887245+00:00",
+  "archive_bytes": 22416759,
+  "sha256": "3e61171789ec5a3a994e11d0786d3382ea97e27967913878e3f928682839ea7a",
+  "smoke_checks_passed": 20,
+  "smoke_checks_failed": 0,
+  "fur_and_attack_checks": "passed",
+  "asset_validation": {
+    "run_contact_error": 0.000162,
+    "fur_bones": 8,
+    "tail_tip_height": {
+      "Idle": 1.953,
+      "Walk": 2.527,
+      "Run": 3.268
+    },
+    "body_volume": 15.2341,
+    "skin_joints": 39,
+    "clips": [
+      "AirStrike",
+      "Bark",
+      "ChargedHeavy",
+      "ChargedThrust",
+      "ChargeHeavy",
+      "ChargeLight",
+      "Dodge",
+      "Finish",
+      "Growl",
+      "HeavyArc",
+      "HeavyReturn",
+      "Howl",
+      "Hurt",
+      "Idle",
+      "JumpFall",
+      "JumpRise",
+      "Land",
+      "Run",
+      "Sweep",
+      "Thrust",
+      "Walk"
+    ],
+    "contact_error": 6.5e-05,
+    "max_joint_bend_degrees": 78.99,
+    "loop_error": 1e-06,
+    "embedded_images": 2
+  }
+}

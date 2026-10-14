@@ -1,0 +1,37 @@
+{
+  "fur_vertices": {
+    "ruffL": 217,
+    "shoulderFurL": 283,
+    "foreFurL": 182,
+    "hindFurL": 260,
+    "ruffR": 265,
+    "shoulderFurR": 281,
+    "foreFurR": 176,
+    "hindFurR": 251
+  },
+  "actions": [
+    "Thrust",
+    "Sweep",
+    "Finish",
+    "HeavyArc",
+    "HeavyReturn",
+    "ChargedThrust",
+    "ChargedHeavy",
+    "AirStrike",
+    "JumpRise",
+    "JumpFall",
+    "Land",
+    "Dodge",
+    "ChargeLight",
+    "ChargeHeavy",
+    "Bark",
+    "Growl",
+    "Hurt",
+    "Howl"
+  ],
+  "tail_states": [
+    "Idle",
+    "Walk",
+    "Run"
+  ]
+}

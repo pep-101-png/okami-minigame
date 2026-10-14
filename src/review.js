@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { wolf, loadWolf } from "./wolf.js";
+import { wolf, loadWolf } from "./divine-wolf.js";
 await loadWolf();
 import { animateWolf } from "./animation.js";
 import { createPainterlyRenderer } from "./rendering.js";

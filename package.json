@@ -9,7 +9,8 @@
     "preview": "vite preview --host 0.0.0.0",
     "test:smoke": "node tools/smoke-test.mjs",
     "test:wolf": "node tools/wolf-abilities-test.mjs",
-    "test:foundation": "node tools/foundation-test.mjs"
+    "test:foundation": "node tools/foundation-test.mjs",
+    "test:divine": "node tools/divine-wolf-test.mjs"
   },
   "dependencies": {
     "three": "^0.180.0"

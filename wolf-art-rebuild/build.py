@@ -23,6 +23,15 @@ for o in meshes:
  # Keep the original body while replacing its coarse stock tail in this derivative.
  if o.name in ['Object_2','Object_6','Object_10','Object_11']:
   bm=bmesh.new();bm.from_mesh(o.data);remove=[v for v in bm.verts if v.co.y>2.89 or (v.co.y>2.35 and abs(v.co.x)<.46 and 1.05<v.co.z<3.05)];bmesh.ops.delete(bm,geom=remove,context='VERTS');bmesh.ops.holes_fill(bm,edges=[e for e in bm.edges if e.is_boundary],sides=0);bmesh.ops.recalc_face_normals(bm,faces=list(bm.faces));bm.to_mesh(o.data);bm.free()
+ # Fold the stock shoulder spike into a low, swept-back fur fold.
+ for v in o.data.vertices:
+  x,y,z=v.co
+  if -.0>y>-2.05 and abs(x)>.55 and z>3.72:
+   lateral=max(0,min(1,(abs(x)-.55)/.28))
+   height=max(0,min(1,(z-3.72)/.78))
+   region=max(0,min(1,(y+2.05)/.55))*max(0,min(1,(-y)/.45))
+   w=lateral*height*region
+   v.co.z-=.68*w;v.co.y+=.30*w
  o.data.update()
 # Layered ivory coat: warm dorsal planes, cool underfur, irregular brush grain.
 fur=bpy.data.materials.new('Ivory fur - warm light cool shadow');fur.use_nodes=True
@@ -66,13 +75,13 @@ faces.append(tuple(range(31,-1,-1)));faces.append(tuple((len(rings)-1)*32+k for 
 mesh=bpy.data.meshes.new('Continuous layered ruff');mesh.from_pydata(verts,[],faces);mesh.update();obj=bpy.data.objects.new('Continuous layered ruff',mesh);bpy.context.collection.objects.link(obj);obj.data.materials.append(fur)
 for f in mesh.polygons:f.use_smooth=True
 meshes.append(obj)
+# A few embedded, unequal tufts replace the repeated fin-like stack.
 for side in [-1,1]:
- for i in range(5):
-  z=4.73-i*.25;y=-2.70+i*.18;x=side*(.52+.075*i)
-  plume('Mane_%s_%s'%(side,i),(x,y,z),(x+side*.16,y+.70,z-.17),.23,.062)
+ for i,(y,z,length,width) in enumerate([(-2.67,4.48,.43,.13),(-2.30,3.97,.47,.17),(-1.99,3.57,.38,.14)]):
+  x=side*(.53+i*.115)
+  plume('Mane_%s_%s'%(side,i),(x,y,z),(x+side*.045,y+length,z-.22),width,.10)
  for i in range(2):
-  plume('Cheek_%s_%s'%(side,i),(side*.45,-2.98+i*.17,4.26-i*.15),(side*(.65+i*.06),-2.44+i*.22,4.08-i*.19),.15,.045)
-for i in range(2):plume('Dorsal_%s'%i,(0,-1.65+i*.27,4.55),(0,-.78+i*.35,4.58),.16,.065)
+  plume('Cheek_%s_%s'%(side,i),(side*.45,-2.98+i*.17,4.26-i*.15),(side*(.59+i*.04),-2.57+i*.18,4.05-i*.19),.10,.065)
 # A tapered curled tail, with a rounded fur volume rather than a flat paddle.
 path=[(2.15,3.04,.28,.22),(2.70,3.09,.37,.32),(3.20,3.24,.44,.40),(3.65,3.53,.36,.34),(4.02,3.90,.23,.22),(4.22,4.14,.07,.075),(4.24,4.29,.003,.003)]
 verts=[];faces=[]
@@ -243,16 +252,20 @@ for name,(joints,leg,side) in leg_specs.items():
  level=rig.pose.bones[leg+'Paw'+side].constraints.new('COPY_ROTATION');level.target=rig;level.subtarget=name+'Level';level.target_space='WORLD';level.owner_space='WORLD'
  print('REST_JOINT_ERROR',name,best[0])
 # Feet push back on the ground, then flex and recover during the swing.
-for clip,duration in [('Idle',96),('Walk',48)]:
+for clip,duration in [('Idle',96),('Walk',48),('Run',30)]:
  rig.animation_data_create();action=bpy.data.actions.new(clip);rig.animation_data.action=action
  for f in range(1,duration+2):
   cycle=(f-1)/duration;phase=cycle*math.tau
   for b in rig.pose.bones:b.rotation_mode='XYZ';b.rotation_euler=(0,0,0);b.location=(0,0,0)
-  rig.pose.bones['body'].location.z=-.36+.045*math.sin(phase*2) if clip=='Walk' else .012*math.sin(phase)
+  rig.pose.bones['body'].location.z=-.36+.045*math.sin(phase*2) if clip=='Walk' else -.48+.065*math.sin(phase*2) if clip=='Run' else .012*math.sin(phase)
   rig.pose.bones['body'].rotation_euler.x=.008*math.sin(phase*2)
   rig.pose.bones['head'].rotation_euler.x=.012*math.sin(phase*2+.6)
-  rig.pose.bones['tail'].rotation_euler.z=.09*math.sin(phase-.7)
-  rig.pose.bones['tailTip'].rotation_euler.z=.11*math.sin(phase-1.3)
+  # Gravity at rest; speed lifts the tail. Tip motion trails the root.
+  tail_drop={'Idle':-.95,'Walk':-.48,'Run':.08}[clip]
+  rig.pose.bones['tail'].rotation_euler.x=tail_drop+(.025 if clip=='Idle' else .045)*math.sin(phase-.4)
+  rig.pose.bones['tailTip'].rotation_euler.x={'Idle':-.32,'Walk':-.12,'Run':-.28}[clip]+.055*math.sin(phase-1.05)
+  rig.pose.bones['tail'].rotation_euler.z=(.025 if clip=='Idle' else .07)*math.sin(phase-.7)
+  rig.pose.bones['tailTip'].rotation_euler.z=(.035 if clip=='Idle' else .10)*math.sin(phase-1.3)
   rig.pose.bones['chest'].rotation_euler.y=.045*math.sin(phase) if clip=='Walk' else .009*math.sin(phase)
   rig.pose.bones['hips'].rotation_euler.y=-.038*math.sin(phase) if clip=='Walk' else 0
   rig.pose.bones['chest'].rotation_euler.x=.024*math.sin(phase*2+.3) if clip=='Walk' else 0
@@ -264,11 +277,15 @@ for clip,duration in [('Idle',96),('Walk',48)]:
    offset={('fore','L'):0,('hind','R'):.25,('fore','R'):.5,('hind','L'):.75}[(leg,side)]
    t=(cycle+offset)%1
    stride=2.05 if leg=='fore' else 1.78
-   if clip=='Walk':
-    if t<.62:
-     u=t/.62;dy=-stride/2+stride*u;lift=0;curl=0
+   if clip in ['Walk','Run']:
+    contact=.62 if clip=='Walk' else .44
+    if clip=='Run':
+     stride=2.55 if leg=='fore' else 2.25
+     t=(cycle+{('fore','L'):0,('fore','R'):.07,('hind','L'):.48,('hind','R'):.55}[(leg,side)])%1
+    if t<contact:
+     u=t/contact;dy=-stride/2+stride*u;lift=0;curl=0
     else:
-     u=(t-.62)/.38;v=.38/.62;dy=stride*(.5+v*u-(1+v)*(10*u**3-15*u**4+6*u**5));lift=(.44 if leg=='fore' else .34)*math.sin(math.pi*u)**3;curl=.39*math.sin(math.pi*u)**3
+     u=(t-contact)/(1-contact);v=(1-contact)/contact;dy=stride*(.5+v*u-(1+v)*(10*u**3-15*u**4+6*u**5));lift=((.44 if leg=='fore' else .34) if clip=='Walk' else .72)*math.sin(math.pi*u)**3;curl=.39*math.sin(math.pi*u)**3
     target=rig.pose.bones[name+'Target'];target.location=target.bone.matrix_local.to_3x3().inverted() @ Vector((0,dy,lift))
     # Paw counter-rotation keeps the sole level during contact.
     rig.pose.bones[name+'Level'].rotation_euler.x=-curl
@@ -328,11 +345,13 @@ for pos,power in [((5,-6,10),1700),((-5,1,8),650)]:
  bpy.ops.object.light_add(type='AREA',location=pos);l=bpy.context.object;l.data.energy=power;l.data.size=5;l.rotation_euler=(Vector((0,0,2.5))-l.location).to_track_quat('-Z','Y').to_euler()
 bpy.ops.object.camera_add(location=(13,-7,7));camera=bpy.context.object;camera.rotation_euler=(Vector((0,0,2.5))-camera.location).to_track_quat('-Z','Y').to_euler();camera.data.type='ORTHO';camera.data.ortho_scale=11;scene.camera=camera
 scene.render.resolution_x=1000;scene.render.resolution_y=800;scene.render.resolution_percentage=100
-scene.frame_set(1);scene.cycles.samples=32 if draft else 128;scene.render.filepath=str(review/(revision+'-body.png'));bpy.ops.render.render(write_still=True)
+scene.frame_set(1);scene.cycles.samples=24 if draft else 64;scene.render.filepath=str(review/(revision+'-body.png'));bpy.ops.render.render(write_still=True)
 bpy.ops.wm.save_as_mainfile(filepath=str(root/'wolf.blend'))
 rig.animation_data.action=bpy.data.actions['Walk']
-scene.render.resolution_x=640;scene.render.resolution_y=512;scene.cycles.samples=12 if draft else 32
-frames=[1,9,17,25,33,41] if draft else range(1,49)
-for f in frames:
- scene.frame_set(f);scene.render.filepath=str(Path('/tmp')/f'{revision}-walk-{f:02}.png');bpy.ops.render.render(write_still=True)
+scene.render.resolution_x=640;scene.render.resolution_y=512;scene.cycles.samples=12 if draft else 20
+for clip,length in [('Idle',96),('Walk',48),('Run',30)]:
+ rig.animation_data.action=bpy.data.actions[clip]
+ frames=[1,length//3,2*length//3] if draft else range(1,length+1,2 if clip=='Idle' else 1)
+ for f in frames:
+  scene.frame_set(f);scene.render.filepath=str(Path('/tmp')/f'{revision}-{clip.lower()}-{f:02}.png');bpy.ops.render.render(write_still=True)
 print('ART_REBUILD_COMPLETE',revision)

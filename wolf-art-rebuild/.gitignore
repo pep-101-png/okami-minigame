@@ -1,3 +1,5 @@
 /review/r[0-9]*.png
 *.blend1
 __pycache__/
+
+/review/soft-draft*

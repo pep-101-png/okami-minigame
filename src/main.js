@@ -4,7 +4,7 @@ import { Input } from "./input.js";
 import { createTown } from "./town.js";
 import { ATTACKS } from "./combat.js";
 import { Game } from "./game.js";
-import { loadWolf } from "./wolf.js";
+import { loadWolf } from "./divine-wolf.js";
 import { FollowCamera } from "./camera.js";
 import { createPainterlyRenderer } from "./rendering.js";
 
