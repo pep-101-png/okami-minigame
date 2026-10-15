@@ -7,13 +7,13 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 const parameters=new URLSearchParams(location.search);const baseline=parameters.has('baseline');
 if(parameters.has('compare'))document.querySelector('main').style.display='none';
 const scene=new THREE.Scene();scene.background=new THREE.Color('#e8dfc8');scene.fog=new THREE.Fog('#e8dfc8',16,35);
-scene.add(new THREE.HemisphereLight('#fff8e9','#85847c',1.55));
-const key=new THREE.DirectionalLight('#fff2d7',2.1);key.position.set(-4,7,5);key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.camera.left=-6;key.shadow.camera.right=6;key.shadow.camera.top=6;key.shadow.camera.bottom=-6;key.shadow.normalBias=.018;scene.add(key);
-const fill=new THREE.DirectionalLight('#dce8ed',.65);fill.position.set(4,3,-4);scene.add(fill);
+scene.add(new THREE.HemisphereLight('#fff8e9','#85847c',.9));
+const key=new THREE.DirectionalLight('#fff2d7',2.6);key.position.set(4,6,-3);key.castShadow=true;key.shadow.mapSize.set(2048,2048);key.shadow.camera.left=-6;key.shadow.camera.right=6;key.shadow.camera.top=6;key.shadow.camera.bottom=-6;key.shadow.normalBias=.018;scene.add(key);
+const fill=new THREE.DirectionalLight('#dce8ed',.7);fill.position.set(-4,3,2);scene.add(fill);
 const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.02;document.body.append(renderer.domElement);
 const camera=new THREE.PerspectiveCamera(34,innerWidth/innerHeight,.1,80);camera.position.set(-7.5,3.1,-.1);
 const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,1,-.45);controls.enableDamping=true;controls.minDistance=1.2;controls.maxDistance=12;controls.maxPolarAngle=Math.PI*.48;
-const floor=new THREE.Mesh(new THREE.PlaneGeometry(80,80),new THREE.MeshStandardMaterial({color:'#d2c7a9',roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=-.008;floor.receiveShadow=true;scene.add(floor);
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(80,80),new THREE.MeshStandardMaterial({color:'#d2c7a9',roughness:1}));floor.rotation.x=-Math.PI/2;floor.position.y=-.008;floor.receiveShadow=true;floor.renderOrder=-2;scene.add(floor);
 const markers=new THREE.Group();scene.add(markers);for(let i=0;i<40;i++){const line=new THREE.Mesh(new THREE.PlaneGeometry(8,.012),new THREE.MeshBasicMaterial({color:'#aa9e83',transparent:true,opacity:.38,depthWrite:false}));line.rotation.x=-Math.PI/2;line.position.set(0,.001,(i-20)*.35);markers.add(line);}
 const status=document.querySelector('#status'),select=document.querySelector('#animation'),scrub=document.querySelector('#scrub');
 let model,mixer,action,clips=[],motion={},skeleton,paused=false,rate=1,groundDistance=0,fade=0,groundSpeed=0,last=performance.now(),idleBindings=[],idleBlend=1,walkBlend=0,tail,fur;

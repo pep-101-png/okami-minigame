@@ -1,29 +1,85 @@
 {
+  "reviewedAtUTC": "2026-10-15T08:18:23.896462+00:00",
   "preview": "releases/wolf-fur-preview.mp4",
-  "frames": 180,
-  "fps": 24,
-  "seconds": 7.5,
-  "runtimeErrors": [],
-  "maxBendRadians": {
-    "ruffL": 0.003131465564723741,
-    "ruffLFlow": 0.06760146003974242,
-    "ruffLTip": 0.13002926960320807,
-    "ruffR": 0.003131465564723741,
-    "ruffRFlow": 0.06788729324073244,
-    "ruffRTip": 0.13043726616404622,
-    "shoulderFurL": 0.0028378418081657615,
-    "shoulderFurLFlow": 0.07213893646383888,
-    "shoulderFurLTip": 0.13457191296745788,
-    "shoulderFurR": 0.0028378418081657615,
-    "shoulderFurRFlow": 0.07521427297158255,
-    "shoulderFurRTip": 0.14207204039335344
+  "video": {
+    "seconds": 8,
+    "fps": 24,
+    "frames": 192,
+    "size": [
+      1280,
+      720
+    ],
+    "errors": [],
+    "comparison": "First 3 seconds: a still from the previous 4bf339c video on the left and the new animated model on the right. Then a new-model camera pullback. Only cropping, labels and MP4 encoding added."
   },
-  "checks": [
-    "Production build passed",
-    "Actual Chromium-rendered model; close shoulder view followed by full-body pullback",
-    "Reviewed frames 0, 72, 96, 144: old jagged atlas patches removed; loose upper tip changes position while curl base remains anchored",
-    "Colour and tangent normals rebaked into clean UV islands; AO embedded",
-    "Existing viewer ZIP and both games unchanged"
+  "native": {
+    "nativeVertices": 44506,
+    "nativeFaces": 44506,
+    "boundaryEdges": 0,
+    "nonManifoldEdges": 0,
+    "correctiveShapes": 48
+  },
+  "browser": {
+    "vertices": 50971,
+    "triangles": 89012,
+    "morphs": 48,
+    "clips": [
+      "Idle",
+      "Walk",
+      "Run",
+      "Jump",
+      "JumpRise",
+      "JumpFall",
+      "Land",
+      "AirStrike",
+      "Bark",
+      "ChargedHeavy",
+      "ChargedThrust",
+      "ChargeHeavy",
+      "ChargeLight",
+      "Dodge",
+      "Finish",
+      "Growl",
+      "HeavyArc",
+      "HeavyReturn",
+      "Howl",
+      "Hurt",
+      "Sweep",
+      "Thrust"
+    ],
+    "bindings": {
+      "skinWeight": {
+        "min": 0.9999999478459358,
+        "max": 1.0000000521540642,
+        "invalid": 0
+      },
+      "_idle_skin_weight": {
+        "min": 0.9999998705461621,
+        "max": 1.0000001303851604,
+        "invalid": 0
+      },
+      "_walk_skin_weight": {
+        "min": 0.9999998826533556,
+        "max": 1.0000001154839993,
+        "invalid": 0
+      }
+    },
+    "errors": []
+  },
+  "shoulderDarkPigmentPixels": 0,
+  "revisionsReviewed": [
+    "Subdivision and repaint: rejected because inherited gaps and normal-based paint remained visible.",
+    "Continuous ivory paint: rejected because the underlying surface still had open edges.",
+    "Sealed, relaxed sculpt with transferred skin and corrective shapes: reviewed at shoulder, side and three-quarter views, plus Walk and four sampled Run poses."
   ],
-  "scope": "Idle shading and shoulder wind preview only. Run motion and corrective shapes have not been re-reviewed with the changed tip weights."
+  "checks": [
+    "Vite production build passed; built and source GLB hashes match",
+    "Native boundary and nonmanifold edge counts are zero",
+    "All three skin bindings are normalized and finite; 22 clips and 48 run correctives retained",
+    "Black shoulder scroll removed from source paint",
+    "Reviewed video frames 0, 60 and 191; wind moves loose upper fur; no broken shoulder patches in these views",
+    "MP4 reports 192 frames at 24 fps, 8 seconds; full FFmpeg decode passed",
+    "Existing viewer ZIP and Sunward/Inkbound games unchanged"
+  ],
+  "scope": "Surface, pigment and studio lighting refinement. Combat clips are retained, not redesigned or exhaustively reviewed."
 }

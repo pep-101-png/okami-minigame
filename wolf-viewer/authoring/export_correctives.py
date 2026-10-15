@@ -71,12 +71,13 @@ for animation in doc['animations']:
   duration=max(float(accessor(doc,binary,s['input'])[-1,0]) for s in animation['samplers']);times=[0,duration];values=np.zeros((2,48))
  sampler=len(animation['samplers']);animation['samplers'].append({'input':append(times,'SCALAR'),'output':append(values.ravel(),'SCALAR'),'interpolation':'LINEAR'});animation['channels'].append({'sampler':sampler,'target':{'node':node,'path':'weights'}})
 occlusion=root/'authoring/fur-occlusion.png'
-if occlusion.exists():
+# Legacy occlusion records rest-pose creases; the repaired coat uses live light.
+if occlusion.exists() and not coat.get('surface_polished'):
  while len(binary)%4:binary.append(0)
  payload=occlusion.read_bytes();view=len(doc['bufferViews']);doc['bufferViews'].append({'buffer':0,'byteOffset':len(binary),'byteLength':len(payload)});binary.extend(payload);image_index=len(doc['images']);doc['images'].append({'bufferView':view,'mimeType':'image/png','name':'Soft fur occlusion'});texture_index=len(doc['textures']);doc['textures'].append({'source':image_index});doc['materials'][0]['occlusionTexture']={'index':texture_index,'texCoord':0,'strength':.35}
 while len(binary)%4:binary.append(0)
 doc['buffers'][0]['byteLength']=len(binary);text=json.dumps(doc,separators=(',',':')).encode()
 while len(text)%4:text+=b' '
 asset.write_bytes(struct.pack('<III',0x46546c67,2,28+len(text)+len(binary))+struct.pack('<II',len(text),0x4e4f534a)+text+struct.pack('<II',len(binary),0x004e4942)+binary)
-bpy.ops.wm.save_as_mainfile(filepath=str(root/'authoring/wolf.blend'))
+bpy.ops.wm.save_as_mainfile(filepath=str(root/'authoring/wolf.blend'),compress=True)
 print('CORRECTIVE_EXPORT',len(delta),len(positions),asset.stat().st_size,flush=True)
