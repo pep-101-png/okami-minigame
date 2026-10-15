@@ -1,0 +1,647 @@
+[
+  {
+    "peak_area": 2.383930936635336,
+    "total_area": 18.831097698670344,
+    "frames": [
+      {
+        "frame": 1,
+        "folded_area": 1.157444359614146,
+        "folded_triangles": 249
+      },
+      {
+        "frame": 2,
+        "folded_area": 1.0804522390108666,
+        "folded_triangles": 236
+      },
+      {
+        "frame": 3,
+        "folded_area": 0.8155050723012964,
+        "folded_triangles": 183
+      },
+      {
+        "frame": 4,
+        "folded_area": 0.4454173781404273,
+        "folded_triangles": 110
+      },
+      {
+        "frame": 5,
+        "folded_area": 0.2818116431109661,
+        "folded_triangles": 54
+      },
+      {
+        "frame": 6,
+        "folded_area": 0.03071682791625037,
+        "folded_triangles": 12
+      },
+      {
+        "frame": 7,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 8,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 9,
+        "folded_area": 0.023080223042589075,
+        "folded_triangles": 2
+      },
+      {
+        "frame": 10,
+        "folded_area": 0.10980501775824811,
+        "folded_triangles": 8
+      },
+      {
+        "frame": 11,
+        "folded_area": 0.07124990240603456,
+        "folded_triangles": 7
+      },
+      {
+        "frame": 12,
+        "folded_area": 0.10200600818611161,
+        "folded_triangles": 9
+      },
+      {
+        "frame": 13,
+        "folded_area": 0.10509625213595308,
+        "folded_triangles": 11
+      },
+      {
+        "frame": 14,
+        "folded_area": 0.10994584193830165,
+        "folded_triangles": 17
+      },
+      {
+        "frame": 15,
+        "folded_area": 0.3527741782016234,
+        "folded_triangles": 92
+      },
+      {
+        "frame": 16,
+        "folded_area": 1.1789094567985055,
+        "folded_triangles": 305
+      },
+      {
+        "frame": 17,
+        "folded_area": 1.5013394584140793,
+        "folded_triangles": 397
+      },
+      {
+        "frame": 18,
+        "folded_area": 2.383930936635336,
+        "folded_triangles": 606
+      },
+      {
+        "frame": 19,
+        "folded_area": 2.3793781604221493,
+        "folded_triangles": 569
+      },
+      {
+        "frame": 20,
+        "folded_area": 1.9571382135808046,
+        "folded_triangles": 467
+      },
+      {
+        "frame": 21,
+        "folded_area": 1.5517551733873658,
+        "folded_triangles": 345
+      },
+      {
+        "frame": 22,
+        "folded_area": 1.199777042747029,
+        "folded_triangles": 255
+      },
+      {
+        "frame": 23,
+        "folded_area": 0.8870326377761643,
+        "folded_triangles": 190
+      },
+      {
+        "frame": 24,
+        "folded_area": 1.0531002644261838,
+        "folded_triangles": 231
+      }
+    ],
+    "trial": 0,
+    "top": 2.95,
+    "bottom": 2.23
+  },
+  {
+    "peak_area": 2.215422443534143,
+    "total_area": 15.631349286112426,
+    "frames": [
+      {
+        "frame": 1,
+        "folded_area": 0.8245360506616886,
+        "folded_triangles": 219
+      },
+      {
+        "frame": 2,
+        "folded_area": 0.7227097263065059,
+        "folded_triangles": 202
+      },
+      {
+        "frame": 3,
+        "folded_area": 0.5065220926708551,
+        "folded_triangles": 153
+      },
+      {
+        "frame": 4,
+        "folded_area": 0.2542919320528214,
+        "folded_triangles": 90
+      },
+      {
+        "frame": 5,
+        "folded_area": 0.19944733538124398,
+        "folded_triangles": 47
+      },
+      {
+        "frame": 6,
+        "folded_area": 0.03071682687657895,
+        "folded_triangles": 12
+      },
+      {
+        "frame": 7,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 8,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 9,
+        "folded_area": 0.023080223042589075,
+        "folded_triangles": 2
+      },
+      {
+        "frame": 10,
+        "folded_area": 0.10980501775824811,
+        "folded_triangles": 8
+      },
+      {
+        "frame": 11,
+        "folded_area": 0.07124990240603456,
+        "folded_triangles": 7
+      },
+      {
+        "frame": 12,
+        "folded_area": 0.10200600818611161,
+        "folded_triangles": 9
+      },
+      {
+        "frame": 13,
+        "folded_area": 0.10509625213595308,
+        "folded_triangles": 11
+      },
+      {
+        "frame": 14,
+        "folded_area": 0.10994584193830165,
+        "folded_triangles": 17
+      },
+      {
+        "frame": 15,
+        "folded_area": 0.24399576900440811,
+        "folded_triangles": 79
+      },
+      {
+        "frame": 16,
+        "folded_area": 1.0535049020082377,
+        "folded_triangles": 293
+      },
+      {
+        "frame": 17,
+        "folded_area": 1.3949510184570688,
+        "folded_triangles": 384
+      },
+      {
+        "frame": 18,
+        "folded_area": 2.215422443534143,
+        "folded_triangles": 587
+      },
+      {
+        "frame": 19,
+        "folded_area": 2.1817554976813858,
+        "folded_triangles": 550
+      },
+      {
+        "frame": 20,
+        "folded_area": 1.7869688802368255,
+        "folded_triangles": 445
+      },
+      {
+        "frame": 21,
+        "folded_area": 1.3220616312574176,
+        "folded_triangles": 326
+      },
+      {
+        "frame": 22,
+        "folded_area": 0.9037626302527179,
+        "folded_triangles": 230
+      },
+      {
+        "frame": 23,
+        "folded_area": 0.644381340624455,
+        "folded_triangles": 164
+      },
+      {
+        "frame": 24,
+        "folded_area": 0.771706552918924,
+        "folded_triangles": 205
+      }
+    ],
+    "trial": 1,
+    "top": 3.2,
+    "bottom": 2.0
+  },
+  {
+    "peak_area": 2.033113145850698,
+    "total_area": 13.80425681572094,
+    "frames": [
+      {
+        "frame": 1,
+        "folded_area": 0.6433886537156409,
+        "folded_triangles": 196
+      },
+      {
+        "frame": 2,
+        "folded_area": 0.5820765270741558,
+        "folded_triangles": 182
+      },
+      {
+        "frame": 3,
+        "folded_area": 0.40203320030166834,
+        "folded_triangles": 124
+      },
+      {
+        "frame": 4,
+        "folded_area": 0.24686609982433555,
+        "folded_triangles": 80
+      },
+      {
+        "frame": 5,
+        "folded_area": 0.17515031021539204,
+        "folded_triangles": 39
+      },
+      {
+        "frame": 6,
+        "folded_area": 0.03071682687657895,
+        "folded_triangles": 12
+      },
+      {
+        "frame": 7,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 8,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 9,
+        "folded_area": 0.023080223042589075,
+        "folded_triangles": 2
+      },
+      {
+        "frame": 10,
+        "folded_area": 0.10980501775824811,
+        "folded_triangles": 8
+      },
+      {
+        "frame": 11,
+        "folded_area": 0.07124990240603456,
+        "folded_triangles": 7
+      },
+      {
+        "frame": 12,
+        "folded_area": 0.10408823887474486,
+        "folded_triangles": 10
+      },
+      {
+        "frame": 13,
+        "folded_area": 0.10717848282458634,
+        "folded_triangles": 12
+      },
+      {
+        "frame": 14,
+        "folded_area": 0.10994584193830165,
+        "folded_triangles": 17
+      },
+      {
+        "frame": 15,
+        "folded_area": 0.2262458314316888,
+        "folded_triangles": 71
+      },
+      {
+        "frame": 16,
+        "folded_area": 0.9510564734339209,
+        "folded_triangles": 287
+      },
+      {
+        "frame": 17,
+        "folded_area": 1.3093067439646555,
+        "folded_triangles": 370
+      },
+      {
+        "frame": 18,
+        "folded_area": 1.9558134574350048,
+        "folded_triangles": 568
+      },
+      {
+        "frame": 19,
+        "folded_area": 2.033113145850698,
+        "folded_triangles": 541
+      },
+      {
+        "frame": 20,
+        "folded_area": 1.620028871295797,
+        "folded_triangles": 437
+      },
+      {
+        "frame": 21,
+        "folded_area": 1.150065385871307,
+        "folded_triangles": 308
+      },
+      {
+        "frame": 22,
+        "folded_area": 0.730308297693626,
+        "folded_triangles": 212
+      },
+      {
+        "frame": 23,
+        "folded_area": 0.5257256100983441,
+        "folded_triangles": 150
+      },
+      {
+        "frame": 24,
+        "folded_area": 0.64358226307371,
+        "folded_triangles": 190
+      }
+    ],
+    "trial": 2,
+    "top": 3.4,
+    "bottom": 1.85
+  },
+  {
+    "peak_area": 1.7450535464222543,
+    "total_area": 12.005769562197667,
+    "frames": [
+      {
+        "frame": 1,
+        "folded_area": 0.593993333426675,
+        "folded_triangles": 175
+      },
+      {
+        "frame": 2,
+        "folded_area": 0.5081591417056689,
+        "folded_triangles": 151
+      },
+      {
+        "frame": 3,
+        "folded_area": 0.33927524550876836,
+        "folded_triangles": 101
+      },
+      {
+        "frame": 4,
+        "folded_area": 0.19481043608559157,
+        "folded_triangles": 67
+      },
+      {
+        "frame": 5,
+        "folded_area": 0.1337020697406417,
+        "folded_triangles": 25
+      },
+      {
+        "frame": 6,
+        "folded_area": 0.013185764788432435,
+        "folded_triangles": 8
+      },
+      {
+        "frame": 7,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 8,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 9,
+        "folded_area": 0.023080223042589075,
+        "folded_triangles": 2
+      },
+      {
+        "frame": 10,
+        "folded_area": 0.10980501775824811,
+        "folded_triangles": 8
+      },
+      {
+        "frame": 11,
+        "folded_area": 0.07124990240603456,
+        "folded_triangles": 7
+      },
+      {
+        "frame": 12,
+        "folded_area": 0.10200600818611161,
+        "folded_triangles": 9
+      },
+      {
+        "frame": 13,
+        "folded_area": 0.10509625213595308,
+        "folded_triangles": 11
+      },
+      {
+        "frame": 14,
+        "folded_area": 0.10967430075415018,
+        "folded_triangles": 17
+      },
+      {
+        "frame": 15,
+        "folded_area": 0.2116793257422046,
+        "folded_triangles": 73
+      },
+      {
+        "frame": 16,
+        "folded_area": 0.8275832675765429,
+        "folded_triangles": 304
+      },
+      {
+        "frame": 17,
+        "folded_area": 1.1580539510341878,
+        "folded_triangles": 380
+      },
+      {
+        "frame": 18,
+        "folded_area": 1.7427705175084103,
+        "folded_triangles": 588
+      },
+      {
+        "frame": 19,
+        "folded_area": 1.7450535464222543,
+        "folded_triangles": 538
+      },
+      {
+        "frame": 20,
+        "folded_area": 1.4097323461003666,
+        "folded_triangles": 423
+      },
+      {
+        "frame": 21,
+        "folded_area": 0.9224052513537604,
+        "folded_triangles": 282
+      },
+      {
+        "frame": 22,
+        "folded_area": 0.6453830656649916,
+        "folded_triangles": 187
+      },
+      {
+        "frame": 23,
+        "folded_area": 0.4427801966053151,
+        "folded_triangles": 126
+      },
+      {
+        "frame": 24,
+        "folded_area": 0.5428589879308567,
+        "folded_triangles": 160
+      }
+    ],
+    "trial": 3,
+    "top": 3.5,
+    "bottom": 1.6
+  },
+  {
+    "peak_area": 1.7820960786189617,
+    "total_area": 12.077466204300398,
+    "frames": [
+      {
+        "frame": 1,
+        "folded_area": 0.5502584342710501,
+        "folded_triangles": 172
+      },
+      {
+        "frame": 2,
+        "folded_area": 0.49021771955670757,
+        "folded_triangles": 153
+      },
+      {
+        "frame": 3,
+        "folded_area": 0.333165496345211,
+        "folded_triangles": 104
+      },
+      {
+        "frame": 4,
+        "folded_area": 0.17870146340625925,
+        "folded_triangles": 60
+      },
+      {
+        "frame": 5,
+        "folded_area": 0.14080739478575388,
+        "folded_triangles": 26
+      },
+      {
+        "frame": 6,
+        "folded_area": 0.011958382113247151,
+        "folded_triangles": 7
+      },
+      {
+        "frame": 7,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 8,
+        "folded_area": 0.026715705359955974,
+        "folded_triangles": 1
+      },
+      {
+        "frame": 9,
+        "folded_area": 0.023080223042589075,
+        "folded_triangles": 2
+      },
+      {
+        "frame": 10,
+        "folded_area": 0.10980501775824811,
+        "folded_triangles": 8
+      },
+      {
+        "frame": 11,
+        "folded_area": 0.07124990240603456,
+        "folded_triangles": 7
+      },
+      {
+        "frame": 12,
+        "folded_area": 0.10200600818611161,
+        "folded_triangles": 9
+      },
+      {
+        "frame": 13,
+        "folded_area": 0.10509625213595308,
+        "folded_triangles": 11
+      },
+      {
+        "frame": 14,
+        "folded_area": 0.10967430075415018,
+        "folded_triangles": 17
+      },
+      {
+        "frame": 15,
+        "folded_area": 0.20702103334755434,
+        "folded_triangles": 70
+      },
+      {
+        "frame": 16,
+        "folded_area": 0.8614086552719344,
+        "folded_triangles": 319
+      },
+      {
+        "frame": 17,
+        "folded_area": 1.1467128747325697,
+        "folded_triangles": 378
+      },
+      {
+        "frame": 18,
+        "folded_area": 1.7641346280407304,
+        "folded_triangles": 611
+      },
+      {
+        "frame": 19,
+        "folded_area": 1.7820960786189617,
+        "folded_triangles": 547
+      },
+      {
+        "frame": 20,
+        "folded_area": 1.4187863919886914,
+        "folded_triangles": 424
+      },
+      {
+        "frame": 21,
+        "folded_area": 0.9760024400018055,
+        "folded_triangles": 286
+      },
+      {
+        "frame": 22,
+        "folded_area": 0.6549137367238664,
+        "folded_triangles": 193
+      },
+      {
+        "frame": 23,
+        "folded_area": 0.4327410357218305,
+        "folded_triangles": 123
+      },
+      {
+        "frame": 24,
+        "folded_area": 0.5541973243712257,
+        "folded_triangles": 163
+      }
+    ],
+    "trial": 4,
+    "top": 3.25,
+    "bottom": 1.65
+  }
+]

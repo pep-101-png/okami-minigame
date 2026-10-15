@@ -1,0 +1,18 @@
+{
+  "finished_sydney": "2026-10-15T16:57:44.605218+11:00",
+  "model_sha256": "85c936e4e3c6c602295134fc48b13b5e343927636d1763b1466d46be637a7085",
+  "inspected_run_phases": 96,
+  "measured_folded_area_reduction": 0.9944738110106467,
+  "authored_frames_residual_folded_area": 0.0,
+  "revisions": [
+    "Detached-component diagnosis and ten-vertex plate removal",
+    "Five hip weight candidates and extra surface topology",
+    "Surface smoothing rejected: insufficient improvement",
+    "Dual-quaternion trial rejected: increased folded area",
+    "Two recovery-path candidates; shorter stride and lower recovery selected",
+    "Run surface correction with 200 iterations, reviewed and revised",
+    "Run surface correction with 1200 iterations; exported and tested between keys"
+  ],
+  "limits": "Some inward-folding area remains between authored frames; this metric is not a guarantee of zero self-intersections. Jump and bark were not redesigned.",
+  "existing_games": "unchanged"
+}
