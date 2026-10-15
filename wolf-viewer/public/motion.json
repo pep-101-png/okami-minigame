@@ -1,0 +1,23 @@
+{
+  "Idle": {
+    "duration": 4.0,
+    "ground_speed": 0,
+    "contact_error": 0,
+    "slip_error_per_frame": 0,
+    "head_motion": 0.19620656967163086
+  },
+  "Walk": {
+    "duration": 1.5,
+    "ground_speed": 0.7083333333333335,
+    "contact_error": 0.0072336268424987304,
+    "slip_error_per_frame": 1.2185838487444034e-06,
+    "head_motion": 0.27113771438598633
+  },
+  "Run": {
+    "duration": 1.0,
+    "ground_speed": 3.74,
+    "contact_error": 0.007185168266296338,
+    "slip_error_per_frame": 1.1920928955078125e-06,
+    "head_motion": 0.2899589538574219
+  }
+}

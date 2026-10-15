@@ -1,0 +1,323 @@
+{
+  "folding": {
+    "before": {
+      "totalFoldedArea": 0.4644875161565929,
+      "peakFoldedArea": 0.0667978147178233
+    },
+    "after": {
+      "totalFoldedArea": 0.01167301069897396,
+      "peakFoldedArea": 0.0036944573806750106
+    }
+  },
+  "preservation": {
+    "Idle": {
+      "maxError": 1.677323060496872e-8,
+      "count": 43968,
+      "worst": {
+        "position": [
+          0.24041631817817688,
+          2.87062931060791,
+          -2.4153146743774414
+        ],
+        "weights": [
+          [
+            "hips",
+            0.9626126885414124
+          ],
+          [
+            "hindL",
+            0.03738725557923317
+          ],
+          [
+            "plume00",
+            4.2172199954393363e-8
+          ],
+          [
+            "body",
+            0
+          ]
+        ]
+      },
+      "boneError": 0
+    },
+    "Walk": {
+      "maxError": 1.2132774751273324e-8,
+      "count": 43984,
+      "worst": {
+        "position": [
+          -0.2182220220565796,
+          3.1717724800109863,
+          -2.215886354446411
+        ],
+        "weights": [
+          [
+            "hipsBackB",
+            0.9999999403953552
+          ],
+          [
+            "plume00",
+            3.541850190913465e-8
+          ],
+          [
+            "body",
+            0
+          ],
+          [
+            "body",
+            0
+          ]
+        ]
+      },
+      "boneError": 0
+    }
+  },
+  "rearPlateVertices": 0,
+  "targets": 48,
+  "corrections": [
+    {
+      "phase": 0,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.020833333333333332,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.041666666666666664,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.0625,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.08333333333333333,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.10416666666666667,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.125,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.14583333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.16666666666666666,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.1875,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.20833333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.22916666666666666,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.25,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.2708333333333333,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.2916666666666667,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.3125,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.3333333333333333,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.3541666666666667,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.375,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.3958333333333333,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.4166666666666667,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.4375,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.4583333333333333,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.4791666666666667,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.5,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.5208333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.5416666666666666,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.5625,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.5833333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.6041666666666666,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.625,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.6458333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.6666666666666666,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.6875,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.7083333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.7291666666666666,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.75,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.7708333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.7916666666666666,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.8125,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.8333333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.8541666666666666,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.875,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.8958333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.9166666666666666,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.9375,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.9583333333333334,
+      "weight": 1,
+      "finite": true
+    },
+    {
+      "phase": 0.9791666666666666,
+      "weight": 1,
+      "finite": true
+    }
+  ],
+  "loopError": 1.860519253414098e-7,
+  "zeroOutsideRun": true,
+  "outlineMatches": true,
+  "clips": 22,
+  "buildLabel": "WOLF VIEWER · TAIL & RUN 02"
+}

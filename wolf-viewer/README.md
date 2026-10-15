@@ -1,0 +1,25 @@
+# Sunward wolf viewer
+
+**Permanent download name: sunward-wolf-viewer.zip. Permanent extracted folder: sunward-wolf-viewer.** Future updates replace this viewer using the same names and link. Close its old CMD window before replacing the files. Existing Sunward and Inkbound games are separate and unchanged.
+
+Double-click **START-VIEWER.cmd**. Keep the terminal open. The footer opens a synchronized comparison with the previous build; choose Idle, Walk or Run, and inspect side, rear or tail-close-up views. The visible revision label is **Tail & run 02**. All 22 existing clips remain available.
+
+## Tail and run revision
+
+The tail uses a continuous weighted chain driven by passive inertia, gravity and air drag. It hangs at idle, trails mildly at walking speed, and lifts progressively under running airflow. The tip responds later than the base. It has no keyed sine-wave curl. This runs in every animation, including transitions. Pause freezes it; scrubbing reconstructs a settled pose.
+
+The run was rebuilt after studying the user-supplied side-view dog GIF: gathered suspension, hind support and push, extended suspension, then front support. The torso compresses and lengthens, the lumbar back arches, shoulders glide with support, and a lower running neck/head carriage counteracts torso pitch. Stance feet retain their ground travel. Idle and walking body motion are retained; their tails deliberately change. Other attack, jump and bark poses are not redesigned in this revision.
+
+Run-only corrective shapes protect the bending skin. The ink outline shares the same corrections. These are not substitutes for visual review; the review folder contains actual rendered comparisons and validation reports.
+
+## Development and authoring
+
+`npm ci`, `npm run dev`, `npm run build`. The production build includes both viewer and comparison pages.
+
+The browser viewer requires no Blender. The local GLB embeds its textures. For integration, keep **src/tail-dynamics.js**, the retained bindings module and shared outline morph influences. Tail physics is realtime; importing the GLB alone into another viewer will not reproduce that motion.
+
+The native scene is **authoring/wolf.blend**. Run surface correctives are a companion shape-key action. From the full repository, rebuild with Blender 4.3, NumPy and Pillow by running `wolf-viewer/authoring/build_motion.py`, then `correct_surface.py`, then `export_correctives.py`. Preserved prior source projects supply the baseline. Intermediate files belong in ignored `review/drafts`. Never enable WOLF_RAW_PREVIEW for a release export.
+
+Review both normal-speed and slow-motion frame sequences, side/rear silhouettes, idle/walk/run transitions, skin folds, foot contacts, head stability and tail kinks before publishing. Keep the fixed release filename, folder, branch and viewer entry point for subsequent revisions.
+
+Model derivative: “Amaterasu the Japanese Fox God” by theamazingdonovan207, CC BY 4.0. See credits and licence. The uploaded dog reference remains outside the published project.

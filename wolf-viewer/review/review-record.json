@@ -1,0 +1,96 @@
+{
+  "revision": "Tail & run 02",
+  "permanent_project": "wolf-viewer",
+  "permanent_release": "sunward-wolf-viewer.zip",
+  "permanent_extracted_folder": "sunward-wolf-viewer",
+  "finished_sydney": "2026-10-15T17:51:57.392077+11:00",
+  "model_sha256": "f62671ed98cc9822ab3fe64d1b3cfb96cba7464a5f63c4625d43c4115304b408",
+  "reference": "User-supplied side-view black-dog GIF, 84 frames, 4.2 seconds; privately extracted from RAR. Reference not republished.",
+  "reviews": [
+    "Initial passive-tail poses reviewed in Idle, Walk and Run",
+    "Idle/walk/run transition simulation and tail-length/bend checks",
+    "First coordinated run revised against uploaded footage",
+    "Gathered and extended suspension phases rebuilt",
+    "Head carriage lowered and stabilized; back compression/extension and shoulder loading authored",
+    "Airborne front reach and rear follow-through revised after sequence review",
+    "Run skin corrected at 48 authored poses and checked at 96 stride positions",
+    "Body preservation discrepancy traced to intentional tail-base reweighting; non-tail body verified",
+    "Rear and tail close-up review identified ankle-fur proximity; hind-leg collision response added",
+    "Final production captures: 3 run loops, 2 walking loops, one complete idle loop, normal and slow MP4s"
+  ],
+  "deferred": "Jump, bark and attack choreography retain prior poses; only their tail motion changes.",
+  "skin_fold_test": {
+    "before": {
+      "totalFoldedArea": 0.4644875161565929,
+      "peakFoldedArea": 0.0667978147178233
+    },
+    "after": {
+      "totalFoldedArea": 0.01167301069897396,
+      "peakFoldedArea": 0.0036944573806750106
+    }
+  },
+  "body_preservation": {
+    "Idle": {
+      "maxError": 1.677323060496872e-08,
+      "count": 43968,
+      "worst": {
+        "position": [
+          0.24041631817817688,
+          2.87062931060791,
+          -2.4153146743774414
+        ],
+        "weights": [
+          [
+            "hips",
+            0.9626126885414124
+          ],
+          [
+            "hindL",
+            0.03738725557923317
+          ],
+          [
+            "plume00",
+            4.2172199954393363e-08
+          ],
+          [
+            "body",
+            0
+          ]
+        ]
+      },
+      "boneError": 0
+    },
+    "Walk": {
+      "maxError": 1.2132774751273324e-08,
+      "count": 43984,
+      "worst": {
+        "position": [
+          -0.2182220220565796,
+          3.1717724800109863,
+          -2.215886354446411
+        ],
+        "weights": [
+          [
+            "hipsBackB",
+            0.9999999403953552
+          ],
+          [
+            "plume00",
+            3.541850190913465e-08
+          ],
+          [
+            "body",
+            0
+          ],
+          [
+            "body",
+            0
+          ]
+        ]
+      },
+      "boneError": 0
+    }
+  },
+  "physics_passed": true,
+  "limitations": "Not a promise of anatomically perfect motion or zero intersections at every possible pose. Corrective fold checks exclude sub-threshold triangles and do not replace visual review."
+}
