@@ -49,6 +49,19 @@ def patch_tail_binding(index_name,weight_name):
  for attr,arr in [(index_name,indices),(weight_name,weights)]:
   a=doc['accessors'][primitive['attributes'][attr]];view=doc['bufferViews'][a['bufferView']];offset=view.get('byteOffset',0)+a.get('byteOffset',0);raw=np.asarray(arr,dtype='<u2' if attr.endswith('INDEX') else '<f4').tobytes();binary[offset:offset+len(raw)]=raw
 patch_tail_binding('_IDLE_SKIN_INDEX','_IDLE_SKIN_WEIGHT');patch_tail_binding('_WALK_SKIN_INDEX','_WALK_SKIN_WEIGHT')
+def patch_fur_binding(index_name,weight_name):
+ indices=accessor(doc,binary,primitive['attributes'][index_name]);weights=accessor(doc,binary,primitive['attributes'][weight_name]);normal_i=accessor(doc,binary,primitive['attributes']['JOINTS_0']);normal_w=accessor(doc,binary,primitive['attributes']['WEIGHTS_0']);names=[doc['nodes'][n]['name'] for n in doc['skins'][0]['joints']]
+ for v in range(len(indices)):
+  bases=('ruffL','ruffR','shoulderFurL','shoulderFurR');fur=[(int(n),float(w)) for n,w in zip(normal_i[v],normal_w[v]) if names[int(n)].startswith(bases) and w>1e-8];amount=sum(w for n,w in fur)
+  if amount<1e-8:continue
+  body={int(n):float(w) for n,w in zip(indices[v],weights[v]) if not names[int(n)].startswith(bases) and w>1e-8};total=sum(body.values())
+  retained={n:w*(1-amount)/total for n,w in body.items()} if total>1e-8 else {}
+  for n,w in fur:retained[n]=retained.get(n,0)+w
+  top=sorted(retained.items(),key=lambda p:-p[1])[:4];total=sum(w for n,w in top);indices[v]=0;weights[v]=0
+  for j,(n,w) in enumerate(top):indices[v,j]=n;weights[v,j]=w/total
+ for attr,arr in [(index_name,indices),(weight_name,weights)]:
+  a=doc['accessors'][primitive['attributes'][attr]];view=doc['bufferViews'][a['bufferView']];offset=view.get('byteOffset',0)+a.get('byteOffset',0);raw=np.asarray(arr,dtype='<u2' if attr.endswith('INDEX') else '<f4').tobytes();binary[offset:offset+len(raw)]=raw
+patch_fur_binding('_IDLE_SKIN_INDEX','_IDLE_SKIN_WEIGHT');patch_fur_binding('_WALK_SKIN_INDEX','_WALK_SKIN_WEIGHT')
 primitive['targets']=[{'POSITION':append(convert(d)[mapping])} for d in delta];doc['meshes'][0]['weights']=[0]*48;doc['meshes'][0].setdefault('extras',{})['targetNames']=[f'RunSurface{i+1:02}' for i in range(48)]
 node=next(i for i,n in enumerate(doc['nodes']) if n.get('mesh')==0 and 'skin' in n)
 for animation in doc['animations']:
@@ -57,6 +70,10 @@ for animation in doc['animations']:
  else:
   duration=max(float(accessor(doc,binary,s['input'])[-1,0]) for s in animation['samplers']);times=[0,duration];values=np.zeros((2,48))
  sampler=len(animation['samplers']);animation['samplers'].append({'input':append(times,'SCALAR'),'output':append(values.ravel(),'SCALAR'),'interpolation':'LINEAR'});animation['channels'].append({'sampler':sampler,'target':{'node':node,'path':'weights'}})
+occlusion=root/'authoring/fur-occlusion.png'
+if occlusion.exists():
+ while len(binary)%4:binary.append(0)
+ payload=occlusion.read_bytes();view=len(doc['bufferViews']);doc['bufferViews'].append({'buffer':0,'byteOffset':len(binary),'byteLength':len(payload)});binary.extend(payload);image_index=len(doc['images']);doc['images'].append({'bufferView':view,'mimeType':'image/png','name':'Soft fur occlusion'});texture_index=len(doc['textures']);doc['textures'].append({'source':image_index});doc['materials'][0]['occlusionTexture']={'index':texture_index,'texCoord':0,'strength':.35}
 while len(binary)%4:binary.append(0)
 doc['buffers'][0]['byteLength']=len(binary);text=json.dumps(doc,separators=(',',':')).encode()
 while len(text)%4:text+=b' '

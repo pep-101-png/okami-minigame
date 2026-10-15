@@ -1,0 +1,29 @@
+{
+  "preview": "releases/wolf-fur-preview.mp4",
+  "frames": 180,
+  "fps": 24,
+  "seconds": 7.5,
+  "runtimeErrors": [],
+  "maxBendRadians": {
+    "ruffL": 0.003131465564723741,
+    "ruffLFlow": 0.06760146003974242,
+    "ruffLTip": 0.13002926960320807,
+    "ruffR": 0.003131465564723741,
+    "ruffRFlow": 0.06788729324073244,
+    "ruffRTip": 0.13043726616404622,
+    "shoulderFurL": 0.0028378418081657615,
+    "shoulderFurLFlow": 0.07213893646383888,
+    "shoulderFurLTip": 0.13457191296745788,
+    "shoulderFurR": 0.0028378418081657615,
+    "shoulderFurRFlow": 0.07521427297158255,
+    "shoulderFurRTip": 0.14207204039335344
+  },
+  "checks": [
+    "Production build passed",
+    "Actual Chromium-rendered model; close shoulder view followed by full-body pullback",
+    "Reviewed frames 0, 72, 96, 144: old jagged atlas patches removed; loose upper tip changes position while curl base remains anchored",
+    "Colour and tangent normals rebaked into clean UV islands; AO embedded",
+    "Existing viewer ZIP and both games unchanged"
+  ],
+  "scope": "Idle shading and shoulder wind preview only. Run motion and corrective shapes have not been re-reviewed with the changed tip weights."
+}
