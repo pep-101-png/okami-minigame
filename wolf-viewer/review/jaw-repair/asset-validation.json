@@ -1,0 +1,15 @@
+{
+  "animationsPreserved": 22,
+  "rigAndAllThreeBindingsUnchanged": true,
+  "protectedGeometryChanges": 0,
+  "protectedCorrectiveChanges": 0,
+  "ornamentalFurChanges": 0,
+  "existingUVsUnchanged": true,
+  "renderUVSeamVerticesAdded": 28,
+  "newNativeVertices": 0,
+  "cheekTestRays": 651,
+  "minimumSurfaceIntersections": 2,
+  "singleSidedSkin": true,
+  "candidateSHA256": "d8eae2ae4ce8f39feb9610459fab1623ecb54f67016daf02db9aecc2adda5787",
+  "approvedNeckSHA256": "34927db7ab06488414889a8c2eb74e112b13bc10bfbde13e3333f6c9f77a001c"
+}

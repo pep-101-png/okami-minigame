@@ -1,0 +1,142 @@
+{
+  "clips": [
+    {
+      "clip": "Idle",
+      "samples": 32,
+      "minimumArea": 0.000012710769803051187,
+      "minimumOutwardNormalX": 0.7323322294727278
+    },
+    {
+      "clip": "Walk",
+      "samples": 32,
+      "minimumArea": 0.000012710769803055036,
+      "minimumOutwardNormalX": 0.7323322294727316
+    },
+    {
+      "clip": "Run",
+      "samples": 32,
+      "minimumArea": 0.00001270833827658343,
+      "minimumOutwardNormalX": 0.7323241986459177
+    },
+    {
+      "clip": "Jump",
+      "samples": 32,
+      "minimumArea": 0.000012710769803053967,
+      "minimumOutwardNormalX": 0.732332229472725
+    },
+    {
+      "clip": "JumpRise",
+      "samples": 32,
+      "minimumArea": 0.000012710769803055097,
+      "minimumOutwardNormalX": 0.7323322294727219
+    },
+    {
+      "clip": "JumpFall",
+      "samples": 32,
+      "minimumArea": 0.000012710769803054474,
+      "minimumOutwardNormalX": 0.7323322294727156
+    },
+    {
+      "clip": "Land",
+      "samples": 32,
+      "minimumArea": 0.00001271076980305256,
+      "minimumOutwardNormalX": 0.7323322294727341
+    },
+    {
+      "clip": "AirStrike",
+      "samples": 32,
+      "minimumArea": 0.000012710769803045819,
+      "minimumOutwardNormalX": 0.7323322294727211
+    },
+    {
+      "clip": "Bark",
+      "samples": 32,
+      "minimumArea": 0.00001271076980304832,
+      "minimumOutwardNormalX": 0.7323322294727325
+    },
+    {
+      "clip": "ChargedHeavy",
+      "samples": 32,
+      "minimumArea": 0.000012710769803053423,
+      "minimumOutwardNormalX": 0.732332229472724
+    },
+    {
+      "clip": "ChargedThrust",
+      "samples": 32,
+      "minimumArea": 0.000012710769803054677,
+      "minimumOutwardNormalX": 0.7323322294727248
+    },
+    {
+      "clip": "ChargeHeavy",
+      "samples": 32,
+      "minimumArea": 0.000012710769803054647,
+      "minimumOutwardNormalX": 0.7323322294727224
+    },
+    {
+      "clip": "ChargeLight",
+      "samples": 32,
+      "minimumArea": 0.000012710769803050384,
+      "minimumOutwardNormalX": 0.7323322294727224
+    },
+    {
+      "clip": "Dodge",
+      "samples": 32,
+      "minimumArea": 0.000012710769803052166,
+      "minimumOutwardNormalX": 0.7323322294727224
+    },
+    {
+      "clip": "Finish",
+      "samples": 32,
+      "minimumArea": 0.000012710769803054647,
+      "minimumOutwardNormalX": 0.7323322294727224
+    },
+    {
+      "clip": "Growl",
+      "samples": 32,
+      "minimumArea": 0.000012710769803053652,
+      "minimumOutwardNormalX": 0.7323322294727216
+    },
+    {
+      "clip": "HeavyArc",
+      "samples": 32,
+      "minimumArea": 0.000012710769803050806,
+      "minimumOutwardNormalX": 0.7323322294727133
+    },
+    {
+      "clip": "HeavyReturn",
+      "samples": 32,
+      "minimumArea": 0.00001271076980304527,
+      "minimumOutwardNormalX": 0.7323322294727154
+    },
+    {
+      "clip": "Howl",
+      "samples": 32,
+      "minimumArea": 0.000012710769803054496,
+      "minimumOutwardNormalX": 0.7323322294727224
+    },
+    {
+      "clip": "Hurt",
+      "samples": 32,
+      "minimumArea": 0.000012710769803053972,
+      "minimumOutwardNormalX": 0.7323322294727224
+    },
+    {
+      "clip": "Sweep",
+      "samples": 32,
+      "minimumArea": 0.00001271076980305147,
+      "minimumOutwardNormalX": 0.732332229472717
+    },
+    {
+      "clip": "Thrust",
+      "samples": 32,
+      "minimumArea": 0.000012710769803053691,
+      "minimumOutwardNormalX": 0.7323322294727211
+    }
+  ],
+  "minimumArea": 0.00001270833827658343,
+  "minimumOutwardNormalX": 0.7323241986459177,
+  "materialSide": 0,
+  "closureTriangles": 24,
+  "renderVertices": 78758,
+  "errors": []
+}

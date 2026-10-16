@@ -1,0 +1,10 @@
+{
+  "sourceSHA256": "b7bd0b9a2864c8b0e94c3f4f627d031c5546f5a64c3b0f93dc66175ca6faa3d8",
+  "candidateSHA256": "d8eae2ae4ce8f39feb9610459fab1623ecb54f67016daf02db9aecc2adda5787",
+  "internalTunnelTrianglesRemoved": 144,
+  "weldedClosureTriangles": 24,
+  "newVertices": 0,
+  "changedFacialVertices": 1611,
+  "closedSurfaceEdges": true,
+  "reviewStatus": "NOT APPROVED"
+}

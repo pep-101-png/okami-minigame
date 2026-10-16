@@ -1,0 +1,43 @@
+{
+  "versions": [
+    "head-study",
+    "jaw-repair"
+  ],
+  "facialRenderVertices": 1955,
+  "protectedProbeVertices": 679,
+  "maxProtectedDifference": 3.2931564680265726e-8,
+  "clips": {
+    "Idle": {
+      "poses": 96,
+      "finiteFacialVerticesChecked": 187680
+    },
+    "Walk": {
+      "poses": 96,
+      "finiteFacialVerticesChecked": 187680
+    },
+    "Run": {
+      "poses": 96,
+      "finiteFacialVerticesChecked": 187680
+    }
+  },
+  "transitions": [
+    {
+      "to": "Walk",
+      "maxFacialVertexStepAt120Hz": 0.0037873078068136395
+    },
+    {
+      "to": "Run",
+      "maxFacialVertexStepAt120Hz": 0.013001049159209913
+    },
+    {
+      "to": "Walk",
+      "maxFacialVertexStepAt120Hz": 0.010008758235043028
+    },
+    {
+      "to": "Idle",
+      "maxFacialVertexStepAt120Hz": 0.0030797315527934283
+    }
+  ],
+  "errors": [],
+  "failedRequests": []
+}

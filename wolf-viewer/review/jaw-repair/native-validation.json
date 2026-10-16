@@ -1,0 +1,11 @@
+{
+  "closedEdges": true,
+  "restFacialIntersectionPairs": 0,
+  "minimumSculptJacobian": 0.0006485382645027356,
+  "protectedVertexChanges": 0,
+  "ornamentalFurChanges": 0,
+  "newNativeVertices": 0,
+  "triangles": 126780,
+  "removedInternalTunnelTriangles": 144,
+  "weldedClosureTriangles": 24
+}
