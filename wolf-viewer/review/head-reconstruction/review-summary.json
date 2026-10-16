@@ -1,0 +1,24 @@
+{
+  "status": "Reviewed candidate awaiting user visual approval",
+  "sourceNeckCheckpoint": "wolf-neck-approved-2026-10-16",
+  "originalBaseline": "2ba1f2b",
+  "visualRevisions": 3,
+  "changes": [
+    "Extended and deepened the actual mandible while retaining upper-muzzle overhang.",
+    "Separated the forehead from the muzzle bridge with a restrained stop and local curvature.",
+    "Added orbital rim and cheek relief while preserving the painterly eye and colour atlas.",
+    "Corrected a local inherited mandibular normal-bake artifact."
+  ],
+  "preserved": [
+    "Neck binding and protected deformation data",
+    "Body, chest, shoulder curls, ornamental fur and tail",
+    "Topology, UVs and all 22 animation tracks",
+    "All three skin bindings, joint hierarchy and existing controls"
+  ],
+  "remainingArtIssues": [
+    "Mouth corners and the underside silhouette can receive finer close-up sculpting after this review.",
+    "The existing painted eyelid rims remain stylized and may need further art direction.",
+    "No new mouth interior, teeth or mouth-opening animation was authored. Existing jaw rig and clips are retained."
+  ],
+  "validationLimit": "Pose orientation/overlap samples and actual browser checks cover the listed poses and transitions; they are not an exhaustive proof over every possible animation blend."
+}

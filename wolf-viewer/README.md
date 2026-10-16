@@ -1,5 +1,34 @@
 # Sunward wolf viewer
 
+## Hosted head anatomy study
+
+Use https://pep-101-png.github.io/okami-minigame/?version=head-study.
+The existing Three.js viewer now provides an interactive comparison at
+https://pep-101-png.github.io/okami-minigame/compare.html?study=head, with matching
+profile, front, both three-quarter and lower-jaw cameras for Idle, Walk and Run.
+The new head is a review study; it has not been visually accepted by the user.
+
+The approved neck repair is immutable at `?version=neck-approved`. The original
+accepted model is available at `?version=baseline-2ba1f2b`. Both use the same
+viewer, lighting, controls and renderer. Git recovery tags are
+`wolf-neck-approved-2026-10-16` and `wolf-original-baseline-2ba1f2b`.
+
+Current facial authoring starts from `authoring/checkpoints/neck-approved.blend`
+and its companion surface data. Run Blender with
+`--python authoring/reconstruct_head.py` from the full viewer directory. It
+writes review candidates into ignored `review/drafts/head-reconstruction/`.
+`authoring/validate_head.py` and `authoring/validate_head_poses.py` check protected
+attributes, skin bindings, animation samples and local deformation. Inspect
+actual viewer comparisons before copying a candidate to `public/models/wolf.glb`
+and its fitted eye metadata to `public/face.json`. The current native sculpt is
+`authoring/wolf.blend`; its companion correction data is
+`authoring/head-surface.npz`. Do not rerun the older broad head/body sculpt stages
+on this checkpoint for a local face revision.
+
+`PAGES.md` describes the existing viewer-only deployment workflow. Future
+published viewer updates use the same browser address. No ZIP is required for
+review. Offline packaging instructions and earlier authoring notes follow.
+
 **Permanent download name: sunward-wolf-viewer.zip. Permanent extracted folder: sunward-wolf-viewer.** Future updates replace this viewer using the same names and link. Close its old CMD window before replacing the files. Existing Sunward and Inkbound games are separate and unchanged.
 
 Double-click **START-VIEWER.cmd**. Keep the terminal open. The footer opens a synchronized comparison with the previous build; choose Idle, Walk or Run, and inspect side, rear or tail-close-up views. The current study is **Watercolor · head & eye study**. All 22 existing clips remain available.

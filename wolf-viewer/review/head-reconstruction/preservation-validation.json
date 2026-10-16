@@ -1,0 +1,18 @@
+{
+  "sourceSHA256": "34927db7ab06488414889a8c2eb74e112b13bc10bfbde13e3333f6c9f77a001c",
+  "headSHA256": "b7bd0b9a2864c8b0e94c3f4f627d031c5546f5a64c3b0f93dc66175ca6faa3d8",
+  "renderVertices": 78730,
+  "triangles": 126900,
+  "changedFacialRenderVertices": 2366,
+  "protectedVerticesExact": 76364,
+  "topologyIdentical": true,
+  "allThreeSkinBindingsIdentical": true,
+  "skeletonAndRigIdentical": true,
+  "all22AnimationTracksAndSamplesIdentical": true,
+  "UVsIdentical": true,
+  "colourAndEyePaintBytesIdentical": true,
+  "normalMapChangesRestrictedToJawTexels": 902,
+  "protectedNormalTexelChanges": 0,
+  "protectedPositionAndNormalCorrectivesIdentical": true,
+  "ornamentalFurVerticesChanged": 0
+}

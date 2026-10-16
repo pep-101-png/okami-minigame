@@ -1,0 +1,18 @@
+{
+  "approvedNeckSHA256": "34927db7ab06488414889a8c2eb74e112b13bc10bfbde13e3333f6c9f77a001c",
+  "candidateSHA256": "b7bd0b9a2864c8b0e94c3f4f627d031c5546f5a64c3b0f93dc66175ca6faa3d8",
+  "nativeVertices": 63514,
+  "renderVertices": 78730,
+  "changedNativeFacialVertices": 1970,
+  "maxNativeDisplacement": 0.14868970215320587,
+  "minimumSculptJacobianDeterminant": 0.14574649074685253,
+  "protectedNativeVerticesChanged": 0,
+  "ornamentalFurVerticesChanged": 0,
+  "topologyChanged": false,
+  "skinBindingsChanged": false,
+  "animationTracksChanged": false,
+  "colourAndEyePaintChanged": false,
+  "normalBakeRepairTexels": 12700,
+  "protectedNormalTexelsChanged": 0,
+  "strength": 1.0
+}

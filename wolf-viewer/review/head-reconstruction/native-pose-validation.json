@@ -1,0 +1,86 @@
+{
+  "approved": {
+    "Idle": {
+      "poses": 96,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    },
+    "Walk": {
+      "poses": 96,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    },
+    "Run": {
+      "poses": 96,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    },
+    "Bark": {
+      "poses": 32,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    },
+    "Howl": {
+      "poses": 32,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    }
+  },
+  "head": {
+    "Idle": {
+      "poses": 96,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    },
+    "Walk": {
+      "poses": 96,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    },
+    "Run": {
+      "poses": 96,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    },
+    "Bark": {
+      "poses": 32,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    },
+    "Howl": {
+      "poses": 32,
+      "worstLocalInvertedTriangles": {
+        "face": 0,
+        "neck": 0
+      },
+      "maxNonadjacentFaceOverlapPairs": 0
+    }
+  }
+}
