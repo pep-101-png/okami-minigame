@@ -1,0 +1,148 @@
+{
+  "source_files_sha256": {
+    "scene.bin": "628314c80136e860bd3ec52eb9727395e0bd882c73eea39b19b6102f7a73bf24",
+    "license.txt": "abef31fafb816f7bd470cf3050643e20c46e05a04580a997e9b74c2a7d0222cb",
+    "scene.gltf": "0ae984784ed1ec8e99139c4485d0b077da5bcbe7a8179b5189c3882f0485bb54",
+    "textures/Material__200_baseColor.png": "ae2d2017e866aa9bdfa124acbafddb04edfdc494d62e350a542b79842360e65e",
+    "textures/Material__191_baseColor.png": "941d4512599f865199eedab184a9048028cac884cff79fe9c326964494f5d231",
+    "textures/Material__201_baseColor.png": "8b483db63df9bf3f0f99c6ea7197cb13f6ed9b506aacfba33dc781d37912ea57",
+    "textures/Material__226_baseColor.png": "666488c079f4f7e9120a7e68dfb84549287eac05fb921cc09bbfe867da5efdf4",
+    "textures/Material__209_baseColor.png": "dab71d0af114d31955d7943d207c9c1e4b15f49238ad2f1101dc692230fc626f",
+    "textures/Material__230_baseColor.png": "b93281335bc9993cdd46190fa46e097b6a66f598d6a23cc6bce62ee36691ade5"
+  },
+  "mesh_fingerprints": {
+    "Object_10": "45361a21d3b8b857751bd9bb32242ed9b593bea1711ee9d6fec6b61c21f76062",
+    "Object_11": "d4e55aa38c844c5710503967df2d686b055efcfbfbc9c8291f95bbeeddfbda4a",
+    "Object_2": "14851bf39564606aa8f3b10b2be32e2f1c9d410bea5441b8c77ac5aaeb0ae6b1",
+    "Object_3": "3bd0e6f476a5a9b90fb89ae0f2995f48bdd39cd166248afbc4d2df4bbc93efa4",
+    "Object_4": "f454fbcab967b187e35a6c7aec70db9003ca5f673734c3b7654f23d8f01c1a13",
+    "Object_5": "29e1c5bcb4aeffb408fe990cf57d0d7df0eeae50953f794710329b91c826ea07",
+    "Object_6": "0f6dcfdb1fadb6ffa3feb71b880eec2b53a0ca381e1e5765b430d76d252a00dc",
+    "Object_7": "b9bb0b5ef134c313360a79066db02092cd82145a8d22d8108f3fab1ee3e8bce9",
+    "Object_8": "4819c612acff9d98edfa3fe924bdc5be7f039648ece5dcf25b5587266b838048",
+    "Object_9": "4bb1d6ec1ced4fef71a3c82bdf28eb964fc8f7a72b9c782728783e234cf5cbac"
+  },
+  "mesh_count": 10,
+  "deform_bones": 36,
+  "control_bones": 32,
+  "neutral_max_displacement": {
+    "Object_10": 1.9667749071162625e-05,
+    "Object_11": 1.9667749071162625e-05,
+    "Object_2": 3.4882571247660844e-05,
+    "Object_3": 1.724707543030436e-05,
+    "Object_4": 1.724707543030436e-05,
+    "Object_5": 1.824642168392895e-05,
+    "Object_6": 3.238414204934998e-05,
+    "Object_7": 1.3853483880197566e-05,
+    "Object_8": 3.407238404117031e-05,
+    "Object_9": 1.5739689649104157e-05
+  },
+  "ik_rest_calibration": {
+    "front.L": {
+      "joint_error": 3.435032795435316e-05,
+      "pole_angle": 1.5707963267948966
+    },
+    "rear.L": {
+      "joint_error": 8.416927198744254e-06,
+      "pole_angle": -1.5707963267948966
+    },
+    "front.R": {
+      "joint_error": 3.435032795435316e-05,
+      "pole_angle": 1.5707963267948966
+    },
+    "rear.R": {
+      "joint_error": 8.617974208323234e-06,
+      "pole_angle": -1.5707963267948966
+    }
+  },
+  "ink_weight_transfer_max_distance": {
+    "Object_2": 0.13318102061748505
+  },
+  "packed_images": [
+    "Material__191_baseColor.png",
+    "Material__200_baseColor.png",
+    "Material__201_baseColor.png",
+    "Material__209_baseColor.png",
+    "Material__226_baseColor.png",
+    "Material__230_baseColor.png"
+  ],
+  "animations": 0,
+  "limitations": [
+    "Original low-poly topology retained, no added bend loops or mouth interior.",
+    "Temporary test poses are not animation cycles.",
+    "Large jaw openings are outside this initial rig review."
+  ],
+  "temporary_pose_tests": [
+    {
+      "pose": "Neutral",
+      "max_displacement": 3.4882571247660844e-05,
+      "edge_ratio_range": [
+        0.9999680238465479,
+        1.0000433000203903
+      ],
+      "ik_target_errors": {
+        "front.L": 3.2236140449023154e-07,
+        "rear.L": 9.610960183499514e-07,
+        "front.R": 3.2236140449023154e-07,
+        "rear.R": 1.1920928955078125e-07
+      }
+    },
+    {
+      "pose": "Body lowered with planted paws",
+      "max_displacement": 0.5236785995288529,
+      "edge_ratio_range": [
+        0.436795745261135,
+        1.5062189433625468
+      ],
+      "ik_target_errors": {
+        "front.L": 2.005917698457063e-05,
+        "rear.L": 7.771494871619522e-07,
+        "front.R": 2.005917698457063e-05,
+        "rear.R": 3.816559456248789e-07
+      }
+    },
+    {
+      "pose": "Opposing paw lift",
+      "max_displacement": 0.7478604495132738,
+      "edge_ratio_range": [
+        0.6709415068579102,
+        1.7409868907262427
+      ],
+      "ik_target_errors": {
+        "front.L": 6.176692187776151e-05,
+        "rear.L": 9.610960183499514e-07,
+        "front.R": 3.2236140449023154e-07,
+        "rear.R": 1.7881393432617188e-07
+      }
+    },
+    {
+      "pose": "Head turn and small jaw opening",
+      "max_displacement": 0.3785976598555838,
+      "edge_ratio_range": [
+        0.6838858626206596,
+        1.3225244529698201
+      ],
+      "ik_target_errors": {
+        "front.L": 3.2236140449023154e-07,
+        "rear.L": 9.610960183499514e-07,
+        "front.R": 3.2236140449023154e-07,
+        "rear.R": 1.1920928955078125e-07
+      }
+    },
+    {
+      "pose": "Tail and spine articulation",
+      "max_displacement": 1.7404680148752505,
+      "edge_ratio_range": [
+        0.867187560681471,
+        1.224565054389139
+      ],
+      "ik_target_errors": {
+        "front.L": 2.874031889734553e-07,
+        "rear.L": 9.610960183499514e-07,
+        "front.R": 9.870824314164636e-07,
+        "rear.R": 1.1920928955078125e-07
+      }
+    }
+  ],
+  "source_unchanged": true
+}

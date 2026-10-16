@@ -1,0 +1,120 @@
+{
+  "reopened_blend": "/workspace/okami-minigame/original-wolf-rig/Original-Sketchfab-Wolf-Rig.blend",
+  "neutral_pose": true,
+  "no_actions_or_cycles": true,
+  "geometry_uv_normals_unchanged": true,
+  "meshes": [
+    {
+      "name": "Object_10",
+      "rest_error": 1.940588926411961e-05,
+      "vertices": 494,
+      "weights_normalized": true
+    },
+    {
+      "name": "Object_11",
+      "rest_error": 1.9451238626780503e-05,
+      "vertices": 1969,
+      "weights_normalized": true
+    },
+    {
+      "name": "Object_2",
+      "rest_error": 3.4397819326847365e-05,
+      "vertices": 4283,
+      "weights_normalized": true
+    },
+    {
+      "name": "Object_3",
+      "rest_error": 1.697466612942463e-05,
+      "vertices": 304,
+      "weights_normalized": true
+    },
+    {
+      "name": "Object_4",
+      "rest_error": 1.697466612942463e-05,
+      "vertices": 68,
+      "weights_normalized": true
+    },
+    {
+      "name": "Object_5",
+      "rest_error": 1.800178688145892e-05,
+      "vertices": 286,
+      "weights_normalized": true
+    },
+    {
+      "name": "Object_6",
+      "rest_error": 3.1893553732054446e-05,
+      "vertices": 1236,
+      "weights_normalized": true
+    },
+    {
+      "name": "Object_7",
+      "rest_error": 1.2929729987889426e-05,
+      "vertices": 553,
+      "weights_normalized": true
+    },
+    {
+      "name": "Object_8",
+      "rest_error": 3.3523095674353426e-05,
+      "vertices": 866,
+      "weights_normalized": true
+    },
+    {
+      "name": "Object_9",
+      "rest_error": 1.493985397755418e-05,
+      "vertices": 1468,
+      "weights_normalized": true
+    }
+  ],
+  "packed_original_images": [
+    {
+      "name": "Material__191_baseColor.png",
+      "original_image_bytes": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "Material__200_baseColor.png",
+      "original_image_bytes": true,
+      "size": [
+        512,
+        512
+      ]
+    },
+    {
+      "name": "Material__201_baseColor.png",
+      "original_image_bytes": true,
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "name": "Material__209_baseColor.png",
+      "original_image_bytes": true,
+      "size": [
+        256,
+        256
+      ]
+    },
+    {
+      "name": "Material__226_baseColor.png",
+      "original_image_bytes": true,
+      "size": [
+        128,
+        128
+      ]
+    },
+    {
+      "name": "Material__230_baseColor.png",
+      "original_image_bytes": true,
+      "size": [
+        256,
+        256
+      ]
+    }
+  ],
+  "global_root_motion_check": true,
+  "saved_file_modified_by_verification": false
+}

@@ -1,0 +1,30 @@
+ORIGINAL SKETCHFAB WOLF — RIG REVIEW (no animation cycles)
+
+Original uploaded geometry, UVs, split normals, textures and shader graphs preserved.
+An inward black outline shell is intentional. Front-face culling matches the
+approved browser viewer; do not recalculate its normals or remove original parts.
+
+OPEN / POSE
+Select WOLF_RIG in the Outliner, then Ctrl+Tab > Pose Mode.
+Gold CTRL_root moves everything. CTRL_body moves torso with paws planted.
+Green CTRL_paw_front/rear.L/R: G places paw, R sets orientation.
+Orange CTRL_pole controls elbow/knee bend direction.
+Blue hips/spine/chest/shoulder/neck: rotate for body posing.
+Purple head/jaw/ears: rotate; jaw uses LOCAL X, small angles.
+Teal tail_01..05: FK rotations along the whole curved original tail.
+CTRL_toes: toe flex. Scale is locked to prevent accidental mesh distortion.
+Clear a pose: select all controls in Pose Mode, Alt+G, Alt+R, Alt+S.
+
+TEXTURES
+All original images are packed. Z > Material Preview displays original paint.
+If you see only grey use Material Preview, not Solid viewport shading.
+The Preview studio collection is independent of the wolf and is optional.
+
+The original is low-poly and has thin ornamental curls/overlapping parts.
+This rig preserves that topology; extreme joint compression or large jaw poses
+need additional review. No retopology, subdivision, new mouth interior or fur
+geometry has been added. Original mouth is slightly open at rest.
+No Idle/Walk/Run or other animation actions were authored.
+
+Source: Amaterasu the Japanese Fox God by theamazingdonovan207, CC BY 4.0.
+https://sketchfab.com/3d-models/amaterasu-the-japanese-fox-god-6d64c6b79c0942a086cad6d988e35712
