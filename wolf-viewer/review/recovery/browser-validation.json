@@ -1,0 +1,162 @@
+{
+  "base": "http://127.0.0.1:5294/okami-minigame/",
+  "models": [
+    {
+      "key": "original",
+      "meshes": 10,
+      "vertices": 11527,
+      "clips": [],
+      "rest": true,
+      "scale": [
+        0.34,
+        0.34,
+        0.34
+      ]
+    },
+    {
+      "key": "first",
+      "meshes": 22,
+      "vertices": 19260,
+      "clips": [
+        "Idle",
+        "Walk"
+      ],
+      "rest": true,
+      "scale": [
+        0.34,
+        0.34,
+        0.34
+      ]
+    },
+    {
+      "key": "art",
+      "meshes": 1,
+      "vertices": 10798,
+      "clips": [
+        "Idle",
+        "Walk"
+      ],
+      "rest": true,
+      "scale": [
+        0.34,
+        0.34,
+        0.34
+      ]
+    },
+    {
+      "key": "prehead",
+      "meshes": 3,
+      "vertices": 235650,
+      "clips": [
+        "AirStrike",
+        "Bark",
+        "ChargedHeavy",
+        "ChargedThrust",
+        "ChargeHeavy",
+        "ChargeLight",
+        "Dodge",
+        "Finish",
+        "Growl",
+        "HeavyArc",
+        "HeavyReturn",
+        "Howl",
+        "Hurt",
+        "Idle",
+        "Jump",
+        "JumpFall",
+        "JumpRise",
+        "Land",
+        "Run",
+        "Sweep",
+        "Thrust",
+        "Walk"
+      ],
+      "rest": true,
+      "scale": [
+        0.34,
+        0.34,
+        0.34
+      ]
+    },
+    {
+      "key": "neck",
+      "meshes": 3,
+      "vertices": 236190,
+      "clips": [
+        "AirStrike",
+        "Bark",
+        "ChargedHeavy",
+        "ChargedThrust",
+        "ChargeHeavy",
+        "ChargeLight",
+        "Dodge",
+        "Finish",
+        "Growl",
+        "HeavyArc",
+        "HeavyReturn",
+        "Howl",
+        "Hurt",
+        "Idle",
+        "Jump",
+        "JumpFall",
+        "JumpRise",
+        "Land",
+        "Run",
+        "Sweep",
+        "Thrust",
+        "Walk"
+      ],
+      "rest": true,
+      "scale": [
+        0.34,
+        0.34,
+        0.34
+      ]
+    },
+    {
+      "key": "current",
+      "meshes": 3,
+      "vertices": 236274,
+      "clips": [
+        "AirStrike",
+        "Bark",
+        "ChargedHeavy",
+        "ChargedThrust",
+        "ChargeHeavy",
+        "ChargeLight",
+        "Dodge",
+        "Finish",
+        "Growl",
+        "HeavyArc",
+        "HeavyReturn",
+        "Howl",
+        "Hurt",
+        "Idle",
+        "Jump",
+        "JumpFall",
+        "JumpRise",
+        "Land",
+        "Run",
+        "Sweep",
+        "Thrust",
+        "Walk"
+      ],
+      "rest": true,
+      "scale": [
+        0.34,
+        0.34,
+        0.34
+      ]
+    }
+  ],
+  "matchedViews": 6,
+  "linkedAndIndependentOrbit": true,
+  "zoom": true,
+  "materials": true,
+  "shadowControl": true,
+  "sourceCullingControl": true,
+  "restAndSavedClips": true,
+  "originalUnanimated": true,
+  "errors": [],
+  "failed": []
+}

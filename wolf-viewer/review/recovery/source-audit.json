@@ -1,0 +1,102 @@
+{
+  "art": {
+    "file": "recovery-art.glb",
+    "bones": 31,
+    "clips": [
+      "Idle",
+      "Walk"
+    ],
+    "headBounds": [
+      [
+        -0.5630999803543091,
+        -4.211698532104492,
+        3.850200891494751
+      ],
+      [
+        0.5728999972343445,
+        -3.061798572540283,
+        5.332700729370117
+      ]
+    ]
+  },
+  "prehead": {
+    "file": "recovery-prehead.glb",
+    "bones": 92,
+    "clips": [
+      "AirStrike",
+      "Bark",
+      "ChargedHeavy",
+      "ChargedThrust",
+      "ChargeHeavy",
+      "ChargeLight",
+      "Dodge",
+      "Finish",
+      "Growl",
+      "HeavyArc",
+      "HeavyReturn",
+      "Howl",
+      "Hurt",
+      "Idle",
+      "Jump",
+      "JumpFall",
+      "JumpRise",
+      "Land",
+      "Run",
+      "Sweep",
+      "Thrust",
+      "Walk"
+    ],
+    "headBounds": [
+      [
+        -0.5592644214630127,
+        -4.193288803100586,
+        3.8500075340270996
+      ],
+      [
+        0.5691348314285278,
+        -3.050048589706421,
+        5.261643409729004
+      ]
+    ]
+  },
+  "current": {
+    "file": "jaw-repair.glb",
+    "bones": 92,
+    "clips": [
+      "AirStrike",
+      "Bark",
+      "ChargedHeavy",
+      "ChargedThrust",
+      "ChargeHeavy",
+      "ChargeLight",
+      "Dodge",
+      "Finish",
+      "Growl",
+      "HeavyArc",
+      "HeavyReturn",
+      "Howl",
+      "Hurt",
+      "Idle",
+      "Jump",
+      "JumpFall",
+      "JumpRise",
+      "Land",
+      "Run",
+      "Sweep",
+      "Thrust",
+      "Walk"
+    ],
+    "headBounds": [
+      [
+        -0.5231549143791199,
+        -4.225317001342773,
+        3.854620933532715
+      ],
+      [
+        0.531090259552002,
+        -3.0500473976135254,
+        5.431643486022949
+      ]
+    ]
+  }
+}

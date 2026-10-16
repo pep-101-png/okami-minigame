@@ -1,0 +1,28 @@
+{
+  "recovery-first.glb": {
+    "commit": "a9bd5d0370e680b7eb7e33a60988b9ddda09ec7b",
+    "path": "uploaded-wolf-review/colored-rigged.glb",
+    "sha256": "44c3bc1306bbf727e42120da478fa88283e9fc89dab4e5c1916db4d86acbd29d"
+  },
+  "recovery-art.glb": {
+    "commit": "56cf9e998c1dd64a8652eabc142b13719c3894f3",
+    "path": "wolf-art-rebuild/wolf.glb",
+    "sha256": "fa1a5879c855e885e59cd61abe64b2398850d04e7524a5c8c9da14369ea4b609"
+  },
+  "recovery-prehead.glb": {
+    "commit": "b6ee9c5c92211d3f15afe47313288d7f17e494b9",
+    "path": "wolf-viewer/public/models/wolf.glb",
+    "sha256": "0972ef1c93254912e7b66d76f8e3a8a591b113c01cf722298abe6df3307f3c07"
+  },
+  "original": {
+    "path": "uploaded-wolf-review/source/scene.gltf",
+    "commit": "a9bd5d0",
+    "filesUnchangedSinceUpload": true
+  },
+  "currentProtected": {
+    "wolf-viewer/public/models/jaw-repair.glb": "d8eae2ae4ce8f39feb9610459fab1623ecb54f67016daf02db9aecc2adda5787",
+    "wolf-viewer/public/models/wolf.glb": "b7bd0b9a2864c8b0e94c3f4f627d031c5546f5a64c3b0f93dc66175ca6faa3d8",
+    "wolf-viewer/public/models/neck-approved.glb": "34927db7ab06488414889a8c2eb74e112b13bc10bfbde13e3333f6c9f77a001c",
+    "wolf-viewer/authoring/wolf.blend": "c90ef723a150db68c65d504c23eec6487de2487ad1045b9c53e5fa1c28233649"
+  }
+}

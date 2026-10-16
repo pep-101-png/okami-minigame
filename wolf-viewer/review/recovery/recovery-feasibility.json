@@ -1,0 +1,14 @@
+{
+  "preheadToCurrentNativeVertexLayoutMatches": true,
+  "nativeVertices": 63514,
+  "selectiveRecoveryNotPerformed": true,
+  "requirementsBeforeAnyRecovery": [
+    "User chooses preferred foundation in browser",
+    "Preserve approved neck, cheek closure, torso, limbs and ornamental fur",
+    "Restore selected facial rest coordinates only",
+    "Recheck facial UV alignment and existing mouth/locomotion deformation"
+  ],
+  "criticalFinding": "The early art rebuild kept Object_2, the inward black outline hull, and discarded the outward painted surfaces including Object_10, the head.",
+  "preheadCheckpointLimitation": "Same vertex layout makes reversing later taper feasible, but it is already outline-hull-derived and includes the old cheek tunnel; it is not an original-skin rollback.",
+  "earliestOutlineHullMatchesFirstAdaptationMaxDistance": 3.242843272384511e-06
+}

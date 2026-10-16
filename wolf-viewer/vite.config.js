@@ -11,6 +11,7 @@ export default defineConfig({
   define:{__WOLF_ASSET_REVISIONS__:JSON.stringify(revisions)},
   build:{rollupOptions:{input:{
     viewer:fileURLToPath(new URL('./index.html',import.meta.url)),
-    compare:fileURLToPath(new URL('./compare.html',import.meta.url))
+    compare:fileURLToPath(new URL('./compare.html',import.meta.url)),
+    recovery:fileURLToPath(new URL('./recovery.html',import.meta.url))
   }}}
 });

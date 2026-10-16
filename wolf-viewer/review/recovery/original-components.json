@@ -1,0 +1,77 @@
+{
+  "components": [
+    {
+      "node": "Object_2",
+      "material": "Material__191",
+      "signedVolume": -15.761619567871094,
+      "inwardFacing": true,
+      "role": "black outline hull; incorrectly retained as sole skin in early rebuild"
+    },
+    {
+      "node": "Object_3",
+      "material": "Material__193",
+      "signedVolume": -0.08338741213083267,
+      "inwardFacing": true,
+      "role": "original component"
+    },
+    {
+      "node": "Object_4",
+      "material": "Material__197",
+      "signedVolume": -0.0029032081365585327,
+      "inwardFacing": true,
+      "role": "original component"
+    },
+    {
+      "node": "Object_5",
+      "material": "Material__198",
+      "signedVolume": 0.07172361761331558,
+      "inwardFacing": false,
+      "role": "original component"
+    },
+    {
+      "node": "Object_6",
+      "material": "Material__200",
+      "signedVolume": 10.0653657913208,
+      "inwardFacing": false,
+      "role": "original component"
+    },
+    {
+      "node": "Object_7",
+      "material": "Material__209",
+      "signedVolume": 0.8888381123542786,
+      "inwardFacing": false,
+      "role": "original component"
+    },
+    {
+      "node": "Object_8",
+      "material": "Material__226",
+      "signedVolume": 0.12812362611293793,
+      "inwardFacing": false,
+      "role": "original component"
+    },
+    {
+      "node": "Object_9",
+      "material": "Material__230",
+      "signedVolume": 0.5620327591896057,
+      "inwardFacing": false,
+      "role": "original component"
+    },
+    {
+      "node": "Object_10",
+      "material": "Material__199",
+      "signedVolume": 1.4721945524215698,
+      "inwardFacing": false,
+      "role": "original painted head surface"
+    },
+    {
+      "node": "Object_11",
+      "material": "Material__201",
+      "signedVolume": 0.278827965259552,
+      "inwardFacing": false,
+      "role": "original component"
+    }
+  ],
+  "sourceDoubleSided": true,
+  "previewCorrection": "front-face culling only; original assets are byte-identical",
+  "earlyRebuildEvidence": "56cf9e9:wolf-art-rebuild/build.py lines 10-12 deletes every mesh except Object_2"
+}
