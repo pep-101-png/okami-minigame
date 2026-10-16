@@ -20,6 +20,9 @@ def mathnode(operation,left,right=None):
 colors=nodes.new('ShaderNodeSeparateColor');links.new(paint_tex.outputs['Color'],colors.inputs['Color'])
 redflag=mathnode('MULTIPLY',mathnode('GREATER_THAN',colors.outputs['Red'],.18),mathnode('LESS_THAN',colors.outputs['Green'],.08))
 allowed=mathnode('SUBTRACT',1,mathnode('MULTIPLY',redflag,mathnode('SUBTRACT',1,parts.outputs['Red'])))
+if coat.data.color_attributes.get('FurGeometry'):
+ detail=nodes.new('ShaderNodeVertexColor');detail.layer_name='FurGeometry';channel=nodes.new('ShaderNodeSeparateColor');links.new(detail.outputs['Color'],channel.inputs['Color'])
+ allowed=mathnode('MULTIPLY',allowed,mathnode('SUBTRACT',1,channel.outputs['Red']))
 links.new(mathnode('MULTIPLY',paint_tex.outputs['Alpha'],allowed),ink_mix.inputs[0])
 # This single template is mirrored in surface tangent space, not projected across the entire face.
 size=1024;image=Image.new('RGBA',(size,size),(0,0,0,0));draw=ImageDraw.Draw(image)

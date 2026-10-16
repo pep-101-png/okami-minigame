@@ -1,27 +1,58 @@
 {
-  "reviewedAtUTC": "2026-10-15T08:18:23.896462+00:00",
+  "reviewedAtUTC": "2026-10-16T05:29:49.645712+00:00",
   "preview": "releases/wolf-fur-preview.mp4",
   "video": {
-    "seconds": 8,
+    "seconds": 12,
     "fps": 24,
-    "frames": 192,
+    "frames": 288,
     "size": [
       1280,
       720
     ],
+    "sha256": "34ea0f0b0103041a25171106a0ef14ca5f8c5a6a1c33d1289c25ddc10d7a1744",
     "errors": [],
-    "comparison": "First 3 seconds: a still from the previous 4bf339c video on the left and the new animated model on the right. Then a new-model camera pullback. Only cropping, labels and MP4 encoding added."
+    "source": "Actual Chromium/Three.js model capture; camera cuts and in-viewer labels, encoded with FFmpeg. No generated artwork or retouched model frames.",
+    "shots": [
+      "0\u20133 s: shoulder curls, layered plumes and coat texture",
+      "3\u20136 s: ankle curls and wind-driven layers",
+      "6\u20139 s: tail, transitioning from Idle to Walk",
+      "9\u201312 s: full wolf transitioning to Run"
+    ],
+    "visuallyReviewedFrames": [
+      60,
+      96,
+      156,
+      204,
+      228,
+      240,
+      260,
+      272,
+      287
+    ],
+    "finiteMotionSamples": 24,
+    "fullDecodePassed": true
   },
   "native": {
-    "nativeVertices": 44506,
-    "nativeFaces": 44506,
+    "nativeVertices": 63514,
+    "nativeFaces": 63194,
     "boundaryEdges": 0,
     "nonManifoldEdges": 0,
-    "correctiveShapes": 48
+    "correctiveShapes": 48,
+    "skinWeightMinTotal": 0.9999999478459358,
+    "skinWeightMaxTotal": 1.0000000491854735
+  },
+  "fur": {
+    "sculptedStrands": 32,
+    "newVertices": 19008,
+    "bodyRestMaxChange": 0.0,
+    "roots": "Projected into the coat and blended into attachment-triangle skin weights.",
+    "paint": "Cool underlayers, warm ivory ridges and directional fibre variation; no flat shoulder/ankle black scroll. Body markings excluded from sculpted fur.",
+    "controls": 30
   },
   "browser": {
-    "vertices": 50971,
-    "triangles": 89012,
+    "furMask": true,
+    "vertices": 78550,
+    "triangles": 126900,
     "morphs": 48,
     "clips": [
       "Idle",
@@ -50,36 +81,78 @@
     "bindings": {
       "skinWeight": {
         "min": 0.9999999478459358,
-        "max": 1.0000000521540642,
+        "max": 1.0000000491272658,
         "invalid": 0
       },
       "_idle_skin_weight": {
-        "min": 0.9999998705461621,
-        "max": 1.0000001303851604,
+        "min": 0.9999999082647264,
+        "max": 1.0000001075677574,
         "invalid": 0
       },
       "_walk_skin_weight": {
-        "min": 0.9999998826533556,
-        "max": 1.0000001154839993,
+        "min": 0.9999999082647264,
+        "max": 1.0000001075677574,
         "invalid": 0
       }
     },
     "errors": []
   },
-  "shoulderDarkPigmentPixels": 0,
+  "production": {
+    "clips": 22,
+    "morphs": 48,
+    "furMask": true,
+    "shells": [
+      {
+        "order": -1,
+        "depthWrite": false,
+        "sharesMorphs": true,
+        "triangles": 126900
+      },
+      {
+        "order": 1,
+        "depthWrite": false,
+        "sharesMorphs": true,
+        "triangles": 37888
+      }
+    ],
+    "furControls": 30,
+    "errors": []
+  },
+  "tail": {
+    "allClipsFinite": true,
+    "maxTransitionStepMetres": 0.007158031973487071,
+    "idleMinimumEarlyDropFraction": 0.9644073658204632,
+    "modes": {
+      "Idle": {
+        "maxStepMetres": 0.0032412471489412405,
+        "maxLengthErrorFraction": 0.018477605876658476,
+        "maxJointBendRadians": 0.43607426816559525
+      },
+      "Walk": {
+        "maxStepMetres": 0.010969501168860023,
+        "maxLengthErrorFraction": 0.0484422395341102,
+        "maxJointBendRadians": 0.38340022754860875
+      },
+      "Run": {
+        "maxStepMetres": 0.018757948103541755,
+        "maxLengthErrorFraction": 0.04960868803192886,
+        "maxJointBendRadians": 0.4385080839032849
+      }
+    }
+  },
   "revisionsReviewed": [
-    "Subdivision and repaint: rejected because inherited gaps and normal-based paint remained visible.",
-    "Continuous ivory paint: rejected because the underlying surface still had open edges.",
-    "Sealed, relaxed sculpt with transferred skin and corrective shapes: reviewed at shoulder, side and three-quarter views, plus Walk and four sampled Run poses."
+    "Added closed sculpted shoulder/ankle curls and layered ruff, haunch and tail fur; refined spacing and buried roots in the coat.",
+    "Rejected retracted legacy body fins and altered leg bindings because they distorted the moving legs; restored approved body coordinates and retained leg bindings.",
+    "Rejected a hard tail bend clamp because it caused tip jumps; retained distributed soft curvature relaxation and progressive whole-tail skin weights.",
+    "Separated body silhouette and fur contour passes after outline ablation isolated dark triangles on bent skin. Reviewed the affected Walk and Run phases after the fix."
   ],
   "checks": [
-    "Vite production build passed; built and source GLB hashes match",
-    "Native boundary and nonmanifold edge counts are zero",
-    "All three skin bindings are normalized and finite; 22 clips and 48 run correctives retained",
-    "Black shoulder scroll removed from source paint",
-    "Reviewed video frames 0, 60 and 191; wind moves loose upper fur; no broken shoulder patches in these views",
-    "MP4 reports 192 frames at 24 fps, 8 seconds; full FFmpeg decode passed",
-    "Existing viewer ZIP and Sunward/Inkbound games unchanged"
+    "Vite production build passed; source and production GLB SHA-256 hashes match.",
+    "Production viewer loaded with no page errors; 22 clips, 48 corrective targets, 30 fur controls and both outline passes present.",
+    "Three skin bindings are finite, nonnegative and normalized; native mesh has no boundary/nonmanifold edges.",
+    "Passive-tail stability, segment lengths, gradual transitions and finite motion across all 22 clips passed.",
+    "Video has 288 frames at 24 fps, 12 seconds; full FFmpeg decode passed.",
+    "Existing Sunward/Inkbound games and permanent viewer ZIP unchanged."
   ],
-  "scope": "Surface, pigment and studio lighting refinement. Combat clips are retained, not redesigned or exhaustively reviewed."
+  "scope": "Fur sculpt, pigment, shading, passive tail and ink-outline refinement in the standalone wolf viewer. Approved body rest shape retained. Combat clips retained, not redesigned or exhaustively visually reviewed."
 }

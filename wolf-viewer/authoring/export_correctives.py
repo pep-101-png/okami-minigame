@@ -20,7 +20,7 @@ keys.animation_data.action=None
 rig.animation_data.action=bpy.data.actions['Idle'];scene.frame_set(1)
 bpy.ops.object.select_all(action='DESELECT');coat.select_set(True);rig.select_set(True);bpy.context.view_layer.objects.active=rig
 asset=root/'public/models/wolf.glb'
-bpy.ops.export_scene.gltf(filepath=str(asset),use_selection=True,export_animations=True,export_nla_strips=True,export_anim_slide_to_zero=True,export_morph=False)
+bpy.ops.export_scene.gltf(filepath=str(asset),use_selection=True,export_animations=True,export_nla_strips=True,export_anim_slide_to_zero=True,export_morph=False,export_vertex_color='NONE')
 exec((root/'authoring/idle_binding.py').read_text());embed_idle_binding(asset,root.parent/'wolf-animation-viewer/public/models/wolf.glb')
 exec((root/'authoring/idle_binding.py').read_text().replace('embed_idle_binding','embed_walk_binding').replace('_IDLE_SKIN_','_WALK_SKIN_'));embed_walk_binding(asset,root.parent/'wolf-motion-refinement/public/models/wolf.glb')
 doc,binary=read_glb(asset);primitive=doc['meshes'][0]['primitives'][0];positions=accessor(doc,binary,primitive['attributes']['POSITION']);kd=KDTree(len(rest))
@@ -36,24 +36,23 @@ def append(array,kind='VEC3'):
 def patch_tail_binding(index_name,weight_name):
  indices=accessor(doc,binary,primitive['attributes'][index_name]);weights=accessor(doc,binary,primitive['attributes'][weight_name]);normal_i=accessor(doc,binary,primitive['attributes']['JOINTS_0']);normal_w=accessor(doc,binary,primitive['attributes']['WEIGHTS_0']);names=[doc['nodes'][n]['name'] for n in doc['skins'][0]['joints']]
  for v in range(len(indices)):
-  retained={};amount=0
-  for n,w in zip(indices[v],weights[v]):
-   if names[int(n)].startswith('tail'):amount+=w
-   else:retained[int(n)]=retained.get(int(n),0)+w
-  if amount<1e-8:continue
-  plume=[(int(n),w) for n,w in zip(normal_i[v],normal_w[v]) if names[int(n)].startswith('plume') and w>1e-8];total=sum(w for n,w in plume)
-  if not plume:plume=[(names.index('plume00'),1)];total=1
-  for n,w in plume:retained[n]=retained.get(n,0)+amount*w/total
-  top=sorted(retained.items(),key=lambda p:-p[1])[:4];total=sum(w for n,w in top);indices[v]=0;weights[v]=0
-  for j,(n,w) in enumerate(top):indices[v,j]=n;weights[v,j]=w/total
+  old_tail=sum(w for n,w in zip(indices[v],weights[v]) if names[int(n)].startswith('tail'))
+  new_tail=sum(w for n,w in zip(normal_i[v],normal_w[v]) if names[int(n)].startswith('plume'))
+  if old_tail>1e-8 or new_tail>1e-8:
+   indices[v]=normal_i[v];weights[v]=normal_w[v]
  for attr,arr in [(index_name,indices),(weight_name,weights)]:
   a=doc['accessors'][primitive['attributes'][attr]];view=doc['bufferViews'][a['bufferView']];offset=view.get('byteOffset',0)+a.get('byteOffset',0);raw=np.asarray(arr,dtype='<u2' if attr.endswith('INDEX') else '<f4').tobytes();binary[offset:offset+len(raw)]=raw
 patch_tail_binding('_IDLE_SKIN_INDEX','_IDLE_SKIN_WEIGHT');patch_tail_binding('_WALK_SKIN_INDEX','_WALK_SKIN_WEIGHT')
+detail_manifest=root/'review/fur-details.json'
+body_vertex_count=json.loads(detail_manifest.read_text())['originalVertices'] if coat.get('fur_details') else None
 def patch_fur_binding(index_name,weight_name):
  indices=accessor(doc,binary,primitive['attributes'][index_name]);weights=accessor(doc,binary,primitive['attributes'][weight_name]);normal_i=accessor(doc,binary,primitive['attributes']['JOINTS_0']);normal_w=accessor(doc,binary,primitive['attributes']['WEIGHTS_0']);names=[doc['nodes'][n]['name'] for n in doc['skins'][0]['joints']]
  for v in range(len(indices)):
-  bases=('ruffL','ruffR','shoulderFurL','shoulderFurR');fur=[(int(n),float(w)) for n,w in zip(normal_i[v],normal_w[v]) if names[int(n)].startswith(bases) and w>1e-8];amount=sum(w for n,w in fur)
-  if amount<1e-8:continue
+  is_detail=body_vertex_count is not None and mapping[v]>=body_vertex_count
+  bases=('ruffL','ruffR','shoulderFurL','shoulderFurR','foreFurL','foreFurR','hindFurL','hindFurR','haunchFurL','haunchFurR') if is_detail else ('ruffL','ruffR','shoulderFurL','shoulderFurR');fur=[(int(n),float(w)) for n,w in zip(normal_i[v],normal_w[v]) if names[int(n)].startswith(bases) and w>1e-8];amount=min(1.,max(0.,sum(w for n,w in fur)))
+  if amount<1e-8:
+   if is_detail and any(names[int(n)].startswith(bases) and w>1e-8 for n,w in zip(indices[v],weights[v])):indices[v]=normal_i[v];weights[v]=normal_w[v]
+   continue
   body={int(n):float(w) for n,w in zip(indices[v],weights[v]) if not names[int(n)].startswith(bases) and w>1e-8};total=sum(body.values())
   retained={n:w*(1-amount)/total for n,w in body.items()} if total>1e-8 else {}
   for n,w in fur:retained[n]=retained.get(n,0)+w
@@ -62,6 +61,8 @@ def patch_fur_binding(index_name,weight_name):
  for attr,arr in [(index_name,indices),(weight_name,weights)]:
   a=doc['accessors'][primitive['attributes'][attr]];view=doc['bufferViews'][a['bufferView']];offset=view.get('byteOffset',0)+a.get('byteOffset',0);raw=np.asarray(arr,dtype='<u2' if attr.endswith('INDEX') else '<f4').tobytes();binary[offset:offset+len(raw)]=raw
 patch_fur_binding('_IDLE_SKIN_INDEX','_IDLE_SKIN_WEIGHT');patch_fur_binding('_WALK_SKIN_INDEX','_WALK_SKIN_WEIGHT')
+if body_vertex_count is not None:
+ primitive['attributes']['_FUR_DETAIL']=append(np.asarray(mapping)>=body_vertex_count,'SCALAR')
 primitive['targets']=[{'POSITION':append(convert(d)[mapping])} for d in delta];doc['meshes'][0]['weights']=[0]*48;doc['meshes'][0].setdefault('extras',{})['targetNames']=[f'RunSurface{i+1:02}' for i in range(48)]
 node=next(i for i,n in enumerate(doc['nodes']) if n.get('mesh')==0 and 'skin' in n)
 for animation in doc['animations']:

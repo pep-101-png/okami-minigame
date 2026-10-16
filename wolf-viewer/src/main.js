@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {createFurDynamics} from './fur-dynamics.js';
+import {createInkOutlines} from './ink-outlines.js';
 import {createTailDynamics} from './tail-dynamics.js';
 import {createIdleBinding} from './idle-binding.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
@@ -44,7 +45,7 @@ try{
  const [asset,metadata,tailMetadata]=await Promise.all([new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}models/${baseline?'before':'wolf'}.glb`),fetch(`${import.meta.env.BASE_URL}${baseline?'before-motion':'motion'}.json`).then(r=>r.json()),fetch(`${import.meta.env.BASE_URL}tail.json`).then(r=>r.json())]);
  model=asset.scene;model.scale.setScalar(.34);model.rotation.y=Math.PI;scene.add(model);motion=metadata;clips=asset.animations;mixer=new THREE.AnimationMixer(model);
  const skins=[];model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;}if(o.isSkinnedMesh)skins.push(o);});
- for(const mesh of skins){idleBindings.push(createIdleBinding(mesh));const ink=new THREE.MeshBasicMaterial({color:'#62584b',side:THREE.BackSide});ink.onBeforeCompile=shader=>{shader.vertexShader=shader.vertexShader.replace('#include <skinning_vertex>','#include <skinning_vertex>\n transformed += normalize(objectNormal) * .013;');};const shell=new THREE.SkinnedMesh(mesh.geometry,ink);shell.bind(mesh.skeleton,mesh.bindMatrix);shell.position.copy(mesh.position);shell.quaternion.copy(mesh.quaternion);shell.scale.copy(mesh.scale);shell.frustumCulled=false;shell.morphTargetInfluences=mesh.morphTargetInfluences;mesh.parent.add(shell);}
+ for(const mesh of skins){idleBindings.push(createIdleBinding(mesh));for(const ink of createInkOutlines(mesh))mesh.parent.add(ink);}
  if(!baseline){tail=createTailDynamics(model,tailMetadata);fur=createFurDynamics(model);}
  skeleton=new THREE.SkeletonHelper(model);skeleton.visible=false;scene.add(skeleton);
  const order=['Idle','Walk','Run','Jump','JumpRise','JumpFall','Land'];clips.sort((a,b)=>(order.includes(a.name)?order.indexOf(a.name):99)-(order.includes(b.name)?order.indexOf(b.name):99)||a.name.localeCompare(b.name));

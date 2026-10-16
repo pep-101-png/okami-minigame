@@ -39,17 +39,21 @@ export function createTailDynamics(model, metadata){
     const p=position[i],old=p.clone(),velocity=p.clone().sub(previous[i]).multiplyScalar(Math.exp(-3.8*h));p.add(velocity);p.y-=8*h*h;p.x+=crosswind*h*h;p.addScaledVector(back,drag*h*h);previous[i].copy(old);
    }
    // The rump supports the base; the remaining chain hangs and trails freely.
-   const rootLean=THREE.MathUtils.lerp(.94,.995,ratio);direction.copy(back).multiplyScalar(rootLean).addScaledVector(up,-Math.sqrt(1-rootLean*rootLean)).normalize();
+   const rootLean=THREE.MathUtils.lerp(.60,.98,ratio);direction.copy(back).multiplyScalar(rootLean).addScaledVector(up,-Math.sqrt(1-rootLean*rootLean)).normalize();
    for(let pass=0;pass<14;pass++){
-    position[0].copy(root);const first=root.clone().addScaledVector(direction,segment);position[1].lerp(first,.42);
-    for(let k=2;k<=3;k++){const lean=THREE.MathUtils.lerp(.94-.035*(k-1),.995,ratio),guide=back.clone().multiplyScalar(lean).addScaledVector(up,-Math.sqrt(1-lean*lean)).multiplyScalar(segment).add(position[k-1]);position[k].lerp(guide,k===2?.22:.08);}
+    position[0].copy(root);const first=root.clone().addScaledVector(direction,segment);position[1].lerp(first,.16);
     for(let i=0;i<position.length-1;i++){
      const d=position[i+1].clone().sub(position[i]),length=d.length();if(length<1e-8)continue;d.multiplyScalar((length-segment)/length);if(i===0)position[i+1].sub(d);else{position[i].addScaledVector(d,.5);position[i+1].addScaledVector(d,-.5);}
     }
     // Distributed bending resistance, strongest at the base and soft at the tip.
     for(let i=1;i<position.length-1;i++){
-     const a=position[i-1],c=position[i+1],d=c.clone().sub(a),length=d.length(),target=segment*1.985;
-     if(length>=target||length<1e-8)continue;d.multiplyScalar((target-length)/length*(.42-.22*i/bones.length));if(i>1)a.addScaledVector(d,-.5);c.addScaledVector(d,.5);
+     const a=position[i-1],c=position[i+1],d=c.clone().sub(a),length=d.length(),target=segment*1.995;
+     if(length>=target||length<1e-8)continue;d.multiplyScalar((target-length)/length*(.48-.30*i/bones.length));if(i>1)a.addScaledVector(d,-.5);c.addScaledVector(d,.5);
+    }
+    // Relax excessive local curvature smoothly across neighbouring joints.
+    for(let i=1;i<position.length-1;i++){
+     const middle=position[i-1].clone().add(position[i+1]).multiplyScalar(.5),offset=position[i].clone().sub(middle),height=offset.length(),allow=segment*(.14+.025*i/bones.length);
+     if(height>allow)position[i].addScaledVector(offset,-.16*(1-allow/height));
     }
     for(let i=3;i<position.length;i++)for(const c of legColliders){const segmentDirection=c.end.clone().sub(c.start),lengthSquared=segmentDirection.lengthSq(),t=lengthSquared>1e-8?THREE.MathUtils.clamp(position[i].clone().sub(c.start).dot(segmentDirection)/lengthSquared,0,1):0,nearest=c.start.clone().addScaledVector(segmentDirection,t),separation=position[i].clone().sub(nearest),distance=separation.length(),radius=c.radius+THREE.MathUtils.lerp(.065,.012,i/bones.length);if(distance<radius){if(distance<1e-6)separation.copy(back);else separation.divideScalar(distance);position[i].addScaledVector(separation,(radius-distance)*.75);}}
     for(let i=2;i<position.length;i++){position[i].y=Math.max(.06,position[i].y);const rear=position[i].clone().sub(root).dot(back);if(rear<.018)position[i].addScaledVector(back,.018-rear);}

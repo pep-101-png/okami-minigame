@@ -13,12 +13,12 @@ try{
     s.advance(1/120);const points=s.tail.points,tip=points.at(-1);maxStep=Math.max(maxStep,tip.distanceTo(previous));if(i<30)maxTransitionStep=Math.max(maxTransitionStep,tip.distanceTo(previous));previous=tip;
     maxLengthError=Math.max(maxLengthError,...s.tail.lengths.map(l=>Math.abs(l/s.tail.segment-1)));
     for(let j=2;j<points.length;j++)maxBend=Math.max(maxBend,points[j].clone().sub(points[j-1]).angleTo(points[j-1].clone().sub(points[j-2])));
-    if(i>240&&i%6===0)samples.push({t:i/120,root:points[0].toArray(),tip:tip.toArray(),head:position('head').toArray(),back:position('hipsBackA').toArray(),shoulder:position('foreL').toArray()});
+    if(i>240&&i%6===0)samples.push({t:i/120,root:points[0].toArray(),tip:tip.toArray(),earlyDropFraction:(points[0].y-points[3].y)/(3*s.tail.segment),head:position('head').toArray(),back:position('hipsBackA').toArray(),shoulder:position('foreL').toArray()});
    }
    modes[clip]={maxStep,maxLengthError,maxBend,samples};
   }
   const allClips={};for(const c of s.clips){s.choose(c.name);for(let i=0;i<30;i++)s.advance(1/120);allClips[c.name]=s.tail.points.every(p=>p.toArray().every(Number.isFinite));}
   s.renderer.render=render;return {modes,maxTransitionStep,allClips};
  });
- await writeFile('wolf-viewer/review/tail-dynamics-validation.json',JSON.stringify(report,null,2));assert(report.maxTransitionStep<.03);for(const [clip,m] of Object.entries(report.modes)){assert(m.maxStep<.04,`${clip} tail jumped`);assert(m.maxLengthError<.08,`${clip} tail stretches: ${m.maxLengthError}`);assert(m.maxBend<1.2,`${clip} tail kink: ${m.maxBend}`)}assert(Object.values(report.allClips).every(Boolean));assert.deepEqual(errors,[]);console.log('PASS: passive-tail stability, length constraints, gradual transitions and all 22 clips.');
+ await writeFile('wolf-viewer/review/tail-dynamics-validation.json',JSON.stringify(report,null,2));assert(report.maxTransitionStep<.03);for(const [clip,m] of Object.entries(report.modes)){assert(m.maxStep<.04,`${clip} tail jumped`);assert(m.maxLengthError<.08,`${clip} tail stretches: ${m.maxLengthError}`);assert(m.maxBend<.5,`${clip} tail kink: ${m.maxBend}`)}assert(report.modes.Idle.samples.every(s=>s.earlyDropFraction>.45),'Idle tail keeps a stiff horizontal base');assert(Object.values(report.allClips).every(Boolean));assert.deepEqual(errors,[]);console.log('PASS: passive-tail stability, length constraints, gradual transitions and all 22 clips.');
 }finally{await browser.close()}

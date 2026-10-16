@@ -1,0 +1,233 @@
+{
+  "strands": [
+    "Shoulder curl L",
+    "Shoulder flowing layer L0",
+    "Shoulder flowing layer L1",
+    "Ruff layer L0",
+    "Ruff layer L1",
+    "Ruff layer L2",
+    "fore ankle curl L",
+    "fore ankle plume L0",
+    "fore ankle plume L1",
+    "hind ankle curl L",
+    "hind ankle plume L0",
+    "hind ankle plume L1",
+    "Haunch wisp L0",
+    "Haunch wisp L1",
+    "Tail soft layer L0",
+    "Tail soft layer L1",
+    "Shoulder curl R",
+    "Shoulder flowing layer R0",
+    "Shoulder flowing layer R1",
+    "Ruff layer R0",
+    "Ruff layer R1",
+    "Ruff layer R2",
+    "fore ankle curl R",
+    "fore ankle plume R0",
+    "fore ankle plume R1",
+    "hind ankle curl R",
+    "hind ankle plume R0",
+    "hind ankle plume R1",
+    "Haunch wisp R0",
+    "Haunch wisp R1",
+    "Tail soft layer R0",
+    "Tail soft layer R1"
+  ],
+  "ranges": [
+    {
+      "name": "Shoulder curl L",
+      "start": 44506,
+      "segments": 72,
+      "ring": 12
+    },
+    {
+      "name": "Shoulder flowing layer L0",
+      "start": 45370,
+      "segments": 56,
+      "ring": 12
+    },
+    {
+      "name": "Shoulder flowing layer L1",
+      "start": 46042,
+      "segments": 56,
+      "ring": 12
+    },
+    {
+      "name": "Ruff layer L0",
+      "start": 46714,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "Ruff layer L1",
+      "start": 47194,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "Ruff layer L2",
+      "start": 47674,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "fore ankle curl L",
+      "start": 48154,
+      "segments": 60,
+      "ring": 12
+    },
+    {
+      "name": "fore ankle plume L0",
+      "start": 48874,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "fore ankle plume L1",
+      "start": 49450,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "hind ankle curl L",
+      "start": 50026,
+      "segments": 60,
+      "ring": 12
+    },
+    {
+      "name": "hind ankle plume L0",
+      "start": 50746,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "hind ankle plume L1",
+      "start": 51322,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "Haunch wisp L0",
+      "start": 51898,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "Haunch wisp L1",
+      "start": 52378,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "Tail soft layer L0",
+      "start": 52858,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "Tail soft layer L1",
+      "start": 53434,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "Shoulder curl R",
+      "start": 54010,
+      "segments": 72,
+      "ring": 12
+    },
+    {
+      "name": "Shoulder flowing layer R0",
+      "start": 54874,
+      "segments": 56,
+      "ring": 12
+    },
+    {
+      "name": "Shoulder flowing layer R1",
+      "start": 55546,
+      "segments": 56,
+      "ring": 12
+    },
+    {
+      "name": "Ruff layer R0",
+      "start": 56218,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "Ruff layer R1",
+      "start": 56698,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "Ruff layer R2",
+      "start": 57178,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "fore ankle curl R",
+      "start": 57658,
+      "segments": 60,
+      "ring": 12
+    },
+    {
+      "name": "fore ankle plume R0",
+      "start": 58378,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "fore ankle plume R1",
+      "start": 58954,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "hind ankle curl R",
+      "start": 59530,
+      "segments": 60,
+      "ring": 12
+    },
+    {
+      "name": "hind ankle plume R0",
+      "start": 60250,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "hind ankle plume R1",
+      "start": 60826,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "Haunch wisp R0",
+      "start": 61402,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "Haunch wisp R1",
+      "start": 61882,
+      "segments": 40,
+      "ring": 12
+    },
+    {
+      "name": "Tail soft layer R0",
+      "start": 62362,
+      "segments": 48,
+      "ring": 12
+    },
+    {
+      "name": "Tail soft layer R1",
+      "start": 62938,
+      "segments": 48,
+      "ring": 12
+    }
+  ],
+  "originalVertices": 44506,
+  "vertices": 63514,
+  "newVertices": 19008
+}
