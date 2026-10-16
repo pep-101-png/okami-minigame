@@ -22,6 +22,14 @@ fibre=nodes.new('ShaderNodeValToRGB');fibre.color_ramp.elements[0].color=(.72,.7
 body_mix=mix;mix=nodes.new('ShaderNodeMixRGB');mix.blend_type='MULTIPLY';mix.inputs[0].default_value=.30;links.new(body_mix.outputs[0],mix.inputs[1]);links.new(fibre.outputs[0],mix.inputs[2])
 if coat.data.color_attributes.get('FurWash'):
     strand_wash=nodes.new('ShaderNodeVertexColor');strand_wash.layer_name='FurWash';base_mix=mix;mix=nodes.new('ShaderNodeMixRGB');mix.blend_type='MULTIPLY';mix.inputs[0].default_value=.8;links.new(base_mix.outputs[0],mix.inputs[1]);links.new(strand_wash.outputs['Color'],mix.inputs[2])
+# Larger wet-in-wet washes sit below the fine, directional fur pigment.
+wash_noise=nodes.new('ShaderNodeTexNoise');wash_noise.inputs['Scale'].default_value=3.2;wash_noise.inputs['Detail'].default_value=2;wash_noise.inputs['Roughness'].default_value=.68;links.new(geo.outputs['Position'],wash_noise.inputs['Vector'])
+wash_ramp=nodes.new('ShaderNodeValToRGB');wash_ramp.color_ramp.interpolation='B_SPLINE'
+wash_ramp.color_ramp.elements.remove(wash_ramp.color_ramp.elements[1])
+for i,(p,c) in enumerate([(.18,(.56,.70,.77,1)),(.40,(.81,.87,.87,1)),(.58,(1,.96,.84,1)),(.79,(1,.99,.94,1))]):
+    e=wash_ramp.color_ramp.elements[0] if i==0 else wash_ramp.color_ramp.elements.new(p);e.position=p;e.color=c
+links.new(wash_noise.outputs['Fac'],wash_ramp.inputs[0]);undercoat=mix
+mix=nodes.new('ShaderNodeMixRGB');mix.blend_type='MULTIPLY';mix.inputs[0].default_value=.48;links.new(undercoat.outputs[0],mix.inputs[1]);links.new(wash_ramp.outputs[0],mix.inputs[2])
 links.new(mix.outputs[0],bs.inputs['Base Color'])
 for obj in meshes:
     obj.data.materials.clear();obj.data.materials.append(fur)

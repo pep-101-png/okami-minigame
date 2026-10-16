@@ -24,9 +24,12 @@ prep=source[:source.rindex("exec(compile(text,'paint-body-and-face','exec'))")];
 # Replace inherited normal-dependent paint with a continuous ivory wash.
 a=text.index("a=source.index('# Layered ivory coat:')");b=text.index('\n',a)
 text=text[:a]+"exec(compile((root/'authoring'/'coat_material.py').read_text(),'ivory-pigment','exec'))"+text[b:]
-# Remove the unwanted shoulder scroll from the source artwork, retaining the
-# ankle and tail ink. A texture blur cannot repair a badly placed black line.
+# Remove the flat shoulder and ankle scrolls replaced by sculpted curls;
+# retain the tail ink. Texture blur alone cannot repair misplaced artwork.
 text=text.replace("exec(paint_code)","paint_code=paint_code.replace('[(-1.30,3.55,.22),(-1.08,.79,.115),(2.13,.82,.13)]','[]')\nexec(paint_code)")
+# Paint the newly lengthened muzzle tip, and process ribbons before projection.
+watercolor_hook="exec(compile((root/'authoring/watercolor_pigment.py').read_text(),'watercolor-pigment','exec'))\nmask=watercolor_pigment(mask)\n"
+text=text.replace("exec(paint_code)", "paint_code=paint_code.replace('default_value=-4.06','default_value=-4.203')\npaint_code=paint_code.replace('mask.save(root/',"+repr(watercolor_hook)+"+'mask.save(root/')\nexec(paint_code)")
 a=text.index('# Keep the existing subtle UV-aligned normal grain.');b=text.index('rig.animation_data.action=previous',a);text=text[:a]+insert+'\n'+text[b:]
 text=text.replace("scene.render.bake.margin=6","scene.render.bake.margin=12").replace("scene.cycles.samples=8","scene.cycles.samples=16")
 exec(compile(text,'clean-uv-coat','exec'))
