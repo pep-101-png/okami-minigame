@@ -1,0 +1,10 @@
+{
+  "approvedByUser": true,
+  "originalBaselineCommit": "2ba1f2b7f829145334a261f7a0fc36d80f39b29e",
+  "modelSHA256": "34927db7ab06488414889a8c2eb74e112b13bc10bfbde13e3333f6c9f77a001c",
+  "faceMetadataSHA256": "f2bfcbdfa4f63288fe3f9a8e1a9491c09ebf2ed541c52b450763437ab5805159",
+  "nativeScene": "authoring/checkpoints/neck-approved.blend",
+  "runCorrectives": "authoring/checkpoints/neck-approved-surface.npz",
+  "neckBindings": "authoring/checkpoints/neck-approved-bindings.npz",
+  "scope": "Approved neck-only repair. Original accepted head, chest, curls, fur, body and animation tracks preserved."
+}
