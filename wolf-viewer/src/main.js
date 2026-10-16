@@ -8,6 +8,12 @@ import {createIdleBinding} from './idle-binding.js';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 const parameters=new URLSearchParams(location.search);const baseline=parameters.has('baseline');
+const version=parameters.get('version')||'head-study';
+const versionModel={'head-study':'wolf.glb','neck-approved':'neck-approved.glb','baseline-2ba1f2b':'baseline-2ba1f2b.glb'}[version]||'wolf.glb';
+const assetRevision=__WOLF_ASSET_REVISION__;
+const neckReview=parameters.get('review');
+const reviewModel={baseline:'baseline.glb',candidate:'wolf.glb'}[neckReview];
+const reviewRoot=`${import.meta.env.BASE_URL}review/drafts/neck-repair/`;
 if(parameters.has('compare'))document.querySelector('main').style.display='none';
 const scene=new THREE.Scene();scene.background=createPaperBackground();scene.fog=new THREE.Fog('#e8dfc8',16,35);
 scene.add(new THREE.HemisphereLight('#fff8e9','#85847c',.9));
@@ -23,7 +29,7 @@ const markers=new THREE.Group();scene.add(markers);for(let i=0;i<40;i++){const l
 const status=document.querySelector('#status'),select=document.querySelector('#animation'),scrub=document.querySelector('#scrub');
 let face,model,mixer,action,clips=[],motion={},skeleton,paused=false,rate=1,groundDistance=0,fade=0,groundSpeed=0,last=performance.now(),idleBindings=[],idleBlend=1,walkBlend=0,tail,fur;
 const descriptions={Jump:'Squat, head and shoulder lead, body lift and staggered landing.',AirStrike:'A slow downward lead, forepaw contact and impact compression.',Bark:'Wide, low front stance and a stronger opening jaw.',Idle:'Relaxed breathing, a hanging tail and gentle fur movement.',Walk:'Four-beat walk. Planted paw travel and ground speed are matched.',Run:'Coordinated head, scapular glide and back flexion. Passive tail follows momentum.',JumpRise:'Upward jump pose.',JumpFall:'Falling pose with reaching legs.',Land:'Landing compression and recovery.'};
-const studio={scene,camera,renderer,controls,get model(){return model},get mixer(){return mixer},get clips(){return clips},get action(){return action},get motion(){return motion},get groundSpeed(){return groundSpeed},get paused(){return paused},get idleBlend(){return idleBlend},get tail(){return tail},get fur(){return fur},get face(){return face},externalClock:false};window.wolfStudio=studio;
+const studio={scene,camera,renderer,controls,get model(){return model},get mixer(){return mixer},get clips(){return clips},get action(){return action},get motion(){return motion},get groundSpeed(){return groundSpeed},get paused(){return paused},get idleBlend(){return idleBlend},get tail(){return tail},get fur(){return fur},get face(){return face},externalClock:parameters.has('capture'),reviewMode:reviewModel?neckReview:null,version};window.wolfStudio=studio;
 function choose(name){const clip=clips.find(c=>c.name===name);if(!clip)return;const next=mixer.clipAction(clip);next.setLoop(THREE.LoopRepeat,Infinity);next.clampWhenFinished=false;next.reset().setEffectiveWeight(1).setEffectiveTimeScale(1).play();if(action&&action!==next)action.crossFadeTo(next,.65,false);for(const existing of clips){const a=mixer.clipAction(existing);if(a!==next&&a!==action)a.stop();}action=next;if(!studio.ready)idleBindings.forEach(b=>b.set(name==='Idle'?1:0,name==='Walk'?1:0));fade=.65;select.value=name;paused=false;document.querySelector('#play').textContent='Pause';document.querySelector('#play').setAttribute('aria-pressed','false');document.querySelector('#description').textContent=descriptions[name]||'Attack unchanged in this pass · deferred for later review.';}
 studio.choose=choose;
 studio.play=()=>{action.paused=false;action.enabled=true;action.clampWhenFinished=false;action.setLoop(THREE.LoopRepeat,Infinity).play();paused=false;};
@@ -46,7 +52,7 @@ scrub.oninput=e=>{if(!action)return;studio.sample(action.getClip().name,Number(e
 document.querySelector('#bones').onchange=e=>{if(skeleton)skeleton.visible=e.target.checked;};
 for(const button of document.querySelectorAll('[data-view]'))button.onclick=()=>{const p={side:[-7.5,2.55,0],front:[0,2.7,-7.5],three:[-6,3.1,-4],face:[0,1.65,-3.5]}[button.dataset.view];camera.position.set(...p);controls.target.set(...(button.dataset.view==='face'?[0,1.48,-1.15]:[0,1,-.5]));controls.update();};
 try{
- const [asset,metadata,tailMetadata,faceMetadata]=await Promise.all([new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}models/${baseline?'before':'wolf'}.glb`),fetch(`${import.meta.env.BASE_URL}${baseline?'before-motion':'motion'}.json`).then(r=>r.json()),fetch(`${import.meta.env.BASE_URL}tail.json`).then(r=>r.json()),fetch(`${import.meta.env.BASE_URL}face.json`).then(r=>r.json())]);
+ const [asset,metadata,tailMetadata,faceMetadata]=await Promise.all([new GLTFLoader().loadAsync(reviewModel?reviewRoot+reviewModel:`${import.meta.env.BASE_URL}models/${baseline?'before.glb':versionModel}?v=${assetRevision}`),fetch(`${import.meta.env.BASE_URL}${baseline?'before-motion':'motion'}.json`).then(r=>r.json()),fetch(`${import.meta.env.BASE_URL}tail.json`).then(r=>r.json()),fetch(reviewModel?reviewRoot+'face.json':`${import.meta.env.BASE_URL}${version==='head-study'?'face.json':'face-neck-approved.json'}?v=${assetRevision}`).then(r=>r.json())]);
  model=asset.scene;model.scale.setScalar(.34);model.rotation.y=Math.PI;scene.add(model);motion=metadata;clips=asset.animations;mixer=new THREE.AnimationMixer(model);
  if(!baseline)face=createFaceDynamics(faceMetadata);
  const skins=[];model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;if(!baseline)for(const material of (Array.isArray(o.material)?o.material:[o.material]))applyWatercolorMaterial(material,face);}if(o.isSkinnedMesh)skins.push(o);});
@@ -54,7 +60,7 @@ try{
  if(!baseline){tail=createTailDynamics(model,tailMetadata);fur=createFurDynamics(model);}
  skeleton=new THREE.SkeletonHelper(model);skeleton.visible=false;scene.add(skeleton);
  const order=['Idle','Walk','Run','Jump','JumpRise','JumpFall','Land'];clips.sort((a,b)=>(order.includes(a.name)?order.indexOf(a.name):99)-(order.includes(b.name)?order.indexOf(b.name):99)||a.name.localeCompare(b.name));
- select.replaceChildren(...clips.map(c=>{const option=document.createElement('option');option.value=c.name;option.textContent=c.name.replace(/([a-z])([A-Z])/g,'$1 $2');return option;}));select.disabled=false;idleBlend=0;choose('Run');studio.ready=true;status.textContent=baseline?'PREVIOUS BUILD · before repair':'WOLF VIEWER · WATERCOLOR STUDY';
+ select.replaceChildren(...clips.map(c=>{const option=document.createElement('option');option.value=c.name;option.textContent=c.name.replace(/([a-z])([A-Z])/g,'$1 $2');return option;}));select.disabled=false;idleBlend=0;choose(baseline?'Run':'Idle');studio.ready=true;if(!parameters.has('compare'))document.querySelector('[data-view=face]').click();status.textContent=reviewModel?(neckReview==='baseline'?'ACCEPTED · 2ba1f2b':'APPROVED NECK CHECKPOINT'):baseline?'PREVIOUS BUILD · before repair':version==='neck-approved'?'APPROVED NECK CHECKPOINT':version==='baseline-2ba1f2b'?'ORIGINAL ACCEPTED · 2ba1f2b':'HEAD ANATOMY · AWAITING REVIEW';
 }catch(error){status.textContent=`Could not load the viewer: ${error.message}`;console.error(error);}
 function advance(dt){
  if(!mixer)return;mixer.update(dt*rate);const targetBinding=action.getClip().name==='Idle'?1:0;

@@ -1,15 +1,21 @@
 # Standalone wolf viewer on GitHub Pages
 
 The existing `wolf-viewer/` project is the only source for this site. The
-`wolf-viewer-pages` branch contains hosting configuration based on the accepted
-`2ba1f2b` viewer. It does not include the unapproved neck study. No game project
-is built or deployed.
+`wolf-viewer-pages` branch contains the existing viewer and its hosting configuration.
+The neck repair is approved and saved as an immutable checkpoint; the current
+head reconstruction is an explicitly requested browser review study. It is not
+yet an accepted head. No game project is built or deployed.
 
 Expected site: https://pep-101-png.github.io/okami-minigame/
 
-Animation comparison: https://pep-101-png.github.io/okami-minigame/compare.html
+Head comparison: https://pep-101-png.github.io/okami-minigame/compare.html?study=head
 
-These are destination addresses, not a claim that Pages has been enabled.
+Approved neck: https://pep-101-png.github.io/okami-minigame/?version=neck-approved
+
+Original baseline: https://pep-101-png.github.io/okami-minigame/?version=baseline-2ba1f2b
+
+The initial hosted viewer was verified in a real browser after deployment attempt 3.
+Verify each subsequent deployed revision before reporting it live.
 
 ## One-time repository setting
 
@@ -31,9 +37,8 @@ and deploys only `wolf-viewer/dist`. The public URL stays the same; no ZIP
 download or Windows setup is required for visitors. Source changes can be
 reviewed separately from model/animation commits before they reach this branch.
 
-Do not merge this branch into the game to deploy it. Do not promote an
-unapproved model merely to update the website. Keep the uncommitted neck repair
-and other authoring drafts separate until their visual approval.
+Do not merge this branch into the game to deploy it. Keep review models clearly labelled until their visual approval. Preserve the
+approved neck checkpoint and original baseline when publishing a new head study.
 
 ## Paths and preserved behaviour
 
