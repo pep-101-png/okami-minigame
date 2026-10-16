@@ -1,0 +1,188 @@
+{
+  "reviewedAtUTC": "2026-10-16T07:19:16.995123+00:00",
+  "baselineCommit": "1305e78893ab57daad4c4c405d2df8a6be907aa7",
+  "scope": "Standalone wolf: rounded chest with small tuft, retracted throat, lower withers, corrected lip stroke and revised fitted ink eyes. Existing games, runtime fur/tail/outline systems and viewer ZIP preserved.",
+  "sculpt": {
+    "headLengthScale": 1.045,
+    "faceWidthScale": 0.85,
+    "muzzleWidthScale": 0.795,
+    "earTipAddedHeight": 0.17,
+    "earTipTaper": 0.32,
+    "design": "Lower withers, retracted mid-throat, rounded brisket with small terminal tufts; retained tapered face and pointed ears.",
+    "protectedLimbsAndTailMaxChange": 0.0,
+    "withersLowering": 0.25,
+    "midThroatRetraction": 0.32,
+    "bodyMaxCoordinateChange": 0.25,
+    "topologyChanged": false,
+    "correctiveShapes": 48,
+    "previousHeadFront": -4.193288803100586,
+    "newHeadFront": -4.260316848754883,
+    "previousEarTop": 5.261643409729004,
+    "newEarTop": 5.431643486022949
+  },
+  "geometry": {
+    "samples": {
+      "withers": {
+        "before": [
+          0.013974571600556374,
+          -1.5729271173477173,
+          4.635458946228027
+        ],
+        "after": [
+          0.013974571600556374,
+          -1.5729271173477173,
+          4.385458946228027
+        ]
+      },
+      "midThroat": {
+        "before": [
+          0.023186633363366127,
+          -2.957017660140991,
+          3.4454071521759033
+        ],
+        "after": [
+          0.021124085411429405,
+          -2.6407361030578613,
+          3.4454071521759033
+        ]
+      }
+    },
+    "protectedVertices": 35541,
+    "maxProtectedRestChange": 0.0,
+    "all48RunCorrectivesFinite": true
+  },
+  "deformationField": {
+    "sampledBodySurfaceVertices": 16962,
+    "minimumLocalJacobianDeterminant": 0.44853136302415275,
+    "foldedLocalSamples": 0
+  },
+  "native": {
+    "nativeVertices": 63514,
+    "nativeFaces": 63194,
+    "boundaryEdges": 0,
+    "nonManifoldEdges": 0,
+    "correctiveShapes": 48,
+    "skinWeightMinTotal": 0.9999999478459358,
+    "skinWeightMaxTotal": 1.0000000491854735
+  },
+  "browser": {
+    "vertices": 78730,
+    "triangles": 126900,
+    "morphs": 48,
+    "clips": [
+      "Idle",
+      "Walk",
+      "Run",
+      "Jump",
+      "JumpRise",
+      "JumpFall",
+      "Land",
+      "AirStrike",
+      "Bark",
+      "ChargedHeavy",
+      "ChargedThrust",
+      "ChargeHeavy",
+      "ChargeLight",
+      "Dodge",
+      "Finish",
+      "Growl",
+      "HeavyArc",
+      "HeavyReturn",
+      "Howl",
+      "Hurt",
+      "Sweep",
+      "Thrust"
+    ],
+    "bindings": {
+      "skinWeight": {
+        "min": 0.9999999478459358,
+        "max": 1.0000000491272658,
+        "invalid": 0
+      },
+      "_idle_skin_weight": {
+        "min": 0.9999999082647264,
+        "max": 1.0000001075677574,
+        "invalid": 0
+      },
+      "_walk_skin_weight": {
+        "min": 0.9999999082647264,
+        "max": 1.0000001075677574,
+        "invalid": 0
+      }
+    },
+    "errors": []
+  },
+  "production": {
+    "clips": 22,
+    "morphs": 48,
+    "furMask": true,
+    "shells": [
+      {
+        "order": -1,
+        "depthWrite": false,
+        "sharesMorphs": true,
+        "triangles": 126900
+      },
+      {
+        "order": 1,
+        "depthWrite": false,
+        "sharesMorphs": true,
+        "triangles": 37888
+      }
+    ],
+    "furControls": 30,
+    "face": true,
+    "errors": []
+  },
+  "sourceAndBuildGLBSHA256": "027e71faa77af11964fc135ec01a7e9a8823ab8e95b78fbf5cee18602cf57a6d",
+  "revisionsReviewed": [
+    "Rejected the first large throat cut and low withers render: it pinched the chest and made the neck too thin. Widened the transition to eliminate local deformation folds.",
+    "Reduced withers lowering and used a rounded Gaussian throat falloff. Retained the lower brisket volume and added small terminal tufts with dilute tapered ink strokes.",
+    "Moved and redrew the ink eyes, added a small dilute pigment highlight; shortened and thinned the lip stroke, joined its front split and relaxed inherited mouth-corner bumps.",
+    "Front views exposed red side-projection spill after sculpting. Replaced the first width-based fade with a smooth normal-aware mask, preserving side pigment while clearing the front chest.",
+    "Final front/profile/three-quarter and complete side views, open/half/closed eyelids, Walk and seven Run phases inspected before capturing the final actual-model video."
+  ],
+  "video": {
+    "path": "releases/wolf-fur-preview.mp4",
+    "seconds": 12,
+    "frames": 288,
+    "fps": 24,
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "410a1577ec1f184d18a5f9cb60225482c71b3fb94cb58f64cbb30ee2b1e983af",
+    "source": "Actual Chromium/Three.js capture; FFmpeg captions only. No generated or retouched wolf imagery.",
+    "shots": [
+      "0\u20133 s: front face and blink",
+      "3\u20136 s: mouth, neck and chest profile",
+      "6\u20139 s: full side silhouette",
+      "9\u201312 s: running"
+    ],
+    "visuallyReviewedFrames": [
+      0,
+      57,
+      63,
+      96,
+      156,
+      204,
+      240,
+      260,
+      287
+    ],
+    "finiteMotionSamples": 24,
+    "browserAndShaderErrors": [],
+    "fullDecodePassed": true
+  },
+  "validation": [
+    "Production Vite build passed; source and built GLB hashes match.",
+    "22 clips, 48 corrective shapes, 30 fur controls and both shared outline passes load without page or shader errors.",
+    "Three skin bindings normalized, finite and nonnegative.",
+    "Native mesh retains closed manifold topology; all 48 Run offsets finite and 35,541 protected lower-limb/tail vertices unchanged.",
+    "Passive tail stability, length constraints and transitions passed; all 22 clips finite.",
+    "Paint-only bake preserves the existing UVs and normal atlas.",
+    "MP4 frame count, duration and complete decode passed.",
+    "Existing Sunward/Inkbound game files and permanent viewer ZIP unchanged."
+  ],
+  "limits": "Art revision of the existing standalone wolf. Combat animation clips retained; not redesigned or exhaustively visually reviewed. Visual review does not claim exact reproduction of the supplied illustrations."
+}

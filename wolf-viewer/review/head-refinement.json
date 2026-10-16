@@ -4,12 +4,15 @@
   "muzzleWidthScale": 0.795,
   "earTipAddedHeight": 0.17,
   "earTipTaper": 0.32,
-  "design": "Tapered face, slimmer muzzle and jaw, pointed ears; small painted nose and compact ink eyes.",
-  "bodyMaxCoordinateChange": 0,
+  "design": "Lower withers, retracted mid-throat, rounded brisket with small terminal tufts; retained tapered face and pointed ears.",
+  "protectedLimbsAndTailMaxChange": 0.0,
+  "withersLowering": 0.25,
+  "midThroatRetraction": 0.32,
+  "bodyMaxCoordinateChange": 0.25,
   "topologyChanged": false,
   "correctiveShapes": 48,
   "previousHeadFront": -4.193288803100586,
-  "newHeadFront": -4.260432720184326,
+  "newHeadFront": -4.260316848754883,
   "previousEarTop": 5.261643409729004,
   "newEarTop": 5.431643486022949
 }

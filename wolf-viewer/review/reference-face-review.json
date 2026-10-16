@@ -114,7 +114,7 @@
     "Final pass: retained denser cores and edge-concentrated dry brush. Reviewed front/profile/three-quarter, open/half/closed eyes, pigment macro, Walk and Run poses."
   ],
   "video": {
-    "path": "releases/wolf-fur-preview.mp4",
+    "path": "https://github.com/pep-101-png/okami-minigame/raw/1305e78893ab57daad4c4c405d2df8a6be907aa7/releases/wolf-fur-preview.mp4",
     "seconds": 12,
     "frames": 288,
     "fps": 24,

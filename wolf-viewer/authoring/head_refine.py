@@ -1,4 +1,4 @@
-"""Reference-guided tapered face and pointed ears, preserving the approved body.
+"""Reference-guided face, rounded brisket and a lower withers silhouette.
 
 Run after anchor_fur and before fur_finish. Repeating the pass reloads its
 saved input, so revisions never accumulate stretch or change body topology.
@@ -37,6 +37,20 @@ def refine(points):
     p[:, 2] += .17*ears
     p[:, 0] += (np.sign(x)*.024-(x-np.sign(x)*.40)*.32)*ears
     p[:, 1] -= .025*ears
+    # Lower the raised withers with a broad continuous dorsal falloff. This
+    # retains curl topology and carries nearby roots with the underlying skin.
+    dorsal = smooth((y+2.75)/.65)*(1-smooth((y+.65)/1.05))*smooth((z-3.78)/.68)
+    p[:, 2] -= .25*dorsal
+    # Retract the long mid-throat wedge, retaining a rounded lower brisket.
+    # A smooth 3D field also carries the nearby skin in every run corrective.
+    throat = np.exp(-((z-3.40)/.42)**2)*smooth((z-2.35)/.30)*(1-smooth((z-3.85)/.20))*smooth((-y-1.70)/1.05)
+    throat *= 1-smooth((np.abs(x)-.42)/.50)
+    p[:, 1] += .32*throat
+    p[:, 0] *= 1-.09*throat
+    # Two understated points emerge from the rounded sternum, not a long bib.
+    tuft = np.exp(-((x-.10)/.075)**2)+.75*np.exp(-((x+.13)/.070)**2)
+    tuft *= np.exp(-((z-2.70)/.17)**2)*smooth((-y-1.90)/.28)
+    p[:, 2] -= .065*tuft
     return p
 
 rest, delta = archive['rest'], archive['delta']
@@ -45,10 +59,10 @@ rest, delta = archive['rest'], archive['delta']
 edges=np.asarray([e.vertices[:] for e in coat.data.edges]);a,b=edges.T
 degree=np.bincount(edges.ravel(),minlength=len(rest)).clip(1)
 x,y,z=rest.T
-lip_weight=.38*smooth((-y-3.30)/.28)*smooth((y+4.25)/.15)*smooth((z-3.98)/.10)*(1-smooth((z-4.22)/.13))
+lip_weight=.48*smooth((-y-3.30)/.28)*smooth((y+4.25)/.15)*smooth((z-3.98)/.10)*(1-smooth((z-4.22)/.13))
 def smooth_lip(points):
     p=points.copy()
-    for _ in range(5):
+    for _ in range(12):
         total=np.zeros_like(p);np.add.at(total,a,p[b]);np.add.at(total,b,p[a])
         p+=(total/degree[:,None]-p)*lip_weight[:,None]
     return p
@@ -57,14 +71,16 @@ next_delta = np.asarray([smooth_lip(refine(rest+d))-next_rest for d in delta])
 coat.data.vertices.foreach_set('co', next_rest.astype(np.float32).ravel())
 coat.data.update()
 coat['head_refined'] = True
-body = rest[:, 1] > -2.42
-assert np.max(np.abs(next_rest[body]-rest[body])) == 0
+protected = (rest[:,2]<2.35) | (rest[:,1]>.5)
+assert np.max(np.abs(next_rest[protected]-rest[protected])) < 1e-6
 np.savez_compressed(draft / 'surface.npz', rest=next_rest, delta=next_delta)
 (root/'review/head-refinement.json').write_text(json.dumps({
     'headLengthScale': 1.045, 'faceWidthScale': .85, 'muzzleWidthScale': .795,
     'earTipAddedHeight': .17, 'earTipTaper': .32,
-    'design': 'Tapered face, slimmer muzzle and jaw, pointed ears; small painted nose and compact ink eyes.',
-    'bodyMaxCoordinateChange': 0,
+    'design': 'Lower withers, retracted mid-throat, rounded brisket with small terminal tufts; retained tapered face and pointed ears.',
+    'protectedLimbsAndTailMaxChange': float(np.max(np.abs(next_rest[protected]-rest[protected]))),
+    'withersLowering': .25, 'midThroatRetraction': .32,
+    'bodyMaxCoordinateChange': float(np.max(np.abs(next_rest[rest[:,1]>-2.42]-rest[rest[:,1]>-2.42]))),
     'topologyChanged': False, 'correctiveShapes': len(delta),
     'previousHeadFront': float(rest[:,1].min()),
     'newHeadFront': float(next_rest[:,1].min()),

@@ -1,15 +1,17 @@
 """Clean UV paint and fresh fur normals; retain every pose and rest vertex."""
-import bpy,math,json,numpy as np
+import bpy,math,json,sys,numpy as np
 from pathlib import Path
 from mathutils import Vector
 root=Path(__file__).resolve().parents[1];stage=10
+paint_only='--paint-only' in sys.argv
 bpy.ops.wm.open_mainfile(filepath=str(root/'review/drafts/run-candidate.blend'))
 rig=bpy.data.objects['DivineWolfRig'];coat=bpy.data.objects['Wolf ivory coat'];scene=bpy.context.scene
 rig.animation_data.action=None
 for b in rig.pose.bones:b.location=(0,0,0);b.rotation_euler=(0,0,0)
 bpy.context.view_layer.update();bpy.ops.object.select_all(action='DESELECT');coat.select_set(True);bpy.context.view_layer.objects.active=coat
 # Repack the full surface rather than reusing the overlapping imported islands.
-bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT');bpy.ops.uv.smart_project(angle_limit=math.radians(65),island_margin=.012,area_weight=.35,correct_aspect=True,scale_to_bounds=True);bpy.ops.object.mode_set(mode='OBJECT')
+if not paint_only:
+    bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT');bpy.ops.uv.smart_project(angle_limit=math.radians(65),island_margin=.012,area_weight=.35,correct_aspect=True,scale_to_bounds=True);bpy.ops.object.mode_set(mode='OBJECT')
 source=(root/'authoring/paint.py').read_text()
 # The imported tangent normal texture belongs to the old UV map. Rebuild it.
 insert='''# Rebuild tangent-space grain in the clean UV layout.
@@ -18,6 +20,13 @@ normal_target=nodes.new('ShaderNodeTexImage');normal_target.image=normal_atlas;n
 scene.render.bake.margin=12;bpy.ops.object.bake(type='NORMAL');normal_atlas.filepath_raw=str(root/'authoring/fur-normals.png');normal_atlas.file_format='PNG';normal_atlas.save();normal_atlas.pack()
 normal_node=nodes.new('ShaderNodeNormalMap');normal_node.inputs['Strength'].default_value=.40;links.new(normal_target.outputs['Color'],normal_node.inputs['Color']);links.new(normal_node.outputs['Normal'],bs.inputs['Normal'])
 '''
+if paint_only:
+    # Only use after a complete geometry/normal bake; keep that UV layout.
+    assert coat.data.uv_layers and (root/'authoring/fur-normals.png').is_file()
+    insert="""normal_atlas=bpy.data.images.load(str(root/'authoring/fur-normals.png'),check_existing=False);normal_atlas.colorspace_settings.name='Non-Color';normal_atlas.pack()
+normal_target=nodes.new('ShaderNodeTexImage');normal_target.image=normal_atlas
+normal_node=nodes.new('ShaderNodeNormalMap');normal_node.inputs['Strength'].default_value=.40;links.new(normal_target.outputs['Color'],normal_node.inputs['Color']);links.new(normal_node.outputs['Normal'],bs.inputs['Normal'])
+"""
 # Replace the older helper's normal-map section inside its loaded source.
 # Execute helper preparation up to its final exec, then adjust its assembled text.
 prep=source[:source.rindex("exec(compile(text,'paint-body-and-face','exec'))")];exec(compile(prep,'prepare-clean-paint','exec'))
