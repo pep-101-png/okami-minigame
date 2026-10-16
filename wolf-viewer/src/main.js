@@ -9,8 +9,8 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 const parameters=new URLSearchParams(location.search);const baseline=parameters.has('baseline');
 const version=parameters.get('version')||'head-study';
-const versionModel={'head-study':'wolf.glb','neck-approved':'neck-approved.glb','baseline-2ba1f2b':'baseline-2ba1f2b.glb'}[version]||'wolf.glb';
-const assetRevision=__WOLF_ASSET_REVISION__;
+const versionModel={'head-study':'head-study.glb','jaw-repair':'jaw-repair.glb','neck-approved':'neck-approved.glb','baseline-2ba1f2b':'baseline-2ba1f2b.glb'}[version]||'wolf.glb';
+const assetRevision=__WOLF_ASSET_REVISIONS__[versionModel];
 const neckReview=parameters.get('review');
 const reviewModel={baseline:'baseline.glb',candidate:'wolf.glb'}[neckReview];
 const reviewRoot=`${import.meta.env.BASE_URL}review/drafts/neck-repair/`;
@@ -52,7 +52,7 @@ scrub.oninput=e=>{if(!action)return;studio.sample(action.getClip().name,Number(e
 document.querySelector('#bones').onchange=e=>{if(skeleton)skeleton.visible=e.target.checked;};
 for(const button of document.querySelectorAll('[data-view]'))button.onclick=()=>{const p={side:[-7.5,2.55,0],front:[0,2.7,-7.5],three:[-6,3.1,-4],face:[0,1.65,-3.5]}[button.dataset.view];camera.position.set(...p);controls.target.set(...(button.dataset.view==='face'?[0,1.48,-1.15]:[0,1,-.5]));controls.update();};
 try{
- const [asset,metadata,tailMetadata,faceMetadata]=await Promise.all([new GLTFLoader().loadAsync(reviewModel?reviewRoot+reviewModel:`${import.meta.env.BASE_URL}models/${baseline?'before.glb':versionModel}?v=${assetRevision}`),fetch(`${import.meta.env.BASE_URL}${baseline?'before-motion':'motion'}.json`).then(r=>r.json()),fetch(`${import.meta.env.BASE_URL}tail.json`).then(r=>r.json()),fetch(reviewModel?reviewRoot+'face.json':`${import.meta.env.BASE_URL}${version==='head-study'?'face.json':'face-neck-approved.json'}?v=${assetRevision}`).then(r=>r.json())]);
+ const [asset,metadata,tailMetadata,faceMetadata]=await Promise.all([new GLTFLoader().loadAsync(reviewModel?reviewRoot+reviewModel:`${import.meta.env.BASE_URL}models/${baseline?'before.glb':versionModel}?v=${assetRevision}`),fetch(`${import.meta.env.BASE_URL}${baseline?'before-motion':'motion'}.json`).then(r=>r.json()),fetch(`${import.meta.env.BASE_URL}tail.json`).then(r=>r.json()),fetch(reviewModel?reviewRoot+'face.json':`${import.meta.env.BASE_URL}${version==='jaw-repair'?'face-jaw-repair.json':version==='head-study'?'face-head-study.json':'face-neck-approved.json'}?v=${assetRevision}`).then(r=>r.json())]);
  model=asset.scene;model.scale.setScalar(.34);model.rotation.y=Math.PI;scene.add(model);motion=metadata;clips=asset.animations;mixer=new THREE.AnimationMixer(model);
  if(!baseline)face=createFaceDynamics(faceMetadata);
  const skins=[];model.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;if(!baseline)for(const material of (Array.isArray(o.material)?o.material:[o.material]))applyWatercolorMaterial(material,face);}if(o.isSkinnedMesh)skins.push(o);});
@@ -60,7 +60,7 @@ try{
  if(!baseline){tail=createTailDynamics(model,tailMetadata);fur=createFurDynamics(model);}
  skeleton=new THREE.SkeletonHelper(model);skeleton.visible=false;scene.add(skeleton);
  const order=['Idle','Walk','Run','Jump','JumpRise','JumpFall','Land'];clips.sort((a,b)=>(order.includes(a.name)?order.indexOf(a.name):99)-(order.includes(b.name)?order.indexOf(b.name):99)||a.name.localeCompare(b.name));
- select.replaceChildren(...clips.map(c=>{const option=document.createElement('option');option.value=c.name;option.textContent=c.name.replace(/([a-z])([A-Z])/g,'$1 $2');return option;}));select.disabled=false;idleBlend=0;choose(baseline?'Run':'Idle');studio.ready=true;if(!parameters.has('compare'))document.querySelector('[data-view=face]').click();status.textContent=reviewModel?(neckReview==='baseline'?'ACCEPTED · 2ba1f2b':'APPROVED NECK CHECKPOINT'):baseline?'PREVIOUS BUILD · before repair':version==='neck-approved'?'APPROVED NECK CHECKPOINT':version==='baseline-2ba1f2b'?'ORIGINAL ACCEPTED · 2ba1f2b':'HEAD ANATOMY · AWAITING REVIEW';
+ select.replaceChildren(...clips.map(c=>{const option=document.createElement('option');option.value=c.name;option.textContent=c.name.replace(/([a-z])([A-Z])/g,'$1 $2');return option;}));select.disabled=false;idleBlend=0;choose(baseline?'Run':'Idle');studio.ready=true;if(!parameters.has('compare'))document.querySelector('[data-view=face]').click();status.textContent=reviewModel?(neckReview==='baseline'?'ACCEPTED · 2ba1f2b':'APPROVED NECK CHECKPOINT'):baseline?'PREVIOUS BUILD · before repair':version==='neck-approved'?'APPROVED NECK CHECKPOINT':version==='baseline-2ba1f2b'?'ORIGINAL ACCEPTED · 2ba1f2b':version==='jaw-repair'?'JAW & FACE REPAIR · AWAITING REVIEW':'HEAD ANATOMY · AWAITING REVIEW';
 }catch(error){status.textContent=`Could not load the viewer: ${error.message}`;console.error(error);}
 function advance(dt){
  if(!mixer)return;mixer.update(dt*rate);const targetBinding=action.getClip().name==='Idle'?1:0;
