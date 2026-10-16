@@ -112,7 +112,7 @@
     "eyes": "Fitted cheek artwork with narrower curved openings, round pupils, muted amber irises, small highlights and softened brows. Eyelids compress the painted skin during irregularly timed blinks."
   },
   "video": {
-    "path": "releases/wolf-fur-preview.mp4",
+    "path": "https://github.com/pep-101-png/okami-minigame/raw/241db88838f0a32cedfe9654519ef981a978ff1e/releases/wolf-fur-preview.mp4",
     "seconds": 12,
     "fps": 24,
     "frames": 288,

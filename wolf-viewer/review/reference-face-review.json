@@ -1,0 +1,162 @@
+{
+  "reviewedAtUTC": "2026-10-16T06:39:48.050782+00:00",
+  "baselineCommit": "241db88838f0a32cedfe9654519ef981a978ff1e",
+  "scope": "Reference-led face sculpt, nose/mouth/eye painting and stronger red brush pigment in the standalone wolf viewer. Body, curls, outline shader, coat shader and existing games retained.",
+  "head": {
+    "headLengthScale": 1.045,
+    "faceWidthScale": 0.85,
+    "muzzleWidthScale": 0.795,
+    "earTipAddedHeight": 0.17,
+    "earTipTaper": 0.32,
+    "design": "Tapered face, slimmer muzzle and jaw, pointed ears; small painted nose and compact ink eyes.",
+    "bodyMaxCoordinateChange": 0,
+    "topologyChanged": false,
+    "correctiveShapes": 48,
+    "previousHeadFront": -4.193288803100586,
+    "newHeadFront": -4.260432720184326,
+    "previousEarTop": 5.261643409729004,
+    "newEarTop": 5.431643486022949
+  },
+  "native": {
+    "nativeVertices": 63514,
+    "nativeFaces": 63194,
+    "boundaryEdges": 0,
+    "nonManifoldEdges": 0,
+    "correctiveShapes": 48,
+    "skinWeightMinTotal": 0.9999999478459358,
+    "skinWeightMaxTotal": 1.0000000491854735
+  },
+  "browser": {
+    "vertices": 78503,
+    "triangles": 126900,
+    "morphs": 48,
+    "clips": [
+      "Idle",
+      "Walk",
+      "Run",
+      "Jump",
+      "JumpRise",
+      "JumpFall",
+      "Land",
+      "AirStrike",
+      "Bark",
+      "ChargedHeavy",
+      "ChargedThrust",
+      "ChargeHeavy",
+      "ChargeLight",
+      "Dodge",
+      "Finish",
+      "Growl",
+      "HeavyArc",
+      "HeavyReturn",
+      "Howl",
+      "Hurt",
+      "Sweep",
+      "Thrust"
+    ],
+    "bindings": {
+      "skinWeight": {
+        "min": 0.9999999478459358,
+        "max": 1.0000000491272658,
+        "invalid": 0
+      },
+      "_idle_skin_weight": {
+        "min": 0.9999999082647264,
+        "max": 1.0000001075677574,
+        "invalid": 0
+      },
+      "_walk_skin_weight": {
+        "min": 0.9999999082647264,
+        "max": 1.0000001075677574,
+        "invalid": 0
+      }
+    },
+    "errors": []
+  },
+  "production": {
+    "clips": 22,
+    "morphs": 48,
+    "furMask": true,
+    "shells": [
+      {
+        "order": -1,
+        "depthWrite": false,
+        "sharesMorphs": true,
+        "triangles": 126900
+      },
+      {
+        "order": 1,
+        "depthWrite": false,
+        "sharesMorphs": true,
+        "triangles": 37888
+      }
+    ],
+    "furControls": 30,
+    "face": true,
+    "errors": []
+  },
+  "checks": {
+    "unchangedBodyVertices": 58040,
+    "maxBodyChange": 0,
+    "sourceAndBuildGLBSHA256": "33be4243ea80719480be27ead4fd106042543ebe7e3a7c4227a9ac45a20ca698",
+    "blinkImageChangeBounds": [
+      530,
+      264,
+      721,
+      370
+    ]
+  },
+  "faceDesign": "Tapered cheeks and muzzle, taller tapered ear tips, locally relaxed lip bumps, small broad-topped painted nose and defined mouth. Compact slanted charcoal eye shapes replace amber iris circles. Red eye framing uses tapered flicks; a stronger forehead seal extends down the bridge.",
+  "pigment": "Red-only edge displacement, denser wet cores, darker edge pools and sparse bristle channels concentrated at the stroke perimeter. No outline or coat shader edits.",
+  "revisionsReviewed": [
+    "First face/paint render: nose and ink-eye direction retained; rejected the overlong mouth upturn and uniformly scratched red texture.",
+    "Second pass: shortened mouth and relaxed inherited lip bumps through all corrective shapes. Reduced dry channels after the pigment macro still read as repeated scratches.",
+    "Final pass: retained denser cores and edge-concentrated dry brush. Reviewed front/profile/three-quarter, open/half/closed eyes, pigment macro, Walk and Run poses."
+  ],
+  "video": {
+    "path": "releases/wolf-fur-preview.mp4",
+    "seconds": 12,
+    "frames": 288,
+    "fps": 24,
+    "size": [
+      1280,
+      720
+    ],
+    "sha256": "c67c12ec6d3268fd63fe3e9dd26941293746ef7275122f5d22adeb6cf980d7d7",
+    "source": "Actual Chromium/Three.js capture with final FFmpeg captions. No generated wolf images or retouched model surfaces.",
+    "shots": [
+      "0\u20133 s: front face and blink",
+      "3\u20136 s: profile and mouth line",
+      "6\u20139 s: red pigment and sculpted-curl close-up",
+      "9\u201312 s: full-model Run transition"
+    ],
+    "visuallyReviewedFrames": [
+      0,
+      57,
+      63,
+      96,
+      156,
+      204,
+      240,
+      260,
+      287
+    ],
+    "finiteMotionSamples": 24,
+    "blinkRange": [
+      0,
+      1
+    ],
+    "browserAndShaderErrors": [],
+    "fullDecodePassed": true
+  },
+  "validation": [
+    "Production build passed; source/built GLB hashes match.",
+    "Production viewer has 22 clips, 48 corrective targets, 30 fur controls and both outline passes, with no page or shader errors.",
+    "All three skin bindings are normalized, finite and nonnegative.",
+    "Native geometry has zero boundary/nonmanifold edges; body vertices outside the head adjustment are unchanged.",
+    "Passive-tail length/stability/transition checks and finite motion across all 22 clips passed.",
+    "MP4 frame count, duration and full FFmpeg decode passed.",
+    "Existing Sunward/Inkbound games and viewer ZIP unchanged."
+  ],
+  "limits": "Combat clips retained rather than redesigned or exhaustively visually reviewed. These renders are an art review, not a claim that every pose matches the supplied illustrations."
+}

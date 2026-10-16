@@ -24,36 +24,27 @@ if coat.data.color_attributes.get('FurGeometry'):
  detail=nodes.new('ShaderNodeVertexColor');detail.layer_name='FurGeometry';channel=nodes.new('ShaderNodeSeparateColor');links.new(detail.outputs['Color'],channel.inputs['Color'])
  allowed=mathnode('MULTIPLY',allowed,mathnode('SUBTRACT',1,channel.outputs['Red']))
 links.new(mathnode('MULTIPLY',paint_tex.outputs['Alpha'],allowed),ink_mix.inputs[0])
+links.new(ink_mix.outputs[0],bs.inputs['Base Color'])
 # This single template is mirrored in surface tangent space, not projected across the entire face.
 size=1024;image=Image.new('RGBA',(size,size),(0,0,0,0));draw=ImageDraw.Draw(image)
 def eye_pixel(u,v):return ((u+.4)/.8*size,(.4-v)/.8*size)
 def shape(points,color):draw.polygon([eye_pixel(u,v) for u,v in points],fill=color)
-# Fine shadow brows and curved vermilion sweeps frame a real almond opening.
+# Compact calligraphic eyes: expression comes from the silhouette, not an iris.
 def bezier(a,b,c,d):
  return [tuple((1-t)**3*a[j]+3*(1-t)**2*t*b[j]+3*(1-t)*t*t*c[j]+t**3*d[j] for j in range(2)) for t in np.linspace(0,1,48)]
 brow=Image.new('RGBA',(size,size),(0,0,0,0));bd=ImageDraw.Draw(brow)
-bd.line([eye_pixel(u,v) for u,v in bezier((-.17,.12),(-.07,.19),(.09,.19),(.20,.18))],fill=(78,68,57,100),width=10,joint='curve')
+bd.line([eye_pixel(u,v) for u,v in bezier((-.12,.10),(-.02,.14),(.08,.16),(.155,.16))],fill=(88,78,64,78),width=8,joint='curve')
 image.alpha_composite(brow.filter(ImageFilter.GaussianBlur(5)));draw=ImageDraw.Draw(image)
-shape(bezier((-.215,-.040),(-.11,-.16),(.07,-.13),(.265,.12))+bezier((.265,.12),(.09,-.005),(-.04,-.04),(-.215,-.040)),(185,22,10,248))
-shape(bezier((-.22,.025),(-.12,.19),(.09,.14),(.29,.19))+bezier((.29,.19),(.14,.11),(-.04,.12),(-.22,.025)),(185,22,10,246))
+# The lower stroke hugs the opening and ends in a rising, tapered brush flick.
+shape(bezier((-.157,-.026),(-.075,-.112),(.055,-.078),(.225,.170))+bezier((.225,.170),(.065,-.012),(-.035,-.038),(-.157,-.026)),(185,22,10,255))
+shape(bezier((-.150,.025),(-.065,.13),(.065,.12),(.235,.210))+bezier((.235,.210),(.080,.055),(-.025,.085),(-.150,.025)),(185,22,10,255))
+shape([(.128,.117),(.235,.250),(.187,.127)],(185,22,10,240))
 exec(compile((root/'authoring/watercolor_pigment.py').read_text(),'face-watercolor','exec'))
 image=watercolor_pigment(image,531,black=False);draw=ImageDraw.Draw(image)
-almond=bezier((-.174,-.030),(-.070,.103),(.060,.116),(.190,.080))+bezier((.190,.080),(.055,-.058),(-.080,-.102),(-.174,-.030))
-almond=[(u,.25*u+.018+(v-.25*u-.018)*.82) for u,v in almond]
-shape(almond,(35,31,26,255))
-# Warm iris, a focused pupil and two restrained pigment highlights give direction.
-iris=Image.new('RGBA',(size,size),(0,0,0,0));idraw=ImageDraw.Draw(iris)
-def ellipse(drawer,u,v,rx,ry,color):
- drawer.ellipse([eye_pixel(u-rx,v+ry),eye_pixel(u+rx,v-ry)],fill=color)
-ellipse(idraw,-.024,.014,.054,.055,(100,77,44,255))
-ellipse(idraw,-.030,.015,.042,.044,(142,111,65,255))
-ellipse(idraw,-.040,.018,.027,.029,(24,24,22,255))
-ellipse(idraw,-.047,.040,.009,.010,(240,230,199,225))
-ellipse(idraw,-.002,-.015,.005,.006,(197,166,107,160))
-eye_mask=Image.new('L',(size,size),0);ImageDraw.Draw(eye_mask).polygon([eye_pixel(u,v) for u,v in almond],fill=255)
-iris.putalpha(Image.fromarray(np.minimum(np.array(iris.getchannel('A')),np.array(eye_mask))))
-image.alpha_composite(iris);draw=ImageDraw.Draw(image)
-draw.line([eye_pixel(u,v) for u,v in bezier((-.16,-.030),(-.06,-.087),(.06,-.04),(.16,.055))],fill=(111,98,78,165),width=4,joint='curve')
+almond=bezier((-.124,-.018),(-.050,.051),(.065,.086),(.148,.073))+bezier((.148,.073),(.051,-.007),(-.032,-.047),(-.124,-.018))
+shape(almond,(27,25,22,250))
+# A fine lower edge keeps the eye readable without a circular iris or catchlight.
+draw.line([eye_pixel(u,v) for u,v in bezier((-.11,-.02),(-.035,-.043),(.045,-.013),(.13,.058))],fill=(91,80,62,135),width=3,joint='curve')
 image=image.filter(ImageFilter.GaussianBlur(.7));image.save(root/'authoring'/'eye-template.png');eye_image=bpy.data.images.load(str(root/'authoring'/'eye-template.png'));eye_image.pack()
 bvh=BVHTree.FromPolygons([v.co.copy() for v in coat.data.vertices],[list(f.vertices) for f in coat.data.polygons]);eye_locations=[]
 position_socket=geo.outputs['Position']
@@ -63,7 +54,7 @@ def dot_position(vector,offset=0):
 def overlay(tex,mask):
  current=bs.inputs['Base Color'].links[0].from_socket;blend=nodes.new('ShaderNodeMixRGB');links.new(mask,blend.inputs[0]);links.new(current,blend.inputs[1]);links.new(tex.outputs['Color'],blend.inputs[2]);links.new(blend.outputs[0],bs.inputs['Base Color'])
 for sign in [-1,1]:
- hit,normal,_,_=bvh.ray_cast(Vector((sign*1.6,-3.46,4.74)),Vector((-sign,0,0)),3)
+ hit,normal,_,_=bvh.ray_cast(Vector((sign*1.6,-3.43,4.70)),Vector((-sign,0,0)),3)
  assert hit is not None,'Eye ray missed the face'
  horizontal=Vector((normal.x,normal.y,0)).normalized();tangent=Vector((0,0,1)).cross(horizontal)*sign
  uv=nodes.new('ShaderNodeCombineXYZ');u=dot_position(tangent,hit.dot(tangent));v=dot_position(Vector((0,0,1)),hit.z)
@@ -73,12 +64,33 @@ for sign in [-1,1]:
 # Central forehead seal follows the frontal face. It stays clear of the nose and ears.
 front=Image.new('RGBA',(1024,1536),(0,0,0,0));fd=ImageDraw.Draw(front)
 def fp(x,z):return ((x+.8)/1.6*1024,(5.6-z)/1.7*1536)
-fd.ellipse([fp(-.075,5.06),fp(.075,4.84)],outline=(185,22,10,248),width=14)
-fd.polygon([fp(x,z) for x,z in [(-.055,4.84),(.055,4.84),(0,4.65)]],fill=(185,22,10,248))
-fd.polygon([fp(x,z) for x,z in [(-.025,5.06),(.025,5.06),(0,5.18)]],fill=(185,22,10,248))
+fd.ellipse([fp(-.095,5.09),fp(.095,4.84)],outline=(185,22,10,255),width=24)
+fd.polygon([fp(x,z) for x,z in [(-.040,4.85),(.040,4.85),(.018,4.59),(0,4.43),(-.018,4.59)]],fill=(185,22,10,248))
+fd.polygon([fp(x,z) for x,z in [(-.024,5.08),(.024,5.08),(0,5.29)]],fill=(185,22,10,248))
 front=watercolor_pigment(front,712,black=False);front=front.filter(ImageFilter.GaussianBlur(.6));front.save(root/'authoring'/'forehead-template.png');front_image=bpy.data.images.load(str(root/'authoring'/'forehead-template.png'));front_image.pack()
 uv=nodes.new('ShaderNodeCombineXYZ');links.new(mathnode('DIVIDE',mathnode('ADD',position.outputs['X'],.8),1.6),uv.inputs['X']);links.new(mathnode('DIVIDE',mathnode('SUBTRACT',position.outputs['Z'],3.9),1.7),uv.inputs['Y'])
 tex=nodes.new('ShaderNodeTexImage');tex.image=front_image;tex.extension='CLIP';links.new(uv.outputs[0],tex.inputs[0]);gate=mathnode('LESS_THAN',position.outputs['Y'],-2.50);overlay(tex,mathnode('MULTIPLY',tex.outputs['Alpha'],gate))
+# A small broad-topped nose, tapered chin and readable mouth replace the button.
+nose=Image.new('RGBA',(768,768),(0,0,0,0));nd=ImageDraw.Draw(nose)
+def npixel(x,z):return ((x+.24)/.48*768,(4.58-z)/.48*768)
+nd.polygon([npixel(x,z) for x,z in [(-.090,4.405),(-.052,4.426),(.055,4.426),(.091,4.405),(.074,4.338),(0,4.298),(-.073,4.338)]],fill=(28,26,22,255))
+nd.line([npixel(x,z) for x,z in [(-.055,4.402),(-.015,4.413),(.035,4.410)]],fill=(88,79,65,125),width=5,joint='curve')
+nd.line([npixel(x,z) for x,z in [(0,4.303),(0,4.264)]],fill=(45,40,32,220),width=6)
+nose=nose.filter(ImageFilter.GaussianBlur(1.1));nose.save(root/'authoring/nose-template.png')
+nose_image=bpy.data.images.load(str(root/'authoring/nose-template.png'));nose_image.pack()
+uv=nodes.new('ShaderNodeCombineXYZ');links.new(mathnode('DIVIDE',mathnode('ADD',position.outputs['X'],.24),.48),uv.inputs['X']);links.new(mathnode('DIVIDE',mathnode('SUBTRACT',position.outputs['Z'],4.10),.48),uv.inputs['Y'])
+tex=nodes.new('ShaderNodeTexImage');tex.image=nose_image;tex.extension='CLIP';links.new(uv.outputs[0],tex.inputs[0]);overlay(tex,mathnode('MULTIPLY',tex.outputs['Alpha'],mathnode('LESS_THAN',position.outputs['Y'],-4.02)))
+mouth=Image.new('RGBA',(2048,1024),(0,0,0,0));md=ImageDraw.Draw(mouth)
+def mp(y,z):return ((y+4.50)/1.40*2048,(4.60-z)/.80*1024)
+path=bezier((-4.18,4.265),(-3.98,4.215),(-3.70,4.185),(-3.52,4.280))
+left=[];right=[]
+for i,(y,z) in enumerate(path):
+ w=.008+.012*math.sin(math.pi*i/(len(path)-1))**.7
+ left.append(mp(y,z+w));right.append(mp(y,z-w))
+md.polygon(left+right[::-1],fill=(45,40,32,235))
+mouth=mouth.filter(ImageFilter.GaussianBlur(.9));mouth.save(root/'authoring/mouth-template.png');mouth_image=bpy.data.images.load(str(root/'authoring/mouth-template.png'));mouth_image.pack()
+uv=nodes.new('ShaderNodeCombineXYZ');links.new(mathnode('DIVIDE',mathnode('ADD',position.outputs['Y'],4.50),1.40),uv.inputs['X']);links.new(mathnode('DIVIDE',mathnode('SUBTRACT',position.outputs['Z'],3.80),.80),uv.inputs['Y'])
+tex=nodes.new('ShaderNodeTexImage');tex.image=mouth_image;tex.extension='CLIP';links.new(uv.outputs[0],tex.inputs[0]);overlay(tex,mathnode('MULTIPLY',tex.outputs['Alpha'],mathnode('GREATER_THAN',mathnode('ABSOLUTE',position.outputs['X']),.055)))
 face_metadata={'eyes':eye_locations,'red_excluded_ornament_faces':masked}
 (root/'review'/'face-placement.json').write_text(json.dumps(face_metadata,indent=2))
 (root/'public'/'face.json').write_text(json.dumps(face_metadata,indent=2))

@@ -1,13 +1,15 @@
 {
-  "headLengthScale": 1.105,
-  "muzzleWidthScale": 0.965,
-  "earTipAddedHeight": 0.12,
-  "earTipAddedLateralWidth": 0.024,
+  "headLengthScale": 1.045,
+  "faceWidthScale": 0.85,
+  "muzzleWidthScale": 0.795,
+  "earTipAddedHeight": 0.17,
+  "earTipTaper": 0.32,
+  "design": "Tapered face, slimmer muzzle and jaw, pointed ears; small painted nose and compact ink eyes.",
   "bodyMaxCoordinateChange": 0,
   "topologyChanged": false,
   "correctiveShapes": 48,
   "previousHeadFront": -4.193288803100586,
-  "newHeadFront": -4.35008430480957,
+  "newHeadFront": -4.260432720184326,
   "previousEarTop": 5.261643409729004,
-  "newEarTop": 5.381643295288086
+  "newEarTop": 5.431643486022949
 }

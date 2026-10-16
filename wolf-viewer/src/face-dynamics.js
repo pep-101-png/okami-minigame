@@ -29,8 +29,8 @@ export function createFaceDynamics(metadata) {
             vec3 offset=position-swEyePoint[eye];
             float u=dot(offset,swEyeTangent[eye]);
             float v=offset.y-.25*u-.014;
-            float across=smoothstep(-.24,-.175,u)*(1.0-smoothstep(.17,.26,u));
-            float around=1.0-smoothstep(.075,.18,abs(v));
+            float across=smoothstep(-.18,-.12,u)*(1.0-smoothstep(.14,.20,u));
+            float around=1.0-smoothstep(.045,.11,abs(v));
             float surface=1.0-smoothstep(.12,.18,abs(dot(offset,swEyeDepth[eye])));
             transformed.y-=v*.94*swBlink[eye]*across*around*surface;
           }

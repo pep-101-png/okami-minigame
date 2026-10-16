@@ -1,4 +1,4 @@
-"""A restrained head-length and ear-size pass, preserving the approved body.
+"""Reference-guided tapered face and pointed ears, preserving the approved body.
 
 Run after anchor_fur and before fur_finish. Repeating the pass reloads its
 saved input, so revisions never accumulate stretch or change body topology.
@@ -27,16 +27,33 @@ def refine(points):
     p = np.asarray(points).copy()
     x, y, z = points.T
     head = smooth((-y-2.42)/.60) * smooth((z-3.60)/.50)
-    p[:, 1] -= .105 * np.maximum(0, -y-2.70) * head
-    p[:, 0] *= 1 - .035*smooth((-y-3.15)/.75)*head
+    # A wedge-shaped face, rather than stretching the broad original muzzle.
+    p[:, 1] -= .045 * np.maximum(0, -y-2.70) * head
+    taper = smooth((-y-2.70)/.65)*smooth((z-3.85)/.35)
+    p[:, 0] *= 1-.15*taper-.055*smooth((-y-3.55)/.5)*head
+    lip = smooth((-y-3.40)/.45)*(1-smooth((z-4.02)/.18))*head
+    p[:, 2] += .045*lip
     ears = smooth((z-4.90)/.28)*smooth((np.abs(x)-.16)/.12)*smooth((-y-2.55)/.30)
-    p[:, 2] += .12*ears
-    p[:, 0] += np.sign(x)*.024*ears
+    p[:, 2] += .17*ears
+    p[:, 0] += (np.sign(x)*.024-(x-np.sign(x)*.40)*.32)*ears
+    p[:, 1] -= .025*ears
     return p
 
 rest, delta = archive['rest'], archive['delta']
-next_rest = refine(rest)
-next_delta = np.asarray([refine(rest+d)-next_rest for d in delta])
+# Relax the inherited lip bumps locally, with the same linear operator for
+# every corrective. Neither the body nor the sculpted fur enters this mask.
+edges=np.asarray([e.vertices[:] for e in coat.data.edges]);a,b=edges.T
+degree=np.bincount(edges.ravel(),minlength=len(rest)).clip(1)
+x,y,z=rest.T
+lip_weight=.38*smooth((-y-3.30)/.28)*smooth((y+4.25)/.15)*smooth((z-3.98)/.10)*(1-smooth((z-4.22)/.13))
+def smooth_lip(points):
+    p=points.copy()
+    for _ in range(5):
+        total=np.zeros_like(p);np.add.at(total,a,p[b]);np.add.at(total,b,p[a])
+        p+=(total/degree[:,None]-p)*lip_weight[:,None]
+    return p
+next_rest = smooth_lip(refine(rest))
+next_delta = np.asarray([smooth_lip(refine(rest+d))-next_rest for d in delta])
 coat.data.vertices.foreach_set('co', next_rest.astype(np.float32).ravel())
 coat.data.update()
 coat['head_refined'] = True
@@ -44,8 +61,9 @@ body = rest[:, 1] > -2.42
 assert np.max(np.abs(next_rest[body]-rest[body])) == 0
 np.savez_compressed(draft / 'surface.npz', rest=next_rest, delta=next_delta)
 (root/'review/head-refinement.json').write_text(json.dumps({
-    'headLengthScale': 1.105, 'muzzleWidthScale': .965,
-    'earTipAddedHeight': .12, 'earTipAddedLateralWidth': .024,
+    'headLengthScale': 1.045, 'faceWidthScale': .85, 'muzzleWidthScale': .795,
+    'earTipAddedHeight': .17, 'earTipTaper': .32,
+    'design': 'Tapered face, slimmer muzzle and jaw, pointed ears; small painted nose and compact ink eyes.',
     'bodyMaxCoordinateChange': 0,
     'topologyChanged': False, 'correctiveShapes': len(delta),
     'previousHeadFront': float(rest[:,1].min()),
