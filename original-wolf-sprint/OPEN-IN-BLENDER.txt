@@ -1,0 +1,38 @@
+AMATERASU — IDLE / WALK / JOG / SPRINT
+
+Open Amaterasu-Movement.blend in Blender 4.3 or newer.
+All six original textures are packed. No add-ons or texture folders are required.
+
+PLAY
+The rig is selected in Pose Mode and Sprint is already active.
+Hover over the 3D view and press Space to play/pause.
+Use the Action-name dropdown in the lower Action Editor to choose:
+  Idle   — original breathing/idle, unchanged; 240 frames / 4 seconds.
+  Walk   — original slow walk, unchanged; 72 frames / 1.2 seconds.
+  Jog    — approved RUN_REFINED, renamed only; 40 frames / 0.667 seconds.
+  Sprint — new long-stride gallop; 32 frames / 0.533 seconds.
+Legacy_Run is the older pre-refinement Run, kept only for rollback.
+
+The shared 1–1440 playback range repeats complete cycles of every Action.
+Do not change the playback range when switching Actions.
+The closing key (cycle length + 1) repeats the first key; Cycles modifiers
+repeat the curves with matching boundary tangents.
+Hover over the Action Editor and press Home to fit the selected Action's keys.
+
+VIEW
+Z > Material Preview shows the original appearance.
+Turn Viewport Overlays off for a clean motion preview, on again to pose controls.
+Numpad 3: side. Numpad 1: front. Ctrl+Numpad 1: rear.
+Without a numpad, use View > Viewpoint. Middle mouse orbits; wheel zooms.
+
+These are IN-PLACE cycles. Forward game travel is not baked into the root.
+Corresponding source-unit travel speeds: Walk 1.667, Jog 7.2, Sprint 14.625.
+Sprint travels 7.8 source units per cycle, versus Jog's 4.8; it also has
+new extended/gathered poses and different footfall/contact timing.
+The old rig checkpoint and approved Jog project remain separate, unchanged files.
+
+EXPORT LATER
+Single-cycle export ranges: Idle 1–241, Walk 1–73, Jog 1–41, Sprint 1–33.
+Bake/sample the existing IK constraints onto deform bones for game export.
+Exclude Legacy_Run when exporting the four main movement clips.
+No game or browser-viewer files have been modified.

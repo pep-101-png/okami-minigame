@@ -1,0 +1,18 @@
+{
+  "Jog": {
+    "cycle_frames": 40,
+    "stride": 4.8,
+    "ground_speed_source_units_per_second": 7.2,
+    "maximum_fore_hind_paw_span": 5.02899694442749,
+    "airborne_fraction": 0.1875,
+    "lumbar_arch_range": 0.43999698484393734
+  },
+  "Sprint": {
+    "cycle_frames": 32,
+    "stride": 7.8,
+    "ground_speed_source_units_per_second": 14.625,
+    "maximum_fore_hind_paw_span": 7.548755407333374,
+    "airborne_fraction": 0.3984375,
+    "lumbar_arch_range": 0.581768075201738
+  }
+}
