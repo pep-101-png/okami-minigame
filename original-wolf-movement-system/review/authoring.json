@@ -1,0 +1,110 @@
+{
+  "turns": {
+    "Walk_Turn_L": {
+      "radius": 7,
+      "yaw_rate": 0.2380952380952381,
+      "max_solve_error": 1.2218952178955078e-06,
+      "min_z": 0.034999437630176544,
+      "frames": 41
+    },
+    "Walk_Turn_R": {
+      "radius": 7,
+      "yaw_rate": -0.2380952380952381,
+      "max_solve_error": 1.3113021850585938e-06,
+      "min_z": 0.034999411553144455,
+      "frames": 41
+    },
+    "Jog_Turn_L": {
+      "radius": 14,
+      "yaw_rate": 0.5142857142857143,
+      "max_solve_error": 1.2442469596862793e-06,
+      "min_z": 0.0349995493888855,
+      "frames": 26
+    },
+    "Jog_Turn_R": {
+      "radius": 14,
+      "yaw_rate": -0.5142857142857143,
+      "max_solve_error": 1.4994293451309204e-06,
+      "min_z": 0.03499971702694893,
+      "frames": 26
+    },
+    "Sprint_Turn_L": {
+      "radius": 30,
+      "yaw_rate": 0.4875,
+      "max_solve_error": 1.9408762454986572e-06,
+      "min_z": 0.034999310970306396,
+      "frames": 24
+    },
+    "Sprint_Turn_R": {
+      "radius": 30,
+      "yaw_rate": -0.4875,
+      "max_solve_error": 1.2889504432678223e-06,
+      "min_z": 0.03499951586127281,
+      "frames": 24
+    },
+    "Idle_Turn_L90": {
+      "max_solve_error": 1.5497207641601562e-06,
+      "duration": 3.6,
+      "steps": 12
+    },
+    "Idle_Turn_R90": {
+      "max_solve_error": 1.7881393432617188e-06,
+      "duration": 3.6,
+      "steps": 12
+    }
+  },
+  "specs": {
+    "Walk": {
+      "base": "Walk_Natural",
+      "N": 72,
+      "v": 1.6666666666666667,
+      "radius": 7,
+      "lean": 2.5,
+      "d": {
+        "front": 0.65,
+        "rear": 0.65
+      },
+      "offset": {
+        "rear.L": 0,
+        "front.L": 0.25,
+        "rear.R": 0.5,
+        "front.R": 0.75
+      }
+    },
+    "Jog": {
+      "base": "Jog_Natural",
+      "N": 40,
+      "v": 7.2,
+      "radius": 14,
+      "lean": 5,
+      "d": {
+        "front": 0.22,
+        "rear": 0.23
+      },
+      "offset": {
+        "front.R": 0,
+        "front.L": 0.12,
+        "rear.R": 0.5,
+        "rear.L": 0.62
+      }
+    },
+    "Sprint": {
+      "base": "Sprint_Fluid",
+      "N": 32,
+      "v": 14.625,
+      "radius": 30,
+      "lean": 8.5,
+      "d": {
+        "front": 0.18,
+        "rear": 0.16
+      },
+      "offset": {
+        "front.R": 0,
+        "front.L": 0.09,
+        "rear.L": 0.47,
+        "rear.R": 0.56
+      }
+    }
+  },
+  "source_sha256": "bcf79d66cd522bbca442982ff71d88a11fecb0391d727f3319496c78721d86e4"
+}

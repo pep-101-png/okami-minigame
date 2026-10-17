@@ -1,0 +1,98 @@
+[
+  {
+    "frame": 241,
+    "label": "Idle"
+  },
+  {
+    "frame": 577,
+    "label": ".DEMO_Idle_Turn_L90"
+  },
+  {
+    "frame": 781,
+    "label": ".DEMO_Idle_Turn_R90"
+  },
+  {
+    "frame": 925,
+    "label": "Walk_Natural"
+  },
+  {
+    "frame": 1129,
+    "label": "Walk_Turn_L"
+  },
+  {
+    "frame": 1333,
+    "label": "Walk_Turn_R"
+  },
+  {
+    "frame": 1501,
+    "label": "Walk_Natural"
+  },
+  {
+    "frame": 1609,
+    "label": "Jog_Natural"
+  },
+  {
+    "frame": 1717,
+    "label": "Jog_Turn_L"
+  },
+  {
+    "frame": 1825,
+    "label": "Jog_Turn_R"
+  },
+  {
+    "frame": 1913,
+    "label": "Jog_Natural"
+  },
+  {
+    "frame": 1993,
+    "label": "Sprint_Fluid"
+  },
+  {
+    "frame": 2109,
+    "label": "Sprint_Turn_L"
+  },
+  {
+    "frame": 2225,
+    "label": "Sprint_Turn_R"
+  },
+  {
+    "frame": 2325,
+    "label": "Sprint_Fluid"
+  },
+  {
+    "frame": 2409,
+    "label": "Jog_Natural"
+  },
+  {
+    "frame": 2553,
+    "label": "Walk_Natural"
+  },
+  {
+    "frame": 2829,
+    "label": "Idle_Natural"
+  },
+  {
+    "frame": 853,
+    "label": "transition Walk_Natural"
+  },
+  {
+    "frame": 1561,
+    "label": "transition Jog_Natural"
+  },
+  {
+    "frame": 1941,
+    "label": "transition Sprint_Fluid"
+  },
+  {
+    "frame": 2361,
+    "label": "transition Jog_Natural"
+  },
+  {
+    "frame": 2457,
+    "label": "transition Walk_Natural"
+  },
+  {
+    "frame": 2625,
+    "label": "transition Idle_Natural"
+  }
+]

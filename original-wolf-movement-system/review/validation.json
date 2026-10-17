@@ -1,0 +1,243 @@
+{
+  "max_ik_by_action": {},
+  "bad_ik": [],
+  "preserved": {
+    "geometry": "ec9ab463666cfc2ab91e2a35cc452c01aee0cec4b6f66cdd5853b9a3fa8bb386",
+    "rest_rig": "c848e7701de94a66ad4cab613c032e6203f2b523e1f15a7c3dd6c9e76de41d43",
+    "weights": "7c02351dbdf6143df4726668a159b98e62c06e1271af1c5c8aa94e96aaba9d44",
+    "actions": {
+      "Idle": "901fb470b0b7ce200cbacb096962c93706a6eda3329369fc3ba52fd79b92e21a",
+      "Jog": "0be67416a6faf82d4551f8a60d5efc6256b7996a5fc3ecd294a8588d35dccc76",
+      "Legacy_Run": "ce43fecf1aa658ea84c098aa594e190d50b78db97592922e21dafa866586a649",
+      "Sprint": "320dea9dd1fee49ffdec8f2c2e25373e4fcbe75eaf4a5a7ba369a4eea99674ae",
+      "Sprint_Fluid": "58993a22f9357e0a6abf22b8bc302ee878d04836b316b7fb341ae196fc089b92",
+      "Sprint_Polished": "4069e9ae6c1807448dc7948eb7e11a3ed7f410b916ed81a986fbb8e2fe1e6662",
+      "Walk": "a8eb0dbe494728bebc31699e7afd5360679d314d9c79e96a9a9acd4710b3351e",
+      "Wind_Speed_Demo": "6315dddc99460e0f6e4129ed8f888374645beee45731f8f21827a62e86666259"
+    },
+    "textures": {
+      "Material__191_baseColor.png": "941d4512599f865199eedab184a9048028cac884cff79fe9c326964494f5d231",
+      "Material__200_baseColor.png": "ae2d2017e866aa9bdfa124acbafddb04edfdc494d62e350a542b79842360e65e",
+      "Material__201_baseColor.png": "8b483db63df9bf3f0f99c6ea7197cb13f6ed9b506aacfba33dc781d37912ea57",
+      "Material__209_baseColor.png": "dab71d0af114d31955d7943d207c9c1e4b15f49238ad2f1101dc692230fc626f",
+      "Material__226_baseColor.png": "666488c079f4f7e9120a7e68dfb84549287eac05fb921cc09bbfe867da5efdf4",
+      "Material__230_baseColor.png": "b93281335bc9993cdd46190fa46e097b6a66f598d6a23cc6bce62ee36691ade5"
+    }
+  },
+  "demo_min_sole_z": 0.03412167727947235,
+  "demo_max_ik_error": 0.0039773059111327955,
+  "demo_max_frame_joint_rotation_deg": 21.24405330622095,
+  "neck_head_scale_error": 8.14199447631836e-05,
+  "worst_contact_step_drift": [
+    {
+      "f": 2468,
+      "key": "rear.R",
+      "distance": 0.001541156579836727
+    },
+    {
+      "f": 858,
+      "key": "rear.L",
+      "distance": 0.0014014686240109557
+    },
+    {
+      "f": 866,
+      "key": "rear.R",
+      "distance": 0.001396372819461663
+    },
+    {
+      "f": 2280,
+      "key": "rear.L",
+      "distance": 0.00137516000511648
+    },
+    {
+      "f": 2057,
+      "key": "rear.L",
+      "distance": 0.0013369085368898392
+    },
+    {
+      "f": 2614,
+      "key": "rear.L",
+      "distance": 0.0013122614039814049
+    },
+    {
+      "f": 2110,
+      "key": "front.L",
+      "distance": 0.001272270166470536
+    },
+    {
+      "f": 2108,
+      "key": "front.L",
+      "distance": 0.0012707065222366707
+    },
+    {
+      "f": 2173,
+      "key": "front.L",
+      "distance": 0.0012475999337269068
+    },
+    {
+      "f": 2108,
+      "key": "front.R",
+      "distance": 0.0012367755072337746
+    },
+    {
+      "f": 2637,
+      "key": "front.R",
+      "distance": 0.0012207090854499257
+    },
+    {
+      "f": 2610,
+      "key": "front.L",
+      "distance": 0.001220703125
+    },
+    {
+      "f": 2611,
+      "key": "front.L",
+      "distance": 0.0012054684793493
+    },
+    {
+      "f": 2639,
+      "key": "front.R",
+      "distance": 0.0012054684793493
+    },
+    {
+      "f": 837,
+      "key": "front.L",
+      "distance": 0.0011956451538160501
+    },
+    {
+      "f": 1823,
+      "key": "front.R",
+      "distance": 0.0011935069280775358
+    },
+    {
+      "f": 2238,
+      "key": "front.L",
+      "distance": 0.001192774768364493
+    },
+    {
+      "f": 1784,
+      "key": "front.R",
+      "distance": 0.0011860595613648712
+    },
+    {
+      "f": 2236,
+      "key": "front.R",
+      "distance": 0.0011844005352981586
+    },
+    {
+      "f": 656,
+      "key": "front.R",
+      "distance": 0.001182680690652634
+    }
+  ],
+  "cpu_median_ms": 1.9763079999393085,
+  "cpu_p95_ms": 2.6425109990668716,
+  "frames_tested": 3069,
+  "linked_geometry": true,
+  "wind_samples": [
+    [
+      1,
+      0.0
+    ],
+    [
+      121,
+      0.0
+    ],
+    [
+      241,
+      0.0
+    ],
+    [
+      361,
+      0.0
+    ],
+    [
+      481,
+      0.0
+    ],
+    [
+      601,
+      0.0
+    ],
+    [
+      721,
+      0.0
+    ],
+    [
+      841,
+      0.0
+    ],
+    [
+      961,
+      0.0
+    ],
+    [
+      1081,
+      0.0
+    ],
+    [
+      1201,
+      0.0
+    ],
+    [
+      1321,
+      0.0
+    ],
+    [
+      1441,
+      0.0
+    ],
+    [
+      1561,
+      0.1402430534362793
+    ],
+    [
+      1681,
+      0.2800000011920929
+    ],
+    [
+      1801,
+      0.2800000011920929
+    ],
+    [
+      1921,
+      0.2800000011920929
+    ],
+    [
+      2041,
+      1.0
+    ],
+    [
+      2161,
+      1.0
+    ],
+    [
+      2281,
+      1.0
+    ],
+    [
+      2401,
+      0.2800000011920929
+    ],
+    [
+      2521,
+      0.0
+    ],
+    [
+      2641,
+      0.0
+    ],
+    [
+      2761,
+      0.0
+    ],
+    [
+      2881,
+      0.0
+    ],
+    [
+      3001,
+      0.0
+    ]
+  ]
+}

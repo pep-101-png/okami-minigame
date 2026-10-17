@@ -1,0 +1,21 @@
+{
+  "inspected_by": "Rendered images inspected visually by the assistant; user approval pending",
+  "current_views": 86,
+  "coverage": [
+    "idle gaze",
+    "left and right standing pivots",
+    "Walk left/right",
+    "Jog left/right",
+    "Sprint left/right",
+    "six gait transitions",
+    "showcase arc headings"
+  ],
+  "source_sha256": "bcf79d66cd522bbca442982ff71d88a11fecb0391d727f3319496c78721d86e4",
+  "delivered_sha256": "82cee2e6e6d8ac3c3708c4a16d12cb5fefaa155da74c961fe34bec8810082cf4",
+  "utc": "2026-10-17T09:09:42.827332+00:00",
+  "limits": [
+    "No independent eye rig",
+    "Actual viewport GPU FPS depends on hardware",
+    "Showcase contact correction must be rebaked if timing changes"
+  ]
+}

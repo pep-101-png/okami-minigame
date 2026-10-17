@@ -1,0 +1,26 @@
+{
+  "Walk_Turn_L": {
+    "max_solve_error": 2.0265579223632812e-06,
+    "contact_keys_per_component": 145
+  },
+  "Walk_Turn_R": {
+    "max_solve_error": 1.5497207641601562e-06,
+    "contact_keys_per_component": 145
+  },
+  "Jog_Turn_L": {
+    "max_solve_error": 1.430511474609375e-06,
+    "contact_keys_per_component": 66
+  },
+  "Jog_Turn_R": {
+    "max_solve_error": 1.9073486328125e-06,
+    "contact_keys_per_component": 66
+  },
+  "Sprint_Turn_L": {
+    "max_solve_error": 1.9073486328125e-06,
+    "contact_keys_per_component": 45
+  },
+  "Sprint_Turn_R": {
+    "max_solve_error": 1.9073486328125e-06,
+    "contact_keys_per_component": 45
+  }
+}

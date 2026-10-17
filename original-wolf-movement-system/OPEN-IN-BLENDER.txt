@@ -1,0 +1,70 @@
+AMATERASU — NATURAL MOVEMENT MILESTONE
+Blender 4.3 or newer. All original textures are packed. No add-ons or Python
+script execution are required for playback.
+
+START HERE
+The file opens in scene "02 · Movement showcase". Press Space.
+The timeline markers identify idle gaze, both standing pivots, straight travel,
+left/right steering at all three speeds, acceleration and deceleration.
+This is a native NLA demonstration with separate locomotion, additive gaze,
+root path/speed and paw-contact correction tracks.
+
+INSPECT INDIVIDUAL ACTIONS
+Use the Scene dropdown at the top-right to select "01 · Action inspection".
+Select WOLF_RIG. Use the Action dropdown in the lower Action Editor.
+Idle_Natural: 480-frame / 8-second breathing and look-around loop.
+Walk_Natural: 72-frame loop. Jog_Natural: 40-frame loop.
+Sprint_Fluid: the accepted 32-frame gallop, unchanged.
+Walk_Turn_L / Walk_Turn_R
+Jog_Turn_L / Jog_Turn_R
+Sprint_Turn_L / Sprint_Turn_R
+Idle_Turn_L90 / Idle_Turn_R90: 216-frame one-shot stepping pivots.
+ADD_LookAround: rotation-only additive layer; use ADD above an Idle strip,
+not as a standalone full-body animation.
+
+The inspection timeline spans 1440 frames, a common multiple of the looping
+Actions. For a standing pivot, inspect frames 1–217; it holds its final pose
+rather than cycling back to zero. Middle-mouse orbit exits camera view.
+All previous Actions (Idle, Walk, Jog, Sprint, Sprint_Polished, Legacy_Run)
+are retained. Internal .DEMO_ Actions are implementation helpers.
+
+HOW THE TURNS WORK
+Locomotion turn clips are IN PLACE, for a game blend tree. Their paws follow
+curved-ground trajectories, with different inside/outside travel, bank,
+shoulder/hip/spine response, a leading gaze and tail follow-through.
+The showcase supplies actual curved root travel so you can see physical turns.
+Walk radius: 7 source units; Jog: 14; Sprint: 30. The Actions include speed,
+turn radius and signed yaw_rate_radians metadata. Left is positive Blender
+world-Z yaw. These are model/source units, not a calibrated real-world scale.
+The stationary pivots include their own 90-degree root motion and twelve small
+paw placements; they do not spin a rigid statue.
+
+LAYERS / FUTURE BLENDING
+The showcase's base NLA strips have phase-continuous time and eased crossfades.
+Gait changes use matched foot poses; starting/stopping uses a longer blend.
+ROOT · Continuous speed / curved path is independent of locomotion clips.
+CONTACT · Grounded paws through blends is an additive paw-location correction.
+It is adaptively reduced after solving the showcase. If showcase timing is
+changed, rebake this correction with demo.py; it is not a live IK game controller.
+The first idle section demonstrates ADD_LookAround over the original Idle.
+
+WIND AND PLAYBACK
+Walk/Idle have no wind. Jog_Natural uses three light streaks. Sprint uses the
+full wind. Wind fades with the showcase's speed transitions and follows its
+root. The separate effect does not modify the character mesh or skeleton.
+In the inspection scene, FULL · Painted wind and FAST · Lightweight wind View
+Layers remain available. The latter uses three simple opaque preview streaks.
+The scene is 60 FPS with Frame Dropping. Actual drawn FPS depends on the GPU,
+viewport size and shading. Original cached bend resolution is retained; no
+expensive subdivision was reintroduced. No Windows 60-FPS guarantee is made.
+
+PRESERVATION / EXPORT
+Wolf mesh data, original UVs, textures, materials, authored weights and rest rig
+are unchanged. The showcase instance shares the same mesh/armature data.
+Its floor, grid, camera and helpers are separate. The game/viewer are untouched.
+Eyes are painted artwork with no independent eye rig; gaze uses head and neck.
+Export loops over frames 1–N+1 (the last duplicates the first), sampled at 60 fps.
+Bake the existing IK/deform constraints for glTF. Apply turn yaw/speed in the
+future game controller for in-place turn clips. Exclude showcase/stage/preview
+objects from character export. Wind drivers/shaders need recreating as ribbons
+in Three.js. No additional gameplay or browser-viewer work is included.

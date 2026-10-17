@@ -1,0 +1,98 @@
+{
+  "Idle_Natural": {
+    "min_z": 0.03499747812747955,
+    "loop_error": 0.0,
+    "max_ik_error": 1.9150166304608993e-06,
+    "samples": 1921,
+    "max_quarter_frame_contact_drift": 0,
+    "max_quarter_frame_upper_leg_rotation_deg": 0.05595291023658669
+  },
+  "Walk_Natural": {
+    "min_z": 0.03154469281435013,
+    "loop_error": 0.0,
+    "max_ik_error": 0.000182211506316004,
+    "samples": 289,
+    "max_quarter_frame_contact_drift": 0,
+    "max_quarter_frame_upper_leg_rotation_deg": 1.5706853182879803
+  },
+  "Jog_Natural": {
+    "min_z": 0.014640139415860176,
+    "loop_error": 0.0,
+    "max_ik_error": 0.00027312833250980916,
+    "samples": 161,
+    "max_quarter_frame_contact_drift": 0,
+    "max_quarter_frame_upper_leg_rotation_deg": 2.7348975243477724
+  },
+  "Sprint_Fluid": {
+    "min_z": 0.02303277514874935,
+    "loop_error": 0.0,
+    "max_ik_error": 0.00027616398865894915,
+    "samples": 129,
+    "max_quarter_frame_contact_drift": 0,
+    "max_quarter_frame_upper_leg_rotation_deg": 4.9611422582586835
+  },
+  "Walk_Turn_L": {
+    "min_z": 0.03382985293865204,
+    "loop_error": 0.0,
+    "max_ik_error": 0.00024685697370103896,
+    "samples": 289,
+    "max_quarter_frame_contact_drift": 0.00011950313591733164,
+    "max_quarter_frame_upper_leg_rotation_deg": 1.640398352781354
+  },
+  "Walk_Turn_R": {
+    "min_z": 0.033830735832452774,
+    "loop_error": 0.0,
+    "max_ik_error": 0.0002469246436165556,
+    "samples": 289,
+    "max_quarter_frame_contact_drift": 0.00011423704059508573,
+    "max_quarter_frame_upper_leg_rotation_deg": 1.640398352781354
+  },
+  "Jog_Turn_L": {
+    "min_z": 0.030999941751360893,
+    "loop_error": 0.0,
+    "max_ik_error": 0.0002718833906347913,
+    "samples": 161,
+    "max_quarter_frame_contact_drift": 0.0008293382327614833,
+    "max_quarter_frame_upper_leg_rotation_deg": 2.51482098583012
+  },
+  "Jog_Turn_R": {
+    "min_z": 0.030997639521956444,
+    "loop_error": 0.0,
+    "max_ik_error": 0.00026920879086795023,
+    "samples": 161,
+    "max_quarter_frame_contact_drift": 0.0006784657716144142,
+    "max_quarter_frame_upper_leg_rotation_deg": 2.759118184831805
+  },
+  "Sprint_Turn_L": {
+    "min_z": 0.016849666833877563,
+    "loop_error": 0.0,
+    "max_ik_error": 0.0002642595234811458,
+    "samples": 129,
+    "max_quarter_frame_contact_drift": 0.0007604635659454296,
+    "max_quarter_frame_upper_leg_rotation_deg": 5.425486882777382
+  },
+  "Sprint_Turn_R": {
+    "min_z": 0.01685292460024357,
+    "loop_error": 0.0,
+    "max_ik_error": 0.0002700395651062393,
+    "samples": 129,
+    "max_quarter_frame_contact_drift": 0.0007516899589133454,
+    "max_quarter_frame_upper_leg_rotation_deg": 5.129207516360459
+  },
+  "Idle_Turn_L90": {
+    "min_z": 0.03180483728647232,
+    "loop_error": null,
+    "max_ik_error": 3.223062952660507e-06,
+    "samples": 865,
+    "max_quarter_frame_contact_drift": 0,
+    "max_quarter_frame_upper_leg_rotation_deg": 1.7431093513434615
+  },
+  "Idle_Turn_R90": {
+    "min_z": 0.031889114528894424,
+    "loop_error": null,
+    "max_ik_error": 2.8557794547708818e-06,
+    "samples": 865,
+    "max_quarter_frame_contact_drift": 0,
+    "max_quarter_frame_upper_leg_rotation_deg": 1.800102835898451
+  }
+}
