@@ -1,5 +1,5 @@
 {
-  "revision": 4,
+  "revision": 5,
   "frames_reviewed_per_angle": 32,
   "angles": [
     "side",
@@ -8,6 +8,13 @@
   ],
   "joint_closeups_reviewed": 11,
   "fractional_frame_samples": 129,
+  "gait": "double-suspension rotary gallop",
+  "footfall_order": [
+    "front.R",
+    "front.L",
+    "rear.L",
+    "rear.R"
+  ],
   "main_actions": [
     "Idle",
     "Walk",
@@ -16,15 +23,15 @@
   ],
   "archived_action": "Legacy_Run",
   "source_jog_sha256": "53dccddf955eeb6829ac3c6334a5bf1431fbfca6cf26af89b5887d82fe718dee",
-  "blend_sha256": "a16a6429ad1de0cdc88c9695fc2b5244c039a6f398901149cfc953e239c75573",
+  "blend_sha256": "4eb07c832ae5e43f232599c96a8d2e1fb20f58e898931a665d57c56a09b3f2e8",
   "preservation_pose_samples": 25,
   "visual_findings": [
-    "Distinct extended and gathered silhouettes; fore reach and hind kickback are visibly longer than Jog.",
-    "Continuous rear-leg motion with no observed pole flip or large hip collapse.",
-    "Rhythmic pelvis/lumbar/chest motion, steady gaze and delayed neck/tail response.",
-    "Side/front/rear sequences and closing-to-opening transition inspected.",
-    "Some creasing remains in the original skin around deeply flexed joints."
+    "Longer fore reach and hind kickback, with visibly distinct gathered and extended poses.",
+    "Opposite fore/hind leads form the rotary gallop; rear IK remains continuous.",
+    "Rhythmic spine/hip/chest motion with stabilised gaze and delayed neck/tail response.",
+    "Full side/front/rear sequences and closing-to-opening transition inspected.",
+    "Some original-skin creasing remains at deeply flexed inner joints."
   ],
   "game_and_viewer_untouched": true,
-  "reviewed_utc": "2026-10-17T04:30:02.274382+00:00"
+  "reviewed_utc": "2026-10-17T04:41:13.930251+00:00"
 }

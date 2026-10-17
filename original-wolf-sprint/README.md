@@ -21,7 +21,8 @@ were required. The actual game and browser viewer are untouched.
 Sprint is authored separately, rather than copied and retimed from Jog:
 
 - Longer forward foreleg reach and a high, extended hind-leg kickback.
-- Shorter ground support and distinct gathered/extended flight phases.
+- Opposite fore/hind leads for a rotary gallop, with shorter ground support
+  and distinct gathered/extended flight phases.
 - Coordinated pelvis tuck, lumbar flexion/extension, chest counter-motion,
   scapular motion, landing compression, stabilised gaze and neck follow-through.
 - A trailing tail pose with a delayed wave through its existing five controls.

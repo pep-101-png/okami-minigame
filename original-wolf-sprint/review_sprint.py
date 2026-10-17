@@ -42,7 +42,7 @@ if os.environ.get('RENDER_MODE')=='none':raise SystemExit
 for o in bpy.data.collections['04 · Preview studio (not part of wolf)'].objects:o.hide_set(False)
 bpy.ops.mesh.primitive_plane_add(size=20,location=(0,0,-.012));floor=bpy.context.object
 mat=bpy.data.materials.new('TEMP neutral ground');mat.diffuse_color=(.17,.16,.15,1);floor.data.materials.append(mat)
-s.render.engine='BLENDER_EEVEE_NEXT';s.eevee.taa_render_samples=12;s.render.resolution_x=840;s.render.resolution_y=600;s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';c=s.camera;c.data.type='ORTHO'
+s.render.engine='BLENDER_EEVEE_NEXT';s.eevee.taa_render_samples=8;s.render.resolution_x=840;s.render.resolution_y=600;s.render.resolution_percentage=100;s.render.image_settings.file_format='PNG';c=s.camera;c.data.type='ORTHO'
 full=os.environ.get('RENDER_MODE')=='full';r.animation_data.action=bpy.data.actions['Sprint']
 for view,loc,target,scale in [('side',(14,0,4.4),(0,0,2.45),11.5),('front',(0,-14,4.5),(0,-.5,2.65),9.6),('rear',(0,14,4.5),(0,.5,2.65),9.6),('hip',(9,4.5,3.8),(0,1.2,2),5.4)]:
  c.location=loc;c.rotation_euler=(Vector(target)-c.location).to_track_quat('-Z','Y').to_euler();c.data.ortho_scale=scale

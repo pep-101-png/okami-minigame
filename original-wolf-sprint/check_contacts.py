@@ -22,7 +22,7 @@ errors=[];slips=[];low=100;flight=[];old=None
 for i in range(129):
  f=1+i/4;t=i/128;data=sample(f);all_air=True
  for key,v in data.items():
-  offset={'front.R':0,'front.L':.09,'rear.R':.47,'rear.L':.56}[key];u=(t-offset)%1;d=.18 if key.startswith('front')else .16
+  offset={'front.R':0,'front.L':.09,'rear.L':.47,'rear.R':.56}[key];u=(t-offset)%1;d=.18 if key.startswith('front')else .16
   low=min(low,v['z']);all_air=all_air and v['z']>.06
   if u<d:
    errors.append(abs(v['z']-.035))

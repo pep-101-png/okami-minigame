@@ -28,7 +28,7 @@ for o in meshes:
  for m in o.modifiers:
   if m.type=='SUBSURF':m.show_viewport=False
 N=32;STRIDE=7.8
-OFFSETS={'front.R':0,'front.L':.09,'rear.R':.47,'rear.L':.56}
+OFFSETS={'front.R':0,'front.L':.09,'rear.L':.47,'rear.R':.56}
 def sprint_foot(t,key):
  u=(t-OFFSETS[key])%1;front=key.startswith('front');d=.18 if front else .16
  start=(-1.05 if key.endswith('R')else-1.15)if front else-1.10
@@ -78,7 +78,7 @@ def pose(t):
   bpy.context.view_layer.update()
  return states,sole_points()
 a=bpy.data.actions.new('Sprint');a.use_fake_user=True;a.asset_mark();a.asset_data.description='Distinct fast double-suspension gallop: long fore reach, high rear kickback, compact low recovery and travelling body wave.'
-a.use_frame_range=True;a.frame_start=1;a.frame_end=N+1;a['cycle_frames']=N;a['in_place']=True;a['metres_per_second']=STRIDE*60/N;a['stride_length']=STRIDE;a['revision']=4
+a.use_frame_range=True;a.frame_start=1;a.frame_end=N+1;a['cycle_frames']=N;a['in_place']=True;a['metres_per_second']=STRIDE*60/N;a['stride_length']=STRIDE;a['revision']=5
 rig.animation_data.action=a;samples=[]
 for frame in range(1,N+2):
  scene.frame_set(frame);states,obs=pose((frame-1)/N);row={'frame':frame,'feet':{},'legs':{}}
@@ -104,6 +104,6 @@ scene.frame_set(1);scene.frame_start=1;scene.frame_end=1440;scene.use_preview_ra
 for o in scene.objects:o.select_set(False)
 rig.select_set(True);bpy.context.view_layer.objects.active=rig;bpy.ops.object.mode_set(mode='POSE')
 bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'Amaterasu-Movement.blend'))
-report={'revision':4,'input_sha256':SOURCE_HASH,'preserved':preserve,'unchanged_actions':keep,'action_mapping':mapping,'cycle_frames':N,'stride':STRIDE,'speed':STRIDE*60/N,'samples':samples}
+report={'revision':5,'input_sha256':SOURCE_HASH,'preserved':preserve,'unchanged_actions':keep,'action_mapping':mapping,'cycle_frames':N,'stride':STRIDE,'speed':STRIDE*60/N,'samples':samples}
 (ROOT/'review/authoring.json').write_text(json.dumps(report,indent=2))
 print('SPRINT_AUTHORED','IK',max(v['ik_error']for s in samples for v in s['legs'].values()),'contact',max(v['error']for s in samples for v in s['feet'].values()if v['contact']),flush=True)

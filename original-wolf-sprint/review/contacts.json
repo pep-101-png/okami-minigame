@@ -1,12 +1,12 @@
 {
-  "minimum_paw_z": 0.023033902049064636,
-  "max_contact_floor_error_quarterframe": 0.013858702182769772,
+  "minimum_paw_z": 0.02303277514874935,
+  "max_contact_floor_error_quarterframe": 0.013857428133487698,
   "max_stance_slide_error_quarterframe": 0.005426979064941405,
   "cycle_boundary_velocity_difference_per_frame": {
     "front.L": 0.0009980396865403166,
     "front.R": 0.0007492102466502283,
-    "rear.L": 0.00336305046131966,
-    "rear.R": 0.0004768208597795269
+    "rear.L": 0.0006470347752291992,
+    "rear.R": 0.0033684548673617843
   },
   "airborne_samples": [
     10.5,
