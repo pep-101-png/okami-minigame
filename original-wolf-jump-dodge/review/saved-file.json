@@ -1,0 +1,9 @@
+{
+  "sha256": "5e24c750d5c31e1ba071f3290927bc3006d9b4bcd4628aba59bff96fc6f5aa0e",
+  "opens_without_autoexec": true,
+  "default_scene": "03 \u00b7 Jump and dodge showcase",
+  "fps": 60,
+  "showcase_frames": 2539,
+  "air_fall_loop_matrix_error": 0.0,
+  "packed_textures": 6
+}

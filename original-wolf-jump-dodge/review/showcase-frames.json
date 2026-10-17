@@ -1,0 +1,146 @@
+[
+  {
+    "frame": 110,
+    "label": "Jump_Standing / Jump_Standing"
+  },
+  {
+    "frame": 168,
+    "label": "Jump_Standing / recovery blend"
+  },
+  {
+    "frame": 313,
+    "label": "Jump_Walk / Jump_Walk"
+  },
+  {
+    "frame": 368,
+    "label": "Jump_Walk / recovery blend"
+  },
+  {
+    "frame": 530,
+    "label": "Jump_Jog / Jump_Jog"
+  },
+  {
+    "frame": 582,
+    "label": "Jump_Jog / recovery blend"
+  },
+  {
+    "frame": 734,
+    "label": "Jump_Sprint / Jump_Sprint"
+  },
+  {
+    "frame": 784,
+    "label": "Jump_Sprint / recovery blend"
+  },
+  {
+    "frame": 882,
+    "label": "Double jump + soft landing / Jump_Standing"
+  },
+  {
+    "frame": 940,
+    "label": "Double jump + soft landing / Jump_Double"
+  },
+  {
+    "frame": 993,
+    "label": "Double jump + soft landing / Air_Fall"
+  },
+  {
+    "frame": 1027,
+    "label": "Double jump + soft landing / Land_Soft"
+  },
+  {
+    "frame": 910,
+    "label": "Double jump + soft landing / recovery blend"
+  },
+  {
+    "frame": 1146,
+    "label": "Falling + soft landing / Jump_Standing"
+  },
+  {
+    "frame": 1187,
+    "label": "Falling + soft landing / Air_Fall"
+  },
+  {
+    "frame": 1223,
+    "label": "Falling + soft landing / Land_Soft"
+  },
+  {
+    "frame": 1174,
+    "label": "Falling + soft landing / recovery blend"
+  },
+  {
+    "frame": 1342,
+    "label": "Large fall + heavy landing / Jump_Standing"
+  },
+  {
+    "frame": 1381,
+    "label": "Large fall + heavy landing / Jump_Double"
+  },
+  {
+    "frame": 1425,
+    "label": "Large fall + heavy landing / Air_Fall"
+  },
+  {
+    "frame": 1469,
+    "label": "Large fall + heavy landing / Land_Heavy"
+  },
+  {
+    "frame": 1370,
+    "label": "Large fall + heavy landing / recovery blend"
+  },
+  {
+    "frame": 1607,
+    "label": "Dodge_Left / Dodge_Left"
+  },
+  {
+    "frame": 1648,
+    "label": "Dodge_Left / recovery blend"
+  },
+  {
+    "frame": 1725,
+    "label": "Dodge_Right / Dodge_Right"
+  },
+  {
+    "frame": 1766,
+    "label": "Dodge_Right / recovery blend"
+  },
+  {
+    "frame": 1843,
+    "label": "Dodge_Back / Dodge_Back"
+  },
+  {
+    "frame": 1884,
+    "label": "Dodge_Back / recovery blend"
+  },
+  {
+    "frame": 1961,
+    "label": "Dodge_Forward / Dodge_Forward"
+  },
+  {
+    "frame": 2002,
+    "label": "Dodge_Forward / recovery blend"
+  },
+  {
+    "frame": 2103,
+    "label": "Dodge_Walk / Dodge_Walk"
+  },
+  {
+    "frame": 2150,
+    "label": "Dodge_Walk / recovery blend"
+  },
+  {
+    "frame": 2283,
+    "label": "Dodge_Jog / Dodge_Jog"
+  },
+  {
+    "frame": 2324,
+    "label": "Dodge_Jog / recovery blend"
+  },
+  {
+    "frame": 2449,
+    "label": "Dodge_Sprint / Dodge_Sprint"
+  },
+  {
+    "frame": 2484,
+    "label": "Dodge_Sprint / recovery blend"
+  }
+]

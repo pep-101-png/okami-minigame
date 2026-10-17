@@ -1,0 +1,206 @@
+{
+  "source_sha256": "82cee2e6e6d8ac3c3708c4a16d12cb5fefaa155da74c961fe34bec8810082cf4",
+  "original_geometry_rig_weights_materials_textures_exact": true,
+  "all_previous_actions_exact": true,
+  "previous_action_count": 24,
+  "actions": {
+    "Jump_Standing": {
+      "sample_count": 441,
+      "max_ik_error": 0.0002788152380637015,
+      "min_paw_z": 0.03470039740204811,
+      "max_quarter_frame_upper_leg_rotation_deg": 1.2265109430809413,
+      "bad_reach_samples": []
+    },
+    "Jump_Walk": {
+      "sample_count": 417,
+      "max_ik_error": 0.0002769226472125311,
+      "min_paw_z": 0.031791701912879944,
+      "max_quarter_frame_upper_leg_rotation_deg": 1.9975520020200517,
+      "bad_reach_samples": []
+    },
+    "Jump_Jog": {
+      "sample_count": 393,
+      "max_ik_error": 0.00027671981924906727,
+      "min_paw_z": 0.027664948254823685,
+      "max_quarter_frame_upper_leg_rotation_deg": 2.1558531619793215,
+      "bad_reach_samples": []
+    },
+    "Jump_Sprint": {
+      "sample_count": 377,
+      "max_ik_error": 0.0002737650094183344,
+      "min_paw_z": 0.011401671916246414,
+      "max_quarter_frame_upper_leg_rotation_deg": 7.812206448120504,
+      "bad_reach_samples": []
+    },
+    "Air_Fall": {
+      "sample_count": 289,
+      "max_ik_error": 7.311548983561197e-05,
+      "min_paw_z": 0.4799971878528595,
+      "max_quarter_frame_upper_leg_rotation_deg": 0.06852804166478502,
+      "bad_reach_samples": []
+    },
+    "Jump_Double": {
+      "sample_count": 313,
+      "max_ik_error": 0.0002721772339228666,
+      "min_paw_z": 0.45372024178504944,
+      "max_quarter_frame_upper_leg_rotation_deg": 0.40734354415670126,
+      "bad_reach_samples": []
+    },
+    "Land_Soft": {
+      "sample_count": 217,
+      "max_ik_error": 5.255532028706083e-05,
+      "min_paw_z": 0.03491833060979843,
+      "max_quarter_frame_upper_leg_rotation_deg": 1.444526846128046,
+      "bad_reach_samples": []
+    },
+    "Land_Heavy": {
+      "sample_count": 313,
+      "max_ik_error": 0.00020923256096752165,
+      "min_paw_z": 0.03485110402107239,
+      "max_quarter_frame_upper_leg_rotation_deg": 1.772056081336431,
+      "bad_reach_samples": []
+    },
+    "Dodge_Left": {
+      "sample_count": 233,
+      "max_ik_error": 0.0002136657503991053,
+      "min_paw_z": 0.034561414271593094,
+      "max_quarter_frame_upper_leg_rotation_deg": 2.327640743898193,
+      "bad_reach_samples": []
+    },
+    "Dodge_Right": {
+      "sample_count": 233,
+      "max_ik_error": 0.00021360515142739809,
+      "min_paw_z": 0.034572262316942215,
+      "max_quarter_frame_upper_leg_rotation_deg": 2.326967970264947,
+      "bad_reach_samples": []
+    },
+    "Dodge_Back": {
+      "sample_count": 233,
+      "max_ik_error": 0.00023895230753227068,
+      "min_paw_z": 0.032985709607601166,
+      "max_quarter_frame_upper_leg_rotation_deg": 2.5017143047549033,
+      "bad_reach_samples": []
+    },
+    "Dodge_Forward": {
+      "sample_count": 233,
+      "max_ik_error": 0.0002094646980038696,
+      "min_paw_z": 0.03432127833366394,
+      "max_quarter_frame_upper_leg_rotation_deg": 7.100433288487122,
+      "bad_reach_samples": []
+    },
+    "Dodge_Walk": {
+      "sample_count": 257,
+      "max_ik_error": 0.0002093360268772966,
+      "min_paw_z": 0.03042609430849552,
+      "max_quarter_frame_upper_leg_rotation_deg": 1.5200366151149467,
+      "bad_reach_samples": []
+    },
+    "Dodge_Jog": {
+      "sample_count": 233,
+      "max_ik_error": 0.0002748217567607643,
+      "min_paw_z": 0.02497289888560772,
+      "max_quarter_frame_upper_leg_rotation_deg": 2.595993113415882,
+      "bad_reach_samples": []
+    },
+    "Dodge_Sprint": {
+      "sample_count": 209,
+      "max_ik_error": 0.00027963689816819844,
+      "min_paw_z": 0.009709707461297512,
+      "max_quarter_frame_upper_leg_rotation_deg": 9.055581768592441,
+      "bad_reach_samples": []
+    }
+  },
+  "action_problems": [],
+  "demo": {
+    "frames": 2539,
+    "minimum_paw_z": 0.03441263362765312,
+    "maximum_ik_error": 0.0002956098111380012,
+    "maximum_frame_upper_leg_rotation_deg": 34.115575715446845,
+    "worst_rotation": {
+      "frame": 2469,
+      "key": "front.R",
+      "angle": 34.115575715446845,
+      "up": [
+        6.58154296875,
+        -139.62258911132812,
+        2.5602588653564453
+      ],
+      "knee": [
+        6.540502071380615,
+        -139.34820556640625,
+        1.4388582706451416
+      ],
+      "target": [
+        6.52612829208374,
+        -140.75372314453125,
+        1.4575042724609375
+      ]
+    },
+    "bad_reach_samples": [],
+    "worst_grounded_xy_steps": [
+      {
+        "frame": 2462,
+        "key": "rear.L",
+        "distance": 0.022571747963478796
+      },
+      {
+        "frame": 1956,
+        "key": "rear.L",
+        "distance": 0.009857178037307126
+      },
+      {
+        "frame": 363,
+        "key": "rear.R",
+        "distance": 0.009640467581110751
+      },
+      {
+        "frame": 2137,
+        "key": "rear.R",
+        "distance": 0.007291594788876823
+      },
+      {
+        "frame": 2045,
+        "key": "rear.R",
+        "distance": 0.0071573758328555195
+      },
+      {
+        "frame": 2149,
+        "key": "rear.R",
+        "distance": 0.0056432834237391
+      },
+      {
+        "frame": 255,
+        "key": "front.R",
+        "distance": 0.005076646763170577
+      },
+      {
+        "frame": 416,
+        "key": "rear.L",
+        "distance": 0.004896640754733349
+      },
+      {
+        "frame": 415,
+        "key": "rear.L",
+        "distance": 0.004768848395349979
+      },
+      {
+        "frame": 2148,
+        "key": "rear.R",
+        "distance": 0.0044914484894142456
+      },
+      {
+        "frame": 254,
+        "key": "front.R",
+        "distance": 0.004443168547784061
+      },
+      {
+        "frame": 143,
+        "key": "front.R",
+        "distance": 0.0043206219969962704
+      }
+    ],
+    "cpu_median_ms": 3.3416439982829615,
+    "cpu_p95_ms": 15.100717999303015
+  },
+  "packed_textures": 6
+}

@@ -1,0 +1,58 @@
+AMATERASU — MILESTONE 2: JUMPING AND DODGING
+Blender 4.3 or newer. Textures packed. No add-ons or Python trust required.
+
+OPEN AND PLAY
+The file opens in scene "03 · Jump and dodge showcase". Press Space.
+On-screen titles and timeline markers identify each test. The demonstration
+includes gait lead-ins/recoveries, standing/walk/jog/sprint jumps, midair
+rebound, falling, soft/heavy landings and all seven evasive Actions.
+The previous "02 · Movement showcase" is retained unchanged.
+
+INDIVIDUAL ACTIONS
+Choose scene "01 · Action inspection" (Scene dropdown at the top-right).
+Select WOLF_RIG. Use the lower Action Editor's Action dropdown:
+
+Jump_Standing / Jump_Walk / Jump_Jog / Jump_Sprint
+Jump_Double — airborne rebound with asymmetric tuck, twist and a second arc.
+Air_Fall — looping airborne descent pose; no world descent baked into this loop.
+Land_Soft / Land_Heavy
+Dodge_Left / Dodge_Right / Dodge_Back / Dodge_Forward
+Dodge_Walk / Dodge_Jog / Dodge_Sprint
+
+The existing Idle, Walk, Jog, Sprint_Fluid, natural variants, standing and moving
+turns, additive look-around and earlier rollback Actions are retained.
+The inspection timeline spans 180 frames; use an Action's displayed range to
+inspect its one-shot. Air_Fall alone is cyclic. Reset to frame 1 to replay.
+Middle-mouse orbit exits camera view; inspect joints from both sides and rear.
+
+PHASES / TRANSITIONS
+Pose markers identify anticipation, takeoff, apex, front/hind landing and
+recovery. Jump_Double marks ENERGY_GATHER and MAGIC_IMPULSE. Dodges mark loading,
+push, airborne, touchdown and return to gait. Custom Action properties record
+entry/exit gait and phase where applicable. These phases support later blending.
+Standing and moving jumps include recovery into their corresponding gait.
+Land_Soft and Land_Heavy recover toward Idle and may be blended into locomotion.
+The stage uses native NLA with six-frame action crossfades and longer gait
+crossfades, separate continuous root travel, and additive paw-contact correction.
+
+ROOT MOTION / FUTURE EXPORT
+New jump and dodge one-shots include root translation. Air_Fall is in place.
+The showcase overrides the root with M2_ROOT and adds M2_CONTACT; the library
+Actions remain independently selectable. Its linked wolf shares original
+mesh/armature data and is not another geometry copy.
+Do not export M2 stage, text, cameras or wind objects as part of the character.
+Bake existing IK/deform constraints for glTF. Extract root motion or provide an
+in-place equivalent in the later game controller; do not apply both world/root
+translation twice. Metadata uses original source units, not calibrated metres.
+Changing the showcase timing requires rebaking M2_CONTACT with demo.py.
+This is authored animation, not a live terrain-adapting controller.
+
+PRESERVATION / PERFORMANCE
+Original geometry, UVs, normals, rig, weights, materials and six packed textures
+are preserved. Previous Action curves are not rewritten. Original movement
+checkpoint remains on the separate amaterasu-movement-system branch.
+Walk has no wind; Jog is light; Sprint retains full wind. Existing FAST and FULL
+View Layers in the inspection scene remain available. New Actions use native
+interpolated curves; no frame handlers or mesh modifiers were added.
+60 FPS is the scene timebase. Actual viewport FPS depends on hardware/shading.
+No game or browser-viewer files are modified.

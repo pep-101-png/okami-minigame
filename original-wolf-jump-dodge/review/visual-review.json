@@ -1,0 +1,14 @@
+{
+  "utc": "2026-10-17T09:41:59.109847+00:00",
+  "delivered_sha256": "5e24c750d5c31e1ba071f3290927bc3006d9b4bcd4628aba59bff96fc6f5aa0e",
+  "rendered_views": 246,
+  "new_actions": 15,
+  "showcase_cases": 14,
+  "frames_checked": 2539,
+  "visual_review": "Side/rear contact sheets for all 15 Actions and showcase images inspected by assistant; user artistic approval pending. Corrected sprint takeoff handoff, safe IK reach and sparse subframe paw clearance.",
+  "limits": [
+    "Fixed trajectory animations need runtime terrain/root-motion handling later",
+    "Showcase contact layer must be rebaked if timing changes",
+    "Actual GPU viewport FPS is hardware dependent"
+  ]
+}

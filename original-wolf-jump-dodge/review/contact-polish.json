@@ -1,0 +1,10 @@
+{
+  "Jump_Sprint": {
+    "clearance_samples_corrected": 7,
+    "local_samples_keyed": 13
+  },
+  "Dodge_Sprint": {
+    "clearance_samples_corrected": 7,
+    "local_samples_keyed": 11
+  }
+}

@@ -1,0 +1,948 @@
+{
+  "frames": 2539,
+  "seconds": 42.31666666666667,
+  "cases": [
+    {
+      "name": "Jump_Standing",
+      "start": 1,
+      "end": 219
+    },
+    {
+      "name": "Jump_Walk",
+      "start": 219,
+      "end": 431
+    },
+    {
+      "name": "Jump_Jog",
+      "start": 431,
+      "end": 653
+    },
+    {
+      "name": "Jump_Sprint",
+      "start": 653,
+      "end": 839
+    },
+    {
+      "name": "Double jump + soft landing",
+      "start": 839,
+      "end": 1103
+    },
+    {
+      "name": "Falling + soft landing",
+      "start": 1103,
+      "end": 1299
+    },
+    {
+      "name": "Large fall + heavy landing",
+      "start": 1299,
+      "end": 1569
+    },
+    {
+      "name": "Dodge_Left",
+      "start": 1569,
+      "end": 1687
+    },
+    {
+      "name": "Dodge_Right",
+      "start": 1687,
+      "end": 1805
+    },
+    {
+      "name": "Dodge_Back",
+      "start": 1805,
+      "end": 1923
+    },
+    {
+      "name": "Dodge_Forward",
+      "start": 1923,
+      "end": 2041
+    },
+    {
+      "name": "Dodge_Walk",
+      "start": 2041,
+      "end": 2213
+    },
+    {
+      "name": "Dodge_Jog",
+      "start": 2213,
+      "end": 2395
+    },
+    {
+      "name": "Dodge_Sprint",
+      "start": 2395,
+      "end": 2539
+    }
+  ],
+  "segments": [
+    {
+      "action": "Idle",
+      "duration": 60,
+      "phase": -0.225,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1,
+      "end": 61,
+      "blend": 0,
+      "N": 240,
+      "case": "Jump_Standing"
+    },
+    {
+      "action": "Jump_Standing",
+      "duration": 110,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 55,
+      "end": 165,
+      "blend": 6,
+      "N": 110,
+      "case": "Jump_Standing"
+    },
+    {
+      "action": "Idle",
+      "duration": 60,
+      "phase": 0.4333333333333333,
+      "zbase": 0,
+      "zfall": null,
+      "start": 159,
+      "end": 219,
+      "blend": 6,
+      "N": 240,
+      "case": "Jump_Standing"
+    },
+    {
+      "action": "Walk_Natural",
+      "duration": 72,
+      "phase": -0.4666666666666666,
+      "zbase": 0,
+      "zfall": null,
+      "start": 195,
+      "end": 267,
+      "blend": 24,
+      "N": 72,
+      "case": "Jump_Walk"
+    },
+    {
+      "action": "Jump_Walk",
+      "duration": 104,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 261,
+      "end": 365,
+      "blend": 6,
+      "N": 104,
+      "case": "Jump_Walk"
+    },
+    {
+      "action": "Walk_Natural",
+      "duration": 72,
+      "phase": 0.811111111111111,
+      "zbase": 0,
+      "zfall": null,
+      "start": 359,
+      "end": 431,
+      "blend": 6,
+      "N": 72,
+      "case": "Jump_Walk"
+    },
+    {
+      "action": "Jog_Natural",
+      "duration": 80,
+      "phase": -1.33,
+      "zbase": 0,
+      "zfall": null,
+      "start": 407,
+      "end": 487,
+      "blend": 24,
+      "N": 40,
+      "case": "Jump_Jog"
+    },
+    {
+      "action": "Jump_Jog",
+      "duration": 98,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 481,
+      "end": 579,
+      "blend": 6,
+      "N": 98,
+      "case": "Jump_Jog"
+    },
+    {
+      "action": "Jog_Natural",
+      "duration": 80,
+      "phase": 0.8200000000000002,
+      "zbase": 0,
+      "zfall": null,
+      "start": 573,
+      "end": 653,
+      "blend": 6,
+      "N": 40,
+      "case": "Jump_Jog"
+    },
+    {
+      "action": "Sprint_Fluid",
+      "duration": 64,
+      "phase": -1.2625,
+      "zbase": 0,
+      "zfall": null,
+      "start": 629,
+      "end": 693,
+      "blend": 24,
+      "N": 32,
+      "case": "Jump_Sprint"
+    },
+    {
+      "action": "Jump_Sprint",
+      "duration": 94,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 687,
+      "end": 781,
+      "blend": 6,
+      "N": 94,
+      "case": "Jump_Sprint"
+    },
+    {
+      "action": "Sprint_Fluid",
+      "duration": 64,
+      "phase": 0.2999999999999998,
+      "zbase": 0,
+      "zfall": null,
+      "start": 775,
+      "end": 839,
+      "blend": 6,
+      "N": 32,
+      "case": "Jump_Sprint"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.175,
+      "zbase": 0,
+      "zfall": null,
+      "start": 815,
+      "end": 863,
+      "blend": 24,
+      "N": 240,
+      "case": "Double jump + soft landing"
+    },
+    {
+      "action": "Jump_Standing",
+      "duration": 50,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 857,
+      "end": 907,
+      "blend": 6,
+      "N": 110,
+      "case": "Double jump + soft landing"
+    },
+    {
+      "action": "Jump_Double",
+      "duration": 78,
+      "phase": 0,
+      "zbase": 2.25,
+      "zfall": null,
+      "start": 901,
+      "end": 979,
+      "blend": 6,
+      "N": 78,
+      "case": "Double jump + soft landing"
+    },
+    {
+      "action": "Air_Fall",
+      "duration": 40,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": [
+        2.25,
+        0.65
+      ],
+      "start": 973,
+      "end": 1013,
+      "blend": 6,
+      "N": 72,
+      "case": "Double jump + soft landing"
+    },
+    {
+      "action": "Land_Soft",
+      "duration": 54,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1007,
+      "end": 1061,
+      "blend": 6,
+      "N": 54,
+      "case": "Double jump + soft landing"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.025,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1055,
+      "end": 1103,
+      "blend": 6,
+      "N": 240,
+      "case": "Double jump + soft landing"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.175,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1079,
+      "end": 1127,
+      "blend": 24,
+      "N": 240,
+      "case": "Falling + soft landing"
+    },
+    {
+      "action": "Jump_Standing",
+      "duration": 50,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1121,
+      "end": 1171,
+      "blend": 6,
+      "N": 110,
+      "case": "Falling + soft landing"
+    },
+    {
+      "action": "Air_Fall",
+      "duration": 44,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": [
+        2.25,
+        0.65
+      ],
+      "start": 1165,
+      "end": 1209,
+      "blend": 6,
+      "N": 72,
+      "case": "Falling + soft landing"
+    },
+    {
+      "action": "Land_Soft",
+      "duration": 54,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1203,
+      "end": 1257,
+      "blend": 6,
+      "N": 54,
+      "case": "Falling + soft landing"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.025,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1251,
+      "end": 1299,
+      "blend": 6,
+      "N": 240,
+      "case": "Falling + soft landing"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.175,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1275,
+      "end": 1323,
+      "blend": 24,
+      "N": 240,
+      "case": "Large fall + heavy landing"
+    },
+    {
+      "action": "Jump_Standing",
+      "duration": 50,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1317,
+      "end": 1367,
+      "blend": 6,
+      "N": 110,
+      "case": "Large fall + heavy landing"
+    },
+    {
+      "action": "Jump_Double",
+      "duration": 40,
+      "phase": 0,
+      "zbase": 2.25,
+      "zfall": null,
+      "start": 1361,
+      "end": 1401,
+      "blend": 6,
+      "N": 78,
+      "case": "Large fall + heavy landing"
+    },
+    {
+      "action": "Air_Fall",
+      "duration": 60,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": [
+        4.950000047683716,
+        1.5
+      ],
+      "start": 1395,
+      "end": 1455,
+      "blend": 6,
+      "N": 72,
+      "case": "Large fall + heavy landing"
+    },
+    {
+      "action": "Land_Heavy",
+      "duration": 78,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1449,
+      "end": 1527,
+      "blend": 6,
+      "N": 78,
+      "case": "Large fall + heavy landing"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.025,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1521,
+      "end": 1569,
+      "blend": 6,
+      "N": 240,
+      "case": "Large fall + heavy landing"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.175,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1545,
+      "end": 1593,
+      "blend": 24,
+      "N": 240,
+      "case": "Dodge_Left"
+    },
+    {
+      "action": "Dodge_Left",
+      "duration": 58,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1587,
+      "end": 1645,
+      "blend": 6,
+      "N": 58,
+      "case": "Dodge_Left"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": 0.21666666666666667,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1639,
+      "end": 1687,
+      "blend": 6,
+      "N": 240,
+      "case": "Dodge_Left"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.175,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1663,
+      "end": 1711,
+      "blend": 24,
+      "N": 240,
+      "case": "Dodge_Right"
+    },
+    {
+      "action": "Dodge_Right",
+      "duration": 58,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1705,
+      "end": 1763,
+      "blend": 6,
+      "N": 58,
+      "case": "Dodge_Right"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": 0.21666666666666667,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1757,
+      "end": 1805,
+      "blend": 6,
+      "N": 240,
+      "case": "Dodge_Right"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.175,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1781,
+      "end": 1829,
+      "blend": 24,
+      "N": 240,
+      "case": "Dodge_Back"
+    },
+    {
+      "action": "Dodge_Back",
+      "duration": 58,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1823,
+      "end": 1881,
+      "blend": 6,
+      "N": 58,
+      "case": "Dodge_Back"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": 0.21666666666666667,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1875,
+      "end": 1923,
+      "blend": 6,
+      "N": 240,
+      "case": "Dodge_Back"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": -0.175,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1899,
+      "end": 1947,
+      "blend": 24,
+      "N": 240,
+      "case": "Dodge_Forward"
+    },
+    {
+      "action": "Dodge_Forward",
+      "duration": 58,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1941,
+      "end": 1999,
+      "blend": 6,
+      "N": 58,
+      "case": "Dodge_Forward"
+    },
+    {
+      "action": "Idle",
+      "duration": 48,
+      "phase": 0.21666666666666667,
+      "zbase": 0,
+      "zfall": null,
+      "start": 1993,
+      "end": 2041,
+      "blend": 6,
+      "N": 240,
+      "case": "Dodge_Forward"
+    },
+    {
+      "action": "Walk_Natural",
+      "duration": 72,
+      "phase": -0.6666666666666666,
+      "zbase": 0,
+      "zfall": null,
+      "start": 2017,
+      "end": 2089,
+      "blend": 24,
+      "N": 72,
+      "case": "Dodge_Walk"
+    },
+    {
+      "action": "Dodge_Walk",
+      "duration": 64,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 2083,
+      "end": 2147,
+      "blend": 6,
+      "N": 64,
+      "case": "Dodge_Walk"
+    },
+    {
+      "action": "Walk_Natural",
+      "duration": 72,
+      "phase": 0.05555555555555551,
+      "zbase": 0,
+      "zfall": null,
+      "start": 2141,
+      "end": 2213,
+      "blend": 6,
+      "N": 72,
+      "case": "Dodge_Walk"
+    },
+    {
+      "action": "Jog_Natural",
+      "duration": 80,
+      "phase": -1.35,
+      "zbase": 0,
+      "zfall": null,
+      "start": 2189,
+      "end": 2269,
+      "blend": 24,
+      "N": 40,
+      "case": "Dodge_Jog"
+    },
+    {
+      "action": "Dodge_Jog",
+      "duration": 58,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 2263,
+      "end": 2321,
+      "blend": 6,
+      "N": 58,
+      "case": "Dodge_Jog"
+    },
+    {
+      "action": "Jog_Natural",
+      "duration": 80,
+      "phase": 0.7999999999999999,
+      "zbase": 0,
+      "zfall": null,
+      "start": 2315,
+      "end": 2395,
+      "blend": 6,
+      "N": 40,
+      "case": "Dodge_Jog"
+    },
+    {
+      "action": "Sprint_Fluid",
+      "duration": 64,
+      "phase": -1.3125,
+      "zbase": 0,
+      "zfall": null,
+      "start": 2371,
+      "end": 2435,
+      "blend": 24,
+      "N": 32,
+      "case": "Dodge_Sprint"
+    },
+    {
+      "action": "Dodge_Sprint",
+      "duration": 52,
+      "phase": 0,
+      "zbase": 0,
+      "zfall": null,
+      "start": 2429,
+      "end": 2481,
+      "blend": 6,
+      "N": 52,
+      "case": "Dodge_Sprint"
+    },
+    {
+      "action": "Sprint_Fluid",
+      "duration": 64,
+      "phase": -0.0625,
+      "zbase": 0,
+      "zfall": null,
+      "start": 2475,
+      "end": 2539,
+      "blend": 6,
+      "N": 32,
+      "case": "Dodge_Sprint"
+    }
+  ],
+  "contact_samples": [
+    {
+      "frame": 1,
+      "min_sole_z": 0.034999750554561615
+    },
+    {
+      "frame": 121,
+      "min_sole_z": 1.417717695236206
+    },
+    {
+      "frame": 241,
+      "min_sole_z": 0.03499967232346535
+    },
+    {
+      "frame": 361,
+      "min_sole_z": 0.034999970346689224
+    },
+    {
+      "frame": 481,
+      "min_sole_z": 0.03500005230307579
+    },
+    {
+      "frame": 601,
+      "min_sole_z": 0.03499680384993553
+    },
+    {
+      "frame": 721,
+      "min_sole_z": 3.2446296215057373
+    },
+    {
+      "frame": 841,
+      "min_sole_z": 0.03499931842088699
+    },
+    {
+      "frame": 961,
+      "min_sole_z": 4.272829532623291
+    },
+    {
+      "frame": 1081,
+      "min_sole_z": 0.03499554842710495
+    },
+    {
+      "frame": 1201,
+      "min_sole_z": 1.5458804368972778
+    },
+    {
+      "frame": 1321,
+      "min_sole_z": 0.034993112087249756
+    },
+    {
+      "frame": 1441,
+      "min_sole_z": 3.1140594482421875
+    },
+    {
+      "frame": 1561,
+      "min_sole_z": 0.03499450534582138
+    },
+    {
+      "frame": 1681,
+      "min_sole_z": 0.034995079040527344
+    },
+    {
+      "frame": 1801,
+      "min_sole_z": 0.035001520067453384
+    },
+    {
+      "frame": 1921,
+      "min_sole_z": 0.03499694913625717
+    },
+    {
+      "frame": 2041,
+      "min_sole_z": 0.034993771463632584
+    },
+    {
+      "frame": 2161,
+      "min_sole_z": 0.0349934846162796
+    },
+    {
+      "frame": 2281,
+      "min_sole_z": 0.42103737592697144
+    },
+    {
+      "frame": 2401,
+      "min_sole_z": 0.03500213101506233
+    },
+    {
+      "frame": 2521,
+      "min_sole_z": 0.11717107892036438
+    }
+  ],
+  "contact_keys": 5000,
+  "phase_alignment": [
+    {
+      "action": "Idle",
+      "start": 1,
+      "old_phase": -0.25,
+      "phase": -0.225
+    },
+    {
+      "action": "Idle",
+      "start": 159,
+      "old_phase": 0.4583333333333333,
+      "phase": 0.4333333333333333
+    },
+    {
+      "action": "Walk_Natural",
+      "start": 195,
+      "old_phase": -0.55,
+      "phase": -0.4666666666666666
+    },
+    {
+      "action": "Walk_Natural",
+      "start": 359,
+      "old_phase": 0.8944444444444444,
+      "phase": 0.811111111111111
+    },
+    {
+      "action": "Jog_Natural",
+      "start": 407,
+      "old_phase": -1.48,
+      "phase": -1.33
+    },
+    {
+      "action": "Jog_Natural",
+      "start": 573,
+      "old_phase": 0.9700000000000002,
+      "phase": 0.8200000000000002
+    },
+    {
+      "action": "Sprint_Fluid",
+      "start": 629,
+      "old_phase": -1.45,
+      "phase": -1.2625
+    },
+    {
+      "action": "Sprint_Fluid",
+      "start": 775,
+      "old_phase": 0.4874999999999998,
+      "phase": 0.2999999999999998
+    },
+    {
+      "action": "Idle",
+      "start": 815,
+      "old_phase": 0,
+      "phase": -0.175
+    },
+    {
+      "action": "Idle",
+      "start": 1055,
+      "old_phase": 0,
+      "phase": -0.025
+    },
+    {
+      "action": "Idle",
+      "start": 1079,
+      "old_phase": 0,
+      "phase": -0.175
+    },
+    {
+      "action": "Idle",
+      "start": 1251,
+      "old_phase": 0,
+      "phase": -0.025
+    },
+    {
+      "action": "Idle",
+      "start": 1275,
+      "old_phase": 0,
+      "phase": -0.175
+    },
+    {
+      "action": "Idle",
+      "start": 1521,
+      "old_phase": 0,
+      "phase": -0.025
+    },
+    {
+      "action": "Idle",
+      "start": 1545,
+      "old_phase": -0.2,
+      "phase": -0.175
+    },
+    {
+      "action": "Idle",
+      "start": 1639,
+      "old_phase": 0.24166666666666667,
+      "phase": 0.21666666666666667
+    },
+    {
+      "action": "Idle",
+      "start": 1663,
+      "old_phase": -0.2,
+      "phase": -0.175
+    },
+    {
+      "action": "Idle",
+      "start": 1757,
+      "old_phase": 0.24166666666666667,
+      "phase": 0.21666666666666667
+    },
+    {
+      "action": "Idle",
+      "start": 1781,
+      "old_phase": -0.2,
+      "phase": -0.175
+    },
+    {
+      "action": "Idle",
+      "start": 1875,
+      "old_phase": 0.24166666666666667,
+      "phase": 0.21666666666666667
+    },
+    {
+      "action": "Idle",
+      "start": 1899,
+      "old_phase": -0.2,
+      "phase": -0.175
+    },
+    {
+      "action": "Idle",
+      "start": 1993,
+      "old_phase": 0.24166666666666667,
+      "phase": 0.21666666666666667
+    },
+    {
+      "action": "Walk_Natural",
+      "start": 2017,
+      "old_phase": -0.75,
+      "phase": -0.6666666666666666
+    },
+    {
+      "action": "Walk_Natural",
+      "start": 2141,
+      "old_phase": 0.13888888888888884,
+      "phase": 0.05555555555555551
+    },
+    {
+      "action": "Jog_Natural",
+      "start": 2189,
+      "old_phase": -1.5,
+      "phase": -1.35
+    },
+    {
+      "action": "Jog_Natural",
+      "start": 2315,
+      "old_phase": 0.95,
+      "phase": 0.7999999999999999
+    },
+    {
+      "action": "Sprint_Fluid",
+      "start": 2371,
+      "old_phase": -1.5,
+      "phase": -1.3125
+    },
+    {
+      "action": "Sprint_Fluid",
+      "start": 2475,
+      "old_phase": 0.125,
+      "phase": -0.0625
+    }
+  ]
+}
