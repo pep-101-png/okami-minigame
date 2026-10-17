@@ -1,0 +1,31 @@
+{
+  "review_completed_utc": "2026-10-17T03:11:14.074885+00:00",
+  "authoring_revision": 7,
+  "rendered_side_frames": {
+    "idle": 24,
+    "walk": 36,
+    "run": 40
+  },
+  "additional_three_quarter_poses_per_action": 4,
+  "run_opposite_three_quarter_poses": 4,
+  "visually_reviewed": [
+    "Idle breathing, planted paws and quiet tail",
+    "Four-beat walking contacts and passing poses",
+    "Gallop collection, extension, both suspension phases and foreleg reach",
+    "Both three-quarter sides at gallop recovery and push-off"
+  ],
+  "checks_passed": [
+    "Exact loop endpoints",
+    "Ground contacts and intended travel-matched stance motion",
+    "Original mesh/UVs/normals/weights/rest bones/materials/images preserved",
+    "Original rig checkpoint unchanged",
+    "Three named Actions retained on reopen",
+    "Layout opens with an Action Editor and Walk selected",
+    "Isolated glTF export: three correctly timed clips and ten skinned parts"
+  ],
+  "necessary_fix": "Non-smoothing pre-skin subdivision supplies joint bend resolution; original mesh and rig data remain intact. Strong recovery poses were moderated.",
+  "limits": [
+    "Compression remains at the inside of the deepest hip/knee bends in the original mesh; no claim of distortion-free extreme poses.",
+    "Final game-engine skinning appearance has not been tested; no game work was performed."
+  ]
+}

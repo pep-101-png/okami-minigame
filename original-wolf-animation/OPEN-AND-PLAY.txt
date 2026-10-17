@@ -1,0 +1,31 @@
+AMATERASU — IDLE / WALK / RUN
+
+The approved original wolf's mesh, appearance and control system are unchanged.
+Only animator controls have keys. Non-smoothing pre-skin subdivision prevents sparse joint faces folding.
+Original base mesh, weights, rest bones and rig hierarchy remain unchanged;
+no remodel or rest-mesh edits. The source rig checkpoint is untouched.
+All original images remain packed. Original unanimated rig remains a separate file.
+
+PLAY AN ACTION
+Select WOLF_RIG. The lower panel is an Action Editor.
+Use the Action-name dropdown in its header: IDLE, WALK or RUN. Press Space.
+The shared review range loops smoothly with all three Actions; no range change
+is needed. All actions use 60 fps. Start = 1.
+  IDLE: 240-frame cycle (4 seconds)
+  WALK: 72-frame cycle (1.2 seconds)
+  RUN:  40-frame cycle (0.667 seconds)
+The 720-frame review range repeats whole cycles of whichever Action is active.
+Each Action has its own short export range and a duplicate closing key.
+The shield / fake-user flag retains all three actions in the file.
+
+CONTROLS
+Gold: root and torso. Green: planted IK paws. Orange: bend-direction poles.
+Blue: hips/spine/chest/shoulders/neck. Purple: head, jaw, ears. Teal: tail.
+Press Z > Material Preview for original paint. No plugin or texture folder needed.
+
+GAME EXPORT LATER
+These are in-place cycles. Match game travel speed to 1.667 Blender units/s for
+WALK, 7.2 for RUN (or scale both model and velocity consistently).
+Sample/bake the existing constraints when exporting deform-bone animation.
+Do not export just raw control curves as if they were deform bones.
+No game files or browser pages were changed.

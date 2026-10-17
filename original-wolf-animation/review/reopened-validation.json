@@ -1,0 +1,89 @@
+{
+  "reopened_blend": "/workspace/okami-minigame/original-wolf-animation/Amaterasu-Idle-Walk-Run.blend",
+  "original_rig_checkpoint_sha256": "6dacb175ae341fafc0c7a5b2f5ca742ea6f962a5762dcc14316b7c90073f3a34",
+  "base_mesh_uv_normals_weights_materials_images_preserved": true,
+  "original_skeleton_and_controls_preserved": true,
+  "neutral_surface_checks": {
+    "Object_10": {
+      "original_vertices": 494,
+      "evaluated_vertices": 494,
+      "max_rest_surface_distance": 1.82488547579851e-05
+    },
+    "Object_11": {
+      "original_vertices": 1969,
+      "evaluated_vertices": 1969,
+      "max_rest_surface_distance": 1.92020415852312e-05
+    },
+    "Object_2": {
+      "original_vertices": 4283,
+      "evaluated_vertices": 23160,
+      "max_rest_surface_distance": 0.00012247548147570342
+    },
+    "Object_3": {
+      "original_vertices": 304,
+      "evaluated_vertices": 304,
+      "max_rest_surface_distance": 1.6740312275942415e-05
+    },
+    "Object_4": {
+      "original_vertices": 68,
+      "evaluated_vertices": 68,
+      "max_rest_surface_distance": 1.6740312275942415e-05
+    },
+    "Object_5": {
+      "original_vertices": 286,
+      "evaluated_vertices": 286,
+      "max_rest_surface_distance": 1.8001786884269677e-05
+    },
+    "Object_6": {
+      "original_vertices": 1236,
+      "evaluated_vertices": 6257,
+      "max_rest_surface_distance": 3.052130341529846e-05
+    },
+    "Object_7": {
+      "original_vertices": 553,
+      "evaluated_vertices": 553,
+      "max_rest_surface_distance": 1.1184943105035927e-05
+    },
+    "Object_8": {
+      "original_vertices": 866,
+      "evaluated_vertices": 866,
+      "max_rest_surface_distance": 3.2827821996761486e-05
+    },
+    "Object_9": {
+      "original_vertices": 1468,
+      "evaluated_vertices": 1468,
+      "max_rest_surface_distance": 1.4285232282418292e-05
+    }
+  },
+  "loop_checks": {
+    "IDLE": {
+      "one_cycle_matrix_error": 1.5094127120071632e-18,
+      "review_range_matrix_error": 1.5094127120071632e-18
+    },
+    "WALK": {
+      "one_cycle_matrix_error": 0.0,
+      "review_range_matrix_error": 0.0
+    },
+    "RUN": {
+      "one_cycle_matrix_error": 0.0,
+      "review_range_matrix_error": 0.0
+    }
+  },
+  "actions": [
+    "IDLE",
+    "WALK",
+    "RUN"
+  ],
+  "no_game_or_viewer_tested": true,
+  "isolated_game_export_smoke": {
+    "clips": {
+      "IDLE": 4.0,
+      "RUN": 0.6666666666666666,
+      "WALK": 1.2
+    },
+    "skinned_meshes": 10,
+    "applied_simple_bend_resolution": true,
+    "standard_constraint_sampling": true,
+    "file_in_tmp_only": true
+  }
+}

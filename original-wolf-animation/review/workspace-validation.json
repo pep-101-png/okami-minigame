@@ -1,0 +1,7 @@
+{
+  "action_curves_sha256": "30569ee77f566c355ef519e64a38b154d141597018e16ab713dfc36e32f48e69",
+  "actions_unchanged": true,
+  "default_action": "WALK",
+  "common_review_range": 720,
+  "layout_action_editor": true
+}

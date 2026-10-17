@@ -1,0 +1,201 @@
+{
+  "IDLE": {
+    "loop_seam_vertex_error": 0.0,
+    "minimum_paw_z": 0.03499909117817879,
+    "max_contact_floor_error": 9.088218212160992e-07,
+    "max_stance_slip_per_frame": 2.6226043701171875e-06,
+    "flight_frames": [],
+    "severe_edge_samples": 0,
+    "worst_edges": []
+  },
+  "WALK": {
+    "loop_seam_vertex_error": 0.0,
+    "minimum_paw_z": 0.03499927744269371,
+    "max_contact_floor_error": 7.225573062930035e-07,
+    "max_stance_slip_per_frame": 1.3245476616734198e-06,
+    "flight_frames": [],
+    "severe_edge_samples": 0,
+    "worst_edges": []
+  },
+  "RUN": {
+    "loop_seam_vertex_error": 0.0,
+    "minimum_paw_z": 0.034999262541532516,
+    "max_contact_floor_error": 7.374584674868512e-07,
+    "max_stance_slip_per_frame": 1.5544891357327506e-06,
+    "flight_frames": [
+      16,
+      17,
+      18,
+      19,
+      36,
+      37,
+      38,
+      39
+    ],
+    "severe_edge_samples": 642,
+    "worst_edges": [
+      {
+        "frame": 7,
+        "object": "Object_6",
+        "edge": [
+          1813,
+          5761
+        ],
+        "ratio": 0.04343956210329509
+      },
+      {
+        "frame": 8,
+        "object": "Object_6",
+        "edge": [
+          1813,
+          5761
+        ],
+        "ratio": 0.04755780872979577
+      },
+      {
+        "frame": 9,
+        "object": "Object_6",
+        "edge": [
+          1813,
+          5761
+        ],
+        "ratio": 0.08211885075655607
+      },
+      {
+        "frame": 6,
+        "object": "Object_6",
+        "edge": [
+          1813,
+          5761
+        ],
+        "ratio": 0.0824215206382192
+      },
+      {
+        "frame": 10,
+        "object": "Object_2",
+        "edge": [
+          15219,
+          23126
+        ],
+        "ratio": 0.0965214512015455
+      },
+      {
+        "frame": 11,
+        "object": "Object_2",
+        "edge": [
+          15219,
+          23126
+        ],
+        "ratio": 0.10108581718692781
+      },
+      {
+        "frame": 6,
+        "object": "Object_6",
+        "edge": [
+          943,
+          4189
+        ],
+        "ratio": 0.10144220032940006
+      },
+      {
+        "frame": 6,
+        "object": "Object_2",
+        "edge": [
+          8835,
+          19651
+        ],
+        "ratio": 0.10330481257137536
+      },
+      {
+        "frame": 27,
+        "object": "Object_2",
+        "edge": [
+          1332,
+          5134
+        ],
+        "ratio": 0.11309544958743929
+      },
+      {
+        "frame": 9,
+        "object": "Object_2",
+        "edge": [
+          11706,
+          19652
+        ],
+        "ratio": 0.11358391343934271
+      },
+      {
+        "frame": 11,
+        "object": "Object_6",
+        "edge": [
+          3076,
+          5055
+        ],
+        "ratio": 0.11734891976046835
+      },
+      {
+        "frame": 26,
+        "object": "Object_2",
+        "edge": [
+          1332,
+          5134
+        ],
+        "ratio": 0.11735472637254982
+      },
+      {
+        "frame": 7,
+        "object": "Object_2",
+        "edge": [
+          8835,
+          19651
+        ],
+        "ratio": 0.11909948330375747
+      },
+      {
+        "frame": 12,
+        "object": "Object_6",
+        "edge": [
+          3076,
+          5055
+        ],
+        "ratio": 0.11951405428151599
+      },
+      {
+        "frame": 8,
+        "object": "Object_2",
+        "edge": [
+          11706,
+          19652
+        ],
+        "ratio": 0.12257411281488274
+      },
+      {
+        "frame": 10,
+        "object": "Object_6",
+        "edge": [
+          3404,
+          5862
+        ],
+        "ratio": 0.1233455206705692
+      },
+      {
+        "frame": 28,
+        "object": "Object_2",
+        "edge": [
+          1332,
+          5134
+        ],
+        "ratio": 0.12379704828810867
+      },
+      {
+        "frame": 10,
+        "object": "Object_6",
+        "edge": [
+          1813,
+          5761
+        ],
+        "ratio": 0.12675588916363428
+      }
+    ]
+  }
+}
