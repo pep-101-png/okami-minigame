@@ -1,0 +1,24 @@
+{
+  "source_sha256": "005c591cc810cfec7cc352c441ab3227d6e140ba578be9ef768b5750a488f57e",
+  "visually_inspected_frames": 96,
+  "views": [
+    "side",
+    "rear three-quarter",
+    "neck close-up"
+  ],
+  "comparison": [
+    "previous Sprint key poses 1,9,17,25",
+    "new full 32-frame cycle"
+  ],
+  "review_findings": [
+    "Head motion is phased after neck flexion while gaze remains stabilised.",
+    "Tail follows hips with a damped root and delayed wave through five existing controls.",
+    "Approved leg and core curves and evaluated matrices are unchanged.",
+    "No new visible holes, snapping, neck/shoulder intersection or tail/body penetration was observed in the reviewed frames.",
+    "Wind remains behind the face, with the side-view silhouette readable.",
+    "Original skin can retain creasing in tightly bent joints; no weight or mesh changes were made."
+  ],
+  "not_an_acceptance": true,
+  "wind_speed_and_action_gate_tested_with_autoexec_disabled": true,
+  "created_utc": "2026-10-17T05:10:10.416253+00:00"
+}

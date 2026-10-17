@@ -1,0 +1,84 @@
+{
+  "gates": {
+    "Idle": {
+      "scale": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "opacity": 0.0
+    },
+    "Walk": {
+      "scale": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "opacity": 0.0
+    },
+    "Jog": {
+      "scale": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "opacity": 0.0
+    },
+    "Sprint": {
+      "scale": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "opacity": 0.0
+    },
+    "Sprint_Polished": {
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "opacity": 1.0
+    }
+  },
+  "speed_fade_demo": {
+    "1": {
+      "speed": 0.0,
+      "opacity": 0.0,
+      "length_factor": 0.0
+    },
+    "9": {
+      "speed": 7.0,
+      "opacity": 0.467968225479126,
+      "length_factor": 0.35817569494247437
+    },
+    "17": {
+      "speed": 15.0,
+      "opacity": 1.0,
+      "length_factor": 1.0115385055541992
+    },
+    "65": {
+      "speed": 15.0,
+      "opacity": 1.0,
+      "length_factor": 1.0115385055541992
+    },
+    "97": {
+      "speed": 15.0,
+      "opacity": 1.0,
+      "length_factor": 1.0115385055541992
+    },
+    "113": {
+      "speed": 7.0,
+      "opacity": 0.467968225479126,
+      "length_factor": 0.35817569494247437
+    },
+    "129": {
+      "speed": 0.0,
+      "opacity": 0.0,
+      "length_factor": 0.0
+    }
+  },
+  "wind_loop_error": 0.0,
+  "simple_native_drivers": 66,
+  "source_sha256": "005c591cc810cfec7cc352c441ab3227d6e140ba578be9ef768b5750a488f57e"
+}

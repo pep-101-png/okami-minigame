@@ -1,0 +1,38 @@
+AMATERASU — SPRINT POLISH + WIND
+
+Blender 4.3 or newer. Open Amaterasu-Movement.blend, then press Space.
+No add-ons or permission to run Python scripts are required.
+
+The selected wolf Action is Sprint_Polished (32 frames at 60 fps).
+Select WOLF_RIG in the Outliner. In the lower Action Editor, use the Action
+name dropdown to choose Idle, Walk, Jog, Sprint or Sprint_Polished.
+Sprint is the previous accepted gallop, preserved for rollback and comparison.
+Sprint_Polished preserves its body, shoulders, hips, paws, toes and leg curves.
+Only head, neck and existing tail-control animation has been revised.
+
+Wind appears on Sprint_Polished only. It is an independent collection:
+05 · Sprint wind — separate effect. The wolf has no wind modifiers or materials.
+For proper wind shading, use Material Preview or Rendered viewport shading
+(the third or fourth sphere icon at the upper right of the 3D viewport).
+
+WIND SPEED AND FADE
+In collection 05 select SPRINT_WIND · speed control, then open Object Properties
+> Custom Properties. 'speed' 0–20 controls the wind only; 14.625 is full sprint.
+'strength' 0–1 changes its overall strength. Neither control retimes the wolf.
+Keyframe speed to fade the wind as a future sprint controller accelerates or
+slows down. The smoothstep response avoids a hard on/off threshold.
+
+Optional fade preview: select that control empty, then select Wind_Speed_Demo
+in the Action Editor. Play frames 1–129: accelerate, hold, decelerate. The wolf
+continues its unchanged 32-frame gallop. To return to steady wind, unlink the
+empty's Action with X, then set speed to 14.625. Keep Sprint_Polished on WOLF_RIG.
+
+EXPORT NOTES
+Bake/sample the wolf's existing constrained rig onto deform bones at 60 fps;
+export one Sprint_Polished cycle, frames 1–33 (frame 33 duplicates frame 1).
+The wind's Blender drivers, attribute shader and shape-key driver animation
+are not a directly portable glTF particle effect. Recreate it in Three.js with
+pooled curved ribbon strips, tapered widths, pigment noise and a speed-driven
+opacity/length uniform. Smooth the actual movement speed in the game controller.
+The wind collection is isolated so it can be excluded from the character export.
+No Three.js/game/viewer changes are included in this project.
