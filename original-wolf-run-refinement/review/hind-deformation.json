@@ -1,0 +1,28 @@
+{
+  "RUN": {
+    "minimum_relative_hip_edge_length": 0.04343930396073165,
+    "worst_sample": {
+      "object": "Object_6",
+      "frame": 7,
+      "edge": [
+        1813,
+        5761
+      ]
+    },
+    "collapsed_hip_edge_samples": 135,
+    "reported_thigh_collapse_edge_min_ratio": 0.04343930396073165
+  },
+  "RUN_REFINED": {
+    "minimum_relative_hip_edge_length": 0.21966922115997203,
+    "worst_sample": {
+      "object": "Object_2",
+      "frame": 13,
+      "edge": [
+        13069,
+        4275
+      ]
+    },
+    "collapsed_hip_edge_samples": 16,
+    "reported_thigh_collapse_edge_min_ratio": 0.3458242478458371
+  }
+}

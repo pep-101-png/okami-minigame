@@ -1,0 +1,23 @@
+AMATERASU — REFINED RUN
+
+Open Amaterasu-Run-Refined.blend in Blender 4.3 or newer.
+Textures are packed; no add-ons or separate texture folder are needed.
+
+1. WOLF_RIG is selected, in Pose Mode.
+2. RUN_REFINED is selected in the Action Editor below the viewport.
+3. Hover over the viewport and press Space to play or pause.
+4. Use the Action-name dropdown to select IDLE, WALK, RUN or RUN_REFINED.
+   RUN is the previous animation, retained unchanged for rollback.
+5. Use Z > Material Preview to see the original materials.
+   Toggle Viewport Overlays off for an unobstructed motion preview.
+
+RUN_REFINED is an in-place 40-frame gallop at 60 fps.
+Frame 41 repeats frame 1. Cycles modifiers repeat all keyed channels.
+The shared 1–720 playback range works with all four Actions.
+The original three Actions and their export ranges are unchanged.
+RUN_REFINED retains its 1–41 single-cycle export range.
+Its corresponding travel speed is 7.2 source Blender units per second.
+For game export later, bake/sample the existing IK constraints.
+
+The source animation project and approved rig checkpoint remain separate,
+unchanged files. No game or viewer changes are included.

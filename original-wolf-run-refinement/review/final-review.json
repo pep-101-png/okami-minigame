@@ -1,0 +1,28 @@
+{
+  "revision": 6,
+  "side_frames_reviewed": 40,
+  "rear_frames_reviewed": 40,
+  "hip_closeups_reviewed": 12,
+  "quarter_frame_kinematic_samples": 161,
+  "visual_findings": [
+    "The large upper-thigh collapse at the previously problematic recovery frames is resolved.",
+    "No rear IK snapping or bend-plane inversion observed.",
+    "Gathered and extended body silhouettes are visibly different; pelvis, lumbar, thorax and neck motion are coordinated.",
+    "Minor inner-knee/inner-elbow creasing remains at deep flexion; no claim of perfect skinning."
+  ],
+  "unchanged": [
+    "Original base geometry and appearance",
+    "Rest skeleton and skin weights",
+    "IDLE",
+    "WALK",
+    "Previous RUN",
+    "Actual game and browser viewer"
+  ],
+  "new_action": "RUN_REFINED",
+  "cycle_frames": 40,
+  "fps": 60,
+  "source_project_unchanged": true,
+  "old_action_pose_samples_match": 18,
+  "reviewed_utc": "2026-10-17T03:47:47.692449+00:00",
+  "blend_sha256": "53dccddf955eeb6829ac3c6334a5bf1431fbfca6cf26af89b5887d82fe718dee"
+}
