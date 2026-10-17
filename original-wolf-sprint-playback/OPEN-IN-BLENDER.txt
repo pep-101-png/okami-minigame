@@ -1,0 +1,42 @@
+AMATERASU — FLUID SPRINT / PLAYBACK REPAIR
+
+Open Amaterasu-Movement.blend in Blender 4.3 or newer. Press Space.
+Sprint_Fluid is selected on WOLF_RIG in the lower Action Editor.
+The previous Sprint_Polished and Sprint are retained, along with Idle, Walk,
+Jog and Legacy_Run. None of their existing animation curves were edited.
+
+VIEWPORT QUALITY
+At the top-right of Blender, the View Layer dropdown offers:
+FULL · Painted wind — the finished painted wind effect.
+FAST · Lightweight wind — three opaque streaks without alpha/noise shading.
+Both use the same textured wolf and animation; the fast streaks do not render.
+The finished effect has not been deleted or replaced.
+
+The scene remains 60 fps, FPS Base 1.0, with Frame Dropping enabled.
+This keeps real-time speed if your hardware cannot draw every frame, but
+cannot create missing GPU performance. For judging smoothness, enable
+Viewport Overlays > Text Info to see playback FPS. Maximise the viewport
+with Ctrl+Space if desired. Material Preview preserves the original look.
+Solid shading is a further optional motion-checking mode; return to Material
+Preview to see the original materials. No Python auto-run or add-ons required.
+
+WHAT WAS FIXED
+The CPU bottleneck was two live SIMPLE subdivision modifiers used for joint
+bend resolution. Their already-visible surface is now precomputed before
+skinning, rather than recalculated every frame. This is not reduced detail:
+retained-pose evaluated vertices and normals match exactly. Original base
+mesh datablocks remain stored as ORIGINAL_BASE · Object_2 / Object_6, and the
+previous complete project is preserved separately for rollback.
+
+The neck controls and weights were working. The old animation moved them
+mostly together and explicitly locked the head to a world-space target.
+Sprint_Fluid introduces phased lower/upper-neck counter-flexion and partial
+rather than absolute gaze stabilisation. No bones, constraints or weights
+were rebuilt. Body, legs, tail, stride and gallop timing retain their curves.
+
+EXPORT
+Sprint_Fluid is an in-place 32-frame loop at 60 fps. Export/sample frames
+1–33, with 33 duplicating 1. Bake the existing IK constraints onto deform
+bones for game export. Exclude preview objects and the independent wind
+collection from the character export. Wind drivers/shaders need recreating
+as ribbon effects in Three.js. No game or browser-viewer files were changed.

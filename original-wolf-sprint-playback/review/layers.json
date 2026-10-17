@@ -1,0 +1,73 @@
+{
+  "gates": {
+    "FULL \u00b7 Painted wind": {
+      "Idle": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Walk": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Jog": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Sprint": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Sprint_Polished": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Sprint_Fluid": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "FAST \u00b7 Lightweight wind": {
+      "Idle": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Walk": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Jog": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Sprint": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "Sprint_Polished": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "Sprint_Fluid": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "render_uses_full_effect_only": true,
+  "fps": 60,
+  "fps_base": 1,
+  "sync": "FRAME_DROP",
+  "source_sha256": "bcf79d66cd522bbca442982ff71d88a11fecb0391d727f3319496c78721d86e4"
+}

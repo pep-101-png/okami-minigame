@@ -1,0 +1,138 @@
+{
+  "baseline": {
+    "median_ms": 85.90206300004866,
+    "p95_ms": 97.70690200002718
+  },
+  "no_subsurf": {
+    "median_ms": 0.5282054996769148,
+    "p95_ms": 0.8271860001514142
+  },
+  "no_armature": {
+    "median_ms": 39.36888699990959,
+    "p95_ms": 42.73470099997212
+  },
+  "no_mesh_modifiers": {
+    "median_ms": 0.3187104998687573,
+    "p95_ms": 0.38855499997225706
+  },
+  "no_ik": {
+    "median_ms": 83.74639700014086,
+    "p95_ms": 91.80168900002172
+  },
+  "wind_removed": {
+    "median_ms": 84.45209399997111,
+    "p95_ms": 88.31522700029382
+  },
+  "modifiers": {
+    "Object_10": {
+      "verts": 494,
+      "mods": [
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    },
+    "Object_11": {
+      "verts": 1969,
+      "mods": [
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    },
+    "Object_2": {
+      "verts": 4283,
+      "mods": [
+        [
+          "Joint bend resolution \u00b7 SIMPLE, original surface retained",
+          "SUBSURF",
+          true
+        ],
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    },
+    "Object_3": {
+      "verts": 304,
+      "mods": [
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    },
+    "Object_4": {
+      "verts": 68,
+      "mods": [
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    },
+    "Object_5": {
+      "verts": 286,
+      "mods": [
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    },
+    "Object_6": {
+      "verts": 1236,
+      "mods": [
+        [
+          "Joint bend resolution \u00b7 SIMPLE, original surface retained",
+          "SUBSURF",
+          true
+        ],
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    },
+    "Object_7": {
+      "verts": 553,
+      "mods": [
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    },
+    "Object_8": {
+      "verts": 866,
+      "mods": [
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    },
+    "Object_9": {
+      "verts": 1468,
+      "mods": [
+        [
+          "Original mesh \u00b7 quadruped skin (dual quaternion)",
+          "ARMATURE",
+          true
+        ]
+      ]
+    }
+  }
+}

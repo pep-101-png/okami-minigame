@@ -1,0 +1,19 @@
+{
+  "cached_subdivision": [
+    "Object_2",
+    "Object_6"
+  ],
+  "timing": {
+    "FULL \u00b7 Painted wind": {
+      "median_ms": 3.0723234999641136,
+      "p95_ms": 4.579159000059008,
+      "cpu_evaluation_only": true
+    },
+    "FAST \u00b7 Lightweight wind": {
+      "median_ms": 2.7243044999067934,
+      "p95_ms": 4.446318000191241,
+      "cpu_evaluation_only": true
+    }
+  },
+  "source_sha256": "005c591cc810cfec7cc352c441ab3227d6e140ba578be9ef768b5750a488f57e"
+}

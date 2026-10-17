@@ -1,0 +1,22 @@
+{
+  "new_cycle_frames_inspected": 72,
+  "prior_comparison_keyframes": 24,
+  "views": [
+    "32 side frames",
+    "32 neck close-ups",
+    "8 front poses"
+  ],
+  "findings": [
+    "More changing neck curvature with partial gaze stabilisation.",
+    "No new visible neck holes, joint collapse or snapping in the reviewed frames.",
+    "Body, legs, tail and timing tracks match the previous clip.",
+    "Cached subdivision preserves evaluated surface vertices and normals exactly in retained poses.",
+    "Finished wind is unchanged; FAST uses a deliberately simplified viewport preview."
+  ],
+  "cpu_bottleneck_removed": true,
+  "windows_60fps_not_verified": true,
+  "software_display_remains_gpu_limited": true,
+  "not_accepted_until_user_review": true,
+  "sha256": "bcf79d66cd522bbca442982ff71d88a11fecb0391d727f3319496c78721d86e4",
+  "utc": "2026-10-17T08:12:18.174714+00:00"
+}
