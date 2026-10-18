@@ -14,7 +14,7 @@ for m in bpy.data.materials:
  if m.use_nodes:
   maps=[n.image.name for n in m.node_tree.nodes if n.type=='TEX_IMAGE'and n.image]
  bs=next((n for n in m.node_tree.nodes if n.type=='BSDF_PRINCIPLED'),None) if m.use_nodes else None
- materials.append({'name':m.name,'images':maps,'color':list(bs.inputs['Base Color'].default_value)if bs else list(m.diffuse_color),'metallic':bs.inputs['Metallic'].default_value if bs else 0,'roughness':bs.inputs['Roughness'].default_value if bs else .8})
+ materials.append({'name':m.name,'images':maps,'color':list(bs.inputs['Base Color'].default_value)if bs else list(m.diffuse_color),'metallic':bs.inputs['Metallic'].default_value if bs else 0,'roughness':bs.inputs['Roughness'].default_value if bs else .8,'doubleSided':not m.use_backface_culling})
 arm.animation_data.action=None
 for t in list(arm.animation_data.nla_tracks):arm.animation_data.nla_tracks.remove(t)
 for p in arm.pose.bones:p.matrix_basis.identity()

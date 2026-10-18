@@ -44,6 +44,31 @@ namespace Sunward
                 Destroy(line.gameObject);
         }
 
+        // Curved, tapered orbital strokes ported from the original Sundial effect.
+        public void SundialOrbit(Vector3 center, bool heavy)
+        {
+            for (int layer = 0; layer < 3; layer++)
+            {
+                var go = new GameObject("Sundial · painted flame orbit");
+                go.transform.position = center;
+                var line = go.AddComponent<LineRenderer>();
+                line.sharedMaterial = ink;
+                line.useWorldSpace = false;
+                line.positionCount = 28;
+                line.widthMultiplier = heavy ? .16f : .10f;
+                line.widthCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(.25f, 1), new Keyframe(1, 0));
+                line.startColor = line.endColor = layer == 1 ? new Color(1, .80f, .38f) : new Color(.88f, .34f, .16f);
+                for (int i = 0; i < 28; i++)
+                {
+                    float angle = i / 27f * Mathf.PI * 1.8f + layer * .9f;
+                    float radius = heavy ? 2 : 1.6f;
+                    line.SetPosition(i, new Vector3(Mathf.Sin(angle) * radius, .6f + Mathf.Sin(angle * 2) * .25f, Mathf.Cos(angle) * radius));
+                }
+
+                StartCoroutine(Fade(line, heavy ? .42f : .32f));
+            }
+        }
+
         public void Impact(Vector3 point, Color color)
         {
             Ring(point, color, .7f, .22f);

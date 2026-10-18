@@ -1,3 +1,7 @@
+# Latest integrated restoration status
+
+See [RESTORATION.md](RESTORATION.md) for the current pass, actual verification, remaining limits and local installation checklist. The implementation below describes the initial port; the restoration adds repaired material culling/wrapping, three revised sleep actions plus archives, village/river safety, arena equipment and rendering changes. Unity Editor compilation, shaders and Play Mode remain unverified in the cloud.
+
 # Unity port — first implementation, pending real Editor verification
 
 Branch: `sunward-unity-port`, based on the preserved V3 game `b55b1bd`.

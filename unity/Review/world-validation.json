@@ -1,0 +1,9 @@
+{
+  "safe_npc_spawns": 7,
+  "river_recovery_locations": 30,
+  "bridge_samples": 10001,
+  "grounded_components": 192,
+  "checked_meshes": 104,
+  "unity_editor": "NOT RUN",
+  "note": "Actual navigation, height and grounding C# executed against a test-only numerical shim. No Unity physics, rendering or Play Mode claim."
+}

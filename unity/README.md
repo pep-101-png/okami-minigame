@@ -1,5 +1,7 @@
 # Sunward — Amaterasu Unity port
 
+**Integrated restoration update:** read [Review/RESTORATION.md](Review/RESTORATION.md) for installation, verified fixes and remaining local Unity checks. After applying an update, run **Sunward > Create or Rebuild V3 Scene** once. Original wolf mesh/UVs are preserved; only Unity sleep clips changed, with three legacy copies retained.
+
 **Target: Unity 6.6 (6000.6.6f1), Windows. Separate project and branch.**
 
 This is the first implementation of the Unity port. It includes real converted V3

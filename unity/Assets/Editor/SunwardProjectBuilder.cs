@@ -112,7 +112,15 @@ namespace Sunward.Editor
             cam.backgroundColor = new Color(.86f, .89f, .84f);
             cameraObject.AddComponent<AudioListener>();
             cameraObject.AddComponent<CinemachineBrain>();
-            cameraObject.AddComponent<UniversalAdditionalCameraData>();
+            cam.allowHDR = true;
+            cam.clearFlags = CameraClearFlags.Skybox;
+            var cameraData = cameraObject.AddComponent<UniversalAdditionalCameraData>();
+            cameraData.renderPostProcessing = true;
+            cameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;
+            cameraData.antialiasingQuality = AntialiasingQuality.High;
+            cameraData.requiresDepthTexture = true;
+            cameraData.requiresColorTexture = true;
+            BuildAtmosphere();
             motor.view = cam.transform;
             var cutaway = town.AddComponent<HomeCutaway>();
             cutaway.player = motor;
@@ -153,18 +161,32 @@ namespace Sunward.Editor
                 col.height = 1.7f;
                 col.center = Vector3.up * .85f;
                 obj.layer = 6;
+                var body = obj.AddComponent<Rigidbody>();
+                body.isKinematic = true;
+                body.useGravity = false;
+                body.interpolation = RigidbodyInterpolation.Interpolate;
+                if (!VillageNavigation.FindSafe(data.world, obj.transform.position, out var safe))
+                    throw new InvalidDataException("No valid NPC spawn for " + n.name);
+                obj.transform.position = safe;
+                var resident = obj.AddComponent<VillageResident>();
+                resident.game = flow;
+                resident.index = i;
                 flow.npcObjects[i] = obj;
             }
 
             flow.spirits = EnemyDefinitions(prefabs);
             Collisions(data.world, town);
+            BuildWeaponRack(flow, town, prefabs);
             logic.AddComponent<PerformanceHUD>();
             var ui = logic.AddComponent<ScrollUI>();
             ui.game = flow;
             var sun = new GameObject("Soft afternoon wash").AddComponent<Light>();
             sun.type = LightType.Directional;
             sun.color = new Color(1, .96f, .86f);
-            sun.intensity = 1.2f;
+            sun.intensity = 1.6f;
+            sun.shadowBias = .035f;
+            sun.shadowNormalBias = .22f;
+            sun.shadowStrength = .85f;
             sun.shadows = LightShadows.Soft;
             sun.transform.rotation = Quaternion.Euler(42, -38, 0);
             var warm = new GameObject("Home · warm lantern wash").AddComponent<Light>();
@@ -182,7 +204,8 @@ namespace Sunward.Editor
             RenderSettings.fog = true;
             RenderSettings.fogColor = new Color(.79f, .85f, .80f);
             RenderSettings.fogMode = FogMode.ExponentialSquared;
-            RenderSettings.fogDensity = .0043f;
+            RenderSettings.fogDensity = .0055f;
+            BuildPetalDrift();
             player.transform.position = new Vector3(-34, Sample(data.world.terrain, -34, 22), -22);
             EditorSceneManager.SaveScene(scene, ScenePath);
             EditorBuildSettings.scenes = new[]
@@ -206,6 +229,7 @@ namespace Sunward.Editor
             where T : UnityEngine.Object
         {
             string path = Generated + name;
+            obj.name = Path.GetFileNameWithoutExtension(name);
             var old = AssetDatabase.LoadAssetAtPath<T>(path);
             if (old)
             {
@@ -220,15 +244,21 @@ namespace Sunward.Editor
 
         static void ConfigurePipeline()
         {
-            var renderer = SaveAsset(ScriptableObject.CreateInstance<UniversalRendererData>(), "ValleyRenderer.asset");
+            var renderer = AssetDatabase.LoadAssetAtPath<UniversalRendererData>(Generated + "ValleyRenderer.asset");
+            if (!renderer)
+                renderer = SaveAsset(ScriptableObject.CreateInstance<UniversalRendererData>(), "ValleyRenderer.asset");
+            ConfigureOcclusion(renderer);
             var pipeline = UniversalRenderPipelineAsset.Create(renderer);
             pipeline.renderScale = 1;
-            pipeline.msaaSampleCount = 2;
-            pipeline.shadowDistance = 45;
+            pipeline.msaaSampleCount = 4;
+            pipeline.supportsCameraDepthTexture = true;
+            pipeline.supportsCameraOpaqueTexture = true;
+            pipeline.shadowDistance = 80;
+            pipeline.shadowCascadeCount = 4;
             pipeline = SaveAsset(pipeline, "ValleyURP.asset");
             var pipelineSettings = new SerializedObject(pipeline);
             pipelineSettings.FindProperty("m_SoftShadowsSupported").boolValue = true;
-            pipelineSettings.FindProperty("m_MainLightShadowmapResolution").intValue = 2048;
+            pipelineSettings.FindProperty("m_MainLightShadowmapResolution").intValue = 4096;
             pipelineSettings.ApplyModifiedProperties();
             GraphicsSettings.defaultRenderPipeline = pipeline;
             QualitySettings.renderPipeline = pipeline;
@@ -290,14 +320,17 @@ namespace Sunward.Editor
                     }
 
                     var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
-                    if (!texture) throw new InvalidDataException("Expected a 2D map: " + path);
+                    if (!texture)
+                        throw new InvalidDataException("Expected a 2D map: " + path);
                     m.SetTexture("_BaseMap", texture);
                 }
 
                 if (d.kind != "water")
                 {
                     m.SetFloat("_Cutoff", Mathf.Max(.005f, d.cutout));
-                    m.SetFloat("_Pigment", d.kind == "landscape" ? .12f : .22f);
+                    m.SetFloat("_Pigment", d.kind == "landscape" ? .23f : .30f);
+                    m.SetFloat("_SurfaceKind", d.kind == "wood" ? 1 : d.kind == "stone" ? 2 : d.kind == "landscape" ? 3 : d.kind == "leaves" || d.kind == "grass-blade" ? 4 : 0);
+                    m.SetFloat("_Relief", d.kind == "stone" ? .20f : d.kind == "wood" ? .13f : .055f);
                     m.SetFloat("_Wind", d.kind == "leaves" || d.kind == "grass-blade" ? 1 : 0);
                     m.SetFloat("_Cull", d.side == 2 ? 0 : d.side == 1 ? 1 : 2);
                     if (d.transparent)
@@ -321,16 +354,23 @@ namespace Sunward.Editor
         {
             var roots = new Dictionary<string, GameObject>();
             string meshPath = Generated + "ValleyMeshes.asset";
-            AssetDatabase.DeleteAsset(meshPath);
-            var container = new Mesh()
+            var container = AssetDatabase.LoadAssetAtPath<Mesh>(meshPath);
+            if (!container)
             {
-                name = "Valley mesh catalogue"
-            };
-            AssetDatabase.CreateAsset(container, meshPath);
+                container = new Mesh
+                {
+                    name = "ValleyMeshes"
+                };
+                AssetDatabase.CreateAsset(container, meshPath);
+            }
+            else
+                foreach (var childAsset in AssetDatabase.LoadAllAssetsAtPath(meshPath))
+                    if (childAsset != container)
+                        UnityEngine.Object.DestroyImmediate(childAsset, true);
             using (var stream = File.OpenRead(Root + "Data/Valley.bytes"))
             using (var reader = new BinaryReader(stream))
             {
-                int id = 0;
+                int id = 0, groundedObjects = 0;
                 foreach (var asset in data.assets)
                 {
                     if (!roots.TryGetValue(asset.name, out var root))
@@ -365,6 +405,8 @@ namespace Sunward.Editor
                             name = "Valley-" + id++,
                             indexFormat = IndexFormat.UInt32
                         };
+                        if (asset.name == "TownV3")
+                            groundedObjects += EnvironmentGrounding.Adjust(v, indices, data.materials[record.material], data.world);
                         mesh.vertices = v;
                         mesh.normals = n;
                         mesh.uv = uv;
@@ -390,6 +432,8 @@ namespace Sunward.Editor
                         }
                     }
                 }
+
+                Debug.Log("Grounded " + groundedObjects + " disconnected rock / grass components against V3 terrain. Architecture and river stones preserved.");
             }
 
             AssetDatabase.SaveAssets();
@@ -417,6 +461,7 @@ namespace Sunward.Editor
             public string[] images;
             public float[] color;
             public float metallic, roughness;
+            public bool doubleSided;
         }
 
         [Serializable]
@@ -452,7 +497,7 @@ namespace Sunward.Editor
             foreach (var c in clips)
             {
                 c.name = CleanClip(c.name);
-                c.loopTime = c.name.StartsWith("Idle") || c.name.StartsWith("Walk") || c.name.StartsWith("Jog") || c.name.StartsWith("Sprint") || c.name == "Air_Fall" || c.name == "Sleep_Loop";
+                c.loopTime = c.name.StartsWith("Idle") || c.name.StartsWith("Walk") || c.name.StartsWith("Jog") || c.name.StartsWith("Sprint") || c.name == "Air_Fall" || c.name.StartsWith("Sleep_Loop");
                 c.lockRootRotation = true;
                 c.lockRootPositionXZ = true;
                 c.lockRootHeightY = false;
@@ -472,7 +517,9 @@ namespace Sunward.Editor
                 m.SetColor("_BaseColor", c);
                 m.SetFloat("_Metallic", entry.metallic);
                 m.SetFloat("_Smoothness", 1 - entry.roughness);
-                m.SetFloat("_Cull", 0);
+                m.SetFloat("_Cull", entry.doubleSided ? 0 : 2);
+                m.SetFloat("_SpecularHighlights", 0);
+                m.EnableKeyword("_SPECULARHIGHLIGHTS_OFF");
                 if (entry.images != null && entry.images.Length > 0)
                 {
                     string image = entry.images[0].Split('.')[0];
@@ -483,6 +530,10 @@ namespace Sunward.Editor
                         texImporter.textureType = TextureImporterType.Default;
                         texImporter.textureShape = TextureImporterShape.Texture2D;
                         texImporter.sRGBTexture = true;
+                        texImporter.wrapMode = TextureWrapMode.Repeat;
+                        texImporter.filterMode = FilterMode.Trilinear;
+                        texImporter.npotScale = TextureImporterNPOTScale.None;
+                        texImporter.anisoLevel = 4;
                         texImporter.textureCompression = TextureImporterCompression.Uncompressed;
                         texImporter.SaveAndReimport();
                     }
@@ -504,7 +555,10 @@ namespace Sunward.Editor
             if (report.meshMaterials == null || report.meshMaterials.Length == 0)
                 throw new InvalidDataException("Missing original mesh/material bindings in Review/wolf-export.json");
             var bindings = report.meshMaterials.ToDictionary(entry => entry.name);
-            var fallback = new Material(Shader.Find("Universal Render Pipeline/Lit")) { name = "Original glTF default" };
+            var fallback = new Material(Shader.Find("Universal Render Pipeline/Lit"))
+            {
+                name = "Original glTF default"
+            };
             fallback.SetColor("_BaseColor", Color.white);
             fallback.SetFloat("_Metallic", 1);
             fallback.SetFloat("_Smoothness", 0);
@@ -530,6 +584,7 @@ namespace Sunward.Editor
                         return material;
                     }).ToArray();
                 }
+
                 renderer.shadowCastingMode = ShadowCastingMode.On;
             }
 
@@ -547,8 +602,12 @@ namespace Sunward.Editor
             if (!animator)
                 animator = visual.AddComponent<Animator>();
             string ac = Generated + "Amaterasu.controller";
-            AssetDatabase.DeleteAsset(ac);
-            var controller = AnimatorController.CreateAnimatorControllerAtPath(ac);
+            var controller = AssetDatabase.LoadAssetAtPath<AnimatorController>(ac);
+            if (!controller)
+                controller = AnimatorController.CreateAnimatorControllerAtPath(ac);
+            else
+                foreach (var oldState in controller.layers[0].stateMachine.states)
+                    controller.layers[0].stateMachine.RemoveState(oldState.state);
             var sm = controller.layers[0].stateMachine;
             var actions = AssetDatabase.LoadAllAssetsAtPath(path).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__")).ToArray();
             var names = new HashSet<string>();
@@ -772,7 +831,7 @@ namespace Sunward.Editor
                 var go = new GameObject("Trunk / rock collider");
                 go.layer = 6;
                 go.transform.SetParent(root.transform, false);
-                go.transform.position = new Vector3(o.x, .5f, -o.z);
+                go.transform.position = new Vector3(o.x, Sample(w.terrain, o.x, o.z) + .5f, -o.z);
                 var c = go.AddComponent<CapsuleCollider>();
                 c.radius = o.r;
                 c.height = 1.0f;
@@ -820,6 +879,211 @@ namespace Sunward.Editor
                 go.transform.SetParent(root.transform, false);
                 go.AddComponent<MeshCollider>().sharedMesh = mesh;
             }
+        }
+
+        static void ConfigureOcclusion(UniversalRendererData renderer)
+        {
+            // SSAO settings are internal in URP. Configure the serialized feature
+            // supplied by the installed package, with explicit compatibility checks.
+            var feature = renderer.rendererFeatures.FirstOrDefault(f => f && f.GetType().Name == "ScreenSpaceAmbientOcclusion");
+            if (!feature)
+            {
+                var type = typeof(UniversalRendererData).Assembly.GetType("UnityEngine.Rendering.Universal.ScreenSpaceAmbientOcclusion");
+                if (type == null)
+                {
+                    Debug.LogWarning("Installed URP exposes no SSAO feature; colour grading and shadows remain enabled.");
+                    return;
+                }
+
+                feature = (ScriptableRendererFeature)ScriptableObject.CreateInstance(type);
+                feature.name = "Painted contact occlusion";
+                AssetDatabase.AddObjectToAsset(feature, renderer);
+                renderer.rendererFeatures.Add(feature);
+            }
+
+            var settings = new SerializedObject(feature);
+            void Float(string name, float value)
+            {
+                var p = settings.FindProperty("m_Settings." + name);
+                if (p != null)
+                    p.floatValue = value;
+            }
+
+            void Int(string name, int value)
+            {
+                var p = settings.FindProperty("m_Settings." + name);
+                if (p != null)
+                    p.intValue = value;
+            }
+
+            void Bool(string name, bool value)
+            {
+                var p = settings.FindProperty("m_Settings." + name);
+                if (p != null)
+                    p.boolValue = value;
+            }
+
+            Int("Source", 0);
+            Int("AOMethod", 1);
+            Int("NormalSamples", 1);
+            Int("Samples", 1);
+            Float("Intensity", .65f);
+            Float("Radius", .28f);
+            Float("DirectLightingStrength", .12f);
+            Float("Falloff", 55);
+            Bool("Downsample", true);
+            Bool("AfterOpaque", false);
+            settings.ApplyModifiedPropertiesWithoutUndo();
+            feature.SetActive(true);
+            EditorUtility.SetDirty(renderer);
+        }
+
+        static void BuildPetalDrift()
+        {
+            var vertices = new Vector3[15];
+            var colors = new Color[15];
+            var triangles = new int[14 * 3];
+            colors[0] = new Color(1, .88f, .80f);
+            vertices[0] = Vector3.zero;
+            for (int i = 0; i < 14; i++)
+            {
+                float angle = i / 14f * Mathf.PI * 2;
+                float taper = .72f + Mathf.Cos(angle) * .20f;
+                vertices[i + 1] = new Vector3(Mathf.Sin(angle) * taper * .48f, Mathf.Cos(angle) * .70f, Mathf.Sin(angle) * Mathf.Sin(angle) * .11f);
+                colors[i + 1] = Color.Lerp(new Color(.58f, .27f, .28f), new Color(.93f, .60f, .61f), .5f + .5f * Mathf.Sin(angle * 3));
+                triangles[i * 3] = 0;
+                triangles[i * 3 + 1] = i + 1;
+                triangles[i * 3 + 2] = (i + 1) % 14 + 1;
+            }
+
+            var mesh = new Mesh
+            {
+                vertices = vertices,
+                colors = colors,
+                triangles = triangles
+            };
+            mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+            mesh = SaveAsset(mesh, "WindflowerPetal.asset");
+            var material = new Material(Shader.Find("Sunward/Surface Pigment"));
+            material.SetColor("_BaseColor", Color.white);
+            material.SetFloat("_Cull", 0);
+            material.SetFloat("_Pigment", .25f);
+            material = SaveAsset(material, "WindflowerPetal.mat");
+            var drift = new GameObject("Windflower · drifting painted petals").AddComponent<ParticleSystem>();
+            drift.transform.position = new Vector3(-8, 6, 0);
+            drift.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            var main = drift.main;
+            main.maxParticles = 180;
+            main.startLifetime = 24;
+            main.startSpeed = .05f;
+            main.startSize = new ParticleSystem.MinMaxCurve(.09f, .17f);
+            main.simulationSpace = ParticleSystemSimulationSpace.World;
+            main.startRotation3D = true;
+            main.startRotationX = new ParticleSystem.MinMaxCurve(0, Mathf.PI);
+            main.startRotationZ = new ParticleSystem.MinMaxCurve(-Mathf.PI, Mathf.PI);
+            var shape = drift.shape;
+            shape.shapeType = ParticleSystemShapeType.Box;
+            shape.scale = new Vector3(70, 1, 52);
+            var emission = drift.emission;
+            emission.rateOverTime = 6;
+            var velocity = drift.velocityOverLifetime;
+            velocity.enabled = true;
+            velocity.space = ParticleSystemSimulationSpace.World;
+            velocity.x = .17f;
+            velocity.y = -.22f;
+            velocity.z = .10f;
+            var noise = drift.noise;
+            noise.enabled = true;
+            noise.strength = .18f;
+            noise.frequency = .30f;
+            noise.scrollSpeed = .12f;
+            var rotation = drift.rotationOverLifetime;
+            rotation.enabled = true;
+            rotation.z = new ParticleSystem.MinMaxCurve(-.8f, .8f);
+            var renderer = drift.GetComponent<ParticleSystemRenderer>();
+            renderer.renderMode = ParticleSystemRenderMode.Mesh;
+            renderer.mesh = mesh;
+            renderer.sharedMaterial = material;
+            renderer.shadowCastingMode = ShadowCastingMode.Off;
+            renderer.receiveShadows = false;
+            drift.Play();
+        }
+
+        static void BuildAtmosphere()
+        {
+            var volume = new GameObject("Windflower · watercolour colour grade").AddComponent<Volume>();
+            volume.isGlobal = true;
+            var profile = ScriptableObject.CreateInstance<VolumeProfile>();
+            var tone = ScriptableObject.CreateInstance<Tonemapping>();
+            tone.mode.Override(TonemappingMode.ACES);
+            var grade = ScriptableObject.CreateInstance<ColorAdjustments>();
+            grade.postExposure.Override(.15f);
+            grade.contrast.Override(7);
+            grade.saturation.Override(6);
+            grade.colorFilter.Override(new Color(1, .98f, .94f));
+            var bloom = ScriptableObject.CreateInstance<Bloom>();
+            bloom.intensity.Override(.16f);
+            bloom.threshold.Override(1.3f);
+            bloom.scatter.Override(.55f);
+            var vignette = ScriptableObject.CreateInstance<Vignette>();
+            vignette.intensity.Override(.12f);
+            vignette.smoothness.Override(.65f);
+            vignette.color.Override(new Color(.17f, .22f, .21f));
+            profile.components.Add(SaveAsset(tone, "ValleyTone.asset"));
+            profile.components.Add(SaveAsset(grade, "ValleyColour.asset"));
+            profile.components.Add(SaveAsset(bloom, "ValleyBloom.asset"));
+            profile.components.Add(SaveAsset(vignette, "ValleyVignette.asset"));
+            volume.sharedProfile = SaveAsset(profile, "ValleyAtmosphere.asset");
+            var skyShader = Shader.Find("Skybox/Procedural");
+            if (skyShader)
+            {
+                var sky = new Material(skyShader);
+                sky.SetColor("_SkyTint", new Color(.60f, .73f, .77f));
+                sky.SetColor("_GroundColor", new Color(.52f, .59f, .49f));
+                sky.SetFloat("_AtmosphereThickness", .8f);
+                sky.SetFloat("_Exposure", .9f);
+                sky.SetFloat("_SunSize", .025f);
+                RenderSettings.skybox = SaveAsset(sky, "PaintedSky.mat");
+            }
+        }
+
+        static void BuildWeaponRack(GameFlow game, GameObject town, Dictionary<string, GameObject> models)
+        {
+            var display = new GameObject("Home · original weapons on lacquered wall rack");
+            display.transform.SetParent(town.transform, false);
+            var wood = new Material(Shader.Find("Sunward/Surface Pigment"));
+            wood.SetColor("_BaseColor", new Color(.21f, .105f, .07f));
+            wood = SaveAsset(wood, "HomeWeaponLacquer.mat");
+            foreach (float x in new[]
+            {
+                -35.1f,
+                -32.9f
+            }
+
+            )
+            {
+                var mount = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                mount.name = "Carved lacquer wall bracket";
+                mount.transform.SetParent(display.transform, false);
+                mount.transform.position = new Vector3(x, 1.55f, -12.23f);
+                mount.transform.localScale = new Vector3(.14f, 1.65f, .16f);
+                mount.GetComponent<Renderer>().sharedMaterial = wood;
+                UnityEngine.Object.DestroyImmediate(mount.GetComponent<Collider>());
+            }
+
+            var spear = UnityEngine.Object.Instantiate(models["Spear"], display.transform);
+            spear.name = "Reed spear · wall display";
+            spear.transform.position = new Vector3(-34, 1.25f, -12.45f);
+            spear.transform.rotation = Quaternion.Euler(0, 90, 0);
+            spear.transform.localScale = Vector3.one * .65f;
+            var disc = UnityEngine.Object.Instantiate(models["Sundial"], display.transform);
+            disc.name = "Sundial Flame · wall display · unlock at Taro";
+            disc.transform.position = new Vector3(-34, 2.1f, -12.5f);
+            disc.transform.localScale = Vector3.one * .57f;
+            var rack = town.AddComponent<HomeWeaponRack>();
+            rack.game = game;
+            rack.displays = display;
         }
 
         static Material Energy(string name, Color color, bool barrier)

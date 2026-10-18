@@ -293,7 +293,8 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     },
     {
       "name": "Material__193",
@@ -307,7 +308,8 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     },
     {
       "name": "Material__197",
@@ -321,7 +323,8 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     },
     {
       "name": "Material__198",
@@ -335,7 +338,8 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     },
     {
       "name": "Material__199",
@@ -349,7 +353,8 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     },
     {
       "name": "Material__200",
@@ -363,7 +368,8 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     },
     {
       "name": "Material__201",
@@ -377,7 +383,8 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     },
     {
       "name": "Material__209",
@@ -391,7 +398,8 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     },
     {
       "name": "Material__226",
@@ -405,7 +413,8 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     },
     {
       "name": "Material__230",
@@ -419,10 +428,11 @@
         1
       ],
       "metallic": 0,
-      "roughness": 0.9839954972267151
+      "roughness": 0.9839954972267151,
+      "doubleSided": false
     }
   ],
-  "notes": "FBX uses native Unity importer; Editor builder remaps preserved PNG base maps. Unity visual comparison remains required.",
+  "notes": "Original GLB remains untouched. Unity FBX has repaired Sleep_Down/Loop/Up and three archived legacy sleep clips. Bindings, source base maps and one-sided material flags are explicit. Original UVs require Repeat wrapping. Unity Editor verification is pending.",
   "meshMaterials": [
     {
       "name": "Icosphere",
@@ -488,5 +498,11 @@
         "Material__226"
       ]
     }
-  ]
+  ],
+  "unity_only_actions": [
+    "Sleep_Down_Legacy",
+    "Sleep_Loop_Legacy",
+    "Sleep_Up_Legacy"
+  ],
+  "unity_fbx_sha256": "277f0b1c04e91274f46320358279da43ee5a01ac420ebbe9f7ecf16184478328"
 }

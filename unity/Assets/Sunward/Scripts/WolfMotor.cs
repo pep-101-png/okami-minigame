@@ -41,6 +41,16 @@ namespace Sunward
             Speed = 0;
         }
 
+        public void Recover(Vector3 point)
+        {
+            Teleport(point);
+            dodgeTimer = landing = jumpBuffer = 0;
+            doubleUsed = false;
+            Grounded = true;
+            Invulnerable = Mathf.Max(Invulnerable, .8f);
+            animationView.Play("Land_Soft", .08f, .25f, true);
+        }
+
         public void Push(Vector3 delta)
         {
             if (!controller.enabled)
@@ -110,6 +120,7 @@ namespace Sunward
 
             if (jumpBuffer > 0 && (coyote > 0 || (!doubleUsed && game.Profile.upgrades.movement >= 2)))
             {
+                game.Combat.Cancel();
                 bool second = coyote <= 0;
                 Vertical = second ? 7.4f : 7.2f;
                 if (second)

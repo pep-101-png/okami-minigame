@@ -1,3 +1,5 @@
+> Historical import-only repair notes. The latest download now includes the integrated restoration, including repaired Unity sleep clips. Follow [RESTORATION.md](RESTORATION.md) for the current update and installation steps. Statements below describe the earlier import-only patch.
+
 # Unity 6.6 import repair
 
 Close Unity before copying the repair ZIP contents into your existing Sunward-Unity project folder (the folder containing Assets, Packages and ProjectSettings). Replace the included files, then reopen the project. Run **Sunward > Create or Rebuild V3 Scene** once. Clear the Console and check for newly reported red errors.

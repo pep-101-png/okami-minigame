@@ -6,7 +6,7 @@ namespace Sunward
     {
         public AudioClip bark, growl, hit, howl;
         AudioSource effects, ambience;
-        AudioClip jump, land, attack, impact, dash, collect, wind;
+        AudioClip jump, land, attack, impact, dash, collect, wind, heavy, heavyImpact, flame, flameImpact;
         void Awake()
         {
             effects = gameObject.AddComponent<AudioSource>();
@@ -19,6 +19,10 @@ namespace Sunward
             land = Tone(90, .16f, 2);
             attack = Tone(240, .15f, 1.5f);
             impact = Tone(120, .18f, 3);
+            heavy = Tone(135, .30f, 1.6f);
+            heavyImpact = Tone(65, .30f, 3.2f);
+            flame = Tone(360, .25f, 1.8f);
+            flameImpact = Tone(190, .25f, 2.8f);
             dash = Tone(600, .14f, 1);
             collect = Tone(880, .26f, .2f);
             wind = Tone(160, 8, 1);
@@ -46,7 +50,7 @@ namespace Sunward
 
         public void Cue(string id)
         {
-            AudioClip clip = id == "bark" ? bark : id == "hurt" ? hit : id == "growl" ? growl : id == "jump" ? jump : id == "land" ? land : id == "attack" ? attack : id == "impact" ? impact : id == "dash" ? dash : collect;
+            AudioClip clip = id == "heavy" ? heavy : id == "heavy-impact" ? heavyImpact : id == "flame" ? flame : id == "flame-impact" ? flameImpact : id == "bark" ? bark : id == "hurt" ? hit : id == "growl" ? growl : id == "jump" ? jump : id == "land" ? land : id == "attack" ? attack : id == "impact" ? impact : id == "dash" ? dash : collect;
             if (clip)
                 effects.PlayOneShot(clip);
         }

@@ -6,6 +6,7 @@ namespace Sunward
     {
         public Animator animator;
         Transform rootBone;
+        readonly System.Collections.Generic.HashSet<string> missingStates = new System.Collections.Generic.HashSet<string>();
         void Start()
         {
             foreach (var t in animator.GetComponentsInChildren<Transform>())
@@ -26,7 +27,12 @@ namespace Sunward
             if (!animator || (state == Current && !restart))
                 return;
             if (!animator.HasState(0, Animator.StringToHash(state)))
-                state = "Idle_Natural";
+            {
+                if (missingStates.Add(state))
+                    Debug.LogError("Missing Amaterasu animation state: " + state + ". Rebuild the Windflower scene and validate imports.", this);
+                return;
+            }
+
             Current = state;
             animator.speed = duration > 0 ? ClipLength(state) / duration : 1;
             animator.CrossFadeInFixedTime(state, blend, 0);

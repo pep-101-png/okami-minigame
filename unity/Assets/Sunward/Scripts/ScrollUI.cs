@@ -145,7 +145,7 @@ namespace Sunward
 
             DrawPaper(new Rect(20, h - 93, w - 40, 72));
             GUI.Label(new Rect(34, h - 88, w - 68, 28), game.Message != "" ? game.Message : game.Prompt, body);
-            GUI.Label(new Rect(34, h - 57, w - 68, 28), "WASD / left stick · Shift sprint · Ctrl walk · Space jump · K dodge · LMB / RMB attack (hold to charge) · B bark · Q weapon · E interact · middle drag orbit · wheel zoom · Esc pause", small);
+            GUI.Label(new Rect(34, h - 57, w - 68, 28), game.InTrial ? "LMB / J light · RMB / L heavy · hold to charge · Q switch weapon · B bark · K dodge · Space jump · Esc pause" : "WASD move · Shift sprint · Ctrl walk · Space jump · E interact · Tab forge · Weapons stay on the home wall outside trials · Middle drag orbit", small);
             if (game.InTrial && GUI.Button(new Rect(w - 160, h - 140, 140, 34), "RETREAT", button))
                 game.Finish(false);
             if (!game.Blocked)
@@ -215,6 +215,8 @@ namespace Sunward
                     GUILayout.Label("A moment of stillness.", title);
                     if (game.InTrial && Button("RETREAT · KEEP EARNED REWARDS", button))
                         game.Finish(false);
+                    if (!game.InTrial && Button("RETURN HOME · KEEP PROGRESS", button))
+                        game.ReturnHome();
                     GUILayout.Label("Quality presets change shadows, MSAA and render scale. Performance depends on your hardware.", body);
                     if (Button("QUALITY · HIGH", button))
                         Quality(true);
@@ -281,7 +283,9 @@ namespace Sunward
             if (urp)
             {
                 urp.renderScale = high ? 1 : .75f;
-                urp.msaaSampleCount = high ? 2 : 1;
+                urp.msaaSampleCount = high ? 4 : 1;
+                urp.shadowDistance = high ? 80 : 35;
+                urp.shadowCascadeCount = high ? 4 : 2;
             }
 
             game.Notify(high ? "High quality" : "Lightweight quality");

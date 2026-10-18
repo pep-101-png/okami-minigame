@@ -30,7 +30,7 @@ namespace Sunward
             }
 
             Vector3 desiredFocus = target.transform.position + Vector3.up * .9f + Vector3.ClampMagnitude(target.Velocity * .16f, 1);
-            if (!initialized)
+            if (!initialized || (focus - desiredFocus).sqrMagnitude > 36)
             {
                 focus = desiredFocus;
                 initialized = true;

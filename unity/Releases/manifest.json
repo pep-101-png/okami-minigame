@@ -2,9 +2,9 @@
   "project": "Sunward-Unity",
   "target_editor": "6000.6.6f1",
   "source_game_commit": "b55b1bd2283738fcdc2a5cd711d2adb91aba4418",
-  "files": 197,
-  "zip_sha256": "c8f2162f8cdb23c553939ec7c608d83f69f3cddc0e36fa0559dab1a4fb0f35cb",
-  "bytes": 26104071,
+  "files": 220,
+  "zip_sha256": "3c0f900b3bfe6e567fe9a4fafe65ec0c5a43a2f1efc825b3d95ef2088ac8f3b3",
+  "bytes": 27187844,
   "unity_compilation_verified": false,
   "unity_playmode_verified": false,
   "windows_executable_included": false

@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup>
+<ItemGroup>
+<Compile Include="Program.cs"/><Compile Include="MathShim.cs"/>
+<Compile Include="../../Assets/Sunward/Scripts/WorldData.cs"/>
+<Compile Include="../../Assets/Sunward/Scripts/Valley.cs"/>
+<Compile Include="../../Assets/Sunward/Scripts/VillageNavigation.cs"/>
+<Compile Include="../../Assets/Editor/EnvironmentGrounding.cs"/>
+</ItemGroup></Project>

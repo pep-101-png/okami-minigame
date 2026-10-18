@@ -240,7 +240,7 @@ namespace Sunward
 
             Consider("bed", new Vector3(-36, .18f, -14.1f), 1.9f);
             Consider("mirror", new Vector3(-30.7f, .105f, -14), 1.7f);
-            Consider("shop", new Vector3(3, 0, 0));
+            Consider("shop", npcObjects != null && npcObjects.Length > 1 && npcObjects[1] ? npcObjects[1].transform.position : new Vector3(3, 0, 0));
             Consider("arena", new Vector3(12.8f, 0, 0));
             if (!Profile.shrine)
             {
@@ -288,6 +288,7 @@ namespace Sunward
             Close();
             ClearEnemies();
             InTrial = true;
+            Combat.Equip();
             Wave = 0;
             waiting = true;
             breakTimer = 2.5f;
@@ -398,6 +399,7 @@ namespace Sunward
             if (!InTrial)
                 return;
             InTrial = false;
+            Combat.Equip();
             if (barrier)
             {
                 Destroy(barrier.GetComponent<MeshFilter>().sharedMesh);
@@ -423,7 +425,9 @@ namespace Sunward
         public void ReturnHome()
         {
             ClearEnemies();
+            InTrial = false;
             Combat.Cancel();
+            Combat.Equip();
             Player.Teleport(new Vector3(-34, valley.Height(new Vector3(-34, 0, -22)), -22));
             Player.transform.rotation = Quaternion.identity;
             Health = MaxHealth;

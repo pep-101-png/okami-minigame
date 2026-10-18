@@ -42,6 +42,10 @@ namespace Sunward
         {
             if (Depth(next) <= .34f)
                 return next;
+            // If already in deep water, allow escape rather than pinning both ends
+            // of the bisection inside the river. WaterContact supplies the failsafe.
+            if (Depth(previous) > .34f)
+                return next;
             Vector3 lo = previous, hi = next;
             for (int i = 0; i < 12; i++)
             {
@@ -65,14 +69,15 @@ namespace Sunward
             return .10f + .42f * Mathf.Pow(arch, 1.5f);
         }
 
-        public float Height(Vector3 p)
+        public float Height(Vector3 p) => SurfaceHeight(Data.terrain, p);
+        public static float SurfaceHeight(TerrainData terrain, Vector3 p)
         {
             float z = -p.z;
             if (OnBridge(p.x, z))
                 return BridgeHeight((p.x + 27.8f) / 9.6f);
             if (Mathf.Abs(p.x + 34) < 5.2f && Mathf.Abs(z - 16) < 4.25f)
                 return .105f;
-            var t = Data.terrain;
+            var t = terrain;
             float xg = Mathf.Clamp((p.x - t.minX) / t.step, 0, t.nx - 1.001f), zg = Mathf.Clamp((z - t.minZ) / t.step, 0, t.nz - 1.001f);
             int x = (int)xg, j = (int)zg;
             return Mathf.Lerp(Mathf.Lerp(t.heights[j * t.nx + x], t.heights[j * t.nx + x + 1], xg - x), Mathf.Lerp(t.heights[(j + 1) * t.nx + x], t.heights[(j + 1) * t.nx + x + 1], xg - x), zg - j);

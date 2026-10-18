@@ -1,0 +1,62 @@
+{
+  "original_texture_pixels": [
+    {
+      "name": "Material__191_baseColor",
+      "dimensions": [
+        512,
+        512
+      ],
+      "pixels_unchanged": true
+    },
+    {
+      "name": "Material__201_baseColor",
+      "dimensions": [
+        256,
+        256
+      ],
+      "pixels_unchanged": true
+    },
+    {
+      "name": "Material__200_baseColor",
+      "dimensions": [
+        512,
+        512
+      ],
+      "pixels_unchanged": true
+    },
+    {
+      "name": "Material__209_baseColor",
+      "dimensions": [
+        256,
+        256
+      ],
+      "pixels_unchanged": true
+    },
+    {
+      "name": "Material__226_baseColor",
+      "dimensions": [
+        128,
+        128
+      ],
+      "pixels_unchanged": true
+    },
+    {
+      "name": "Material__230_baseColor",
+      "dimensions": [
+        256,
+        256
+      ],
+      "pixels_unchanged": true
+    }
+  ],
+  "original_material_culling_preserved": true,
+  "all_44_source_actions_retained": true,
+  "three_legacy_sleep_actions_retained": true,
+  "rest_mesh_and_uvs_unchanged": true,
+  "maximum_non_sleep_pose_matrix_difference": 3.0100345611572266e-05,
+  "finite_sleep_frames_checked": 443,
+  "source_glb_unchanged": true,
+  "unity_editor_compilation": "NOT RUN",
+  "unity_playmode": "NOT RUN",
+  "note": "Blender imports and numeric pose comparisons, not Unity runtime or final visual approval."
+}
