@@ -95,8 +95,8 @@ export class VillageActivities {
       return;
     }
     this.offered = true;
-    game.maxHp = 120;
-    game.hp = 120;
+    if(game.expansion){game.expansion.profile.data.shrine=true;game.expansion.profile.save();game.expansion.applyStats(true);}
+    else { game.maxHp = 120; game.hp = 120; }
     game.effects.burst(target.root.position, 22, "#edcc76");
     game.audio?.play("victory");
     this.notify("Shrine blessing earned · maximum vitality is now 120");
@@ -107,6 +107,7 @@ export class VillageActivities {
       if (this.offered) return ["The windflowers bloom again. Thank you, little guardian.", "The northern shrine will restore your vitality whenever you need it."];
       return ["The northern shrine has lost its flowers. Will you help it bloom?", "Find three pink windflowers: beside my garden, along the mill path, and on the road to the shrine. Press E to pick them.", this.collected === 3 ? "You found them all! Bring the flowers to the northern shrine for its blessing." : `You have ${this.collected} of three. An offering will strengthen your vitality before you enter the grove.`];
     }
+    if (npc.name.startsWith("Elder") && game.expansion) return [game.expansion.profile.data.wins ? 'The Hollow Bell has fallen silent. Your strength remains, but new seals await.' : 'Three waves guard the Hollow Bell. Watch for its charge, ground shock and ink fan.', this.offered ? 'Our shrine remembers your offering. Its blessing is permanent.' : 'Offer three windflowers at the shrine for permanent vitality.'];
     if (npc.name.startsWith("Elder")) return [game.victory ? "The grove's shadows are gone. The village can breathe again." : "Five restless spirits trouble the grove east of town. Watch them bow before they charge.", this.offered ? "Our shrine has blessed you. Rest there whenever your spirit is weary." : "An offering of three windflowers at the shrine will strengthen you."];
     if (npc.name.startsWith("Taro")) return [game.victory ? "Travelers are returning! Your spear made the road safe again." : "A thrust opens the way; a sweep breaks their guard; a lunge sends them home.", "Press again during a strike to prepare the next. Dodge with K before a charge reaches you."];
     if (npc.name.startsWith("Yui")) return ["I follow this road whenever the valley feels quiet.", "The pink windflowers shine in the grass. Use the mouse wheel to see them up close."];

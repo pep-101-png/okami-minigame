@@ -19,7 +19,7 @@ export function part(
   if (lined) outline(m);
   return m;
 }
-export { wolf } from "./divine-wolf.js";
+export { wolf } from "./expansion/amaterasu.js";
 // Hand shaped rings keep the sentinel's silhouette coherent rather than a stack
 // of primitive spheres. These assets are intentionally original and local.
 function sculpt(rings, sides = 8) {
@@ -64,7 +64,7 @@ function ribbon(parent, material, points, width = 0.12) {
   geometry.computeVertexNormals();
   return part(parent, geometry, material, [0, 0, 0], [0, 0, 0], false);
 }
-function batchFixedParts(root) {
+export function batchFixedParts(root) {
   const groups=[];
   root.traverse(object=>{if(object.isGroup)groups.push(object);});
   for(const group of groups) {

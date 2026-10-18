@@ -1,0 +1,82 @@
+{
+  "Thrust": {
+    "frames": 24,
+    "maximum_sampled_ik_error": 1.222985060732555e-06,
+    "minimum_paw_z": 0.03499939292669296
+  },
+  "Sweep": {
+    "frames": 29,
+    "maximum_sampled_ik_error": 1.572478527816882e-06,
+    "minimum_paw_z": 0.034999508410692215
+  },
+  "Finish": {
+    "frames": 40,
+    "maximum_sampled_ik_error": 0.00015773219164943108,
+    "minimum_paw_z": 0.03499981015920639
+  },
+  "HeavyArc": {
+    "frames": 36,
+    "maximum_sampled_ik_error": 3.278797278279082e-06,
+    "minimum_paw_z": 0.03499981015920639
+  },
+  "HeavyReturn": {
+    "frames": 42,
+    "maximum_sampled_ik_error": 1.4588655374715753e-05,
+    "minimum_paw_z": 0.03499981015920639
+  },
+  "ChargedThrust": {
+    "frames": 39,
+    "maximum_sampled_ik_error": 1.8284155905458888e-06,
+    "minimum_paw_z": 0.03499981015920639
+  },
+  "ChargedHeavy": {
+    "frames": 52,
+    "maximum_sampled_ik_error": 0.00025634613425373857,
+    "minimum_paw_z": 0.03499981015920639
+  },
+  "AirStrike": {
+    "frames": 44,
+    "maximum_sampled_ik_error": 5.545795012203024e-06,
+    "minimum_paw_z": 0.1849995255470276
+  },
+  "ChargeLight": {
+    "frames": 45,
+    "maximum_sampled_ik_error": 1.5542989743239043e-06,
+    "minimum_paw_z": 0.03499951213598251
+  },
+  "ChargeHeavy": {
+    "frames": 45,
+    "maximum_sampled_ik_error": 4.321233978364911e-06,
+    "minimum_paw_z": 0.03499948978424072
+  },
+  "Bark": {
+    "frames": 33,
+    "maximum_sampled_ik_error": 3.0218144107368653e-06,
+    "minimum_paw_z": 0.03499957174062729
+  },
+  "Disc1": {
+    "frames": 22,
+    "maximum_sampled_ik_error": 2.1201582445898545e-06,
+    "minimum_paw_z": 0.03499981015920639
+  },
+  "Disc2": {
+    "frames": 29,
+    "maximum_sampled_ik_error": 3.431281558185638e-06,
+    "minimum_paw_z": 0.03499981015920639
+  },
+  "Disc3": {
+    "frames": 40,
+    "maximum_sampled_ik_error": 2.744332742316863e-05,
+    "minimum_paw_z": 0.03499981015920639
+  },
+  "DiscHeavy": {
+    "frames": 40,
+    "maximum_sampled_ik_error": 8.481944099159498e-05,
+    "minimum_paw_z": 0.03499981015920639
+  },
+  "DiscCharged": {
+    "frames": 51,
+    "maximum_sampled_ik_error": 0.00015570012198149434,
+    "minimum_paw_z": 0.03499981015920639
+  }
+}

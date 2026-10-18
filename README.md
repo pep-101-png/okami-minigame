@@ -1,83 +1,101 @@
-# Wolf-only foundation review branch
+# Sunward — The Hollow Bell
 
-This branch opens the isolated wolf viewer rather than the town. See [screenshots and movement preview](notes/foundation/REVIEW.md). Run `npm run dev` or the existing `START-GAME.cmd` launcher to inspect the viewer locally. Build: `npm run build`. Viewer checks: `npm run test:foundation` against a running production preview on port 4173.
+A playable Three.js action RPG expansion of the existing Windflower Village game.
+Explore the enlarged village, return to Amaterasu's walk-in home, buy permanent
+blessings and weapons, and challenge three arena waves followed by Kurogane.
+Coins, experience, purchased weapons, upgrades and divine growth persist through
+victory, defeat, retreat and browser restarts.
 
-The playable game remains on `sunward-minigame`. The game instructions below describe that branch; its full-game test suites are not the selected workflow for this review branch.
+## Play on Windows
 
-# Sunward — The Crimson Guardian
+The **Sunward-RPG.zip** play build is in `releases/` on branch
+**sunward-rpg-expansion**. Extract it, open the **Sunward-RPG** folder and double-click
+**START-GAME.cmd**. It uses your existing Node installation or portable Desktop
+Node folder. It opens the browser after the local server starts. Keep its CMD
+window open. This build needs **no npm install and no install-script approvals**.
+If the port is occupied, close the previous game terminal before starting it.
 
-A playable Three.js + Vite town and combat minigame inspired by Japanese painted fantasy art. Explore Windflower Village with a controlled 2.5D camera, talk to villagers, gather windflowers, restore a shrine, and cleanse the eastern spirit grove.
+The Windows launcher is provided for Windows; its server and packaged game were
+tested on Linux/Chromium. The `.cmd` itself cannot be executed in this environment.
 
-The wolf uses a locally included skinned model adapted from an artist-rigged, licensed canine foundation. The source is a fox adapted for this original wolf interpretation; it is not extracted from Ōkami. Its existing artist-made walk/run cycles are retained, with additional local combat, jump, dodge and landing clips. See [asset attribution](THIRD_PARTY.md).
+## Develop from source
 
-## Run on Windows
+Node 22.12+ or Node 24 LTS:
 
-On Windows you can double-click **START-GAME.cmd** in the extracted folder. It finds the existing portable Desktop Node download, installs missing dependencies, and starts Vite. The helper has not been run on Windows in this cloud validation; the manual commands below are the fallback.
-
-Install Node.js 22.12+ or 24. Open a command window in this folder (the folder with `package.json`) and run:
-
-```bat
+```sh
 npm ci
 npm run dev
 ```
 
-Open the **Local** address printed by Vite and keep the terminal open. If using the portable Node folder from this project conversation, first run:
+The source-project **START-GAME.cmd** remains available and handles the portable
+Desktop Node installation. Build with `npm run build`. All models, textures and
+audio are local; gameplay makes no external asset requests.
 
-```bat
-set "PATH=C:\Users\giuse\Desktop\node-v24.21.0-win-x64;%PATH%"
-```
+## Controls
 
-If npm reports that esbuild's setup script is not approved, finish it with:
+- **WASD:** camera-relative jog; **Shift:** sprint; **Ctrl:** slow walk.
+- **Space:** jump; a second airborne jump unlocks at movement upgrade level 2.
+- **K:** stamina-based directional dodge with brief invulnerability.
+- **Left click / J:** three-hit weapon combo; hold/release for charged light.
+- **Right click / L:** heavy attacks; hold/release for a charged heavy.
+- **Attack in the air:** downward Falling Star attack.
+- **Q:** switch owned weapons. The spear retains long reach; Sundial Flame uses
+  shorter circular strikes, area damage and painted fire arcs.
+- **B:** bark stun, spending divine ink; **V:** selected vocal cue.
+- **E:** talk, shop, rest, use the home altar, enter the eastern trial or collect
+  the existing windflowers. The home has an open front entrance.
+- **Middle-drag / Alt-drag:** orbit camera; **wheel:** zoom.
+- **Escape:** pause / close shop; **M:** mute. Pause retains volume/voice controls.
 
-```bat
-npm install-scripts approve esbuild
-npm rebuild esbuild
-npm run dev
-```
+Follow the western bridge to the market. Taro's shop is beside his tea stall.
+The trial entrance is on the eastern road. Defeat Kurogane, return home and spend
+your rewards. Retreat is available through the on-screen button during a run.
 
-## Controls and activities
+## Saving and permanent growth
 
-- **WASD:** move relative to the fixed camera. **Shift:** run.
-- **Space:** jump. **K:** directional dodge.
-- **Tap left click / J:** quick thrust → turning sweep → lunging finish. Hold and release for a charged Dawn Thrust; charging longer increases its damage.
-- **Tap right click / L:** Moon Arc heavy sweep. Hold and release for charged Sunbreak, a wider heavy strike with its own animation. Right click does not open the browser menu in the game canvas.
-- **Left click / J while jumping:** Falling Star aerial dive.
-- **B:** loud Guardian Bark, stunning nearby forward spirits for 1.65 seconds; six-second cooldown. Cover blocks the stun.
-- **V:** selected vocal sound. Choose growl, soft bark, or howl from the pause menu. Damage produces a whimper.
-- **E:** talk, collect a nearby windflower, or offer flowers at the northern shrine.
-- **Mouse wheel:** camera zoom. **Escape:** pause. **M / sound button:** mute sound.
+The versioned save uses `localStorage` key `sunward.rpg.v2`, with a backup and
+validation/recovery. Rewards save on each kill; purchases and equipment save
+immediately. A visible warning identifies session-only play if storage is blocked.
+Do not clear this site's browser data. Use the **same browser and printed address**
+when returning: localhost and 127.0.0.1, or different ports, have different saves.
+Cloud sync and save export/import are not implemented.
 
-Talk to Hana, collect three windflowers around the village, then offer them at the northern shrine for a vitality upgrade. The village is safe. Follow the east road to the grove and restore its five restless spirits; enemies wind up their attacks and stagger when hit. You can continue exploring after victory or retry after defeat without reloading the page.
+Permanent experience gives levels and vitality/damage. Shop upgrades improve
+health, damage, movement, stamina, divine ink, bark/charge strength and each weapon.
+Saved power gradually adds bone-attached shoulder/ankle curls and spectral brush
+trails. The original wolf mesh, textures and materials are not recoloured or
+reshaped; these effects are separate geometry and vanish at low power.
 
-The wolf has visible amber-and-ink eyes that follow the animated face, sparse silky fur wisps, and blossoms/leaves trailing behind during running. Jumping uses separate rise, fall, and landing poses; charging while moving layers leg animation under the windup.
+## Existing assets preserved
 
-The local model, textures, and recorded canine vocals and original synthesized weapon/world audio need no external requests during play. Audio starts only after a player gesture. A desktop browser with WebGL 2 is required.
+The playable Amaterasu is exported from the approved original Sketchfab wolf's
+latest Blender movement project, with 25 named movement/jump/dodge Actions plus new original-rig spear, disc, charge and bark Actions. The
+source `.blend` files and older game GLBs are preserved. The previous game commit
+is recoverable on **sunward-pre-expansion**. The standalone browser wolf viewer
+and its pre-existing uncommitted work are not part of this expansion commit.
 
-## Development and checks
-
-`npm run build` creates the production build. `npm run preview -- --port 4173` serves it. In a second terminal, `npm run test:smoke` runs the browser integration suite. On a machine without installed Chromium, run `npx playwright install chromium` first. Use `npm run test:wolf` for the charged attack, bark, voice, foliage, eye, fur and aerial-attack checks. See [validation instructions](tools/VALIDATION.md).
-
-The model adaptation can be rebuilt with Blender 4.3.2:
+## Checks and remaining work
 
 ```sh
-blender -b --python tools/adapt_wolf.py
+node tools/expansion/progression-test.mjs
+# With the dev server running:
+node tools/expansion/integration-test.mjs
 ```
 
-The script verifies its locally included source binary's checksum before import. Blender is needed only for editing/rebuilding the model, not for playing the game.
+Browser checks cover movement, jumping, stamina, home entry/rest, real shop
+purchases, reload persistence, double-jump unlock, enemy tells/damage, arena sealing,
+actual attack damage through all waves and both boss phases, victory, harder repeat
+runs, defeat retention and progression-driven fur. The scripted wave-clear check
+uses temporary invulnerability to isolate offensive/reward mechanics; separate
+checks verify player damage and defeat. This is not a claim of human balance approval.
 
-## Modules
+This is a substantial first playable RPG expansion, not a finished commercial game.
+Remaining work includes further hand-polishing of the new rigged combat/bark
+Actions, further bespoke
+NPC/building art, more nuanced fur deformation, longer-run balance, broader GPU
+and Windows testing, and save export/cloud sync. Enemies use simple steering,
+not a navigation mesh. Some minor model/prop intersection remains possible.
+See `notes/expansion/STATUS.md` for the continuation checklist.
 
-- `src/wolf.js`, `src/wolf-paint.js`, `src/wolf-fur.js`, `src/animation.js`: local model loading, painted atlas, skin outlines, action blending, contact-driven footfalls, face tracking, silk wisps and mouth-held spear.
-- `src/wolf-abilities.js`: hold/release charges, bark stun/cooldown, vocal options, and running foliage.
-- `src/combat.js`, `src/game.js`: attack windows, swept hits, input queues, dodge cancellation, movement, collision, enemy behavior and game lifecycle.
-- `src/models.js`, `src/enemy.js`: articulated reed sentinels and their animation/death state.
-- `src/effects.js`, `src/audio.js`: bounded painted impact/trail/death effects and original WebAudio cues.
-- `src/town.js`, `src/world.js`, `src/quests.js`: village, NPCs, spirit grove, shrine and windflower activities.
-- `src/art.js`, `src/rendering.js`: local pigment surface textures, toon materials, ink edges and paper grain.
-- `src/input.js`, `src/camera.js`, `src/main.js`: controls, smooth fixed camera, HUD and startup.
-
-[Development priorities](TODO.md) remain the guide for further iteration. [Build log](notes/BUILD_LOG.md) records actual revisions, interruption and validation; technical success is not a claim of artistic perfection.
-
-Wolf revision controls remain: hold/release left click for the coiled charged pounce, right click for overhead cleaver, hold/release right click for charged ground break, click in the air for tucked spear dive/slam. B is the recorded stun bark; V plays the vocal selected in Pause. The spear has an original spectral leaf blade, animated tassels and pale attack trails. Recorded-audio licenses are listed in Credits and THIRD_PARTY.md.
-
-Latest combat revision: tap left click/J three times to connect Reed Crosscut, Crescent Sweep and Sunward Vault. Tap right click/L twice for Sky Cleaver into Rising Tempest; the second press can be buffered during the first strike or entered within its brief recovery window. Holding/releasing either button still selects the charged attack. Eyes, vocal audio and spear artwork remain the approved versions.
+Original model/audio attribution: [credits](public/credits.html),
+[third-party notices](THIRD_PARTY.md). No copyrighted Ōkami music is included.

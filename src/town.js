@@ -1,3 +1,4 @@
+import { createVillager as npc } from './expansion/villagers.js';
 import * as THREE from "three";
 import { createWorld } from "./world.js";
 import { part } from "./models.js";
@@ -23,12 +24,12 @@ function geometryForBatch(node,inverse) {
   if(!geometry.attributes.uv)geometry.setAttribute("uv",new THREE.BufferAttribute(new Float32Array(geometry.attributes.position.count*2),2));
   return geometry.applyMatrix4(inverse.clone().multiply(node.matrixWorld));
 }
-function batchHouse(root) {
+export function batchHouse(root) {
   // Facades are static. Batch their beams and ink shells by material instead of
   // submitting a draw call for every window bar. NPC joints remain independent.
   root.updateMatrixWorld(true);
   const localMaterials=new Map();
-  root.traverse(node=>{if(!node.isMesh)return;const source=node.material;if(!localMaterials.has(source))localMaterials.set(source,source.clone());node.material=localMaterials.get(source);});
+  root.traverse(node=>{if(!node.isMesh)return;const source=node.material,key=[source.type,source.color?.getHexString(),source.map?.uuid,source.side,source.transparent,source.opacity].join(":");if(!localMaterials.has(key))localMaterials.set(key,source.clone());node.material=localMaterials.get(key);});
   root.userData.fade.materials=[...localMaterials.values()];
   const inverse=root.matrixWorld.clone().invert(),groups=new Map(),meshes=[];
   root.traverse(node=>{
@@ -47,7 +48,7 @@ function batchHouse(root) {
     for(const geometry of geometries)geometry.dispose();
   }
 }
-function batchDecoration(root) {
+export function batchDecoration(root) {
   root.updateMatrixWorld(true);
   const inverse=root.matrixWorld.clone().invert(),groups=new Map(),meshes=[];
   root.traverse(node=>{
@@ -63,7 +64,7 @@ function batchDecoration(root) {
     for(const g of group.geometry)g.dispose();
   }
 }
-function roof(parent,w,d,y,color,height=1.05) {
+export function roof(parent,w,d,y,color,height=1.05) {
   const positions=[],uv=[],indices=[];
   for(let side=0;side<2;side++) {
     const sign=side?1:-1,base=positions.length/3;
@@ -95,7 +96,7 @@ function shoji(parent,x,y,z,width=.96,height=1.1) {
   for(let i=-1;i<=1;i++)block(parent,[.043,height+.06,.075],palette.ink,[x+i*width/3,y,z+.03],"wood",undefined,false);
   for(let i=-1;i<=1;i++)block(parent,[width+.05,.038,.075],palette.ink,[x,y+i*height/3,z+.04],"wood",undefined,false);
 }
-function house(scene,x,z,w=5,d=4,color=palette.roof,turn=0,tier=false) {
+export function house(scene,x,z,w=5,d=4,color=palette.roof,turn=0,tier=false) {
   const root=new THREE.Group();root.position.set(x,0,z);root.rotation.y=turn;scene.add(root);
   const height=tier?3.25:2.55;
   block(root,[w+.15,.22,d+.15],palette.stone,[0,.08,0],"stone");
@@ -132,7 +133,7 @@ function boardLabel(text,width) {
   const sprite=label(text,width);
   return new THREE.Mesh(new THREE.PlaneGeometry(width,.59),new THREE.MeshBasicMaterial({map:sprite.material.map,transparent:true}));
 }
-function npc(scene,x,z,name,color,lines,route=null) {
+function legacyNpc(scene,x,z,name,color,lines,route=null) {
   const root=new THREE.Group();root.position.set(x,0,z);scene.add(root);
   const body=new THREE.Group();body.position.y=.88;root.add(body);
   // Layered kimono silhouette, wide sleeves, separate calves and sandal feet.
@@ -176,7 +177,7 @@ function flatPatch(scene,points,color,y=.035,kind="wash") {
   // Shape's second coordinate becomes -Z after rotation, so callers give [x,-z].
   return mesh;
 }
-function lantern(scene,x,z,color="#f5dba0") {
+export function lantern(scene,x,z,color="#f5dba0") {
   const group=new THREE.Group();group.position.set(x,0,z);scene.add(group);
   block(group,[.65,.14,.65],palette.stone,[0,.08,0],"stone");
   part(group,new THREE.CylinderGeometry(.13,.22,1,6),paint(palette.stone,"stone"),[0,.63,0]);
@@ -184,7 +185,7 @@ function lantern(scene,x,z,color="#f5dba0") {
   for(const s of [-1,1])block(group,[.045,.52,.49],palette.ink,[s*.21,1.32,0],"wood",undefined,false);
   part(group,new THREE.ConeGeometry(.5,.27,4),paint("#637542","roof"),[0,1.74,0],[0,Math.PI/4,0]);return group;
 }
-function garden(scene,x,z,seed=10) {
+export function garden(scene,x,z,seed=10) {
   const rand=seededRandom(seed),group=new THREE.Group();group.position.set(x,.025,z);scene.add(group);
   const plot=part(group,new THREE.CylinderGeometry(1.4,1.5,.06,10),paint("#577943","grass"),[0,0,0],undefined,false);plot.scale.z=.57;
   // Flower cards are low poly and small enough that the paper-painting reads first.
@@ -206,7 +207,7 @@ export function createTown(scene) {
   }
   for(const o of world.obstacles)o.x+=26;
   scene.background=new THREE.Color("#389bc0");scene.fog=new THREE.Fog("#b1cab0",42,115);
-  const terrain=paint("#8ba647","grass");terrain.map=paintedTexture("grass").clone();terrain.map.repeat.set(18,15);terrain.map.needsUpdate=true;
+  const terrain=paint("#a1ae78","grass");terrain.map=paintedTexture("grass").clone();terrain.map.repeat.set(18,15);terrain.map.needsUpdate=true;
   part(scene,new THREE.PlaneGeometry(110,90),terrain,[8,-.025,0],[-Math.PI/2,0,0],false);
   flatPatch(scene,[[-4.4,-25],[-3.8,-13],[-4.15,-4],[-4.4,6],[-3.8,18],[-3.6,27],[3.6,27],[4.1,18],[4.25,7],[3.8,-4],[4.4,-14],[3.8,-25]],"#cfac69",.035);
   flatPatch(scene,[[-5,-2.5],[4.2,-3.1],[13,-2.6],[19,-3.2],[36,-2.2],[36,2.2],[21,2.6],[12,3.3],[2,2.8],[-5,2.5]],"#d9bb7d",.04);
@@ -296,7 +297,8 @@ export function createTown(scene) {
   for(const h of houses)batchHouse(h);
   // Static terrain, reeds, stones, lanterns and beams can share a submission.
   // Keep the animated wheel, petals, NPC joints and fading houses independent.
-  const animatedRoots=new Set([...houses,...world.npcs.map(n=>n.root),wheel,world.petals]);
+  const trees=[...scene.children].filter(n=>n.isGroup&&n.children.filter(c=>c.isSprite).length>=4);
+  const animatedRoots=new Set([...houses,...world.npcs.map(n=>n.root),wheel,world.petals,...trees]);
   const staticMeshes=[];
   scene.updateMatrixWorld(true);
   scene.traverse(node=>{
@@ -307,11 +309,11 @@ export function createTown(scene) {
   const scenery=new THREE.Group();scene.add(scenery);
   for(const mesh of staticMeshes)scenery.attach(mesh);
   batchDecoration(scenery);
-  world.wheel=wheel;world.houses=houses;
+  world.wheel=wheel;world.houses=houses;world.trees=trees;
   world.update=(dt,time)=>{
     wheel.rotation.z+=dt*.26;
     for(const n of world.npcs) {
-      n.tag.visible=!world.player||n.root.position.distanceTo(world.player.position)<8.5;
+      n.tag.visible=!world.player||n.root.position.distanceTo(world.player.position)<4;
       n.walking=false;
       if(n.route) {
         const target=n.route[n.index],delta=target.clone().sub(n.root.position);
@@ -329,9 +331,9 @@ export function createTown(scene) {
     if(world.player)for(const h of houses){
       const f=h.userData.fade,p=world.player.position;
       // Camera is offset +9,+8.5,+12. Test its ground-projected sight line.
-      const dx=f.x-p.x,dz=f.z-p.z,projection=(dx*9+dz*12)/225;
-      const lateral=Math.abs(dx*12-dz*9)/15;
-      const blocked=projection>0&&projection<.7&&lateral<Math.max(f.w,f.d)*.45&&Math.hypot(dx,dz)<11;
+      const dx=f.x-p.x,dz=f.z-p.z,cx=world.camera?world.camera.position.x-p.x:9,cz=world.camera?world.camera.position.z-p.z:12,cl=Math.hypot(cx,cz)||1,projection=(dx*cx+dz*cz)/(cl*cl);
+      const lateral=Math.abs(dx*cz-dz*cx)/cl;
+      const blocked=projection>0&&projection<1.1&&lateral<Math.max(f.w,f.d)*.45&&Math.hypot(dx,dz)<18;
       const target=blocked?.2:1;f.value+=(target-f.value)*(1-Math.exp(-dt*8));
       const faded=f.value<.995;
       for(const m of f.materials){m.transparent=faded;m.opacity=f.value;m.depthWrite=!faded;}

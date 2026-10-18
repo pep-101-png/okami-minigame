@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { mat, part } from "./models.js";
 import { paperTexture, stroke, paintedTexture, seededRandom } from "./art.js";
-function blossomTexture() {
+export function blossomTexture() {
   const c = document.createElement("canvas");
   c.width = c.height = 256;
   const ctx = c.getContext("2d");
@@ -50,7 +50,7 @@ export function createWorld(scene) {
   sun.shadow.bias = -0.0005;
   sun.shadow.normalBias = 0.035;
   scene.add(sun);
-  const ground = mat("#7f9c4e");
+  const ground = mat("#919f74");
   ground.map = paintedTexture("grass").clone();
   ground.map.repeat.set(12, 12);
   part(

@@ -1,0 +1,109 @@
+{
+  "checks": [
+    {
+      "name": "Original model, 25 movement Actions and native combat load",
+      "result": {
+        "actions": 41,
+        "position": [
+          -34,
+          0,
+          22
+        ]
+      }
+    },
+    {
+      "name": "Movement, jump and stamina dodge",
+      "result": {
+        "jump": true,
+        "stamina": 82.63333333333333
+      }
+    },
+    {
+      "name": "Walk-through home, rest, shop purchase and equipment",
+      "result": true
+    },
+    {
+      "name": "Purchases survive reload; double jump unlock works",
+      "result": true
+    },
+    {
+      "name": "Arena entry, sealed boundary and enemy attack tell/damage",
+      "result": {
+        "spirits": 3,
+        "sealed": true,
+        "tell": true,
+        "damage": 9
+      }
+    },
+    {
+      "name": "Actual weapon strikes clear three waves and defeat boss",
+      "result": {
+        "strikes": 81,
+        "seenBoss": true,
+        "seenPhase2": true,
+        "wins": 1,
+        "coins": 676,
+        "xp": 342
+      }
+    },
+    {
+      "name": "Victory returns home; next trial scales; defeat keeps progress",
+      "result": {
+        "tier": 2,
+        "hp": 10,
+        "retained": true
+      }
+    },
+    {
+      "name": "Saved power drives additional fur without replacing original mesh",
+      "result": true
+    },
+    {
+      "name": "No runtime errors or missing assets",
+      "result": true
+    }
+  ],
+  "errors": [],
+  "note": "Deterministic engine integration checks; scripted invulnerability during the wave-clear test isolates damage/reward mechanics. Separate tests verify player damage and defeat.",
+  "native_combat_pose_checks": {
+    "tested": [
+      "spear:Thrust",
+      "spear:Sweep",
+      "spear:Finish",
+      "spear:HeavyArc",
+      "spear:HeavyReturn",
+      "spear:ChargedThrust",
+      "spear:ChargedHeavy",
+      "spear:AirStrike",
+      "sundial:Disc1",
+      "sundial:Disc2",
+      "sundial:Disc3",
+      "sundial:DiscHeavy",
+      "sundial:DiscHeavy",
+      "sundial:DiscCharged",
+      "sundial:DiscCharged",
+      "sundial:AirStrike",
+      "ChargeLight",
+      "ChargeHeavy",
+      "Bark"
+    ],
+    "actions": 41,
+    "rendering": {
+      "drawCallsIncludingShadowsAndPostprocessing": 1016,
+      "trianglesIncludingPasses": 311186,
+      "geometries": 864,
+      "textures": 46
+    },
+    "errors": []
+  },
+  "release": {
+    "zip_sha256": "2a63570812d0035770e8b305d81d3ae88acd92a5d925da7ef05ce220601137de",
+    "files": 27,
+    "model_sha256": "dbb683222afcb3cfdfe675a6882114ebd53c14e485de28d2607256ea274be921",
+    "node_required": true,
+    "npm_install_required": false
+  },
+  "verified_utc": "2026-10-18T01:43:43.729715+00:00",
+  "platform": "Linux Chromium with software WebGL; Windows .cmd not executed",
+  "limits": "No claim of hardware frame rate, human balance approval or final art approval."
+}

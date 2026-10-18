@@ -145,9 +145,10 @@ export class WolfAbilities {
       return false;
     }
     if (g.player.root.position.y > 0.15 || g.dashTime > 0) return false;
+    if (g.expansion && !g.expansion.spendEnergy(16)) return false;
     g.cancelAttack();
     this.cancel();
-    this.barkCooldown = 6;
+    this.barkCooldown = g.expansion?.profile.stats.barkCooldown ?? 6;
     this.voiceKind = "Bark";
     this.voiceTime = this.voiceDuration = 0.55;
     g.audio.play("barkStun");
@@ -161,7 +162,7 @@ export class WolfAbilities {
       delta.y = 0;
       const distance = delta.length();
       if (
-        distance > 5.5 ||
+        distance > (g.expansion?.profile.stats.barkRadius ?? 5.5) ||
         g.player.root.position.x < 15 ||
         !g.clearShot(g.player.root.position, e.mesh.position)
       )

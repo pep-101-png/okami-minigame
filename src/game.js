@@ -135,6 +135,7 @@ export class Game {
     e.texture.needsUpdate = true;
   }
   collide(pos, radius = 0.43) {
+    this.expansion?.collide(pos, radius);
     const b = this.world.bounds;
     pos.x = clamp(pos.x, b.minX + radius, b.maxX - radius);
     pos.z = clamp(pos.z, b.minZ + radius, b.maxZ - radius);
@@ -226,9 +227,11 @@ export class Game {
     return new THREE.Vector3(0, 0, -1).applyAxisAngle(UP, angle);
   }
   attackData() {
-    return this.currentAttack || ATTACKS[this.combo] || ATTACKS[1];
+    const base = this.currentAttack || (this.expansion?.weapon === 'sundial' ? this.expansion.flameAttacks[this.combo] : ATTACKS[this.combo]) || ATTACKS[1];
+    return this.expansion?.weapon === 'sundial' && this.specialAttack ? { ...base, name: 'SUNDIAL · ' + base.name, range: Math.min(3.5, base.range), arc: -1, radial: true, sweep: true, damage: base.damage * 1.12 } : base;
   }
   startSpecialAttack(kind, level = 0) {
+    if(kind.startsWith('charged')&&this.expansion&&!this.expansion.spendEnergy(kind==='chargedHeavy'?16:9))return false;
     if (kind === "heavy" && this.heavyWindow > 0) kind = "heavyFinish";
     if (kind === "aerial" && this.aerialUsed) return false;
     this.startAttack(1);
@@ -257,7 +260,7 @@ export class Game {
     this.combo =
       nextCombo ??
       (this.comboWindow > 0 && this.combo < 3 ? this.combo + 1 : 1);
-    const data = ATTACKS[this.combo];
+    const data = this.attackData();
     const front = this.forward();
     const candidates = this.enemies
       .filter((e) => {
@@ -314,16 +317,18 @@ export class Game {
       if (!this.clearShot(root.position, e.mesh.position)) continue;
       this.hitTargets.add(e);
       this.didHit = true;
-      e.hp = Math.max(0, e.hp - data.damage);
+      e.hp = Math.max(0, e.hp - data.damage * (this.expansion?.profile.weaponDamage() ?? 1) * (this.specialAttack?.startsWith("charged") ? this.expansion?.profile.stats.charge ?? 1 : 1));
       const knock = e.mesh.position.clone().sub(root.position);
       knock.y = 0;
       if (knock.lengthSq() < 0.001) knock.copy(forward);
       knock.normalize();
       e.knockback.copy(knock).multiplyScalar(data.knockback * 9);
+      const previousEnemyState = e.state, previousEnemyTimer = e.timer;
       e.stun = data.stagger;
       e.state = "stagger";
       e.stateDuration = e.timer = data.stagger;
       e.cooldown = Math.max(e.cooldown, 0.6);
+      if(e.kind === 'boss' && ['windup','lunge'].includes(previousEnemyState)){e.state=previousEnemyState;e.timer=previousEnemyTimer;e.stun=0;e.knockback.multiplyScalar(.03);}
       e.visual.hit(
         knock,
         data.heavy || this.combo === 3 ? 1.7 : this.combo === 2 ? 1.2 : 0.8,
@@ -345,7 +350,8 @@ export class Game {
         e.bar.visible = false;
         e.visual.kill();
         this.kills++;
-        if (this.kills === this.enemies.length) this.victoryPending = 1.25;
+        if (this.expansion) this.expansion.enemyKilled(e);
+        else if (this.kills === this.enemies.length) this.victoryPending = 1.25;
       }
     }
   }
@@ -362,12 +368,14 @@ export class Game {
     this.queuedCombo = false;
   }
   startDodge(direction) {
+    if (this.expansion && !this.expansion.spendStamina(18)) { this.dodgeBuffer=0; return; }
     const root = this.player.root;
     this.cancelAttack();
     this.dashDirection
       .copy(direction.lengthSq() ? direction : this.forward())
       .normalize();
-    root.rotation.y = Math.atan2(-this.dashDirection.x, -this.dashDirection.z);
+    const facing=this.forward(),dot=facing.dot(this.dashDirection),cross=facing.x*this.dashDirection.z-facing.z*this.dashDirection.x;
+    this.player.dodgeClip=this.speed>5?'Dodge_Sprint':this.speed>2?'Dodge_Jog':dot<-.5?'Dodge_Back':Math.abs(dot)<.5?(cross>0?'Dodge_Left':'Dodge_Right'):'Dodge_Forward';
     this.dashTime = 0.28;
     this.dashCooldown = this.activities.offered ? 0.65 : 0.78;
     this.invulnerable = Math.max(this.invulnerable, 0.32);
@@ -376,6 +384,7 @@ export class Game {
     this.audio.play("dodge");
   }
   interact() {
+    if (!this.dialogue && this.expansion?.interact()) return;
     if (this.dialogue) {
       this.dialogue.line++;
       if (this.dialogue.line >= this.dialogue.lines.length)
@@ -403,6 +412,11 @@ export class Game {
     }
   }
   update(dt) {
+    if (this.expansion?.shopOpen) {
+      if (this.input.consume('pause') && this.expansion.mode !== 'result') this.expansion.closeShop();
+      this.input.clear(); this.time+=dt; this.world.update(dt,this.time);this.expansion.barrier.update(dt,this.time,this.input.yaw);this.effects.update(dt);this.player.animate({dt,speed:0}); return;
+    }
+    if (this.input.consume("weapon")) this.expansion?.switchWeapon();
     if (this.input.consume("mute")) this.audio.toggleMute();
     if (this.input.consume("pause") && this.active && !this.dialogue)
       this.paused = !this.paused;
@@ -428,6 +442,7 @@ export class Game {
     this.world.update(dt, this.time);
     this.effects.update(dt);
     this.activities.update(dt, this.time);
+    this.expansion?.update(dt);
     this.toast.timer = Math.max(0, this.toast.timer - dt);
     for (const petal of this.world.petals?.children || []) {
       petal.position.y -= dt * 0.35;
@@ -448,7 +463,6 @@ export class Game {
     if (
       this.input.consume("interact") &&
       this.active &&
-      root.position.x < 15 &&
       root.position.y < 0.1 &&
       this.dashTime === 0 &&
       this.attackTime === 0
@@ -554,7 +568,7 @@ export class Game {
       angleDelta(root.rotation.y, previousHeading) / Math.max(dt, 0.001);
     const sprint =
       this.input.keys.has("ShiftLeft") || this.input.keys.has("ShiftRight");
-    const maxSpeed = sprint ? 6.8 : 3.65;
+    const maxSpeed = (sprint && (!this.expansion || this.expansion.stamina>1) ? 6.8 : this.input.keys.has("ControlLeft") ? .85 : 3.65) * (this.expansion?.profile.stats.movement ?? 1);
     const desired = direction
       .clone()
       .multiplyScalar(
@@ -583,12 +597,13 @@ export class Game {
       this.cancelAttack();
       this.aerialUsed = false;
       this.aerialLanded = false;
-      this.velocityY = 7.7;
+      this.velocityY = 7.7;this.doubleJumpUsed=false;
       this.jumpBuffer = 0;
       this.coyote = 0;
       this.effects.dust(root.position, { count: 5 });
       this.audio.play("jump");
     }
+    if(this.jumpBuffer>0&&!grounded&&!this.doubleJumpUsed&&(this.expansion?.profile.data.upgrades.movement??0)>=2){this.cancelAttack();this.velocityY=7.4;this.doubleJumpUsed=true;this.jumpBuffer=0;this.player.triggerDouble?.();this.effects.barkWave(root.position,root.rotation.y);this.audio.play('jump');}
     const wasAirborne = root.position.y > 0;
     if (
       this.specialAttack === "aerial" &&
@@ -608,7 +623,7 @@ export class Game {
           this.audio.play("slam");
           this.strike(Math.max(0.22, Math.min(0.82, this.attackPhase)));
         }
-        this.aerialUsed = false;
+        this.aerialUsed = false;this.doubleJumpUsed=false;
         this.landing = 0.16;
         this.effects.dust(root.position, { count: 6 });
         this.audio.play("land");
@@ -662,7 +677,7 @@ export class Game {
       speed: this.speed,
       combat: root.position.x > 15 && !this.victory,
     });
-    if (this.victoryPending > 0) {
+    if (!this.expansion && this.victoryPending > 0) {
       this.victoryPending = Math.max(0, this.victoryPending - dt);
       if (this.victoryPending === 0) {
         this.victory = true;
@@ -670,7 +685,7 @@ export class Game {
         this.end(true);
       }
     }
-    if (root.position.x > 15 && !this.combatStarted) {
+    if (!this.expansion && root.position.x > 15 && !this.combatStarted) {
       this.combatStarted = true;
       this.notify(
         "Spirit grove · watch the golden windup, then dodge the charge",
@@ -690,6 +705,7 @@ export class Game {
     const phase = this.attackPhase;
     if (!this.swingPlayed && phase >= data.active[0] - 0.08) {
       this.swingPlayed = true;
+      this.expansion?.attackEffect(this.player.root.position);
       this.audio.play("swing", { combo: data.heavy ? 3 : this.combo });
     }
     this.move(
@@ -762,6 +778,7 @@ export class Game {
     this.drawBar(e);
   }
   updateEnemies(dt) {
+    if (this.expansion) { this.expansion.updateEnemies(dt); return; }
     const root = this.player.root;
     const attackers = this.enemies.filter(
       (e) => e.hp > 0 && ["windup", "lunge"].includes(e.state),
@@ -978,6 +995,7 @@ export class Game {
     this.notify("A new dawn · the shrine remembers your offering");
   }
   end(win) {
+    if (this.expansion) { this.expansion.finish(win); return; }
     this.active = false;
     this.paused = false;
     this.input.clear();

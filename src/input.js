@@ -19,8 +19,10 @@ export class Input {
       this[action] = false;
     this.lightHeld = false;
     this.heavyHeld = false;
+    this.weapon = false;
     this.yaw = Math.atan2(9, 12);
-    this.pitch = 0.18;
+    this.pitch = .448;
+    this.cameraDrag = false;
     this.zoom = 1;
     this.mouseButtons = new Set();
     const setHold = (kind, held) => {
@@ -55,6 +57,7 @@ export class Input {
           KeyM: "mute",
           KeyB: "bark",
           KeyV: "voice",
+          KeyQ: "weapon",
         }[event.code];
         if (action) this[action] = true;
       }
@@ -67,7 +70,7 @@ export class Input {
         setHold("heavy", false);
     });
     canvas.addEventListener("pointerdown", (event) => {
-      if (event.button !== 0 && event.button !== 2) return;
+      if (event.altKey || event.button !== 0 && event.button !== 2) return;
       event.preventDefault();
       this.mouseButtons.add(event.button);
       setHold(event.button === 0 ? "light" : "heavy", true);
@@ -77,6 +80,9 @@ export class Input {
       if (event.button === 0 && !this.keys.has("KeyJ")) setHold("light", false);
       if (event.button === 2 && !this.keys.has("KeyL")) setHold("heavy", false);
     });
+    canvas.addEventListener('pointerdown',event=>{if(event.button===1||event.altKey){this.cameraDrag=true;this.lastMouse=[event.clientX,event.clientY];event.preventDefault();}});
+    window.addEventListener('pointermove',event=>{if(!this.cameraDrag)return;this.yaw-=(event.clientX-this.lastMouse[0])*.005;this.pitch=Math.max(.22,Math.min(.95,this.pitch+(event.clientY-this.lastMouse[1])*.004));this.lastMouse=[event.clientX,event.clientY];});
+    window.addEventListener('pointerup',()=>this.cameraDrag=false);
     canvas.addEventListener("contextmenu", (event) => event.preventDefault());
     canvas.addEventListener("pointercancel", () => this.clear());
     window.addEventListener("blur", () => this.clear());
@@ -96,6 +102,7 @@ export class Input {
     );
   }
   clear() {
+    this.weapon = false;this.cameraDrag=false;
     this.keys.clear();
     this.mouseButtons.clear();
     this.lightHeld = this.heavyHeld = false;
