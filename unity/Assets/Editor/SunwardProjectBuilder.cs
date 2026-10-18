@@ -790,7 +790,7 @@ namespace Sunward.Editor
                 var ix = new int[24 * 6];
                 for (int i = 0; i <= 24; i++)
                 {
-                    float x = -27.8f + i * .4f, h = .10f + .42f * Mathf.Pow(Mathf.Sin(Mathf.PI * i / 24), 1.5f);
+                    float x = -27.8f + i * .4f, h = Valley.BridgeHeight(i / 24f);
                     v[i * 2] = new Vector3(x, h, -z - 1.26f);
                     v[i * 2 + 1] = new Vector3(x, h, -z + 1.26f);
                     if (i < 24)
@@ -805,8 +805,12 @@ namespace Sunward.Editor
                     }
                 }
 
+                for (int vertex = 0; vertex < v.Length; vertex++)
+                    if (float.IsNaN(v[vertex].y) || float.IsInfinity(v[vertex].y))
+                        throw new InvalidDataException("Non-finite bridge collision height at vertex " + vertex);
                 var mesh = new Mesh()
                 {
+                    name = "Arched bridge collision · " + z,
                     vertices = v,
                     triangles = ix
                 };

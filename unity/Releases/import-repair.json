@@ -1,5 +1,7 @@
 {
   "files": [
+    "Assets/Sunward/Scripts/Valley.cs",
+    "Assets/Sunward/Scripts/Valley.cs.meta",
     "Assets/Editor/SunwardProjectBuilder.cs",
     "Assets/Editor/SunwardProjectBuilder.cs.meta",
     "Assets/Editor/SunwardImportPolicy.cs",
@@ -10,7 +12,7 @@
     "Review/IMPORT-REPAIR.md",
     "Packages/manifest.json"
   ],
-  "sha256": "9b44c4fb6ff633bca00f4068f52e009dad08aec8fa49197620dde189e1c08c31",
-  "bytes": 17720,
+  "sha256": "3cfdde601ecd2fbd17bf40b972dcc5293ca235ed4802b33cf530d84d2ac50f60",
+  "bytes": 19662,
   "unity_editor_verified": false
 }

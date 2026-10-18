@@ -11,3 +11,9 @@ No FBX, texture, rig or animation binary has been changed. This patch also inclu
 Unity Editor is unavailable in this cloud environment. Asset checks and C# syntax checks are separate from Unity compilation, asset import and Play Mode, which still require verification in the Editor. This repair does not claim that all previously reported errors are resolved.
 
 Cloud validation: all 26 C# files parsed without syntax errors; 18 existing portable progression/save checks passed; mesh/material bindings and all PNG files passed integrity checks. These checks do not compile against Unity assemblies.
+
+## Bridge collision NaN repair
+
+The last bridge sample evaluated sin(float PI) as a tiny negative number. Raising it to 1.5 produced NaN at vertices 48 and 49. The collision builder and runtime bridge-height sampler now share a clamped height calculation. Collision meshes also have descriptive names and a finite-height guard before Unity collision cooking.
+
+The patch now also includes Assets/Sunward/Scripts/Valley.cs and its existing metadata. No model or animation assets changed. Unity Editor import/Play Mode still require local confirmation.

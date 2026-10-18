@@ -57,11 +57,19 @@ namespace Sunward
             return next;
         }
 
+        // Clamp both the bridge coordinate and the sine: sin(float PI) can be
+        // slightly negative, which is undefined for the fractional exponent.
+        public static float BridgeHeight(float progress)
+        {
+            float arch = Mathf.Max(0f, Mathf.Sin(Mathf.PI * Mathf.Clamp01(progress)));
+            return .10f + .42f * Mathf.Pow(arch, 1.5f);
+        }
+
         public float Height(Vector3 p)
         {
             float z = -p.z;
             if (OnBridge(p.x, z))
-                return .10f + .42f * Mathf.Pow(Mathf.Sin(Mathf.PI * (p.x + 27.8f) / 9.6f), 1.5f);
+                return BridgeHeight((p.x + 27.8f) / 9.6f);
             if (Mathf.Abs(p.x + 34) < 5.2f && Mathf.Abs(z - 16) < 4.25f)
                 return .105f;
             var t = Data.terrain;
