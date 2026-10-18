@@ -1,0 +1,11 @@
+{
+  "original_mesh_uvs_indices_weights_unchanged": true,
+  "original_materials_textures_unchanged": true,
+  "original_41_animation_curves_unchanged": true,
+  "actions": 44,
+  "added": [
+    "Sleep_Down",
+    "Sleep_Loop",
+    "Sleep_Up"
+  ]
+}

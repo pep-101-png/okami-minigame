@@ -16,10 +16,7 @@ export function expandVillage(scene,world){
  const homes=[[-41,-12,6,5,'#777f6c'],[-32,-24,7,5,'#b57550'],[-43,0,5,6,'#9e705b'],[-41,27,6,5,'#8c8b6e'],[-27,-8,5,4,'#a27750']];
  for(const[x,z,w,d,c]of homes){const h=house(scene,x,z,w,d,c,0,(z===-24));batchHouse(h);world.houses.push(h);world.boxes.push({x,z,halfX:w/2+.2,halfZ:d/2+.2});garden(scene,x+3,z+4,Math.round(x*z+900));}
  // Bridges remain part of this continuous world, with flat accessible decks.
- for(const z of[12,-14]){
-  block(town,[8,.10,3.2],'#a57b52',[-23,.065,z]);for(let i=0;i<14;i++)stroke(town,[[-27+i*.58,.125,z-1.5],[-27+i*.58,.125,z+1.5]],'#5f5140',.012);
-  for(const s of[-1,1])for(let i=0;i<5;i++){let x=-26.8+i*1.9;block(town,[.11,.72,.11],'#914a36',[x,.42,z+s*1.6]);if(i<4)stroke(town,[[x,.75,z+s*1.6],[x+.95,.87,z+s*1.6],[x+1.9,.75,z+s*1.6]],'#a65a40',.045);}
- }
+ // V3 arched bridges share the terrain navigation height.
  // A home with real openings and separate collision walls, not a solid house box.
  const home=new THREE.Group();home.position.set(-34,0,16);home.name='Amaterasu · home';scene.add(home);
  block(home,[10,.10,8],'#ac855b',[0,.01,0]);

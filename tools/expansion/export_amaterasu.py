@@ -4,7 +4,8 @@ from pathlib import Path
 R=Path(__file__).resolve().parents[2];source=R/'original-wolf-jump-dodge/Amaterasu-Movement.blend';before=hashlib.sha256(source.read_bytes()).hexdigest();bpy.ops.wm.open_mainfile(filepath=str(source));s=bpy.data.scenes['01 · Action inspection'];bpy.context.window.scene=s;r=bpy.data.objects['WOLF_RIG'];bpy.context.view_layer.objects.active=r
 if r.mode!='OBJECT':bpy.ops.object.mode_set(mode='OBJECT')
 exec(compile((R/'tools/expansion/author_combat.py').read_text(),str(R/'tools/expansion/author_combat.py'),'exec'))
-keep=['Idle_Natural','Walk_Natural','Jog_Natural','Sprint_Fluid','Walk_Turn_L','Walk_Turn_R','Jog_Turn_L','Jog_Turn_R','Sprint_Turn_L','Sprint_Turn_R','Jump_Standing','Jump_Walk','Jump_Jog','Jump_Sprint','Jump_Double','Air_Fall','Land_Soft','Land_Heavy','Dodge_Left','Dodge_Right','Dodge_Back','Dodge_Forward','Dodge_Walk','Dodge_Jog','Dodge_Sprint','Thrust','Sweep','Finish','HeavyArc','HeavyReturn','ChargedThrust','ChargedHeavy','AirStrike','ChargeLight','ChargeHeavy','Bark','Disc1','Disc2','Disc3','DiscHeavy','DiscCharged']
+exec(compile((R/'tools/organic/author_sleep.py').read_text(),str(R/'tools/organic/author_sleep.py'),'exec'))
+keep=['Sleep_Down','Sleep_Loop','Sleep_Up','Idle_Natural','Walk_Natural','Jog_Natural','Sprint_Fluid','Walk_Turn_L','Walk_Turn_R','Jog_Turn_L','Jog_Turn_R','Sprint_Turn_L','Sprint_Turn_R','Jump_Standing','Jump_Walk','Jump_Jog','Jump_Sprint','Jump_Double','Air_Fall','Land_Soft','Land_Heavy','Dodge_Left','Dodge_Right','Dodge_Back','Dodge_Forward','Dodge_Walk','Dodge_Jog','Dodge_Sprint','Thrust','Sweep','Finish','HeavyArc','HeavyReturn','ChargedThrust','ChargedHeavy','AirStrike','ChargeLight','ChargeHeavy','Bark','Disc1','Disc2','Disc3','DiscHeavy','DiscCharged']
 # Export only original character objects. Studio, wind and demonstrations stay in Blender.
 for o in bpy.context.view_layer.objects:o.select_set(False)
 for o in s.objects:

@@ -42,12 +42,13 @@ export function grassMeadows(scene,world){
  for(let i=0;i<1900;i++){
   const x=-46+r()*101,z=-31+r()*61;
   if(Math.abs(x+34)<5.5&&Math.abs(z-16)<5||Math.pow((x+15)/3.1,2)+Math.pow((z-22)/2.1,2)<1)continue;
+  if(world.waterInfo?.(x,z).river||Math.abs(x+23)<4.2)continue;
   if(Math.abs(x)<5.0||Math.abs(z)<3.4||Math.hypot(x-35,z)<18.8||Math.abs(z-12)<3||Math.abs(z+14)<2.6||Math.abs(x+32)<2.8||Math.abs(x+23)<3.5||world.boxes.some(b=>Math.abs(x-b.x)<b.halfX+.5&&Math.abs(z-b.z)<b.halfZ+.5))continue;
   positions.push([x,z]);
  }
- const m=new THREE.InstancedMesh(geo,mat,positions.length),dummy=new THREE.Object3D();positions.forEach(([x,z],i)=>{dummy.position.set(x,.015,z);dummy.rotation.y=r()*6.28;dummy.scale.setScalar(.5+r()*.8);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);});m.name='Instanced grass brush blades';scene.add(m);
+ const m=new THREE.InstancedMesh(geo,mat,positions.length),dummy=new THREE.Object3D();positions.forEach(([x,z],i)=>{dummy.position.set(x,(world.groundHeight?.(x,z)??0)+.015,z);dummy.rotation.y=r()*6.28;dummy.scale.setScalar(.5+r()*.8);dummy.updateMatrix();m.setMatrixAt(i,dummy.matrix);});m.name='Instanced grass brush blades';scene.add(m);
  // Wildflowers use a shared transparent atlas with original painted petal forms.
- const tex=foliageTexture('cherry'),fm=pigment(new THREE.MeshBasicMaterial({map:tex,transparent:true,alphaTest:.15,side:THREE.DoubleSide,depthWrite:false,color:'#ffe5ce'}),'grass-blade'),flower=new THREE.InstancedMesh(new THREE.PlaneGeometry(.32,.20),fm,positions.length),d=new THREE.Object3D();positions.forEach(([x,z],i)=>{d.position.set(x+.1,.15,z);d.rotation.set(-.7,r()*6.28,0);d.updateMatrix();flower.setMatrixAt(i,d.matrix);});flower.name='Meadow petals';scene.add(flower);
+ const tex=foliageTexture('cherry'),fm=pigment(new THREE.MeshBasicMaterial({map:tex,transparent:true,alphaTest:.15,side:THREE.DoubleSide,depthWrite:false,color:'#ffe5ce'}),'grass-blade'),flower=new THREE.InstancedMesh(new THREE.PlaneGeometry(.32,.20),fm,positions.length),d=new THREE.Object3D();positions.forEach(([x,z],i)=>{d.position.set(x+.1,(world.groundHeight?.(x,z)??0)+.15,z);d.rotation.set(-.7,r()*6.28,0);d.updateMatrix();flower.setMatrixAt(i,d.matrix);});flower.name='Meadow petals';scene.add(flower);
  return positions.length;
 }
 

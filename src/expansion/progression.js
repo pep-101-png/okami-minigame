@@ -10,7 +10,7 @@ export const UPGRADES = {
   sundial: { name: 'Stoke Sundial Flame', detail: '+14% flame damage', base: 35, max: 10 },
 };
 const cleanInt = (v, cap = 1e8) => Number.isFinite(v) ? Math.max(0, Math.min(cap, Math.floor(v))) : 0;
-export function freshSave() { return { version: 2, revision: 0, coins: 35, xp: 0, wins: 0, defeats: 0, kills: 0, equipped: 'spear', owned: ['spear'], upgrades: Object.fromEntries(Object.keys(UPGRADES).map(k=>[k,0])), shrine: false }; }
+export function freshSave() { return { version: 2, revision: 0, coins: 35, xp: 0, wins: 0, defeats: 0, kills: 0, equipped: 'spear', owned: ['spear'], upgrades: Object.fromEntries(Object.keys(UPGRADES).map(k=>[k,0])), shrine: false, collectibles: [], windflowers: [], milestones: {} }; }
 export function sanitizeSave(raw) {
   if (!raw || typeof raw !== 'object' || ![1,2].includes(raw.version)) throw new Error('Unsupported save version');
   const s=freshSave();
@@ -19,6 +19,10 @@ export function sanitizeSave(raw) {
   s.owned=raw.owned?.includes('sundial')?['spear','sundial']:['spear'];
   s.equipped=s.owned.includes(raw.equipped)?raw.equipped:'spear';s.shrine=raw.shrine===true;
   for(const [k,d]of Object.entries(UPGRADES))s.upgrades[k]=cleanInt(raw.upgrades?.[k],d.max);
+  s.collectibles=Array.isArray(raw.collectibles)?[...new Set(raw.collectibles.filter(v=>typeof v==='string'&&/^[-a-zA-Z0-9_]{1,64}$/.test(v)))].slice(0,64):[];
+  s.windflowers=Array.isArray(raw.windflowers)?[...new Set(raw.windflowers.filter(v=>['garden','mill','shrine'].includes(v)))]:[];
+  if(raw.milestones&&typeof raw.milestones==='object')for(const[k,v]of Object.entries(raw.milestones))if(/^[-a-zA-Z0-9_]{1,64}$/.test(k)&&v===true)s.milestones[k]=true;
+  if(s.wins)s.milestones.hollowBell=true;
   return s;
 }
 export class Progression {
@@ -30,6 +34,7 @@ export class Progression {
     if(this.status==='recovered'&&candidates.length===0)this.status='new save · damaged data ignored';
     this.save();
   }
+  reload(){const candidates=[];for(const key of[SAVE_KEY,SAVE_KEY+'.backup'])try{const v=this.storage?.getItem(key);if(v)candidates.push(sanitizeSave(JSON.parse(v)));}catch{}if(!candidates.length)return false;this.data=candidates.sort((a,b)=>b.revision-a.revision)[0];this.status='loaded';return true;}
   save() {
     this.data.revision++;const text=JSON.stringify(this.data);
     try {

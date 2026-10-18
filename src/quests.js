@@ -74,6 +74,7 @@ export class VillageActivities {
       target.collected = true;
       target.root.visible = false;
       this.collected++;
+      game.world.homeSystem?.captureQuest();game.expansion?.profile.save();
       this.started = true;
       game.audio?.play("collect");
       game.effects.dust(target.root.position, { count: 8 });

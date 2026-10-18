@@ -10,17 +10,24 @@ The environmental art overhaul adds object/UV-space pigment and broken ink,
 curved tiled roofs, verandas and painted wall scrolls, a nonrepeating valley atlas,
 dimensional cherry/maple/pine canopies, wind-blown meadows, a brush-current river,
 lotus pond, waterfalls, cliff terraces, bamboo boundaries and layered ink mountains.
-The original Amaterasu GLB, all 41 clips, gameplay and save format are preserved.
+The original Amaterasu mesh, textures, materials and all 41 existing clips are preserved.
+V3 adds three original-rig sleep Actions and additive fields to the existing save.
 The image-space edge filter is removed; surface textures and geometry carry the art.
 
-Previous playable expansion: **sunward-before-art-overhaul** (`6f4f90a`).
+V3 adds physically sculpted terrain, spline-worn paths, a recessed winding river,
+shallow wading ripples, deep-water guards, arched bridges with solid handrails,
+shaped timber, layered tile ribs and cloth canopies. The home now has an animated
+futon, save/load mirror and six registered collectible display slots.
+
+Previous art build: **sunward-before-organic-v3** (`e3b463d`).
+Earlier playable expansion: **sunward-before-art-overhaul** (`6f4f90a`).
 Keep the previous folder if desired. Close its terminal before launching this build;
 use the same browser and localhost address/port to retain existing progress.
 
 ## Play on Windows
 
 The **Sunward-RPG.zip** play build is in `releases/` on branch
-**sunward-painted-world**. Extract it, open the **Sunward-RPG** folder and double-click
+**sunward-organic-v3**. Extract it, open the **Sunward-RPG** folder and double-click
 **START-GAME.cmd**. It uses your existing Node installation or portable Desktop
 Node folder. It opens the browser after the local server starts. Keep its CMD
 window open. This build needs **no npm install and no install-script approvals**.
@@ -53,8 +60,9 @@ audio are local; gameplay makes no external asset requests.
 - **Q:** switch owned weapons. The spear retains long reach; Sundial Flame uses
   shorter circular strikes, area damage and painted fire arcs.
 - **B:** bark stun, spending divine ink; **V:** selected vocal cue.
-- **E:** talk, shop, rest, use the home altar, enter the eastern trial or collect
-  the existing windflowers. The home has an open front entrance.
+- **E:** talk, shop, sleep/wake at the futon, save/load at the home mirror, enter the eastern trial or collect
+  the existing windflowers. The home has an open front entrance. Movement also wakes
+  Amaterasu after she has settled. Deep river water blocks entry; use either bridge.
 - **Middle-drag / Alt-drag:** orbit camera; **wheel:** zoom.
 - **Escape:** pause / close shop; **M:** mute. Pause retains volume/voice controls.
 
@@ -116,3 +124,23 @@ Art validation: `node tools/environment/check.mjs` with the dev server running.
 `tools/environment/review.mjs` captures fixed camera views against the prior
 packaged build on port 5180; set `ART_AFTER_ONLY=1` to inspect only the new version.
 See `notes/environment/STATUS.md` for the art changes and remaining limitations.
+
+
+## V3 environment verification
+
+```sh
+node tools/organic/landform-test.mjs
+node tools/organic/save-test.mjs
+# With the dev server running:
+node tools/organic/interaction-test.mjs
+node tools/environment/check.mjs
+```
+
+The mirror keeps the original save key and supports older saves. Collectible IDs,
+individual windflowers and milestones are additive fields; no new collectible
+catalogue is invented. `world.homeSystem.registry.register({id, createDisplay})`
+registers future shelf items; `awardCollectible(id)` persists known entries.
+
+Before/after images and the precise unfinished-art list are in
+[notes/organic/STATUS.md](notes/organic/STATUS.md). This is working V3 progress,
+not a claim that every legacy prop has received final bespoke artwork.

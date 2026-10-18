@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "name": "Original model, 25 movement Actions and native combat load",
+      "result": {
+        "actions": 44,
+        "position": [
+          -34,
+          -0.05771488696336746,
+          22
+        ]
+      }
+    },
+    {
+      "name": "Movement, jump and stamina dodge",
+      "result": {
+        "jump": true,
+        "stamina": 82.63333333333333
+      }
+    },
+    {
+      "name": "Walk-through home, rest, shop purchase and equipment",
+      "result": true
+    },
+    {
+      "name": "Purchases survive reload; double jump unlock works",
+      "result": true
+    },
+    {
+      "name": "Arena entry, sealed boundary and enemy attack tell/damage",
+      "result": {
+        "spirits": 3,
+        "sealed": true,
+        "tell": true,
+        "damage": 9
+      }
+    },
+    {
+      "name": "Actual weapon strikes clear three waves and defeat boss",
+      "result": {
+        "strikes": 81,
+        "seenBoss": true,
+        "seenPhase2": true,
+        "wins": 1,
+        "coins": 676,
+        "xp": 342
+      }
+    },
+    {
+      "name": "Victory returns home; next trial scales; defeat keeps progress",
+      "result": {
+        "tier": 2,
+        "hp": 10,
+        "retained": true
+      }
+    },
+    {
+      "name": "Saved power drives additional fur without replacing original mesh",
+      "result": true
+    },
+    {
+      "name": "No runtime errors or missing assets",
+      "result": true
+    }
+  ],
+  "errors": [],
+  "note": "Deterministic engine integration checks; scripted invulnerability during the wave-clear test isolates damage/reward mechanics. Separate tests verify player damage and defeat."
+}

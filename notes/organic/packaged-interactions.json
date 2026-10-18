@@ -1,0 +1,40 @@
+{
+  "checks": [
+    {
+      "name": "Player remains grounded on rolling terrain",
+      "result": {
+        "maximumGroundError": 0
+      }
+    },
+    {
+      "name": "Deep water blocks normal movement on both banks",
+      "result": {
+        "bankApproaches": 6
+      }
+    },
+    {
+      "name": "Both arched bridges physically cross the river",
+      "result": true
+    },
+    {
+      "name": "Native rig lowers, sleeps, restores resources and wakes",
+      "result": {
+        "asleep": true,
+        "woke": true
+      }
+    },
+    {
+      "name": "Mirror buttons save and load the existing progression",
+      "result": true
+    },
+    {
+      "name": "Future collectible registry stores IDs and populates only registered slots",
+      "result": true
+    },
+    {
+      "name": "Mirror currency and collectible survive page reload",
+      "result": true
+    }
+  ],
+  "errors": []
+}

@@ -134,7 +134,10 @@ export class Game {
     context.fillRect(3, 3, (122 * Math.max(0, e.hp)) / e.maxHp, 10);
     e.texture.needsUpdate = true;
   }
+  get groundY(){const p=this.player.root.position;return this.world.groundHeight?.(p.x,p.z)??0;}
+  get airHeight(){return this.player.root.position.y-this.groundY;}
   collide(pos, radius = 0.43) {
+    this.world.resolveTerrainCollision?.(pos,radius);
     this.expansion?.collide(pos, radius);
     const b = this.world.bounds;
     pos.x = clamp(pos.x, b.minX + radius, b.maxX - radius);
@@ -173,6 +176,7 @@ export class Game {
         }
       }
     }
+    this.world.resolveTerrainCollision?.(pos,radius);
   }
   move(pos, delta, radius = 0.43) {
     const steps = Math.max(1, Math.ceil(Math.hypot(delta.x, delta.z) / 0.22));
@@ -311,7 +315,7 @@ export class Game {
       const diff = e.mesh.position.clone().sub(root.position);
       diff.y = 0;
       const distance = diff.length();
-      if (distance > data.range || root.position.y > (data.height ?? 1.2))
+      if (distance > data.range || this.airHeight > (data.height ?? 1.2))
         continue;
       if (distance > 0.01 && diff.normalize().dot(forward) < data.arc) continue;
       if (!this.clearShot(root.position, e.mesh.position)) continue;
@@ -412,6 +416,7 @@ export class Game {
     }
   }
   update(dt) {
+    if(this.world.homeSystem?.update(dt))return;
     if (this.expansion?.shopOpen) {
       if (this.input.consume('pause') && this.expansion.mode !== 'result') this.expansion.closeShop();
       this.input.clear(); this.time+=dt; this.world.update(dt,this.time);this.expansion.barrier.update(dt,this.time,this.input.yaw);this.effects.update(dt);this.player.animate({dt,speed:0}); return;
@@ -463,7 +468,7 @@ export class Game {
     if (
       this.input.consume("interact") &&
       this.active &&
-      root.position.y < 0.1 &&
+      this.airHeight < 0.1 &&
       this.dashTime === 0 &&
       this.attackTime === 0
     )
@@ -529,7 +534,7 @@ export class Game {
     ])
       this[name] = Math.max(0, this[name] - dt);
     if (this.input.consume("attack")) {
-      if (root.position.y > 0.16) {
+      if (this.airHeight > 0.16) {
         if (!this.aerialUsed) this.startSpecialAttack("aerial");
       } else if (this.attackTime > 0) this.queuedCombo = true;
       else this.attackBuffer = ATTACK_BUFFER;
@@ -543,7 +548,7 @@ export class Game {
     );
     if (direction.lengthSq())
       direction.normalize().applyAxisAngle(UP, this.input.yaw);
-    const grounded = root.position.y < 0.002 && this.velocityY <= 0;
+    const grounded = this.airHeight < 0.025 && this.velocityY <= 0;
     const data = this.attackTime > 0 ? this.attackData() : null;
     const canCancel =
       !data ||
@@ -604,7 +609,9 @@ export class Game {
       this.audio.play("jump");
     }
     if(this.jumpBuffer>0&&!grounded&&!this.doubleJumpUsed&&(this.expansion?.profile.data.upgrades.movement??0)>=2){this.cancelAttack();this.velocityY=7.4;this.doubleJumpUsed=true;this.jumpBuffer=0;this.player.triggerDouble?.();this.effects.barkWave(root.position,root.rotation.y);this.audio.play('jump');}
-    const wasAirborne = root.position.y > 0;
+    const groundAfter=this.groundY;
+    if(grounded&&this.velocityY<=0)root.position.y=groundAfter;
+    const wasAirborne = root.position.y > groundAfter+.025 && !grounded;
     if (
       this.specialAttack === "aerial" &&
       this.attackTime > 0 &&
@@ -613,8 +620,9 @@ export class Game {
       this.velocityY =
         this.attackPhase < 0.18 ? 0 : Math.min(this.velocityY, -12);
     } else this.velocityY -= 21 * dt;
-    root.position.y = Math.max(0, root.position.y + this.velocityY * dt);
-    if (root.position.y === 0) {
+    root.position.y = Math.max(groundAfter, root.position.y + this.velocityY * dt);
+    root.userData.groundY=groundAfter;root.userData.moving=this.speed>.2;
+    if (root.position.y <= groundAfter+.001) {
       this.velocityY = 0;
       if (wasAirborne) {
         if (this.specialAttack === "aerial" && !this.aerialLanded) {
@@ -633,7 +641,7 @@ export class Game {
       this.attackBuffer > 0 &&
       this.attackTime <= 0 &&
       !dashing &&
-      root.position.y < 0.15
+      this.airHeight < 0.15
     )
       this.startAttack();
     this.updateAttack(dt);
@@ -643,8 +651,8 @@ export class Game {
       dt,
       time: this.time,
       speed: this.attackTime > 0 ? 0 : this.speed,
-      air: root.position.y > 0.05,
-      grounded: root.position.y === 0,
+      air: this.airHeight > 0.05,
+      grounded: this.airHeight < .025,
       verticalVelocity: this.velocityY,
       turnDelta: this.turnDelta,
       landing: this.landing / 0.16,
@@ -655,7 +663,7 @@ export class Game {
       ...this.abilities.pose(),
       velocity: this.velocity.clone().applyAxisAngle(UP, -root.rotation.y),
     });
-    if (this.attackTime === 0 && !dashing && root.position.y === 0) {
+    if (this.attackTime === 0 && !dashing && this.airHeight < .025) {
       if (this.player.footfalls) {
         for (const position of this.player.footfalls) {
           this.audio.play("footstep", { speed: this.speed });
@@ -724,7 +732,7 @@ export class Game {
       this.audio.play("slam");
     }
     const active = phase >= data.active[0] && previousPhase <= data.active[1];
-    if (active && (!data.aerial || this.player.root.position.y < 0.08)) {
+    if (active && (!data.aerial || this.airHeight < 0.08)) {
       // A few arc samples also keep fast animation frames from skipping victims.
       const a = Math.max(previousPhase, data.active[0]);
       const b = Math.min(phase, data.active[1]);

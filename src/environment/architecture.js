@@ -1,24 +1,23 @@
+import{timberGeometry}from'./joinery.js';
 import * as THREE from 'three';
 import {paint,outline} from '../art.js';
 // Thin architectural ink curves need a fraction of the tessellation of body ribbons.
 function stroke(root,points,color,radius=.025){const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));const g=new THREE.TubeGeometry(curve,Math.min(24,Math.max(8,points.length*2)),radius,3,false);const m=new THREE.Mesh(g,paint(color));root.add(m);return m;}
 const materials=new Map();
 function material(c,k){const key=c+k;if(!materials.has(key))materials.set(key,paint(c,k));return materials.get(key);}
-function beam(root,size,pos,color='#73594b',kind='wood',rot=[0,0,0]){const m=new THREE.Mesh(new THREE.BoxGeometry(...size),material(color,kind));m.position.set(...pos);m.rotation.set(...rot);m.castShadow=true;m.receiveShadow=true;root.add(m);return m;}
+function beam(root,size,pos,color='#73594b',kind='wood',rot=[0,0,0]){const m=new THREE.Mesh(timberGeometry(size),material(color,kind));m.position.set(...pos);m.rotation.set(...rot);m.castShadow=true;m.receiveShadow=true;root.add(m);return m;}
 export function paintedRoof(root,w,d,y,color,height=1.1){
  if(height>.7)height*=1.4;
  // Sweeping hipped roof: the corners kick upward, while the eave belly dips.
  const slate=['#617b80','#6e777f','#776f7d','#6c827e'];const tint=slate[Math.abs(Math.round(w*11+d*7))%slate.length];
- const rise=(x,z)=>{let t=Math.min(1,Math.max(Math.abs(x)/(w/2),Math.abs(z)/(d/2)));return y+height*Math.pow(1-t,1.25)+.47*Math.pow(t,6)+.17*Math.pow(Math.abs(x*z)/(w*d*.25),3);};
+ const rise=(x,z)=>{let t=Math.min(1,Math.max(Math.abs(x)/(w/2),Math.max(0,(Math.abs(z)/(d/2)-.48)/.52)));return y+height*Math.pow(1-t,1.25)+.47*Math.pow(t,6)+.17*Math.pow(Math.abs(x*z)/(w*d*.25),3);};
  const g=new THREE.PlaneGeometry(w,d,24,20),a=g.attributes.position;
  for(let i=0;i<a.count;i++){const x=a.getX(i),z=a.getY(i);a.setXYZ(i,x,rise(x,z),z);}g.computeVertexNormals();
  const m=new THREE.Mesh(g,material(tint,'roof'));m.material.side=THREE.DoubleSide;m.castShadow=true;m.receiveShadow=true;root.add(m);
  const perimeter=[];for(let side=0;side<4;side++)for(let i=0;i<=12;i++){let t=i/12,x,z;if(side===0){x=-w/2+t*w;z=-d/2;}if(side===1){x=w/2;z=-d/2+t*d;}if(side===2){x=w/2-t*w;z=d/2;}if(side===3){x=-w/2;z=d/2-t*d;}perimeter.push([x,rise(x,z)-.035,z]);}
  stroke(root,perimeter,'#414f53',.085);stroke(root,perimeter.map(p=>[p[0],p[1]-.13,p[2]]),'#a19a85',.055);
- // Glazed kawara rows are separate painted strokes, not photorealistic tiles.
- for(let side=0;side<2;side++)for(let j=1;j<=8;j++){
-  let z=(j/9-.5)*d*.94,sgn=side?1:-1;const pts=Array.from({length:14},(_,i)=>{let x=sgn*i/13*w/2;return[x,rise(x,z)+.027,z];});stroke(root,pts,j%2?'#9ba8a2':'#4e6268',.016);
- }
+ // Raised clay tile ribs follow the roof's actual curved slope; one mesh per tint.
+ for(let tone=0;tone<3;tone++){const verts=[],uv=[],indices=[];for(let side of[-1,1])for(let row=0;row<Math.ceil(d/.40);row++){if(row%3!==tone)continue;const z=-d/2+.19+row*.40,base=verts.length/3;for(let j=0;j<=12;j++)for(let k=0;k<=4;k++){const xx=side*(.02+j/12*(w/2-.07)),a=k/4*Math.PI,zz=z+Math.cos(a)*.075;verts.push(xx,rise(xx,zz)+.025+Math.sin(a)*.035,zz);uv.push(j/12,k/4);if(j<12&&k<4){let n=base+j*5+k;indices.push(n,n+5,n+1,n+1,n+5,n+6);}}}const geom=new THREE.BufferGeometry();geom.setAttribute('position',new THREE.Float32BufferAttribute(verts,3));geom.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));geom.setIndex(indices);geom.computeVertexNormals();const capMat=material(['#758d8b','#5b767c','#889b94'][tone],'roof');capMat.side=THREE.DoubleSide;root.add(new THREE.Mesh(geom,capMat));}
  for(const sign of[-1,1]){const pts=Array.from({length:18},(_,i)=>{const z=-d/2+i/17*d;return[0,rise(0,z)+.065,z];});stroke(root,pts,'#405456',.07);break;}
  for(const z of[-d*.28,d*.28])stroke(root,[[-.38,y+height+.03,z],[-.16,y+height+.15,z],[.13,y+height+.15,z],[.4,y+height+.02,z]],'#a7b1a0',.04);
  return m;

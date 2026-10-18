@@ -1,0 +1,14 @@
+{
+  "Sleep_Down": {
+    "frames": 100,
+    "maximum_sampled_ik_error": 0.0002586635911583745
+  },
+  "Sleep_Loop": {
+    "frames": 240,
+    "maximum_sampled_ik_error": 0.0001522121428227784
+  },
+  "Sleep_Up": {
+    "frames": 100,
+    "maximum_sampled_ik_error": 0.00024568258055308184
+  }
+}

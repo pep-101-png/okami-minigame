@@ -1,3 +1,4 @@
+import{stoneLantern}from"./environment/props.js";
 import * as THREE from "three";
 import { mat, part } from "./models.js";
 import { paperTexture, stroke, paintedTexture, seededRandom } from "./art.js";
@@ -176,24 +177,7 @@ export function createWorld(scene) {
     [13, 1],
   ]) {
     obstacles.push({ x, z, r: 0.37 });
-    part(scene, new THREE.BoxGeometry(0.7, 0.22, 0.7), stone, [x, 0.11, z]);
-    part(scene, new THREE.CylinderGeometry(0.16, 0.24, 1.2, 8), stone, [
-      x,
-      0.8,
-      z,
-    ]);
-    part(scene, new THREE.BoxGeometry(0.6, 0.6, 0.6), mat("#f3d39a"), [
-      x,
-      1.6,
-      z,
-    ]);
-    part(
-      scene,
-      new THREE.ConeGeometry(0.6, 0.35, 4),
-      wood,
-      [x, 2.1, z],
-      [0, Math.PI / 4, 0],
-    );
+    stoneLantern(scene,x,z);
   }
   // Flat, layered mountain silhouettes resemble ink washes rather than solid cones.
   for (let layer = 0; layer < 3; layer++)

@@ -2,6 +2,9 @@
   "source_sha256": "5e24c750d5c31e1ba071f3290927bc3006d9b4bcd4628aba59bff96fc6f5aa0e",
   "original_source_unchanged": true,
   "requested_actions": [
+    "Sleep_Down",
+    "Sleep_Loop",
+    "Sleep_Up",
     "Idle_Natural",
     "Walk_Natural",
     "Jog_Natural",

@@ -24,7 +24,8 @@ export class FollowCamera {
     ahead.y = 0;
     this.lookAhead.lerp(ahead, 1 - Math.exp(-dt * 3.5));
     const target = player.position.clone();
-    target.y = 0.85 + player.position.y * 0.35;
+    const ground=player.userData.groundY??0;
+    target.y = ground+0.85+(player.position.y-ground)*.35;
     target.add(this.lookAhead);
     this.focus.lerp(target, 1 - Math.exp(-dt * 9));
     const desiredZoom = this.input.zoom * (1 + Math.max(0, speed - 5) * 0.009);

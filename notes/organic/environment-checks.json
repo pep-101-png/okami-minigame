@@ -1,0 +1,47 @@
+{
+  "checks": {
+    "environment": {
+      "version": 3,
+      "name": "The painted valley",
+      "retiredSurfaces": 42,
+      "trees": 21,
+      "grassCount": 735,
+      "atlas": "2048 × 1536, one nonrepeating world atlas",
+      "materials": "object/UV-space pigment; variable ink; no repaint of the original wolf"
+    },
+    "invalidGeometry": 0,
+    "invertedMounds": 0,
+    "interiorPlants": 0,
+    "wolfPaintOverrides": 0,
+    "anchoredMaterialMaps": true,
+    "checkedMaterialMaps": 1121,
+    "physicalBoundaries": [
+      {
+        "axis": "x",
+        "actual": -47.57,
+        "limit": -47.57,
+        "inside": true
+      },
+      {
+        "axis": "x",
+        "actual": 56.57,
+        "limit": 56.57,
+        "inside": true
+      },
+      {
+        "axis": "z",
+        "actual": -32.080000000000005,
+        "limit": -32.57,
+        "inside": true
+      },
+      {
+        "axis": "z",
+        "actual": 31.25,
+        "limit": 31.57,
+        "inside": true
+      }
+    ],
+    "clips": 44
+  },
+  "errors": []
+}

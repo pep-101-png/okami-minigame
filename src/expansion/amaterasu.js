@@ -10,12 +10,12 @@ export function wolf(){
  const root=new THREE.Group(),body=clone(asset.scene);root.add(body);body.scale.setScalar(.34);body.rotation.y=Math.PI;
  body.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;o.frustumCulled=false;}});
  const mixer=new THREE.AnimationMixer(body),actions={};
- for(const clip of asset.animations){if(actions[clip.name])continue;const a=mixer.clipAction(clip);actions[clip.name]=a;if(!/^(Idle|Walk|Jog|Sprint|Air_Fall)/.test(clip.name)){a.setLoop(THREE.LoopOnce,1);a.clampWhenFinished=true;}}
+ for(const clip of asset.animations){if(actions[clip.name])continue;const a=mixer.clipAction(clip);actions[clip.name]=a;if(!/^(Idle|Walk|Jog|Sprint|Air_Fall|Sleep_Loop)/.test(clip.name)){a.setLoop(THREE.LoopOnce,1);a.clampWhenFinished=true;}}
  const head=body.getObjectByName('DEF_head');if(!head)throw new Error('Original wolf head bone missing');body.updateMatrixWorld(true);
  function carrier(bone,point){const g=new THREE.Group();bone.add(g);g.position.copy(bone.worldToLocal(body.localToWorld(new THREE.Vector3(...point))));const q=new THREE.Quaternion();bone.getWorldQuaternion(q);g.quaternion.copy(q.invert().multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0,1,0),Math.PI)));g.scale.setScalar(1/.34);return g;}
  const headCarrier=carrier(head,[0,4.20,4.16]);const{spear,ribbon,tassels,ghost}=createDivineSpear(headCarrier);
  const back=carrier(body.getObjectByName('DEF_chest')||head,[0,4.2,.1]);const sundial=createSundial(back);sundial.root.visible=false;
- const result={root,body,head,spear,ribbon,mixer,actions,state:null,eyes:[],legs:[],footfalls:[],groundLift:0,equipment:'spear',power:0};const ascension=createAscension(result);
+ const result={root,body,head,spear,disc:sundial.root,ribbon,mixer,actions,state:null,eyes:[],legs:[],footfalls:[],groundLift:0,equipment:'spear',power:0};const ascension=createAscension(result);
  result.equip=weapon=>{result.equipment=weapon;spear.visible=weapon==='spear';sundial.root.visible=weapon==='sundial';};
  result.weaponEndpoints=()=>{root.updateMatrixWorld(true);return result.equipment==='sundial'?{tip:sundial.root.localToWorld(new THREE.Vector3(.5,.3,0)),heel:sundial.root.localToWorld(new THREE.Vector3(-.4,-.3,0))}:{tip:spear.localToWorld(new THREE.Vector3(.3,0,2.08)),heel:spear.localToWorld(new THREE.Vector3(.3,0,-.9))};};
  result.updateDetails=()=>root.updateMatrixWorld(true);
@@ -23,7 +23,7 @@ export function wolf(){
  result.triggerDouble=()=>{doubleActive=true;doubleClock=0;};
  function restore(){for(const[b,q]of overlays)b.quaternion.copy(q);overlays.clear();}
  function bend(name,x,y,z){const b=body.getObjectByName(name);if(!b)return;overlays.set(b,b.quaternion.clone());b.rotateX(x);b.rotateY(y);b.rotateZ(z);}
- result.animate=({dt=0,speed=0,air=false,attack=0,dash=false,combo=1,attackClip=null,verticalVelocity=0,turnDelta=0,charge=null,voice=null})=>{
+ result.animate=({dt=0,speed=0,air=false,attack=0,dash=false,combo=1,attackClip=null,verticalVelocity=0,turnDelta=0,charge=null,voice=null,homePose=null})=>{
   restore();time+=dt;
   if(air&&!previousAir)jump=lastSpeed>5?'Jump_Sprint':lastSpeed>2?'Jump_Jog':lastSpeed>.4?'Jump_Walk':'Jump_Standing';
   if(previousAir&&!air){heavyLand=lastVertical < -9;land=heavyLand?.48:.32;doubleActive=false;}lastVertical=verticalVelocity;previousAir=air;land=Math.max(0,land-dt);
@@ -34,11 +34,13 @@ export function wolf(){
   if(attack>0){state=attackClip||['','Thrust','Sweep','Finish'][combo];if(result.equipment==='sundial'&&state!=='AirStrike')state=/Charged/.test(state)?'DiscCharged':/Heavy/.test(state)?'DiscHeavy':['','Disc1','Disc2','Disc3'][combo];}
   else if(charge&&!air&&!dash)state=charge.kind==='heavy'?'ChargeHeavy':'ChargeLight';
   else if(voice?.clip==='Bark'&&speed<.5&&!air&&!dash)state='Bark';
+  if(homePose)state=homePose.clip;
   if(!actions[state])state='Idle_Natural';const a=actions[state];
   if(result.state!==state){const old=actions[result.state];a.reset().setEffectiveWeight(1).setEffectiveTimeScale(1).play();if(old)old.crossFadeTo(a,.13,false);result.state=state;}
   const gait=state.startsWith('Sprint')?'Sprint':state.startsWith('Jog')?'Jog':state.startsWith('Walk')?'Walk':null;
   if(gait)a.setEffectiveTimeScale(THREE.MathUtils.clamp(speed/({Walk:.5667,Jog:2.448,Sprint:4.9725}[gait]),.45,1.7));
   mixer.update(dt);
+  if(homePose){a.time=homePose.phase*a.getClip().duration;mixer.update(0);}
   if(attack>0){a.time=attack*a.getClip().duration;mixer.update(0);}
   else if(charge&&!air&&!dash){a.time=(.08+.90*charge.ratio)*a.getClip().duration;mixer.update(0);}
   if(air&&doubleActive&&attack<=0){doubleClock+=dt;a.time=Math.min(a.getClip().duration,.23+doubleClock*1.15);mixer.update(0);}

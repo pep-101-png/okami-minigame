@@ -1,0 +1,146 @@
+{
+  "baseline": "e3b463db1dcab0ef16c61b86903e6fa40df9248e",
+  "views": [
+    {
+      "name": "village-path",
+      "p": [
+        0,
+        0,
+        8
+      ],
+      "c": [
+        9,
+        8.05,
+        20
+      ],
+      "look": [
+        0,
+        0.85,
+        8
+      ]
+    },
+    {
+      "name": "river-and-bridge",
+      "p": [
+        -23,
+        0,
+        12
+      ],
+      "c": [
+        -14,
+        8.05,
+        24
+      ],
+      "look": [
+        -23,
+        0.85,
+        12
+      ]
+    },
+    {
+      "name": "home",
+      "p": [
+        -34,
+        0,
+        22
+      ],
+      "c": [
+        -25,
+        8.05,
+        34
+      ],
+      "look": [
+        -34,
+        0.85,
+        22
+      ]
+    },
+    {
+      "name": "westbank-path",
+      "p": [
+        -33,
+        0,
+        -19
+      ],
+      "c": [
+        -24,
+        8.05,
+        -7
+      ],
+      "look": [
+        -33,
+        0.85,
+        -19
+      ]
+    },
+    {
+      "name": "home-interior",
+      "p": [
+        -34,
+        0,
+        16
+      ],
+      "c": [
+        -25,
+        8.05,
+        28
+      ],
+      "look": [
+        -34,
+        0.85,
+        16
+      ]
+    },
+    {
+      "name": "valley-boundary",
+      "p": [
+        -44,
+        0,
+        -24
+      ],
+      "c": [
+        -35,
+        6,
+        -12
+      ],
+      "look": [
+        -46,
+        2,
+        -28
+      ]
+    }
+  ],
+  "results": [
+    {
+      "version": "before",
+      "url": "http://127.0.0.1:5181",
+      "metrics": {
+        "drawCalls": 1536,
+        "triangles": 547841,
+        "textures": 61,
+        "position": [
+          -4.178743290511766,
+          0,
+          3.4283422793176426
+        ]
+      },
+      "errors": []
+    },
+    {
+      "version": "after",
+      "url": "http://127.0.0.1:5173",
+      "metrics": {
+        "drawCalls": 1611,
+        "triangles": 821965,
+        "textures": 61,
+        "position": [
+          -4.178743290511766,
+          0,
+          3.4283422793176426
+        ]
+      },
+      "errors": []
+    }
+  ],
+  "note": "Identical camera positions, lens and resolution. The environment lighting belongs to each version; V3 retains V2 lighting. Render counts are measured in software Chromium, not a hardware FPS guarantee."
+}

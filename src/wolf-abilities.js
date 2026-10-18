@@ -86,7 +86,7 @@ export class WolfAbilities {
       if (released) {
         const time = this.charge.time;
         this.charge = null;
-        if (g.player.root.position.y > 0.16) {
+        if (g.airHeight > 0.16) {
           if (!g.aerialUsed)
             this.request(
               "aerial",
@@ -104,7 +104,7 @@ export class WolfAbilities {
     input.consume("lightUp");
     input.consume("heavyUp");
     if (input.consume("heavy"))
-      this.request(g.player.root.position.y > 0.16 ? "aerial" : "heavy");
+      this.request(g.airHeight > 0.16 ? "aerial" : "heavy");
     if (this.pending) {
       const current = g.attackData();
       if (g.attackTime <= 0 || g.attackPhase >= current.cancel) {
@@ -144,7 +144,7 @@ export class WolfAbilities {
       g.notify(`Bark recovers in ${this.barkCooldown.toFixed(1)}s`, 1.2);
       return false;
     }
-    if (g.player.root.position.y > 0.15 || g.dashTime > 0) return false;
+    if (g.airHeight > 0.15 || g.dashTime > 0) return false;
     if (g.expansion && !g.expansion.spendEnergy(16)) return false;
     g.cancelAttack();
     this.cancel();
@@ -201,7 +201,7 @@ export class WolfAbilities {
     const g = this.game;
     if (
       g.speed < 4.5 ||
-      g.player.root.position.y > 0.05 ||
+      g.airHeight > 0.05 ||
       g.attackTime > 0 ||
       this.charge
     )

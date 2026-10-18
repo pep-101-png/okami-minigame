@@ -36,16 +36,17 @@ export function paintedSky(scene){
 }
 export function valleyBoundaries(scene,world){
  const root=new THREE.Group();root.name='Painted cliff terraces · physical map edges';scene.add(root);const b=world.bounds;
- for(let side=0;side<4;side++){
-  const length=side%2?b.maxZ-b.minZ:b.maxX-b.minX,N=Math.ceil(length/2),vertices=[],uv=[],indices=[],colors=[];
-  for(let i=0;i<=N;i++)for(let j=0;j<=5;j++){
-   const t=i/N,depth=j/5,edge=.30+depth*11,height=Math.pow(depth,.48)*(3.7+Math.sin(t*19+side)*1.2+Math.sin(t*42)*.4);
-   let x,z;if(side===0){x=b.minX+t*length;z=b.minZ-edge;}if(side===1){x=b.maxX+edge;z=b.minZ+t*length;}if(side===2){x=b.minX+t*length;z=b.maxZ+edge;}if(side===3){x=b.minX-edge;z=b.minZ+t*length;}
-   vertices.push(x,height-.035,z);uv.push(t*9,depth*2);const c=new THREE.Color(j>3?'#8ba58a':j%2?'#929f96':'#aab4a2');colors.push(c.r,c.g,c.b);
-   if(i<N&&j<5){let k=i*6+j;indices.push(k,k+1,k+6,k+1,k+7,k+6);}
-  }
-  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));g.setAttribute('normal',new THREE.Float32BufferAttribute(new Array(vertices.length).fill(0),3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));g.setIndex(indices);g.computeVertexNormals();const m=paint('#ffffff','stone');m.vertexColors=true;m.side=THREE.DoubleSide;const cliff=new THREE.Mesh(g,m);cliff.receiveShadow=true;root.add(cliff);
+ // A continuous rounded contour replaces four disconnected straight cliff strips.
+ const cx=(b.minX+b.maxX)/2,cz=(b.minZ+b.maxZ)/2,hx=(b.maxX-b.minX)/2,hz=(b.maxZ-b.minZ)/2;
+ const contour=new THREE.CatmullRomCurve3([[cx,b.minZ-3],[b.maxX-5,b.minZ-3],[b.maxX+3,b.minZ+5],[b.maxX+3,b.maxZ-5],[b.maxX-5,b.maxZ+3],[b.minX+5,b.maxZ+3],[b.minX-3,b.maxZ-5],[b.minX-3,b.minZ+5],[b.minX+5,b.minZ-3]].map(([x,z])=>new THREE.Vector3(x,0,z)),true,'catmullrom',.3);
+ const vertices=[],uv=[],indices=[],colors=[],N=200,K=10;
+ for(let i=0;i<=N;i++)for(let j=0;j<=K;j++){
+  const t=i/N,depth=j/K,p=contour.getPointAt(t%1),out=new THREE.Vector2((p.x-cx)/hx,(p.z-cz)/hz).normalize(),ripple=Math.sin(t*71)*.32+Math.sin(t*133)*.15;
+  const x=p.x+out.x*(depth*13+ripple),z=p.z+out.y*(depth*13+ripple),base=world.landform.terrainHeight(x,z),h=base+Math.pow(depth,.7)*(5.0+Math.sin(t*29)*1.5+Math.sin(t*71)*.55);
+  vertices.push(x,h-.04,z);uv.push(t*35,depth*3);const c=new THREE.Color().setHSL(.27+Math.sin(t*37)*.015,.10,.60-depth*.10);colors.push(c.r,c.g,c.b);
+  if(i<N&&j<K){const k=i*(K+1)+j;indices.push(k,k+1,k+K+1,k+1,k+K+2,k+K+1);}
  }
+ const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));g.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));g.setIndex(indices);g.computeVertexNormals();const m=paint('#ffffff','stone');m.vertexColors=true;m.side=THREE.DoubleSide;const cliff=new THREE.Mesh(g,m);cliff.receiveShadow=true;root.add(cliff);
  const stones=new THREE.Group();root.add(stones);
  // Ink-drawn garden walls and irregular basalt banks, outside existing routes.
  for(const z of[-31.8,30.8])for(let i=0;i<14;i++){
