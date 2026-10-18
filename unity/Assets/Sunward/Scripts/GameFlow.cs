@@ -84,7 +84,7 @@ namespace Sunward
 
         public void RefreshQuest()
         {
-            foreach (var r in FindObjectsByType<MeshRenderer>(FindObjectsSortMode.None))
+            foreach (var r in FindObjectsByType<MeshRenderer>())
                 foreach (string id in new[]
                 {
                     "garden",
@@ -364,7 +364,7 @@ namespace Sunward
                 if (e)
                     Destroy(e.gameObject);
             Enemies.Clear();
-            foreach (var b in FindObjectsByType<InkProjectile>(FindObjectsSortMode.None))
+            foreach (var b in FindObjectsByType<InkProjectile>())
                 Destroy(b.gameObject);
         }
 

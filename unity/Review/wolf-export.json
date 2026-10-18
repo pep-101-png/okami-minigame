@@ -422,5 +422,71 @@
       "roughness": 0.9839954972267151
     }
   ],
-  "notes": "FBX uses native Unity importer; Editor builder remaps preserved PNG base maps. Unity visual comparison remains required."
+  "notes": "FBX uses native Unity importer; Editor builder remaps preserved PNG base maps. Unity visual comparison remains required.",
+  "meshMaterials": [
+    {
+      "name": "Icosphere",
+      "materials": []
+    },
+    {
+      "name": "Object_3",
+      "materials": [
+        "Material__193"
+      ]
+    },
+    {
+      "name": "Object_11",
+      "materials": [
+        "Material__201"
+      ]
+    },
+    {
+      "name": "Object_5",
+      "materials": [
+        "Material__198"
+      ]
+    },
+    {
+      "name": "Object_7",
+      "materials": [
+        "Material__209"
+      ]
+    },
+    {
+      "name": "Object_9",
+      "materials": [
+        "Material__230"
+      ]
+    },
+    {
+      "name": "Object_10",
+      "materials": [
+        "Material__199"
+      ]
+    },
+    {
+      "name": "Object_2",
+      "materials": [
+        "Material__191"
+      ]
+    },
+    {
+      "name": "Object_4",
+      "materials": [
+        "Material__197"
+      ]
+    },
+    {
+      "name": "Object_6",
+      "materials": [
+        "Material__200"
+      ]
+    },
+    {
+      "name": "Object_8",
+      "materials": [
+        "Material__226"
+      ]
+    }
+  ]
 }

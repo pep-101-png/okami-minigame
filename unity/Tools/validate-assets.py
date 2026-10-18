@@ -18,6 +18,13 @@ assert len(data['world']['terrain']['heights'])==data['world']['terrain']['nx']*
 report=json.loads((ROOT/'Review/wolf-export.json').read_text());assert len(report['clips'])==44
 for m in report['materials']:
  for image in m['images']:assert(ROOT/'Assets/Sunward/Textures'/('Wolf-'+image.split('.')[0]+'.png')).exists()
+bindings=report['meshMaterials'];assert len(bindings)==11
+assert len({b['name']for b in bindings})==len(bindings)
+material_names={m['name']for m in report['materials']}
+for binding in bindings:assert set(binding['materials'])<=material_names
+from PIL import Image
+for image in (ROOT/'Assets/Sunward/Textures').glob('*.png'):
+ with Image.open(image)as png:png.verify()
 for file in (ROOT/'Assets/Sunward/Scripts').glob('*.cs'):
  for name in re.findall(r'class\s+(\w+)\s*:\s*MonoBehaviour',file.read_text()):assert name==file.stem,(name,file)
 for file in ROOT.rglob('*'):

@@ -281,13 +281,17 @@ namespace Sunward.Editor
                     var imp = AssetImporter.GetAtPath(path) as TextureImporter;
                     if (imp != null && initialized.Add(path))
                     {
+                        imp.textureType = TextureImporterType.Default;
+                        imp.textureShape = TextureImporterShape.Texture2D;
                         imp.sRGBTexture = true;
                         imp.alphaIsTransparency = d.transparent;
                         imp.wrapMode = TextureWrapMode.Repeat;
                         imp.SaveAndReimport();
                     }
 
-                    m.SetTexture("_BaseMap", AssetDatabase.LoadAssetAtPath<Texture2D>(path));
+                    var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+                    if (!texture) throw new InvalidDataException("Expected a 2D map: " + path);
+                    m.SetTexture("_BaseMap", texture);
                 }
 
                 if (d.kind != "water")
@@ -403,6 +407,7 @@ namespace Sunward.Editor
         class WolfReport
         {
             public WolfMaterial[] materials;
+            public WolfMeshMaterials[] meshMaterials;
         }
 
         [Serializable]
@@ -412,6 +417,13 @@ namespace Sunward.Editor
             public string[] images;
             public float[] color;
             public float metallic, roughness;
+        }
+
+        [Serializable]
+        class WolfMeshMaterials
+        {
+            public string name;
+            public string[] materials;
         }
 
         static string CleanClip(string name)
@@ -432,7 +444,10 @@ namespace Sunward.Editor
             importer.optimizeGameObjects = false;
             importer.importNormals = ModelImporterNormals.Import;
             importer.animationCompression = ModelImporterAnimationCompression.Off;
-            importer.materialImportMode = ModelImporterMaterialImportMode.ImportStandard;
+            // Material conversion is intentionally disabled. Legacy FBX conversion can bind
+            // a Cube texture to _MainTex before our final material assignment runs.
+            // Keep rig/mesh/animation import, then bind the original 2D maps by mesh name.
+            importer.materialImportMode = ModelImporterMaterialImportMode.None;
             var clips = importer.defaultClipAnimations;
             foreach (var c in clips)
             {
@@ -465,6 +480,8 @@ namespace Sunward.Editor
                     var texImporter = AssetImporter.GetAtPath(texturePath) as TextureImporter;
                     if (texImporter != null)
                     {
+                        texImporter.textureType = TextureImporterType.Default;
+                        texImporter.textureShape = TextureImporterShape.Texture2D;
                         texImporter.sRGBTexture = true;
                         texImporter.textureCompression = TextureImporterCompression.Uncompressed;
                         texImporter.SaveAndReimport();
@@ -484,9 +501,35 @@ namespace Sunward.Editor
             var visual = UnityEngine.Object.Instantiate(model, root.transform);
             visual.name = "Original Amaterasu · geometry untouched";
             visual.transform.localScale = Vector3.one * .34f;
+            if (report.meshMaterials == null || report.meshMaterials.Length == 0)
+                throw new InvalidDataException("Missing original mesh/material bindings in Review/wolf-export.json");
+            var bindings = report.meshMaterials.ToDictionary(entry => entry.name);
+            var fallback = new Material(Shader.Find("Universal Render Pipeline/Lit")) { name = "Original glTF default" };
+            fallback.SetColor("_BaseColor", Color.white);
+            fallback.SetFloat("_Metallic", 1);
+            fallback.SetFloat("_Smoothness", 0);
+            fallback = SaveAsset(fallback, "Wolf-OriginalDefault.mat");
             foreach (var renderer in visual.GetComponentsInChildren<Renderer>())
             {
-                renderer.sharedMaterials = renderer.sharedMaterials.Select(m => wolfMaterials.TryGetValue(m.name, out var mapped) ? mapped : m).ToArray();
+                if (!bindings.TryGetValue(renderer.name, out var binding))
+                    throw new InvalidDataException("Unmapped original wolf renderer: " + renderer.name);
+                var skinned = renderer as SkinnedMeshRenderer;
+                var filter = renderer.GetComponent<MeshFilter>();
+                var mesh = skinned ? skinned.sharedMesh : filter ? filter.sharedMesh : null;
+                int slots = mesh ? mesh.subMeshCount : 1;
+                if (binding.materials == null || binding.materials.Length == 0)
+                    renderer.sharedMaterials = Enumerable.Repeat(fallback, slots).ToArray();
+                else
+                {
+                    if (binding.materials.Length != slots)
+                        throw new InvalidDataException("Original wolf material-slot mismatch: " + renderer.name + " (" + binding.materials.Length + " source / " + slots + " imported)");
+                    renderer.sharedMaterials = binding.materials.Select(name =>
+                    {
+                        if (!wolfMaterials.TryGetValue(name, out var material))
+                            throw new InvalidDataException("Missing original wolf material: " + name);
+                        return material;
+                    }).ToArray();
+                }
                 renderer.shadowCastingMode = ShadowCastingMode.On;
             }
 
