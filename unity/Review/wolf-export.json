@@ -1,0 +1,426 @@
+{
+  "source_sha256": "98c380b9c078457df8493595d26bdb4ccd6285feadef3b793cd457fcd5d1d609",
+  "source_unchanged": true,
+  "clips": [
+    {
+      "name": "Air_Fall_WOLF_RIG",
+      "start": 1.0,
+      "end": 73.0
+    },
+    {
+      "name": "AirStrike_WOLF_RIG",
+      "start": 1.0,
+      "end": 45.0
+    },
+    {
+      "name": "Bark_WOLF_RIG",
+      "start": 1.0,
+      "end": 34.0
+    },
+    {
+      "name": "ChargedHeavy_WOLF_RIG",
+      "start": 1.0,
+      "end": 53.0
+    },
+    {
+      "name": "ChargedThrust_WOLF_RIG",
+      "start": 1.0,
+      "end": 40.0
+    },
+    {
+      "name": "ChargeHeavy_WOLF_RIG",
+      "start": 1.0,
+      "end": 46.0
+    },
+    {
+      "name": "ChargeLight_WOLF_RIG",
+      "start": 1.0,
+      "end": 46.0
+    },
+    {
+      "name": "Disc1_WOLF_RIG",
+      "start": 1.0,
+      "end": 23.0
+    },
+    {
+      "name": "Disc2_WOLF_RIG",
+      "start": 1.0,
+      "end": 30.0
+    },
+    {
+      "name": "Disc3_WOLF_RIG",
+      "start": 1.0,
+      "end": 41.0
+    },
+    {
+      "name": "DiscCharged_WOLF_RIG",
+      "start": 1.0,
+      "end": 52.0
+    },
+    {
+      "name": "DiscHeavy_WOLF_RIG",
+      "start": 1.0,
+      "end": 41.0
+    },
+    {
+      "name": "Dodge_Back_WOLF_RIG",
+      "start": 1.0,
+      "end": 59.0
+    },
+    {
+      "name": "Dodge_Forward_WOLF_RIG",
+      "start": 1.0,
+      "end": 59.0
+    },
+    {
+      "name": "Dodge_Jog_WOLF_RIG",
+      "start": 1.0,
+      "end": 59.0
+    },
+    {
+      "name": "Dodge_Left_WOLF_RIG",
+      "start": 1.0,
+      "end": 59.0
+    },
+    {
+      "name": "Dodge_Right_WOLF_RIG",
+      "start": 1.0,
+      "end": 59.0
+    },
+    {
+      "name": "Dodge_Sprint_WOLF_RIG",
+      "start": 1.0,
+      "end": 53.0
+    },
+    {
+      "name": "Dodge_Walk_WOLF_RIG",
+      "start": 1.0,
+      "end": 65.0
+    },
+    {
+      "name": "Finish_WOLF_RIG",
+      "start": 1.0,
+      "end": 41.0
+    },
+    {
+      "name": "HeavyArc_WOLF_RIG",
+      "start": 1.0,
+      "end": 37.0
+    },
+    {
+      "name": "HeavyReturn_WOLF_RIG",
+      "start": 1.0,
+      "end": 43.0
+    },
+    {
+      "name": "Idle_Natural_WOLF_RIG",
+      "start": 1.0,
+      "end": 481.0
+    },
+    {
+      "name": "Jog_Natural_WOLF_RIG",
+      "start": 1.0,
+      "end": 41.0
+    },
+    {
+      "name": "Jog_Turn_L_WOLF_RIG",
+      "start": 1.0,
+      "end": 41.0
+    },
+    {
+      "name": "Jog_Turn_R_WOLF_RIG",
+      "start": 1.0,
+      "end": 41.0
+    },
+    {
+      "name": "Jump_Double_WOLF_RIG",
+      "start": 1.0,
+      "end": 79.0
+    },
+    {
+      "name": "Jump_Jog_WOLF_RIG",
+      "start": 1.0,
+      "end": 99.0
+    },
+    {
+      "name": "Jump_Sprint_WOLF_RIG",
+      "start": 1.0,
+      "end": 95.0
+    },
+    {
+      "name": "Jump_Standing_WOLF_RIG",
+      "start": 1.0,
+      "end": 111.0
+    },
+    {
+      "name": "Jump_Walk_WOLF_RIG",
+      "start": 1.0,
+      "end": 105.0
+    },
+    {
+      "name": "Land_Heavy_WOLF_RIG",
+      "start": 1.0,
+      "end": 79.0
+    },
+    {
+      "name": "Land_Soft_WOLF_RIG",
+      "start": 1.0,
+      "end": 55.0
+    },
+    {
+      "name": "Sleep_Down_WOLF_RIG",
+      "start": 1.0,
+      "end": 101.0
+    },
+    {
+      "name": "Sleep_Loop_WOLF_RIG",
+      "start": 1.0,
+      "end": 241.00001525878906
+    },
+    {
+      "name": "Sleep_Up_WOLF_RIG",
+      "start": 1.0,
+      "end": 101.0
+    },
+    {
+      "name": "Sprint_Fluid_WOLF_RIG",
+      "start": 1.0,
+      "end": 33.0
+    },
+    {
+      "name": "Sprint_Turn_L_WOLF_RIG",
+      "start": 1.0,
+      "end": 33.0
+    },
+    {
+      "name": "Sprint_Turn_R_WOLF_RIG",
+      "start": 1.0,
+      "end": 33.0
+    },
+    {
+      "name": "Sweep_WOLF_RIG",
+      "start": 1.0,
+      "end": 30.0
+    },
+    {
+      "name": "Thrust_WOLF_RIG",
+      "start": 1.0,
+      "end": 25.0
+    },
+    {
+      "name": "Walk_Natural_WOLF_RIG",
+      "start": 1.0,
+      "end": 73.0
+    },
+    {
+      "name": "Walk_Turn_L_WOLF_RIG",
+      "start": 1.0,
+      "end": 73.0
+    },
+    {
+      "name": "Walk_Turn_R_WOLF_RIG",
+      "start": 1.0,
+      "end": 73.0
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_10",
+      "vertices": 494,
+      "polygons": 822
+    },
+    {
+      "name": "Object_11",
+      "vertices": 1976,
+      "polygons": 2054
+    },
+    {
+      "name": "Object_2",
+      "vertices": 23160,
+      "polygons": 43644
+    },
+    {
+      "name": "Object_3",
+      "vertices": 304,
+      "polygons": 292
+    },
+    {
+      "name": "Object_4",
+      "vertices": 68,
+      "polygons": 100
+    },
+    {
+      "name": "Object_5",
+      "vertices": 286,
+      "polygons": 216
+    },
+    {
+      "name": "Object_6",
+      "vertices": 6259,
+      "polygons": 11340
+    },
+    {
+      "name": "Object_7",
+      "vertices": 556,
+      "polygons": 692
+    },
+    {
+      "name": "Object_8",
+      "vertices": 871,
+      "polygons": 1300
+    },
+    {
+      "name": "Object_9",
+      "vertices": 1470,
+      "polygons": 1784
+    },
+    {
+      "name": "Icosphere",
+      "vertices": 42,
+      "polygons": 80
+    }
+  ],
+  "materials": [
+    {
+      "name": "Material__191",
+      "images": [
+        "Material__191_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    },
+    {
+      "name": "Material__193",
+      "images": [
+        "Material__191_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    },
+    {
+      "name": "Material__197",
+      "images": [
+        "Material__191_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    },
+    {
+      "name": "Material__198",
+      "images": [
+        "Material__191_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    },
+    {
+      "name": "Material__199",
+      "images": [
+        "Material__191_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    },
+    {
+      "name": "Material__200",
+      "images": [
+        "Material__200_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    },
+    {
+      "name": "Material__201",
+      "images": [
+        "Material__201_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    },
+    {
+      "name": "Material__209",
+      "images": [
+        "Material__209_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    },
+    {
+      "name": "Material__226",
+      "images": [
+        "Material__226_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    },
+    {
+      "name": "Material__230",
+      "images": [
+        "Material__230_baseColor"
+      ],
+      "color": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "metallic": 0,
+      "roughness": 0.9839954972267151
+    }
+  ],
+  "notes": "FBX uses native Unity importer; Editor builder remaps preserved PNG base maps. Unity visual comparison remains required."
+}

@@ -1,0 +1,9 @@
+{
+  "source_actions": 44,
+  "fbx_actions": 44,
+  "max_duration_error_seconds": 2.220446049250313e-16,
+  "skinned_meshes": 11,
+  "nonfinite_vertices": 0,
+  "note": "Blender reimport/animation-duration validation, not Unity visual or runtime approval.",
+  "maximum_rest_surface_vertex_distance_blender_units": 1.0683467053240747e-06
+}

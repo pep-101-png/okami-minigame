@@ -1,0 +1,17 @@
+{
+  "converted_meshes": 1110,
+  "vertices": 657793,
+  "triangles": 746809,
+  "materials": 251,
+  "map_textures": 36,
+  "wolf_textures": 6,
+  "animation_actions": 44,
+  "source_model_sha256": "98c380b9c078457df8493595d26bdb4ccd6285feadef3b793cd457fcd5d1d609",
+  "home_roof_cutaway_meshes": true,
+  "three_collectible_flower_visual_groups": true,
+  "mono_behaviour_filenames_match": true,
+  "unity_editor_compilation": "NOT RUN",
+  "unity_shader_compilation": "NOT RUN",
+  "unity_playmode": "NOT RUN",
+  "windows_build": "NOT RUN"
+}

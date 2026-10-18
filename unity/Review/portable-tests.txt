@@ -1,0 +1,19 @@
+Parsed 25 C# files without syntax errors (not Unity API compilation).
+PASS fresh save validation
+PASS unaffordable purchase rejected
+PASS health purchase and cost
+PASS weapon unlock/equip
+PASS duplicate weapon rejected
+PASS double-jump upgrade threshold
+PASS defeat does not reset progression
+PASS level/power growth
+PASS file save verified
+PASS backup save created
+PASS reload restores currency
+PASS quest/collectible save roundtrip
+PASS corrupted current file recovers backup
+PASS invalid import keeps progress
+PASS high-revision checkpoint
+PASS browser-shaped save import
+PASS import remains newer than Unity backup
+PASS invalid upgrade cap rejected

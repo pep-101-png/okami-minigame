@@ -1,0 +1,924 @@
+{
+  "source": "b55b1bd V3",
+  "assets": [
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 35
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 35
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 38
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 35
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 34
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 35
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 34
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 34
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 39
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 43
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 2
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 33
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 36
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 34
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 33
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 34
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 33
+    },
+    {
+      "name": "TownV3",
+      "meshes": 7
+    },
+    {
+      "name": "TownV3",
+      "meshes": 7
+    },
+    {
+      "name": "TownV3",
+      "meshes": 7
+    },
+    {
+      "name": "TownV3",
+      "meshes": 7
+    },
+    {
+      "name": "TownV3",
+      "meshes": 7
+    },
+    {
+      "name": "TownV3",
+      "meshes": 7
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 3
+    },
+    {
+      "name": "TownV3",
+      "meshes": 3
+    },
+    {
+      "name": "TownV3",
+      "meshes": 3
+    },
+    {
+      "name": "TownV3",
+      "meshes": 3
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 8
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 3
+    },
+    {
+      "name": "TownV3",
+      "meshes": 6
+    },
+    {
+      "name": "TownV3",
+      "meshes": 2
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 2
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 0
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 4
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 5
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 13
+    },
+    {
+      "name": "TownV3",
+      "meshes": 1
+    },
+    {
+      "name": "TownV3",
+      "meshes": 14
+    },
+    {
+      "name": "NPC-0",
+      "meshes": 16
+    },
+    {
+      "name": "NPC-1",
+      "meshes": 16
+    },
+    {
+      "name": "NPC-2",
+      "meshes": 16
+    },
+    {
+      "name": "NPC-3",
+      "meshes": 16
+    },
+    {
+      "name": "NPC-4",
+      "meshes": 16
+    },
+    {
+      "name": "NPC-5",
+      "meshes": 16
+    },
+    {
+      "name": "NPC-6",
+      "meshes": 16
+    },
+    {
+      "name": "Enemy-wisp",
+      "meshes": 11
+    },
+    {
+      "name": "Enemy-reed",
+      "meshes": 10
+    },
+    {
+      "name": "Enemy-heavy",
+      "meshes": 13
+    },
+    {
+      "name": "Enemy-ranged",
+      "meshes": 11
+    },
+    {
+      "name": "Enemy-elite",
+      "meshes": 13
+    },
+    {
+      "name": "Enemy-boss",
+      "meshes": 17
+    },
+    {
+      "name": "Spear",
+      "meshes": 8
+    },
+    {
+      "name": "Sundial",
+      "meshes": 8
+    }
+  ],
+  "materials": 251,
+  "textures": 36,
+  "bytes": 40544652
+}
