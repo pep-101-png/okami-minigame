@@ -1,0 +1,167 @@
+{
+  "verified_utc": "2026-10-18T04:18:49.208742+00:00",
+  "baseline": "6f4f90a77f56b04b0ea62a6171099eee97d7a7c5",
+  "release": {
+    "zip_sha256": "8d86c8c08acf9b161374ed44c58538ee3ea860355f4b599f49487b4d43f796b5",
+    "files": 27,
+    "model_sha256": "dbb683222afcb3cfdfe675a6882114ebd53c14e485de28d2607256ea274be921",
+    "node_required": true,
+    "npm_install_required": false
+  },
+  "protected_game_files": {
+    "public/models/amaterasu-original.glb": "dbb683222afcb3cfdfe675a6882114ebd53c14e485de28d2607256ea274be921",
+    "src/game.js": "cebbd52f98ed8de42cda6cdf0b0e6ef3bf79c953b722aaba269f8f10a2243875",
+    "src/combat.js": "f3d6fed1e812869e01f62d324874d1f9bcff3c92cadbaf4e55064e6ac27b765b",
+    "src/expansion/progression.js": "bbc105bdfa1beef56cce1f2a73a4a464a32bb2f5987bd273b1478725b3753dc1",
+    "src/expansion/amaterasu.js": "60a999b4546a3652d3a57ea81758551477c87b2b845dc6ae8d506947abb2c260",
+    "src/quests.js": "72ac5165f229914bf4513be616ff325e91bf2c83de3db0e402380870615fbab1"
+  },
+  "standalone_viewer_protected_hashes_match": true,
+  "gameplay": {
+    "checks": [
+      {
+        "name": "Original model, 25 movement Actions and native combat load",
+        "result": {
+          "actions": 41,
+          "position": [
+            -34,
+            0,
+            22
+          ]
+        }
+      },
+      {
+        "name": "Movement, jump and stamina dodge",
+        "result": {
+          "jump": true,
+          "stamina": 82.63333333333333
+        }
+      },
+      {
+        "name": "Walk-through home, rest, shop purchase and equipment",
+        "result": true
+      },
+      {
+        "name": "Purchases survive reload; double jump unlock works",
+        "result": true
+      },
+      {
+        "name": "Arena entry, sealed boundary and enemy attack tell/damage",
+        "result": {
+          "spirits": 3,
+          "sealed": true,
+          "tell": true,
+          "damage": 9
+        }
+      },
+      {
+        "name": "Actual weapon strikes clear three waves and defeat boss",
+        "result": {
+          "strikes": 81,
+          "seenBoss": true,
+          "seenPhase2": true,
+          "wins": 1,
+          "coins": 676,
+          "xp": 342
+        }
+      },
+      {
+        "name": "Victory returns home; next trial scales; defeat keeps progress",
+        "result": {
+          "tier": 2,
+          "hp": 10,
+          "retained": true
+        }
+      },
+      {
+        "name": "Saved power drives additional fur without replacing original mesh",
+        "result": true
+      },
+      {
+        "name": "No runtime errors or missing assets",
+        "result": true
+      }
+    ],
+    "errors": [],
+    "note": "Deterministic engine integration checks; scripted invulnerability during the wave-clear test isolates damage/reward mechanics. Separate tests verify player damage and defeat."
+  },
+  "environment": {
+    "checks": {
+      "environment": {
+        "version": 1,
+        "name": "The painted valley",
+        "retiredSurfaces": 42,
+        "trees": 21,
+        "grassCount": 759,
+        "atlas": "2048 \u00d7 1536, one nonrepeating world atlas",
+        "materials": "object/UV-space pigment; variable ink; no repaint of the original wolf"
+      },
+      "invalidGeometry": 0,
+      "invertedMounds": 0,
+      "interiorPlants": 0,
+      "wolfPaintOverrides": 0,
+      "anchoredMaterialMaps": true,
+      "checkedMaterialMaps": 931,
+      "physicalBoundaries": [
+        {
+          "axis": "x",
+          "actual": -47.57,
+          "limit": -47.57,
+          "inside": true
+        },
+        {
+          "axis": "x",
+          "actual": 56.57,
+          "limit": 56.57,
+          "inside": true
+        },
+        {
+          "axis": "z",
+          "actual": -32.080000000000005,
+          "limit": -32.57,
+          "inside": true
+        },
+        {
+          "axis": "z",
+          "actual": 31.25,
+          "limit": 31.57,
+          "inside": true
+        }
+      ],
+      "clips": 41
+    },
+    "errors": []
+  },
+  "fixed_camera_rendering": {
+    "environment": {
+      "version": 1,
+      "name": "The painted valley",
+      "retiredSurfaces": 42,
+      "trees": 21,
+      "grassCount": 759,
+      "atlas": "2048 \u00d7 1536, one nonrepeating world atlas",
+      "materials": "object/UV-space pigment; variable ink; no repaint of the original wolf"
+    },
+    "invalidGeometry": 0,
+    "rendering": {
+      "drawCalls": 1115,
+      "triangles": 420027,
+      "textures": 63
+    },
+    "capturedViews": [
+      "home-exterior",
+      "market",
+      "river-bridge",
+      "arena",
+      "home-interior",
+      "mountain-horizon",
+      "garden-pond",
+      "meadow-terrace"
+    ],
+    "errors": []
+  },
+  "platform": "Linux Chromium, software WebGL; Windows launcher not executed",
+  "limits": "No claim of real-device 60 FPS, human balance or final art approval.",
+  "geometry_checks": "Finite authored rocks with outward side winding and upward caps; raised meadow normals face upwards.",
+  "http_checks": "200 for root and original wolf GLB; 404 for missing modules and parent traversal; ZIP CRC/manifest verified."
+}

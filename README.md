@@ -1,4 +1,4 @@
-# Sunward — The Hollow Bell
+# Sunward — The Painted Valley
 
 A playable Three.js action RPG expansion of the existing Windflower Village game.
 Explore the enlarged village, return to Amaterasu's walk-in home, buy permanent
@@ -6,10 +6,21 @@ blessings and weapons, and challenge three arena waves followed by Kurogane.
 Coins, experience, purchased weapons, upgrades and divine growth persist through
 victory, defeat, retreat and browser restarts.
 
+The environmental art overhaul adds object/UV-space pigment and broken ink,
+curved tiled roofs, verandas and painted wall scrolls, a nonrepeating valley atlas,
+dimensional cherry/maple/pine canopies, wind-blown meadows, a brush-current river,
+lotus pond, waterfalls, cliff terraces, bamboo boundaries and layered ink mountains.
+The original Amaterasu GLB, all 41 clips, gameplay and save format are preserved.
+The image-space edge filter is removed; surface textures and geometry carry the art.
+
+Previous playable expansion: **sunward-before-art-overhaul** (`6f4f90a`).
+Keep the previous folder if desired. Close its terminal before launching this build;
+use the same browser and localhost address/port to retain existing progress.
+
 ## Play on Windows
 
 The **Sunward-RPG.zip** play build is in `releases/` on branch
-**sunward-rpg-expansion**. Extract it, open the **Sunward-RPG** folder and double-click
+**sunward-painted-world**. Extract it, open the **Sunward-RPG** folder and double-click
 **START-GAME.cmd**. It uses your existing Node installation or portable Desktop
 Node folder. It opens the browser after the local server starts. Keep its CMD
 window open. This build needs **no npm install and no install-script approvals**.
@@ -70,8 +81,9 @@ reshaped; these effects are separate geometry and vanish at low power.
 
 The playable Amaterasu is exported from the approved original Sketchfab wolf's
 latest Blender movement project, with 25 named movement/jump/dodge Actions plus new original-rig spear, disc, charge and bark Actions. The
-source `.blend` files and older game GLBs are preserved. The previous game commit
-is recoverable on **sunward-pre-expansion**. The standalone browser wolf viewer
+source `.blend` files and older game GLBs are preserved. The original game commit
+is recoverable on **sunward-pre-expansion**; the RPG expansion before this art pass
+is recoverable on **sunward-before-art-overhaul**. The standalone browser wolf viewer
 and its pre-existing uncommitted work are not part of this expansion commit.
 
 ## Checks and remaining work
@@ -99,3 +111,8 @@ See `notes/expansion/STATUS.md` for the continuation checklist.
 
 Original model/audio attribution: [credits](public/credits.html),
 [third-party notices](THIRD_PARTY.md). No copyrighted Ōkami music is included.
+
+Art validation: `node tools/environment/check.mjs` with the dev server running.
+`tools/environment/review.mjs` captures fixed camera views against the prior
+packaged build on port 5180; set `ART_AFTER_ONLY=1` to inspect only the new version.
+See `notes/environment/STATUS.md` for the art changes and remaining limitations.

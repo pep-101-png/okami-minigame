@@ -1,0 +1,3 @@
+import assert from'node:assert/strict';import{rockGeometry}from'../../src/environment/rocks.js';
+for(const radius of[.3,.9,2.1]){const g=rockGeometry(radius),p=g.attributes.position,n=g.attributes.normal;let outward=0,total=0;for(let i=0;i<40;i++){const x=p.getX(i)-.04*radius,z=p.getZ(i)-.02*radius;if(Math.hypot(x,z)>.1*radius){total++;if(x*n.getX(i)+z*n.getZ(i)>0)outward++;}}assert.ok(outward/total>.95,'Rock side faces must face outward');assert.ok(n.getY(p.count-1)>0,'Rock cap must face upwards');assert.ok(p.array.every(Number.isFinite));g.dispose();}
+console.log('PASS: finite rock geometry with outward-facing sides and upward-facing caps.');

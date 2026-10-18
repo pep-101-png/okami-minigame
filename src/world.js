@@ -60,7 +60,7 @@ export function createWorld(scene) {
     [0, -0.45, 0],
     undefined,
     false,
-  );
+  ).userData.groundLayer=true;
   const arena = mat("#d9bd7d");
   arena.map = paperTexture();
   arena.map.repeat.set(5, 5);
@@ -71,7 +71,7 @@ export function createWorld(scene) {
     [0, 0.01, 0],
     [-Math.PI / 2, 0, 0],
     false,
-  );
+  ).userData.groundLayer=true;
   for (let i = 0; i < 3; i++) {
     const ring = part(
       scene,
@@ -81,6 +81,7 @@ export function createWorld(scene) {
       [Math.PI / 2, 0, 0],
       false,
     );
+    ring.userData.groundLayer=true;
   }
   const obstacles = [];
   const red = mat("#bd442b", "wood"),
@@ -218,6 +219,7 @@ export function createWorld(scene) {
         -0.5,
         Math.cos(a) * (29 + layer * 9),
       );
+      m.userData.legacyLandscape=true;
       m.rotation.y = a;
       scene.add(m);
     }

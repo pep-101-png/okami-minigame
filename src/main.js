@@ -1,3 +1,4 @@
+import { installEnvironment } from "./environment/index.js";
 import { Expansion } from './expansion/director.js';
 import * as THREE from "three";
 import "./style.css";
@@ -74,6 +75,7 @@ const game = new Game(scene, input, world, (win) => {
   };
 });
 game.expansion = new Expansion(game);
+installEnvironment(game,camera);
 game.cameraReset = () => { followCamera.initialized=false; };
 game.cameraImpact = (strength) => followCamera.impact(strength);
 renderer.domElement.addEventListener("webglcontextlost", (event) => {

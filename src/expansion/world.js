@@ -11,8 +11,8 @@ export function expandVillage(scene,world){
  world.bounds={minX:-48,maxX:57,minZ:-33,maxZ:32};world.arena={center:new THREE.Vector3(35,0,0),radius:18};
  for(const tree of world.trees||[]){const old=tree.position.clone(),d=tree.position.clone().sub(world.arena.center);d.y=0;if(d.length()<17){d.setLength(20);tree.position.x=35+d.x;tree.position.z=d.z;const obstacle=world.obstacles.find(o=>Math.abs(o.x-old.x)<.01&&Math.abs(o.z-old.z)<.01);if(obstacle){obstacle.x=tree.position.x;obstacle.z=tree.position.z;}}}
  const town=new THREE.Group();town.name='Westbank · expanded village';scene.add(town);
- const path=part(town,new THREE.PlaneGeometry(35,4.2),paint('#c8b282','stone'),[-27,.055,12],[-Math.PI/2,0,0],false);
- part(town,new THREE.PlaneGeometry(4.2,43),paint('#c8b282','stone'),[-32,.055,-3],[-Math.PI/2,0,0],false);
+ const path=part(town,new THREE.PlaneGeometry(35,4.2),paint('#c8b282','stone'),[-27,.055,12],[-Math.PI/2,0,0],false);path.userData.groundLayer=true;
+ part(town,new THREE.PlaneGeometry(4.2,43),paint('#c8b282','stone'),[-32,.055,-3],[-Math.PI/2,0,0],false).userData.groundLayer=true;
  const homes=[[-41,-12,6,5,'#777f6c'],[-32,-24,7,5,'#b57550'],[-43,0,5,6,'#9e705b'],[-41,27,6,5,'#8c8b6e'],[-27,-8,5,4,'#a27750']];
  for(const[x,z,w,d,c]of homes){const h=house(scene,x,z,w,d,c,0,(z===-24));batchHouse(h);world.houses.push(h);world.boxes.push({x,z,halfX:w/2+.2,halfZ:d/2+.2});garden(scene,x+3,z+4,Math.round(x*z+900));}
  // Bridges remain part of this continuous world, with flat accessible decks.
@@ -32,7 +32,7 @@ export function expandVillage(scene,world){
  for(const x of[-4.92,-1.55,1.55,4.92])block(home,[.13,3.3,.16],'#76563b',[x,1.65,4.06]);
  for(const y of[.35,2.85])for(const x of[-3.25,3.25])block(home,[3.4,.10,.18],'#8c6947',[x,y,4.08]);
  for(const cx of[-3.25,3.25])for(let i=-2;i<=2;i++)block(home,[.025,1.3,.04],'#a58a63',[cx+i*.36,1.68,4.10]);
- const roofGroup=new THREE.Group();home.add(roofGroup);roof(roofGroup,11.2,9,3.35,'#607963',1.15);
+ const roofGroup=new THREE.Group();home.add(roofGroup);roof(roofGroup,11.2,9,3.35,'#607963',1.15);batchDecoration(roofGroup);
  const roofMaterials=new Set();roofGroup.traverse(o=>{if(o.material){o.material=o.material.clone();roofMaterials.add(o.material);}});
  for(const[x,z]of[[-2.5,-1],[.5,-1],[-2.5,1],[.5,1]]){const m=block(home,[2.8,.05,1.8],'#a9aa79',[x,.09,z],'grass');for(const side of[-1,1])block(home,[.04,.012,1.8],'#58684b',[x+side*1.37,.12,z]);}
  // Open front, warm furnishings and legible progression/equipment alcoves.
@@ -52,7 +52,7 @@ export function expandVillage(scene,world){
  const banners=[];
  for(let i=0;i<9;i++){const g=new THREE.Group();g.position.set(-31+i*3.5,3.6,7);town.add(g);const m=brushRibbon([[0,0,0],[.1,-.2,.01],[0,-.6,.1],[.08,-.95,.14]],.23,i%2?'#a55b5a':'#637f74');g.add(m);banners.push(g);}
  world.npcs.push(createVillager(scene,-31,8,'Akari · shrine musician','#94719a',['The westbank bridges lead home. Rest there after each trial.','Your spirit keeps every earned coin, even after defeat.']),createVillager(scene,-38,-10,'Mio · lantern keeper','#568790',['The Hollow Bell awakens beyond three waves.','Jump its ground shock, dodge its charge, and watch for ink bolts.']),createVillager(scene,-31,22,'Ren · pilgrim','#ab7860',['A guardian’s strength is remembered in ink.','Your shoulder and ankle fur will blossom with permanent power.']));
- const arenaFloor=part(scene,new THREE.CircleGeometry(18.4,96),paint('#c9b17e','stone'),[35,.052,0],[-Math.PI/2,0,0],false);arenaFloor.material.map=paintedTexture('stone').clone();arenaFloor.material.map.repeat.set(5,5);
+ const arenaFloor=part(scene,new THREE.CircleGeometry(18.4,96),paint('#c9b17e','stone'),[35,.052,0],[-Math.PI/2,0,0],false);arenaFloor.userData.groundLayer=true;arenaFloor.material.map=paintedTexture('stone').clone();arenaFloor.material.map.repeat.set(5,5);
  for(let i=0;i<16;i++){let a=i/16*Math.PI*2;stroke(scene,[[35+17.4*Math.sin(a),.07,17.4*Math.cos(a)],[35+17.4*Math.sin(a+.22),.07,17.4*Math.cos(a+.22)]],'#736956',.035);}
  for(const [x,z]of[[26,-15],[44,-15],[50,10],[30,16]]){
   const gate=new THREE.Group();gate.position.set(x,0,z);scene.add(gate);

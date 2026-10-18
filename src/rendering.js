@@ -12,11 +12,8 @@ export function createPainterlyRenderer(renderer,scene,camera) {
   float luma(vec3 c){return dot(c,vec3(.299,.587,.114));}
   float noise(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}
   void main(){vec2 d=1./resolution;vec3 c=texture2D(tDiffuse,vUv).rgb;
-  float l=luma(texture2D(tDiffuse,vUv-vec2(d.x,0.)).rgb),r=luma(texture2D(tDiffuse,vUv+vec2(d.x,0.)).rgb);
-  float t=luma(texture2D(tDiffuse,vUv+vec2(0.,d.y)).rgb),b=luma(texture2D(tDiffuse,vUv-vec2(0.,d.y)).rgb);
-  float edge=smoothstep(.16,.5,length(vec2(l-r,t-b)));c=mix(c,vec3(.045,.032,.024),edge*.24);
-  c*=1.+(noise(gl_FragCoord.xy)-.5)*.032;
-  float vignette=smoothstep(.45,.95,distance(vUv,vec2(.5)));c*=1.-vignette*.075;gl_FragColor=vec4(max(c,vec3(0.)),1.);}`});
+  c*=1.+(noise(gl_FragCoord.xy)-.5)*.016;
+  float vignette=smoothstep(.45,.95,distance(vUv,vec2(.5)));c*=1.-vignette*.045;gl_FragColor=vec4(max(c,vec3(0.)),1.);}`});
   composer.addPass(pass);composer.addPass(new OutputPass());
   return {render:()=>composer.render(),resize:(w,h)=>{composer.setSize(w,h);pass.uniforms.resolution.value.set(w*renderer.getPixelRatio(),h*renderer.getPixelRatio());}};
 }

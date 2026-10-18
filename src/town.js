@@ -1,11 +1,14 @@
 import { createVillager as npc } from './expansion/villagers.js';
 import * as THREE from "three";
+import {gardenWash} from "./environment/pigment.js";
+import {rockGeometry} from "./environment/rocks.js";
+import {paintedRoof,enrichHouse} from "./environment/architecture.js";
 import { createWorld } from "./world.js";
 import { part } from "./models.js";
 import { stroke, paint, paintedTexture, seededRandom } from "./art.js";
 import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js";
 
-const palette = { ink:"#322a20", timber:"#865b32", cream:"#e9c794", roof:"#b98a42", red:"#bd442b", green:"#769747", stone:"#939372" };
+const palette = { ink:"#4a4e49", timber:"#8d7764", cream:"#e9e3cf", roof:"#647d83", red:"#ac544a", green:"#72977e", stone:"#96a396" };
 const architectureMaterials = new Map();
 function architectureMaterial(color,kind) {
   const key = `${color}:${kind}`;
@@ -52,7 +55,7 @@ export function batchDecoration(root) {
   root.updateMatrixWorld(true);
   const inverse=root.matrixWorld.clone().invert(),groups=new Map(),meshes=[];
   root.traverse(node=>{
-    if(!node.isMesh)return;
+    if(!node.isMesh||node.userData.groundLayer||node.userData.legacyLandscape)return;
     const m=node.material,key=[m.type,m.color.getHexString(),m.map?.uuid,m.side,m.transparent,m.opacity].join(":");
     if(!groups.has(key))groups.set(key,{material:m,geometry:[],cast:false,receive:false});
     const group=groups.get(key);group.geometry.push(geometryForBatch(node,inverse));group.cast ||=node.castShadow;group.receive ||=node.receiveShadow;meshes.push(node);
@@ -64,33 +67,8 @@ export function batchDecoration(root) {
     for(const g of group.geometry)g.dispose();
   }
 }
-export function roof(parent,w,d,y,color,height=1.05) {
-  const positions=[],uv=[],indices=[];
-  for(let side=0;side<2;side++) {
-    const sign=side?1:-1,base=positions.length/3;
-    for(let i=0;i<6;i++) {
-      const t=i/5;
-      for(const z of [-d/2,d/2]) {
-        positions.push(sign*t*w/2,y+height*(1-t)+.24*t*t*t,z);
-        uv.push(z/d+.5,t);
-      }
-    }
-    for(let i=0;i<5;i++){const a=base+i*2;indices.push(a,a+1,a+2,a+1,a+3,a+2);}
-  }
-  const g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.Float32BufferAttribute(positions,3));g.setAttribute("uv",new THREE.Float32BufferAttribute(uv,2));g.setIndex(indices);g.computeVertexNormals();
-  const material=paint(color,"roof");material.side=THREE.DoubleSide;
-  part(parent,g,material,undefined,undefined,false);
-  const linePoints=(z)=>[[-w/2,y+.24,z],[-w*.3,y+height*.42,z],[0,y+height,z],[w*.3,y+height*.42,z],[w/2,y+.24,z]];
-  for(const z of [-d/2,d/2])stroke(parent,linePoints(z),palette.ink,.055);
-  for(const s of [-1,1])stroke(parent,[[s*w/2,y+.22,-d/2],[s*w/2,y+.2,0],[s*w/2,y+.24,d/2]],palette.ink,.07);
-  block(parent,[.13,.12,d+.3],palette.timber,[0,y+height+.03,0],"wood");
-  // Short irregular ink strokes suggest roof fibers without modeling every tile.
-  const rand=seededRandom(Math.round(w*100+d*10));
-  for(let i=0;i<18;i++) {
-    const x=(rand()-.5)*w*.9,z=(rand()-.5)*d*.85,t=Math.abs(x)/(w/2),yy=y+height*(1-t)+.24*t*t*t+.035;
-    stroke(parent,[[x,yy,z],[x+.04,yy+.006,z+.24]],"#655137",.012);
-  }
-}
+export function roof(parent,w,d,y,color,height=1.05){return paintedRoof(parent,w,d,y,color,height);}
+
 function shoji(parent,x,y,z,width=.96,height=1.1) {
   block(parent,[width,height,.045],"#f9dfa0",[x,y,z],"shoji",undefined,false);
   for(let i=-1;i<=1;i++)block(parent,[.043,height+.06,.075],palette.ink,[x+i*width/3,y,z+.03],"wood",undefined,false);
@@ -100,7 +78,7 @@ export function house(scene,x,z,w=5,d=4,color=palette.roof,turn=0,tier=false) {
   const root=new THREE.Group();root.position.set(x,0,z);root.rotation.y=turn;scene.add(root);
   const height=tier?3.25:2.55;
   block(root,[w+.15,.22,d+.15],palette.stone,[0,.08,0],"stone");
-  block(root,[w,height,d],palette.cream,[0,height/2+.15,0],"wood");
+  block(root,[w,height,d],palette.cream,[0,height/2+.15,0],"wash");
   // Front and side timber framing provides readable silhouettes from fixed view.
   for(const sx of [-1,1])for(const sz of [-1,1])block(root,[.17,height+.2,.17],"#503b26",[sx*w/2,height/2+.15,sz*d/2],"wood");
   for(const y of [.35,1.05,height-.1]) {
@@ -118,6 +96,7 @@ export function house(scene,x,z,w=5,d=4,color=palette.roof,turn=0,tier=false) {
     shoji(root,0,height+.82,d*.3+.03,1.7,.9);
     roof(eaves,w*.7,d*.76,height+1.39,"#a15c34",.8);
   }
+  enrichHouse(root,w,d,height,z===-25?'shrine':'home');
   // All facade materials are local so a foreground house can fade independently.
   root.userData.fade={materials:[],value:1,x,z,w:w+1.2,d:d+1.2};
   return root;
@@ -175,7 +154,7 @@ function flatPatch(scene,points,color,y=.035,kind="wash") {
   const shape=new THREE.Shape();shape.moveTo(...points[0]);for(const p of points.slice(1))shape.lineTo(...p);shape.closePath();
   const mesh=part(scene,new THREE.ShapeGeometry(shape),paint(color,kind),[0,y,0],[-Math.PI/2,0,0],false);
   // Shape's second coordinate becomes -Z after rotation, so callers give [x,-z].
-  return mesh;
+  mesh.userData.groundLayer=true;return mesh;
 }
 export function lantern(scene,x,z,color="#f5dba0") {
   const group=new THREE.Group();group.position.set(x,0,z);scene.add(group);
@@ -187,7 +166,7 @@ export function lantern(scene,x,z,color="#f5dba0") {
 }
 export function garden(scene,x,z,seed=10) {
   const rand=seededRandom(seed),group=new THREE.Group();group.position.set(x,.025,z);scene.add(group);
-  const plot=part(group,new THREE.CylinderGeometry(1.4,1.5,.06,10),paint("#577943","grass"),[0,0,0],undefined,false);plot.scale.z=.57;
+  const plot=part(group,new THREE.PlaneGeometry(3.3,2.1),new THREE.MeshBasicMaterial({map:gardenWash(),transparent:true,depthWrite:false}),[0,.008,0],[-Math.PI/2,0,0],false);
   // Flower cards are low poly and small enough that the paper-painting reads first.
   for(let i=0;i<14;i++) {
     const a=rand()*6.28,r=rand()*1.1,xx=Math.cos(a)*r,zz=Math.sin(a)*r*.57;
@@ -208,7 +187,7 @@ export function createTown(scene) {
   for(const o of world.obstacles)o.x+=26;
   scene.background=new THREE.Color("#389bc0");scene.fog=new THREE.Fog("#b1cab0",42,115);
   const terrain=paint("#a1ae78","grass");terrain.map=paintedTexture("grass").clone();terrain.map.repeat.set(18,15);terrain.map.needsUpdate=true;
-  part(scene,new THREE.PlaneGeometry(110,90),terrain,[8,-.025,0],[-Math.PI/2,0,0],false);
+  part(scene,new THREE.PlaneGeometry(110,90),terrain,[8,-.025,0],[-Math.PI/2,0,0],false).userData.groundLayer=true;
   flatPatch(scene,[[-4.4,-25],[-3.8,-13],[-4.15,-4],[-4.4,6],[-3.8,18],[-3.6,27],[3.6,27],[4.1,18],[4.25,7],[3.8,-4],[4.4,-14],[3.8,-25]],"#cfac69",.035);
   flatPatch(scene,[[-5,-2.5],[4.2,-3.1],[13,-2.6],[19,-3.2],[36,-2.2],[36,2.2],[21,2.6],[12,3.3],[2,2.8],[-5,2.5]],"#d9bb7d",.04);
   // Stone thresholds and a broad market square avoid an obstacle course layout.
@@ -236,14 +215,14 @@ export function createTown(scene) {
   for(const[layerIndex,layer]of mountains.entries())for(let i=0;i<10;i++) {
     const shape=new THREE.Shape(),x=-47+i*11,h=layer.height+Math.sin(i*2.7)*4;
     shape.moveTo(-10,0);shape.lineTo(-8,h*.35);shape.lineTo(-4,h*.68);shape.lineTo(-1,h);shape.lineTo(2,h*.72);shape.lineTo(6,h*.54);shape.lineTo(11,0);
-    const m=new THREE.Mesh(new THREE.ShapeGeometry(shape),new THREE.MeshBasicMaterial({color:layer.color,side:THREE.DoubleSide}));m.position.set(x,-.5,layer.z);scene.add(m);
+    const m=new THREE.Mesh(new THREE.ShapeGeometry(shape),new THREE.MeshBasicMaterial({color:layer.color,side:THREE.DoubleSide}));m.position.set(x,-.5,layer.z);m.userData.legacyLandscape=true;scene.add(m);
     if(!layerIndex)stroke(m,[[-8,h*.35,.02],[-4,h*.68,.02],[-1,h,.02],[2,h*.72,.02],[6,h*.54,.02]],"#526e5a",.06);
   }
   // A river lives outside the walkable bounds, so it needs no hidden blocking wall.
   part(scene,new THREE.PlaneGeometry(5.5,66),paint("#56b3b3"),[-23,.015,0],[-Math.PI/2,0,0],false);
   for(let i=0;i<18;i++)stroke(scene,[[-24+.5*Math.sin(i),.04,-29+i*3.5],[-21.4,.04,-28.3+i*3.5]],"#b8dace",.025);
   for(let i=0;i<20;i++) {
-    const rock=part(scene,new THREE.DodecahedronGeometry(.7+(i%3)*.1,0),paint(palette.stone,"stone"),[-19.9,.3,-26+i*2.7],undefined,true);rock.scale.set(.6,.5,1);
+    const rock=part(scene,rockGeometry(.7+(i%3)*.1),paint(palette.stone,"stone"),[-19.9,.3,-26+i*2.7],undefined,true);rock.scale.set(.6,.5,1);
     world.obstacles.push({x:-19.9,z:-26+i*2.7,r:.42});
   }
   // Mill wheel sits beside an aqueduct, connected to the river by painted water.
@@ -302,8 +281,8 @@ export function createTown(scene) {
   const staticMeshes=[];
   scene.updateMatrixWorld(true);
   scene.traverse(node=>{
-    if(!node.isMesh)return;
-    for(let parent=node;parent;parent=parent.parent)if(animatedRoots.has(parent))return;
+    if(!node.isMesh||node.userData.groundLayer||node.userData.legacyLandscape)return;
+    for(let parent=node;parent;parent=parent.parent)if(animatedRoots.has(parent)||parent.userData.groundLayer||parent.userData.legacyLandscape)return;
     staticMeshes.push(node);
   });
   const scenery=new THREE.Group();scene.add(scenery);
