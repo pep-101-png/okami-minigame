@@ -56,7 +56,7 @@ namespace Sunward.Editor
             AssetDatabase.Refresh();
             ConfigurePipeline();
             var data = JsonUtility.FromJson<ValleyData>(File.ReadAllText(Root + "Data/Valley.json"));
-            var materials = MakeMaterials(data.materials);
+            var materials = MakeMaterials(data.materials, data.assets.Where(a => a.name == "TownV3").SelectMany(a => a.meshes).Select(m => m.material).ToHashSet());
             var prefabs = MakePrefabs(data, materials);
             var wolf = MakeWolf();
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -177,6 +177,7 @@ namespace Sunward.Editor
             flow.spirits = EnemyDefinitions(prefabs);
             Collisions(data.world, town);
             BuildWeaponRack(flow, town, prefabs);
+            BuildCraftDetails(data.world, town);
             logic.AddComponent<PerformanceHUD>();
             var ui = logic.AddComponent<ScrollUI>();
             ui.game = flow;
@@ -216,6 +217,185 @@ namespace Sunward.Editor
             AssetDatabase.SaveAssets();
             Selection.activeGameObject = player;
             Debug.Log("Sunward V3 scene generated. Open Assets/Sunward/Scenes/Windflower and press Play. Runtime verification is required.");
+        }
+
+        [MenuItem("Sunward/Apply Windflower Repair and Artwork Update")]
+        public static void ApplyUpdate()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode)
+                throw new InvalidOperationException("Stop Play Mode first.");
+            var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            if (scene.path != ScenePath)
+                throw new InvalidOperationException("Open Assets/Sunward/Scenes/Windflower.unity before applying the update. No scene was replaced.");
+            var roots = scene.GetRootGameObjects();
+            var flow = roots.SelectMany(r => r.GetComponentsInChildren<GameFlow>(true)).SingleOrDefault();
+            var home = roots.SelectMany(r => r.GetComponentsInChildren<HomeCutaway>(true)).SingleOrDefault();
+            if (!flow || !home || !flow.Combat)
+                throw new InvalidDataException("Windflower game-system references are missing. Use Validate Imported Project for details.");
+            WolfClipProcessor.RepairExisting();
+            var data = JsonUtility.FromJson<ValleyData>(File.ReadAllText(Root + "Data/Valley.json"));
+            ConfigurePipeline();
+            MakeMaterials(data.materials, data.assets.Where(a => a.name == "TownV3").SelectMany(a => a.meshes).Select(m => m.material).ToHashSet());
+            RegroundExistingMeshes(data);
+            var models = new Dictionary<string, GameObject>();
+            foreach (string id in new[]
+            {
+                "Spear",
+                "Sundial"
+            }
+
+            )
+            {
+                models[id] = AssetDatabase.LoadAssetAtPath<GameObject>(Generated + id + ".prefab");
+                if (!models[id])
+                    throw new InvalidDataException("Missing original weapon prefab: " + id);
+            }
+
+            flow.Combat.spear = Weapon("spear", models["Spear"]);
+            flow.Combat.sundial = Weapon("sundial", models["Sundial"]);
+            var oldRack = home.GetComponent<HomeWeaponRack>();
+            if (oldRack)
+            {
+                if (oldRack.displays)
+                    UnityEngine.Object.DestroyImmediate(oldRack.displays);
+                UnityEngine.Object.DestroyImmediate(oldRack);
+            }
+
+            BuildWeaponRack(flow, home.gameObject, models);
+            BuildCraftDetails(data.world, home.gameObject);
+            for (int i = 0; i < flow.npcObjects.Length; i++)
+            {
+                var npc = flow.npcObjects[i];
+                if (!VillageNavigation.FindSafe(data.world, npc.transform.position, out var safe))
+                    throw new InvalidDataException("No safe location for " + npc.name);
+                Undo.RecordObject(npc.transform, "Safe NPC placement");
+                npc.transform.position = safe;
+                var body = npc.GetComponent<Rigidbody>();
+                if (!body)
+                    body = npc.AddComponent<Rigidbody>();
+                body.isKinematic = true;
+                body.useGravity = false;
+                body.interpolation = RigidbodyInterpolation.Interpolate;
+                var resident = npc.GetComponent<VillageResident>();
+                if (!resident)
+                    resident = npc.AddComponent<VillageResident>();
+                resident.game = flow;
+                resident.index = i;
+            }
+
+            EditorUtility.SetDirty(flow.Combat);
+            EditorSceneManager.MarkSceneDirty(scene);
+            AssetDatabase.SaveAssets();
+            EditorSceneManager.SaveScene(scene);
+            SunwardValidation.Validate();
+            WindflowerDiagnostics.Connections();
+            WindflowerDiagnostics.BoundsAudit();
+            Debug.Log("Windflower updated in place: processed animation clips, connected surface artwork, existing-mesh grounding, safe NPCs, and original weapon displays. Play Mode and final visual review are still required.");
+        }
+
+        static void RegroundExistingMeshes(ValleyData data)
+        {
+            var meshes = AssetDatabase.LoadAllAssetsAtPath(Generated + "ValleyMeshes.asset").OfType<Mesh>().ToDictionary(m => m.name);
+            using (var reader = new BinaryReader(File.OpenRead(Root + "Data/Valley.bytes")))
+            {
+                int id = 0, adjusted = 0;
+                foreach (var asset in data.assets)
+                    foreach (var record in asset.meshes)
+                    {
+                        string name = "Valley-" + id++;
+                        if (asset.name != "TownV3")
+                            continue;
+                        if (!meshes.TryGetValue(name, out var mesh))
+                            throw new InvalidDataException("Existing Windflower mesh missing: " + name + ". No model was substituted.");
+                        reader.BaseStream.Position = record.offset;
+                        int nv = reader.ReadInt32(), ni = reader.ReadInt32();
+                        if (nv != mesh.vertexCount || nv != record.vertices || ni != record.indices)
+                            throw new InvalidDataException("Mesh catalogue changed: " + name);
+                        var vertices = new Vector3[nv];
+                        for (int i = 0; i < nv; i++)
+                        {
+                            vertices[i] = new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+                            reader.BaseStream.Position += 36;
+                        }
+
+                        var indices = new int[ni];
+                        for (int i = 0; i < ni; i++)
+                            indices[i] = reader.ReadInt32();
+                        adjusted += EnvironmentGrounding.Adjust(vertices, indices, data.materials[record.material], data.world);
+                        mesh.vertices = vertices;
+                        mesh.RecalculateBounds();
+                        EditorUtility.SetDirty(mesh);
+                    }
+
+                Debug.Log("Updated existing terrain-decoration meshes in place: " + adjusted + " grounded components; asset GUIDs/file IDs retained.");
+            }
+        }
+
+        static void BuildCraftDetails(WorldData world, GameObject town)
+        {
+            var prior = town.transform.Find("Windflower · painted architectural details");
+            if (prior)
+                UnityEngine.Object.DestroyImmediate(prior.gameObject);
+            var root = new GameObject("Windflower · painted architectural details");
+            root.transform.SetParent(town.transform, false);
+            var timber = new Material(Shader.Find("Sunward/Surface Pigment"));
+            timber.SetColor("_BaseColor", new Color(.40f, .22f, .14f));
+            WindflowerArt.Apply(timber, new PaintData { kind = "wood" });
+            timber = SaveAsset(timber, "CraftTimber.mat");
+            var cloth = new Material(Shader.Find("Sunward/Surface Pigment"));
+            cloth.SetTexture("_BaseMap", WindflowerArt.Load("noren"));
+            cloth.SetColor("_BaseColor", Color.white);
+            cloth.SetFloat("_Cull", 0);
+            cloth.SetFloat("_Wind", .35f);
+            cloth = SaveAsset(cloth, "NorenPaint.mat");
+            const int W = 10, H = 5;
+            var v = new Vector3[(W + 1) * (H + 1)];
+            var uv = new Vector2[v.Length];
+            var colors = Enumerable.Repeat(Color.white, v.Length).ToArray();
+            var triangles = new List<int>();
+            for (int y = 0; y <= H; y++)
+                for (int x = 0; x <= W; x++)
+                {
+                    int k = y * (W + 1) + x;
+                    float a = x / (float)W, b = y / (float)H;
+                    v[k] = new Vector3((a - .5f) * .75f, -.85f * b, Mathf.Sin(a * Mathf.PI * 4) * .035f * b);
+                    uv[k] = new Vector2(a, b);
+                    if (x < W && y < H)
+                    {
+                        int n = k + W + 1;
+                        triangles.AddRange(new[] { k, n, k + 1, k + 1, n, n + 1 });
+                    }
+                }
+
+            var mesh = new Mesh
+            {
+                vertices = v,
+                uv = uv,
+                colors = colors,
+                triangles = triangles.ToArray()
+            };
+            mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+            mesh = SaveAsset(mesh, "NorenCloth.asset");
+            foreach (var house in world.boxes.Take(9))
+            {
+                var center = new Vector3(house.x, Sample(world.terrain, house.x, house.z) + 2.55f, -house.z - house.halfZ - .13f);
+                var bar = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                bar.name = "Carved noren lintel";
+                bar.transform.SetParent(root.transform, false);
+                bar.transform.position = center + Vector3.up * .045f;
+                bar.transform.localScale = new Vector3(1.85f, .10f, .12f);
+                bar.GetComponent<Renderer>().sharedMaterial = timber;
+                UnityEngine.Object.DestroyImmediate(bar.GetComponent<Collider>());
+                for (int panel = 0; panel < 2; panel++)
+                {
+                    var curtain = new GameObject("Painted sun-spiral noren");
+                    curtain.transform.SetParent(root.transform, false);
+                    curtain.transform.position = center + Vector3.right * (panel == 0 ? -.40f : .40f);
+                    curtain.AddComponent<MeshFilter>().sharedMesh = mesh;
+                    curtain.AddComponent<MeshRenderer>().sharedMaterial = cloth;
+                }
+            }
         }
 
         static float Sample(Sunward.TerrainData t, float x, float z)
@@ -287,7 +467,7 @@ namespace Sunward.Editor
             tags.ApplyModifiedProperties();
         }
 
-        static Material[] MakeMaterials(PaintData[] data)
+        static Material[] MakeMaterials(PaintData[] data, HashSet<int> environment)
         {
             var initialized = new HashSet<string>();
             var result = new Material[data.Length];
@@ -295,8 +475,8 @@ namespace Sunward.Editor
             {
                 var d = data[i];
                 var shader = Shader.Find(d.kind == "water" ? "Sunward/Brush River" : "Sunward/Surface Pigment");
-                if (!shader)
-                    throw new InvalidDataException("Sunward shaders did not import");
+                if (!shader || ShaderUtil.ShaderHasError(shader))
+                    throw new InvalidDataException("Sunward shader failed to import/compile: " + (shader ? shader.name : d.kind) + ". Read its Console error before applying materials.");
                 var m = new Material(shader)
                 {
                     name = d.name,
@@ -342,6 +522,14 @@ namespace Sunward.Editor
                     }
                     else
                         m.renderQueue = 2000;
+                }
+
+                if (environment.Contains(i) && d.kind != "water")
+                    WindflowerArt.Apply(m, d);
+                if (d.kind == "water")
+                {
+                    m.SetTexture("_FlowMap", WindflowerArt.Load("water"));
+                    m.SetTexture("_FlowNormal", WindflowerArt.Load("water", true));
                 }
 
                 result[i] = SaveAsset(m, "Paint-" + i + ".mat");
@@ -407,6 +595,7 @@ namespace Sunward.Editor
                         };
                         if (asset.name == "TownV3")
                             groundedObjects += EnvironmentGrounding.Adjust(v, indices, data.materials[record.material], data.world);
+                        MeshSafety.Validate(asset.name + "/" + mesh.name, v, indices);
                         mesh.vertices = v;
                         mesh.normals = n;
                         mesh.uv = uv;
@@ -609,7 +798,7 @@ namespace Sunward.Editor
                 foreach (var oldState in controller.layers[0].stateMachine.states)
                     controller.layers[0].stateMachine.RemoveState(oldState.state);
             var sm = controller.layers[0].stateMachine;
-            var actions = AssetDatabase.LoadAllAssetsAtPath(path).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__")).ToArray();
+            var actions = WolfClipProcessor.Prepare();
             var names = new HashSet<string>();
             foreach (var clip in actions)
             {
@@ -873,6 +1062,7 @@ namespace Sunward.Editor
                     vertices = v,
                     triangles = ix
                 };
+                MeshSafety.Validate(mesh.name, v, ix);
                 mesh.RecalculateNormals();
                 var go = new GameObject("Arched bridge collision");
                 go.layer = 6;
@@ -1054,6 +1244,7 @@ namespace Sunward.Editor
             display.transform.SetParent(town.transform, false);
             var wood = new Material(Shader.Find("Sunward/Surface Pigment"));
             wood.SetColor("_BaseColor", new Color(.21f, .105f, .07f));
+            WindflowerArt.Apply(wood, new PaintData { kind = "wood" });
             wood = SaveAsset(wood, "HomeWeaponLacquer.mat");
             foreach (float x in new[]
             {

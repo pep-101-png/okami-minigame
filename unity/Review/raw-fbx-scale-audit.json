@@ -1,0 +1,11 @@
+{
+  "fbx_sha256": "277f0b1c04e91274f46320358279da43ee5a01ac420ebbe9f7ecf16184478328",
+  "animation_stacks": 47,
+  "rig_container_scale_curves": 141,
+  "container_scale_values": [
+    100.0
+  ],
+  "all_container_curves_constant_100": true,
+  "blender_import_caveat": "Blender compensates these object curves to scale 1 during FBX import; bone-only validation missed the raw 100 values. Unity user reported rest scale 1 and animated scale 100.",
+  "repair": "Keep source FBX untouched. Generate native .anim copies without container-only local-scale channels, preserving all bone channels and original imported clips."
+}

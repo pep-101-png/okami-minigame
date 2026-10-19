@@ -25,9 +25,17 @@ for binding in bindings:assert set(binding['materials'])<=material_names
 from PIL import Image
 for image in (ROOT/'Assets/Sunward/Textures').glob('*.png'):
  with Image.open(image)as png:png.verify()
+# Validate the new, connected artwork rather than only the original map folder.
+art=json.loads((ROOT/'Review/windflower-art.json').read_text())
+for image in (ROOT/'Assets/Sunward/Textures/Art').glob('*.png'):
+ with Image.open(image)as png:
+  assert png.size==(1024,1024),('Artwork resolution',image)
+  png.verify()
+ assert image.with_suffix('.png.meta').exists(),('Missing artwork GUID',image)
+assert len(list((ROOT/'Assets/Sunward/Textures/Art').glob('*.png')))==15
 for file in (ROOT/'Assets/Sunward/Scripts').glob('*.cs'):
  for name in re.findall(r'class\s+(\w+)\s*:\s*MonoBehaviour',file.read_text()):assert name==file.stem,(name,file)
 for file in ROOT.rglob('*'):
  if file.is_file()and'bin'not in file.parts and'obj'not in file.parts:assert file.stat().st_size<100*1024*1024,('GitHub individual-file size limit',file)
-result={'converted_meshes':meshes,'vertices':vcount,'triangles':triangles,'materials':len(data['materials']),'map_textures':len(list((ROOT/'Assets/Sunward/Textures').glob('map-*.png'))),'wolf_textures':len(list((ROOT/'Assets/Sunward/Textures').glob('Wolf-*.png'))),'animation_actions':len(report['clips'])+len(report.get('unity_only_actions',[])),'source_actions':44,'sleep_rollback_actions':len(report.get('unity_only_actions',[])),'source_model_sha256':report['source_sha256'],'home_roof_cutaway_meshes':True,'three_collectible_flower_visual_groups':True,'mono_behaviour_filenames_match':True,'unity_editor_compilation':'NOT RUN','unity_shader_compilation':'NOT RUN','unity_playmode':'NOT RUN','windows_build':'NOT RUN'}
+result={'converted_meshes':meshes,'vertices':vcount,'triangles':triangles,'materials':len(data['materials']),'map_textures':len(list((ROOT/'Assets/Sunward/Textures').glob('map-*.png'))),'wolf_textures':len(list((ROOT/'Assets/Sunward/Textures').glob('Wolf-*.png'))),'animation_actions':len(report['clips'])+len(report.get('unity_only_actions',[])),'source_actions':44,'sleep_rollback_actions':len(report.get('unity_only_actions',[])),'source_model_sha256':report['source_sha256'],'home_roof_cutaway_meshes':True,'three_collectible_flower_visual_groups':True,'mono_behaviour_filenames_match':True,'new_artwork_maps':15,'new_artwork_resolution':'1024x1024','unity_editor_compilation':'NOT RUN','unity_shader_compilation':'NOT RUN','unity_playmode':'NOT RUN','windows_build':'NOT RUN'}
 (ROOT/'Review/asset-validation.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2))

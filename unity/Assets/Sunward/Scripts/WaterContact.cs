@@ -24,10 +24,11 @@ namespace Sunward
 
             bool trapped = depth > .34f && p.y < .05f;
             submerged = trapped ? submerged + Time.deltaTime : 0;
-            if (!float.IsFinite(p.y) || p.y < -6 || submerged > .65f)
+            if (!MeshSafety.Finite(p) || p.y < -6 || submerged > .65f)
             {
                 Vector3 safe;
-                if (!VillageNavigation.FindSafe(game.valley.Data, p, out safe, .55f, 16))
+                var desired = MeshSafety.Finite(p) ? p : hasSafe ? lastSafe : new Vector3(-34, 0, -22);
+                if (!VillageNavigation.FindSafe(game.valley.Data, desired, out safe, .55f, 16))
                 {
                     if (!hasSafe && !VillageNavigation.FindSafe(game.valley.Data, new Vector3(-34, 0, -22), out lastSafe))
                     {

@@ -63,12 +63,12 @@ namespace Sunward.Editor
             int adjusted = 0;
             foreach (var group in groups.Values)
             {
-                if (rocks && (group.Count < 35 || group.Count > 1500))
+                if (rocks && (group.Count < 35 || group.Count > 5000))
                     continue;
                 var bounds = new Bounds(vertices[group[0]], Vector3.zero);
                 foreach (int i in group)
                     bounds.Encapsulate(vertices[i]);
-                if (bounds.size.x > 5 || bounds.size.z > 5 || bounds.size.y > 5 || bounds.size.y < .08f)
+                if (bounds.size.x > 12 || bounds.size.z > 12 || bounds.size.y > 16 || bounds.size.y < .08f)
                     continue;
                 var center = bounds.center;
                 // Architectural stone, bridge fittings and intentional underwater rocks stay put.
@@ -84,7 +84,7 @@ namespace Sunward.Editor
                     continue;
                 float ground = Valley.SurfaceHeight(world.terrain, center);
                 float gap = bounds.min.y - ground;
-                if (gap < (grass ? .055f : .12f) || gap > 2)
+                if (gap < (grass ? .055f : .12f) || gap > 4)
                     continue;
                 float shift = ground - bounds.min.y - (grass ? .025f : Mathf.Min(.13f, bounds.size.y * .12f));
                 foreach (int i in group)

@@ -3,7 +3,7 @@
  <ItemGroup>
   <Compile Include="../../Assets/Sunward/Scripts/ProgressionData.cs"/>
   <Compile Include="../../Assets/Sunward/Scripts/SaveStore.cs"/>
-  <Compile Include="../../Assets/Sunward/Scripts/AttackSequence.cs"/><Compile Include="Program.cs"/><Compile Include="UnitySaveShim.cs"/>
+  <Compile Include="../../Assets/Sunward/Scripts/AttackSequence.cs"/><Compile Include="../../Assets/Sunward/Scripts/WolfScaleRules.cs"/><Compile Include="Program.cs"/><Compile Include="UnitySaveShim.cs"/>
   <Reference Include="Microsoft.CodeAnalysis"><HintPath>$(MSBuildSDKsPath)/../Roslyn/bincore/Microsoft.CodeAnalysis.dll</HintPath></Reference>
   <Reference Include="Microsoft.CodeAnalysis.CSharp"><HintPath>$(MSBuildSDKsPath)/../Roslyn/bincore/Microsoft.CodeAnalysis.CSharp.dll</HintPath></Reference>
  </ItemGroup>

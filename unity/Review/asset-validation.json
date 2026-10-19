@@ -12,6 +12,8 @@
   "home_roof_cutaway_meshes": true,
   "three_collectible_flower_visual_groups": true,
   "mono_behaviour_filenames_match": true,
+  "new_artwork_maps": 15,
+  "new_artwork_resolution": "1024x1024",
   "unity_editor_compilation": "NOT RUN",
   "unity_shader_compilation": "NOT RUN",
   "unity_playmode": "NOT RUN",

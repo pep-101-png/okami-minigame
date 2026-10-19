@@ -36,7 +36,7 @@ namespace Sunward.Editor
 
             var fbx = AssetDatabase.LoadAllAssetsAtPath("Assets/Sunward/Models/Amaterasu.fbx");
             var clips = fbx.OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__")).ToArray();
-            Need(clips.Length >= 44, "44 imported animation clips");
+            Need(clips.Length == 47, "All 47 imported animation clips retained");
             foreach (string n in new[]
             {
                 "Idle_Natural",
@@ -121,7 +121,7 @@ namespace Sunward.Editor
                 Need(Valley.Depth(new Vector3(-23, 0, -12)) == 0, "Bridge is a valid crossing");
             }
 
-            Debug.Log("Sunward validation complete · " + checks + " checks passed. Imports and wiring checked; visual review and playtesting still required. Follow Review/RESTORATION.md.");
+            Debug.Log("Sunward validation complete · " + checks + " checks passed. Imports and wiring checked; visual review and playtesting still required. Follow Review/REPAIR-2.md.");
         }
 
         [MenuItem("Sunward/Validate Character Deformations")]

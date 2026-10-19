@@ -1,0 +1,17 @@
+{
+  "checks": [
+    {
+      "file": "public/models/amaterasu-original.glb",
+      "sha256": "98c380b9c078457df8493595d26bdb4ccd6285feadef3b793cd457fcd5d1d609"
+    },
+    {
+      "file": "original-wolf-jump-dodge/Amaterasu-Movement.blend",
+      "sha256": "5e24c750d5c31e1ba071f3290927bc3006d9b4bcd4628aba59bff96fc6f5aa0e"
+    },
+    {
+      "file": "unity/Assets/Sunward/Models/Amaterasu.fbx",
+      "sha256": "277f0b1c04e91274f46320358279da43ee5a01ac420ebbe9f7ecf16184478328"
+    }
+  ],
+  "comparison": "All hashes identical to pre-update values; no source model re-exported or edited."
+}

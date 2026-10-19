@@ -1,3 +1,5 @@
+> Historical previous-pass report. For the current update and installation use [REPAIR-2.md](REPAIR-2.md). Its in-place update replaces the prior rebuild instruction.
+
 # Sunward Unity — integrated restoration review
 
 Target: **Unity 6.6 / 6000.6.6f1**. Work is confined to `unity/` on `sunward-unity-port`. The original Three.js game, GLB, Blender workspaces and existing saves are not overwritten.

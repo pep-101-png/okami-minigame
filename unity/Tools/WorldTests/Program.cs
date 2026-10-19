@@ -12,6 +12,12 @@ class Program {
  string root=Directory.Exists("unity")?"unity":".";
  var data=JsonUtility.FromJson<ValleyData>(File.ReadAllText(root+"/Assets/Sunward/Data/Valley.json"));var world=data.world;
  foreach(var npc in world.npcs){var p=new Vector3(npc.position[0],npc.position[1],npc.position[2]);Need(VillageNavigation.FindSafe(world,p,out var safe)&&VillageNavigation.Clear(world,safe),"Safe spawn: "+npc.name);}
+ var materials=data.assets.Where(a=>a.name=="TownV3").SelectMany(a=>a.meshes).Select(m=>m.material).Distinct().ToArray();
+ var families=new Dictionary<string,int>();
+ foreach(int id in materials){string family=SurfaceArtRules.Family(data.materials[id]);if(family==null)continue;if(!families.ContainsKey(family))families[family]=0;families[family]++;Need(File.Exists(root+"/Assets/Sunward/Textures/Art/Paint-"+family+".png")&&File.Exists(root+"/Assets/Sunward/Textures/Art/Paint-"+family+"-normal.png"),"Connected art source for real TownV3 material "+id);}
+ foreach(string family in new[]{"wood","roof","stone","plaster","meadow"})Need(families.ContainsKey(family),"Actual Windflower uses new "+family+" artwork");
+ File.WriteAllText(root+"/Review/art-binding-plan.json",JsonSerializer.Serialize(new{source="actual TownV3 mesh material indices",material_families=families,unity_scene_references="REQUIRE LOCAL UNITY VALIDATION"},new JsonSerializerOptions{WriteIndented=true}));
+ bool rejected=false;try{MeshSafety.Validate("test invalid generated mesh",new[]{new Vector3(0,float.NaN,0)},new[]{0,0,0});}catch(InvalidOperationException){rejected=true;}Need(rejected,"NaN mesh identified before collision cooking");
  int recovery=0;for(int z=-29;z<=29;z+=2){var water=new Vector3(Valley.RiverX(z),-1,-z);Need(VillageNavigation.FindSafe(world,water,out var safe,.55f,16)&&Valley.Depth(safe)<=.1f,"River escape near z="+z);recovery++;}
  for(int i=0;i<=10000;i++){float h=Valley.BridgeHeight(i/10000f);if(!float.IsFinite(h)||h<.1f||h>.521f)throw new Exception("Invalid bridge height");}
  Need(Valley.BridgeHeight(0)==.1f&&Valley.BridgeHeight(1)==.1f,"Bridge finite and level endpoints");

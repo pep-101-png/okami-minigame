@@ -1,0 +1,11 @@
+{
+  "source": "actual TownV3 mesh material indices",
+  "material_families": {
+    "wood": 54,
+    "stone": 21,
+    "plaster": 75,
+    "roof": 7,
+    "meadow": 3
+  },
+  "unity_scene_references": "REQUIRE LOCAL UNITY VALIDATION"
+}

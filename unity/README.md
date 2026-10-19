@@ -1,6 +1,6 @@
 # Sunward — Amaterasu Unity port
 
-**Integrated restoration update:** read [Review/RESTORATION.md](Review/RESTORATION.md) for installation, verified fixes and remaining local Unity checks. After applying an update, run **Sunward > Create or Rebuild V3 Scene** once. Original wolf mesh/UVs are preserved; only Unity sleep clips changed, with three legacy copies retained.
+**Current scale/artwork update:** read [Review/REPAIR-2.md](Review/REPAIR-2.md). For an existing project, open Windflower and choose **Sunward → Apply Windflower Repair and Artwork Update**. This updates existing assets in place; no full scene rebuild is required. Original FBX/import settings remain untouched by the overlay. Unity rendering and Play Mode are **not verified** here.
 
 **Target: Unity 6.6 (6000.6.6f1), Windows. Separate project and branch.**
 

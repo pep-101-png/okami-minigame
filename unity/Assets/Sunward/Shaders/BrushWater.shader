@@ -1,5 +1,5 @@
 Shader "Sunward/Brush River" {
- Properties {_BaseColor("River wash",Color)=(.32,.62,.66,.7)}
+ Properties {_FlowMap("Painted currents",2D)="white"{} _FlowNormal("Linear current relief",2D)="bump"{} _BaseColor("River wash",Color)=(.32,.62,.66,.7)}
  SubShader {Tags{"RenderPipeline"="UniversalPipeline" "Queue"="Transparent" "RenderType"="Transparent"}Blend SrcAlpha OneMinusSrcAlpha ZWrite Off Cull Off
  Pass {Tags{"LightMode"="UniversalForward"}
  HLSLPROGRAM
@@ -10,6 +10,7 @@ Shader "Sunward/Brush River" {
  #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
  #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareDepthTexture.hlsl"
  #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DeclareOpaqueTexture.hlsl"
+ TEXTURE2D(_FlowMap);SAMPLER(sampler_FlowMap);TEXTURE2D(_FlowNormal);SAMPLER(sampler_FlowNormal);
  CBUFFER_START(UnityPerMaterial)
  float4 _BaseColor;
  CBUFFER_END
@@ -24,12 +25,17 @@ Shader "Sunward/Brush River" {
  float shoreline=(1-smoothstep(.015,.35,gap))*(.45+.15*sin(travel*8+i.world.x*3));
  float2 ripple=float2(sin(i.world.z*3-_Time.y*2),cos(i.world.x*5+_Time.y))*min(.0015,gap*.001);
  half3 refracted=SampleSceneColor(saturate(screenUV+ripple));
- float3 normal=normalize(float3(sin(travel*3)*.035,1,cos(i.world.x*6+travel*4)*.045));
+ float2 flowUV=float2((i.world.x-cx)/(width*2)+.5,z*.045-_Time.y*.055);
+ half3 paintedCurrent=SAMPLE_TEXTURE2D(_FlowMap,sampler_FlowMap,flowUV).rgb;
+ float3 flowNormal=SAMPLE_TEXTURE2D(_FlowNormal,sampler_FlowNormal,flowUV).rgb*2-1;
+ float3 normal=normalize(float3(flowNormal.x*.12+sin(travel*3)*.035,1,flowNormal.y*.12+cos(i.world.x*6+travel*4)*.045));
  float3 view=GetWorldSpaceNormalizeViewDir(i.world);
  float fresnel=pow(1-saturate(dot(view,normal)),4);
  half3 reflection=GlossyEnvironmentReflection(reflect(-view,normal),.35,1);
  c=lerp(refracted,c,1-exp(-max(.08,gap)*.85));
+ c=lerp(c,paintedCurrent,.38);
  c=lerp(c,reflection+float3(.15,.23,.23),fresnel*.28);
+ c=lerp(c,float3(.93,.95,.87),saturate((paintedCurrent.r-.62)*2.5)*.42);
  c=lerp(c,float3(.90,.94,.84),saturate(shoreline+streak*.12));
  Light sun=GetMainLight();float glint=pow(saturate(dot(normal,normalize(sun.direction+view))),90);
  c+=sun.color*glint*.20;

@@ -28,15 +28,7 @@ namespace Sunward
                     return false;
             float h = Valley.SurfaceHeight(world.terrain, p);
             // Reject cliff edges, steep banks and ledges, including the footprint.
-            foreach (var direction in new[]
-            {
-                Vector3.right,
-                Vector3.left,
-                Vector3.forward,
-                Vector3.back
-            }
-
-            )
+            foreach (var direction in Directions)
                 if (Mathf.Abs(Valley.SurfaceHeight(world.terrain, p + direction * radius) - h) > radius * .75f)
                     return false;
             return true;

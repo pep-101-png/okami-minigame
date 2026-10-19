@@ -300,7 +300,10 @@ namespace Sunward
             Player.Teleport(new Vector3(22, 0, 0));
             Player.transform.rotation = Quaternion.Euler(0, 90, 0);
             barrier = new GameObject("Hollow Bell · calligraphic seal");
-            var mesh = new Mesh();
+            var mesh = new Mesh
+            {
+                name = "Hollow Bell arena barrier"
+            };
             const int N = 160, K = 6;
             var v = new Vector3[(N + 1) * (K + 1)];
             var uv = new Vector2[v.Length];
@@ -325,6 +328,7 @@ namespace Sunward
                     }
                 }
 
+            MeshSafety.Validate("Hollow Bell arena barrier", v, index);
             mesh.vertices = v;
             mesh.uv = uv;
             mesh.triangles = index;

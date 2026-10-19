@@ -1,0 +1,92 @@
+{
+  "resolution": "1024 x 1024; not 4K",
+  "artwork": [
+    {
+      "family": "wood",
+      "color": "Paint-wood.png",
+      "normal": "Paint-wood-normal.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "source": "original procedural watercolour artwork",
+      "sha256": "14a8158cd634ed29beb71e4b16274256c424c2f6a50a98d6c1e7d8ac80c81bd0"
+    },
+    {
+      "family": "roof",
+      "color": "Paint-roof.png",
+      "normal": "Paint-roof-normal.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "source": "original procedural watercolour artwork",
+      "sha256": "f0701d4b937545c919557161716e97526fc12a6b1b4800277a59fd7ee6e244d9"
+    },
+    {
+      "family": "stone",
+      "color": "Paint-stone.png",
+      "normal": "Paint-stone-normal.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "source": "original procedural watercolour artwork",
+      "sha256": "d2dbafb264a1304fcc9e3f46df654b9a4f80bf80f837b41c1d46a6dc500fec5c"
+    },
+    {
+      "family": "plaster",
+      "color": "Paint-plaster.png",
+      "normal": "Paint-plaster-normal.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "source": "original procedural watercolour artwork",
+      "sha256": "e1f61e8f055ae7ced9e631bc9d107c0234e92ed8bc7cb9d16a8678606b721b00"
+    },
+    {
+      "family": "meadow",
+      "color": "Paint-meadow.png",
+      "normal": "Paint-meadow-normal.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "source": "original procedural watercolour artwork",
+      "sha256": "cd197d48dcb2ed9c72d40d83489a1577c8afd8db17173085f25af0cd4bdc1119"
+    },
+    {
+      "family": "path",
+      "color": "Paint-path.png",
+      "normal": "Paint-path-normal.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "source": "original procedural watercolour artwork",
+      "sha256": "98e00f18619d633066d3cd1662c3ee4d9cfd0c036dfa2318b5e93c00bf9530a3"
+    },
+    {
+      "family": "water",
+      "color": "Paint-water.png",
+      "normal": "Paint-water-normal.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "source": "original procedural watercolour artwork",
+      "sha256": "418bcf78cdc38f31626d504a184fe80ff9712de337c98efe6d39c482defd3375"
+    },
+    {
+      "family": "noren",
+      "color": "Paint-noren.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "source": "original procedural painted sun-spiral crest",
+      "sha256": "baa2bafeaba2bbdf92f06cd2ed269b7af7d3ae45f54df6c8ec37d0876e2cb321"
+    }
+  ]
+}

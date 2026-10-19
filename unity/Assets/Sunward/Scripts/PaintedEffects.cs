@@ -8,6 +8,8 @@ namespace Sunward
         public Material ink;
         public LineRenderer Ring(Vector3 center, Color color, float radius, float life = .65f)
         {
+            if (!MeshSafety.Finite(center) || !float.IsFinite(radius))
+                throw new System.InvalidOperationException("Invalid painted-ring input: " + center + ", radius " + radius);
             var go = new GameObject("Painted impact ring");
             go.transform.position = center + Vector3.up * .035f;
             var line = go.AddComponent<LineRenderer>();

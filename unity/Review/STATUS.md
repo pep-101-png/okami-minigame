@@ -1,6 +1,6 @@
-# Latest integrated restoration status
+# Current delivery status
 
-See [RESTORATION.md](RESTORATION.md) for the current pass, actual verification, remaining limits and local installation checklist. The implementation below describes the initial port; the restoration adds repaired material culling/wrapping, three revised sleep actions plus archives, village/river safety, arena equipment and rendering changes. Unity Editor compilation, shaders and Play Mode remain unverified in the cloud.
+See [REPAIR-2.md](REPAIR-2.md) for the current scale/artwork update, feature-by-feature status and local steps. Reports below are historical initial-port notes, not the current feature status.
 
 # Unity port — first implementation, pending real Editor verification
 
