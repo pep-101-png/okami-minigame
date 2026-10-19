@@ -118,6 +118,7 @@
     "Review/IMPORT-REPAIR.md",
     "Review/REPAIR-2.md",
     "Review/RESTORATION.md",
+    "Review/SCALE-HOTFIX.md",
     "Review/STATUS.md",
     "Review/SleepInspection.png",
     "Review/art-binding-plan.json",
@@ -136,8 +137,8 @@
     "Review/world-tests.txt",
     "Review/world-validation.json"
   ],
-  "sha256": "12a9f2319a885609faba59ab161fa0f29fa9b92a1b0a25da28a4642e12078edb",
-  "bytes": 15263896,
+  "sha256": "99c6fcd830c54b8bd6a6ec47fbfa2dc6a1c13d56c9c7d3b8e4725c0c944107b9",
+  "bytes": 15266597,
   "unity_editor_verified": false,
   "note": "Preserves existing FBX and its importer metadata. Includes native-clip repair code and connected Windflower artwork. Open Windflower and run Sunward > Apply Windflower Repair and Artwork Update."
 }

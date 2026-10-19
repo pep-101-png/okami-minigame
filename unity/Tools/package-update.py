@@ -16,3 +16,13 @@ with zipfile.ZipFile(target)as archive:
 shutil.copyfile(target,out/'Sunward-Unity-Import-Repair.zip')
 report={'type':'integrated-restoration-overlay','target_editor':'6000.6.6f1','files':sorted(files),'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'bytes':target.stat().st_size,'unity_editor_verified':False,'note':'Preserves existing FBX and its importer metadata. Includes native-clip repair code and connected Windflower artwork. Open Windflower and run Sunward > Apply Windflower Repair and Artwork Update.'}
 (out/'restoration-update.json').write_text(json.dumps(report,indent=2)+'\n');(out/'import-repair.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items()if k!='files'},indent=2))
+
+# Small repair overlay for users who already applied the full environment update.
+hotfix=out/'Sunward-Unity-Scale-Hotfix.zip'
+with zipfile.ZipFile(hotfix,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as archive:
+ for name in ['Assets/Editor/WolfClipProcessor.cs','Assets/Editor/WolfClipProcessor.cs.meta','Review/SCALE-HOTFIX.md']:
+  archive.write(root/name,name)
+with zipfile.ZipFile(hotfix) as archive:
+ assert archive.testzip() is None
+(out/'scale-hotfix.json').write_text(json.dumps({'sha256':hashlib.sha256(hotfix.read_bytes()).hexdigest(),'bytes':hotfix.stat().st_size,'unity_editor_verified':False,'install':'Extract into existing project root, reopen Unity, run Sunward > Repair Amaterasu Animation Scale (not just Validate).'},indent=2)+'\n')
+print('Scale hotfix:',hotfix.stat().st_size,'bytes')

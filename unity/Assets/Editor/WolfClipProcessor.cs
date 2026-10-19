@@ -22,27 +22,68 @@ namespace Sunward.Editor
             var source = AssetDatabase.LoadAllAssetsAtPath(Source).OfType<AnimationClip>().Where(c => !c.name.StartsWith("__preview__")).ToArray();
             if (source.Length != 47)
                 throw new InvalidDataException("Expected all 47 Amaterasu clips, found " + source.Length);
+            var model = AssetDatabase.LoadAssetAtPath<GameObject>(Source);
+            var rigs = model.GetComponentsInChildren<Transform>(true).Where(t => t != model.transform && t.name == "WOLF_RIG").ToArray();
+            if (rigs.Length != 1)
+                throw new InvalidDataException("Expected exactly one WOLF_RIG beneath the FBX root; found " + rigs.Length);
+            string rigPath = AnimationUtility.CalculateTransformPath(rigs[0], model.transform);
             var result = new List<AnimationClip>();
-            int removed = 0;
+            int corrected = 0;
             foreach (var original in source)
             {
-                var copy = UnityEngine.Object.Instantiate(original);
-                copy.name = Clean(original.name);
-                copy.hideFlags = HideFlags.None;
-                copy.legacy = false;
-                foreach (var binding in AnimationUtility.GetCurveBindings(copy))
+                // Do not clone the imported clip's baked/internal binding payload.
+                // Removing exposed curves from a clone did not prevent Unity's initial
+                // Animator evaluation from restoring 100 on the user's machine.
+                var copy = new AnimationClip
                 {
-                    if (binding.type != typeof(Transform) || !WolfScaleRules.IsContainerScale(binding.path, binding.propertyName))
+                    name = Clean(original.name),
+                    legacy = false,
+                    frameRate = original.frameRate,
+                    wrapMode = original.wrapMode,
+                    localBounds = original.localBounds
+                };
+                var settings = AnimationUtility.GetAnimationClipSettings(original);
+                AnimationUtility.SetAnimationClipSettings(copy, settings);
+                foreach (var binding in AnimationUtility.GetCurveBindings(original))
+                {
+                    var curve = AnimationUtility.GetEditorCurve(original, binding);
+                    if (binding.type == typeof(Transform) && WolfScaleRules.IsContainerScale(binding.path, binding.propertyName))
+                    {
+                        if (curve.keys.Any(k => !float.IsFinite(k.value)))
+                            throw new InvalidDataException("Non-finite source container scale: " + copy.name + " / " + binding.path);
+                        corrected++;
                         continue;
-                    var curve = AnimationUtility.GetEditorCurve(copy, binding);
-                    if (curve.keys.Any(k => !float.IsFinite(k.value)))
-                        throw new InvalidDataException("Non-finite source container scale: " + copy.name + " / " + binding.path);
-                    AnimationUtility.SetEditorCurve(copy, binding, null);
-                    removed++;
+                    }
+
+                    AnimationUtility.SetEditorCurve(copy, binding, curve);
                 }
 
-                if (AnimationUtility.GetCurveBindings(copy).Any(b => b.type == typeof(Transform) && WolfScaleRules.IsContainerScale(b.path, b.propertyName)))
-                    throw new InvalidDataException("Container scale survived processing: " + copy.name);
+                foreach (var binding in AnimationUtility.GetObjectReferenceCurveBindings(original))
+                    AnimationUtility.SetObjectReferenceCurve(copy, binding, AnimationUtility.GetObjectReferenceCurve(original, binding));
+                AnimationUtility.SetAnimationEvents(copy, AnimationUtility.GetAnimationEvents(original));
+                // Explicit authored values override imported/avatar default-pose scale.
+                // These are asset curves, not a per-frame runtime transform clamp.
+                foreach (string container in new[]
+                {
+                    "",
+                    rigPath
+                }
+
+                )
+                    foreach (string axis in new[]
+                    {
+                        "x",
+                        "y",
+                        "z"
+                    }
+
+                    )
+                    {
+                        var binding = EditorCurveBinding.FloatCurve(container, typeof(Transform), "m_LocalScale." + axis);
+                        AnimationUtility.SetEditorCurve(copy, binding, AnimationCurve.Constant(0, Mathf.Max(original.length, 1f / original.frameRate), container.Length == 0 ? .34f : 1f));
+                    }
+
+                VerifyCurveTransfer(original, copy, rigPath);
                 string path = Folder + "/" + copy.name + ".anim";
                 var saved = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
                 if (saved)
@@ -56,13 +97,49 @@ namespace Sunward.Editor
                     saved = copy;
                 }
 
+                VerifyCurveTransfer(original, saved, rigPath);
                 EditorUtility.SetDirty(saved);
                 result.Add(saved);
             }
 
             AssetDatabase.SaveAssets();
-            Debug.Log("Prepared " + result.Count + " native Amaterasu clip copies; removed " + removed + " container-only scale bindings. Source FBX and all bone channels preserved.");
+            Debug.Log("Prepared " + result.Count + " fresh native Amaterasu clips; replaced " + corrected + " source container-scale channels with explicit authored .34/1 scale curves. Bone keys/events/settings copied, imported payload not cloned. Source FBX untouched.");
             return result.ToArray();
+        }
+
+        static void VerifyCurveTransfer(AnimationClip source, AnimationClip copy, string rigPath)
+        {
+            foreach (var binding in AnimationUtility.GetCurveBindings(source))
+            {
+                if (binding.type == typeof(Transform) && WolfScaleRules.IsContainerScale(binding.path, binding.propertyName))
+                    continue;
+                var before = AnimationUtility.GetEditorCurve(source, binding);
+                var after = AnimationUtility.GetEditorCurve(copy, binding);
+                if (after == null || !before.keys.SequenceEqual(after.keys) || before.preWrapMode != after.preWrapMode || before.postWrapMode != after.postWrapMode)
+                    throw new InvalidDataException("Animation curve changed during transfer: " + source.name + " / " + binding.path + " / " + binding.propertyName);
+            }
+
+            foreach (string path in new[]
+            {
+                "",
+                rigPath
+            }
+
+            )
+                foreach (string axis in new[]
+                {
+                    "x",
+                    "y",
+                    "z"
+                }
+
+                )
+                {
+                    var curve = AnimationUtility.GetEditorCurve(copy, EditorCurveBinding.FloatCurve(path, typeof(Transform), "m_LocalScale." + axis));
+                    float expected = path.Length == 0 ? .34f : 1f;
+                    if (curve == null || curve.keys.Any(k => !float.IsFinite(k.value) || Mathf.Abs(k.value - expected) > .00001f))
+                        throw new InvalidDataException("Authored container curve missing/invalid: " + copy.name + " / " + path);
+                }
         }
 
         [MenuItem("Sunward/Repair Amaterasu Animation Scale")]
@@ -145,9 +222,12 @@ namespace Sunward.Editor
                     samples++;
                 }
 
+                animator.enabled = true;
+                animator.cullingMode = AnimatorCullingMode.AlwaysAnimate;
+                Debug.Log("Scale diagnostic before Rebind: " + string.Join("; ", containers.Select(t => t.name + "=" + t.localScale)));
                 animator.Rebind();
                 animator.Update(0);
-                Check("initial Animator enable");
+                Check("initial Animator enable (fresh native clips with explicit container curves)");
                 foreach (var clip in clips)
                 {
                     if (!AssetDatabase.GetAssetPath(clip).StartsWith(Folder + "/"))

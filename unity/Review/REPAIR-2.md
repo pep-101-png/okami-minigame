@@ -1,5 +1,7 @@
 # Windflower — Animator scale repair and connected artwork update
 
+**Scale follow-up:** the original removal-only processor failed on the user’s Unity installation at initial Animator enable (WOLF_RIG=100). The current processor uses fresh native clips with explicit authored container-scale curves. See [SCALE-HOTFIX.md](SCALE-HOTFIX.md). This follow-up still requires local Unity validation.
+
 Target: **Unity 6000.6.6f1**. This update follows `4b71188`; keep a copy of your existing Unity folder before applying it. `bc7306c` and the original Three.js source remain recoverable in Git. All changes in this delivery are under `unity/`.
 
 **Unity Editor is unavailable here.** Native C# API compilation, shader compilation, generated-scene reference checks, Play Mode, visual quality and performance have NOT been verified. Implemented source/assets below are ready for local verification, not a claim of a fully repaired, visually approved build.
@@ -20,7 +22,7 @@ For a fresh full-project ZIP, first-import generation builds Windflower with the
 
 The **raw binary FBX** contains 47 animation stacks and **141 WOLF_RIG scale curves, all constant 100**. The model's raw container also carries FBX unit-conversion scale. Blender's importer compensates those object curves back to 1, which is why prior bone-focused Blender checks missed the values that matched your Unity observation. This confirms a source of the reported fault; exact Unity binding behaviour still requires the native check.
 
-`WolfClipProcessor` copies all 47 imported clips into native `.anim` assets. It removes **only Transform local-scale bindings on the Animator container or named WOLF_RIG container**. Deform/control-bone scales, positions, rotations, timing and clip settings are retained. The controller references the copies; the FBX/imported clips remain untouched. Reimport schedules the same processing again. No runtime script resets scale every frame. A one-time Editor-only reset handles an accidentally saved scale of 100, and a disabled scene Animator is re-enabled after validation.
+`WolfClipProcessor` transfers all 47 imported clips into fresh native `.anim` assets rather than cloning imported internal data. It replaces **only Transform local-scale bindings on the Animator container or named WOLF_RIG container** with explicit constant `.34` / `1` asset curves, including startup defaults. Deform/control-bone scales, positions, rotations, timing and clip settings are retained. The controller references the copies; the FBX/imported clips remain untouched. Reimport schedules the same processing again. No runtime script resets scale every frame. A one-time Editor-only reset handles an accidentally saved scale of 100, and a disabled scene Animator is re-enabled after validation.
 
 **Sunward → Validate Amaterasu Scale and Transitions** samples all 47 actions at 13 phases plus representative transitions, against the authored `.34` visual-wrapper / `1` rig scale. This native checker was provided but **not run here**. It catches container size changes, not every skinning/visual defect.
 
@@ -52,7 +54,7 @@ The **raw binary FBX** contains 47 animation stacks and **141 WOLF_RIG scale cur
 ## Checks actually executed
 
 - Raw binary FBX inspection: 47 stacks, 141 constant-100 rig-container scale curves. See `raw-fbx-scale-audit.json`.
-- Roslyn syntax parsing for Assets C#; **not** Unity API compilation. Portable scale-binding, combat-chain and progression/save checks execute real pure C# rules (33 cases).
+- Roslyn syntax parsing for Assets C#; **not** Unity API compilation. Portable scale-binding, combat-chain and progression/save checks execute real pure C# rules (33 cases). The scale follow-up was syntax-checked with the same suite; native curve-transfer/startup assertions require Unity.
 - Numerical world tests execute actual navigation/grounding code against actual V3 data: seven safe NPC spawns, 30 riverbank escape locations, 10,001 finite bridge-height samples, obstacle checks, 192 decoration components grounded. These are **not Unity physics tests**.
 - Binary integrity: 1,110 source meshes, valid finite vertices/indices; 47 actions/catalog; original material bindings; original PNGs and 15 new 1024×1024 PNGs verified.
 - Source hashes confirm original GLB/Blender/Unity FBX unchanged. No animation render or Unity screenshot is fabricated. Prior Blender round-trip reports remain historical evidence for the unchanged FBX, not a new Unity test.
