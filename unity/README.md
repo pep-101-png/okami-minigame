@@ -1,6 +1,6 @@
 # Sunward — Amaterasu Unity port
 
-**Current village overhaul:** read [Review/VILLAGE-OVERHAUL.md](Review/VILLAGE-OVERHAUL.md) for all eleven issue statuses and the local checklist. Apply the complete update to your existing project, open Windflower, then choose **Sunward → Apply Windflower Repair and Artwork Update**. Original wolf FBX/import settings remain untouched. **Unity compilation, rendering, physics and gameplay have not been verified in this cloud.**
+**Current visual remake:** read [Review/VISUAL-REMAKE.md](Review/VISUAL-REMAKE.md). Close Unity Editor (Hub can stay open), extract the update into your existing project root, reopen **Windflower**, then choose **Sunward → Apply Visual Remake to Windflower** once. This dedicated command changes world artwork without reprocessing Amaterasu's animation clips. **Unity compilation, shader rendering, physics and gameplay remain unverified in this cloud.**
 
 **Target: Unity 6.6 (6000.6.6f1), Windows. Separate project and branch.**
 

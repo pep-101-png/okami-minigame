@@ -1,0 +1,32 @@
+{
+  "maps": [
+    "Bark-normal.png",
+    "Bark.png",
+    "Earth-normal.png",
+    "Earth.png",
+    "Indigo-normal.png",
+    "Indigo.png",
+    "Jade-normal.png",
+    "Jade.png",
+    "Meadow-normal.png",
+    "Meadow.png",
+    "Oak-normal.png",
+    "Oak.png",
+    "Paper-normal.png",
+    "Paper.png",
+    "Plaster-normal.png",
+    "Plaster.png",
+    "Roof-normal.png",
+    "Roof.png",
+    "Skin-normal.png",
+    "Skin.png",
+    "Stone-normal.png",
+    "Stone.png",
+    "Vermilion-normal.png",
+    "Vermilion.png"
+  ],
+  "resolution": "2048x2048",
+  "FBX_hash_matches_manifest": true,
+  "material_bindings_checked_against_exported_FBX": true,
+  "Unity_import_and_shaders": "NOT RUN"
+}

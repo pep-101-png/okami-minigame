@@ -5,11 +5,13 @@ namespace Sunward
     public sealed class Valley : MonoBehaviour
     {
         public TextAsset source;
+        public bool visualRelief;
         public WorldData Data { get; private set; }
 
         void Awake()
         {
             Data = JsonUtility.FromJson<ValleyData>(source.text).world;
+            Data.terrain.visualRelief = visualRelief;
         }
 
         public static Vector3 Point(float x, float y, float threeZ) => new Vector3(x, y, -threeZ);
@@ -80,7 +82,7 @@ namespace Sunward
             var t = terrain;
             float xg = Mathf.Clamp((p.x - t.minX) / t.step, 0, t.nx - 1.001f), zg = Mathf.Clamp((z - t.minZ) / t.step, 0, t.nz - 1.001f);
             int x = (int)xg, j = (int)zg;
-            return Mathf.Lerp(Mathf.Lerp(t.heights[j * t.nx + x], t.heights[j * t.nx + x + 1], xg - x), Mathf.Lerp(t.heights[(j + 1) * t.nx + x], t.heights[(j + 1) * t.nx + x + 1], xg - x), zg - j);
+            return Mathf.Lerp(Mathf.Lerp(t.heights[j * t.nx + x], t.heights[j * t.nx + x + 1], xg - x), Mathf.Lerp(t.heights[(j + 1) * t.nx + x], t.heights[(j + 1) * t.nx + x + 1], xg - x), zg - j) + (t.visualRelief ? TerrainRelief.Offset(p) : 0);
         }
     }
 }

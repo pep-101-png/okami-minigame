@@ -44,6 +44,19 @@ class Program {
  for(int i=0;i<=10000;i++){float h=Valley.BridgeHeight(i/10000f);if(!float.IsFinite(h)||h<.1f||h>.521f)throw new Exception("Invalid bridge height");}
  Need(Valley.BridgeHeight(0)==.1f&&Valley.BridgeHeight(1)==.1f,"Bridge finite and level endpoints");
  foreach(var box in world.boxes)Need(!VillageNavigation.Clear(world,new Vector3(box.x,0,-box.z)),"Building/rail rejected");
+ // A dormant vertex must never enlarge an island's bounds or join two stones.
+ var seamVertices=new[]{new Vector3(0,0,0),new Vector3(1,0,0),new Vector3(0,1,0),new Vector3(1,0,0),new Vector3(1,1,0),new Vector3(0,1,0),new Vector3(900,900,900)};
+ var seam=SurfaceIslands.Find(seamVertices,new[]{0,1,2,3,4,5});
+ Need(seam.Count==1&&seam[0].Count==6&&!seam[0].Contains(6),"Drawn-face islands weld UV seams and exclude dormant vertices");
+ int rockCount=0,riverRockCount=0,sourceID=0;var rockAudit=new List<object>();
+ world.terrain.visualRelief=true;
+ using(var rr=new BinaryReader(File.OpenRead(root+"/Assets/Sunward/Data/Valley.bytes")))
+ foreach(var asset in data.assets)foreach(var m in asset.meshes){int id=sourceID++;if(asset.name!="TownV3"||!RockSeating.Source(id))continue;rr.BaseStream.Position=m.offset;int nv=rr.ReadInt32(),ni=rr.ReadInt32();var v=new Vector3[nv];for(int i=0;i<nv;i++){v[i]=new(rr.ReadSingle(),rr.ReadSingle(),rr.ReadSingle());rr.BaseStream.Position+=36;}var ix=new int[ni];for(int i=0;i<ni;i++)ix[i]=rr.ReadInt32();foreach(var island in SurfaceIslands.Find(v,ix)){var b=new Bounds(v[island[0]],Vector3.zero);foreach(int k in island)b.Encapsulate(v[k]);if(!RockSeating.Suitable(world,b))continue;float bottom=RockSeating.Bottom(world,b),centerGround=Valley.SurfaceHeight(world.terrain,b.center);Need(float.IsFinite(bottom)&&bottom<centerGround,"Individual rock foundation embeds below its own surface "+id+"/"+island[0]);bool river=Math.Abs(b.center.x-Valley.RiverX(-b.center.z))<4;rockCount++;if(river)riverRockCount++;rockAudit.Add(new{source=id,vertex=island[0],x=b.center.x,z=b.center.z,original_bottom=b.min.y,replacement_bottom=bottom,river});}}
+ Need(rockCount>40&&riverRockCount>10,"Actual source stone census includes landscape and river rocks: "+rockCount+" / "+riverRockCount);
+ for(int i=0;i<400;i++){var p=new Vector3(-55+i*.29f,0,-40+(i*7)%80);Need(float.IsFinite(TerrainRelief.Offset(p))&&Math.Abs(TerrainRelief.Offset(p))<=.251f,"Bounded terrain relief "+i);}
+ Need(TerrainRelief.Offset(new Vector3(-34,0,-16))==0&&TerrainRelief.Offset(new Vector3(0,0,3))==0,"Home and central route relief preserved");
+ File.WriteAllText(root+"/Review/remake-rock-placement.json",JsonSerializer.Serialize(new{rocks=rockCount,river_rocks=riverRockCount,placements=rockAudit,native_visual_check="NOT RUN"},new JsonSerializerOptions{WriteIndented=true}));
+ world.terrain.visualRelief=false;
  int grounded=0,components=0;
  using var reader=new BinaryReader(File.OpenRead(root+"/Assets/Sunward/Data/Valley.bytes"));
  foreach(var asset in data.assets.Where(a=>a.name=="TownV3"))foreach(var m in asset.meshes){if(data.materials[m.material].kind!="stone"&&data.materials[m.material].kind!="grass-blade")continue;reader.BaseStream.Position=m.offset;int nv=reader.ReadInt32(),ni=reader.ReadInt32();var v=new Vector3[nv];for(int i=0;i<nv;i++){v[i]=new(reader.ReadSingle(),reader.ReadSingle(),reader.ReadSingle());reader.BaseStream.Position+=36;}var ix=new int[ni];for(int i=0;i<ni;i++)ix[i]=reader.ReadInt32();int n=EnvironmentGrounding.Adjust(v,ix,data.materials[m.material],world);grounded+=n;components++;Need(v.All(p=>float.IsFinite(p.y)),"Finite grounded geometry "+m.material);}

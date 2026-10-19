@@ -1,0 +1,1096 @@
+{
+  "rocks": 121,
+  "river_rocks": 56,
+  "placements": [
+    {
+      "source": 371,
+      "vertex": 0,
+      "x": -19.87476,
+      "z": 25.989243,
+      "original_bottom": 0.3019221,
+      "replacement_bottom": -0.07389796,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 243,
+      "x": -19.871155,
+      "z": 23.287704,
+      "original_bottom": 0.34426737,
+      "replacement_bottom": -0.05285967,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 486,
+      "x": -19.867548,
+      "z": 20.586168,
+      "original_bottom": 0.2512452,
+      "replacement_bottom": -0.16704994,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 729,
+      "x": -19.87476,
+      "z": 17.889244,
+      "original_bottom": 0.17856127,
+      "replacement_bottom": -0.21497877,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 972,
+      "x": -19.87476,
+      "z": 9.789242,
+      "original_bottom": 0.24486512,
+      "replacement_bottom": -0.16887268,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 1215,
+      "x": -19.871155,
+      "z": 7.0877056,
+      "original_bottom": 0.090856805,
+      "replacement_bottom": -0.2767279,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 1701,
+      "x": -19.87476,
+      "z": 1.6892425,
+      "original_bottom": 0.33046243,
+      "replacement_bottom": -0.06782435,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 1944,
+      "x": -19.871155,
+      "z": -1.0122943,
+      "original_bottom": -0.6473407,
+      "replacement_bottom": -1.1395189,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 2187,
+      "x": -19.867548,
+      "z": -3.7138312,
+      "original_bottom": -1.3216655,
+      "replacement_bottom": -1.827853,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 2430,
+      "x": -19.87476,
+      "z": -6.4107575,
+      "original_bottom": -1.3622395,
+      "replacement_bottom": -1.8478456,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 2673,
+      "x": -19.871155,
+      "z": -9.112295,
+      "original_bottom": -0.8793851,
+      "replacement_bottom": -1.3946657,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 2916,
+      "x": -19.87476,
+      "z": -14.510757,
+      "original_bottom": 0.23055759,
+      "replacement_bottom": -0.14162236,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 3159,
+      "x": -19.871155,
+      "z": -17.212296,
+      "original_bottom": -0.19038606,
+      "replacement_bottom": -0.5360131,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 3402,
+      "x": -19.867548,
+      "z": -19.913832,
+      "original_bottom": -0.40525094,
+      "replacement_bottom": -0.73404336,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 3645,
+      "x": -19.87476,
+      "z": -22.610756,
+      "original_bottom": 0.010137597,
+      "replacement_bottom": -0.35156918,
+      "river": true
+    },
+    {
+      "source": 371,
+      "vertex": 3888,
+      "x": -19.871155,
+      "z": -25.312294,
+      "original_bottom": 0.12359054,
+      "replacement_bottom": -0.29615593,
+      "river": true
+    },
+    {
+      "source": 780,
+      "vertex": 0,
+      "x": -45.90264,
+      "z": 31.78617,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.5092312,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 51,
+      "x": -31.79249,
+      "z": 31.868645,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.17847058,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 102,
+      "x": -17.637934,
+      "z": 31.771687,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.042346366,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 153,
+      "x": 10.793605,
+      "z": 31.765625,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.36867547,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 204,
+      "x": 25.02698,
+      "z": 31.824284,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.1468549,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 255,
+      "x": 39.14574,
+      "z": 31.868147,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.22116682,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 306,
+      "x": -45.90264,
+      "z": -30.813831,
+      "original_bottom": 0.37,
+      "replacement_bottom": 0.05880736,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 357,
+      "x": -31.79249,
+      "z": -30.731358,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.3109643,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 408,
+      "x": -17.637934,
+      "z": -30.828316,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.24549882,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 459,
+      "x": 10.793605,
+      "z": -30.834375,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.3493737,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 510,
+      "x": 25.02698,
+      "z": -30.775715,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.49771124,
+      "river": false
+    },
+    {
+      "source": 780,
+      "vertex": 561,
+      "x": 39.14574,
+      "z": -30.731853,
+      "original_bottom": 0.37,
+      "replacement_bottom": 0.06735353,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 0,
+      "x": -38.86891,
+      "z": 31.827282,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.4572863,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 51,
+      "x": -24.757137,
+      "z": 31.872112,
+      "original_bottom": 0.37,
+      "replacement_bottom": -1.1462392,
+      "river": true
+    },
+    {
+      "source": 781,
+      "vertex": 102,
+      "x": -10.611038,
+      "z": 31.746407,
+      "original_bottom": 0.37,
+      "replacement_bottom": 0.002308026,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 153,
+      "x": 18.000042,
+      "z": 31.79203,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.23687415,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 204,
+      "x": 32.111046,
+      "z": 31.871574,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.11536968,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 255,
+      "x": 46.25898,
+      "z": 31.775192,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.5339473,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 306,
+      "x": -38.86891,
+      "z": -30.772717,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.2399782,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 357,
+      "x": -24.757137,
+      "z": -30.727888,
+      "original_bottom": 0.37,
+      "replacement_bottom": -1.5407583,
+      "river": true
+    },
+    {
+      "source": 781,
+      "vertex": 408,
+      "x": -10.611038,
+      "z": -30.853596,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.02593597,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 459,
+      "x": 18.000042,
+      "z": -30.807968,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.61272097,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 510,
+      "x": 32.111046,
+      "z": -30.728428,
+      "original_bottom": 0.37,
+      "replacement_bottom": -0.052943707,
+      "river": false
+    },
+    {
+      "source": 781,
+      "vertex": 561,
+      "x": 46.25898,
+      "z": -30.824806,
+      "original_bottom": 0.37,
+      "replacement_bottom": 0.08113301,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 0,
+      "x": -42.64423,
+      "z": 34.782787,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.68420553,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 51,
+      "x": -49.818943,
+      "z": 29.79171,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.6272899,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 102,
+      "x": -29.609016,
+      "z": -33.92285,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.36423016,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 153,
+      "x": 58.614914,
+      "z": 13.500376,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.62419194,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 204,
+      "x": -3.5139904,
+      "z": 34.757195,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.31158635,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 255,
+      "x": -49.817978,
+      "z": 5.3876715,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.16878638,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 306,
+      "x": 9.712124,
+      "z": -33.664,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.4959118,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 357,
+      "x": 58.64016,
+      "z": -10.87681,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.15275794,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 408,
+      "x": 36.11349,
+      "z": 34.84668,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.29166165,
+      "river": false
+    },
+    {
+      "source": 782,
+      "vertex": 459,
+      "x": -49.821587,
+      "z": -19.035637,
+      "original_bottom": 0.05,
+      "replacement_bottom": 0.003190428,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 0,
+      "x": 58.645294,
+      "z": 29.7806,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.49234042,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 51,
+      "x": -42.74116,
+      "z": -33.639633,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.08437343,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 102,
+      "x": -29.767906,
+      "z": 34.794003,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.14001606,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 153,
+      "x": 58.552197,
+      "z": 21.606651,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.7910602,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 204,
+      "x": -49.791992,
+      "z": 21.595634,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.49423864,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 255,
+      "x": -16.315508,
+      "z": 34.83886,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.0760116,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 306,
+      "x": -16.543823,
+      "z": -33.637024,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.1578801,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 357,
+      "x": -49.791634,
+      "z": 13.5082245,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.3856159,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 408,
+      "x": 58.604237,
+      "z": 5.3896413,
+      "original_bottom": 0.05,
+      "replacement_bottom": 0.14467609,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 459,
+      "x": -3.3036685,
+      "z": -34.007202,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.33574644,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 510,
+      "x": 9.9246235,
+      "z": 34.85398,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.51355845,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 561,
+      "x": 58.56858,
+      "z": -2.7663763,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.025951788,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 612,
+      "x": -49.79416,
+      "z": -2.7878072,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.5260546,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 663,
+      "x": 22.690132,
+      "z": 34.75482,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.42542115,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 714,
+      "x": 22.919645,
+      "z": -33.94759,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.6756749,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 765,
+      "x": -49.78791,
+      "z": -10.804796,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.3992361,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 816,
+      "x": 58.5485,
+      "z": -18.981712,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.36792845,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 867,
+      "x": 35.918503,
+      "z": -33.647934,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.3583358,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 918,
+      "x": 49.005577,
+      "z": 34.718765,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.6728867,
+      "river": false
+    },
+    {
+      "source": 783,
+      "vertex": 969,
+      "x": 58.641674,
+      "z": -27.165466,
+      "original_bottom": 0.05,
+      "replacement_bottom": -0.23868984,
+      "river": false
+    },
+    {
+      "source": 788,
+      "vertex": 0,
+      "x": -12.180168,
+      "z": -22.003689,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.35009357,
+      "river": false
+    },
+    {
+      "source": 788,
+      "vertex": 51,
+      "x": -13.415163,
+      "z": -23.480453,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.29687038,
+      "river": false
+    },
+    {
+      "source": 788,
+      "vertex": 102,
+      "x": -16.002102,
+      "z": -23.66057,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.5339218,
+      "river": false
+    },
+    {
+      "source": 788,
+      "vertex": 153,
+      "x": -17.727644,
+      "z": -22.429638,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.46212772,
+      "river": false
+    },
+    {
+      "source": 788,
+      "vertex": 204,
+      "x": -17.105854,
+      "z": -20.82183,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.46197867,
+      "river": false
+    },
+    {
+      "source": 788,
+      "vertex": 255,
+      "x": -14.656622,
+      "z": -20.242943,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.1474708,
+      "river": false
+    },
+    {
+      "source": 788,
+      "vertex": 306,
+      "x": -12.523065,
+      "z": -21.154198,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.31335264,
+      "river": false
+    },
+    {
+      "source": 789,
+      "vertex": 0,
+      "x": -12.506328,
+      "z": -22.817959,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.3247594,
+      "river": false
+    },
+    {
+      "source": 789,
+      "vertex": 51,
+      "x": -14.656136,
+      "z": -23.77235,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.36744994,
+      "river": false
+    },
+    {
+      "source": 789,
+      "vertex": 102,
+      "x": -17.104076,
+      "z": -23.188896,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.530745,
+      "river": false
+    },
+    {
+      "source": 789,
+      "vertex": 153,
+      "x": -17.748833,
+      "z": -21.581728,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.45928043,
+      "river": false
+    },
+    {
+      "source": 789,
+      "vertex": 204,
+      "x": -15.988779,
+      "z": -20.320328,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.27256668,
+      "river": false
+    },
+    {
+      "source": 789,
+      "vertex": 255,
+      "x": -13.386984,
+      "z": -20.525772,
+      "original_bottom": 0.015,
+      "replacement_bottom": -0.23170158,
+      "river": false
+    },
+    {
+      "source": 792,
+      "vertex": 0,
+      "x": -22.986353,
+      "z": 38.997124,
+      "original_bottom": -1.552304,
+      "replacement_bottom": -1.6443415,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 51,
+      "x": -23.182268,
+      "z": 31.404137,
+      "original_bottom": -1.2888757,
+      "replacement_bottom": -1.3850878,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 102,
+      "x": -24.713943,
+      "z": 23.80077,
+      "original_bottom": -1.1087918,
+      "replacement_bottom": -1.1983814,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 153,
+      "x": -24.197773,
+      "z": 16.19434,
+      "original_bottom": -1.0944806,
+      "replacement_bottom": -1.1897326,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 204,
+      "x": -23.034473,
+      "z": 8.604471,
+      "original_bottom": -1.258476,
+      "replacement_bottom": -1.3664789,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 255,
+      "x": -24.468445,
+      "z": 1.0024662,
+      "original_bottom": -1.5334321,
+      "replacement_bottom": -1.6257327,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 306,
+      "x": -23.155457,
+      "z": -6.6052322,
+      "original_bottom": -1.7323735,
+      "replacement_bottom": -1.8254076,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 357,
+      "x": -24.164972,
+      "z": -14.194286,
+      "original_bottom": -1.7603186,
+      "replacement_bottom": -1.8572425,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 408,
+      "x": -23.531078,
+      "z": -21.812023,
+      "original_bottom": -1.6049519,
+      "replacement_bottom": -1.7085006,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 459,
+      "x": -24.435587,
+      "z": -29.381907,
+      "original_bottom": -1.3610252,
+      "replacement_bottom": -1.4552047,
+      "river": true
+    },
+    {
+      "source": 792,
+      "vertex": 510,
+      "x": -25.741676,
+      "z": -37.02082,
+      "original_bottom": -1.1436031,
+      "replacement_bottom": -1.2344576,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 0,
+      "x": -18.538445,
+      "z": 37.11487,
+      "original_bottom": 0.021594541,
+      "replacement_bottom": -0.3198645,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 51,
+      "x": -24.373436,
+      "z": 35.234276,
+      "original_bottom": -0.010154771,
+      "replacement_bottom": -0.35638648,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 102,
+      "x": -18.769325,
+      "z": 33.306046,
+      "original_bottom": -0.019414952,
+      "replacement_bottom": -0.19124863,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 153,
+      "x": -19.589893,
+      "z": 29.469292,
+      "original_bottom": 0.010953352,
+      "replacement_bottom": -0.49518096,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 204,
+      "x": -25.76371,
+      "z": 27.587673,
+      "original_bottom": -0.015903167,
+      "replacement_bottom": -0.18226635,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 255,
+      "x": -20.239819,
+      "z": 25.68479,
+      "original_bottom": -0.0071278997,
+      "replacement_bottom": -0.19467114,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 306,
+      "x": -20.5254,
+      "z": 21.917187,
+      "original_bottom": 0.038183708,
+      "replacement_bottom": -0.16407645,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 357,
+      "x": -26.370426,
+      "z": 20.00663,
+      "original_bottom": -0.0029620784,
+      "replacement_bottom": -0.24199784,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 408,
+      "x": -20.676641,
+      "z": 18.135271,
+      "original_bottom": -0.018262813,
+      "replacement_bottom": -0.3094021,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 459,
+      "x": -20.487646,
+      "z": 10.471155,
+      "original_bottom": 0.05776996,
+      "replacement_bottom": -0.32147297,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 510,
+      "x": -20.119991,
+      "z": 6.7171526,
+      "original_bottom": -0.0684889,
+      "replacement_bottom": -0.622805,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 561,
+      "x": -25.552698,
+      "z": 4.8017797,
+      "original_bottom": 0.014147906,
+      "replacement_bottom": -0.34331104,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 612,
+      "x": -20.570854,
+      "z": 2.9390435,
+      "original_bottom": 0.0071444036,
+      "replacement_bottom": -0.33971623,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 663,
+      "x": -19.597523,
+      "z": -0.89929533,
+      "original_bottom": 0.006632617,
+      "replacement_bottom": -0.3323015,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 714,
+      "x": -25.461367,
+      "z": -2.8120549,
+      "original_bottom": 0.015374063,
+      "replacement_bottom": -0.37530604,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 765,
+      "x": -18.856133,
+      "z": -4.7379255,
+      "original_bottom": -0.009856162,
+      "replacement_bottom": -0.40396038,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 816,
+      "x": -19.319084,
+      "z": -8.511162,
+      "original_bottom": -0.028262042,
+      "replacement_bottom": -0.5429814,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 918,
+      "x": -20.049374,
+      "z": -16.098244,
+      "original_bottom": 0.024570506,
+      "replacement_bottom": -0.7693714,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 969,
+      "x": -25.345486,
+      "z": -18.020283,
+      "original_bottom": -0.06369764,
+      "replacement_bottom": -0.2896903,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 1020,
+      "x": -19.805399,
+      "z": -19.909718,
+      "original_bottom": -0.054626625,
+      "replacement_bottom": -0.30732435,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 1071,
+      "x": -20.152676,
+      "z": -23.69387,
+      "original_bottom": -0.07671064,
+      "replacement_bottom": -0.3907278,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 1122,
+      "x": -24.937708,
+      "z": -25.586609,
+      "original_bottom": 0.018173667,
+      "replacement_bottom": -0.6346303,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 1173,
+      "x": -21.033018,
+      "z": -27.500912,
+      "original_bottom": 0.0374765,
+      "replacement_bottom": -0.84233236,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 1224,
+      "x": -21.822334,
+      "z": -31.31304,
+      "original_bottom": -0.046087354,
+      "replacement_bottom": -0.5215117,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 1275,
+      "x": -26.802216,
+      "z": -33.220886,
+      "original_bottom": -0.05281634,
+      "replacement_bottom": -0.59266347,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 1326,
+      "x": -21.854492,
+      "z": -35.099693,
+      "original_bottom": 0.003768785,
+      "replacement_bottom": -0.15735249,
+      "river": true
+    },
+    {
+      "source": 793,
+      "vertex": 1377,
+      "x": -21.048996,
+      "z": -38.90103,
+      "original_bottom": 0.031859722,
+      "replacement_bottom": -0.41144875,
+      "river": true
+    }
+  ],
+  "native_visual_check": "NOT RUN"
+}

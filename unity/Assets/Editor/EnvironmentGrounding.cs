@@ -11,70 +11,9 @@ namespace Sunward.Editor
             bool rocks = material.kind == "stone", grass = material.kind == "grass-blade";
             if (!rocks && !grass)
                 return 0;
-            var parent = new int[vertices.Length];
-            for (int i = 0; i < parent.Length; i++)
-                parent[i] = i;
-            int Find(int a)
-            {
-                while (parent[a] != a)
-                {
-                    parent[a] = parent[parent[a]];
-                    a = parent[a];
-                }
-
-                return a;
-            }
-
-            void Join(int a, int b)
-            {
-                a = Find(a);
-                b = Find(b);
-                if (a != b)
-                    parent[b] = a;
-            }
-
-            // Weld positions for connectivity only; never change the authored topology.
-            var shared = new Dictionary<Vector3Int, int>();
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                var v = vertices[i];
-                var key = new Vector3Int(Mathf.RoundToInt(v.x * 10000), Mathf.RoundToInt(v.y * 10000), Mathf.RoundToInt(v.z * 10000));
-                if (shared.TryGetValue(key, out int other))
-                    Join(i, other);
-                else
-                    shared.Add(key, i);
-            }
-
-            for (int i = 0; i < triangles.Length; i += 3)
-            {
-                Join(triangles[i], triangles[i + 1]);
-                Join(triangles[i], triangles[i + 2]);
-            }
-
-            // UV seams split coincident vertices. Join by position before finding
-            // whole rocks; otherwise each cap/face can be missed as a tiny island.
-            var welded = new Dictionary<(int, int, int), int>();
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                var p = vertices[i];
-                var key = (Mathf.RoundToInt(p.x * 10000), Mathf.RoundToInt(p.y * 10000), Mathf.RoundToInt(p.z * 10000));
-                if (welded.TryGetValue(key, out int prior))
-                    Join(i, prior);
-                else
-                    welded[key] = i;
-            }
-
-            var groups = new Dictionary<int, List<int>>();
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                int root = Find(i);
-                if (!groups.TryGetValue(root, out var group))
-                    groups[root] = group = new List<int>();
-                group.Add(i);
-            }
-
+            var groups = SurfaceIslands.Find(vertices, triangles);
             int adjusted = 0;
-            foreach (var group in groups.Values)
+            foreach (var group in groups)
             {
                 if (rocks && (group.Count < 35 || group.Count > 5000))
                     continue;

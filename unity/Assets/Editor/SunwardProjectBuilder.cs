@@ -210,6 +210,7 @@ namespace Sunward.Editor
             BuildPetalDrift();
             player.transform.position = new Vector3(-34, Sample(data.world.terrain, -34, 22), -22);
             EditorSceneManager.SaveScene(scene, ScenePath);
+            VisualRemakeBuilder.Apply();
             EditorBuildSettings.scenes = new[]
             {
                 new EditorBuildSettingsScene(ScenePath, true)

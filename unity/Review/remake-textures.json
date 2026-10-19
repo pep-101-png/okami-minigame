@@ -1,0 +1,101 @@
+{
+  "origin": "Original generated 2048px watercolour surface artwork; no outside assets",
+  "textures": [
+    {
+      "name": "Oak",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "f60a5d3a8b3ddfde2704875af37720b098f5ed435cf8c901d2c2b3643ea81423"
+    },
+    {
+      "name": "Bark",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "7a6f0509283c4375a4c9230c6093f46db73451ec51727b8ac95fa0e95655bc27"
+    },
+    {
+      "name": "Plaster",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "725a92e0828e9263e52d618ac9f305aae8d3e10677193124198256756582e096"
+    },
+    {
+      "name": "Roof",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "489a47e3e3addae24fb3bef2aa476c156211d0f17c14045c4f16f379a996903f"
+    },
+    {
+      "name": "Stone",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "edf5d5ade977b0b3c0f46dec7a82db797cf4ec680fbf2a23e8e5c9716e8211b9"
+    },
+    {
+      "name": "Earth",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "cdb81d2c3b5da179db5330a57095c83e3a830c95967114f718022357893f7e3b"
+    },
+    {
+      "name": "Meadow",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "b54106e8e0b0c940576a80f3fcc35f0691b38fa541a97fcd0837bcb9204d2661"
+    },
+    {
+      "name": "Indigo",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "5cbbd88ea1331a3c9281582b61de2f9d9dddbf5f865e859d7307e528383fb6f3"
+    },
+    {
+      "name": "Vermilion",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "9955d76bb666c0c9378e31296240df83c5479765918ad1c7535f189c0ee41e79"
+    },
+    {
+      "name": "Jade",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "a97e848ccc1bfaa0b8c75cb42cfa736c100a939595973e48e75bd9ca29a9a3d8"
+    },
+    {
+      "name": "Paper",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "0ee6777b1c435652850fd8e37940fefe1b89f8e528e806b5c69dc210ccc2d918"
+    },
+    {
+      "name": "Skin",
+      "size": [
+        2048,
+        2048
+      ],
+      "sha256": "4d3876338557540bccb6a342aea8e3feda6b5d51e01709b11f02a3408e18d36b"
+    }
+  ]
+}

@@ -226,7 +226,7 @@ namespace Sunward.Editor
                         throw new InvalidDataException("Old festival rope provenance does not match V3.");
                     int materialID = asset.meshes[ids.IndexOf(n)].material;
                     bool banner = materialID == 106 || materialID == 107;
-                    if ((n >= 343 && n <= 347) || n == 892 || (n >= 893 && n <= 906))
+                    if ((n >= 343 && n <= 347) || n == 892 || (n >= 743 && n <= 750) || (n >= 893 && n <= 906))
                         filter.GetComponent<Renderer>().enabled = false;
                     if (n >= 600 && n <= 632 || n >= 348 && n <= 390 || n >= 484 && n <= 599 || banner)
                     {

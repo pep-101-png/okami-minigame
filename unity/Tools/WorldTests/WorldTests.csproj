@@ -5,5 +5,5 @@
 <Compile Include="../../Assets/Sunward/Scripts/WorldData.cs"/>
 <Compile Include="../../Assets/Sunward/Scripts/Valley.cs"/>
 <Compile Include="../../Assets/Sunward/Scripts/VillageNavigation.cs"/>
-<Compile Include="../../Assets/Editor/EnvironmentGrounding.cs"/>
+<Compile Include="../../Assets/Editor/EnvironmentGrounding.cs"/><Compile Include="../../Assets/Editor/SurfaceIslands.cs"/><Compile Include="../../Assets/Editor/RockSeating.cs"/><Compile Include="../../Assets/Sunward/Scripts/TerrainRelief.cs"/>
 </ItemGroup></Project>

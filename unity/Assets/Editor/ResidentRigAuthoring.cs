@@ -18,12 +18,12 @@ namespace Sunward.Editor
             return t;
         }
 
-        public static void Build(GameObject npc, GameFlow game, int index)
+        public static void Build(GameObject npc, GameFlow game, int index, GameObject visualSource = null)
         {
             var old = npc.transform.Find("Resident · articulated skeleton");
             if (old)
                 UnityEngine.Object.DestroyImmediate(old.gameObject);
-            var filters = npc.GetComponentsInChildren<MeshFilter>(true);
+            var filters = (visualSource ? visualSource : npc).GetComponentsInChildren<MeshFilter>(true);
             var root = Joint(npc.transform, "Resident · articulated skeleton", Vector3.zero);
             var hips = Joint(root, "Hips", new Vector3(0, .74f, 0));
             var spine = Joint(hips, "Spine", new Vector3(0, .46f, 0));
@@ -65,7 +65,7 @@ namespace Sunward.Editor
                 var vertices = mesh.vertices;
                 var normals = mesh.normals;
                 var toLocal = npc.transform.worldToLocalMatrix * filter.transform.localToWorldMatrix;
-                Quaternion facing = Quaternion.Euler(0, 180, 0);
+                Quaternion facing = visualSource ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
                 var weights = new BoneWeight[vertices.Length];
                 for (int v = 0; v < vertices.Length; v++)
                 {

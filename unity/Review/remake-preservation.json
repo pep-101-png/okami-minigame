@@ -1,0 +1,130 @@
+{
+  "previous_checkpoint": "bf27e8b",
+  "wolf_sources_and_animation_authoring_unchanged": [
+    {
+      "file": "Assets/Sunward/Models/Amaterasu.fbx",
+      "sha256": "277f0b1c04e91274f46320358279da43ee5a01ac420ebbe9f7ecf16184478328"
+    },
+    {
+      "file": "Assets/Sunward/Models/Amaterasu.fbx.meta",
+      "sha256": "39f0039da23462097f295fdd4a776f9b5dc6ed6a24a3f975bf953bd21369fc7f"
+    },
+    {
+      "file": "Assets/Editor/WolfClipProcessor.cs",
+      "sha256": "e1b2be10fe61bd5dbe7296d4ad17bbf3686649974cae066d4e7cf1b505db3b02"
+    },
+    {
+      "file": "Assets/Editor/SleepClipAuthoring.cs",
+      "sha256": "9cc6c60133c790fcb418f4abe5ffd023a0963b199ad6db4898d27efeb98af7c1"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__191_baseColor.png",
+      "sha256": "20e6b98355a48d0f995208ff01f0b9dd70994e9fd407999c8241dd601b920c32"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__209_baseColor.png",
+      "sha256": "7c323d4adb1dd2af2d887de86123ce46e5fcf9632827923182bfd7049f824e04"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__201_baseColor.png.meta",
+      "sha256": "e30456ad9fd26941a92e224314f26c31cf3f460782c1a51386b8b271196068b7"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__191_baseColor.png.meta",
+      "sha256": "4fc378b20c24e1f87e2c17f006a9c162401eddca4f41d1aa5db242dff0e37af7"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__230_baseColor.png.meta",
+      "sha256": "04fb72ade46aaefb489210852c92f9ddbef3a308afa17f6f975391343b072fd5"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__209_baseColor.png.meta",
+      "sha256": "1aa0ae1ed869a4e3fe13229333dcf520132366919df58b4de0291d7c7ca2a5ec"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__226_baseColor.png.meta",
+      "sha256": "0343733387b381161c2e942f2bfd1653876e5cd0b9ac301b3da19e142065e847"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__226_baseColor.png",
+      "sha256": "7d66743ead43da82d43b2e764ae93d73a836fd3468792751b762d92da6d15f51"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__230_baseColor.png",
+      "sha256": "0f52dc236731635facc801464c34277d504e078090c33681b5436a73fbbb042f"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__200_baseColor.png",
+      "sha256": "eecf42dbdb898e777d305416249baad65d3a5b2187d5222bf362741f06b63def"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__200_baseColor.png.meta",
+      "sha256": "7a828295aba630ae1684597a74c885858c89dac71d469fe9ced67adbb6d29a47"
+    },
+    {
+      "file": "Assets/Sunward/Textures/Wolf-Material__201_baseColor.png",
+      "sha256": "a89405cd231eab45ba0c550e9d6e6b738cf3141a935667d8734c00fa9c2efb5f"
+    }
+  ],
+  "candidate_building_source_groups": [
+    24,
+    59,
+    94,
+    132,
+    167,
+    201,
+    236,
+    270,
+    304,
+    410,
+    447,
+    487,
+    525,
+    562
+  ],
+  "candidate_tree_source_groups": [
+    0,
+    4,
+    8,
+    12,
+    16,
+    20,
+    691,
+    695,
+    699,
+    703,
+    707,
+    711,
+    805,
+    809,
+    813,
+    817,
+    821,
+    825,
+    829,
+    833,
+    837,
+    841,
+    846,
+    851,
+    856,
+    861,
+    866,
+    871
+  ],
+  "candidate_buildings": 14,
+  "candidate_trees": 28,
+  "legacy_spear_source_ids": [
+    743,
+    744,
+    745,
+    746,
+    747,
+    748,
+    749,
+    750
+  ],
+  "original_threejs_edits": false,
+  "native_unity_run": false,
+  "scene_connection_method": "Initial native scene generation or Sunward > Apply Visual Remake to Windflower; cannot serialize the scene without Unity"
+}

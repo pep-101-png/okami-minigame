@@ -9,6 +9,15 @@ namespace Sunward.Editor
         public override uint GetVersion() => 3;
         void OnPreprocessModel()
         {
+            if (assetPath.StartsWith("Assets/Sunward/Models/Remake/"))
+            {
+                var staticModel = (ModelImporter)assetImporter;
+                staticModel.materialImportMode = ModelImporterMaterialImportMode.None;
+                staticModel.importAnimation = false;
+                staticModel.isReadable = true;
+                return;
+            }
+
             if (assetPath != "Assets/Sunward/Models/Amaterasu.fbx")
                 return;
             var model = (ModelImporter)assetImporter;
@@ -44,7 +53,7 @@ namespace Sunward.Editor
             var texture = (TextureImporter)assetImporter;
             texture.textureType = TextureImporterType.Default;
             texture.textureShape = TextureImporterShape.Texture2D;
-            bool normalData = assetPath.Contains("/Art/") && assetPath.EndsWith("-normal.png", System.StringComparison.OrdinalIgnoreCase);
+            bool normalData = (assetPath.Contains("/Art/") || assetPath.Contains("/Remake/")) && assetPath.EndsWith("-normal.png", System.StringComparison.OrdinalIgnoreCase);
             texture.sRGBTexture = !normalData;
             if (normalData)
                 texture.textureCompression = TextureImporterCompression.Uncompressed;

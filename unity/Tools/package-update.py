@@ -3,10 +3,10 @@ from pathlib import Path
 import json,hashlib,zipfile,shutil
 root=Path(__file__).resolve().parents[1];out=root/'Releases';out.mkdir(exist_ok=True)
 files=set()
-for directory in ['Assets/Editor','Assets/Sunward/Scripts','Assets/Sunward/Shaders','Assets/Sunward/Textures/Art','Assets/Sunward/Audio','Review']:
+for directory in ['Assets/Editor','Assets/Sunward/Scripts','Assets/Sunward/Shaders','Assets/Sunward/Textures/Art','Assets/Sunward/Textures/Remake','Assets/Sunward/Models/Remake','Assets/Sunward/Audio','Review']:
  for p in (root/directory).rglob('*'):
   if p.is_file():files.add(p.relative_to(root).as_posix())
-files.update(['Assets/Sunward/Textures/Art.meta','Packages/manifest.json','README.md'])
+files.update(['Assets/Sunward/Textures/Remake.meta','Assets/Sunward/Models/Remake.meta','Assets/Sunward/Textures/Art.meta','Packages/manifest.json','README.md'])
 target=out/'Sunward-Unity-Restoration-Update.zip'
 with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=6)as archive:
  for name in sorted(files):archive.write(root/name,name)
@@ -14,7 +14,7 @@ with zipfile.ZipFile(target)as archive:
  assert archive.testzip()is None
  for name in ['Assets/Editor/EnvironmentGrounding.cs','Assets/Sunward/Scripts/VillageResident.cs','Assets/Sunward/Scripts/HomeWeaponRack.cs','Assets/Editor/WolfClipProcessor.cs','Review/RESTORATION.md']:assert name in archive.namelist()
 shutil.copyfile(target,out/'Sunward-Unity-Import-Repair.zip')
-report={'type':'integrated-restoration-overlay','target_editor':'6000.6.6f1','files':sorted(files),'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'bytes':target.stat().st_size,'unity_editor_verified':False,'note':'Preserves existing FBX and its importer metadata. Includes native-clip repair code and connected Windflower artwork. Open Windflower and run Sunward > Apply Windflower Repair and Artwork Update.'}
+report={'type':'integrated-restoration-overlay','target_editor':'6000.6.6f1','files':sorted(files),'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'bytes':target.stat().st_size,'unity_editor_verified':False,'note':'Preserves existing FBX and its importer metadata. Includes native-clip repair code and connected Windflower artwork. Open Windflower and run Sunward > Apply Visual Remake to Windflower. This visual-only menu does not reprocess wolf animations.'}
 (out/'restoration-update.json').write_text(json.dumps(report,indent=2)+'\n');(out/'import-repair.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:v for k,v in report.items()if k!='files'},indent=2))
 
 # Small repair overlay for users who already applied the full environment update.
