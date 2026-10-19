@@ -51,6 +51,19 @@ namespace Sunward.Editor
                 Join(triangles[i], triangles[i + 2]);
             }
 
+            // UV seams split coincident vertices. Join by position before finding
+            // whole rocks; otherwise each cap/face can be missed as a tiny island.
+            var welded = new Dictionary<(int, int, int), int>();
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                var p = vertices[i];
+                var key = (Mathf.RoundToInt(p.x * 10000), Mathf.RoundToInt(p.y * 10000), Mathf.RoundToInt(p.z * 10000));
+                if (welded.TryGetValue(key, out int prior))
+                    Join(i, prior);
+                else
+                    welded[key] = i;
+            }
+
             var groups = new Dictionary<int, List<int>>();
             for (int i = 0; i < vertices.Length; i++)
             {
@@ -80,7 +93,7 @@ namespace Sunward.Editor
                         break;
                     }
 
-                if (architectural || Valley.Depth(center) > .12f || Valley.OnBridge(center.x, -center.z))
+                if (architectural || Valley.OnBridge(center.x, -center.z))
                     continue;
                 float ground = Valley.SurfaceHeight(world.terrain, center);
                 float gap = bounds.min.y - ground;

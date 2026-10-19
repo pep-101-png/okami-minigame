@@ -1,0 +1,342 @@
+PASS Actual lantern roof geometry is closed, including poles and circumference seam
+PASS Actual lantern cap has outward winding, not just closed edges
+PASS 5000 actual shared limb solves preserve upper/lower lengths, including unreachable targets
+PASS Nonfinite limb input rejected
+PASS Separate sleep/mirror zones
+PASS Safe spawn: Hana · gardener
+PASS Safe spawn: Taro · merchant
+PASS Safe spawn: Elder Sora
+PASS Safe spawn: Yui · traveler
+PASS Safe spawn: Akari · shrine musician
+PASS Safe spawn: Mio · lantern keeper
+PASS Safe spawn: Ren · pilgrim
+PASS Connected art source for real TownV3 material 0
+PASS Connected art source for real TownV3 material 1
+PASS Connected art source for real TownV3 material 5
+PASS Connected art source for real TownV3 material 7
+PASS Connected art source for real TownV3 material 8
+PASS Connected art source for real TownV3 material 9
+PASS Connected art source for real TownV3 material 10
+PASS Connected art source for real TownV3 material 11
+PASS Connected art source for real TownV3 material 12
+PASS Connected art source for real TownV3 material 13
+PASS Connected art source for real TownV3 material 14
+PASS Connected art source for real TownV3 material 15
+PASS Connected art source for real TownV3 material 16
+PASS Connected art source for real TownV3 material 17
+PASS Connected art source for real TownV3 material 18
+PASS Connected art source for real TownV3 material 19
+PASS Connected art source for real TownV3 material 20
+PASS Connected art source for real TownV3 material 21
+PASS Connected art source for real TownV3 material 23
+PASS Connected art source for real TownV3 material 24
+PASS Connected art source for real TownV3 material 25
+PASS Connected art source for real TownV3 material 26
+PASS Connected art source for real TownV3 material 27
+PASS Connected art source for real TownV3 material 28
+PASS Connected art source for real TownV3 material 29
+PASS Connected art source for real TownV3 material 30
+PASS Connected art source for real TownV3 material 31
+PASS Connected art source for real TownV3 material 32
+PASS Connected art source for real TownV3 material 33
+PASS Connected art source for real TownV3 material 34
+PASS Connected art source for real TownV3 material 35
+PASS Connected art source for real TownV3 material 36
+PASS Connected art source for real TownV3 material 37
+PASS Connected art source for real TownV3 material 38
+PASS Connected art source for real TownV3 material 39
+PASS Connected art source for real TownV3 material 40
+PASS Connected art source for real TownV3 material 41
+PASS Connected art source for real TownV3 material 42
+PASS Connected art source for real TownV3 material 44
+PASS Connected art source for real TownV3 material 47
+PASS Connected art source for real TownV3 material 48
+PASS Connected art source for real TownV3 material 49
+PASS Connected art source for real TownV3 material 50
+PASS Connected art source for real TownV3 material 52
+PASS Connected art source for real TownV3 material 53
+PASS Connected art source for real TownV3 material 54
+PASS Connected art source for real TownV3 material 55
+PASS Connected art source for real TownV3 material 56
+PASS Connected art source for real TownV3 material 57
+PASS Connected art source for real TownV3 material 58
+PASS Connected art source for real TownV3 material 59
+PASS Connected art source for real TownV3 material 60
+PASS Connected art source for real TownV3 material 61
+PASS Connected art source for real TownV3 material 62
+PASS Connected art source for real TownV3 material 63
+PASS Connected art source for real TownV3 material 64
+PASS Connected art source for real TownV3 material 65
+PASS Connected art source for real TownV3 material 66
+PASS Connected art source for real TownV3 material 67
+PASS Connected art source for real TownV3 material 68
+PASS Connected art source for real TownV3 material 69
+PASS Connected art source for real TownV3 material 71
+PASS Connected art source for real TownV3 material 74
+PASS Connected art source for real TownV3 material 75
+PASS Connected art source for real TownV3 material 77
+PASS Connected art source for real TownV3 material 78
+PASS Connected art source for real TownV3 material 79
+PASS Connected art source for real TownV3 material 80
+PASS Connected art source for real TownV3 material 81
+PASS Connected art source for real TownV3 material 82
+PASS Connected art source for real TownV3 material 83
+PASS Connected art source for real TownV3 material 84
+PASS Connected art source for real TownV3 material 85
+PASS Connected art source for real TownV3 material 86
+PASS Connected art source for real TownV3 material 87
+PASS Connected art source for real TownV3 material 88
+PASS Connected art source for real TownV3 material 89
+PASS Connected art source for real TownV3 material 90
+PASS Connected art source for real TownV3 material 91
+PASS Connected art source for real TownV3 material 92
+PASS Connected art source for real TownV3 material 93
+PASS Connected art source for real TownV3 material 94
+PASS Connected art source for real TownV3 material 95
+PASS Connected art source for real TownV3 material 96
+PASS Connected art source for real TownV3 material 97
+PASS Connected art source for real TownV3 material 102
+PASS Connected art source for real TownV3 material 103
+PASS Connected art source for real TownV3 material 104
+PASS Connected art source for real TownV3 material 105
+PASS Connected art source for real TownV3 material 106
+PASS Connected art source for real TownV3 material 107
+PASS Connected art source for real TownV3 material 108
+PASS Connected art source for real TownV3 material 109
+PASS Connected art source for real TownV3 material 110
+PASS Connected art source for real TownV3 material 111
+PASS Connected art source for real TownV3 material 112
+PASS Connected art source for real TownV3 material 113
+PASS Connected art source for real TownV3 material 114
+PASS Connected art source for real TownV3 material 115
+PASS Connected art source for real TownV3 material 116
+PASS Connected art source for real TownV3 material 117
+PASS Connected art source for real TownV3 material 118
+PASS Connected art source for real TownV3 material 119
+PASS Connected art source for real TownV3 material 120
+PASS Connected art source for real TownV3 material 121
+PASS Connected art source for real TownV3 material 122
+PASS Connected art source for real TownV3 material 123
+PASS Connected art source for real TownV3 material 124
+PASS Connected art source for real TownV3 material 125
+PASS Connected art source for real TownV3 material 126
+PASS Connected art source for real TownV3 material 127
+PASS Connected art source for real TownV3 material 128
+PASS Connected art source for real TownV3 material 129
+PASS Connected art source for real TownV3 material 130
+PASS Connected art source for real TownV3 material 131
+PASS Connected art source for real TownV3 material 133
+PASS Connected art source for real TownV3 material 134
+PASS Connected art source for real TownV3 material 135
+PASS Connected art source for real TownV3 material 136
+PASS Connected art source for real TownV3 material 137
+PASS Connected art source for real TownV3 material 144
+PASS Connected art source for real TownV3 material 145
+PASS Connected art source for real TownV3 material 146
+PASS Connected art source for real TownV3 material 147
+PASS Connected art source for real TownV3 material 148
+PASS Connected art source for real TownV3 material 149
+PASS Connected art source for real TownV3 material 153
+PASS Connected art source for real TownV3 material 154
+PASS Connected art source for real TownV3 material 155
+PASS Connected art source for real TownV3 material 156
+PASS Connected art source for real TownV3 material 157
+PASS Connected art source for real TownV3 material 158
+PASS Connected art source for real TownV3 material 160
+PASS Connected art source for real TownV3 material 161
+PASS Connected art source for real TownV3 material 162
+PASS Connected art source for real TownV3 material 163
+PASS Connected art source for real TownV3 material 164
+PASS Connected art source for real TownV3 material 165
+PASS Connected art source for real TownV3 material 168
+PASS Connected art source for real TownV3 material 169
+PASS Connected art source for real TownV3 material 170
+PASS Connected art source for real TownV3 material 171
+PASS Connected art source for real TownV3 material 176
+PASS Connected art source for real TownV3 material 177
+PASS Connected art source for real TownV3 material 178
+PASS Connected art source for real TownV3 material 179
+PASS Connected art source for real TownV3 material 180
+PASS Connected art source for real TownV3 material 181
+PASS Connected art source for real TownV3 material 182
+PASS Connected art source for real TownV3 material 183
+PASS Connected art source for real TownV3 material 184
+PASS Connected art source for real TownV3 material 185
+PASS Connected art source for real TownV3 material 186
+PASS Connected art source for real TownV3 material 187
+PASS Connected art source for real TownV3 material 188
+PASS Connected art source for real TownV3 material 189
+PASS Connected art source for real TownV3 material 190
+PASS Connected art source for real TownV3 material 191
+PASS Connected art source for real TownV3 material 193
+PASS Connected art source for real TownV3 material 194
+PASS Actual Windflower uses new wood artwork
+PASS Actual Windflower uses new roof artwork
+PASS Actual Windflower uses new stone artwork
+PASS Actual Windflower uses new plaster artwork
+PASS Actual Windflower uses new meadow artwork
+PASS NaN mesh identified before collision cooking
+PASS River escape near z=-29
+PASS River escape near z=-27
+PASS River escape near z=-25
+PASS River escape near z=-23
+PASS River escape near z=-21
+PASS River escape near z=-19
+PASS River escape near z=-17
+PASS River escape near z=-15
+PASS River escape near z=-13
+PASS River escape near z=-11
+PASS River escape near z=-9
+PASS River escape near z=-7
+PASS River escape near z=-5
+PASS River escape near z=-3
+PASS River escape near z=-1
+PASS River escape near z=1
+PASS River escape near z=3
+PASS River escape near z=5
+PASS River escape near z=7
+PASS River escape near z=9
+PASS River escape near z=11
+PASS River escape near z=13
+PASS River escape near z=15
+PASS River escape near z=17
+PASS River escape near z=19
+PASS River escape near z=21
+PASS River escape near z=23
+PASS River escape near z=25
+PASS River escape near z=27
+PASS River escape near z=29
+PASS Bridge finite and level endpoints
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 68
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 93
+PASS Finite grounded geometry 94
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 120
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 144
+PASS Finite grounded geometry 145
+PASS Finite grounded geometry 146
+PASS Finite grounded geometry 147
+PASS Finite grounded geometry 148
+PASS Finite grounded geometry 153
+PASS Finite grounded geometry 154
+PASS Finite grounded geometry 157
+PASS Finite grounded geometry 158
+PASS Finite grounded geometry 173
+PASS Finite grounded geometry 174
+PASS Actual V3 floating decoration components corrected: 193

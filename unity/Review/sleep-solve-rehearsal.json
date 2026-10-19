@@ -1,0 +1,56 @@
+{
+  "type": "Blender geometric rehearsal, not Unity clip/skin validation",
+  "samples": [
+    {
+      "phase": 0,
+      "max_basis_scale_error": 1.7881393432617188e-07,
+      "paw_heights": [
+        0.1462,
+        0.1462,
+        0.085,
+        0.085
+      ]
+    },
+    {
+      "phase": 0.25,
+      "max_basis_scale_error": 2.1457672119140625e-06,
+      "paw_heights": [
+        0.1462,
+        0.1462,
+        0.085,
+        0.085
+      ]
+    },
+    {
+      "phase": 0.5,
+      "max_basis_scale_error": 3.2186508178710938e-06,
+      "paw_heights": [
+        0.1462,
+        0.1462,
+        0.085,
+        0.085
+      ]
+    },
+    {
+      "phase": 0.75,
+      "max_basis_scale_error": 3.6954879760742188e-06,
+      "paw_heights": [
+        0.1462,
+        0.1462,
+        0.085,
+        0.085
+      ]
+    },
+    {
+      "phase": 1,
+      "max_basis_scale_error": 2.6226043701171875e-06,
+      "paw_heights": [
+        0.1462,
+        0.1462,
+        0.085,
+        0.085
+      ]
+    }
+  ],
+  "native_unity": "UNRUN"
+}

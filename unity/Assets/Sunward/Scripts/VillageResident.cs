@@ -6,6 +6,9 @@ namespace Sunward
     {
         public GameFlow game;
         public int index;
+        public bool stallkeeper;
+        public Vector3[] route = new Vector3[0];
+        readonly Collider[] nearby = new Collider[12];
         Vector3 home, destination;
         float wait, stuck;
         int visit;
@@ -21,7 +24,7 @@ namespace Sunward
 
         void FixedUpdate()
         {
-            if (game.Blocked || game.Home.Active)
+            if (stallkeeper || game.Blocked || game.Home.Active)
                 return;
             if (!VillageNavigation.Clear(game.valley.Data, transform.position))
             {
@@ -45,7 +48,7 @@ namespace Sunward
                     return;
                 visit++;
                 float angle = (visit * 2.39996f + index) * 1.0f;
-                var candidate = home + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * (index == 1 ? .65f : 1.3f);
+                var candidate = route.Length > 0 ? route[(visit - 1) % route.Length] : home + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * 1.3f;
                 if (VillageNavigation.SegmentClear(game.valley.Data, transform.position, candidate))
                     destination = candidate;
                 wait = 3 + (index + visit) % 5;
@@ -67,6 +70,14 @@ namespace Sunward
                 destination = transform.position;
                 return;
             }
+
+            int count = Physics.OverlapCapsuleNonAlloc(next + Vector3.up * .45f, next + Vector3.up * 1.6f, .36f, nearby, 1 << 6, QueryTriggerInteraction.Ignore);
+            for (int n = 0; n < count; n++)
+                if (nearby[n].transform.root != transform.root)
+                {
+                    destination = transform.position;
+                    return;
+                }
 
             stuck = 0;
             next.y = game.valley.Height(next);

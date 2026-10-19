@@ -3,7 +3,7 @@ from pathlib import Path
 import json,hashlib,zipfile,shutil
 root=Path(__file__).resolve().parents[1];out=root/'Releases';out.mkdir(exist_ok=True)
 files=set()
-for directory in ['Assets/Editor','Assets/Sunward/Scripts','Assets/Sunward/Shaders','Assets/Sunward/Textures/Art','Review']:
+for directory in ['Assets/Editor','Assets/Sunward/Scripts','Assets/Sunward/Shaders','Assets/Sunward/Textures/Art','Assets/Sunward/Audio','Review']:
  for p in (root/directory).rglob('*'):
   if p.is_file():files.add(p.relative_to(root).as_posix())
 files.update(['Assets/Sunward/Textures/Art.meta','Packages/manifest.json','README.md'])
@@ -20,7 +20,7 @@ report={'type':'integrated-restoration-overlay','target_editor':'6000.6.6f1','fi
 # Small repair overlay for users who already applied the full environment update.
 hotfix=out/'Sunward-Unity-Scale-Hotfix.zip'
 with zipfile.ZipFile(hotfix,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as archive:
- for name in ['Assets/Editor/WolfClipProcessor.cs','Assets/Editor/WolfClipProcessor.cs.meta','Review/SCALE-HOTFIX.md']:
+ for name in ['Assets/Editor/WolfClipProcessor.cs','Assets/Editor/WolfClipProcessor.cs.meta','Assets/Editor/SleepClipAuthoring.cs','Assets/Editor/SleepClipAuthoring.cs.meta','Assets/Sunward/Scripts/LimbArc.cs','Assets/Sunward/Scripts/LimbArc.cs.meta','Review/SCALE-HOTFIX.md']:
   archive.write(root/name,name)
 with zipfile.ZipFile(hotfix) as archive:
  assert archive.testzip() is None

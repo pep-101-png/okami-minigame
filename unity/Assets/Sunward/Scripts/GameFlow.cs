@@ -238,8 +238,8 @@ namespace Sunward
                 }
             }
 
-            Consider("bed", new Vector3(-36, .18f, -14.1f), 1.9f);
-            Consider("mirror", new Vector3(-30.7f, .105f, -14), 1.7f);
+            Consider("bed", HomeLayout.Bed, 1.9f);
+            Consider("mirror", HomeLayout.Mirror, 2.1f);
             Consider("shop", npcObjects != null && npcObjects.Length > 1 && npcObjects[1] ? npcObjects[1].transform.position : new Vector3(3, 0, 0));
             Consider("arena", new Vector3(12.8f, 0, 0));
             if (!Profile.shrine)

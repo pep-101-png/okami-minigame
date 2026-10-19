@@ -21,6 +21,7 @@ namespace Sunward
         public Vector3 Velocity { get; private set; }
 
         Vector3 horizontal, dodgeDirection;
+        WolfBodyCollision bodyCollision;
         float dodgeTimer, coyote, jumpBuffer, landing;
         bool doubleUsed;
         public bool Dodging => dodgeTimer > 0;
@@ -29,6 +30,9 @@ namespace Sunward
         {
             controller = GetComponent<CharacterController>();
             input = GetComponent<WolfInput>();
+            bodyCollision = GetComponent<WolfBodyCollision>();
+            if (!bodyCollision)
+                bodyCollision = gameObject.AddComponent<WolfBodyCollision>();
         }
 
         public void Teleport(Vector3 point)
@@ -56,7 +60,7 @@ namespace Sunward
             if (!controller.enabled)
                 return;
             Vector3 old = transform.position;
-            controller.Move(delta);
+            controller.Move(bodyCollision ? bodyCollision.Sweep(delta) : delta);
             var guarded = valley.GuardRiver(old, transform.position);
             if (game.InTrial)
             {
@@ -139,6 +143,7 @@ namespace Sunward
                 Vertical = Mathf.Min(Vertical, -12);
             Vector3 movement = (Dodging ? dodgeDirection * 9 : horizontal) * dt + Vector3.up * Vertical * dt;
             bool wasAir = !Grounded;
+            Vector3 beforeMove = transform.position;
             Push(movement);
             h = valley.Height(transform.position);
             if (Vertical <= 0 && (controller.isGrounded || transform.position.y < h + .035f))
@@ -158,14 +163,18 @@ namespace Sunward
 
             landing = Mathf.Max(0, landing - dt);
             dodgeTimer = Mathf.Max(0, dodgeTimer - dt);
-            Speed = horizontal.magnitude;
-            Velocity = horizontal;
+            Vector3 actual = (transform.position - beforeMove) / Mathf.Max(dt, .00001f);
+            actual.y = 0;
+            Speed = Dodging ? horizontal.magnitude : actual.magnitude;
+            Velocity = actual;
             float turn = 0;
             if (direction.sqrMagnitude > .01f && !game.Combat.Busy && !Dodging)
             {
                 float angle = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
                 turn = angle / 60;
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), dt * (Speed > 4 ? 230 : 400));
+                var rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), dt * (Speed > 4 ? 230 : 400));
+                if (!bodyCollision || bodyCollision.CanTurn(rotation))
+                    transform.rotation = rotation;
             }
 
             if (!Dodging && !game.Combat.Busy && landing <= 0)

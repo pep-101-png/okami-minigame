@@ -22,7 +22,7 @@ namespace Sunward
             p.Locked = true;
             game.Combat.Cancel();
             game.Combat.Rest(true);
-            Vector3 from = p.transform.position, to = new Vector3(-36, .18f, -14.1f);
+            Vector3 from = p.transform.position, to = HomeLayout.Bed;
             Quaternion rotation = p.transform.rotation;
             float t = 0;
             p.animationView.Play("Walk_Natural");

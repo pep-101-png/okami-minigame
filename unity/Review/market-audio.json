@@ -1,0 +1,20 @@
+{
+  "license": "Original generated music/Foley for this project; no external samples. Synthesized plucked-string and flute-like placeholders, not recordings of traditional instruments or human market chatter.",
+  "audio": [
+    {
+      "file": "market-pentatonic.wav",
+      "seconds": 48.0,
+      "sha256": "5b515afad22b2326f7d377e1e45d70dc2202523345f06ff0c98a015febbcc459"
+    },
+    {
+      "file": "market-ambience.wav",
+      "seconds": 24.0,
+      "sha256": "527ef05199596820b8e5b36398e4a635dbdd7b0eb3c19b0e7329c4f5c9b70b99"
+    },
+    {
+      "file": "resident-footstep.wav",
+      "seconds": 0.08997732426303855,
+      "sha256": "495b7221c7cf0c4c995ac904128fe0ea8a51bc54ffa4dcc76a723d7ad802f083"
+    }
+  ]
+}

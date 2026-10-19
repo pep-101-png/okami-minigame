@@ -1,6 +1,6 @@
 {
-  "sha256": "9f74e37c5778ce3886fb610224297884a81b20601af918437029187976d98e23",
-  "bytes": 5584,
+  "sha256": "d578830f6cc8f168bcf259edcdb44636cb1536dfcb838a48fc45143a3b720f50",
+  "bytes": 10251,
   "unity_editor_verified": false,
   "install": "Extract into existing project root, reopen Unity, run Sunward > Repair Amaterasu Animation Scale (not just Validate)."
 }

@@ -1,3 +1,5 @@
+> Historical scale-follow-up notes. For the complete current delivery use [VILLAGE-OVERHAUL.md](VILLAGE-OVERHAUL.md) and the full restoration overlay. The compatibility small ZIP now includes the processor’s new sleep-authoring/shared-solver dependencies.
+
 # Scale repair follow-up — initial Animator enable
 
 The previous update FAILED native validation on the user's Unity 6000.6.6f1 installation: WOLF_RIG became (100,100,100) immediately after Animator.Rebind/Update(0). Removing exposed curves from cloned imported clips was insufficient. The precise surviving internal binding/default cannot be inspected here without Unity; the failure is confirmed, not dismissed.

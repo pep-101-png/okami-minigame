@@ -53,7 +53,7 @@ namespace Sunward.Editor
             }
 
             )
-                Need(clips.Any(c => c.name == n), "Animation: " + n);
+                Need(clips.Any(c => WolfClipProcessor.Clean(c.name) == n), "Animation: " + n);
             Need(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Sunward/Generated/Amaterasu.prefab"), "Original-wolf prefab");
             Need(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Sunward/Generated/TownV3.prefab"), "Latest V3 town prefab");
             Need(AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Sunward/Generated/sundial.asset"), "Sundial weapon definition");
@@ -93,7 +93,7 @@ namespace Sunward.Editor
                 var weapon = AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Sunward/Generated/" + id + ".asset");
                 Need(weapon && weapon.visual && weapon.visual.GetComponentsInChildren<Renderer>(true).Length > 0, "Original weapon geometry: " + id);
                 foreach (var strike in weapon.light.Concat(weapon.heavy).Concat(new[] { weapon.charged, weapon.chargedHeavy, weapon.air }))
-                    Need(clips.Any(c => c.name == strike.clip) && strike.start < strike.end && strike.end <= 1 && strike.duration > 0, "Playable attack: " + id + " / " + strike.clip);
+                    Need(clips.Any(c => WolfClipProcessor.Clean(c.name) == strike.clip) && strike.start < strike.end && strike.end <= 1 && strike.duration > 0, "Playable attack: " + id + " / " + strike.clip);
             }
 
             foreach (var mesh in AssetDatabase.LoadAllAssetsAtPath("Assets/Sunward/Generated/ValleyMeshes.asset").OfType<Mesh>())

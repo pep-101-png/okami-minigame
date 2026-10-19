@@ -84,6 +84,7 @@ namespace Sunward.Editor
                     }
 
                 VerifyCurveTransfer(original, copy, rigPath);
+                SleepClipAuthoring.Apply(copy, model);
                 string path = Folder + "/" + copy.name + ".anim";
                 var saved = AssetDatabase.LoadAssetAtPath<AnimationClip>(path);
                 if (saved)
@@ -97,7 +98,8 @@ namespace Sunward.Editor
                     saved = copy;
                 }
 
-                VerifyCurveTransfer(original, saved, rigPath);
+                if (!IsAuthoredSleep(copyName: saved.name))
+                    VerifyCurveTransfer(original, saved, rigPath);
                 EditorUtility.SetDirty(saved);
                 result.Add(saved);
             }
@@ -107,6 +109,7 @@ namespace Sunward.Editor
             return result.ToArray();
         }
 
+        static bool IsAuthoredSleep(string copyName) => copyName == "Sleep_Down" || copyName == "Sleep_Loop" || copyName == "Sleep_Up";
         static void VerifyCurveTransfer(AnimationClip source, AnimationClip copy, string rigPath)
         {
             foreach (var binding in AnimationUtility.GetCurveBindings(source))

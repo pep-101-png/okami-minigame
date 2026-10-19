@@ -1,0 +1,34 @@
+Parsed 50 C# files without syntax errors (not Unity API compilation).
+PASS rig 100x channel selected
+PASS nested rig scale selected
+PASS Animator root scale selected
+PASS deform-bone scale preserved
+PASS control-bone scale preserved
+PASS root translation preserved
+PASS root rotation preserved
+PASS RMB begins first heavy, not a queued light
+PASS second heavy continues chain
+PASS heavy chain wraps after two hits
+PASS heavy to light starts first light
+PASS three distinct light entries
+PASS light to heavy resets to first heavy
+PASS cancel or charged attack clears prior chain
+PASS expired combo window resets chain
+PASS fresh save validation
+PASS unaffordable purchase rejected
+PASS health purchase and cost
+PASS weapon unlock/equip
+PASS duplicate weapon rejected
+PASS double-jump upgrade threshold
+PASS defeat does not reset progression
+PASS level/power growth
+PASS file save verified
+PASS backup save created
+PASS reload restores currency
+PASS quest/collectible save roundtrip
+PASS corrupted current file recovers backup
+PASS invalid import keeps progress
+PASS high-revision checkpoint
+PASS browser-shaped save import
+PASS import remains newer than Unity backup
+PASS invalid upgrade cap rejected

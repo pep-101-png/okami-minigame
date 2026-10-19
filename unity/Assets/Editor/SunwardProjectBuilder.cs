@@ -178,6 +178,7 @@ namespace Sunward.Editor
             Collisions(data.world, town);
             BuildWeaponRack(flow, town, prefabs);
             BuildCraftDetails(data.world, town);
+            WindflowerRenovation.Apply(flow, town, data);
             logic.AddComponent<PerformanceHUD>();
             var ui = logic.AddComponent<ScrollUI>();
             ui.game = flow;
@@ -232,7 +233,6 @@ namespace Sunward.Editor
             var home = roots.SelectMany(r => r.GetComponentsInChildren<HomeCutaway>(true)).SingleOrDefault();
             if (!flow || !home || !flow.Combat)
                 throw new InvalidDataException("Windflower game-system references are missing. Use Validate Imported Project for details.");
-            WolfClipProcessor.RepairExisting();
             var data = JsonUtility.FromJson<ValleyData>(File.ReadAllText(Root + "Data/Valley.json"));
             ConfigurePipeline();
             MakeMaterials(data.materials, data.assets.Where(a => a.name == "TownV3").SelectMany(a => a.meshes).Select(m => m.material).ToHashSet());
@@ -283,13 +283,18 @@ namespace Sunward.Editor
                 resident.index = i;
             }
 
+            WindflowerRenovation.Apply(flow, home.gameObject, data);
             EditorUtility.SetDirty(flow.Combat);
             EditorSceneManager.MarkSceneDirty(scene);
             AssetDatabase.SaveAssets();
             EditorSceneManager.SaveScene(scene);
+            WolfClipProcessor.RepairExisting();
+            EditorSceneManager.MarkSceneDirty(scene);
+            EditorSceneManager.SaveScene(scene);
             SunwardValidation.Validate();
             WindflowerDiagnostics.Connections();
             WindflowerDiagnostics.BoundsAudit();
+            VillageOverhaulValidation.Validate();
             Debug.Log("Windflower updated in place: processed animation clips, connected surface artwork, existing-mesh grounding, safe NPCs, and original weapon displays. Play Mode and final visual review are still required.");
         }
 

@@ -15,3 +15,10 @@ Current update additions:
 - PortableTests includes container-scale selection/preserved bone channels and actual combat-chain rules. WorldTests checks actual town material-family references and NaN mesh input rejection.
 - In Unity, run **Sunward > Apply Windflower Repair and Artwork Update** on existing Windflower. This includes native scale/transition, connection and bounds checks. The individual menus remain available. Follow **Review/REPAIR-2.md** for visual/gameplay acceptance; native checks were NOT executed in the cloud.
 - No FBX or Blender model was re-exported in this update. The overlay deliberately excludes the FBX and its importer metadata.
+
+Village overhaul:
+
+- WorldTests now executes the actual shared LimbArc code over 5,000 length-invariant cases and the actual closed lantern-roof geometry generator (including its seam/poles).
+- `blender -b --python unity/Tools/audit-sleep-pose.py` is a read-only Blender rehearsal, not a Unity skin/clip check. It does not export models.
+- New native menu **Sunward > Validate Village Overhaul** checks live resident skins/weights, sleep scale channels, generated normals/geometry, mill links, wall mounts and audio. The main Apply command invokes it after scale checks. This has not been run in the cloud.
+- Original audio can be regenerated with `python unity/Tools/compose-market.py`; assets are already included, so no installation/authoring prerequisite for users.

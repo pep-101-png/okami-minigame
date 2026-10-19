@@ -1,3 +1,7 @@
+# Current village overhaul
+
+See [VILLAGE-OVERHAUL.md](VILLAGE-OVERHAUL.md). Earlier scale/initial-port sections below are historical; native Unity tests remain required.
+
 # Current delivery status
 
 See [REPAIR-2.md](REPAIR-2.md) for the current scale/artwork update, feature-by-feature status and local steps. Reports below are historical initial-port notes, not the current feature status.
