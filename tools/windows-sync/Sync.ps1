@@ -11,6 +11,9 @@ param(
 $ErrorActionPreference = 'Stop'
 $env:GIT_TERMINAL_PROMPT = '0'
 $env:GCM_INTERACTIVE = 'Never'
+# Application-only lookup bypasses aliases/functions named Git (case-insensitive).
+$GitExecutable = (Get-Command -Name git -CommandType Application -ErrorAction Stop |
+    Select-Object -First 1).Source
 $Repository = (Resolve-Path -LiteralPath $Repository).Path
 $state = Join-Path $env:LOCALAPPDATA 'SunwardGitSync'
 New-Item -ItemType Directory -Force -Path $state | Out-Null
@@ -24,12 +27,12 @@ function Report([string]$message) {
     }
     Add-Content -LiteralPath $log -Value $line
 }
-function Git([string[]]$Arguments) {
+function Invoke-SunwardGit([string[]]$Arguments) {
     # Windows PowerShell 5.1 wraps native stderr even when Git succeeds.
     $savedPreference = $ErrorActionPreference
     try {
         $ErrorActionPreference = 'Continue'
-        $result = & git -C $Repository @Arguments 2>&1
+        $result = & $GitExecutable -C $Repository @Arguments 2>&1
         $code = $LASTEXITCODE
     } finally { $ErrorActionPreference = $savedPreference }
     if ($code -ne 0) { throw "git $($Arguments -join ' ') failed: $($result -join ' ')" }
@@ -45,8 +48,8 @@ function UnityBusy {
         (Test-Path (Join-Path $Repository 'Sunward-Unity\Temp\UnityLockfile')))
 }
 function Fingerprint {
-    $names = ((Git @('ls-files','-z','--cached','--others','--exclude-standard')) + [char]0 +
-        (Git @('ls-tree','-r','--name-only','-z','HEAD'))).Split([char]0) |
+    $names = ((Invoke-SunwardGit @('ls-files','-z','--cached','--others','--exclude-standard')) + [char]0 +
+        (Invoke-SunwardGit @('ls-tree','-r','--name-only','-z','HEAD'))).Split([char]0) |
         Where-Object { $_ } | Sort-Object -Unique
     $lines = foreach ($name in $names) {
         $path = Join-Path $Repository $name
@@ -61,30 +64,30 @@ function Fingerprint {
     finally { $sha.Dispose() }
 }
 function CheckRepository {
-    if ((Git @('rev-parse','--show-toplevel')).Replace('/','\').TrimEnd('\') -ine $Repository.TrimEnd('\')) {
+    if ((Invoke-SunwardGit @('rev-parse','--show-toplevel')).Replace('/','\').TrimEnd('\') -ine $Repository.TrimEnd('\')) {
         throw 'Repository must be the repository root, not Sunward-Unity.'
     }
-    if ((Git @('branch','--show-current')) -cne 'sunward-minigame') { throw 'Expected branch sunward-minigame. No branch switch was attempted.' }
-    $url = Git @('remote','get-url','origin')
+    if ((Invoke-SunwardGit @('branch','--show-current')) -cne 'sunward-minigame') { throw 'Expected branch sunward-minigame. No branch switch was attempted.' }
+    $url = Invoke-SunwardGit @('remote','get-url','origin')
     if ($url -notmatch '^(https://github\.com/pep-101-png/okami-minigame(?:\.git)?/?|git@github\.com:pep-101-png/okami-minigame(?:\.git)?)$') {
         throw 'origin does not match pep-101-png/okami-minigame.'
     }
     if (-not (Test-Path (Join-Path $Repository 'Sunward-Unity\ProjectSettings\ProjectVersion.txt'))) { throw 'Unity project is missing.' }
     foreach ($marker in @('MERGE_HEAD','CHERRY_PICK_HEAD','REVERT_HEAD','rebase-merge','rebase-apply','index.lock')) {
-        $path = Git @('rev-parse','--git-path',$marker)
+        $path = Invoke-SunwardGit @('rev-parse','--git-path',$marker)
         if (-not [IO.Path]::IsPathRooted($path)) { $path = Join-Path $Repository $path }
         if (Test-Path -LiteralPath $path) { throw "Git operation or lock present: $marker" }
     }
-    if (Git @('ls-files','--unmerged')) { throw 'Unresolved conflicts present.' }
-    Git @('lfs','version') | Out-Null
-    if ((Git @('config','--get','filter.lfs.process')) -ne 'git-lfs filter-process') {
+    if (Invoke-SunwardGit @('ls-files','--unmerged')) { throw 'Unresolved conflicts present.' }
+    Invoke-SunwardGit @('lfs','version') | Out-Null
+    if ((Invoke-SunwardGit @('config','--get','filter.lfs.process')) -ne 'git-lfs filter-process') {
         throw 'Run Install.ps1 to configure the local Git LFS filter first.'
     }
-    $generated = Git @('ls-files','--','Sunward-Unity/Library/*','Sunward-Unity/Temp/*','Sunward-Unity/Logs/*','Sunward-Unity/Obj/*','Sunward-Unity/UserSettings/*','Sunward-Unity/Build/*','Sunward-Unity/Builds/*')
+    $generated = Invoke-SunwardGit @('ls-files','--','Sunward-Unity/Library/*','Sunward-Unity/Temp/*','Sunward-Unity/Logs/*','Sunward-Unity/Obj/*','Sunward-Unity/UserSettings/*','Sunward-Unity/Build/*','Sunward-Unity/Builds/*')
     if ($generated) { throw 'Generated Unity files are already tracked. Review and untrack them manually before syncing.' }
 
     # Do not stage changes another human has already prepared.
-    if (Git @('diff','--cached','--name-only')) { throw 'Staged changes exist; finish or unstage them manually first.' }
+    if (Invoke-SunwardGit @('diff','--cached','--name-only')) { throw 'Staged changes exist; finish or unstage them manually first.' }
 }
 $mutex = New-Object Threading.Mutex($false, 'Local\SunwardGitSync')
 $held = $false
@@ -102,10 +105,10 @@ try {
                 Start-Sleep -Seconds $QuietSeconds
                 if ((UnityBusy) -or ((Fingerprint) -ne $before)) { Report 'Waiting: project is active or files changed.' }
                 else {
-                    Git @('fetch','--no-tags','origin','refs/heads/sunward-minigame:refs/remotes/origin/sunward-minigame') | Out-Null
-                    $counts = (Git @('rev-list','--left-right','--count','HEAD...refs/remotes/origin/sunward-minigame')) -split '\s+'
+                    Invoke-SunwardGit @('fetch','--no-tags','origin','refs/heads/sunward-minigame:refs/remotes/origin/sunward-minigame') | Out-Null
+                    $counts = (Invoke-SunwardGit @('rev-list','--left-right','--count','HEAD...refs/remotes/origin/sunward-minigame')) -split '\s+'
                     $ahead = [int]$counts[0]; $behind = [int]$counts[1]
-                    $dirty = [bool](Git @('status','--porcelain=v1','--untracked-files=all'))
+                    $dirty = [bool](Invoke-SunwardGit @('status','--porcelain=v1','--untracked-files=all'))
                     if ($ahead -gt 0 -and $behind -gt 0) { throw 'Branches diverged. Review and reconcile manually; no merge or rebase attempted.' }
                     if ($behind -gt 0 -and $dirty) { throw 'Remote updates and local changes coexist. Reconcile manually; no stash or merge attempted.' }
                     if (-not $Apply) {
@@ -115,8 +118,8 @@ try {
                         if ((UnityBusy) -or ((Fingerprint) -ne $before)) { throw 'Files or editor state changed during fetch; retry after review.' }
                         if ($behind -gt 0) {
                             RequireIdle
-                            Git @('merge','--ff-only','--no-autostash','refs/remotes/origin/sunward-minigame') | Out-Null
-                            Git @('lfs','pull','--include=','--exclude=','origin') | Out-Null
+                            Invoke-SunwardGit @('merge','--ff-only','--no-autostash','refs/remotes/origin/sunward-minigame') | Out-Null
+                            Invoke-SunwardGit @('lfs','pull','--include=','--exclude=','origin') | Out-Null
                             Report 'Downloaded fast-forward update and LFS assets.'
                         } else {
                             $lastFile = Join-Path $state 'last-commit.txt'
@@ -124,35 +127,35 @@ try {
                             if ($dirty -and $cooldown) { Report 'Waiting: minimum commit interval has not elapsed.' }
                             elseif ($dirty) {
                                 # Large files without an LFS rule must be explicitly reviewed.
-                                $names = (Git @('ls-files','-z','--cached','--others','--exclude-standard')).Split([char]0) | Where-Object { $_ }
+                                $names = (Invoke-SunwardGit @('ls-files','-z','--cached','--others','--exclude-standard')).Split([char]0) | Where-Object { $_ }
                                 foreach ($name in $names) {
                                     $path = Join-Path $Repository $name
                                     if ((Test-Path -LiteralPath $path -PathType Leaf) -and ((Get-Item -LiteralPath $path).Length -ge 50MB)) {
-                                        if ((Git @('check-attr','filter','--',$name)) -notmatch ': filter: lfs$') {
+                                        if ((Invoke-SunwardGit @('check-attr','filter','--',$name)) -notmatch ': filter: lfs$') {
                                             throw "Large asset needs an explicit Git LFS rule: $name"
                                         }
                                     }
                                 }
                                 RequireIdle
-                                Git @('add','--all','--','.') | Out-Null
+                                Invoke-SunwardGit @('add','--all','--','.') | Out-Null
                                 if ((UnityBusy) -or ((Fingerprint) -ne $before)) {
                                     throw 'Files changed while staging. Review staged changes manually before resuming.'
                                 }
-                                if (Git @('diff','--cached','--name-only')) {
+                                if (Invoke-SunwardGit @('diff','--cached','--name-only')) {
                                     RequireIdle
-                                    Git @('commit','-m',('Sunward autosync {0:yyyy-MM-dd HH:mm:ss zzz}' -f (Get-Date))) | Out-Null
+                                    Invoke-SunwardGit @('commit','-m',('Sunward autosync {0:yyyy-MM-dd HH:mm:ss zzz}' -f (Get-Date))) | Out-Null
                                     (Get-Date).ToString('o') | Set-Content $lastFile
                                     Report 'Created snapshot commit.'
                                 }
                             }
                             # Explicit LFS upload also protects installations with custom hooks.
-                            if ([int](Git @('rev-list','--count','refs/remotes/origin/sunward-minigame..HEAD')) -gt 0) {
+                            if ([int](Invoke-SunwardGit @('rev-list','--count','refs/remotes/origin/sunward-minigame..HEAD')) -gt 0) {
                                 if (UnityBusy) { throw 'Unity opened before upload; waiting for manual review.' }
                                 RequireIdle
-                                Git @('lfs','push','origin','HEAD') | Out-Null
+                                Invoke-SunwardGit @('lfs','push','origin','HEAD') | Out-Null
                                 if (UnityBusy) { throw 'Unity opened during LFS upload; retry after review.' }
                                 RequireIdle
-                                Git @('push','origin','HEAD:refs/heads/sunward-minigame') | Out-Null
+                                Invoke-SunwardGit @('push','origin','HEAD:refs/heads/sunward-minigame') | Out-Null
                                 Report 'Uploaded commits and LFS assets.'
                             } else { Report 'No outgoing commits.' }
                         }

@@ -188,11 +188,54 @@ It is disabled again. For uninstall, stop/wait/unregister; optionally remove the
 SunwardGitSync local state directory after saving logs. Keep the repository's LFS
 configuration and hooks: existing assets need them even without autosync.
 
-## Validation performed in the implementation environment
+## Recovering from the Git helper recursion bug
 
-Reviewed control flow and Git operations; checked ignore/LFS attribute matching,
-configuration whitespace, and that no generated directories are tracked. Windows
-PowerShell/Task Scheduler/Unity execution is unavailable in the Linux environment,
-so the Windows first-run and round-trip procedure above is required before enabling.
-This setup does not provide an atomic editor lock; always keep Unity closed during
-applied cycles. It trades live-editor convenience for conservative synchronization.
+The original helper was named `Git` and invoked `& git`. PowerShell resolves command
+names without regard to case and chooses functions before native applications, so
+that call invoked the helper again until call depth overflowed. The helper is now
+`Invoke-SunwardGit` and executes the absolute native application path resolved by
+`Get-Command -Name git -CommandType Application`. Installer and status invocations
+use application-only resolution too, bypassing aliases/functions named Git.
+
+If only preview was run and no task was installed, no installation is needed to
+retest this fix. After reviewing and applying the fix to your `sunward-minigame`
+checkout, close Unity, inspect `git status` and the existing pause/log, then remove
+only the old recursion pause and run preview again:
+
+```powershell
+Get-Content "$env:LOCALAPPDATA\SunwardGitSync\PAUSED.txt"
+git status --short --branch
+# Only after confirming the pause is the old call-depth error and local state is safe:
+Remove-Item "$env:LOCALAPPDATA\SunwardGitSync\PAUSED.txt"
+.\tools\windows-sync\Sync.ps1
+```
+
+Do not pass `-Apply`, install a task, or enable one for this retest. If preview now
+reports missing LFS configuration, review `git lfs install --local` separately;
+that configures Git LFS and its hook without registering/enabling a scheduled task.
+Any new pause should be inspected rather than repeatedly clearing the marker.
+If a task was previously installed, its copied runner must also be updated through
+reviewed reinstall steps; changing the repository copy alone does not update it.
+
+## Validation
+
+Run the dependency-free regression test on Windows PowerShell 5.1 or PowerShell 7:
+
+```powershell
+.\tools\windows-sync\tests\Test-NativeGit.ps1
+```
+
+It parses all PowerShell scripts and loads only the actual helper and executable
+resolution AST fragments. It never starts sync, installs a task, or accesses GitHub.
+It uses an empty temporary directory (including spaces in its path), shadows Git
+with functions/alias, checks native execution and argument boundaries, and checks
+that native failures still throw and preserve the error preference.
+
+The test passed on PowerShell 7.4.6 on Linux. Ignore/LFS attribute matching was
+checked during initial implementation. Windows PowerShell 5.1, Task Scheduler and
+Unity integration remain untested in this environment; the Windows first-run and
+round-trip procedure above is required before enabling. The recursion fix leaves
+branch checks, preview default, LFS, quiet-time/editor checks, mutex, fast-forward
+only downloads, staged/conflict guards, pause handling, commit intervals, and
+ordinary non-force pushes in place. This setup does not provide an atomic editor
+lock; always keep Unity closed during applied cycles.
