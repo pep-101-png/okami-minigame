@@ -63,5 +63,6 @@ class Program {
  Need(grounded>0,"Actual V3 floating decoration components corrected: "+grounded);
  var result=new{limb_samples=5000,safe_npc_spawns=world.npcs.Length,river_recovery_locations=recovery,bridge_samples=10001,grounded_components=grounded,checked_meshes=components,unity_editor="NOT RUN",note="Actual navigation, height and grounding C# executed against a test-only numerical shim. No Unity physics, rendering or Play Mode claim."};File.WriteAllText(root+"/Review/world-validation.json",JsonSerializer.Serialize(result,new JsonSerializerOptions{WriteIndented=true}));
  WatersideChecks.Run(root,data);
+ EnvironmentChecks.Run(root,data);
  }
 }

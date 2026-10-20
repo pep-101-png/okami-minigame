@@ -6,11 +6,17 @@ namespace Sunward
     {
         public TextAsset source;
         public bool visualRelief, gardenPondBasin, exactTerrainSurface;
+        public float homeBridgeSourceZ = 12;
+        public static float HomeBridgeSourceZ = 12;
         public WorldData Data { get; private set; }
 
         void Awake()
         {
             Data = JsonUtility.FromJson<ValleyData>(source.text).world;
+            HomeBridgeSourceZ = homeBridgeSourceZ;
+            foreach (var box in Data.boxes)
+                if (EnvironmentLayout.IsHomeRail(box))
+                    box.z += homeBridgeSourceZ - 12;
             Data.terrain.visualRelief = visualRelief;
             Data.terrain.gardenPondBasin = gardenPondBasin;
             Data.terrain.exactSurface = exactTerrainSurface;
@@ -31,7 +37,7 @@ namespace Sunward
             return -23 + Raw(z) - a * Mathf.Exp(-Mathf.Pow((z - 12) / 4, 2)) - b * Mathf.Exp(-Mathf.Pow((z + 14) / 4, 2));
         }
 
-        public static bool OnBridge(float x, float z) => ((Mathf.Abs(z - 12) < 1.28f || Mathf.Abs(z + 14) < 1.28f) && x >= -27.8f && x <= -18.2f);
+        public static bool OnBridge(float x, float z) => ((Mathf.Abs(z - HomeBridgeSourceZ) < 1.28f || Mathf.Abs(z + 14) < 1.28f) && x >= -27.8f && x <= -18.2f);
         public static float Depth(Vector3 p)
         {
             float z = -p.z;

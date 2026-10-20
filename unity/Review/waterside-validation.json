@@ -1,6 +1,6 @@
 {
   "stones": 122,
-  "base_triangle_support_samples": 36600,
+  "base_triangle_support_samples": 58560,
   "terrain_triangle_samples": 2560,
   "maximum_terrain_error": 9.804964E-06,
   "pond_rim_samples": 360,

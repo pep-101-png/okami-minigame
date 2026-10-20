@@ -1,0 +1,35 @@
+{
+  "texture_sets": {
+    "Granite": {
+      "edge_mean_channel_difference": 2.11,
+      "files_valid": true
+    },
+    "Cedar": {
+      "edge_mean_channel_difference": 3.25,
+      "files_valid": true
+    },
+    "Endgrain": {
+      "edge_mean_channel_difference": 3.05,
+      "files_valid": true
+    },
+    "Earth": {
+      "edge_mean_channel_difference": 3.4,
+      "files_valid": true
+    },
+    "Meadow": {
+      "edge_mean_channel_difference": 2.18,
+      "files_valid": true
+    },
+    "Plaster": {
+      "edge_mean_channel_difference": 0.77,
+      "files_valid": true
+    },
+    "Slate": {
+      "edge_mean_channel_difference": 3.86,
+      "files_valid": true
+    }
+  },
+  "original_wolf_fbx_unchanged_sha256": "277f0b1c04e91274f46320358279da43ee5a01ac420ebbe9f7ecf16184478328",
+  "native_unity_rendering_and_runtime": "NOT RUN",
+  "source": "Original procedural materials, not photographic scans"
+}

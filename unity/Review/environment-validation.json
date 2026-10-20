@@ -1,0 +1,11 @@
+{
+  "home_bridge_source_z": 8,
+  "home_wall_clearance": 2.6750002,
+  "selected_legacy_ink_faces": 1215,
+  "selected_old_banner_faces": 42,
+  "arena_logs": 28,
+  "arena_log_minimum_radius": 18.374952,
+  "closed_lantern_roofs": true,
+  "unity_editor": "NOT RUN",
+  "note": "Source geometry and numerical C# rules tested. Does not verify Unity shaders, Play Mode, migration execution or native visual quality."
+}
