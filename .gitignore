@@ -4,3 +4,31 @@ dist/
 
 .test-artifacts/
 *.blend1
+
+# Unity-generated and machine-local files (retain Assets and their .meta files).
+[Ss]unward-Unity/[Ll]ibrary/
+[Ss]unward-Unity/[Tt]emp/
+[Ss]unward-Unity/[Oo]bj/
+[Ss]unward-Unity/[Ll]ogs/
+[Ss]unward-Unity/[Uu]ser[Ss]ettings/
+[Ss]unward-Unity/[Bb]uild/
+[Ss]unward-Unity/[Bb]uilds/
+[Ss]unward-Unity/[Mm]emoryCaptures/
+[Ss]unward-Unity/[Rr]ecordings/
+.vs/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.pidb
+*.booproj
+*.unityproj
+*.opendb
+*.VC.db
+.DS_Store
+Thumbs.db
+[Ss]unward-Unity/[Cc]rash[Rr]eports/
+[Ss]unward-Unity/[Aa]rtifacts/
+[Ss]unward-Unity/.utmp/
+[Ss]unward-Unity/sysinfo.txt

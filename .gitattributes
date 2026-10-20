@@ -1,1 +1,21 @@
 Sunward-Unity/Assets/Sunward/Generated/Animations/Idle_Natural.anim filter=lfs diff=lfs merge=lfs -text
+
+# Unity binary source assets. Never track .meta files with LFS.
+Sunward-Unity/**/*.fbx filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.blend filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.psd filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.psb filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.png filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.tga filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.tif filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.tiff filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.exr filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.hdr filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.wav filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.mp3 filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.ogg filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.mov filter=lfs diff=lfs merge=lfs -text
+Sunward-Unity/**/*.unitypackage filter=lfs diff=lfs merge=lfs -text
