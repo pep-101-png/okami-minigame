@@ -24,6 +24,7 @@ namespace Sunward.Editor
 
         static void Automatic()
         {
+            if (Automation.AutomationIsolation.Enabled) return;
             if (EditorApplication.isCompiling || EditorApplication.isUpdating)
             {
                 EditorApplication.delayCall += Automatic;

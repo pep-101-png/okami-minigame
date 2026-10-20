@@ -46,6 +46,7 @@ namespace Sunward.Editor
 
         static void TryAutomatic()
         {
+            if (Automation.AutomationIsolation.Enabled) return;
             if (EditorApplication.isCompiling || EditorApplication.isUpdating)
             {
                 EditorApplication.delayCall += TryAutomatic;

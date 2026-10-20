@@ -1,0 +1,12 @@
+{
+  "UnityEditor": "",
+  "PollSeconds": 30,
+  "StableSeconds": 30,
+  "UnityTimeoutSeconds": 3600,
+  "CaptureScreenshots": true,
+  "AllowVisibleCapture": false,
+  "PublishReports": false,
+  "KeepSuccessfulSnapshots": false,
+  "CapturePlayMode": true,
+  "BuildWindowsPlayer": false
+}

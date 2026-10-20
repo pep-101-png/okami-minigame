@@ -32,3 +32,6 @@ Thumbs.db
 [Ss]unward-Unity/[Aa]rtifacts/
 [Ss]unward-Unity/.utmp/
 [Ss]unward-Unity/sysinfo.txt
+
+# Machine-local Unity automation configuration. Reports/snapshots live in LocalAppData.
+tools/unity-automation/config.json
