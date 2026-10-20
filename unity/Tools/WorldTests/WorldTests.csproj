@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems></PropertyGroup>
 <ItemGroup>
-<Compile Include="../../Assets/Sunward/Scripts/SurfaceArtRules.cs"/><Compile Include="../../Assets/Sunward/Scripts/MeshSafety.cs"/><Compile Include="../../Assets/Sunward/Scripts/LimbArc.cs"/><Compile Include="../../Assets/Sunward/Scripts/HomeLayout.cs"/><Compile Include="../../Assets/Sunward/Scripts/RevolvedGeometry.cs"/><Compile Include="Program.cs"/><Compile Include="MathShim.cs"/>
+<Compile Include="../../Assets/Sunward/Scripts/SurfaceArtRules.cs"/><Compile Include="../../Assets/Sunward/Scripts/MeshSafety.cs"/><Compile Include="../../Assets/Sunward/Scripts/LimbArc.cs"/><Compile Include="../../Assets/Sunward/Scripts/HomeLayout.cs"/><Compile Include="../../Assets/Sunward/Scripts/RevolvedGeometry.cs"/><Compile Include="Program.cs"/><Compile Include="WatersideChecks.cs"/><Compile Include="MathShim.cs"/>
 <Compile Include="../../Assets/Sunward/Scripts/WorldData.cs"/>
 <Compile Include="../../Assets/Sunward/Scripts/Valley.cs"/>
 <Compile Include="../../Assets/Sunward/Scripts/VillageNavigation.cs"/>
-<Compile Include="../../Assets/Editor/EnvironmentGrounding.cs"/><Compile Include="../../Assets/Editor/SurfaceIslands.cs"/><Compile Include="../../Assets/Editor/RockSeating.cs"/><Compile Include="../../Assets/Sunward/Scripts/TerrainRelief.cs"/>
+<Compile Include="../../Assets/Editor/EnvironmentGrounding.cs"/><Compile Include="../../Assets/Editor/SurfaceIslands.cs"/><Compile Include="../../Assets/Editor/RockSeating.cs"/><Compile Include="../../Assets/Sunward/Scripts/TerrainRelief.cs"/><Compile Include="../../Assets/Sunward/Scripts/GardenPond.cs"/><Compile Include="../../Assets/Sunward/Scripts/SeatedStoneGeometry.cs"/>
 </ItemGroup></Project>

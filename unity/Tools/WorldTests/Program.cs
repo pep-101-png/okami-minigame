@@ -62,5 +62,6 @@ class Program {
  foreach(var asset in data.assets.Where(a=>a.name=="TownV3"))foreach(var m in asset.meshes){if(data.materials[m.material].kind!="stone"&&data.materials[m.material].kind!="grass-blade")continue;reader.BaseStream.Position=m.offset;int nv=reader.ReadInt32(),ni=reader.ReadInt32();var v=new Vector3[nv];for(int i=0;i<nv;i++){v[i]=new(reader.ReadSingle(),reader.ReadSingle(),reader.ReadSingle());reader.BaseStream.Position+=36;}var ix=new int[ni];for(int i=0;i<ni;i++)ix[i]=reader.ReadInt32();int n=EnvironmentGrounding.Adjust(v,ix,data.materials[m.material],world);grounded+=n;components++;Need(v.All(p=>float.IsFinite(p.y)),"Finite grounded geometry "+m.material);}
  Need(grounded>0,"Actual V3 floating decoration components corrected: "+grounded);
  var result=new{limb_samples=5000,safe_npc_spawns=world.npcs.Length,river_recovery_locations=recovery,bridge_samples=10001,grounded_components=grounded,checked_meshes=components,unity_editor="NOT RUN",note="Actual navigation, height and grounding C# executed against a test-only numerical shim. No Unity physics, rendering or Play Mode claim."};File.WriteAllText(root+"/Review/world-validation.json",JsonSerializer.Serialize(result,new JsonSerializerOptions{WriteIndented=true}));
+ WatersideChecks.Run(root,data);
  }
 }

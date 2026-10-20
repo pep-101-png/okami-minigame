@@ -240,6 +240,7 @@ namespace Sunward.Editor
             AssetDatabase.SaveAssets();
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
+            WatersideRepair.Apply();
             ValidateApplied(flow, town, filters);
             Debug.Log($"Windflower visual remake applied and saved: {buildings} buildings, {trees} trees, {rocks} new individually seated rocks, 4 distinct market stalls and {flow.npcObjects.Length} replacement resident appearances. Wolf/animations untouched. Native visual and Play Mode testing still required.");
         }
@@ -835,14 +836,20 @@ namespace Sunward.Editor
             var mill = town.GetComponentInChildren<WaterMillMotion>(true);
             if (!mill || !mill.wheel || !mill.shaft || !mill.spindle || !mill.millstone)
                 throw new InvalidDataException("Mill transmission missing.");
-            var rocks = town.transform.Find(RockRoot);
-            if (!rocks || rocks.childCount == 0)
-                throw new InvalidDataException("Seated replacement rock group missing.");
-            foreach (Transform rock in rocks)
+            var surfaceRepair = town.GetComponentInChildren<SurfaceRepairState>(true);
+            if (!surfaceRepair || !surfaceRepair.validated)
             {
-                var b = rock.GetComponentInChildren<Renderer>().bounds;
-                if (b.min.y > Ground(b.center) + .035f)
-                    throw new InvalidDataException("Rock base floats above terrain/bed: " + rock.name);
+                var rocks = town.transform.Find(RockRoot);
+                if (!rocks || rocks.childCount == 0)
+                    throw new InvalidDataException("Seated replacement rock group missing.");
+                foreach (Transform rock in rocks)
+                {
+                    if (!rocks.gameObject.activeInHierarchy)
+                        continue;
+                    var b = rock.GetComponentInChildren<Renderer>().bounds;
+                    if (b.min.y > Ground(b.center) + .035f)
+                        throw new InvalidDataException("Rock base floats above terrain/bed: " + rock.name);
+                }
             }
 
             if (!flow.valley.visualRelief)

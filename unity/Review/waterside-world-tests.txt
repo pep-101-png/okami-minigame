@@ -1,0 +1,871 @@
+PASS Actual lantern roof geometry is closed, including poles and circumference seam
+PASS Actual lantern cap has outward winding, not just closed edges
+PASS 5000 actual shared limb solves preserve upper/lower lengths, including unreachable targets
+PASS Nonfinite limb input rejected
+PASS Separate sleep/mirror zones
+PASS Safe spawn: Hana · gardener
+PASS Safe spawn: Taro · merchant
+PASS Safe spawn: Elder Sora
+PASS Safe spawn: Yui · traveler
+PASS Safe spawn: Akari · shrine musician
+PASS Safe spawn: Mio · lantern keeper
+PASS Safe spawn: Ren · pilgrim
+PASS Connected art source for real TownV3 material 0
+PASS Connected art source for real TownV3 material 1
+PASS Connected art source for real TownV3 material 5
+PASS Connected art source for real TownV3 material 7
+PASS Connected art source for real TownV3 material 8
+PASS Connected art source for real TownV3 material 9
+PASS Connected art source for real TownV3 material 10
+PASS Connected art source for real TownV3 material 11
+PASS Connected art source for real TownV3 material 12
+PASS Connected art source for real TownV3 material 13
+PASS Connected art source for real TownV3 material 14
+PASS Connected art source for real TownV3 material 15
+PASS Connected art source for real TownV3 material 16
+PASS Connected art source for real TownV3 material 17
+PASS Connected art source for real TownV3 material 18
+PASS Connected art source for real TownV3 material 19
+PASS Connected art source for real TownV3 material 20
+PASS Connected art source for real TownV3 material 21
+PASS Connected art source for real TownV3 material 23
+PASS Connected art source for real TownV3 material 24
+PASS Connected art source for real TownV3 material 25
+PASS Connected art source for real TownV3 material 26
+PASS Connected art source for real TownV3 material 27
+PASS Connected art source for real TownV3 material 28
+PASS Connected art source for real TownV3 material 29
+PASS Connected art source for real TownV3 material 30
+PASS Connected art source for real TownV3 material 31
+PASS Connected art source for real TownV3 material 32
+PASS Connected art source for real TownV3 material 33
+PASS Connected art source for real TownV3 material 34
+PASS Connected art source for real TownV3 material 35
+PASS Connected art source for real TownV3 material 36
+PASS Connected art source for real TownV3 material 37
+PASS Connected art source for real TownV3 material 38
+PASS Connected art source for real TownV3 material 39
+PASS Connected art source for real TownV3 material 40
+PASS Connected art source for real TownV3 material 41
+PASS Connected art source for real TownV3 material 42
+PASS Connected art source for real TownV3 material 44
+PASS Connected art source for real TownV3 material 47
+PASS Connected art source for real TownV3 material 48
+PASS Connected art source for real TownV3 material 49
+PASS Connected art source for real TownV3 material 50
+PASS Connected art source for real TownV3 material 52
+PASS Connected art source for real TownV3 material 53
+PASS Connected art source for real TownV3 material 54
+PASS Connected art source for real TownV3 material 55
+PASS Connected art source for real TownV3 material 56
+PASS Connected art source for real TownV3 material 57
+PASS Connected art source for real TownV3 material 58
+PASS Connected art source for real TownV3 material 59
+PASS Connected art source for real TownV3 material 60
+PASS Connected art source for real TownV3 material 61
+PASS Connected art source for real TownV3 material 62
+PASS Connected art source for real TownV3 material 63
+PASS Connected art source for real TownV3 material 64
+PASS Connected art source for real TownV3 material 65
+PASS Connected art source for real TownV3 material 66
+PASS Connected art source for real TownV3 material 67
+PASS Connected art source for real TownV3 material 68
+PASS Connected art source for real TownV3 material 69
+PASS Connected art source for real TownV3 material 71
+PASS Connected art source for real TownV3 material 74
+PASS Connected art source for real TownV3 material 75
+PASS Connected art source for real TownV3 material 77
+PASS Connected art source for real TownV3 material 78
+PASS Connected art source for real TownV3 material 79
+PASS Connected art source for real TownV3 material 80
+PASS Connected art source for real TownV3 material 81
+PASS Connected art source for real TownV3 material 82
+PASS Connected art source for real TownV3 material 83
+PASS Connected art source for real TownV3 material 84
+PASS Connected art source for real TownV3 material 85
+PASS Connected art source for real TownV3 material 86
+PASS Connected art source for real TownV3 material 87
+PASS Connected art source for real TownV3 material 88
+PASS Connected art source for real TownV3 material 89
+PASS Connected art source for real TownV3 material 90
+PASS Connected art source for real TownV3 material 91
+PASS Connected art source for real TownV3 material 92
+PASS Connected art source for real TownV3 material 93
+PASS Connected art source for real TownV3 material 94
+PASS Connected art source for real TownV3 material 95
+PASS Connected art source for real TownV3 material 96
+PASS Connected art source for real TownV3 material 97
+PASS Connected art source for real TownV3 material 102
+PASS Connected art source for real TownV3 material 103
+PASS Connected art source for real TownV3 material 104
+PASS Connected art source for real TownV3 material 105
+PASS Connected art source for real TownV3 material 106
+PASS Connected art source for real TownV3 material 107
+PASS Connected art source for real TownV3 material 108
+PASS Connected art source for real TownV3 material 109
+PASS Connected art source for real TownV3 material 110
+PASS Connected art source for real TownV3 material 111
+PASS Connected art source for real TownV3 material 112
+PASS Connected art source for real TownV3 material 113
+PASS Connected art source for real TownV3 material 114
+PASS Connected art source for real TownV3 material 115
+PASS Connected art source for real TownV3 material 116
+PASS Connected art source for real TownV3 material 117
+PASS Connected art source for real TownV3 material 118
+PASS Connected art source for real TownV3 material 119
+PASS Connected art source for real TownV3 material 120
+PASS Connected art source for real TownV3 material 121
+PASS Connected art source for real TownV3 material 122
+PASS Connected art source for real TownV3 material 123
+PASS Connected art source for real TownV3 material 124
+PASS Connected art source for real TownV3 material 125
+PASS Connected art source for real TownV3 material 126
+PASS Connected art source for real TownV3 material 127
+PASS Connected art source for real TownV3 material 128
+PASS Connected art source for real TownV3 material 129
+PASS Connected art source for real TownV3 material 130
+PASS Connected art source for real TownV3 material 131
+PASS Connected art source for real TownV3 material 133
+PASS Connected art source for real TownV3 material 134
+PASS Connected art source for real TownV3 material 135
+PASS Connected art source for real TownV3 material 136
+PASS Connected art source for real TownV3 material 137
+PASS Connected art source for real TownV3 material 144
+PASS Connected art source for real TownV3 material 145
+PASS Connected art source for real TownV3 material 146
+PASS Connected art source for real TownV3 material 147
+PASS Connected art source for real TownV3 material 148
+PASS Connected art source for real TownV3 material 149
+PASS Connected art source for real TownV3 material 153
+PASS Connected art source for real TownV3 material 154
+PASS Connected art source for real TownV3 material 155
+PASS Connected art source for real TownV3 material 156
+PASS Connected art source for real TownV3 material 157
+PASS Connected art source for real TownV3 material 158
+PASS Connected art source for real TownV3 material 160
+PASS Connected art source for real TownV3 material 161
+PASS Connected art source for real TownV3 material 162
+PASS Connected art source for real TownV3 material 163
+PASS Connected art source for real TownV3 material 164
+PASS Connected art source for real TownV3 material 165
+PASS Connected art source for real TownV3 material 168
+PASS Connected art source for real TownV3 material 169
+PASS Connected art source for real TownV3 material 170
+PASS Connected art source for real TownV3 material 171
+PASS Connected art source for real TownV3 material 176
+PASS Connected art source for real TownV3 material 177
+PASS Connected art source for real TownV3 material 178
+PASS Connected art source for real TownV3 material 179
+PASS Connected art source for real TownV3 material 180
+PASS Connected art source for real TownV3 material 181
+PASS Connected art source for real TownV3 material 182
+PASS Connected art source for real TownV3 material 183
+PASS Connected art source for real TownV3 material 184
+PASS Connected art source for real TownV3 material 185
+PASS Connected art source for real TownV3 material 186
+PASS Connected art source for real TownV3 material 187
+PASS Connected art source for real TownV3 material 188
+PASS Connected art source for real TownV3 material 189
+PASS Connected art source for real TownV3 material 190
+PASS Connected art source for real TownV3 material 191
+PASS Connected art source for real TownV3 material 193
+PASS Connected art source for real TownV3 material 194
+PASS Actual Windflower uses new wood artwork
+PASS Actual Windflower uses new roof artwork
+PASS Actual Windflower uses new stone artwork
+PASS Actual Windflower uses new plaster artwork
+PASS Actual Windflower uses new meadow artwork
+PASS NaN mesh identified before collision cooking
+PASS River escape near z=-29
+PASS River escape near z=-27
+PASS River escape near z=-25
+PASS River escape near z=-23
+PASS River escape near z=-21
+PASS River escape near z=-19
+PASS River escape near z=-17
+PASS River escape near z=-15
+PASS River escape near z=-13
+PASS River escape near z=-11
+PASS River escape near z=-9
+PASS River escape near z=-7
+PASS River escape near z=-5
+PASS River escape near z=-3
+PASS River escape near z=-1
+PASS River escape near z=1
+PASS River escape near z=3
+PASS River escape near z=5
+PASS River escape near z=7
+PASS River escape near z=9
+PASS River escape near z=11
+PASS River escape near z=13
+PASS River escape near z=15
+PASS River escape near z=17
+PASS River escape near z=19
+PASS River escape near z=21
+PASS River escape near z=23
+PASS River escape near z=25
+PASS River escape near z=27
+PASS River escape near z=29
+PASS Bridge finite and level endpoints
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Building/rail rejected
+PASS Drawn-face islands weld UV seams and exclude dormant vertices
+PASS Individual rock foundation embeds below its own surface 371/0
+PASS Individual rock foundation embeds below its own surface 371/243
+PASS Individual rock foundation embeds below its own surface 371/486
+PASS Individual rock foundation embeds below its own surface 371/729
+PASS Individual rock foundation embeds below its own surface 371/972
+PASS Individual rock foundation embeds below its own surface 371/1215
+PASS Individual rock foundation embeds below its own surface 371/1701
+PASS Individual rock foundation embeds below its own surface 371/1944
+PASS Individual rock foundation embeds below its own surface 371/2187
+PASS Individual rock foundation embeds below its own surface 371/2430
+PASS Individual rock foundation embeds below its own surface 371/2673
+PASS Individual rock foundation embeds below its own surface 371/2916
+PASS Individual rock foundation embeds below its own surface 371/3159
+PASS Individual rock foundation embeds below its own surface 371/3402
+PASS Individual rock foundation embeds below its own surface 371/3645
+PASS Individual rock foundation embeds below its own surface 371/3888
+PASS Individual rock foundation embeds below its own surface 780/0
+PASS Individual rock foundation embeds below its own surface 780/51
+PASS Individual rock foundation embeds below its own surface 780/102
+PASS Individual rock foundation embeds below its own surface 780/153
+PASS Individual rock foundation embeds below its own surface 780/204
+PASS Individual rock foundation embeds below its own surface 780/255
+PASS Individual rock foundation embeds below its own surface 780/306
+PASS Individual rock foundation embeds below its own surface 780/357
+PASS Individual rock foundation embeds below its own surface 780/408
+PASS Individual rock foundation embeds below its own surface 780/459
+PASS Individual rock foundation embeds below its own surface 780/510
+PASS Individual rock foundation embeds below its own surface 780/561
+PASS Individual rock foundation embeds below its own surface 781/0
+PASS Individual rock foundation embeds below its own surface 781/51
+PASS Individual rock foundation embeds below its own surface 781/102
+PASS Individual rock foundation embeds below its own surface 781/153
+PASS Individual rock foundation embeds below its own surface 781/204
+PASS Individual rock foundation embeds below its own surface 781/255
+PASS Individual rock foundation embeds below its own surface 781/306
+PASS Individual rock foundation embeds below its own surface 781/357
+PASS Individual rock foundation embeds below its own surface 781/408
+PASS Individual rock foundation embeds below its own surface 781/459
+PASS Individual rock foundation embeds below its own surface 781/510
+PASS Individual rock foundation embeds below its own surface 781/561
+PASS Individual rock foundation embeds below its own surface 782/0
+PASS Individual rock foundation embeds below its own surface 782/51
+PASS Individual rock foundation embeds below its own surface 782/102
+PASS Individual rock foundation embeds below its own surface 782/153
+PASS Individual rock foundation embeds below its own surface 782/204
+PASS Individual rock foundation embeds below its own surface 782/255
+PASS Individual rock foundation embeds below its own surface 782/306
+PASS Individual rock foundation embeds below its own surface 782/357
+PASS Individual rock foundation embeds below its own surface 782/408
+PASS Individual rock foundation embeds below its own surface 782/459
+PASS Individual rock foundation embeds below its own surface 783/0
+PASS Individual rock foundation embeds below its own surface 783/51
+PASS Individual rock foundation embeds below its own surface 783/102
+PASS Individual rock foundation embeds below its own surface 783/153
+PASS Individual rock foundation embeds below its own surface 783/204
+PASS Individual rock foundation embeds below its own surface 783/255
+PASS Individual rock foundation embeds below its own surface 783/306
+PASS Individual rock foundation embeds below its own surface 783/357
+PASS Individual rock foundation embeds below its own surface 783/408
+PASS Individual rock foundation embeds below its own surface 783/459
+PASS Individual rock foundation embeds below its own surface 783/510
+PASS Individual rock foundation embeds below its own surface 783/561
+PASS Individual rock foundation embeds below its own surface 783/612
+PASS Individual rock foundation embeds below its own surface 783/663
+PASS Individual rock foundation embeds below its own surface 783/714
+PASS Individual rock foundation embeds below its own surface 783/765
+PASS Individual rock foundation embeds below its own surface 783/816
+PASS Individual rock foundation embeds below its own surface 783/867
+PASS Individual rock foundation embeds below its own surface 783/918
+PASS Individual rock foundation embeds below its own surface 783/969
+PASS Individual rock foundation embeds below its own surface 788/0
+PASS Individual rock foundation embeds below its own surface 788/51
+PASS Individual rock foundation embeds below its own surface 788/102
+PASS Individual rock foundation embeds below its own surface 788/153
+PASS Individual rock foundation embeds below its own surface 788/204
+PASS Individual rock foundation embeds below its own surface 788/255
+PASS Individual rock foundation embeds below its own surface 788/306
+PASS Individual rock foundation embeds below its own surface 789/0
+PASS Individual rock foundation embeds below its own surface 789/51
+PASS Individual rock foundation embeds below its own surface 789/102
+PASS Individual rock foundation embeds below its own surface 789/153
+PASS Individual rock foundation embeds below its own surface 789/204
+PASS Individual rock foundation embeds below its own surface 789/255
+PASS Individual rock foundation embeds below its own surface 792/0
+PASS Individual rock foundation embeds below its own surface 792/51
+PASS Individual rock foundation embeds below its own surface 792/102
+PASS Individual rock foundation embeds below its own surface 792/153
+PASS Individual rock foundation embeds below its own surface 792/204
+PASS Individual rock foundation embeds below its own surface 792/255
+PASS Individual rock foundation embeds below its own surface 792/306
+PASS Individual rock foundation embeds below its own surface 792/357
+PASS Individual rock foundation embeds below its own surface 792/408
+PASS Individual rock foundation embeds below its own surface 792/459
+PASS Individual rock foundation embeds below its own surface 792/510
+PASS Individual rock foundation embeds below its own surface 793/0
+PASS Individual rock foundation embeds below its own surface 793/51
+PASS Individual rock foundation embeds below its own surface 793/102
+PASS Individual rock foundation embeds below its own surface 793/153
+PASS Individual rock foundation embeds below its own surface 793/204
+PASS Individual rock foundation embeds below its own surface 793/255
+PASS Individual rock foundation embeds below its own surface 793/306
+PASS Individual rock foundation embeds below its own surface 793/357
+PASS Individual rock foundation embeds below its own surface 793/408
+PASS Individual rock foundation embeds below its own surface 793/459
+PASS Individual rock foundation embeds below its own surface 793/510
+PASS Individual rock foundation embeds below its own surface 793/561
+PASS Individual rock foundation embeds below its own surface 793/612
+PASS Individual rock foundation embeds below its own surface 793/663
+PASS Individual rock foundation embeds below its own surface 793/714
+PASS Individual rock foundation embeds below its own surface 793/765
+PASS Individual rock foundation embeds below its own surface 793/816
+PASS Individual rock foundation embeds below its own surface 793/918
+PASS Individual rock foundation embeds below its own surface 793/969
+PASS Individual rock foundation embeds below its own surface 793/1020
+PASS Individual rock foundation embeds below its own surface 793/1071
+PASS Individual rock foundation embeds below its own surface 793/1122
+PASS Individual rock foundation embeds below its own surface 793/1173
+PASS Individual rock foundation embeds below its own surface 793/1224
+PASS Individual rock foundation embeds below its own surface 793/1275
+PASS Individual rock foundation embeds below its own surface 793/1326
+PASS Individual rock foundation embeds below its own surface 793/1377
+PASS Actual source stone census includes landscape and river rocks: 121 / 56
+PASS Bounded terrain relief 0
+PASS Bounded terrain relief 1
+PASS Bounded terrain relief 2
+PASS Bounded terrain relief 3
+PASS Bounded terrain relief 4
+PASS Bounded terrain relief 5
+PASS Bounded terrain relief 6
+PASS Bounded terrain relief 7
+PASS Bounded terrain relief 8
+PASS Bounded terrain relief 9
+PASS Bounded terrain relief 10
+PASS Bounded terrain relief 11
+PASS Bounded terrain relief 12
+PASS Bounded terrain relief 13
+PASS Bounded terrain relief 14
+PASS Bounded terrain relief 15
+PASS Bounded terrain relief 16
+PASS Bounded terrain relief 17
+PASS Bounded terrain relief 18
+PASS Bounded terrain relief 19
+PASS Bounded terrain relief 20
+PASS Bounded terrain relief 21
+PASS Bounded terrain relief 22
+PASS Bounded terrain relief 23
+PASS Bounded terrain relief 24
+PASS Bounded terrain relief 25
+PASS Bounded terrain relief 26
+PASS Bounded terrain relief 27
+PASS Bounded terrain relief 28
+PASS Bounded terrain relief 29
+PASS Bounded terrain relief 30
+PASS Bounded terrain relief 31
+PASS Bounded terrain relief 32
+PASS Bounded terrain relief 33
+PASS Bounded terrain relief 34
+PASS Bounded terrain relief 35
+PASS Bounded terrain relief 36
+PASS Bounded terrain relief 37
+PASS Bounded terrain relief 38
+PASS Bounded terrain relief 39
+PASS Bounded terrain relief 40
+PASS Bounded terrain relief 41
+PASS Bounded terrain relief 42
+PASS Bounded terrain relief 43
+PASS Bounded terrain relief 44
+PASS Bounded terrain relief 45
+PASS Bounded terrain relief 46
+PASS Bounded terrain relief 47
+PASS Bounded terrain relief 48
+PASS Bounded terrain relief 49
+PASS Bounded terrain relief 50
+PASS Bounded terrain relief 51
+PASS Bounded terrain relief 52
+PASS Bounded terrain relief 53
+PASS Bounded terrain relief 54
+PASS Bounded terrain relief 55
+PASS Bounded terrain relief 56
+PASS Bounded terrain relief 57
+PASS Bounded terrain relief 58
+PASS Bounded terrain relief 59
+PASS Bounded terrain relief 60
+PASS Bounded terrain relief 61
+PASS Bounded terrain relief 62
+PASS Bounded terrain relief 63
+PASS Bounded terrain relief 64
+PASS Bounded terrain relief 65
+PASS Bounded terrain relief 66
+PASS Bounded terrain relief 67
+PASS Bounded terrain relief 68
+PASS Bounded terrain relief 69
+PASS Bounded terrain relief 70
+PASS Bounded terrain relief 71
+PASS Bounded terrain relief 72
+PASS Bounded terrain relief 73
+PASS Bounded terrain relief 74
+PASS Bounded terrain relief 75
+PASS Bounded terrain relief 76
+PASS Bounded terrain relief 77
+PASS Bounded terrain relief 78
+PASS Bounded terrain relief 79
+PASS Bounded terrain relief 80
+PASS Bounded terrain relief 81
+PASS Bounded terrain relief 82
+PASS Bounded terrain relief 83
+PASS Bounded terrain relief 84
+PASS Bounded terrain relief 85
+PASS Bounded terrain relief 86
+PASS Bounded terrain relief 87
+PASS Bounded terrain relief 88
+PASS Bounded terrain relief 89
+PASS Bounded terrain relief 90
+PASS Bounded terrain relief 91
+PASS Bounded terrain relief 92
+PASS Bounded terrain relief 93
+PASS Bounded terrain relief 94
+PASS Bounded terrain relief 95
+PASS Bounded terrain relief 96
+PASS Bounded terrain relief 97
+PASS Bounded terrain relief 98
+PASS Bounded terrain relief 99
+PASS Bounded terrain relief 100
+PASS Bounded terrain relief 101
+PASS Bounded terrain relief 102
+PASS Bounded terrain relief 103
+PASS Bounded terrain relief 104
+PASS Bounded terrain relief 105
+PASS Bounded terrain relief 106
+PASS Bounded terrain relief 107
+PASS Bounded terrain relief 108
+PASS Bounded terrain relief 109
+PASS Bounded terrain relief 110
+PASS Bounded terrain relief 111
+PASS Bounded terrain relief 112
+PASS Bounded terrain relief 113
+PASS Bounded terrain relief 114
+PASS Bounded terrain relief 115
+PASS Bounded terrain relief 116
+PASS Bounded terrain relief 117
+PASS Bounded terrain relief 118
+PASS Bounded terrain relief 119
+PASS Bounded terrain relief 120
+PASS Bounded terrain relief 121
+PASS Bounded terrain relief 122
+PASS Bounded terrain relief 123
+PASS Bounded terrain relief 124
+PASS Bounded terrain relief 125
+PASS Bounded terrain relief 126
+PASS Bounded terrain relief 127
+PASS Bounded terrain relief 128
+PASS Bounded terrain relief 129
+PASS Bounded terrain relief 130
+PASS Bounded terrain relief 131
+PASS Bounded terrain relief 132
+PASS Bounded terrain relief 133
+PASS Bounded terrain relief 134
+PASS Bounded terrain relief 135
+PASS Bounded terrain relief 136
+PASS Bounded terrain relief 137
+PASS Bounded terrain relief 138
+PASS Bounded terrain relief 139
+PASS Bounded terrain relief 140
+PASS Bounded terrain relief 141
+PASS Bounded terrain relief 142
+PASS Bounded terrain relief 143
+PASS Bounded terrain relief 144
+PASS Bounded terrain relief 145
+PASS Bounded terrain relief 146
+PASS Bounded terrain relief 147
+PASS Bounded terrain relief 148
+PASS Bounded terrain relief 149
+PASS Bounded terrain relief 150
+PASS Bounded terrain relief 151
+PASS Bounded terrain relief 152
+PASS Bounded terrain relief 153
+PASS Bounded terrain relief 154
+PASS Bounded terrain relief 155
+PASS Bounded terrain relief 156
+PASS Bounded terrain relief 157
+PASS Bounded terrain relief 158
+PASS Bounded terrain relief 159
+PASS Bounded terrain relief 160
+PASS Bounded terrain relief 161
+PASS Bounded terrain relief 162
+PASS Bounded terrain relief 163
+PASS Bounded terrain relief 164
+PASS Bounded terrain relief 165
+PASS Bounded terrain relief 166
+PASS Bounded terrain relief 167
+PASS Bounded terrain relief 168
+PASS Bounded terrain relief 169
+PASS Bounded terrain relief 170
+PASS Bounded terrain relief 171
+PASS Bounded terrain relief 172
+PASS Bounded terrain relief 173
+PASS Bounded terrain relief 174
+PASS Bounded terrain relief 175
+PASS Bounded terrain relief 176
+PASS Bounded terrain relief 177
+PASS Bounded terrain relief 178
+PASS Bounded terrain relief 179
+PASS Bounded terrain relief 180
+PASS Bounded terrain relief 181
+PASS Bounded terrain relief 182
+PASS Bounded terrain relief 183
+PASS Bounded terrain relief 184
+PASS Bounded terrain relief 185
+PASS Bounded terrain relief 186
+PASS Bounded terrain relief 187
+PASS Bounded terrain relief 188
+PASS Bounded terrain relief 189
+PASS Bounded terrain relief 190
+PASS Bounded terrain relief 191
+PASS Bounded terrain relief 192
+PASS Bounded terrain relief 193
+PASS Bounded terrain relief 194
+PASS Bounded terrain relief 195
+PASS Bounded terrain relief 196
+PASS Bounded terrain relief 197
+PASS Bounded terrain relief 198
+PASS Bounded terrain relief 199
+PASS Bounded terrain relief 200
+PASS Bounded terrain relief 201
+PASS Bounded terrain relief 202
+PASS Bounded terrain relief 203
+PASS Bounded terrain relief 204
+PASS Bounded terrain relief 205
+PASS Bounded terrain relief 206
+PASS Bounded terrain relief 207
+PASS Bounded terrain relief 208
+PASS Bounded terrain relief 209
+PASS Bounded terrain relief 210
+PASS Bounded terrain relief 211
+PASS Bounded terrain relief 212
+PASS Bounded terrain relief 213
+PASS Bounded terrain relief 214
+PASS Bounded terrain relief 215
+PASS Bounded terrain relief 216
+PASS Bounded terrain relief 217
+PASS Bounded terrain relief 218
+PASS Bounded terrain relief 219
+PASS Bounded terrain relief 220
+PASS Bounded terrain relief 221
+PASS Bounded terrain relief 222
+PASS Bounded terrain relief 223
+PASS Bounded terrain relief 224
+PASS Bounded terrain relief 225
+PASS Bounded terrain relief 226
+PASS Bounded terrain relief 227
+PASS Bounded terrain relief 228
+PASS Bounded terrain relief 229
+PASS Bounded terrain relief 230
+PASS Bounded terrain relief 231
+PASS Bounded terrain relief 232
+PASS Bounded terrain relief 233
+PASS Bounded terrain relief 234
+PASS Bounded terrain relief 235
+PASS Bounded terrain relief 236
+PASS Bounded terrain relief 237
+PASS Bounded terrain relief 238
+PASS Bounded terrain relief 239
+PASS Bounded terrain relief 240
+PASS Bounded terrain relief 241
+PASS Bounded terrain relief 242
+PASS Bounded terrain relief 243
+PASS Bounded terrain relief 244
+PASS Bounded terrain relief 245
+PASS Bounded terrain relief 246
+PASS Bounded terrain relief 247
+PASS Bounded terrain relief 248
+PASS Bounded terrain relief 249
+PASS Bounded terrain relief 250
+PASS Bounded terrain relief 251
+PASS Bounded terrain relief 252
+PASS Bounded terrain relief 253
+PASS Bounded terrain relief 254
+PASS Bounded terrain relief 255
+PASS Bounded terrain relief 256
+PASS Bounded terrain relief 257
+PASS Bounded terrain relief 258
+PASS Bounded terrain relief 259
+PASS Bounded terrain relief 260
+PASS Bounded terrain relief 261
+PASS Bounded terrain relief 262
+PASS Bounded terrain relief 263
+PASS Bounded terrain relief 264
+PASS Bounded terrain relief 265
+PASS Bounded terrain relief 266
+PASS Bounded terrain relief 267
+PASS Bounded terrain relief 268
+PASS Bounded terrain relief 269
+PASS Bounded terrain relief 270
+PASS Bounded terrain relief 271
+PASS Bounded terrain relief 272
+PASS Bounded terrain relief 273
+PASS Bounded terrain relief 274
+PASS Bounded terrain relief 275
+PASS Bounded terrain relief 276
+PASS Bounded terrain relief 277
+PASS Bounded terrain relief 278
+PASS Bounded terrain relief 279
+PASS Bounded terrain relief 280
+PASS Bounded terrain relief 281
+PASS Bounded terrain relief 282
+PASS Bounded terrain relief 283
+PASS Bounded terrain relief 284
+PASS Bounded terrain relief 285
+PASS Bounded terrain relief 286
+PASS Bounded terrain relief 287
+PASS Bounded terrain relief 288
+PASS Bounded terrain relief 289
+PASS Bounded terrain relief 290
+PASS Bounded terrain relief 291
+PASS Bounded terrain relief 292
+PASS Bounded terrain relief 293
+PASS Bounded terrain relief 294
+PASS Bounded terrain relief 295
+PASS Bounded terrain relief 296
+PASS Bounded terrain relief 297
+PASS Bounded terrain relief 298
+PASS Bounded terrain relief 299
+PASS Bounded terrain relief 300
+PASS Bounded terrain relief 301
+PASS Bounded terrain relief 302
+PASS Bounded terrain relief 303
+PASS Bounded terrain relief 304
+PASS Bounded terrain relief 305
+PASS Bounded terrain relief 306
+PASS Bounded terrain relief 307
+PASS Bounded terrain relief 308
+PASS Bounded terrain relief 309
+PASS Bounded terrain relief 310
+PASS Bounded terrain relief 311
+PASS Bounded terrain relief 312
+PASS Bounded terrain relief 313
+PASS Bounded terrain relief 314
+PASS Bounded terrain relief 315
+PASS Bounded terrain relief 316
+PASS Bounded terrain relief 317
+PASS Bounded terrain relief 318
+PASS Bounded terrain relief 319
+PASS Bounded terrain relief 320
+PASS Bounded terrain relief 321
+PASS Bounded terrain relief 322
+PASS Bounded terrain relief 323
+PASS Bounded terrain relief 324
+PASS Bounded terrain relief 325
+PASS Bounded terrain relief 326
+PASS Bounded terrain relief 327
+PASS Bounded terrain relief 328
+PASS Bounded terrain relief 329
+PASS Bounded terrain relief 330
+PASS Bounded terrain relief 331
+PASS Bounded terrain relief 332
+PASS Bounded terrain relief 333
+PASS Bounded terrain relief 334
+PASS Bounded terrain relief 335
+PASS Bounded terrain relief 336
+PASS Bounded terrain relief 337
+PASS Bounded terrain relief 338
+PASS Bounded terrain relief 339
+PASS Bounded terrain relief 340
+PASS Bounded terrain relief 341
+PASS Bounded terrain relief 342
+PASS Bounded terrain relief 343
+PASS Bounded terrain relief 344
+PASS Bounded terrain relief 345
+PASS Bounded terrain relief 346
+PASS Bounded terrain relief 347
+PASS Bounded terrain relief 348
+PASS Bounded terrain relief 349
+PASS Bounded terrain relief 350
+PASS Bounded terrain relief 351
+PASS Bounded terrain relief 352
+PASS Bounded terrain relief 353
+PASS Bounded terrain relief 354
+PASS Bounded terrain relief 355
+PASS Bounded terrain relief 356
+PASS Bounded terrain relief 357
+PASS Bounded terrain relief 358
+PASS Bounded terrain relief 359
+PASS Bounded terrain relief 360
+PASS Bounded terrain relief 361
+PASS Bounded terrain relief 362
+PASS Bounded terrain relief 363
+PASS Bounded terrain relief 364
+PASS Bounded terrain relief 365
+PASS Bounded terrain relief 366
+PASS Bounded terrain relief 367
+PASS Bounded terrain relief 368
+PASS Bounded terrain relief 369
+PASS Bounded terrain relief 370
+PASS Bounded terrain relief 371
+PASS Bounded terrain relief 372
+PASS Bounded terrain relief 373
+PASS Bounded terrain relief 374
+PASS Bounded terrain relief 375
+PASS Bounded terrain relief 376
+PASS Bounded terrain relief 377
+PASS Bounded terrain relief 378
+PASS Bounded terrain relief 379
+PASS Bounded terrain relief 380
+PASS Bounded terrain relief 381
+PASS Bounded terrain relief 382
+PASS Bounded terrain relief 383
+PASS Bounded terrain relief 384
+PASS Bounded terrain relief 385
+PASS Bounded terrain relief 386
+PASS Bounded terrain relief 387
+PASS Bounded terrain relief 388
+PASS Bounded terrain relief 389
+PASS Bounded terrain relief 390
+PASS Bounded terrain relief 391
+PASS Bounded terrain relief 392
+PASS Bounded terrain relief 393
+PASS Bounded terrain relief 394
+PASS Bounded terrain relief 395
+PASS Bounded terrain relief 396
+PASS Bounded terrain relief 397
+PASS Bounded terrain relief 398
+PASS Bounded terrain relief 399
+PASS Home and central route relief preserved
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 68
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 93
+PASS Finite grounded geometry 94
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 5
+PASS Finite grounded geometry 23
+PASS Finite grounded geometry 24
+PASS Finite grounded geometry 27
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 120
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 59
+PASS Finite grounded geometry 60
+PASS Finite grounded geometry 61
+PASS Finite grounded geometry 64
+PASS Finite grounded geometry 144
+PASS Finite grounded geometry 145
+PASS Finite grounded geometry 146
+PASS Finite grounded geometry 147
+PASS Finite grounded geometry 148
+PASS Finite grounded geometry 153
+PASS Finite grounded geometry 154
+PASS Finite grounded geometry 157
+PASS Finite grounded geometry 158
+PASS Finite grounded geometry 173
+PASS Finite grounded geometry 174
+PASS Actual V3 floating decoration components corrected: 193
+PASS Physical sampler matches actual exported terrain triangles, max error 9.804964E-06
+PASS Rock foundation distinguishes riverbed from bridge WALKING surface
+PASS Pond water sits inside a real excavated basin
+PASS Replacement stones are fully closed with outward winding
+PASS 122 stones, 36600 actual underside support samples and 360 pond-rim samples

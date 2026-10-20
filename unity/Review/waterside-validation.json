@@ -1,0 +1,10 @@
+{
+  "stones": 122,
+  "base_triangle_support_samples": 36600,
+  "terrain_triangle_samples": 2560,
+  "maximum_terrain_error": 9.804964E-06,
+  "pond_rim_samples": 360,
+  "closed_stone_geometry": true,
+  "blender_diagnostic": "Geometry preview only, not Unity",
+  "unity_editor": "NOT RUN"
+}

@@ -22,14 +22,17 @@ namespace Sunward.Editor
 
         public static float Bottom(WorldData world, Bounds b)
         {
-            float bed = Valley.SurfaceHeight(world.terrain, b.center);
-            for (int corner = 0; corner < 4; corner++)
-            {
-                var q = new Vector3(b.center.x + (corner % 2 == 0 ? -.34f : .34f) * b.size.x, 0, b.center.z + (corner < 2 ? -.34f : .34f) * b.size.z);
-                bed = Mathf.Min(bed, Valley.SurfaceHeight(world.terrain, q));
-            }
+            float bed = float.PositiveInfinity;
+            // Sample the whole footprint, on the physical terrain triangles.
+            // A low point below a bridge's WALKING deck is not ground contact.
+            for (int z = 0; z <= 8; z++)
+                for (int x = 0; x <= 8; x++)
+                {
+                    var q = new Vector3(b.min.x + b.size.x * x / 8, 0, b.min.z + b.size.z * z / 8);
+                    bed = Mathf.Min(bed, Valley.TerrainHeight(world.terrain, q));
+                }
 
-            return bed - Mathf.Min(.22f, b.size.y * .18f);
+            return bed - Mathf.Min(.22f, b.size.y * .25f);
         }
     }
 }

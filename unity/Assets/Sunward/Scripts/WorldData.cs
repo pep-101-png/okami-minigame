@@ -66,7 +66,7 @@ namespace Sunward
     [Serializable]
     public class TerrainData
     {
-        public bool visualRelief;
+        public bool visualRelief, gardenPondBasin, exactSurface;
         public float minX, minZ, step;
         public int nx, nz;
         public float[] heights;

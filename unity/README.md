@@ -1,6 +1,6 @@
 # Sunward — Amaterasu Unity port
 
-**Current visual remake:** read [Review/VISUAL-REMAKE.md](Review/VISUAL-REMAKE.md). Close Unity Editor (Hub can stay open), extract the update into your existing project root, reopen **Windflower**, then choose **Sunward → Apply Visual Remake to Windflower** once. This dedicated command changes world artwork without reprocessing Amaterasu's animation clips. **Unity compilation, shader rendering, physics and gameplay remain unverified in this cloud.**
+**Current targeted correction:** [Review/WATERSIDE-REPAIR.md](Review/WATERSIDE-REPAIR.md). Back up the project, close Unity Editor (Hub can stay open), extract **Sunward-Unity-Waterside-Fix.zip** into the existing project root and reopen **Windflower**. The rocks/pond/spear/market-tree correction applies and saves automatically once; **no Sunward update-menu step is required**. The broader visual-remake report remains available at [Review/VISUAL-REMAKE.md](Review/VISUAL-REMAKE.md). **Unity compilation/rendering/Play Mode remain unverified in this cloud.**
 
 **Target: Unity 6.6 (6000.6.6f1), Windows. Separate project and branch.**
 

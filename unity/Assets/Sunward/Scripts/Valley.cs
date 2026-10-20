@@ -5,13 +5,15 @@ namespace Sunward
     public sealed class Valley : MonoBehaviour
     {
         public TextAsset source;
-        public bool visualRelief;
+        public bool visualRelief, gardenPondBasin, exactTerrainSurface;
         public WorldData Data { get; private set; }
 
         void Awake()
         {
             Data = JsonUtility.FromJson<ValleyData>(source.text).world;
             Data.terrain.visualRelief = visualRelief;
+            Data.terrain.gardenPondBasin = gardenPondBasin;
+            Data.terrain.exactSurface = exactTerrainSurface;
         }
 
         public static Vector3 Point(float x, float y, float threeZ) => new Vector3(x, y, -threeZ);
@@ -79,10 +81,34 @@ namespace Sunward
                 return BridgeHeight((p.x + 27.8f) / 9.6f);
             if (Mathf.Abs(p.x + 34) < 5.2f && Mathf.Abs(z - 16) < 4.25f)
                 return .105f;
-            var t = terrain;
+            return TerrainHeight(terrain, p);
+        }
+
+        // Physical ground only: never return the bridge deck or home floor.
+        public static float TerrainHeight(TerrainData t, Vector3 p)
+        {
+            float z = -p.z;
             float xg = Mathf.Clamp((p.x - t.minX) / t.step, 0, t.nx - 1.001f), zg = Mathf.Clamp((z - t.minZ) / t.step, 0, t.nz - 1.001f);
             int x = (int)xg, j = (int)zg;
-            return Mathf.Lerp(Mathf.Lerp(t.heights[j * t.nx + x], t.heights[j * t.nx + x + 1], xg - x), Mathf.Lerp(t.heights[(j + 1) * t.nx + x], t.heights[(j + 1) * t.nx + x + 1], xg - x), zg - j) + (t.visualRelief ? TerrainRelief.Offset(p) : 0);
+            float u = xg - x, v = zg - j;
+            if (!t.exactSurface)
+                return Mathf.Lerp(Mathf.Lerp(t.heights[j * t.nx + x], t.heights[j * t.nx + x + 1], u), Mathf.Lerp(t.heights[(j + 1) * t.nx + x], t.heights[(j + 1) * t.nx + x + 1], u), v) + (t.visualRelief ? TerrainRelief.Offset(p) : 0);
+            float H(int dx, int dz)
+            {
+                var q = new Vector3(t.minX + (x + dx) * t.step, t.heights[(j + dz) * t.nx + x + dx], -(t.minZ + (j + dz) * t.step));
+                return RenderHeight(t, q);
+            }
+
+            float h00 = H(0, 0), h10 = H(1, 0), h01 = H(0, 1), h11 = H(1, 1);
+            // The actual exported terrain uses the 10--01 diagonal, not a
+            // bilinear patch. This exactly matches its two rendered triangles.
+            return u + v <= 1 ? h00 + (h10 - h00) * u + (h01 - h00) * v : h11 + (h01 - h11) * (1 - u) + (h10 - h11) * (1 - v);
+        }
+
+        public static float RenderHeight(TerrainData t, Vector3 original)
+        {
+            float h = original.y + (t.visualRelief ? TerrainRelief.Offset(original) : 0);
+            return t.gardenPondBasin ? GardenPond.Shape(original, h) : h;
         }
     }
 }
