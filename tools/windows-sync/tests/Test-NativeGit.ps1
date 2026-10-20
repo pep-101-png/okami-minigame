@@ -44,10 +44,22 @@ try {
         }, $true)
         if ($bareGit) { throw "$name contains an ambiguous Git invocation." }
     }
+    function Report([string]$message) { Write-Host $message }
+    $GitTimeoutSeconds = 10; $NetworkTimeoutSeconds = 10; $LfsTimeoutSeconds = 10; $HeartbeatSeconds = 1
+    foreach ($name in @('ConvertTo-NativeArgument','Stop-GitProcess')) {
+        $dependency = $syncAst.Find({ param($node)
+            $node -is [Management.Automation.Language.FunctionDefinitionAst] -and $node.Name -eq $name
+        }, $true)
+        . ([scriptblock]::Create($dependency.Extent.Text))
+    }
     . ([scriptblock]::Create($helper.Extent.Text))
     if ((Invoke-SunwardGit @('--version')) -notmatch '^git version ') { throw 'Helper did not invoke native Git.' }
     $value = Invoke-SunwardGit @('-c','sunward.testValue=argument with spaces','config','--get','sunward.testValue')
     if ($value -cne 'argument with spaces') { throw 'Argument boundaries were not preserved.' }
+    foreach ($expected in @('', 'contains "quotes"', 'ends with space \', 'café')) {
+        $actual = Invoke-SunwardGit @('-c',("sunward.testValue=" + $expected),'config','--get','sunward.testValue')
+        if ($actual -cne $expected) { throw "Native argument quoting changed the value: $expected" }
+    }
     $failedSafely = $false
     try { Invoke-SunwardGit @('__sunward_invalid_command__') | Out-Null }
     catch {

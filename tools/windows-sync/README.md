@@ -4,8 +4,8 @@ Target repository root: `C:\Users\giuse\Documents\okami-minigame`
 Unity project: `Sunward-Unity`; remote: `pep-101-png/okami-minigame`; branch: `sunward-minigame`.
 
 Nothing in this change installs, enables, starts, commits, or pushes this service.
-The development checkout is on `work`, not `main`; do not run the Windows service
-against that branch. Scripts refuse every branch except `sunward-minigame`.
+Review fixes are published on a separate branch; do not run the Windows service
+against a review branch. Scripts refuse every branch except `sunward-minigame`.
 
 ## Policy and limits
 
@@ -217,25 +217,100 @@ Any new pause should be inspected rather than repeatedly clearing the marker.
 If a task was previously installed, its copied runner must also be updated through
 reviewed reinstall steps; changing the repository copy alone does not update it.
 
+## Watch-loop progress and deadlines
+
+`-Watch` is meant to remain running. The previous implementation logged the start
+of its quiet period, then ran the second file scan, fetch, and status synchronously
+without per-operation logs or deadlines. That left a stalled Git/LFS/credential
+operation indistinguishable from idle observation. The single reported log line
+cannot establish which operation stalled on the Windows machine.
+
+The runner now logs `CYCLE`, `CHECK`, `SCAN`, `OBSERVE`, `COMPARE`, `ASSET CHECK`,
+`GIT`, `POLL` and `PAUSED` stages. Each Git command logs its start, timeout, elapsed
+time and exit code; waits produce a heartbeat every ten seconds. Startup identifies
+`runner=watchdog-v1`, its script path, PID, PowerShell version, and deadlines.
+`Status.ps1 -LogOnly` reads task state and recent logs without running Git status.
+
+Git runs in a separate native process with stdin closed and interactive credential
+prompts disabled. Both stdout and stderr are drained asynchronously, preventing
+full-pipe deadlocks; output-drain completion is subject to the same deadline as the
+process. Only stdout is returned to decision logic, so successful Git warnings on
+stderr cannot corrupt branch names, counts or file listings. Git auto-maintenance
+is disabled per invocation to avoid detached maintenance inheriting output pipes.
+
+Defaults (seconds; configurable runner parameters):
+
+| Parameter | Default | Scope |
+| --- | ---: | --- |
+| `GitTimeoutSeconds` | 120 | Local Git checks, status, add, commit and hooks |
+| `NetworkTimeoutSeconds` | 900 | Fetch, ordinary push and fast-forward merge |
+| `LfsTimeoutSeconds` | 1800 | Explicit LFS pull/push/fetch |
+| `ScanTimeoutSeconds` | 120 | File metadata and large-file rule scan loops |
+| `HeartbeatSeconds` | 10 | Git waits, observation, scans and polling |
+
+LFS filters invoked by status/add/commit share that enclosing command's timeout;
+raise it deliberately if a large first normalization requires longer. Filesystem
+scan budgets are checked between local filesystem calls; a kernel-level stalled
+local drive is outside PowerShell's ability to interrupt a single metadata call.
+Timeouts are wall-clock limits, not inactivity limits. Increase transfer limits
+explicitly for slow links rather than repeatedly restarting an incomplete sync.
+
+On a Git timeout, the runner stops only that invocation's process tree (Windows
+`taskkill /PID ... /T /F`), writes a detailed pause/error and exits. It does not
+reset, unstage, remove lock files, or retry writes. A timed-out add/commit/merge/hook
+may leave prepared work or an incomplete operation. A timed-out push may already
+have succeeded remotely: inspect local status, processes, locks, and remote HEAD
+before clearing the pause. Do not remove locks until confirming no writer remains.
+If termination fails, the log explicitly requires manual process-tree inspection.
+Operator Stop requests interrupt observation/polling promptly; an active Git write
+finishes or reaches its command deadline before the runner exits at a safe boundary.
+
+### Update an already installed runner while leaving the task disabled
+
+Review/apply this branch to your checkout first. Keep Unity closed and confirm
+`SunwardGitSync` is **Disabled**, with no old runner/Git operation still active.
+The scheduled task executes a copied script: updating the repository alone does
+not update that installed copy. After review, copy just the new runner:
+
+```powershell
+Get-ScheduledTask -TaskName SunwardGitSync | Select-Object TaskName,State
+Copy-Item .\tools\windows-sync\Sync.ps1 "$env:LOCALAPPDATA\SunwardGitSync\Sync.ps1"
+.\tools\windows-sync\Status.ps1 -LogOnly
+```
+
+These commands do not enable or start the task. Read any pause file, resolve its
+cause, and only then remove it. Foreground preview remains the default. For a later
+explicit, reviewed foreground applied diagnostic, `-Apply -Watch -MaxCycles 3`
+runs three cycles and exits; `MaxCycles=0` (default) monitors continuously. Production
+quiet/poll minimums remain enforced. No task is installed, enabled or started by
+running these diagnostic modes. Leave the task disabled until Windows verification.
+
 ## Validation
 
-Run the dependency-free regression test on Windows PowerShell 5.1 or PowerShell 7:
+Run the dependency-free regression tests on Windows PowerShell 5.1 or PowerShell 7:
 
 ```powershell
 .\tools\windows-sync\tests\Test-NativeGit.ps1
+.\tools\windows-sync\tests\Test-Monitoring.ps1
 ```
 
-It parses all PowerShell scripts and loads only the actual helper and executable
-resolution AST fragments. It never starts sync, installs a task, or accesses GitHub.
-It uses an empty temporary directory (including spaces in its path), shadows Git
-with functions/alias, checks native execution and argument boundaries, and checks
-that native failures still throw and preserve the error preference.
+`Test-NativeGit.ps1` parses all scripts and exercises only the native process helper
+and executable resolution fragments. It tests case-insensitive function/alias
+collisions, spaces/quotes/trailing backslashes/Unicode arguments and failure handling.
 
-The test passed on PowerShell 7.4.6 on Linux. Ignore/LFS attribute matching was
-checked during initial implementation. Windows PowerShell 5.1, Task Scheduler and
-Unity integration remain untested in this environment; the Windows first-run and
-round-trip procedure above is required before enabling. The recursion fix leaves
-branch checks, preview default, LFS, quiet-time/editor checks, mutex, fast-forward
-only downloads, staged/conflict guards, pause handling, commit intervals, and
-ordinary non-force pushes in place. This setup does not provide an atomic editor
-lock; always keep Unity closed during applied cycles.
+`Test-Monitoring.ps1` loads the actual production function definitions and uses
+throwaway local repositories/remotes, including paths with spaces. Only the remote
+identity and Unity-busy signal are substituted; Git/LFS commands execute locally.
+Quiet/poll delays are shortened in that isolated harness, not in production. Tests
+cover three consecutive cycles per scenario, no-op stability, one commit/upload per
+save, fast-forward download, preview, Unity busy waits, commit cooldown, dirty +
+remote-ahead, existing staging, divergence, wrong branch, scan deadlines, simultaneous
+stdout/stderr pipe pressure, a real hung Git child, timeout pause propagation,
+observation heartbeats, and operator stop handling. No GitHub calls, scheduled-task
+operations or real project files are involved.
+
+Both tests are run on PowerShell 7.4.6 on Linux. Windows PowerShell 5.1, Task Scheduler
+and Windows process-tree termination remain untested here; run these tests and the
+Windows first-run verification before enabling. All previous branch, LFS, quiet-time,
+mutex, conflict/staging, non-force-push and fast-forward protections remain. The
+editor checks are not an atomic lock; keep Unity closed during applied cycles.
