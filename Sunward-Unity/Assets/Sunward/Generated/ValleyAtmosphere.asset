@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: ValleyAtmosphere
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.VolumeProfile
+  components:
+  - {fileID: 11400000, guid: 785b4246e68d17847939b8e4d7f64e2b, type: 2}
+  - {fileID: 11400000, guid: 80d6b5555d10e8144b5de27b87956329, type: 2}
+  - {fileID: 11400000, guid: 0f99d2c4b8a3b51449fa411e73a8d8dc, type: 2}
+  - {fileID: 11400000, guid: 02913112923b6b344a47d864be5a6651, type: 2}

@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71f80a46a4e1584c935f6f02b1a27a01, type: 3}
+  m_Name: spear
+  m_EditorClassIdentifier: Assembly-CSharp::Sunward.WeaponDefinition
+  id: spear
+  title: Reed spear
+  visual: {fileID: 5878536848524024932, guid: 5e0bcf1545340384fa1127977a9ac76c, type: 3}
+  light:
+  - clip: Thrust
+    duration: 0.4
+    damage: 1
+    range: 3.3
+    arc: 0.8
+    start: 0.32
+    end: 0.62
+    lunge: 3.2
+    stagger: 0.45
+  - clip: Sweep
+    duration: 0.48
+    damage: 2
+    range: 3.15
+    arc: 0.32
+    start: 0.32
+    end: 0.62
+    lunge: 1.3
+    stagger: 0.45
+  - clip: Finish
+    duration: 0.66
+    damage: 3
+    range: 3.8
+    arc: 0.82
+    start: 0.32
+    end: 0.62
+    lunge: 8.5
+    stagger: 0.45
+  heavy:
+  - clip: HeavyArc
+    duration: 0.66
+    damage: 3.3
+    range: 3.5
+    arc: 0.2
+    start: 0.32
+    end: 0.62
+    lunge: 2
+    stagger: 0.45
+  - clip: HeavyReturn
+    duration: 0.72
+    damage: 4
+    range: 3.8
+    arc: 0.2
+    start: 0.32
+    end: 0.62
+    lunge: 2
+    stagger: 0.45
+  charged:
+    clip: ChargedThrust
+    duration: 0.65
+    damage: 4.5
+    range: 4
+    arc: 0.8
+    start: 0.32
+    end: 0.62
+    lunge: 5
+    stagger: 0.45
+  chargedHeavy:
+    clip: ChargedHeavy
+    duration: 0.9
+    damage: 6
+    range: 4
+    arc: 0.1
+    start: 0.32
+    end: 0.62
+    lunge: 4
+    stagger: 0.45
+  air:
+    clip: AirStrike
+    duration: 0.72
+    damage: 4.5
+    range: 3.8
+    arc: -1
+    start: 0.32
+    end: 0.62
+    lunge: 1
+    stagger: 0.45

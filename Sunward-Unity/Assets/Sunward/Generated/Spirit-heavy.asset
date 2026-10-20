@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897d2eeccd185c67a38d34fe8d6caeaf, type: 3}
+  m_Name: Spirit-heavy
+  m_EditorClassIdentifier: Assembly-CSharp::Sunward.EnemyDefinition
+  id: heavy
+  title: Stonejaw
+  visual: {fileID: 4544599440953741393, guid: 3018abfbb40edf744bcab2ece8676e2a, type: 3}
+  hp: 27
+  damage: 23
+  speed: 1.4
+  scale: 1.65
+  windup: 1.08
+  reward: 18
+  xp: 17

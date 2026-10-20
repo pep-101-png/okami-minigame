@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897d2eeccd185c67a38d34fe8d6caeaf, type: 3}
+  m_Name: Spirit-elite
+  m_EditorClassIdentifier: Assembly-CSharp::Sunward.EnemyDefinition
+  id: elite
+  title: Crimson oathkeeper
+  visual: {fileID: 3653945641635979712, guid: 8aa07e264e6f20843b7a8a7f11e83757, type: 3}
+  hp: 32
+  damage: 21
+  speed: 2.8
+  scale: 1.25
+  windup: 0.48
+  reward: 23
+  xp: 23

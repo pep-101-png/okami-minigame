@@ -1,0 +1,3 @@
+Original procedural surfaces authored for Sunward. No third-party texture assets.
+Color: sRGB; Normal: tangent-space RGB; Mask: linear R=metallic(0), G=AO, B=0, A=smoothness.
+All seven sets are tileable 1024x1024 PNGs. They are detailed procedural materials, not photographic scans.
