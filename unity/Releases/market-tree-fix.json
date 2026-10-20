@@ -1,0 +1,19 @@
+{
+  "file": "Sunward-Unity-Market-Tree-Fix.zip",
+  "bytes": 20469,
+  "sha256": "8d3941e5cea55e113de1d2f37fcf8df8dfbf1b321fe2dee263013512ed2f2d48",
+  "files": [
+    "Assets/Editor/MarketTreeCleanup.cs",
+    "Assets/Editor/VisualRemakeBuilder.cs",
+    "Assets/Sunward/Scripts/MarketTreeRules.cs",
+    "Assets/Sunward/Scripts/EnvironmentReviewState.cs",
+    "Assets/Editor/MarketTreeCleanup.cs.meta",
+    "Assets/Editor/VisualRemakeBuilder.cs.meta",
+    "Assets/Sunward/Scripts/MarketTreeRules.cs.meta",
+    "Assets/Sunward/Scripts/EnvironmentReviewState.cs.meta",
+    "Review/MARKET-TREE-FIX.md",
+    "Review/market-tree-portable-tests.txt"
+  ],
+  "target": "Scene-root Cherry_A / Cherry_A(Clone) / Cherry_A_Mesh / Cherry_A_Mesh_MeshPart0 and MeshPart1",
+  "native_unity_tested": false
+}

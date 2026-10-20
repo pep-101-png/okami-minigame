@@ -108,6 +108,16 @@ namespace Sunward.Editor
             Directory.CreateDirectory(Folder);
             AssetDatabase.Refresh();
             library = JsonUtility.FromJson<Library>(File.ReadAllText("Review/remake-library.json"));
+            // The dense cherry canopy can exceed a 16-bit vertex buffer after
+            // normal/UV splitting. Keep it as one imported mesh so the verified
+            // material-section catalogue is valid. Never change Amaterasu's importer.
+            var modelImporter = AssetImporter.GetAtPath(Model) as ModelImporter;
+            if (modelImporter && modelImporter.indexFormat != ModelImporterIndexFormat.UInt32)
+            {
+                modelImporter.indexFormat = ModelImporterIndexFormat.UInt32;
+                modelImporter.SaveAndReimport();
+            }
+
             model = AssetDatabase.LoadAssetAtPath<GameObject>(Model);
             if (!model)
                 throw new InvalidDataException("Replacement FBX is missing or has not imported. Wait for imports to finish.");
@@ -155,33 +165,42 @@ namespace Sunward.Editor
                 if (!source)
                     throw new InvalidDataException("FBX asset not found: " + part.name);
                 var temp = new GameObject(part.name);
-                var copy = UnityEngine.Object.Instantiate(source.gameObject, temp.transform, false);
-                copy.transform.localPosition = Vector3.zero;
-                // Preserve imported ancestor axis/unit conversion, then normalize
-                // against the authoring guide, whose length is exactly one metre.
-                copy.transform.localRotation = source.rotation;
-                copy.transform.localScale = source.lossyScale;
-                var front = copy.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == part.front);
-                if (!front)
-                    throw new InvalidDataException("Missing facing datum: " + part.front);
-                Vector3 forward = temp.transform.InverseTransformPoint(front.position);
-                forward.y = 0;
-                if (forward.magnitude < .000001f || !MeshSafety.Finite(forward))
-                    throw new InvalidDataException("Invalid FBX facing datum.");
-                copy.transform.localRotation = Quaternion.FromToRotation(forward.normalized, Vector3.forward) * copy.transform.localRotation;
-                copy.transform.localScale /= forward.magnitude;
-                var renderers = temp.GetComponentsInChildren<MeshRenderer>(true);
-                if (renderers.Length != 1 || renderers[0].GetComponent<MeshFilter>().sharedMesh.subMeshCount != part.materials.Length)
-                    throw new InvalidDataException("Material section order/count changed: " + part.name);
-                float height = renderers[0].bounds.size.y;
-                if (part.name.StartsWith("Resident_") && (height < 1.8f || height > 2.4f) || part.name.StartsWith("House_") && (height < 3 || height > 6))
-                    throw new InvalidDataException("Imported axis/unit dimensions are wrong: " + part.name + " height " + height);
-                renderers[0].sharedMaterials = part.materials.Select(n => paint[n]).ToArray();
-                var mesh = renderers[0].GetComponent<MeshFilter>().sharedMesh;
-                if (mesh.vertexCount < 20)
-                    throw new InvalidDataException("Empty replacement mesh: " + part.name);
-                prefabs[part.name] = PrefabUtility.SaveAsPrefabAsset(temp, Folder + part.name + ".prefab");
-                UnityEngine.Object.DestroyImmediate(temp);
+                try
+                {
+                    var copy = UnityEngine.Object.Instantiate(source.gameObject, temp.transform, false);
+                    copy.transform.localPosition = Vector3.zero;
+                    // Preserve imported ancestor axis/unit conversion, then normalize
+                    // against the authoring guide, whose length is exactly one metre.
+                    copy.transform.localRotation = source.rotation;
+                    copy.transform.localScale = source.lossyScale;
+                    var front = copy.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == part.front);
+                    if (!front)
+                        throw new InvalidDataException("Missing facing datum: " + part.front);
+                    Vector3 forward = temp.transform.InverseTransformPoint(front.position);
+                    forward.y = 0;
+                    if (forward.magnitude < .000001f || !MeshSafety.Finite(forward))
+                        throw new InvalidDataException("Invalid FBX facing datum.");
+                    copy.transform.localRotation = Quaternion.FromToRotation(forward.normalized, Vector3.forward) * copy.transform.localRotation;
+                    copy.transform.localScale /= forward.magnitude;
+                    var renderers = temp.GetComponentsInChildren<MeshRenderer>(true);
+                    if (renderers.Length != 1 || renderers[0].GetComponent<MeshFilter>().sharedMesh.subMeshCount != part.materials.Length)
+                        throw new InvalidDataException("Material section order/count changed: " + part.name);
+                    float height = renderers[0].bounds.size.y;
+                    if (part.name.StartsWith("Resident_") && (height < 1.8f || height > 2.4f) || part.name.StartsWith("House_") && (height < 3 || height > 6))
+                        throw new InvalidDataException("Imported axis/unit dimensions are wrong: " + part.name + " height " + height);
+                    renderers[0].sharedMaterials = part.materials.Select(n => paint[n]).ToArray();
+                    var mesh = renderers[0].GetComponent<MeshFilter>().sharedMesh;
+                    if (mesh.vertexCount < 20)
+                        throw new InvalidDataException("Empty replacement mesh: " + part.name);
+                    prefabs[part.name] = PrefabUtility.SaveAsPrefabAsset(temp, Folder + part.name + ".prefab");
+                }
+                finally
+                {
+                    // A failed import/validation must never leave a grey authoring
+                    // template at the scene origin (the middle of the market).
+                    if (temp)
+                        UnityEngine.Object.DestroyImmediate(temp);
+                }
             }
         }
 

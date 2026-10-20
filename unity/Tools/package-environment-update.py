@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib,json,zipfile
 r=Path(__file__).resolve().parents[1]
 new=[
-'Assets/Editor/EnvironmentFinishBuilder.cs',
+'Assets/Editor/EnvironmentFinishBuilder.cs','Assets/Editor/MarketTreeCleanup.cs','Assets/Sunward/Scripts/MarketTreeRules.cs',
 'Assets/Sunward/Scripts/EnvironmentLayout.cs',
 'Assets/Sunward/Scripts/EnvironmentReviewState.cs',
 'Assets/Sunward/Scripts/MarketWalker.cs',

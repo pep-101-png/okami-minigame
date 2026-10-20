@@ -10,6 +10,11 @@ class Program {
  static void Need(bool ok,string message){if(!ok)throw new Exception(message);Console.WriteLine("PASS "+message);}
  static void Main(){
  string root=Directory.Exists("unity")?"unity":".";
+ Need(MarketTreeRules.TreeMesh("Cherry_A_Mesh")&&MarketTreeRules.TreeMesh("Cherry_A_Mesh.001")&&MarketTreeRules.TreeMesh("Maple_A_Mesh (Instance)")&&MarketTreeRules.TreeMesh("Cherry_A_Mesh_MeshPart0")&&MarketTreeRules.TreeMesh("Cherry_A_Mesh_MeshPart1"),"Tree identification uses original mesh provenance, including import suffixes");
+ Need(MarketTreeRules.TreeMesh("Giant_Grey_Tree")&&!MarketTreeRules.TreeMesh("Street lantern")&&!MarketTreeRules.TreeMesh("Trees_Mesh")&&!MarketTreeRules.TreeMesh("House_A_Mesh")&&!MarketTreeRules.TreeMesh("Resident_Traveler_Mesh"),"Tree classifier excludes street decorations, houses and residents");
+ Need(MarketTreeRules.TreeOwner("Cherry_A(Clone)")&&MarketTreeRules.TreeOwner("Tree_04")&&!MarketTreeRules.TreeOwner("V3 · preserved painted valley")&&!MarketTreeRules.TreeOwner("Trees"),"Tree owner selection cannot hide the town or an entire forest holder");
+ Need(MarketTreeRules.InMarket(Vector3.zero,new Bounds(new Vector3(0,4,0),new Vector3(8,8,8))),"An orphan tree at the scene origin is selected without a town-parent requirement");
+ Need(!MarketTreeRules.InMarket(new Vector3(10,0,0),new Bounds(new Vector3(6,4,0),new Vector3(8,8,8)))&&!MarketTreeRules.InMarket(Vector3.zero,new Bounds(Vector3.zero,new Vector3(5,.05f,5))),"Background tree canopies and flat market surfaces excluded");
  RevolvedGeometry.Build(RevolvedGeometry.LanternRoof,32,out var roof,out var roofUV,out var roofIndices);
  MeshSafety.Validate("New actual stone lantern cap",roof,roofIndices);
  var edges=new Dictionary<(int,int),int>();
