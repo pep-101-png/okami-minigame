@@ -136,7 +136,7 @@ namespace Sunward.Editor.Automation
                 using (var serialized = new SerializedObject(component)) {
                     var property = serialized.GetIterator();
                     while (property.Next(true))
-                        if (property.propertyType == SerializedPropertyType.ObjectReference && property.objectReferenceValue == null && property.objectReferenceInstanceIDValue != 0)
+                        if (property.propertyType == SerializedPropertyType.ObjectReference && property.objectReferenceValue == null && property.objectReferenceEntityIdValue != EntityId.None)
                             throw new Exception("Broken reference: " + go.name + "/" + property.propertyPath);
                 }
             }
