@@ -27,6 +27,7 @@ namespace Sunward.Editor
         static bool repairQueued;
         static void OnPostprocessAllAssets(string[] imported, string[] deleted, string[] moved, string[] movedFrom)
         {
+            if (Automation.AutomationIsolation.Enabled) return;
             if (System.Array.IndexOf(imported, WolfClipProcessor.Source) < 0 || repairQueued)
                 return;
             repairQueued = true;
@@ -35,6 +36,7 @@ namespace Sunward.Editor
 
         static void RepairAfterImport()
         {
+            if (Automation.AutomationIsolation.Enabled) return;
             if (EditorApplication.isCompiling || EditorApplication.isUpdating)
             {
                 EditorApplication.delayCall += RepairAfterImport;

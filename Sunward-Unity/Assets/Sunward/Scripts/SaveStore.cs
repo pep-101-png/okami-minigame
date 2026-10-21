@@ -12,7 +12,12 @@ namespace Sunward
 
         public SaveStore()
         {
-            Path = System.IO.Path.Combine(Application.persistentDataPath, "Sunward-Unity-v1.json");
+            string automationData = System.Environment.GetEnvironmentVariable("SUNWARD_AUTOMATION_DATA");
+            bool isolated = System.Environment.GetEnvironmentVariable("SUNWARD_AUTOMATION_READONLY") == "1";
+            if (isolated && string.IsNullOrWhiteSpace(automationData))
+                throw new System.InvalidOperationException("Automation requires an isolated save directory.");
+            if (isolated) Directory.CreateDirectory(automationData);
+            Path = System.IO.Path.Combine(isolated ? automationData : Application.persistentDataPath, "Sunward-Unity-v1.json");
             Reload();
         }
 

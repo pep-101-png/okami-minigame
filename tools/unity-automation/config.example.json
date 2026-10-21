@@ -1,0 +1,28 @@
+{
+  "UnityEditor": "",
+  "PollSeconds": 30,
+  "StableSeconds": 30,
+  "UnityTimeoutSeconds": 3600,
+  "CaptureScreenshots": true,
+  "AllowVisibleCapture": false,
+  "PublishReports": false,
+  "KeepSuccessfulSnapshots": false,
+  "CapturePlayMode": true,
+  "BuildWindowsPlayer": false,
+  "Video": {
+    "Enabled": true,
+    "Fps": 30,
+    "Width": 960,
+    "Height": 540,
+    "TimeoutSeconds": 900,
+    "MaxFrames": 2400,
+    "MaxFrameMegabytes": 2048,
+    "PreferRecorder": true,
+    "FFmpegPath": "",
+    "FFprobePath": "",
+    "Crf": 24,
+    "KeepEncodedFrames": false,
+    "MaxFeedbackMegabytes": 80,
+    "MaxFrameArchiveMegabytes": 20
+  }
+}
