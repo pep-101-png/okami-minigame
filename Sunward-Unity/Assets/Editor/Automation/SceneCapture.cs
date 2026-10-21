@@ -125,7 +125,7 @@ namespace Sunward.Editor.Automation
                 var pixels = image.GetPixels32(); int variation = 0; var first = pixels[0];
                 foreach (var p in pixels) variation = Math.Max(variation, Math.Max(Math.Abs(p.r-first.r), Math.Max(Math.Abs(p.g-first.g), Math.Abs(p.b-first.b))));
                 if (variation < 3) throw new Exception("Capture is nearly uniform; cannot claim a usable render.");
-                view.file = name + ".png"; File.WriteAllBytes(Path.Combine(output,view.file),image.EncodeToPNG());
+                view.file = name + ".png"; File.WriteAllBytes(Path.Combine(output,view.file),UnityEngine.ImageConversion.EncodeToPNG(image));
                 view.status = "rendered_unreviewed";
             } catch (Exception e) { view.detail = e.ToString(); }
             finally { RenderTexture.active = previous; if (rt) { rt.Release(); UnityEngine.Object.DestroyImmediate(rt); } if (image) UnityEngine.Object.DestroyImmediate(image); }

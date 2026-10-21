@@ -60,7 +60,7 @@ namespace Sunward.Editor.Automation
                     foreach (var pixel in pixels) variation=Math.Max(variation,Math.Max(Math.Abs(pixel.r-first.r),Math.Max(Math.Abs(pixel.g-first.g),Math.Abs(pixel.b-first.b))));
                     if (variation<3) throw new Exception("Nearly uniform capture; usable rendering not established.");
                     string folder=Path.Combine(BatchValidation.Output,"screenshots"); Directory.CreateDirectory(folder);
-                    report.file="gameplay-live-camera.png"; File.WriteAllBytes(Path.Combine(folder,report.file),image.EncodeToPNG()); report.status="rendered_unreviewed";
+                    report.file="gameplay-live-camera.png"; File.WriteAllBytes(Path.Combine(folder,report.file),UnityEngine.ImageConversion.EncodeToPNG(image)); report.status="rendered_unreviewed";
                 } finally { RenderTexture.active=previous; rt.Release(); UnityEngine.Object.DestroyImmediate(rt); UnityEngine.Object.DestroyImmediate(image); }
                 Finish(report);
             } catch (Exception e) { Finish(new Report { error=e.ToString() }); }
