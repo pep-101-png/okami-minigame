@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 namespace Sunward.Editor.Automation
 {
+    // Shared with Windows PowerShell 5.1 Add-Type: keep this file compatible with C# 5.
     // Pure capture specification: testable without Unity. No animation/runtime overrides.
     [Serializable] public sealed class VideoClipSpec
     {
@@ -32,7 +33,10 @@ namespace Sunward.Editor.Automation
             clips.Add(new VideoClipSpec { name = "windflower-gameplay-route", category = "gameplay", angle = "gameplay", seconds = 8, expectedStates = new[] { "Walk_", "Jog_" } });
             return clips;
         }
-        static bool Pulse(int frame, float seconds, int fps, int width = 2) => frame >= (int)Math.Round(seconds * fps) && frame < (int)Math.Round(seconds * fps) + width;
+        static bool Pulse(int frame, float seconds, int fps, int width = 2)
+        {
+            return frame >= (int)Math.Round(seconds * fps) && frame < (int)Math.Round(seconds * fps) + width;
+        }
         public static VideoCommand Command(VideoClipSpec clip, int frame, int fps)
         {
             float t = frame / (float)fps;

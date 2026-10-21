@@ -10,7 +10,14 @@ function Assert([bool]$Condition,[string]$Message) { if (-not $Condition) { thro
 function Reject([scriptblock]$Action,[string]$Message) { $rejected=$false;try { & $Action | Out-Null } catch { $rejected=$true };Assert $rejected $Message }
 try {
     $source=Join-Path $tools '../../Sunward-Unity/Assets/Sunward/Automation/VideoCapturePlan.cs'
-    Add-Type -TypeDefinition ((Get-Content $source -Raw).Replace('#if UNITY_EDITOR','').Replace('#endif',''))
+    # Windows PowerShell 5.1 uses the legacy C# compiler. Enforce the same language
+    # ceiling on modern PowerShell so its newer compiler cannot mask regressions.
+    $compile=@{TypeDefinition=((Get-Content $source -Raw).Replace('#if UNITY_EDITOR','').Replace('#endif',''));ErrorAction='Stop'}
+    if ((Get-Command Add-Type -CommandType Cmdlet).Parameters.ContainsKey('CompilerOptions')) {
+        $compile.CompilerOptions=@('/langversion:5')
+    }
+    Add-Type @compile
+    Write-Host 'PASS: shared video plan compiles with C# 5 compatible syntax.'
     $plan=[Sunward.Editor.Automation.VideoCapturePlan]::Build()
     Assert ($plan.Count -eq 14) '14 clip recipes'
     Assert (($plan | Measure-Object seconds -Sum).Sum -eq 70) '70 seconds / 2100 frames'
