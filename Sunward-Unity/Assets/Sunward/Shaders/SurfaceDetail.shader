@@ -44,10 +44,13 @@ Shader "Sunward/Surface Detail PBR"
    o.shadow=TransformWorldToShadowCoord(o.world);
    #endif
    return o;}
+   float BrushNoise(float2 p) { return sin(p.x*.71+sin(p.y*.43))*sin(p.y*.59+sin(p.x*.37)); }
    half4 Frag(V i):SV_Target
    {
     UNITY_SETUP_INSTANCE_ID(i);
     float3 g=normalize(i.normal),w=pow(abs(g),4);w/=max(dot(w,float3(1,1,1)),.001);float3 p=i.world*_Scale;
+    // Slow continuous warp breaks a repeated grid while preserving seamless sampling.
+    p+=sin(i.world.zxy*.13)*.19;
     half3 col=SAMPLE_TEXTURE2D(_DetailColor,sampler_DetailColor,p.zy).rgb*w.x+SAMPLE_TEXTURE2D(_DetailColor,sampler_DetailColor,p.xz).rgb*w.y+SAMPLE_TEXTURE2D(_DetailColor,sampler_DetailColor,p.xy).rgb*w.z;
     half4 mask=SAMPLE_TEXTURE2D(_DetailMask,sampler_DetailMask,p.zy)*w.x+SAMPLE_TEXTURE2D(_DetailMask,sampler_DetailMask,p.xz)*w.y+SAMPLE_TEXTURE2D(_DetailMask,sampler_DetailMask,p.xy)*w.z;
     float3 nx=UnpackNormal(SAMPLE_TEXTURE2D(_DetailNormal,sampler_DetailNormal,p.zy));
@@ -63,10 +66,17 @@ Shader "Sunward/Surface Detail PBR"
      float crossing=(1-smoothstep(1.25,1.7,abs(i.world.z+8)))*smoothstep(-33,-31,i.world.x)*(1-smoothstep(-15,-13,i.world.x));
      float trial=(1-smoothstep(2.1,2.8,abs(i.world.z)))*smoothstep(0,2,i.world.x)*(1-smoothstep(18,20,i.world.x));
      float road=max(max(market,west),max(crossing,trial));
+     // Soft broken brush borders keep the original safe walking corridors.
+     road=saturate(road+(1-abs(road*2-1))*BrushNoise(i.world.xz*3)*.14);
      col=lerp(col,SAMPLE_TEXTURE2D(_EarthColor,sampler_EarthColor,p.xz).rgb,road);
      mask=lerp(mask,SAMPLE_TEXTURE2D(_EarthMask,sampler_EarthMask,p.xz),road);
      float3 en=UnpackNormal(SAMPLE_TEXTURE2D(_EarthNormal,sampler_EarthNormal,p.xz));n=normalize(lerp(n,float3(en.x,en.z,en.y),road));
     }
+    // Metre-scale pigment washes interrupt repetition without extra texture fetches.
+    float wash=BrushNoise(i.world.xz*.31+i.world.y*.12);
+    col*=1+wash*.13;
+    float facing=pow(1-saturate(abs(dot(g,GetWorldSpaceNormalizeViewDir(i.world)))),4);
+    col*=1-facing*.12;
     InputData input=(InputData)0;
     input.positionWS=i.world;input.normalWS=normalize(lerp(g,n,.65));input.viewDirectionWS=GetWorldSpaceNormalizeViewDir(i.world);
     input.shadowCoord=i.shadow;input.fogCoord=i.fog;input.bakedGI=SampleSH(input.normalWS);

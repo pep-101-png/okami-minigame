@@ -55,7 +55,7 @@ Material:
     m_Floats:
     - _Cull: 2
     - _Cutoff: 0.01
-    - _Scale: 0.9
+    - _Scale: 0.4
     - _Terrain: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

@@ -34,7 +34,17 @@ Shader "Sunward/Surface Pigment" {
  float3 painted=PaintColor(i.world*_ArtTiling,weights);
  float3 paintedNormal=PaintNormal(i.world*_ArtTiling,weights,normal);
  if(_TerrainBlend>.5){float path=smoothstep(-.015,.09,i.color.r-i.color.g);float3 dust=SAMPLE_TEXTURE2D(_PathMap,sampler_PathMap,i.world.xz*.22).rgb;painted=lerp(painted,dust,path);float3 pn=SAMPLE_TEXTURE2D(_PathNormal,sampler_PathNormal,i.world.xz*.22).rgb*2-1;paintedNormal=normalize(lerp(paintedNormal,float3(pn.x,pn.z,pn.y),path));}
- base.rgb*=lerp(float3(1,1,1),painted*1.18,_ArtStrength);
+ // Opaque environmental surfaces retain source hue without multiplying two
+ // dark albedos together. Wolf uses its separate URP material/shader.
+ float3 underpaint=lerp(base.rgb,lerp(base.rgb, _BaseColor.rgb,.65)*painted*1.35,_ArtStrength);
+ base.rgb=underpaint;
+ if(_SurfaceKind>1.5 && _SurfaceKind<2.5){
+  float moss=smoothstep(.45,.85,normal.y)*smoothstep(.30,.72,Noise(i.world.xz*.6));
+  base.rgb=lerp(base.rgb,base.rgb*float3(.73,1.05,.68),moss*.45);
+  // Ink strata and cool shadow planes articulate existing cliff forms.
+  float strata=smoothstep(.88,.98,Noise(float2(i.world.y*1.8,i.world.x*.04+i.world.z*.04)));
+  base.rgb*=1-strata*.10;
+ }
  normal=normalize(lerp(normal,paintedNormal,_NormalStrength*_ArtStrength));
  }
 
