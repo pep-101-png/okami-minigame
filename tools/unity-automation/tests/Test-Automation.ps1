@@ -7,6 +7,7 @@ $Repository=Join-Path $root 'repository with spaces'
 $AutomationState=Join-Path $root 'state'
 New-Item -ItemType Directory -Path $Repository,$AutomationState -Force | Out-Null
 . (Join-Path $tools 'Common.ps1')
+. (Join-Path $tools 'Video.ps1')
 function Assert([bool]$Condition,[string]$Message) { if (-not $Condition) { throw "ASSERT: $Message" } }
 $GitExecutable=(Get-Command git -CommandType Application | Select-Object -First 1).Source
 try {
@@ -75,7 +76,7 @@ try {
     try { New-ProjectSnapshot $commit $missingRun | Out-Null } catch { $rejected=$_.Exception.Message -match 'Missing cached LFS' }
     Assert $rejected 'missing LFS object was accepted'
     Move-Item (Join-Path $cache 'held') (Join-Path $cache $oid)
-    $Config=[pscustomobject]@{UnityTimeoutSeconds=60;PublishReports=$false;CaptureScreenshots=$true;CapturePlayMode=$false;BuildWindowsPlayer=$false;AllowVisibleCapture=$false;KeepSuccessfulSnapshots=$false}
+    $Config=[pscustomobject]@{Video=[pscustomobject]@{Enabled=$false};UnityTimeoutSeconds=60;PublishReports=$false;CaptureScreenshots=$true;CapturePlayMode=$false;BuildWindowsPlayer=$false;AllowVisibleCapture=$false;KeepSuccessfulSnapshots=$false}
     $script:unityCalls=0
     function Invoke-UnityStage([string]$Snapshot,[string]$RunDirectory,[string]$Method,[string]$Stage,[bool]$Graphics=$false,[bool]$Visible=$false) {
         $script:unityCalls++
@@ -101,6 +102,14 @@ try {
     Assert ($script:unityCalls -eq $callsBefore) 'monitoring loop reran the same completed commit'
     $Watch=$false
 
+    # Video is independent of screenshot configuration; missing capture stays incomplete.
+    $Config.Video.Enabled=$true; $Config.CaptureScreenshots=$false
+    $callsBefore=$script:unityCalls
+    $result=Invoke-ValidationJob $commit
+    Assert ($script:unityCalls -eq $callsBefore+2) 'video did not run independently of screenshots'
+    Assert ($result.video -eq 'capture_failed_or_incomplete') 'missing video was accepted'
+    Assert (Test-Path (Join-Path $result.runDirectory 'video-report.json')) 'missing-video report absent'
+    $Config.Video.Enabled=$false
     function Invoke-UnityStage { return [pscustomobject]@{ExitCode=1} }
     $result=Invoke-ValidationJob $commit
     Assert ($result.status -eq 'failed') 'compilation/startup failure was accepted'

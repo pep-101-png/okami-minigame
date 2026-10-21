@@ -265,3 +265,98 @@ existing validator outcomes, Play Mode behavior, actual PNG rendering/quality,
 Windows PowerShell 5.1, Task Scheduler, Windows taskkill, gh authentication/upload
 from your PC, and player builds. These require your existing Windows Unity setup.
 No rendered screenshot or successful Unity validation is claimed by this PR.
+
+## Automated gameplay video feedback
+
+Video capture is enabled by default in the reviewed configuration, including when
+screenshots are disabled. Nothing runs until this separate validation service is
+explicitly enabled; this change does not install, start or change your sync task.
+Existing local configs without `Video` use the documented defaults. Review the
+new `Video` section before an intentional manual `Run.ps1 -Retry` smoke test.
+
+The isolated snapshot runs the **actual Windflower scene, Amaterasu FBX/rig,
+controller, WolfMotor and WolfCombat**. An editor-only virtual gamepad supplies
+normal input actions. It never directly plays replacement animation clips. Each
+clip reloads the actual scene with a fresh isolated save and seeded input recipe.
+Combat starts the real trial; enemies, damage and blocking states remain active.
+An interrupted/dead player or missing requested animation is reported as incomplete.
+Diagnostic cameras follow fixed world offsets; the route uses the real gameplay
+camera. No scene assets or controller settings are saved.
+
+The versioned recipe produces 14 short clips (70 seconds total):
+
+| Clips | Duration each | Purpose |
+|---|---:|---|
+| `walk-{side,front,rear-quarter}` | 4 s | Paw contact and walking |
+| `jog-{side,front,rear-quarter}` | 4 s | Jogging/body movement |
+| `sprint-{side,front,rear-quarter}` | 4 s | Sprinting/foot sliding |
+| `jump-air-land-side` | 5 s | Moving and standing jumps, airborne/landing |
+| `gait-stop-turn-side` | 7 s | Idle, walk, jog, sprint, turn and stop |
+| `dodge-directions-rear-quarter` | 5 s | Forward/side/back dodge inputs |
+| `combat-light-heavy-charge-side` | 9 s | Light chain, heavy chain, charged attack |
+| `windflower-gameplay-route` | 8 s | Actual gameplay camera/environment traversal |
+
+Default capture is 960×540, 30 fps (2,100 frames), no audio. The fixed timestep,
+inputs, seed, scene resets and camera offsets support comparisons, **not bit-exact
+simulation**: wall-clock hit-stop, physics and procedural/GPU effects can differ.
+Use matching recipe/configuration and inspect telemetry when comparing builds.
+Per-frame CSV includes actual position, speed, grounded/state/transition data,
+body yaw, four existing paw positions/terrain heights and camera position. These
+measurements support inspection; they do not certify correct paw contact/blending.
+
+If an installed Unity Recorder exposes compatible Movie/RenderTexture APIs, it
+is tried first. No package is downloaded or added. Numbered PNGs are captured
+regardless. A Recorder MP4 must pass ffprobe checks before being preferred;
+incompatible/incorrect Recorder output falls back to FFmpeg. Recorder integration
+and Unity rendering must still be tested with your installed editor/package.
+
+For reliable fallback, put **ffmpeg.exe and ffprobe.exe** on PATH or set absolute
+`Video.FFmpegPath` and `Video.FFprobePath`. Neither tool is installed automatically.
+FFmpeg creates H.264/yuv420p MP4 with CRF 24 and a 2.5 Mbit/s rate target. Each clip
+is checked for numbered-frame continuity, PNG dimensions, decoded frame count,
+frame rate, MP4 container and duration (within two frames / 0.12 seconds). Encoder
+and probe failures are explicit; missing tools preserve frames under
+`runs/<runId>/video-frames/`. A missing ffprobe means MP4 remains **unverified**.
+
+The campaign has a 900-second capture limit plus a 120-second editor startup
+allowance, 2,400-frame / 2,048 MiB PNG caps, per-process encoding/probe deadlines,
+and progress every recorded second in `gameplay-video-editor.log`. These limits
+fail with partial files retained rather than silently hanging or claiming success.
+After a verified MP4, only runner-owned numbered PNGs may be removed (disable via
+`KeepEncodedFrames=true`). Frames from failed/unverified captures remain local.
+
+Feedback ZIPs include `video-capture.json`, `video-report.json`, named MP4s,
+12-thumbnail contact sheets and telemetry alongside screenshots/logs. With missing
+encoders, each frame ZIP is capped at 20 MiB. Total uploaded video artifacts are
+capped at 80 MiB; `video-delivery.json` identifies omissions retained locally.
+Partial encoder outputs are never published. No movies/frames are committed to
+Git, and publication remains opt-in through `PublishReports`.
+
+Successful captures are reused across commits with the same Unity source tree
+and video settings while their artifacts remain available. `video-reuse.json`
+points to the original commit/run and matching release bundle; documentation-only
+commits do not upload duplicate movies. `-Retry` explicitly requests a new capture.
+Failed jobs are not retried endlessly for the same commit. Review local storage
+periodically; failed frames/snapshots are deliberately retained for diagnosis.
+
+For the first Windows smoke test, keep automation disabled, review config and run
+once manually with `-Retry` using the existing installation instructions. Confirm
+all 14 entries in `video-capture.json`, exact counts/dimensions/duration in
+`video-report.json`, and play the actual MP4s. Check the gameplay route is in
+Windflower and the wolf/paws are visible. Missing states/airborne/landing/dodge
+coverage must remain incomplete rather than being waived. Repeat once to compare
+timing, then run normally on the same commit to verify no repeat recording.
+Do not enable the scheduled task as part of reviewing this PR.
+
+A subsequent Codex task downloads the matching release ZIP using the commands
+above, reads manifests/coverage/errors, opens contact sheets, and extracts further
+MP4 frames (for example `ffmpeg -i walk-side.mp4 -vf fps=10 frames/%04d.png`) to
+inspect motion over time. It must inspect the actual sequence and report which
+clips/timestamps were reviewed. Generated footage and passing technical checks
+**never imply that an animation looks correct**. No Amaterasu video has been
+rendered or visually approved in this cloud environment.
+
+Additional local tests: `tests/Test-Video.ps1` exercises the pure C# input plan,
+real FFmpeg/ffprobe synthetic-video encoding, contact sheets, Recorder-candidate
+selection, artifact reuse, malformed/missing-frame rejection, missing dependencies
+and safe feedback packaging. Synthetic fixtures are not gameplay evidence.

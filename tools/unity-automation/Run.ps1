@@ -7,6 +7,7 @@ $ErrorActionPreference='Stop'
 $AutomationState=[IO.Path]::GetFullPath($StateDirectory)
 New-Item -ItemType Directory -Path $AutomationState -Force | Out-Null
 . (Join-Path $PSScriptRoot 'Common.ps1')
+. (Join-Path $PSScriptRoot 'Video.ps1')
 function Invoke-UnityStage([string]$Snapshot,[string]$RunDirectory,[string]$Method,[string]$Stage,[bool]$Graphics=$false,[bool]$Visible=$false) {
     if (Test-OtherUnity) { throw 'Unity opened before launch; validation deferred.' }
     $argsList=@('-projectPath',$Snapshot,'-executeMethod',$Method,'-logFile',(Join-Path $RunDirectory "$Stage-editor.log"))
@@ -15,7 +16,8 @@ function Invoke-UnityStage([string]$Snapshot,[string]$RunDirectory,[string]$Meth
     if (-not $Graphics) { $argsList=@('-nographics')+$argsList }
     $environment=@{SUNWARD_AUTOMATION_READONLY='1';SUNWARD_AUTOMATION_OUTPUT=$RunDirectory;SUNWARD_AUTOMATION_STAGE=$Stage;SUNWARD_AUTOMATION_DATA=(Join-Path $RunDirectory 'save-data')}
     $cancel={ param($OwnedPid) (Test-Path (Join-Path $AutomationState 'DISABLED')) -or (Test-OtherUnity $OwnedPid) }
-    Invoke-AutomationProcess -Executable $UnityPath -Arguments $argsList -TimeoutSeconds $Config.UnityTimeoutSeconds -Environment $environment -CancelCheck $cancel -Stage $Stage -WorkingDirectory $Snapshot
+    $deadline=if ($Stage -eq 'gameplay-video') { (Get-VideoConfig $Config).TimeoutSeconds+120 } else { $Config.UnityTimeoutSeconds }
+    Invoke-AutomationProcess -Executable $UnityPath -Arguments $argsList -TimeoutSeconds $deadline -Environment $environment -CancelCheck $cancel -Stage $Stage -WorkingDirectory $Snapshot
 }
 function Publish-Feedback([string]$RunDirectory,[object]$Report) {
     $reportPath=Join-Path $RunDirectory 'report.json'
@@ -26,8 +28,9 @@ function Publish-Feedback([string]$RunDirectory,[object]$Report) {
     $payload=Join-Path $RunDirectory 'feedback'
     $payload=$payload+'-'+[Guid]::NewGuid().ToString('N')
     New-Item -ItemType Directory -Path $payload | Out-Null
-    foreach ($p in Get-ChildItem -LiteralPath $RunDirectory -File | Where-Object { $_.Extension -in @('.json','.xml','.log') -and $_.Name -notlike '*-report.json' }) { Copy-Item -LiteralPath $p.FullName -Destination $payload }
+    foreach ($p in Get-ChildItem -LiteralPath $RunDirectory -File | Where-Object { $_.Extension -in @('.json','.xml','.log') -and ($_.Name -notlike '*-report.json' -or $_.Name -eq 'video-report.json') }) { Copy-Item -LiteralPath $p.FullName -Destination $payload }
     if (Test-Path (Join-Path $RunDirectory 'screenshots')) { Copy-Item (Join-Path $RunDirectory 'screenshots') $payload -Recurse }
+    Copy-VideoFeedback $RunDirectory $payload (Get-VideoConfig $Config)
     $archive=Join-Path $RunDirectory ($assetName+'.zip')
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     if (-not (Test-Path $archive)) { [IO.Compression.ZipFile]::CreateFromDirectory($payload,$archive) }
@@ -97,6 +100,28 @@ function Invoke-ValidationJob([string]$Commit) {
             $livePath=Join-Path $runDirectory 'gameplay-capture.json'
             $report.gameplayCapture=if (Test-Path $livePath) { (Get-Content $livePath -Raw | ConvertFrom-Json).status } else { 'unavailable_or_failed' }
             if ($r.ExitCode -ne 0 -or $report.gameplayCapture -ne 'rendered_unreviewed') { $report.visual='incomplete' }
+        }
+        $videoSettings=Get-VideoConfig $Config
+        $report.video='skipped_configuration'
+        if ($videoSettings.Enabled) {
+            $fingerprint=Get-VideoFingerprint $Commit $videoSettings
+            $cachePath=Join-Path $AutomationState 'last-video.json'
+            $cached=if (Test-Path $cachePath) { Get-Content $cachePath -Raw | ConvertFrom-Json } else { $null }
+            if (-not $Retry -and $cached -and $cached.fingerprint -eq $fingerprint -and (Test-VideoCache $cached $fingerprint)) {
+                $cached | ConvertTo-Json -Depth 8 | Set-Content (Join-Path $runDirectory 'video-reuse.json') -Encoding UTF8
+                $report.video='reused_previous_capture_unreviewed'
+                Write-AutomationLog "VIDEO reused unchanged Unity tree/settings: $($cached.runDirectory)"
+            } else {
+                $videoSettings | ConvertTo-Json | Set-Content (Join-Path $runDirectory 'video-options.json') -Encoding UTF8
+                $r=Invoke-UnityStage $snapshot $runDirectory 'Sunward.Editor.Automation.GameplayVideoCapture.Run' 'gameplay-video' $true
+                $video=Complete-GameplayVideos $runDirectory $videoSettings
+                $report.video=$video.status
+                if ($r.ExitCode -ne 0) { $report.video='capture_failed_or_incomplete'; $report.errors+='Video Unity process exit='+$r.ExitCode }
+                if ($video.status -eq 'encoded_verified_unreviewed' -and $r.ExitCode -eq 0) {
+                    @{fingerprint=$fingerprint;runDirectory=$runDirectory;commit=$Commit;runId=$runId;status=$video.status} | ConvertTo-Json | Set-Content $cachePath -Encoding UTF8
+                }
+            }
+            if ($report.video -notin @('encoded_verified_unreviewed','reused_previous_capture_unreviewed')) { $report.visual='incomplete' }
         }
         if ($Config.BuildWindowsPlayer) {
             $r=Invoke-UnityStage $snapshot $runDirectory 'Sunward.Editor.Automation.BatchValidation.Build' 'build'

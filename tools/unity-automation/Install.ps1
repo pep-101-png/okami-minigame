@@ -5,7 +5,7 @@ $Repository=(Resolve-Path $Repository).Path
 $state=Join-Path $env:LOCALAPPDATA 'SunwardUnityAutomation'
 if (Get-ScheduledTask -TaskName SunwardUnityValidation -ErrorAction SilentlyContinue) { throw 'Task exists. Disable it and wait for exit before explicitly unregistering/reinstalling.' }
 New-Item -ItemType Directory -Path $state -Force | Out-Null
-foreach ($name in @('Run.ps1','Common.ps1')) { Copy-Item (Join-Path $PSScriptRoot $name) (Join-Path $state $name) }
+foreach ($name in @('Run.ps1','Common.ps1','Video.ps1')) { Copy-Item (Join-Path $PSScriptRoot $name) (Join-Path $state $name) }
 if (-not (Test-Path (Join-Path $state 'config.json'))) { Copy-Item (Join-Path $PSScriptRoot 'config.example.json') (Join-Path $state 'config.json') }
 'Installed disabled. Review config and run a manual smoke test before enabling.' | Set-Content (Join-Path $state 'DISABLED')
 $executable=Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
