@@ -190,7 +190,7 @@ namespace Sunward.Editor.Automation
                 var bytes=image.GetRawTextureData<byte>(); int variation=0,step=Math.Max(3,(bytes.Length/256/3)*3);
                 for (int n=0;n+2<bytes.Length;n+=step) for (int c=0;c<3;c++) variation=Math.Max(variation,Math.Abs(bytes[n+c]-bytes[c]));
                 if (variation<3) throw new Exception("Almost-uniform rendered frame; usable footage not established.");
-                byte[] png=image.EncodeToPNG();
+                byte[] png=UnityEngine.ImageConversion.EncodeToPNG(image);
                 if (totalFrames>=options.MaxFrames || totalBytes+png.Length>options.MaxFrameMegabytes*1024L*1024L) throw new Exception("Video frame storage/count budget exceeded; partial frames preserved.");
                 string file=Path.Combine(output,clip.framesDirectory,"frame_"+clip.frames.ToString("D6")+".png");
                 if (File.Exists(file)) throw new IOException("Refusing to overwrite captured frame.");
