@@ -15,7 +15,7 @@ function Invoke-UnityStage([string]$Snapshot,[string]$RunDirectory,[string]$Meth
     if ($Stage -in @('validation','build')) { $argsList=@('-quit')+$argsList }
     if (-not $Graphics) { $argsList=@('-nographics')+$argsList }
     $environment=@{SUNWARD_AUTOMATION_READONLY='1';SUNWARD_AUTOMATION_OUTPUT=$RunDirectory;SUNWARD_AUTOMATION_STAGE=$Stage;SUNWARD_AUTOMATION_DATA=(Join-Path $RunDirectory 'save-data')}
-    $cancel={ param($OwnedPid) (Test-Path (Join-Path $AutomationState 'DISABLED')) -or (Test-OtherUnity $OwnedPid) }
+    $cancel={ param($OwnedPid) Get-UnityCancellationReason $OwnedPid }
     $deadline=if ($Stage -eq 'gameplay-video') { (Get-VideoConfig $Config).TimeoutSeconds+120 } else { $Config.UnityTimeoutSeconds }
     Invoke-AutomationProcess -Executable $UnityPath -Arguments $argsList -TimeoutSeconds $deadline -Environment $environment -CancelCheck $cancel -Stage $Stage -WorkingDirectory $Snapshot
 }
@@ -77,7 +77,7 @@ function Invoke-ValidationJob([string]$Commit) {
             foreach ($platform in @('EditMode')) {
                 if (Test-OtherUnity) { throw 'Unity opened before test launch.' }
                 $xml=Join-Path $runDirectory "$platform-results.xml"
-                $r=Invoke-AutomationProcess -Executable $UnityPath -Arguments @('-batchmode','-nographics','-projectPath',$snapshot,'-runTests','-testPlatform',$platform,'-testResults',$xml,'-logFile',(Join-Path $runDirectory "$platform-editor.log")) -TimeoutSeconds $Config.UnityTimeoutSeconds -Environment @{SUNWARD_AUTOMATION_READONLY='1';SUNWARD_AUTOMATION_DATA=(Join-Path $runDirectory 'save-data')} -CancelCheck {param($OwnedPid) (Test-Path (Join-Path $AutomationState 'DISABLED')) -or (Test-OtherUnity $OwnedPid)} -Stage $platform -WorkingDirectory $snapshot
+                $r=Invoke-AutomationProcess -Executable $UnityPath -Arguments @('-batchmode','-nographics','-projectPath',$snapshot,'-runTests','-testPlatform',$platform,'-testResults',$xml,'-logFile',(Join-Path $runDirectory "$platform-editor.log")) -TimeoutSeconds $Config.UnityTimeoutSeconds -Environment @{SUNWARD_AUTOMATION_READONLY='1';SUNWARD_AUTOMATION_DATA=(Join-Path $runDirectory 'save-data')} -CancelCheck {param($OwnedPid) Get-UnityCancellationReason $OwnedPid} -Stage $platform -WorkingDirectory $snapshot
                 if ($r.ExitCode -ne 0 -or -not (Test-Path $xml)) { throw 'Unity Test Framework did not return successful results.' }
                 [xml]$testXml=Get-Content $xml -Raw
                 if (-not $testXml.'test-run' -or -not $testXml.'test-run'.result) { throw 'Malformed or incomplete test result XML.' }
