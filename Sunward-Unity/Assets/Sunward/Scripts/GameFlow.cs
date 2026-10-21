@@ -165,7 +165,7 @@ namespace Sunward
             }
 
             string action = Nearest();
-            Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "shop" ? "E · Taro · weapons & blessings" : action == "arena" ? "E · Enter the Hollow Bell trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
+            Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "shop" ? "E · Taro · weapons & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
             if (Player.input.Interact.WasPressedThisFrame() && !Home.Active)
             {
                 switch (action)
@@ -285,6 +285,7 @@ namespace Sunward
 
         public void StartTrial()
         {
+            Audio.Cue("bell");
             Close();
             ClearEnemies();
             InTrial = true;

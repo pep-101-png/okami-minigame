@@ -58,7 +58,7 @@ namespace Sunward.Editor.Automation
                 Capture("gameplay-camera-editmode", null, Vector3.zero);
                 var wolf = UnityEngine.Object.FindFirstObjectByType<Sunward.WolfAnimation>();
                 if (!wolf || !wolf.animator) throw new Exception("Existing scene Amaterasu/Animator missing.");
-                Bounds bounds = BoundsOf(wolf.gameObject);
+                Bounds bounds = WolfBounds(wolf);
                 Capture("amaterasu-front", bounds, new Vector3(.3f,.2f,1));
                 Capture("amaterasu-side", bounds, new Vector3(1,.15f,.2f));
                 foreach (string state in new[] { "Idle_Natural", "Walk_Natural", "Sprint_Fluid", "Thrust" }) {
@@ -69,7 +69,7 @@ namespace Sunward.Editor.Automation
                         AnimationMode.BeginSampling();
                         try { AnimationMode.SampleAnimationClip(wolf.animator.gameObject, clip, clip.length * .25f); }
                         finally { AnimationMode.EndSampling(); }
-                        Capture("pose-" + state + "-quarter", BoundsOf(wolf.gameObject), new Vector3(1,.25f,.35f));
+                        Capture("pose-" + state + "-quarter", WolfBounds(wolf), new Vector3(1,.25f,.35f));
                     } finally { AnimationMode.StopAnimationMode(); }
                 }
                 CaptureTarget("architecture", "house|roof|shoji", false);
@@ -85,6 +85,19 @@ namespace Sunward.Editor.Automation
                 try { File.WriteAllText(Path.Combine(BatchValidation.Output, "capture.json"), JsonUtility.ToJson(report, true)); }
                 finally { EditorApplication.Exit(code); }
             }
+        }
+        static Bounds WolfBounds(Sunward.WolfAnimation wolf)
+        {
+            // Keep diagnostic framing near the actual player even if an imported
+            // edit-mode skin envelope/bake contains the rig's travel/control bounds.
+            // This changes the camera only; the original wolf is never rescaled.
+            var b=BoundsOf(wolf.animator.gameObject);
+            if (b.size.magnitude>8 || Vector3.Distance(b.center,wolf.transform.position)>4)
+            {
+                Debug.LogWarning("Amaterasu posed bounds are not local to the player; using a fixed diagnostic camera volume. bounds="+b);
+                return new Bounds(wolf.transform.position+Vector3.up*.85f,new Vector3(2.4f,2.2f,3.6f));
+            }
+            return b;
         }
         static Bounds BoundsOf(GameObject root)
         {
