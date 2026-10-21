@@ -11,6 +11,7 @@ namespace Sunward
         public Transform view;
         public CharacterController controller;
         public WolfInput input;
+        public const float WalkSpeed = LocomotionTuning.WalkSpeed, JogSpeed = LocomotionTuning.JogSpeed, SprintSpeed = LocomotionTuning.SprintSpeed;
         public float Speed { get; private set; }
         public float Vertical { get; private set; }
 
@@ -105,11 +106,11 @@ namespace Sunward
             right.y = 0;
             right.Normalize();
             Vector3 direction = Vector3.ClampMagnitude(forward * m.y + right * m.x, 1);
-            float target = input.Walk.IsPressed() ? .57f : input.Sprint.IsPressed() && game.Stamina > 5 ? 5.3f : 2.45f;
+            float target = input.Walk.IsPressed() ? WalkSpeed : input.Sprint.IsPressed() && game.Stamina > 5 ? SprintSpeed : JogSpeed;
             target *= 1 + game.Profile.upgrades.movement * .03f;
             if (game.Combat.Busy)
                 target *= .17f;
-            horizontal = Vector3.MoveTowards(horizontal, direction * target, dt * (direction.sqrMagnitude > .01f ? 9 : 12));
+            horizontal = Vector3.MoveTowards(horizontal, direction * target, dt * (direction.sqrMagnitude > .01f ? 13 : 17));
             if (input.Dodge.WasPressedThisFrame() && game.Stamina >= 18 && !Dodging)
             {
                 game.Stamina -= 18;
@@ -172,14 +173,14 @@ namespace Sunward
             {
                 float angle = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
                 turn = angle / 60;
-                var rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), dt * (Speed > 4 ? 230 : 400));
+                var rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), dt * (Speed > 5 ? 260 : 420));
                 if (!bodyCollision || bodyCollision.CanTurn(rotation))
                     transform.rotation = rotation;
             }
 
             if (!Dodging && !game.Combat.Busy && landing <= 0)
                 animationView.Locomotion(Speed, turn, !Grounded, Vertical);
-            game.Stamina = Mathf.Clamp(game.Stamina + dt * (Speed > 4 ? -7 : 19 + game.Profile.upgrades.stamina), 0, game.MaxStamina);
+            game.Stamina = Mathf.Clamp(game.Stamina + dt * (Speed > 5 ? -7 : 19 + game.Profile.upgrades.stamina), 0, game.MaxStamina);
             game.Energy = Mathf.Min(game.MaxEnergy, game.Energy + dt * (game.InTrial ? 5 : 12));
         }
     }

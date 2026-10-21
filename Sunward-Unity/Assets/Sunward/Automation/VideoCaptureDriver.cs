@@ -47,6 +47,9 @@ namespace Sunward.Editor.Automation
         bool active, completing, finishing, resetPending;
         Gamepad pad;
         InputSettings.UpdateMode previousInputMode;
+        InputSettings.BackgroundBehavior previousBackgroundBehavior;
+        InputSettings.EditorInputBehaviorInPlayMode previousEditorInput;
+        bool previousRunInBackground;
         Sunward.GameFlow game;
         Camera captureCamera;
         RenderTexture target;
@@ -83,7 +86,16 @@ namespace Sunward.Editor.Automation
                         framesDirectory=frames,telemetryFile=frames+"/telemetry.csv",missingStates=spec.expectedStates });
                 }
                 if (plan.Sum(p=>p.seconds*options.Fps)>options.MaxFrames) throw new Exception("Plan exceeds configured frame budget.");
-                previousInputMode=InputSystem.settings.updateMode; inputConfigured=true;
+                previousInputMode=InputSystem.settings.updateMode;
+                previousBackgroundBehavior=InputSystem.settings.backgroundBehavior;
+                previousEditorInput=InputSystem.settings.editorInputBehaviorInPlayMode;
+                previousRunInBackground=Application.runInBackground;
+                inputConfigured=true;
+                // Batch/editor captures have no focused Game View. Route the
+                // synthetic gamepad to gameplay instead of recording an idle wolf.
+                Application.runInBackground=true;
+                InputSystem.settings.backgroundBehavior=InputSettings.BackgroundBehavior.IgnoreFocus;
+                InputSystem.settings.editorInputBehaviorInPlayMode=InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
                 foreach (var device in InputSystem.devices) InputSystem.DisableDevice(device);
                 pad=InputSystem.AddDevice<Gamepad>("SunwardCaptureGamepad");
                 InputSystem.settings.updateMode=InputSettings.UpdateMode.ProcessEventsManually;
@@ -188,7 +200,12 @@ namespace Sunward.Editor.Automation
                 Vector3 right=game.Player.view.right; right.y=0; right.Normalize();
                 var state=new GamepadState { leftStick=new Vector2(Vector3.Dot(world,right),Vector3.Dot(world,forward)), leftTrigger=command.walk?1:0,rightTrigger=command.heavy?1:0 };
                 state=state.WithButton(GamepadButton.South,command.jump).WithButton(GamepadButton.East,command.dodge).WithButton(GamepadButton.RightShoulder,command.light).WithButton(GamepadButton.LeftStick,command.sprint);
+                if (!pad.enabled) InputSystem.EnableDevice(pad);
                 InputSystem.QueueStateEvent(pad,state); InputSystem.Update();
+                // Make suppressed input a specific failed capture, not fourteen
+                // technically valid MP4s containing the same idle pose.
+                if (world.sqrMagnitude>.1f && clip.frames>options.Fps && game.Player.input.Move.ReadValue<Vector2>().sqrMagnitude<.01f)
+                    throw new Exception("Capture gamepad input did not reach WolfInput.Move. focus="+Application.isFocused+", enabled="+pad.enabled+", actionEnabled="+game.Player.input.Move.enabled);
                 preparedFrame=Time.frameCount;
             } catch (Exception e) { FailClip(e); }
         }
@@ -286,7 +303,12 @@ namespace Sunward.Editor.Automation
                 foreach (var pending in report.clips.Where(c=>c.status=="not_started")) pending.error="Campaign stopped before this clip; inspect campaign error.";
                 SaveReport();
             } finally {
-                if (inputConfigured) InputSystem.settings.updateMode=previousInputMode;
+                if (inputConfigured) {
+                    InputSystem.settings.updateMode=previousInputMode;
+                    InputSystem.settings.backgroundBehavior=previousBackgroundBehavior;
+                    InputSystem.settings.editorInputBehaviorInPlayMode=previousEditorInput;
+                    Application.runInBackground=previousRunInBackground;
+                }
                 if (pad!=null) InputSystem.RemoveDevice(pad);
                 EditorApplication.Exit(report.status=="failed"?2:0);
             }

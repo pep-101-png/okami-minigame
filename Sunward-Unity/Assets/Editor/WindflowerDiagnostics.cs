@@ -64,7 +64,7 @@ namespace Sunward.Editor
                 throw new InvalidDataException("Open the playable Windflower scene first.");
             var families = new HashSet<string>();
             int assigned = 0, water = 0;
-            foreach (var renderer in home.GetComponentsInChildren<Renderer>(true))
+            foreach (var renderer in Resources.FindObjectsOfTypeAll<Renderer>().Where(r => r.gameObject.scene == home.gameObject.scene))
                 foreach (var material in renderer.sharedMaterials)
                 {
                     if (material && material.shader.name == "Sunward/Brush River")
@@ -81,9 +81,16 @@ namespace Sunward.Editor
                     if (!(texture is Texture2D) || !(normal is Texture2D))
                         throw new InvalidDataException("Artwork not assigned to actual scene renderer: " + Hierarchy(renderer.transform));
                     string asset = AssetDatabase.GetAssetPath(texture);
-                    if (!asset.StartsWith(WindflowerArt.Root))
-                        throw new InvalidDataException("Unexpected environment-art source: " + asset);
-                    string family = Path.GetFileNameWithoutExtension(asset).Replace("Paint-", "");
+                    string family;
+                    if (asset.StartsWith(WindflowerArt.Root))
+                        family = Path.GetFileNameWithoutExtension(asset).Replace("Paint-", "");
+                    else if (asset.StartsWith("Assets/Sunward/Textures/VillageFinish/"))
+                    {
+                        string painting = Path.GetFileNameWithoutExtension(asset);
+                        family = painting == "Bark" ? "wood" : painting.StartsWith("Rock-") ? "stone" : "";
+                        if (family == "") throw new InvalidDataException("Unexpected village-finish painting: " + asset);
+                    }
+                    else throw new InvalidDataException("Unexpected environment-art source: " + asset);
                     families.Add(family);
                     assigned++;
                 }

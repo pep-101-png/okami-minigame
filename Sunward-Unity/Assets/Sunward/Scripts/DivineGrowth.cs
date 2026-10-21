@@ -13,19 +13,9 @@ namespace Sunward
         float power;
         void Start()
         {
-            wind = new LineRenderer[9];
-            for (int i = 0; i < wind.Length; i++)
-            {
-                var go = new GameObject("Spectral wind " + i);
-                go.transform.SetParent(transform, false);
-                var l = go.AddComponent<LineRenderer>();
-                l.sharedMaterial = ink;
-                l.useWorldSpace = false;
-                l.positionCount = 22;
-                l.widthCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(.15f, 1), new Keyframe(1, 0));
-                l.widthMultiplier = .035f + (i % 3) * .015f;
-                wind[i] = l;
-            }
+            // No persistent movement aura/indicator around Amaterasu. Keep the
+            // earned power curls and short, event-driven combat effects.
+            wind = new LineRenderer[0];
 
             var list = new System.Collections.Generic.List<Transform>();
             foreach (var bone in player.animationView.animator.GetComponentsInChildren<Transform>())

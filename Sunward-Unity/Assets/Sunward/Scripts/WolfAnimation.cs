@@ -5,19 +5,36 @@ namespace Sunward
     public sealed class WolfAnimation : MonoBehaviour
     {
         public Animator animator;
-        Transform rootBone;
+        Transform rootBone, hips;
+        Vector3 hipsRest;
+        Quaternion hipsRestRotation;
+        float filteredSpeed;
+        bool groundedGait;
         readonly System.Collections.Generic.HashSet<string> missingStates = new System.Collections.Generic.HashSet<string>();
-        void Start()
+        void Awake()
         {
+            if (!animator) return;
             foreach (var t in animator.GetComponentsInChildren<Transform>())
-                if (t.name == "CTRL_root")
-                    rootBone = t;
+            {
+                if (t.name == "CTRL_root") rootBone = t;
+                if (t.name == "DEF_hips") hips = t;
+            }
+            if (hips) { hipsRest = hips.localPosition; hipsRestRotation = hips.localRotation; }
         }
 
         void LateUpdate()
         {
             if (rootBone)
                 rootBone.localPosition = Vector3.zero;
+            // Calm only the grounded gait's pelvis motion, not jumps/attacks or
+            // bone scale. The source wolf mesh, markings and animation clips stay intact.
+            if (hips && groundedGait && !animator.IsInTransition(0))
+            {
+                var p = hips.localPosition;
+                p.y = Mathf.Lerp(hipsRest.y, p.y, .70f);
+                hips.localPosition = p;
+                hips.localRotation = Quaternion.Slerp(hipsRestRotation, hips.localRotation, .82f);
+            }
         }
 
         public string Current { get; private set; } = "";
@@ -33,9 +50,12 @@ namespace Sunward
                 return;
             }
 
+            groundedGait = state.StartsWith("Walk_") || state.StartsWith("Jog_") || state.StartsWith("Sprint_");
+            bool phaseMatch = groundedGait && (Current.StartsWith("Walk_") || Current.StartsWith("Jog_") || Current.StartsWith("Sprint_"));
+            float phase = phaseMatch ? Mathf.Repeat((animator.IsInTransition(0) ? animator.GetNextAnimatorStateInfo(0) : animator.GetCurrentAnimatorStateInfo(0)).normalizedTime, 1) : 0;
             Current = state;
             animator.speed = duration > 0 ? ClipLength(state) / duration : 1;
-            animator.CrossFadeInFixedTime(state, blend, 0);
+            animator.CrossFadeInFixedTime(state, blend, 0, phase * ClipLength(state));
         }
 
         public float ClipLength(string state)
@@ -54,14 +74,13 @@ namespace Sunward
                 return;
             }
 
-            string gait = speed < .12f ? "Idle_Natural" : speed < 1 ? "Walk_Natural" : speed < 4 ? "Jog_Natural" : "Sprint_Fluid";
-            if (speed > .2f && Mathf.Abs(turn) > .55f)
-                gait = (speed < 1 ? "Walk" : speed < 4 ? "Jog" : "Sprint") + "_Turn_" + (turn < 0 ? "L" : "R");
-            Play(gait);
-            if (speed > .15f)
-                animator.speed = Mathf.Clamp(speed / (speed < 1 ? .5667f : speed < 4 ? 2.448f : 4.9725f), .55f, 1.6f);
-            else
-                animator.speed = 1;
+            filteredSpeed = Mathf.Lerp(filteredSpeed, speed, 1 - Mathf.Exp(-Time.deltaTime * 14));
+            // Hysteresis prevents footstep/contact noise repeatedly restarting gaits.
+            string gait = LocomotionTuning.Gait(filteredSpeed, turn, Current);
+            Play(gait, .18f);
+            float reference = LocomotionTuning.ReferenceSpeed(gait);
+            float rate = filteredSpeed > .15f ? Mathf.Clamp(filteredSpeed / reference, .65f, 1.95f) : 1;
+            animator.speed = Mathf.Lerp(animator.speed, rate, 1 - Mathf.Exp(-Time.deltaTime * 12));
         }
     }
 }

@@ -1,0 +1,22 @@
+{
+  "residents": 13,
+  "rocks": 122,
+  "trees": 21,
+  "bamboo": 7,
+  "houses": 15,
+  "groundcover": 540,
+  "bridge": 1,
+  "arenaRemovedSourceIds": [
+    349,
+    353,
+    354,
+    355,
+    356,
+    357,
+    358,
+    361,
+    383
+  ],
+  "lanternLegacyInkTrianglesRemoved": 2640,
+  "lanternPointShadowFixes": 36
+}
