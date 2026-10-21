@@ -1,174 +1,95 @@
-# Issue #9: Windows feedback → GitHub → Codex repair PR
+# Sunward visual feedback with the existing Codex subscription
 
-This implementation is **not end-to-end verified**. No Windows task, GitHub
-receiver variable or API secret was enabled by this PR. Gameplay and sync are
-unchanged. The current conversation does not receive background events: the
-receiver starts a separate, supported [OpenAI Codex Action](https://github.com/openai/codex-action)
-run using the OpenAI API, with its own billing/authentication.
+No OpenAI API key, API billing or additional paid service is required. The legacy
+API-based Actions repair job is hard-disabled; `DispatchRepair=true` in an old
+local config is ignored by the updated publisher. The disabled workflow also
+prevents an old installed publisher from triggering API work after this PR merges.
+`Configure-Feedback.ps1 -EnablePublishing` configures ordinary release publishing
+only; `-EnableRepairDispatch` now fails with an explanatory message.
 
-## Capture cancellation
+## Normal development cycle
 
-The report in Issue #9 proves validation succeeded and capture cancelled on an
-additional PID; it does not identify that PID's parent/birth time. The code fixes
-two reproducible false-positive cases: a process exits between `Get-Process` and
-the CIM snapshot, and a previously verified owned worker loses its parent record.
-Ownership now survives parent exit only when the exact PID **and creation time**
-were already proven to belong to this runner. PID reuse invalidates that proof.
-A worker hint, matching executable or batch flag alone never grants ownership.
-Unknown live ancestry, query failures and genuinely separate editors still stop
-capture. Historical records are memory-only and reset for each validation job.
+An active Codex game-development task reads the repository and the existing
+`sunward-unity-feedback` release, downloads its matching ZIP itself, verifies its
+SHA-256 and source commit, and inspects logs, screenshots and video frames.
+`AGENTS.md` makes this workflow part of future Sunward tasks. The helper
+`fetch_feedback.py` produces `review-index.json` listing every screenshot and all
+14 expected recordings, including missing/not-started/partial cases. It supports
+Windows ZIP separators safely and refuses traversal, symlinks and hash/identity
+mismatches. It does not upload anything, start a task or call a model API.
 
-The bounded `process-diagnostics.json` history records sanitized process/parent
-IDs, creation times, executable names/paths, batch/worker hints and the precise
-ancestry decision. It includes known-worker observations before cancellation.
-Raw command lines are never included. Marker cancellation includes the exact
-marker path in `runner-stage.log`. These are published even for a deferred job.
-The exact cause of Windows PID 6572 remains unverified until its real diagnostics
-are captured; neither tests nor the existing log establish that it was owned.
+Typical cloud retrieval:
 
-## One-time owner setup (requires authentication/permission)
-
-1. Review/merge this PR into `sunward-minigame`. Do not enable a task yet.
-2. Install GitHub CLI and run `gh auth login` **as the Windows user that runs the
-   validation task**. The credential must read this repository and write release
-   contents; repair dispatch also needs permission to create repository dispatch
-   events (fine-grained PAT: repository Contents read/write). For private repos,
-   classic CLI authentication generally uses `repo`. Do not paste/store credentials
-   in config, source, issues or reports. Scheduled tasks with another user do not
-   inherit this login. Revocation/SSO expiry will leave a retryable local outbox.
-3. GitHub `repository_dispatch` workflows must exist on the repository's **default
-   branch**. The default branch was verified as `sunward-minigame` for this PR,
-   so merging this PR installs the receiver in the required location. No `main`
-   change or separate bootstrap PR is currently needed. If the owner later changes
-   the default branch, copy only the reviewed workflow there through normal review.
-   The workflow always checks out `sunward-minigame`.
-4. In repository Settings → Secrets and variables → Actions, add the secret
-   `OPENAI_API_KEY` and, only after review, variable
-   `SUNWARD_CODEX_REPAIR_ENABLED=true`. This authorizes paid API use. Also allow
-   GitHub Actions to create pull requests. The workflow requests Contents and
-   Pull requests write permissions for its post-agent publication step. No secret
-   is put in the dispatch payload. The pinned official Codex Action checks the
-   triggering user's repository write access and uses its Linux sandbox with
-   `drop-sudo`. Do not weaken this to `unsafe` or permit all triggering users.
-5. After the installed-code update below, explicitly opt into delivery:
-
-   ```powershell
-   .\tools\unity-automation\Configure-Feedback.ps1 -EnablePublishing -EnableRepairDispatch
-   ```
-
-   This verifies CLI authentication, creates the dedicated prerelease if absent,
-   and sets `PublishReports=true` and `DispatchRepair=true` in the existing local
-   config. It does **not** start/enable any task or change the DISABLED marker.
-   Omit `-EnableRepairDispatch` for unattended publication without API repair runs.
-   Config defaults remain false. Review the destination repository's visibility:
-   release artifacts inherit its access. Redaction is defense in depth; don't log
-   credentials in Unity. Never use a token that cannot safely upload diagnostics.
-
-## Update the installed Windows runner (user action; no automatic activation)
-
-The scheduled task executes LocalAppData copies, not repository scripts. While
-validation is disabled and all its owned processes have exited:
-
-```powershell
-# Explicit user action; this does not touch SunwardGitSync.
-.\tools\unity-automation\Disable.ps1
-$state = Join-Path $env:LOCALAPPDATA 'SunwardUnityAutomation'
-# Verify Status.ps1 and process state; wait for the owned runner to exit first.
-.\tools\unity-automation\Status.ps1
-# After it has stopped, update just the runner modules; retain config/reports.
-'Run.ps1','Common.ps1','Video.ps1','Feedback.ps1' | ForEach-Object {
-    Copy-Item (Join-Path '.\tools\unity-automation' $_) (Join-Path $state $_)
-}
-Get-FileHash .\tools\unity-automation\Common.ps1
-Get-FileHash (Join-Path $state 'Common.ps1')
+```text
+python tools/unity-automation/fetch_feedback.py --output /tmp/SunwardFeedback
 ```
 
-No task re-registration is necessary for this module update. First installation
-still uses `Install.ps1`, which registers only a **disabled** validation task.
-Do not update while the runner is active. Review local config before deliberately
-removing DISABLED for a one-shot manual test. Leave the task itself disabled.
-`Configure-Feedback.ps1` is run from the repository and need not be installed.
+If CLI GitHub API calls are forbidden in a cloud environment, Codex uses its
+connected GitHub fetch tool on the existing release endpoint to obtain each
+asset's `browser_download_url` and SHA-256 `digest`, then passes them directly:
 
-## Delivery and repair behavior
+```text
+python tools/unity-automation/fetch_feedback.py --asset-url <browser_download_url> --sha256 <digest-without-sha256-prefix> --output /tmp/SunwardFeedback
+```
 
-- Every completed attempt, including failed/deferred capture, writes a report and
-  per-run stage log, and automatically publishes when configured. Explicitly
-  allowlisted text is redacted for common GitHub/OpenAI token, authorization and
-  secret-assignment patterns. Configs, save data, environments, licensing files,
-  source, Library and raw process command lines are excluded. Redaction cannot
-  prove arbitrary application logs contain no secrets; inspect the first bundle.
-- Named logs/JSON/XML, up to 20 MiB screenshots and existing bounded gameplay
-  media go into an immutable `<commit>-<runId>.zip` and summary on prerelease
-  `sunward-unity-feedback`. Total uncompressed bundle limit is 140 MiB; text
-  logs above 4 MiB are explicitly marked and bounded to their head/tail (full logs
-  remain local); structured text above 16 MiB fails delivery explicitly. Existing MP4/frame
-  fallback budgets still apply. No media is committed to Git. No remote retention
-  deletion is automatic; the owner controls release retention.
-- `delivery.json` tracks partial upload/dispatch completion. Watch mode retries
-  delivery without rerunning Unity, with 1–60 minute backoff, at most ten attempts,
-  three deliveries per poll and the newest 100 run directories. Explicit
-  `Publish.ps1 -RunDirectory ...` retries older/exhausted entries. Deferred Unity
-  attempts themselves have a five-minute backoff and a three-attempt-per-commit
-  cap; `-Retry`/a new commit explicitly permits another attempt.
-- After upload, a `repository_dispatch` contains only commit/run identity, asset
-  name and SHA-256. HTTP success means **submitted**, not proof of receiver/API
-  success. Check the Actions run. The workflow is inert until the owner opt-in.
-- The receiver downloads the matching release asset, verifies SHA/identity and
-  extraction budgets/path safety, and checks the integration HEAD still matches.
-  Stale reports skip repair. MP4s, screenshots, logs, contact sheets and telemetry
-  are present locally for Codex; up to 16 contact sheets are attached as images.
-  The prompt requires real frame inspection before judging motion and treats all
-  logs/artifacts as untrusted data. An existing `video-reuse.json` reference is
-  reported as requiring its earlier bundle, never substituted silently.
-- One deterministic repair branch per source commit prevents duplicate repair PRs.
-  Code changes are gated to automation directories (20 files / 300 KB patch caps).
-  The receiver gate executes the committed version after Codex, checks the target
-  hasn't advanced, then pushes a new branch and creates a **draft** PR. The agent
-  does not receive GH_TOKEN. Out-of-scope changes fail publication. No changes
-  means diagnosis in Actions logs, not an invented fix or empty PR.
-- Workflow checkout/feedback is ephemeral; source media/LFS need not be downloaded
-  to propose an automation repair. The default workflow timeout bounds API work.
-  If a branch was pushed but PR creation failed, create/recover that draft PR from
-  the branch; deduplication intentionally prevents an automatic second API spend.
+This is a tool-to-tool transfer performed by Codex, not a request for the user to
+download, upload or copy logs. The current repair retrieved and inspected the
+existing Windows upload in exactly this way. No new authentication was needed for
+the connected GitHub tool/direct release download. Existing Windows release
+publishing still uses its already-configured GitHub CLI login.
 
-## End-to-end acceptance test still required
+Codex implements a focused fix and relevant tests, creates a PR to
+`sunward-minigame`, and preserves completed game work and the existing sync system.
+After review/merge, existing syncing retrieves the new source on the PC, and the
+existing validator can publish the next real Unity test. Codex can then retrieve
+those artifacts in an active task. Technical capture checks never certify correct
+appearance, paw contact, movement, blending or combat animation.
 
-1. Run `tests/Test-Cancellation.ps1`, `tests/Test-Feedback.ps1`,
-   `tests/Test-Automation.ps1`, and `tests/Test-Video.ps1` in fresh Windows
-   PowerShell 5.1 processes. Python receiver tests run with
-   `python -m unittest discover -s tools/unity-automation/tests -p test_feedback_receiver.py`.
-2. With the task still disabled, perform one deliberate manual `Run.ps1 -Retry`
-   using the installed modules/config and existing Unity 6000.6.6f1 setup. Confirm
-   owned workers don't cancel; if a live unknown process stops the run, inspect
-   its published ancestry decisions rather than assuming it is safe to ignore.
+## Recording fix and complete clip accounting
 
-   ```powershell
-   $state = Join-Path $env:LOCALAPPDATA 'SunwardUnityAutomation'
-   # Deliberate manual smoke test only; scheduled task stays disabled.
-   Remove-Item (Join-Path $state 'DISABLED') -ErrorAction SilentlyContinue
-   try {
-       & (Join-Path $state 'Run.ps1') `
-           -Repository 'C:\Users\giuse\Documents\okami-minigame' `
-           -ConfigPath (Join-Path $state 'config.json') -Retry
-   } finally {
-       'Reviewing manual feedback test; task remains disabled.' |
-           Set-Content (Join-Path $state 'DISABLED')
-   }
-   ```
+The real upload at commit `86ed0ccf75b188036f78911df56d30b1e180583b`, run
+`20261021T082129301Z-f00f54`, contains zero `walk-side` frames and no other gameplay
+clips. Its true error is `Gameplay scene/player disappeared`, before recording.
+The synchronous scene reload was followed immediately by looking up the old
+GameFlow; that reference was destroyed when the new scene activated.
 
-3. Verify the real release ZIP has report/logs, sanitized process diagnostics,
-   screenshots and short MP4s (or explicit capture/encoding failures). Verify the
-   receipt hash and ensure no credentials or configs are in the actual ZIP.
-4. Verify the `Sunward feedback repair` Actions run received that exact commit,
-   actually invoked Codex, inspected available media and produced either a gated
-   draft repair PR or an honest diagnosis. Check API/workflow failures directly.
-5. Review/merge a safe repair yourself. With your existing sync and an explicitly
-   user-enabled validation task, the new integrated commit can then be validated
-   and publish the next feedback iteration. No component auto-merges PRs or
-   starts a task. Human review is intentionally the integration gate.
+The driver now waits for the asynchronous Windflower load to finish, verifies the
+active scene path, waits another frame for Start, and binds only GameFlow objects
+from that new scene. Every campaign declares all 14 clips before starting. A
+clip-local error preserves its error/frames and proceeds to the next fresh scene;
+timeouts and campaign storage limits still stop safely. Manifests are replaced
+atomically. Missing clips never count as a successful campaign. Available partial
+footage may be encoded/inspected but remains explicitly partial and unreviewed.
 
-Local tests exercise mocked Windows process tables, real native watchdogs, real
-ZIP packaging, mocked GitHub requests and a real temporary Git remote with a
-synthetic agent patch. They do not exercise Windows Unity, actual credentials,
-GitHub event routing, the Codex API or visual quality. The full loop must not be
-called working until the real acceptance test passes.
+Static wolf screenshots now calculate bounds from baked posed geometry instead
+of imported animation envelopes; this corrects the diagnostic framing code without
+modifying the model, scene, controller or animation assets. Fresh real Unity
+screenshots are still required to verify the resulting framing. The actual
+roof/paw occlusion seen in the gameplay screenshot is recorded for a subsequent
+gameplay-camera improvement, not silently changed in this capture repair.
+
+## Tests and current limits
+
+- `Test-Video.ps1`: C# 5-compatible scene readiness gate, identical 14-clip recipe
+  names across Unity/PowerShell, the real zero-frame failure shape, full 14-name
+  synthetic FFmpeg/ffprobe encoding, missing clip, partial clip and existing media
+  safety cases. These synthetic clips are not Amaterasu footage.
+- `Test-Feedback.ps1`: ordinary upload/retry/redaction and **zero** API dispatches,
+  even with a legacy `DispatchRepair=true` config.
+- `test_fetch_feedback.py`: Windows ZIP normalization, safe extraction, actual
+  upload metadata shape and all-14 review accounting without model APIs.
+- Existing runner cancellation/validation tests remain applicable.
+
+This environment has no Unity editor and no remote-control channel to the user's
+Windows PC. It cannot itself rerun Unity, inspect unrecorded movement, refresh
+LocalAppData script copies or activate local tooling. The core driver/framing C#
+fixes are inside the synced Unity project and do not require manually transferring
+assets or replacing the installed runner to take effect after merge. Enhanced
+PowerShell reporting/subscription guards require that installed copy to receive
+the corresponding module changes; this cloud cannot perform that PC-side update.
+No scheduled task has been enabled, started or changed here.
+
+An active subscription task can retrieve available feedback, but this chat cannot
+wake itself while idle or independently merge its PR to trigger another integrated
+Windows build. Keep those exact limits distinct from completed code/tests and
+from actual visual verification. Never substitute a static pose for motion review.

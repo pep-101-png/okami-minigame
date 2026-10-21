@@ -95,8 +95,8 @@ function Invoke-ValidationJob([string]$Commit) {
                 Write-AutomationLog "VIDEO reused unchanged Unity tree/settings: $($cached.runDirectory)"
             } else {
                 $videoSettings | ConvertTo-Json | Set-Content (Join-Path $runDirectory 'video-options.json') -Encoding UTF8
-                $r=Invoke-UnityStage $snapshot $runDirectory 'Sunward.Editor.Automation.GameplayVideoCapture.Run' 'gameplay-video' $true
-                $video=Complete-GameplayVideos $runDirectory $videoSettings
+                try { $r=Invoke-UnityStage $snapshot $runDirectory 'Sunward.Editor.Automation.GameplayVideoCapture.Run' 'gameplay-video' $true }
+                finally { $video=Complete-GameplayVideos $runDirectory $videoSettings }
                 $report.video=$video.status
                 if ($r.ExitCode -ne 0) { $report.video='capture_failed_or_incomplete'; $report.errors+='Video Unity process exit='+$r.ExitCode }
                 if ($video.status -eq 'encoded_verified_unreviewed' -and $r.ExitCode -eq 0) {

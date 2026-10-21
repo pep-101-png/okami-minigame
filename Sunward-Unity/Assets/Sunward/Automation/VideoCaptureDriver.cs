@@ -55,6 +55,10 @@ namespace Sunward.Editor.Automation
         RecorderVideoBridge recorder;
         string output, stage;
         Clip clip;
+        AsyncOperation sceneLoad;
+        VideoSceneLoadGate sceneGate;
+        double sceneLoadStarted;
+        bool inputConfigured;
         HashSet<string> observed=new HashSet<string>();
         Transform[] paws;
         Vector3 previousPosition;
@@ -72,8 +76,14 @@ namespace Sunward.Editor.Automation
                 if (!System.Text.RegularExpressions.Regex.IsMatch(stage,"^[a-z0-9-]+$")) throw new Exception("Invalid stage name.");
                 report=new Campaign { graphics=SystemInfo.graphicsDeviceType.ToString(),unityVersion=Application.unityVersion };
                 plan=VideoCapturePlan.Build();
+                foreach (var spec in plan) {
+                    string frames="video-frames/"+stage+"/"+spec.name;
+                    report.clips.Add(new Clip { name=spec.name,category=spec.category,angle=spec.angle,status="not_started",
+                        expectedFrames=spec.seconds*options.Fps,fps=options.Fps,width=options.Width,height=options.Height,
+                        framesDirectory=frames,telemetryFile=frames+"/telemetry.csv",missingStates=spec.expectedStates });
+                }
                 if (plan.Sum(p=>p.seconds*options.Fps)>options.MaxFrames) throw new Exception("Plan exceeds configured frame budget.");
-                previousInputMode=InputSystem.settings.updateMode;
+                previousInputMode=InputSystem.settings.updateMode; inputConfigured=true;
                 foreach (var device in InputSystem.devices) InputSystem.DisableDevice(device);
                 pad=InputSystem.AddDevice<Gamepad>("SunwardCaptureGamepad");
                 InputSystem.settings.updateMode=InputSettings.UpdateMode.ProcessEventsManually;
@@ -92,24 +102,34 @@ namespace Sunward.Editor.Automation
             Environment.SetEnvironmentVariable("SUNWARD_AUTOMATION_DATA",Path.Combine(output,"save-data","video-"+spec.name));
             UnityEngine.Random.InitState(1337);
             InputSystem.QueueStateEvent(pad,new GamepadState()); InputSystem.Update();
-            EditorSceneManager.LoadSceneInPlayMode(VideoCaptureRuntime.ScenePath,new LoadSceneParameters(LoadSceneMode.Single));
-            game=UnityEngine.Object.FindFirstObjectByType<Sunward.GameFlow>();
-            if (!game || !game.Player || !game.Combat) throw new Exception("Actual Windflower player/combat unavailable.");
+            // Do not bind GameFlow here: the previous scene may still be alive until
+            // activation. The old synchronous call returned a reference destroyed next frame.
+            game=null; clip=report.clips[index]; clip.status="loading_scene";
+            Directory.CreateDirectory(Path.Combine(output,clip.framesDirectory));
+            File.WriteAllText(Path.Combine(output,clip.framesDirectory,".sunward-owned-frames"),clip.name);
+            observed.Clear(); warmup=30; completing=false; preparedFrame=writtenFrame=-1;
+            sceneGate=new VideoSceneLoadGate(); sceneLoadStarted=timer.Elapsed.TotalSeconds;
+            sceneLoad=EditorSceneManager.LoadSceneAsyncInPlayMode(VideoCaptureRuntime.ScenePath,new LoadSceneParameters(LoadSceneMode.Single));
+            if (sceneLoad==null) throw new Exception("Windflower scene load returned no operation.");
+            report.status="recording"; SaveReport();
+            Debug.Log("SUNWARD VIDEO SCENE LOAD START: "+spec.name);
+        }
+        void WaitForScene()
+        {
+            if (timer.Elapsed.TotalSeconds-sceneLoadStarted>90) throw new TimeoutException("Windflower scene activation timed out: "+clip.name);
+            var scene=SceneManager.GetActiveScene();
+            if (!sceneGate.CanBind(Time.frameCount,sceneLoad.isDone,scene.isLoaded&&scene.path==VideoCaptureRuntime.ScenePath)) return;
+            var players=scene.GetRootGameObjects().SelectMany(root=>root.GetComponentsInChildren<Sunward.GameFlow>(false)).ToArray();
+            if (players.Length!=1) throw new Exception("Expected exactly one GameFlow in the newly activated Windflower scene.");
+            game=players[0];
+            if (!game.Player || !game.Combat || !game.valley || game.Player.gameObject.scene!=scene) throw new Exception("Actual Windflower player/combat/valley unavailable after activation.");
             game.Close();
             Time.captureDeltaTime=1f/options.Fps; Time.fixedDeltaTime=1f/options.Fps;
             QualitySettings.vSyncCount=0; Application.targetFrameRate=options.Fps;
-            Vector3 start=spec.category=="gameplay" ? new Vector3(0,0,-18) : new Vector3(35,0,-8);
-            start.y=game.valley.Height(start); game.Player.Teleport(start); game.Player.transform.rotation=Quaternion.identity;
-            clip=new Clip { name=spec.name,category=spec.category,angle=spec.angle,expectedFrames=spec.seconds*options.Fps,fps=options.Fps,width=options.Width,height=options.Height };
-            clip.framesDirectory="video-frames/"+stage+"/"+spec.name;
-            clip.telemetryFile=clip.framesDirectory+"/telemetry.csv";
-            Directory.CreateDirectory(Path.Combine(output,clip.framesDirectory));
-            File.WriteAllText(Path.Combine(output,clip.framesDirectory,".sunward-owned-frames"),clip.name);
-            report.clips.Add(clip); observed.Clear(); warmup=30; completing=false;
-            preparedFrame=writtenFrame=-1;
-            report.status="recording";
-            SaveReport();
-            Debug.Log("SUNWARD VIDEO WARMUP: "+spec.name);
+            Vector3 start=clip.category=="gameplay"?new Vector3(0,0,-18):new Vector3(35,0,-8);
+            start.y=game.valley.Height(start);game.Player.Teleport(start);game.Player.transform.rotation=Quaternion.identity;
+            sceneLoad=null;clip.status="warming_up";SaveReport();
+            Debug.Log("SUNWARD VIDEO WARMUP: "+clip.name+" scene="+scene.path);
         }
         void PrepareRecording()
         {
@@ -153,6 +173,7 @@ namespace Sunward.Editor.Automation
                 if (timer.Elapsed.TotalSeconds>options.TimeoutSeconds) throw new TimeoutException("Gameplay video campaign timed out.");
                 if (resetPending) { resetPending=false; BeginClip(); return; }
                 if (completing) { CompleteClip(); resetPending=true; return; }
+                if (sceneLoad!=null) { WaitForScene(); return; }
                 if (!game) throw new Exception("Gameplay scene/player disappeared.");
                 if (warmup>0) {
                     game.Close(); // close only the startup welcome panel during warmup.
@@ -169,7 +190,7 @@ namespace Sunward.Editor.Automation
                 state=state.WithButton(GamepadButton.South,command.jump).WithButton(GamepadButton.East,command.dodge).WithButton(GamepadButton.RightShoulder,command.light).WithButton(GamepadButton.LeftStick,command.sprint);
                 InputSystem.QueueStateEvent(pad,state); InputSystem.Update();
                 preparedFrame=Time.frameCount;
-            } catch (Exception e) { Fail(e); }
+            } catch (Exception e) { FailClip(e); }
         }
         public void CaptureFrame()
         {
@@ -211,7 +232,7 @@ namespace Sunward.Editor.Automation
                 clip.frames++; clip.durationSeconds=clip.frames/(float)options.Fps; writtenFrame=Time.frameCount;
                 if (clip.frames%options.Fps==0) { telemetry.Flush(); Debug.Log("SUNWARD VIDEO FRAME: "+clip.name+" "+clip.frames+"/"+clip.expectedFrames); SaveReport(); }
                 if (clip.frames>=clip.expectedFrames) completing=true;
-            } catch (Exception e) { Fail(e); }
+            } catch (Exception e) { FailClip(e); }
         }
         static string F(float value)=>value.ToString("R",CultureInfo.InvariantCulture);
         void CompleteClip()
@@ -233,7 +254,21 @@ namespace Sunward.Editor.Automation
             if (target) { target.Release(); Destroy(target); target=null; }
             if (image) { Destroy(image); image=null; }
         }
-        void SaveReport()=>File.WriteAllText(Path.Combine(output,"video-capture.json"),JsonUtility.ToJson(report,true));
+        void SaveReport()
+        {
+            string file=Path.Combine(output,"video-capture.json"),temporary=file+".tmp";
+            File.WriteAllText(temporary,JsonUtility.ToJson(report,true));
+            if (File.Exists(file)) File.Replace(temporary,file,null); else File.Move(temporary,file);
+        }
+        void FailClip(Exception error)
+        {
+            if (error is TimeoutException || error.Message.Contains("budget exceeded") || clip==null) { Fail(error);return; }
+            ReleaseClip();sceneLoad=null;game=null;
+            clip.status="failed";clip.error=error.ToString();clip.observedStates=observed.OrderBy(s=>s,StringComparer.Ordinal).ToArray();
+            clip.missingStates=plan[index].expectedStates.Where(s=>!observed.Any(state=>state.Contains(s))).ToArray();
+            completing=false;resetPending=true;SaveReport();
+            Debug.LogError("SUNWARD VIDEO CLIP FAILED: "+clip.name+" "+error);
+        }
         void Fail(Exception error)
         {
             if (finishing) return;
@@ -246,10 +281,12 @@ namespace Sunward.Editor.Automation
             if (finishing) return; finishing=true; active=false;
             try {
                 ReleaseClip();
-                if (report.status!="failed") report.status=report.clips.Count==plan.Count&&report.clips.All(c=>c.status=="frames_captured_unreviewed")?"frames_captured_unreviewed":"frames_captured_coverage_incomplete";
+                if (report.status!="failed") report.status=report.clips.Any(c=>c.status=="failed")?"failed":report.clips.Count==plan.Count&&report.clips.All(c=>c.status=="frames_captured_unreviewed")?"frames_captured_unreviewed":"frames_captured_coverage_incomplete";
+                if (report.status=="failed" && string.IsNullOrEmpty(report.error)) report.error=report.clips.Count(c=>c.status=="failed")+" of "+report.clips.Count+" clips failed; inspect each clip.error.";
+                foreach (var pending in report.clips.Where(c=>c.status=="not_started")) pending.error="Campaign stopped before this clip; inspect campaign error.";
                 SaveReport();
             } finally {
-                InputSystem.settings.updateMode=previousInputMode;
+                if (inputConfigured) InputSystem.settings.updateMode=previousInputMode;
                 if (pad!=null) InputSystem.RemoveDevice(pad);
                 EditorApplication.Exit(report.status=="failed"?2:0);
             }

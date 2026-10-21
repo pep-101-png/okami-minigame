@@ -3,6 +3,7 @@
 param([switch]$EnablePublishing,[switch]$EnableRepairDispatch,
     [string]$StateDirectory=(Join-Path $env:LOCALAPPDATA 'SunwardUnityAutomation'))
 $ErrorActionPreference='Stop'
+if ($EnableRepairDispatch) { throw 'API repair dispatch is disabled. Use -EnablePublishing alone for the Codex subscription workflow.' }
 if (-not $EnablePublishing) { throw 'Review setup, then explicitly pass -EnablePublishing. No task will be enabled.' }
 $path=Join-Path $StateDirectory 'config.json'
 if (-not (Test-Path $path)) { throw 'Install/review the validation runner before configuring feedback.' }
@@ -18,7 +19,6 @@ if ($r.ExitCode -ne 0) {
 }
 $config=Get-Content $path -Raw | ConvertFrom-Json
 $config.PublishReports=$true
-$config | Add-Member -NotePropertyName DispatchRepair -NotePropertyValue ([bool]$EnableRepairDispatch) -Force
+$config | Add-Member -NotePropertyName DispatchRepair -NotePropertyValue $false -Force
 $config | ConvertTo-Json -Depth 10 | Set-Content $path -Encoding UTF8
-Write-Host "Publishing configured. Repair dispatch=$EnableRepairDispatch. No scheduled task was started or enabled."
-if ($EnableRepairDispatch) { Write-Host 'Dispatch requires the reviewed receiver workflow on the default branch, SUNWARD_CODEX_REPAIR_ENABLED=true and OPENAI_API_KEY. See FEEDBACK_LOOP.md.' }
+Write-Host 'Publishing configured for Codex subscription review. No API repair dispatch, task start or task enablement.'

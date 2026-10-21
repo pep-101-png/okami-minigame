@@ -16,6 +16,18 @@ namespace Sunward.Editor.Automation
         public float worldX, worldZ;
         public bool walk, sprint, jump, dodge, light, heavy;
     }
+    // Scene activation and MonoBehaviour.Start can finish on different frames.
+    // Shared with the PowerShell C# 5 tests; no Unity dependency.
+    public sealed class VideoSceneLoadGate
+    {
+        int activationFrame = -1;
+        public bool CanBind(int frame, bool operationComplete, bool expectedSceneLoaded)
+        {
+            if (!operationComplete || !expectedSceneLoaded) { activationFrame = -1; return false; }
+            if (activationFrame < 0) { activationFrame = frame; return false; }
+            return frame > activationFrame;
+        }
+    }
     public static class VideoCapturePlan
     {
         public const int Version = 1;

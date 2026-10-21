@@ -33,11 +33,15 @@ function Find-VideoTool([string]$Explicit,[string]$Name,[string]$Sibling='') {
     }
     return $null
 }
-function Get-FrameInfo([string]$RunDirectory,[object]$Clip) {
-    if ($Clip.name -notmatch '^[a-z0-9-]{1,80}$' -or $Clip.expectedFrames -lt 1 -or $Clip.expectedFrames -gt 6000 -or $Clip.frames -ne $Clip.expectedFrames -or $Clip.fps -lt 12 -or $Clip.fps -gt 60) { throw 'Incomplete or invalid capture frame metadata.' }
+function Get-ExpectedVideoNames {
+    foreach ($gait in @('walk','jog','sprint')) { foreach ($angle in @('side','front','rear-quarter')) { "$gait-$angle" } }
+    'jump-air-land-side';'gait-stop-turn-side';'dodge-directions-rear-quarter';'combat-light-heavy-charge-side';'windflower-gameplay-route'
+}
+function Get-FrameInfo([string]$RunDirectory,[object]$Clip,[switch]$AllowPartial) {
+    if ($Clip.name -notmatch '^[a-z0-9-]{1,80}$' -or $Clip.expectedFrames -lt 1 -or $Clip.expectedFrames -gt 6000 -or $Clip.frames -lt 1 -or $Clip.frames -gt $Clip.expectedFrames -or (-not $AllowPartial -and $Clip.frames -ne $Clip.expectedFrames) -or $Clip.fps -lt 12 -or $Clip.fps -gt 60) { throw "Capture '$($Clip.name)' status=$($Clip.status), frames=$($Clip.frames)/$($Clip.expectedFrames), fps=$($Clip.fps). Unity cause: $($Clip.error)" }
     $directory=Resolve-VideoPath $RunDirectory $Clip.framesDirectory
     $files=@(Get-ChildItem -LiteralPath $directory -Filter 'frame_*.png' -File | Sort-Object Name)
-    if ($files.Count -ne $Clip.expectedFrames) { throw "Frame count mismatch for $($Clip.name)." }
+    if ($files.Count -ne $Clip.frames) { throw "Frame count mismatch for $($Clip.name)." }
     [long]$bytes=0
     for ($i=0;$i -lt $files.Count;$i++) {
         if ($files[$i].Name -cne ('frame_{0:D6}.png' -f $i)) { throw 'Missing/non-contiguous/duplicate frame numbers.' }
@@ -67,7 +71,7 @@ function Test-EncodedVideo([string]$Path,[object]$Clip,[string]$Probe) {
     if ($video.width -ne $Clip.width -or $video.height -ne $Clip.height -or [int]$video.nb_read_frames -ne $Clip.expectedFrames -or [Math]::Abs($fps-$Clip.fps) -gt .02 -or [Math]::Abs($duration-$expected) -gt [Math]::Max(.12,2/[double]$Clip.fps) -or $data.format.format_name -notmatch 'mp4') { throw 'Encoded duration/frame-count/resolution/fps/container mismatch.' }
     return [pscustomobject]@{duration=$duration;frames=[int]$video.nb_read_frames;width=[int]$video.width;height=[int]$video.height;fps=$fps;codec=$video.codec_name;sha256=(Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()}
 }
-function Complete-GameplayVideos([string]$RunDirectory,[object]$Settings) {
+function Complete-GameplayVideos([string]$RunDirectory,[object]$Settings,[string[]]$ExpectedNames=(Get-ExpectedVideoNames)) {
     $capturePath=Join-Path $RunDirectory 'video-capture.json'
     $result=[ordered]@{schemaVersion=1;status='capture_unavailable';quality='unreviewed';scope='Frame/encoding checks do not establish correct movement, paw contact, blending or appearance.';clips=@();errors=@()}
     if (-not (Test-Path $capturePath)) { $result.errors+='Unity did not return a video manifest; inspect gameplay-video-editor.log.' }
@@ -78,19 +82,31 @@ function Complete-GameplayVideos([string]$RunDirectory,[object]$Settings) {
         $result.ffmpegAvailable=[bool]$ffmpeg; $result.ffprobeAvailable=[bool]$ffprobe
         $directory=Join-Path $RunDirectory 'videos'; New-Item -ItemType Directory -Path $directory -Force | Out-Null
         [long]$fallbackBytes=0
-        foreach ($clip in $capture.clips) {
-            $entry=[ordered]@{name=$clip.name;status='failed';captureStatus=$clip.status;expectedFrames=$clip.expectedFrames;fps=$clip.fps;resolution=@($clip.width,$clip.height);quality='unreviewed';framesPreserved=$true;errors=@();sourceFrames=$clip.framesDirectory}
+        $ordered=@()
+        foreach ($name in $ExpectedNames) {
+            $found=@($capture.clips | Where-Object {$_.name -ceq $name})
+            if ($found.Count -eq 1) { $ordered+=$found[0] }
+            else { $ordered+=[pscustomobject]@{name=$name;status='not_started';expectedFrames=0;frames=0;fps=$Settings.Fps;width=$Settings.Width;height=$Settings.Height;framesDirectory='';error=$(if ($found.Count) {'Duplicate clip entries; capture evidence is ambiguous.'} else {'No capture entry: campaign stopped before this clip.'})} }
+        }
+        $result.expectedClipCount=$ExpectedNames.Count
+        $result.unexpectedClips=@($capture.clips | Where-Object {$_.name -notin $ExpectedNames} | ForEach-Object {$_.name})
+        foreach ($clip in $ordered) {
+            $entry=[ordered]@{name=$clip.name;status='failed';captureStatus=$clip.status;expectedFrames=$clip.expectedFrames;fps=$clip.fps;resolution=@($clip.width,$clip.height);quality='unreviewed';framesPreserved=$true;errors=@();sourceFrames=$clip.framesDirectory;captureError=$clip.error}
             try {
-                $frames=Get-FrameInfo $RunDirectory $clip
+                if ($clip.status -eq 'not_started') { $entry.status='not_captured';throw ("Clip not started: $($clip.name). $($clip.error) $($capture.error)") }
+                $frames=Get-FrameInfo $RunDirectory $clip -AllowPartial
+                $encodingClip=$clip | Select-Object *
+                $encodingClip.expectedFrames=$frames.Count
+                $partial=$frames.Count -ne $clip.expectedFrames
                 $entry.frames=$frames.Count; $entry.duration=$frames.Duration
                 if ($clip.telemetryFile) { Copy-Item -LiteralPath (Resolve-VideoPath $RunDirectory $clip.telemetryFile) -Destination (Join-Path $directory ($clip.name+'-telemetry.csv')) }
                 $destination=Join-Path $directory ($clip.name+'.mp4')
                 $encoded=$false
-                if (Test-Path $destination) { $entry.probe=Test-EncodedVideo $destination $clip $ffprobe; $encoded=$true; $entry.encoder='existing_verified' }
+                if (Test-Path $destination) { $entry.probe=Test-EncodedVideo $destination $encodingClip $ffprobe; $encoded=$true; $entry.encoder='existing_verified' }
                 if (-not $encoded -and $clip.recorderCandidate) {
                     $candidate=Resolve-VideoPath $RunDirectory $clip.recorderCandidate
                     if ((Test-Path $candidate) -and $ffprobe) {
-                        try { $entry.probe=Test-EncodedVideo $candidate $clip $ffprobe; Copy-Item -LiteralPath $candidate -Destination $destination; $encoded=$true; $entry.encoder='unity_recorder' }
+                        try { $entry.probe=Test-EncodedVideo $candidate $encodingClip $ffprobe; Copy-Item -LiteralPath $candidate -Destination $destination; $encoded=$true; $entry.encoder='unity_recorder' }
                         catch { $entry.errors+='Recorder candidate rejected: '+$_.Exception.Message }
                     }
                 }
@@ -98,12 +114,12 @@ function Complete-GameplayVideos([string]$RunDirectory,[object]$Settings) {
                     $temporary=Join-Path $directory ($clip.name+'-partial-'+[Guid]::NewGuid().ToString('N')+'.mp4')
                     $r=Invoke-AutomationProcess -Executable $ffmpeg -Arguments @('-hide_banner','-loglevel','error','-n','-framerate',[string]$clip.fps,'-start_number','0','-i',(Join-Path $frames.Directory 'frame_%06d.png'),'-frames:v',[string]$frames.Count,'-c:v','libx264','-preset','veryfast','-crf',[string]$Settings.Crf,'-maxrate','2500k','-bufsize','5000k','-pix_fmt','yuv420p','-threads','2','-an','-movflags','+faststart',$temporary) -TimeoutSeconds 300 -Stage ('encode '+$clip.name)
                     if ($r.ExitCode -ne 0) { throw "FFmpeg encoding failed: $($r.Stderr)" }
-                    if ($ffprobe) { $entry.probe=Test-EncodedVideo $temporary $clip $ffprobe; $encoded=$true; $entry.encoder='ffmpeg_libx264' }
+                    if ($ffprobe) { $entry.probe=Test-EncodedVideo $temporary $encodingClip $ffprobe; $encoded=$true; $entry.encoder='ffmpeg_libx264' }
                     Move-Item -LiteralPath $temporary -Destination $destination
                     if (-not $ffprobe) { $entry.status='mp4_unverified_missing_ffprobe'; $entry.errors+='ffprobe unavailable; frames preserved and MP4 not claimed verified.' }
                 }
                 if ($encoded) {
-                    $entry.status='encoded_verified_unreviewed';$entry.file='videos/'+$clip.name+'.mp4'
+                    $entry.status=if ($partial) {'partial_encoded_unreviewed'} else {'encoded_verified_unreviewed'};$entry.file='videos/'+$clip.name+'.mp4'
                     if ($ffmpeg) {
                         $sheet=Join-Path $directory ($clip.name+'-contact.png'); $stride=[Math]::Max(1,[int][Math]::Floor($frames.Count/12))
                         if (-not (Test-Path $sheet)) {
@@ -130,11 +146,16 @@ function Complete-GameplayVideos([string]$RunDirectory,[object]$Settings) {
                     } else { $entry.errors+='Frame archive exceeds upload budget; full numbered frames remain local.' }
                 }
             } catch { $entry.errors+=$_.Exception.Message; Write-AutomationLog "VIDEO ERROR $($clip.name): $($_.Exception.Message)" }
+            if ($clip.error) { $entry.errors+='Unity capture: '+$clip.error }
             $result.clips+= [pscustomobject]$entry
         }
         $verified=@($result.clips | Where-Object { $_.status -eq 'encoded_verified_unreviewed' })
-        $result.status=if ($result.clips.Count -gt 0 -and $verified.Count -eq $result.clips.Count -and $capture.status -eq 'frames_captured_unreviewed') { 'encoded_verified_unreviewed' } elseif ($verified.Count -gt 0) { 'partial_video_or_action_coverage' } else { 'frames_only_or_capture_failed' }
+        $result.status=if ($result.clips.Count -gt 0 -and $verified.Count -eq $ExpectedNames.Count -and $result.unexpectedClips.Count -eq 0 -and $capture.status -eq 'frames_captured_unreviewed') { 'encoded_verified_unreviewed' } elseif (@($result.clips | Where-Object {$_.status -in @('encoded_verified_unreviewed','partial_encoded_unreviewed')}).Count -gt 0) { 'partial_video_or_action_coverage' } else { 'frames_only_or_capture_failed' }
         if ($capture.error) { $result.errors+=$capture.error }
+    }
+    if ($result.clips.Count -eq 0) {
+        $result.expectedClipCount=$ExpectedNames.Count
+        foreach ($name in $ExpectedNames) { $result.clips+=[pscustomobject]@{name=$name;status='not_captured';quality='unreviewed';errors=@('No Unity capture manifest; inspect gameplay-video-editor.log.')} }
     }
     $result | ConvertTo-Json -Depth 12 | Set-Content (Join-Path $RunDirectory 'video-report.json') -Encoding UTF8
     return [pscustomobject]$result

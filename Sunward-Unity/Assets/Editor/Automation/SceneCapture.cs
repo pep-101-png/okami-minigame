@@ -88,15 +88,34 @@ namespace Sunward.Editor.Automation
         }
         static Bounds BoundsOf(GameObject root)
         {
-            var renderers = root.GetComponentsInChildren<Renderer>(true).Where(r => r.enabled && r.gameObject.activeInHierarchy).ToArray();
-            if (renderers.Length == 0) throw new Exception("No visible renderers: " + root.name);
-            var b = renderers[0].bounds; foreach (var r in renderers.Skip(1)) b.Encapsulate(r.bounds); return b;
+            // Imported skinned renderer bounds can include every animation's travel
+            // envelope. Frame the posed mesh, not those hundred-metre import bounds.
+            var skins=root.GetComponentsInChildren<SkinnedMeshRenderer>(true).Where(r=>r.enabled&&r.gameObject.activeInHierarchy&&r.sharedMesh).ToArray();
+            if (skins.Length>0) {
+                Bounds result=new Bounds();bool hasBounds=false;
+                foreach (var skin in skins) {
+                    var baked=new Mesh();
+                    try {
+                        skin.BakeMesh(baked);baked.RecalculateBounds();var local=baked.bounds;
+                        for (int corner=0;corner<8;corner++) {
+                            var offset=new Vector3((corner&1)==0?-local.extents.x:local.extents.x,(corner&2)==0?-local.extents.y:local.extents.y,(corner&4)==0?-local.extents.z:local.extents.z);
+                            var point=skin.transform.TransformPoint(local.center+offset);
+                            if (float.IsNaN(point.x)||float.IsInfinity(point.x)||float.IsNaN(point.y)||float.IsInfinity(point.y)||float.IsNaN(point.z)||float.IsInfinity(point.z)) throw new Exception("Invalid posed mesh bounds: "+skin.name);
+                            if (!hasBounds) {result=new Bounds(point,Vector3.zero);hasBounds=true;} else result.Encapsulate(point);
+                        }
+                    } finally {UnityEngine.Object.DestroyImmediate(baked);}
+                }
+                if (hasBounds) return result;
+            }
+            var renderers=root.GetComponentsInChildren<Renderer>(true).Where(r=>r.enabled&&r.gameObject.activeInHierarchy&&!(r is ParticleSystemRenderer)&&!(r is TrailRenderer)&&!(r is LineRenderer)).ToArray();
+            if (renderers.Length==0) throw new Exception("No visible renderers: "+root.name);
+            var b=renderers[0].bounds;foreach (var r in renderers.Skip(1)) b.Encapsulate(r.bounds);return b;
         }
         static void CaptureTarget(string name, string pattern, bool shader)
         {
             var selected = UnityEngine.Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None)
                 .Where(r => r.enabled && r.gameObject.activeInHierarchy &&
-                    System.Text.RegularExpressions.Regex.IsMatch(shader ? string.Join(" ", r.sharedMaterials.Where(m => m && m.shader).Select(m => m.shader.name)) : r.name, pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                    System.Text.RegularExpressions.Regex.IsMatch(shader ? string.Join(" ", r.sharedMaterials.Where(m => m && m.shader).Select(m => m.shader.name)) : Hierarchy(r.transform), pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
                 .OrderBy(r => Hierarchy(r.transform), StringComparer.Ordinal).FirstOrDefault();
             if (!selected) { report.views.Add(new View { name = name, status = "not_captured", detail = "No matching existing scene target" }); return; }
             Capture(name, BoundsOf(selected.gameObject), new Vector3(1,.65f,1));
