@@ -1,0 +1,59 @@
+name: Sunward feedback repair
+on:
+  repository_dispatch:
+    types: [sunward_unity_feedback]
+permissions:
+  contents: read
+concurrency:
+  group: sunward-feedback-${{ github.event.client_payload.commit }}
+  cancel-in-progress: false
+jobs:
+  repair:
+    # Deliberate repository-owner opt-in; adding this file alone does not spend API credits.
+    if: github.repository == 'pep-101-png/okami-minigame' && vars.SUNWARD_CODEX_REPAIR_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GIT_LFS_SKIP_SMUDGE: "1"
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: sunward-minigame
+          fetch-depth: 1
+          lfs: false
+          persist-credentials: false
+      - name: Verify event, fetch immutable feedback and prepare Codex input
+        id: prepare
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/unity-automation/feedback_receiver.py prepare
+      - name: Repair the automation from feedback
+        if: steps.prepare.outputs.run == 'true'
+        uses: openai/codex-action@c05cfd74ad95c626cdf05c6685e62becc3bf7813
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          permission-profile: ':workspace'
+          safety-strategy: drop-sudo
+          prompt-file: feedback/prompt.md
+          output-file: feedback/codex-result.md
+          codex-args: ${{ steps.prepare.outputs.codex_args }}
+      - name: Check scope and create review PR
+        if: steps.prepare.outputs.run == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPAIR_BASE: ${{ steps.prepare.outputs.base }}
+        # Execute the committed receiver, never an agent-edited copy of the publication gate.
+        run: |
+          git show "$REPAIR_BASE:tools/unity-automation/feedback_receiver.py" > "$RUNNER_TEMP/sunward-receiver.py"
+          python3 "$RUNNER_TEMP/sunward-receiver.py" finish
+      - name: Retain Codex diagnosis (not game media)
+        if: always() && steps.prepare.outputs.run == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: sunward-repair-${{ github.run_id }}
+          path: feedback/codex-result.md
+          retention-days: 7
+          if-no-files-found: ignore

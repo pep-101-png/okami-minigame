@@ -5,6 +5,7 @@ $ErrorActionPreference='Stop'
 $AutomationState=Join-Path $env:LOCALAPPDATA 'SunwardUnityAutomation'
 . (Join-Path $PSScriptRoot 'Common.ps1')
 . (Join-Path $PSScriptRoot 'Video.ps1')
+. (Join-Path $PSScriptRoot 'Feedback.ps1')
 $Config=Get-Content (Join-Path $AutomationState 'config.json') -Raw | ConvertFrom-Json
 $Config.PublishReports=$true
 $tokens=$null; $errors=$null

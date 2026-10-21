@@ -6,6 +6,7 @@ function Write-AutomationLog([string]$Message) {
     $path = Join-Path $AutomationState 'runner.log'
     if ((Test-Path $path) -and (Get-Item $path).Length -gt 5MB) { Move-Item $path "$path.previous" -Force }
     Add-Content -LiteralPath $path -Value $line
+    if ($script:AutomationRunDirectory) { Add-Content -LiteralPath (Join-Path $script:AutomationRunDirectory 'runner-stage.log') -Value $line }
 }
 function ConvertTo-AutomationArgument([string]$Value) {
     '"' + (($Value -replace '(\\*)"','$1$1\"') -replace '(\\+)$','$1$1') + '"'
@@ -72,7 +73,7 @@ function Invoke-ReadGit([string[]]$Arguments) {
 }
 function Get-AutomationProcessTable {
     # Query ancestry only when another Unity PID exists; never trust batchmode/name alone.
-    Get-CimInstance -ClassName Win32_Process -Property ProcessId,ParentProcessId,CreationDate -OperationTimeoutSec 5 -ErrorAction Stop
+    Get-CimInstance -ClassName Win32_Process -Property ProcessId,ParentProcessId,CreationDate,Name,CommandLine,ExecutablePath -OperationTimeoutSec 5 -ErrorAction Stop
 }
 function Get-OtherUnityProcess([int]$OwnedPid=0) {
     $candidates=@(Get-Process -Name Unity -ErrorAction SilentlyContinue | Where-Object { $_.Id -ne $OwnedPid })
@@ -82,20 +83,55 @@ function Get-OtherUnityProcess([int]$OwnedPid=0) {
         foreach ($entry in Get-AutomationProcessTable) { $table[[int]$entry.ProcessId]=$entry }
     } catch {
         Write-AutomationLog "SAFETY: process ancestry unavailable; treating additional Unity PIDs as external. $($_.Exception.Message)"
+        $script:LastUnityDiagnostics=@{ownedPid=$OwnedPid;error='CIM ancestry query failed';otherPids=@($candidates | ForEach-Object {$_.Id})}
+        Save-UnityProcessDiagnostics
         return $candidates
     }
+    if (-not $script:UnityOwnership) { $script:UnityOwnership=@{} }
+    $root=$table[$OwnedPid]
+    $history=$script:UnityOwnership[$OwnedPid]
+    if (-not $history -or ($root -and $history.rootBorn -ne $root.CreationDate)) {
+        $history=@{rootBorn=$(if ($root) { $root.CreationDate } else { $null });members=@{}}
+        $script:UnityOwnership[$OwnedPid]=$history
+    }
+    $diagnostics=@()
+    # A short-lived import worker may exit between Get-Process and the CIM snapshot.
+    # It cannot conflict once absent; never turn that enumeration race into cancellation.
+    $live=@{};foreach ($item in Get-Process -Name Unity -ErrorAction SilentlyContinue) { $live[[int]$item.Id]=$true }
     foreach ($candidate in $candidates) {
-        $current=$table[[int]$candidate.Id]; $seen=@{}; $owned=$false
+        if (-not $live.ContainsKey([int]$candidate.Id)) { $diagnostics+=@{pid=$candidate.Id;owned=$false;reason='exited_during_snapshot';chain=@()};continue }
+        $current=$table[[int]$candidate.Id]; $seen=@{}; $owned=$false; $chain=@();$why='missing_process_record'
         while ($current -and -not $seen.ContainsKey([int]$current.ProcessId)) {
             $seen[[int]$current.ProcessId]=$true
-            if ([int]$current.ProcessId -eq $OwnedPid) { $owned=$true; break }
+            $chain+= $current
+            if ([int]$current.ProcessId -eq $OwnedPid -and $current.CreationDate) { $owned=$true; $why='live_ancestry'; break }
+            if ($history.members.ContainsKey([int]$current.ProcessId) -and $history.members[[int]$current.ProcessId] -eq $current.CreationDate -and $current.CreationDate) { $owned=$true; $why='previously_verified_identity'; break }
             $parent=$table[[int]$current.ParentProcessId]
             # Missing/reused parents or cycles cannot establish ownership: fail closed.
+            $why=if (-not $parent) { 'parent_exited_or_missing' } elseif (-not $current.CreationDate -or -not $parent.CreationDate) { 'creation_time_unavailable' } elseif ($parent.CreationDate -gt $current.CreationDate) { 'parent_pid_reused' } else { 'unrelated_or_cyclic_ancestry' }
             if (-not $parent -or -not $current.CreationDate -or -not $parent.CreationDate -or $parent.CreationDate -gt $current.CreationDate) { break }
             $current=$parent
         }
+        if ($owned) { foreach ($entry in $chain) { $history.members[[int]$entry.ProcessId]=$entry.CreationDate } }
+        $details=@($chain | ForEach-Object {
+            # Never serialize raw command lines (licensing/auth arguments can contain secrets).
+            $command=[string]$_.CommandLine
+            [pscustomobject]@{pid=$_.ProcessId;parent=$_.ParentProcessId;created=$_.CreationDate;name=$_.Name;
+                batch=($command -match '(?i)(?:^|\s)-batchmode(?:\s|$)');workerHint=($command -match '(?i)AssetImportWorker');executable=$_.ExecutablePath}
+        })
+        $diagnostics+=@{pid=$candidate.Id;owned=$owned;reason=$why;chain=$details}
         if (-not $owned) { $candidate }
     }
+    $script:LastUnityDiagnostics=@{observedUtc=(Get-Date).ToUniversalTime().ToString('o');ownedPid=$OwnedPid;candidates=$diagnostics}
+    Save-UnityProcessDiagnostics
+}
+function Save-UnityProcessDiagnostics {
+    if (-not $script:AutomationRunDirectory) { return }
+    $signature=@{otherPids=$script:LastUnityDiagnostics.otherPids;ownedPid=$script:LastUnityDiagnostics.ownedPid;candidates=$script:LastUnityDiagnostics.candidates;error=$script:LastUnityDiagnostics.error} | ConvertTo-Json -Depth 9 -Compress
+    if ($signature -eq $script:UnityDiagnosticSignature) { return }
+    $script:UnityDiagnosticSignature=$signature
+    $script:UnityDiagnosticHistory=@(@($script:UnityDiagnosticHistory)+$script:LastUnityDiagnostics | Select-Object -Last 20)
+    @{observations=$script:UnityDiagnosticHistory;scope='Process identities and sanitized hints; no raw command lines'} | ConvertTo-Json -Depth 12 | Set-Content (Join-Path $script:AutomationRunDirectory 'process-diagnostics.json') -Encoding UTF8
 }
 function Test-OtherUnity([int]$OwnedPid=0) {
     return @(Get-OtherUnityProcess $OwnedPid).Count -gt 0

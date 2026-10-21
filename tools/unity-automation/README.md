@@ -241,9 +241,10 @@ gh release download sunward-unity-feedback --repo pep-101-png/okami-minigame --p
 
 Codex must match the report's exact commit, inspect failures and actual PNGs, then
 propose a separate fix/review PR. PNGs are not automatically judged beautiful or
-correct. Uploads do not start a new Codex task, approve artwork, merge PRs, resolve
-conflicts or self-authorize new development. The user must start/continue a Codex
-task to consume feedback; this chat cannot run indefinitely or react while idle.
+correct. Release uploads alone do not start a Codex task. The optional, owner-enabled
+GitHub Actions receiver in [FEEDBACK_LOOP.md](FEEDBACK_LOOP.md) now dispatches a
+separate Codex Action repair and opens a draft PR. It does not reactivate this chat,
+approve artwork or merge changes. A user review/merge remains the integration gate.
 
 Actions artifacts were not chosen because a cloud workflow cannot read local
 Windows files without another installed runner/service. A dedicated release uses
@@ -437,3 +438,9 @@ failure, stop-marker precedence/persistence/removal and reason-specific logs.
 Windows PowerShell 5.1 CIM behavior, actual Unity import-worker topology and the
 full Windows validation run still require testing on the PC. No successful
 Windows Unity validation is claimed.
+
+
+Issue #9 adds publishing for deferred/failed runs, an upload/dispatch retry outbox,
+process-exit race handling and birth-time-verified ownership history. See
+[FEEDBACK_LOOP.md](FEEDBACK_LOOP.md) for the supported repair receiver, one-time
+authentication, installed-script update steps and end-to-end acceptance test.
