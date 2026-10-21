@@ -360,3 +360,31 @@ Additional local tests: `tests/Test-Video.ps1` exercises the pure C# input plan,
 real FFmpeg/ffprobe synthetic-video encoding, contact sheets, Recorder-candidate
 selection, artifact reuse, malformed/missing-frame rejection, missing dependencies
 and safe feedback packaging. Synthetic fixtures are not gameplay evidence.
+
+
+## Windows PowerShell 5.1 video-test compiler compatibility
+
+`Test-Video.ps1` compiles the shared `VideoCapturePlan.cs` with `Add-Type`.
+Windows PowerShell 5.1 uses the older .NET Framework C# compiler; this shared
+file therefore uses C# 5 syntax (including a block-bodied `Pulse` method).
+PowerShell versions exposing `Add-Type -CompilerOptions` explicitly use
+`/langversion:5`, so modern test runs also reject newer syntax in this file.
+Windows PowerShell 5.1 uses its native compiler without unsupported parameters.
+Other `Add-Type` calls in the repository load the existing compression assembly;
+they do not compile additional C# source. Unity-only capture scripts retain their
+Unity-supported syntax and are not passed to PowerShell's compiler.
+
+This compatibility fix was checked on Linux PowerShell 7.4.6 with C# 5 language
+restrictions and the synthetic FFmpeg/ffprobe video suite. It does not establish
+Windows PowerShell 5.1/.NET Framework or Unity runtime validation. After reviewing
+the fix, run this from the repository root in a fresh **Windows PowerShell 5.1**
+window, with FFmpeg and ffprobe available:
+
+```powershell
+powershell.exe -NoProfile -File .\tools\unity-automation\tests\Test-Video.ps1
+```
+
+Expect the C# compilation PASS message followed by the video suite PASS message.
+This test uses temporary synthetic frames and does not run Unity, install tasks
+or change task state. Actual Unity recording/animation appearance still requires
+the previously documented isolated Unity smoke test; this fix does not perform it.
