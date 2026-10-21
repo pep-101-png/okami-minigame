@@ -24,5 +24,6 @@
     "KeepEncodedFrames": false,
     "MaxFeedbackMegabytes": 80,
     "MaxFrameArchiveMegabytes": 20
-  }
+  },
+  "DispatchRepair": false
 }

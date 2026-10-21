@@ -8,6 +8,7 @@ $AutomationState=[IO.Path]::GetFullPath($StateDirectory)
 New-Item -ItemType Directory -Path $AutomationState -Force | Out-Null
 . (Join-Path $PSScriptRoot 'Common.ps1')
 . (Join-Path $PSScriptRoot 'Video.ps1')
+. (Join-Path $PSScriptRoot 'Feedback.ps1')
 function Invoke-UnityStage([string]$Snapshot,[string]$RunDirectory,[string]$Method,[string]$Stage,[bool]$Graphics=$false,[bool]$Visible=$false) {
     if (Test-OtherUnity) { throw 'Unity opened before launch; validation deferred.' }
     $argsList=@('-projectPath',$Snapshot,'-executeMethod',$Method,'-logFile',(Join-Path $RunDirectory "$Stage-editor.log"))
@@ -20,38 +21,16 @@ function Invoke-UnityStage([string]$Snapshot,[string]$RunDirectory,[string]$Meth
     Invoke-AutomationProcess -Executable $UnityPath -Arguments $argsList -TimeoutSeconds $deadline -Environment $environment -CancelCheck $cancel -Stage $Stage -WorkingDirectory $Snapshot
 }
 function Publish-Feedback([string]$RunDirectory,[object]$Report) {
-    $reportPath=Join-Path $RunDirectory 'report.json'
-    $Report | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $reportPath -Encoding UTF8
-    if (-not $Config.PublishReports) { Write-AutomationLog 'UPLOAD skipped: PublishReports=false'; return $false }
-    $gh=(Get-Command gh -CommandType Application -ErrorAction Stop | Select-Object -First 1).Source
-    $assetName=$Report.commit+'-'+$Report.runId
-    $payload=Join-Path $RunDirectory 'feedback'
-    $payload=$payload+'-'+[Guid]::NewGuid().ToString('N')
-    New-Item -ItemType Directory -Path $payload | Out-Null
-    foreach ($p in Get-ChildItem -LiteralPath $RunDirectory -File | Where-Object { $_.Extension -in @('.json','.xml','.log') -and ($_.Name -notlike '*-report.json' -or $_.Name -eq 'video-report.json') }) { Copy-Item -LiteralPath $p.FullName -Destination $payload }
-    if (Test-Path (Join-Path $RunDirectory 'screenshots')) { Copy-Item (Join-Path $RunDirectory 'screenshots') $payload -Recurse }
-    Copy-VideoFeedback $RunDirectory $payload (Get-VideoConfig $Config)
-    $archive=Join-Path $RunDirectory ($assetName+'.zip')
-    Add-Type -AssemblyName System.IO.Compression.FileSystem
-    if (-not (Test-Path $archive)) { [IO.Compression.ZipFile]::CreateFromDirectory($payload,$archive) }
-    $summary=Join-Path $RunDirectory ($assetName+'-report.json')
-    Copy-Item $reportPath $summary -Force
-    $existing=Invoke-AutomationProcess -Executable $gh -Arguments @('release','view','sunward-unity-feedback','--repo','pep-101-png/okami-minigame','--json','assets') -Stage 'check reporting release'
-    if ($existing.ExitCode -ne 0) { throw 'Reporting release is unavailable. Create it manually as documented; reports remain local.' }
-    $assetNames=@(($existing.Stdout | ConvertFrom-Json).assets | ForEach-Object { $_.name })
-    foreach ($asset in @($archive,$summary)) {
-        if ([IO.Path]::GetFileName($asset) -in $assetNames) { continue }
-        $result=Invoke-AutomationProcess -Executable $gh -Arguments @('release','upload','sunward-unity-feedback',$asset,'--repo','pep-101-png/okami-minigame') -TimeoutSeconds 300 -Stage 'upload feedback'
-        if ($result.ExitCode -ne 0) { throw "Upload failed; local reports remain in $RunDirectory. $($result.Stderr)" }
-    }
-    return $true
+    $Report | ConvertTo-Json -Depth 12 | Set-Content (Join-Path $RunDirectory 'report.json') -Encoding UTF8
+    Invoke-FeedbackPublish $RunDirectory $Report
 }
 function Test-CommitPending([string]$Commit,[bool]$Force=$false) {
     if ($Force) { return $true }
     $path=Join-Path $AutomationState 'last-run.json'
     if (-not (Test-Path $path)) { return $true }
     $last=Get-Content $path -Raw | ConvertFrom-Json
-    return $last.commit -ne $Commit -or $last.status -eq 'deferred'
+    if ($last.commit -ne $Commit) { return $true }
+    return $last.status -eq 'deferred' -and (-not $last.attempts -or $last.attempts -lt 3) -and (-not $last.nextAttemptUtc -or [datetime]$last.nextAttemptUtc -le (Get-Date).ToUniversalTime())
 }
 function Invoke-ValidationJob([string]$Commit) {
     $runId=(Get-Date).ToUniversalTime().ToString('yyyyMMddTHHmmssfffZ')+'-'+[Guid]::NewGuid().ToString('N').Substring(0,6)
@@ -59,6 +38,9 @@ function Invoke-ValidationJob([string]$Commit) {
     New-Item -ItemType Directory -Path $runDirectory -Force | Out-Null
     $report=[ordered]@{schemaVersion=1;commit=$Commit;runId=$runId;startedUtc=(Get-Date).ToUniversalTime().ToString('o');
         status='running';compilation='not_run';validation='not_run';tests='not_run';visual='not_run';preservation='not_run';build='not_requested';errors=@();runDirectory=$runDirectory}
+    $script:AutomationRunDirectory=$runDirectory
+    $script:UnityOwnership=@{}
+    $script:UnityDiagnosticHistory=@();$script:UnityDiagnosticSignature=$null
     $snapshot=$null
     try {
         $snapshot=New-ProjectSnapshot $Commit $runDirectory
@@ -141,12 +123,16 @@ function Invoke-ValidationJob([string]$Commit) {
     $report.finishedUtc=(Get-Date).ToUniversalTime().ToString('o')
     $report | ConvertTo-Json -Depth 12 | Set-Content (Join-Path $runDirectory 'report.json') -Encoding UTF8
     $published=$false
-    if ($report.status -ne 'deferred') { try { $published=Publish-Feedback $runDirectory $report } catch { Write-AutomationLog $_.Exception.Message } }
-    $checkpoint=[ordered]@{commit=$Commit;runDirectory=$runDirectory;status=$report.status;published=$published;finishedUtc=$report.finishedUtc}
+    try { $published=Publish-Feedback $runDirectory $report } catch { Write-AutomationLog $_.Exception.Message }
+    $priorPath=Join-Path $AutomationState 'last-run.json'
+    $prior=if (Test-Path $priorPath) {Get-Content $priorPath -Raw | ConvertFrom-Json} else {$null}
+    $attempts=if ($prior -and $prior.commit -eq $Commit -and $prior.attempts) { [int]$prior.attempts+1 } else {1}
+    $checkpoint=[ordered]@{attempts=$attempts;nextAttemptUtc=(Get-Date).ToUniversalTime().AddMinutes(5).ToString('o');commit=$Commit;runDirectory=$runDirectory;status=$report.status;published=$published;finishedUtc=$report.finishedUtc}
     $checkpoint | ConvertTo-Json | Set-Content (Join-Path $AutomationState 'last-run.json') -Encoding UTF8
     # Only successful, completed runner-created snapshots are disposable; reports remain.
     if ($snapshot -and $report.status -like 'passed*' -and -not $Config.KeepSuccessfulSnapshots) { try { Remove-OwnedSnapshot $snapshot $runDirectory } catch { Write-AutomationLog $_.Exception.Message } }
     Write-AutomationLog "JOB END: $($report.status) published=$published"
+    $script:AutomationRunDirectory=$null
     return $report
 }
 function Invoke-ValidationMonitoring([int]$MaxPolls=0) {
@@ -155,12 +141,13 @@ function Invoke-ValidationMonitoring([int]$MaxPolls=0) {
     do {
         $polls++
         if (Test-Path (Join-Path $AutomationState 'DISABLED')) { break }
+        Invoke-FeedbackOutbox
         if (Test-RepositoryReady) {
             $head=Invoke-ReadGit @('rev-parse','HEAD')
             if ($head -ne $candidate) { $candidate=$head; $stable.Restart(); Write-AutomationLog "Candidate $head; waiting $($Config.StableSeconds)s for stable sync." }
             if ($stable.Elapsed.TotalSeconds -ge $Config.StableSeconds) {
                 if (Test-CommitPending $head ([bool]$Retry)) { $job=Invoke-ValidationJob $head; $Retry=$false; if (-not $Watch -and $job.status -eq 'failed') { return 1 } }
-                else { Write-AutomationLog "Already attempted $head; no repeat validation or report upload." }
+                else { Write-AutomationLog "Validation already attempted or deferred retry waiting/capped for $head; feedback outbox checked separately." }
                 if (-not $Watch) { break }
             }
         } else { $candidate=$null; $stable.Restart(); if (-not $Watch) { break } }
@@ -175,6 +162,7 @@ try {
     if (Test-Path (Join-Path $AutomationState 'DISABLED')) { throw 'Automation is disabled. Review before removing DISABLED or using Enable.ps1.' }
     if (-not (Test-Path $ConfigPath)) { throw 'Copy config.example.json to config.json and review it before running.' }
     $Config=Get-Content $ConfigPath -Raw | ConvertFrom-Json
+    [void](Get-FeedbackOptions)
     foreach ($name in @('CaptureScreenshots','CapturePlayMode','AllowVisibleCapture','PublishReports','BuildWindowsPlayer','KeepSuccessfulSnapshots')) { if ($Config.$name -isnot [bool]) { throw "Config $name must be a JSON boolean." } }
     if ($Config.PollSeconds -lt 10 -or $Config.StableSeconds -lt 10 -or $Config.UnityTimeoutSeconds -lt 60) { throw 'Unsafe timing configuration.' }
     $Repository=(Resolve-Path -LiteralPath $Repository).Path

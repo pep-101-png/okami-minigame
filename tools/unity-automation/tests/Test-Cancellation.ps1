@@ -16,6 +16,7 @@ function Get-Process { [CmdletBinding()] param([string]$Name) if ($Name -ne 'Uni
 function Get-AutomationProcessTable {
     $script:queryCount++
     if ($script:queryFails) { throw 'simulated CIM failure' }
+    if ($script:exitOnQuery) { $script:unity=@(Unity 100);$script:exitOnQuery=$false }
     $script:processTable
 }
 function Unity([int]$Id) { [pscustomobject]@{Id=$Id} }
@@ -30,18 +31,43 @@ try {
     Assert (-not (Test-OtherUnity 100)) 'owned editor must be excluded'
     Assert ($script:queryCount -eq 0) 'owned-only check should not query CIM'
     Assert (Test-OtherUnity) 'prelaunch must block any Unity, including a prior runner'
+    $script:unity=@(Unity 100;Unity 999);$script:processTable=@((Record 100 50 0));$script:exitOnQuery=$true
+    Assert (-not (Test-OtherUnity 100)) 'worker exited between enumeration and CIM must not cancel'
+    Assert ($script:LastUnityDiagnostics.candidates[0].reason -eq 'exited_during_snapshot') 'process-exit race not diagnosed'
     $script:unity=@(Unity 100;Unity 101;Unity 103)
     $script:processTable=@((Record 100 50 0);(Record 101 100 1);(Record 102 101 2);(Record 103 102 3))
     # The old direct-PID filter falsely flagged 101 and 103.
     Assert (@($script:unity | Where-Object { $_.Id -ne 100 }).Count -eq 2) 'reproduce legacy worker false positive'
     foreach ($cycle in 1..3) { Assert (-not (Test-OtherUnity 100)) 'owned import workers/grandchildren must not cancel' }
     Assert (-not (Get-UnityCancellationReason 100)) 'owned tree has no cancellation reason'
+    # Once observed with a verified birth time, an owned worker remains owned
+    # when its parent exits/reparents; name/flags alone never establish ownership.
+    $saved=$script:processTable
+    $script:processTable=@((Record 101 999 1);(Record 103 998 3))
+    $script:unity=@(Unity 101;Unity 103)
+    Assert (-not (Test-OtherUnity 100)) 'verified workers lost ownership after parent exit'
+    $script:processTable=@((Record 101 999 99))
+    $script:unity=@(Unity 101)
+    Assert (Test-OtherUnity 100) 'reused worker PID must not inherit cached ownership'
+    $script:processTable=$saved
+    $script:unity=@(Unity 100;Unity 101;Unity 103)
     $script:unity+=Unity 200
     $script:processTable+=Record 200 50 4
     Assert (Test-OtherUnity 100) 'separate editor/competing batch must still cancel'
     Assert ((Get-UnityCancellationReason 100) -match 'owned PID=100; other PIDs=200') 'external reason/PIDs missing'
+    $script:AutomationRunDirectory=$AutomationState
+    $script:UnityDiagnosticHistory=@();$script:UnityDiagnosticSignature=$null
+    $hint=Record 201 999 5
+    $hint | Add-Member CommandLine 'Unity.exe -batchmode -name AssetImportWorker0 -password DO_NOT_PUBLISH'
+    $script:processTable=@((Record 100 50 0);$hint);$script:unity=@(Unity 100;Unity 201)
+    Assert (Test-OtherUnity 100) 'worker flags alone must not grant ownership'
+    $forensics=Get-Content (Join-Path $AutomationState 'process-diagnostics.json') -Raw
+    Assert ($forensics -match 'workerHint' -and $forensics -notmatch 'DO_NOT_PUBLISH|password') 'diagnostics leaked raw command line'
+    $script:AutomationRunDirectory=$null
+    $script:UnityOwnership=@{}
     $script:unity=@(Unity 101);$script:processTable=@((Record 101 999 1))
     Assert (Test-OtherUnity 100) 'unknown ancestry must fail closed'
+    Assert ($script:LastUnityDiagnostics.candidates[0].reason -eq 'parent_exited_or_missing') 'missing-parent diagnostics absent'
     $script:processTable=@((Record 100 50 10);(Record 101 100 1))
     Assert (Test-OtherUnity 100) 'reused parent PID must not establish ownership'
     $script:processTable=@((Record 101 102 1);(Record 102 101 1))

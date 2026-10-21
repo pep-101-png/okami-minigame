@@ -8,6 +8,7 @@ $AutomationState=Join-Path $root 'state'
 New-Item -ItemType Directory -Path $Repository,$AutomationState -Force | Out-Null
 . (Join-Path $tools 'Common.ps1')
 . (Join-Path $tools 'Video.ps1')
+. (Join-Path $tools 'Feedback.ps1')
 function Assert([bool]$Condition,[string]$Message) { if (-not $Condition) { throw "ASSERT: $Message" } }
 $GitExecutable=(Get-Command git -CommandType Application | Select-Object -First 1).Source
 try {
@@ -91,6 +92,18 @@ try {
     Assert ($script:unityCalls -eq 2) 'job stage ordering changed'
     Assert ((Get-Content (Join-Path $AutomationState 'last-run.json') -Raw | ConvertFrom-Json).commit -eq $commit) 'commit checkpoint missing'
     Assert ([IO.File]::ReadAllText($liveAsset) -ceq $pointer) 'validation changed live asset'
+    $checkpointPath=Join-Path $AutomationState 'last-run.json'
+    $savedCheckpoint=Get-Content $checkpointPath -Raw
+    $deferred=$savedCheckpoint | ConvertFrom-Json
+    $deferred.status='deferred';$deferred.attempts=1;$deferred.nextAttemptUtc=(Get-Date).ToUniversalTime().AddMinutes(5).ToString('o')
+    $deferred | ConvertTo-Json | Set-Content $checkpointPath
+    Assert (-not (Test-CommitPending $commit)) 'deferred retry ignored five-minute backoff'
+    $deferred.nextAttemptUtc=(Get-Date).ToUniversalTime().AddMinutes(-1).ToString('o');$deferred.attempts=2
+    $deferred | ConvertTo-Json | Set-Content $checkpointPath
+    Assert (Test-CommitPending $commit) 'eligible deferred retry was skipped'
+    $deferred.attempts=3;$deferred | ConvertTo-Json | Set-Content $checkpointPath
+    Assert (-not (Test-CommitPending $commit)) 'deferred retry cap ignored'
+    Set-Content $checkpointPath $savedCheckpoint
     foreach ($cycle in 1..3) { Assert (-not (Test-CommitPending $commit)) 'repeated polls retriggered a completed commit' }
     Assert (Test-CommitPending $commit $true) 'explicit Retry was ignored'
     Assert (Test-CommitPending ('f'*40)) 'new commit was skipped'
@@ -110,6 +123,15 @@ try {
     Assert ($result.video -eq 'capture_failed_or_incomplete') 'missing video was accepted'
     Assert (Test-Path (Join-Path $result.runDirectory 'video-report.json')) 'missing-video report absent'
     $Config.Video.Enabled=$false
+    $script:deferredDeliveries=0
+    function Invoke-UnityStage { throw 'Cancelled capture: synthetic process conflict' }
+    function Invoke-FeedbackPublish([string]$RunDirectory,[object]$Report) {
+        if ($Report.status -eq 'deferred') { $script:deferredDeliveries++ }
+        return $false
+    }
+    $result=Invoke-ValidationJob $commit
+    Assert ($result.status -eq 'deferred' -and $script:deferredDeliveries -eq 1) 'deferred failure diagnostics bypassed publisher'
+    . (Join-Path $tools 'Feedback.ps1')
     function Invoke-UnityStage { return [pscustomobject]@{ExitCode=1} }
     $result=Invoke-ValidationJob $commit
     Assert ($result.status -eq 'failed') 'compilation/startup failure was accepted'
