@@ -241,10 +241,10 @@ gh release download sunward-unity-feedback --repo pep-101-png/okami-minigame --p
 
 Codex must match the report's exact commit, inspect failures and actual PNGs, then
 propose a separate fix/review PR. PNGs are not automatically judged beautiful or
-correct. Release uploads alone do not start a Codex task. The optional, owner-enabled
-GitHub Actions receiver in [FEEDBACK_LOOP.md](FEEDBACK_LOOP.md) now dispatches a
-separate Codex Action repair and opens a draft PR. It does not reactivate this chat,
-approve artwork or merge changes. A user review/merge remains the integration gate.
+correct. Release uploads do not start a Codex task. Use the existing Codex subscription
+workflow in [FEEDBACK_LOOP.md](FEEDBACK_LOOP.md): an active task retrieves and inspects
+feedback itself. The API-billed Actions receiver is disabled and legacy DispatchRepair
+flags no longer dispatch it. No API key or new paid service is required.
 
 Actions artifacts were not chosen because a cloud workflow cannot read local
 Windows files without another installed runner/service. A dedicated release uses

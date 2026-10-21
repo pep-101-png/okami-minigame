@@ -9,8 +9,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   repair:
-    # Deliberate repository-owner opt-in; adding this file alone does not spend API credits.
-    if: github.repository == 'pep-101-png/okami-minigame' && vars.SUNWARD_CODEX_REPAIR_ENABLED == 'true'
+    # Disabled at the owner's request: use active Codex subscription tasks.
+    # Do not enable an API-billed receiver or add API keys for this workflow.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:

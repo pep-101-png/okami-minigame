@@ -4,7 +4,7 @@ function Get-FeedbackOptions {
     $dispatch=$false
     if ($Config.PSObject.Properties.Name -contains 'DispatchRepair') {
         if ($Config.DispatchRepair -isnot [bool]) { throw 'DispatchRepair must be a JSON boolean.' }
-        $dispatch=$Config.DispatchRepair
+        if ($Config.DispatchRepair -and -not $script:ApiDispatchWarningShown) { Write-AutomationLog 'API repair dispatch disabled: publish feedback for the existing Codex subscription workflow.';$script:ApiDispatchWarningShown=$true }
     }
     [pscustomobject]@{Publish=[bool]$Config.PublishReports;Dispatch=$dispatch}
 }
