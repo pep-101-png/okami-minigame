@@ -388,3 +388,52 @@ Expect the C# compilation PASS message followed by the video suite PASS message.
 This test uses temporary synthetic frames and does not run Unity, install tasks
 or change task state. Actual Unity recording/animation appearance still requires
 the previously documented isolated Unity smoke test; this fix does not perform it.
+
+## Cancellation ownership and diagnostics
+
+The watchdog excludes the Unity PID it launched **and verified descendants**
+(such as Unity asset-import workers). It uses Windows CIM parent-process records
+and creation times to establish ancestry, rather than treating every differently
+numbered `Unity.exe` as a user editor. Missing ancestry, parent PID reuse, query
+failure or cycles fail closed: additional Unity processes remain external.
+Prelaunch checks still block any existing Unity process. A separate editor or
+competing batch process is never exempted merely by name, command-line flags or
+project path. Cancellation still stops only the runner-owned process tree.
+
+`DISABLED` remains authoritative and is never removed by the watchdog. Logs now
+separate `stop marker present: <path>` from `Unity outside owned process tree:
+owned PID=...; other PIDs=...`. An ancestry query failure is also logged. The old
+combined message could not establish whether a historical run saw a worker,
+marker or competing process. The direct-PID worker false positive is reproduced
+by `tests/Test-Cancellation.ps1`; the exact cause of the reported Windows runs
+cannot be recovered from their combined message alone.
+
+Installed tasks execute copied scripts under
+`$env:LOCALAPPDATA\SunwardUnityAutomation`, not automatically the repository copy.
+Use the existing disable/wait/reviewed-update procedure above before a deliberate
+manual retry; this PR does not update installed files or change task state.
+For read-only diagnosis in Windows PowerShell:
+
+```powershell
+$state = Join-Path $env:LOCALAPPDATA 'SunwardUnityAutomation'
+Test-Path (Join-Path $state 'DISABLED')
+Get-FileHash (Join-Path $state 'Common.ps1')
+Get-FileHash .\tools\unity-automation\Common.ps1
+Get-CimInstance Win32_Process -Filter "Name = 'Unity.exe'" |
+    Select-Object ProcessId, ParentProcessId, CreationDate
+Get-ScheduledTask -TaskName SunwardUnityValidation | Select-Object TaskName, State
+```
+
+Compare hashes to confirm which code is installed. A pre-existing marker blocks
+startup; one created during a run cancels it. Read-only status does not establish
+who created the marker. Matching Unity PIDs to parent records identifies owned
+workers versus another process; a separate automated Unity launch is treated just
+as conservatively as a manually opened editor.
+
+Regression tests run on Linux PowerShell 7.4.6 with mocked Windows process tables
+and actual native child-process watchdogs. They cover owned main/worker/nested
+processes, independent editors/batches, unknown/reused/cyclic ancestry, CIM
+failure, stop-marker precedence/persistence/removal and reason-specific logs.
+Windows PowerShell 5.1 CIM behavior, actual Unity import-worker topology and the
+full Windows validation run still require testing on the PC. No successful
+Windows Unity validation is claimed.

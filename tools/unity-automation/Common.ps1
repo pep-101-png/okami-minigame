@@ -42,7 +42,13 @@ function Invoke-AutomationProcess {
         $started=$process.Start(); $process.StandardInput.Close()
         $out=$process.StandardOutput.ReadToEndAsync(); $err=$process.StandardError.ReadToEndAsync()
         while (-not ($process.HasExited -and $out.IsCompleted -and $err.IsCompleted)) {
-            if ($CancelCheck -and (& $CancelCheck $process.Id)) { throw "Cancelled ${Stage}: stop requested or another Unity editor opened." }
+            if ($CancelCheck) {
+                $reason=& $CancelCheck $process.Id
+                if ($reason) {
+                    if ($reason -isnot [string]) { $reason='cancellation requested by callback' }
+                    throw "Cancelled ${Stage}: $reason"
+                }
+            }
             if ($timer.Elapsed.TotalSeconds -ge $TimeoutSeconds) { throw "Timeout in $Stage after ${TimeoutSeconds}s." }
             if ($timer.Elapsed.TotalSeconds -ge $next) {
                 Write-AutomationLog "WAIT $Stage elapsed=$([int]$timer.Elapsed.TotalSeconds)s PID=$($process.Id)"
@@ -64,8 +70,44 @@ function Invoke-ReadGit([string[]]$Arguments) {
     if ($r.ExitCode -ne 0) { throw "Read-only Git failed: $($r.Stderr)" }
     $r.Stdout.TrimEnd([char[]]"`r`n")
 }
+function Get-AutomationProcessTable {
+    # Query ancestry only when another Unity PID exists; never trust batchmode/name alone.
+    Get-CimInstance -ClassName Win32_Process -Property ProcessId,ParentProcessId,CreationDate -OperationTimeoutSec 5 -ErrorAction Stop
+}
+function Get-OtherUnityProcess([int]$OwnedPid=0) {
+    $candidates=@(Get-Process -Name Unity -ErrorAction SilentlyContinue | Where-Object { $_.Id -ne $OwnedPid })
+    if ($OwnedPid -eq 0 -or $candidates.Count -eq 0) { return $candidates }
+    try {
+        $table=@{}
+        foreach ($entry in Get-AutomationProcessTable) { $table[[int]$entry.ProcessId]=$entry }
+    } catch {
+        Write-AutomationLog "SAFETY: process ancestry unavailable; treating additional Unity PIDs as external. $($_.Exception.Message)"
+        return $candidates
+    }
+    foreach ($candidate in $candidates) {
+        $current=$table[[int]$candidate.Id]; $seen=@{}; $owned=$false
+        while ($current -and -not $seen.ContainsKey([int]$current.ProcessId)) {
+            $seen[[int]$current.ProcessId]=$true
+            if ([int]$current.ProcessId -eq $OwnedPid) { $owned=$true; break }
+            $parent=$table[[int]$current.ParentProcessId]
+            # Missing/reused parents or cycles cannot establish ownership: fail closed.
+            if (-not $parent -or -not $current.CreationDate -or -not $parent.CreationDate -or $parent.CreationDate -gt $current.CreationDate) { break }
+            $current=$parent
+        }
+        if (-not $owned) { $candidate }
+    }
+}
 function Test-OtherUnity([int]$OwnedPid=0) {
-    return [bool](Get-Process -Name Unity -ErrorAction SilentlyContinue | Where-Object { $_.Id -ne $OwnedPid })
+    return @(Get-OtherUnityProcess $OwnedPid).Count -gt 0
+}
+function Get-UnityCancellationReason([int]$OwnedPid) {
+    $marker=Join-Path $AutomationState 'DISABLED'
+    if (Test-Path -LiteralPath $marker) { return "stop marker present: $marker (owned PID=$OwnedPid)" }
+    $others=@(Get-OtherUnityProcess $OwnedPid)
+    if ($others.Count -gt 0) {
+        return "Unity outside owned process tree: owned PID=$OwnedPid; other PIDs=$((@($others | ForEach-Object { $_.Id }) -join ','))"
+    }
+    return $null
 }
 function Test-OtherGit { return [bool](Get-Process -Name git,git-lfs -ErrorAction SilentlyContinue) }
 function Test-RepositoryReady {
