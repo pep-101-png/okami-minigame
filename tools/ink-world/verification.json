@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-22",
+  "sourceBase": "ce07e12445dbc45e98982fc9c6643dc9530f3b0d",
+  "unitySceneSha256": "b877c35c73087462c238f3db5515b593cf095ba46ac476d2f55c52832e2f3782",
+  "reference": "User supplied Okami river/bridge/mill/village image in this conversation",
+  "unityEditorAvailable": false,
+  "checks": {
+    "savedNativeMeshIndicesNormalsBounds": "passed",
+    "allOriginalSceneObjects": "retained",
+    "originalPhysicsAndGameplayComponents": "unchanged",
+    "assetReferencesAndTextureImports": "passed",
+    "smallTextureGitRulesAndLargeAnimationLFS": "passed",
+    "fiveShaderStaticContracts": "passed_not_Unity_compilation",
+    "roslynCSharpSyntax": {
+      "status": "passed_not_Unity_API_compilation",
+      "files": 77
+    },
+    "pythonSyntax": "passed"
+  },
+  "unchanged": [
+    "wolf model/materials/textures/rig/clips",
+    "locomotion and combat",
+    "quests/home/progression",
+    "Windows Git sync and installed tasks",
+    "Unity automation and packages",
+    "original working rice mill mechanism, motion and physics"
+  ],
+  "latestUnityFeedback": {
+    "sourceCommit": "aefd595771e933a3313ecb4170251764c94ab1e3",
+    "run": "20261021T092745607Z-9936e8",
+    "screenshotsReviewed": 12,
+    "all14ClipStatusesAndContactSequencesReviewed": true,
+    "result": "Older source; clips have incomplete action coverage. Does not validate this update."
+  },
+  "notVerified": [
+    "Unity6000.6.6f1 import/shader compilation",
+    "final Unity visual result compared to reference",
+    "outline stability and water during camera movement",
+    "PC GPU frame time",
+    "actual PC sync receipt"
+  ],
+  "requiredUserCommands": []
+}

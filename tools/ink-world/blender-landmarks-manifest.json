@@ -1,0 +1,137 @@
+{
+  "authoring": "Blender4.3 bevel evaluation,bmesh vertex weld and face-normal recalculation; no external assets",
+  "coordinates": "Unity metres, Y up",
+  "wheel": "Axis local +Z; wood/iron same centre; radius2.10,bodydepth.64,axlelength1.10",
+  "support": "Ground origin, wheel bearing localY2.0; no collision included",
+  "bridge": "9.7mX rail span,Z+/-1.18; existing arch .10+.42*sin(pi*u)^1.5; no deck/collision",
+  "parts": [
+    {
+      "name": "Mill-wheel-wood",
+      "guid": "d6165f02908177a2c8d3ff907c2b6d64",
+      "vertices": 2368,
+      "triangles": 4500,
+      "min": [
+        -2.0950000286102295,
+        -2.0950000286102295,
+        -0.3199999928474426
+      ],
+      "max": [
+        2.0950000286102295,
+        2.0950000286102295,
+        0.3199999928474426
+      ]
+    },
+    {
+      "name": "Mill-wheel-iron",
+      "guid": "b6028d2fc2f268ad586bd7a15b50f4ca",
+      "vertices": 1152,
+      "triangles": 2092,
+      "min": [
+        -1.9566506147384644,
+        -1.959999918937683,
+        -0.550000011920929
+      ],
+      "max": [
+        1.9566506147384644,
+        1.959999918937683,
+        0.550000011920929
+      ]
+    },
+    {
+      "name": "Mill-support-wood",
+      "guid": "87c10951ae7aafd646096750654a4b0c",
+      "vertices": 240,
+      "triangles": 440,
+      "min": [
+        -0.8500000238418579,
+        0.10317480564117432,
+        -0.7699999809265137
+      ],
+      "max": [
+        0.8500000238418579,
+        2.0999999046325684,
+        0.7699999809265137
+      ]
+    },
+    {
+      "name": "Mill-support-stone",
+      "guid": "e282ad12460e3e8956d86d7cfdf2e329",
+      "vertices": 96,
+      "triangles": 176,
+      "min": [
+        -0.925000011920929,
+        -0.019999999552965164,
+        -0.8500000238418579
+      ],
+      "max": [
+        0.925000011920929,
+        0.14000000059604645,
+        0.8500000238418579
+      ]
+    },
+    {
+      "name": "Mill-support-iron",
+      "guid": "3a4dff4ddb9106f75b92f8a1fdbdd3a4",
+      "vertices": 144,
+      "triangles": 272,
+      "min": [
+        -0.3100000023841858,
+        1.809999942779541,
+        -0.7800000309944153
+      ],
+      "max": [
+        0.3100000023841858,
+        2.190000057220459,
+        0.7800000309944153
+      ]
+    },
+    {
+      "name": "Bridge-vermilion",
+      "guid": "4b24ad7219100029d46783f4f39076c8",
+      "vertices": 1872,
+      "triangles": 3432,
+      "min": [
+        -5.175041675567627,
+        0.10362690687179565,
+        -1.2699999809265137
+      ],
+      "max": [
+        5.175041675567627,
+        1.7400000095367432,
+        1.2699999809265137
+      ]
+    },
+    {
+      "name": "Bridge-ink",
+      "guid": "251d5fe88804440570f6966b9d4b3bf4",
+      "vertices": 864,
+      "triangles": 1584,
+      "min": [
+        -4.859999656677246,
+        0.12362693250179291,
+        -1.3199999332427979
+      ],
+      "max": [
+        4.859999656677246,
+        1.809999942779541,
+        1.3199999332427979
+      ]
+    },
+    {
+      "name": "Bridge-gold",
+      "guid": "59c2c0c44545c99767ee34b2401a0894",
+      "vertices": 584,
+      "triangles": 1008,
+      "min": [
+        -5.182308197021484,
+        0.8426269292831421,
+        -1.283000111579895
+      ],
+      "max": [
+        5.182308197021484,
+        1.8325001001358032,
+        1.283000111579895
+      ]
+    }
+  ]
+}

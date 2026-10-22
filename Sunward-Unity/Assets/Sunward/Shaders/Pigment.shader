@@ -1,5 +1,5 @@
 Shader "Sunward/Surface Pigment" {
- Properties {_VertexTint("Use authored vertex tint",Float)=1 _TreeWind("Tree wind",Float)=0 _TreeBaseY("Root height",Float)=0 _TreePhase("Gust phase",Float)=0 _DetailMap("Connected watercolour artwork",2D)="white"{} _DetailNormal("Linear RGB relief",2D)="bump"{} _PathMap("Path wash",2D)="white"{} _PathNormal("Path relief",2D)="bump"{} _ArtStrength("Artwork",Range(0,1))=0 _ArtTiling("World paint scale",Float)=.35 _NormalStrength("Normal relief",Range(0,1))=.3 _TerrainBlend("Terrain blend",Float)=0 _BaseMap("Painted wash",2D)="white"{} _BaseColor("Pigment",Color)=(1,1,1,1) _Cutoff("Paper cutout",Range(0,1))=.01 _Pigment("Dry brush strength",Range(0,1))=.22 _Wind("Leaf wind",Float)=0 _WindObjectSpace("Root anchored local wind",Float)=0 _SurfaceKind("Surface family",Float)=0 _Relief("Paint relief",Range(0,1))=.08 [Enum(UnityEngine.Rendering.CullMode)]_Cull("Cull",Float)=2 [Enum(UnityEngine.Rendering.BlendMode)]_SrcBlend("Source",Float)=1 [Enum(UnityEngine.Rendering.BlendMode)]_DstBlend("Destination",Float)=0 _ZWrite("Depth write",Float)=1}
+ Properties {_VertexTint("Use authored vertex tint",Float)=1 _TreeWind("Tree wind",Float)=0 _TreeBaseY("Root height",Float)=0 _TreePhase("Gust phase",Float)=0 _DetailMap("Connected watercolour artwork",2D)="white"{} _DetailNormal("Linear RGB relief",2D)="bump"{} _PathMap("Path wash",2D)="white"{} _PathNormal("Path relief",2D)="bump"{} _ArtStrength("Artwork",Range(0,1))=0 _ArtTiling("World paint scale",Float)=.35 _PaintObjectSpace("Anchor moving paint to object",Float)=0 _NormalStrength("Normal relief",Range(0,1))=.3 _TerrainBlend("Terrain blend",Float)=0 _BaseMap("Painted wash",2D)="white"{} _BaseColor("Pigment",Color)=(1,1,1,1) _Cutoff("Paper cutout",Range(0,1))=.01 _Pigment("Dry brush strength",Range(0,1))=.22 _Wind("Leaf wind",Float)=0 _WindObjectSpace("Root anchored local wind",Float)=0 _SurfaceKind("Surface family",Float)=0 _Relief("Paint relief",Range(0,1))=.08 _InkStrength("Expressive ink",Range(0,1))=.62 _WashBands("Painted light planes",Range(0,1))=.68 [Enum(UnityEngine.Rendering.CullMode)]_Cull("Cull",Float)=2 [Enum(UnityEngine.Rendering.BlendMode)]_SrcBlend("Source",Float)=1 [Enum(UnityEngine.Rendering.BlendMode)]_DstBlend("Destination",Float)=0 _ZWrite("Depth write",Float)=1}
  SubShader {Tags{"RenderPipeline"="UniversalPipeline" "RenderType"="Opaque"} Cull[_Cull] Blend[_SrcBlend][_DstBlend] ZWrite[_ZWrite]
  Pass {Name "PaintedForward" Tags{"LightMode"="UniversalForward"}
  HLSLPROGRAM
@@ -16,7 +16,7 @@ Shader "Sunward/Surface Pigment" {
  TEXTURE2D(_DetailMap);SAMPLER(sampler_DetailMap);TEXTURE2D(_DetailNormal);SAMPLER(sampler_DetailNormal);TEXTURE2D(_PathMap);SAMPLER(sampler_PathMap);TEXTURE2D(_PathNormal);SAMPLER(sampler_PathNormal);
  TEXTURE2D(_BaseMap);SAMPLER(sampler_BaseMap);
  CBUFFER_START(UnityPerMaterial)
- float4 _BaseMap_ST,_BaseColor;float _VertexTint;float _WindObjectSpace;float _TreeWind,_TreeBaseY,_TreePhase;float _ArtStrength,_ArtTiling,_NormalStrength,_TerrainBlend;float _Cutoff,_Pigment,_Wind,_SurfaceKind,_Relief,_Cull,_SrcBlend,_DstBlend,_ZWrite;
+ float4 _BaseMap_ST,_BaseColor;float _VertexTint;float _WindObjectSpace;float _TreeWind,_TreeBaseY,_TreePhase;float _ArtStrength,_ArtTiling,_NormalStrength,_TerrainBlend;float _Cutoff,_Pigment,_Wind,_SurfaceKind,_Relief,_Cull,_SrcBlend,_DstBlend,_ZWrite;float _InkStrength,_WashBands,_PaintObjectSpace;
  CBUFFER_END
  float3 PaintColor(float3 world,float3 weights){return SAMPLE_TEXTURE2D(_DetailMap,sampler_DetailMap,world.zy).rgb*weights.x+SAMPLE_TEXTURE2D(_DetailMap,sampler_DetailMap,world.xz).rgb*weights.y+SAMPLE_TEXTURE2D(_DetailMap,sampler_DetailMap,world.xy).rgb*weights.z;}
  float3 PaintNormal(float3 world,float3 weights,float3 geometric){float3 a=SAMPLE_TEXTURE2D(_DetailNormal,sampler_DetailNormal,world.zy).rgb*2-1,b=SAMPLE_TEXTURE2D(_DetailNormal,sampler_DetailNormal,world.xz).rgb*2-1,c=SAMPLE_TEXTURE2D(_DetailNormal,sampler_DetailNormal,world.xy).rgb*2-1;float3 n=float3(a.z*sign(geometric.x),a.y,a.x)*weights.x+float3(b.x,b.z*sign(geometric.y),b.y)*weights.y+float3(c.x,c.y,c.z*sign(geometric.z))*weights.z;return normalize(n+geometric*.001);}
@@ -30,9 +30,14 @@ Shader "Sunward/Surface Pigment" {
  else p.x+=sin(_Time.y*1.3+p.x*.7-p.z*.45)*.065*(_WindObjectSpace>.5?saturate(v.positionOS.y*2):max(v.uv.y,saturate((p.y-_TreeBaseY)*2)))*_Wind;o.world=p;o.positionCS=TransformWorldToHClip(p);o.normal=TransformObjectToWorldNormal(v.normalOS);o.uv=TRANSFORM_TEX(v.uv,_BaseMap);o.color=v.color;o.fog=ComputeFogFactor(o.positionCS.z);return o;}
  half4 Frag(V i):SV_Target{UNITY_SETUP_INSTANCE_ID(i);half4 base=SAMPLE_TEXTURE2D(_BaseMap,sampler_BaseMap,i.uv)*_BaseColor*lerp(half4(1,1,1,1),i.color,_VertexTint);clip(base.a-_Cutoff);float wash=Noise(i.world.xz*.70+i.world.y*.45),dry=Noise(float2(i.world.x*22+i.world.y*3,i.world.y*2+i.world.z*3));base.rgb*=1+_Pigment*((wash-.5)*.45+(dry-.5)*.13);base.rgb=lerp(base.rgb,float3(.97,.95,.88),smoothstep(.70,.96,dry)*_Pigment*.15);Light light=GetMainLight(TransformWorldToShadowCoord(i.world));float3 normal=normalize(i.normal);
  if(_ArtStrength>.01){
- float3 weights=pow(abs(normal),4);weights/=max(.001,weights.x+weights.y+weights.z);
- float3 painted=PaintColor(i.world*_ArtTiling,weights);
- float3 paintedNormal=PaintNormal(i.world*_ArtTiling,weights,normal);
+ // Static scenery shares world-scale brushwork. The moving millwheel opts into
+ // local coordinates so its timber grain and relief turn with its geometry.
+ float3 paintPosition=i.world,paintGeometric=normal;
+ if(_PaintObjectSpace>.5){paintPosition=TransformWorldToObject(i.world);paintGeometric=normalize(mul(normal,(float3x3)GetObjectToWorldMatrix()));}
+ float3 weights=pow(abs(paintGeometric),4);weights/=max(.001,weights.x+weights.y+weights.z);
+ float3 painted=PaintColor(paintPosition*_ArtTiling,weights);
+ float3 paintedNormal=PaintNormal(paintPosition*_ArtTiling,weights,paintGeometric);
+ if(_PaintObjectSpace>.5)paintedNormal=TransformObjectToWorldNormal(paintedNormal);
  if(_TerrainBlend>.5){float path=smoothstep(-.015,.09,i.color.r-i.color.g);float3 dust=SAMPLE_TEXTURE2D(_PathMap,sampler_PathMap,i.world.xz*.22).rgb;painted=lerp(painted,dust,path);float3 pn=SAMPLE_TEXTURE2D(_PathNormal,sampler_PathNormal,i.world.xz*.22).rgb*2-1;paintedNormal=normalize(lerp(paintedNormal,float3(pn.x,pn.z,pn.y),path));}
  // Opaque environmental surfaces retain source hue without multiplying two
  // dark albedos together. Wolf uses its separate URP material/shader.
@@ -66,12 +71,27 @@ Shader "Sunward/Surface Pigment" {
   float width=max(.018,fwidth(i.uv.x)*1.4);
   float vein=1-smoothstep(width,width*2,abs(i.uv.x-.5));
   float branch=1-smoothstep(.03,.10,abs(frac(i.uv.y*8-abs(i.uv.x-.5)*2.4)-.5));
-  base.rgb*=1+vein*.09+branch*.035;
+  base.rgb=lerp(base.rgb,base.rgb*float3(.28,.39,.23),saturate(vein*.42+branch*.15)*_InkStrength);
  }
  float contour=pow(1-saturate(abs(dot(normal,GetWorldSpaceNormalizeViewDir(i.world)))),5);
- float inkEdge=contour*(.14+Noise(i.world.xy*5)*.11);
- base.rgb*=1-inkEdge;
- float diffuse=smoothstep(-.25,.90,dot(normal,light.direction));float shadow=lerp(.70,1,light.shadowAttenuation);float3 illumination=SampleSH(normal)*.72+light.color*(.36+diffuse*.48)*shadow;
+ // Irregular interior ink and broad painted light planes complement the
+ // separate, explicit contour meshes. No screen-space effect touches the wolf.
+ float inkEdge=contour*(.34+wash*.28)*_InkStrength;
+ float rawDiffuse=dot(normal,light.direction);
+ float diffuse=smoothstep(-.25,.90,rawDiffuse);
+ float paintedBand=.32+.38*smoothstep(-.12,.02,rawDiffuse+(wash-.5)*.16)+.30*smoothstep(.53,.66,rawDiffuse+(dry-.5)*.08);
+ diffuse=lerp(diffuse,paintedBand,_WashBands);
+ float shadow=lerp(.58,1,light.shadowAttenuation);
+ float creaseMask=smoothstep(.84,.96,dry)*(1-smoothstep(.1,.75,rawDiffuse))*.20;
+ float hatchCoord=i.world.y*15+i.world.x*.65+i.world.z*.38+(wash-.5)*1.9;
+ float hatchAA=max(.025,fwidth(hatchCoord));
+ float hatch=(1-smoothstep(.04,.04+hatchAA,abs(frac(hatchCoord)-.5)))*smoothstep(.42,.76,grain);
+ float hatchFade=1-smoothstep(.3,1.2,fwidth(hatchCoord));
+ float hatchInk=hatch*hatchFade*(1-smoothstep(-.10,.4,rawDiffuse))*.20;
+ base.rgb*=1-saturate(inkEdge+(creaseMask+hatchInk)*_InkStrength);
+ float3 shadowWash=lerp(float3(.78,.77,.64),float3(1.08,1.0,.78),diffuse);
+ float3 illumination=SampleSH(normal)*.66+light.color*(.27+diffuse*.61)*shadow;
+ illumination*=shadowWash;
  #if defined(_ADDITIONAL_LIGHTS)
  uint count=GetAdditionalLightsCount();for(uint l=0;l<count;l++){Light extra=GetAdditionalLight(l,i.world);illumination+=extra.color*extra.distanceAttenuation*(.25+.65*saturate(dot(normal,extra.direction)));}
  #endif
