@@ -18,13 +18,15 @@ namespace Sunward
         public float Invulnerable;
         public bool Grounded { get; private set; }
 
+        public bool Swimming { get; private set; }
+
         public bool Locked;
         public Vector3 Velocity { get; private set; }
 
         Vector3 horizontal, dodgeDirection;
         WolfBodyCollision bodyCollision;
         float dodgeTimer, coyote, jumpBuffer, landing;
-        bool doubleUsed;
+        bool doubleUsed, underBridge;
         public bool Dodging => dodgeTimer > 0;
 
         void Awake()
@@ -44,6 +46,10 @@ namespace Sunward
             horizontal = Vector3.zero;
             Vertical = 0;
             Speed = 0;
+            Swimming = false;
+            underBridge = Valley.OnBridge(point.x, -point.z) && point.y < -.15f;
+            doubleUsed = false;
+            if (animationView) animationView.SetWaterMotion(false, 0, true, 0);
         }
 
         public void Recover(Vector3 point)
@@ -77,14 +83,36 @@ namespace Sunward
                 controller.Move(guarded - transform.position);
         }
 
+        float GroundHeight()
+        {
+            // A swimmer beneath the arch must not snap up onto its deck.
+            if ((underBridge || transform.position.y < -.15f) && Valley.OnBridge(transform.position.x, -transform.position.z))
+                return Valley.TerrainHeight(valley.Data.terrain, transform.position);
+            return valley.Height(transform.position);
+        }
+
         void Update()
         {
             if (game == null || valley == null || game.Blocked || Locked)
                 return;
             float dt = Time.deltaTime;
             Invulnerable = Mathf.Max(0, Invulnerable - dt);
-            float h = valley.Height(transform.position);
-            Grounded = (controller.isGrounded || transform.position.y <= h + .075f) && Vertical <= 0;
+            float h = GroundHeight();
+            bool wasSwimming = Swimming;
+            float depth = Valley.WaterDepth(transform.position);
+            bool bridge = Valley.OnBridge(transform.position.x, -transform.position.z);
+            if (!bridge) underBridge = false;
+            else if (transform.position.y < -.15f) underBridge = true;
+            else if (transform.position.y >= Valley.BridgeHeight((transform.position.x + 27.8f) / 9.6f) - .05f) underBridge = false;
+            bool onDeck = bridge && !underBridge;
+            Swimming = SwimmingRules.ShouldSwim(Swimming, depth, transform.position.y, Vertical, onDeck);
+            if (Swimming && !wasSwimming)
+            {
+                doubleUsed = false;
+                dodgeTimer = landing = 0;
+                game.Combat.Cancel();
+            }
+            Grounded = !Swimming && (controller.isGrounded || transform.position.y <= h + .075f) && Vertical <= 0;
             if (Grounded)
             {
                 coyote = .12f;
@@ -108,10 +136,12 @@ namespace Sunward
             Vector3 direction = Vector3.ClampMagnitude(forward * m.y + right * m.x, 1);
             float target = input.Walk.IsPressed() ? WalkSpeed : input.Sprint.IsPressed() && game.Stamina > 5 ? SprintSpeed : JogSpeed;
             target *= 1 + game.Profile.upgrades.movement * .03f;
+            if (Swimming)
+                target = input.Sprint.IsPressed() && game.Stamina > 5 ? 4.1f : input.Walk.IsPressed() ? 1.7f : 2.8f;
             if (game.Combat.Busy)
                 target *= .17f;
             horizontal = Vector3.MoveTowards(horizontal, direction * target, dt * (direction.sqrMagnitude > .01f ? 13 : 17));
-            if (input.Dodge.WasPressedThisFrame() && game.Stamina >= 18 && !Dodging)
+            if (input.Dodge.WasPressedThisFrame() && game.Stamina >= 18 && !Dodging && !Swimming)
             {
                 game.Stamina -= 18;
                 game.Combat.Cancel();
@@ -123,31 +153,40 @@ namespace Sunward
                 game.Audio.Cue("dash");
             }
 
-            if (jumpBuffer > 0 && (coyote > 0 || (!doubleUsed && game.Profile.upgrades.movement >= 2)))
+            if (jumpBuffer > 0 && SwimmingRules.CanJump(coyote, Swimming, doubleUsed))
             {
                 game.Combat.Cancel();
-                bool second = coyote <= 0;
-                Vertical = second ? 7.4f : 7.2f;
+                bool second = coyote <= 0 && !Swimming;
+                Vertical = second ? SwimmingRules.DoubleJumpImpulse : SwimmingRules.JumpImpulse;
+                Swimming = false;
                 if (second)
                     doubleUsed = true;
                 jumpBuffer = 0;
                 coyote = 0;
-                animationView.Play(second ? "Jump_Double" : Speed > 4 ? "Jump_Sprint" : Speed > 1 ? "Jump_Jog" : "Jump_Standing", .07f);
+                animationView.NaturalJump(second, Speed);
                 game.Fx.Ring(transform.position, new Color(.7f, .85f, .7f), 1.3f);
                 game.Audio.Cue("jump");
                 Grounded = false;
             }
 
             float previousY = Vertical;
-            Vertical -= 21 * dt;
+            if (Swimming)
+            {
+                // Damped buoyancy, not a teleport. Paws paddle below the surface,
+                // while the chest/head stay above water. Shore collision is retained.
+                Vertical = SwimmingRules.BuoyancyVelocity(transform.position.y, Vertical, dt);
+                coyote = 0;
+            }
+            else
+                Vertical -= 21 * dt;
             if (game.Combat.Attacking && animationView.Current == "AirStrike" && !Grounded)
                 Vertical = Mathf.Min(Vertical, -12);
             Vector3 movement = (Dodging ? dodgeDirection * 9 : horizontal) * dt + Vector3.up * Vertical * dt;
             bool wasAir = !Grounded;
             Vector3 beforeMove = transform.position;
             Push(movement);
-            h = valley.Height(transform.position);
-            if (Vertical <= 0 && (controller.isGrounded || transform.position.y < h + .035f))
+            h = GroundHeight();
+            if (!Swimming && Vertical <= 0 && (controller.isGrounded || transform.position.y < h + .035f))
             {
                 if (transform.position.y < h)
                     controller.Move(Vector3.up * (h - transform.position.y));
@@ -178,9 +217,12 @@ namespace Sunward
                     transform.rotation = rotation;
             }
 
-            if (!Dodging && !game.Combat.Busy && landing <= 0)
+            animationView.SetWaterMotion(Swimming, Speed, Grounded, Vertical);
+            if (Swimming)
+                animationView.Swim(Speed);
+            else if (!Dodging && !game.Combat.Busy && landing <= 0)
                 animationView.Locomotion(Speed, turn, !Grounded, Vertical);
-            game.Stamina = Mathf.Clamp(game.Stamina + dt * (Speed > 5 ? -7 : 19 + game.Profile.upgrades.stamina), 0, game.MaxStamina);
+            game.Stamina = Mathf.Clamp(game.Stamina + dt * ((Swimming ? Speed > 3.5f : Speed > 5) ? -7 : 19 + game.Profile.upgrades.stamina), 0, game.MaxStamina);
             game.Energy = Mathf.Min(game.MaxEnergy, game.Energy + dt * (game.InTrial ? 5 : 12));
         }
     }

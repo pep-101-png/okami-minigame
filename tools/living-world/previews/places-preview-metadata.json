@@ -1,0 +1,15 @@
+{
+  "renderer": "Blender Cycles native asset model review",
+  "unityRendered": false,
+  "scene": "temporary preview graph: integrated baseline + places.apply only",
+  "sceneSha256": "2f3c408702922c9dee3b8c851bba46f5dad1893ec20b9b00487be89ed8ddcf6a",
+  "limitations": [
+    "No Unity lighting, shader, interaction, collision or motion validation",
+    "Residents are inspected separately; not included in these place-only previews"
+  ],
+  "images": [
+    "market-stalls.jpg",
+    "shrine-interior.jpg",
+    "foodhall-interior.jpg"
+  ]
+}

@@ -143,11 +143,8 @@ namespace Sunward
                 GUILayout.EndArea();
             }
 
-            DrawPaper(new Rect(20, h - 93, w - 40, 72));
-            GUI.Label(new Rect(34, h - 88, w - 68, 28), game.Message != "" ? game.Message : game.Prompt, body);
-            GUI.Label(new Rect(34, h - 57, w - 68, 28), game.InTrial ? "LMB / J light · RMB / L heavy · hold to charge · Q switch weapon · B bark · K dodge · Space jump · Esc pause" : "WASD move · Shift sprint · Ctrl walk · Space jump · E interact · Tab forge · Weapons stay on the home wall outside trials · Middle drag orbit", small);
-            if (game.InTrial && GUI.Button(new Rect(w - 160, h - 140, 140, 34), "RETREAT", button))
-                game.Finish(false);
+            // Keep the play view clear. Controls, interaction help and retreat
+            // belong in the pause menu; vitality and level remain visible above.
             if (!game.Blocked)
                 return;
             float pw = Mathf.Min(700, w - 40);
@@ -159,7 +156,8 @@ namespace Sunward
             {
                 case "welcome":
                     GUILayout.Label("A light in the mist.", title);
-                    GUILayout.Label("Explore the painted valley, cross its bridges, visit Taro for permanent blessings, then challenge the Hollow Bell. Rewards survive victory and defeat.\n\nThis separate Unity port reuses the existing wolf and V3 town. Controller: left stick moves, right stick looks, A jumps, B dodges, X interacts, RB/RT attack, LB barks, D-pad right switches weapons.", body);
+                    GUILayout.Label("River & Lanterns update · 23 October 2026", small);
+                    GUILayout.Label("Welcome to Windflower. Cross the red bridges, meet the villagers and challenge the Hollow Bell. Your earned rewards are permanent.\n\nOpen the pause menu whenever you need controls or village help.", body);
                     if (Button("ENTER WINDFLOWER →", button))
                         game.Close();
                     break;
@@ -213,6 +211,11 @@ namespace Sunward
                     break;
                 case "pause":
                     GUILayout.Label("A moment of stillness.", title);
+                    GUILayout.Label("River & Lanterns update · 23 October 2026", small);
+                    if (game.Message != "")
+                        GUILayout.Label(game.Message, body);
+                    if (Button("CONTROLS & VILLAGE HELP", button))
+                        game.SetPanel("controls");
                     if (game.InTrial && Button("RETREAT · KEEP EARNED REWARDS", button))
                         game.Finish(false);
                     if (!game.InTrial && Button("RETURN HOME · KEEP PROGRESS", button))
@@ -224,6 +227,15 @@ namespace Sunward
                         Quality(false);
                     if (Button("MUTE / UNMUTE", button))
                         AudioListener.volume = AudioListener.volume > 0 ? 0 : 1;
+                    break;
+                case "controls":
+                    GUILayout.Label("Controls & village help", title);
+                    GUILayout.Label("WASD move · Shift sprint · Ctrl walk\nSpace jump · Space again for a second jump\nE interact · Tab weapons and blessings · Esc pause\nMiddle mouse drag to orbit the camera\n\nCombat: left mouse / J light attack · right mouse / L heavy attack · hold to charge · K dodge · Q switch weapon · B bark\n\nController: left stick move · right stick look · A jump / double jump · B dodge · X interact · RB / RT attack · LB bark · D-pad right switch weapons.", body);
+                    GUILayout.Label("Swim using the movement controls; jump and double jump to reach a riverbank. Rest at the market dog bed to move between day and night. Use E at the food hall mat to sit and listen. Enter the shrine to watch the students train.\n\nRetreat from an arena trial through the pause menu. Earned coins and experience are kept.", body);
+                    if (game.Prompt != "")
+                        GUILayout.Label("Nearby: " + game.Prompt, small);
+                    if (Button("BACK TO OPTIONS", button))
+                        game.SetPanel("pause");
                     break;
                 case "result":
                     GUILayout.Label(game.Dialogue, title);

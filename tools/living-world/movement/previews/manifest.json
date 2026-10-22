@@ -1,0 +1,12 @@
+{
+  "kind": "Blender authoring geometry previews ONLY; not Unity rendering",
+  "fbx_sha256": "277f0b1c04e91274f46320358279da43ee5a01ac420ebbe9f7ecf16184478328",
+  "pose_cs_sha256": "c78707048239bfd42599493b051b3fbc404bcbf993982d7586c549e292c88c8e",
+  "views": [
+    "swim-blender.jpg",
+    "jump-blender.jpg",
+    "sit-blender.jpg"
+  ],
+  "material": "Neutral material override for deformation inspection; actual Unity materials preserved",
+  "review": "Rendered and inspected the three pose stills; no Unity physics or continuous animation validation performed"
+}

@@ -14,6 +14,7 @@ Shader "Sunward/Painted Dawn Sky"
    CBUFFER_START(UnityPerMaterial)
    half4 _Zenith,_Horizon,_Cloud;
    CBUFFER_END
+   float _SunwardNight;
    struct A { float4 positionOS:POSITION; };
    struct V { float4 positionCS:SV_POSITION; float3 direction:TEXCOORD0; };
    V Vert(A v) { V o; o.positionCS=TransformObjectToHClip(v.positionOS.xyz); o.direction=v.positionOS.xyz; return o; }
@@ -54,6 +55,22 @@ Shader "Sunward/Painted Dawn Sky"
     color=lerp(color,half3(.91,.40,.17),sunDisk);
     // A warm uneven wash within the red/gold seal-like sun.
     color=lerp(color,half3(1,.69,.27),sunDisk*smoothstep(.9995,.99995,sunDot)*.55);
+    float night=saturate(_SunwardNight);
+    half3 nightColor=lerp(half3(.11,.14,.25),half3(.022,.035,.10),pow(saturate(altitude),.6));
+    nightColor=lerp(nightColor,half3(.035,.055,.10),1-smoothstep(nearRidge-ridgeAA,farRidge+ridgeAA,altitude));
+    nightColor=lerp(nightColor,half3(.17,.21,.35),clouds*.32);
+    // Stable sparse brush stars, never a temporal noise field.
+    float2 cell=floor(float2(angle*100,altitude*150));
+    float hash=frac(sin(dot(cell,float2(127.1,311.7)))*43758.5453);
+    float2 starUV=frac(float2(angle*100,altitude*150))-.5;
+    float stars=(1-smoothstep(.03,.16,length(starUV)))*step(.985,hash)*smoothstep(.10,.22,altitude);
+    nightColor+=half3(.72,.78,.89)*stars;
+    float moonDot=dot(d,normalize(float3(-.55,.42,.8)));
+    float moonAA=max(.000015,fwidth(moonDot));
+    float moon=smoothstep(.9987-moonAA,.9987+moonAA,moonDot);
+    nightColor+=half3(.035,.055,.10)*pow(saturate(moonDot),60);
+    nightColor=lerp(nightColor,half3(.89,.87,.68),moon);
+    color=lerp(color,nightColor,night);
     return half4(color,1);
    }
    ENDHLSL

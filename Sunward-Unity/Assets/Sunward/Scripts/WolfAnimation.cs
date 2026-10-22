@@ -9,7 +9,9 @@ namespace Sunward
         Vector3 hipsRest;
         Quaternion hipsRestRotation;
         float filteredSpeed;
-        bool groundedGait;
+        bool groundedGait, swimming, jumpPose, seated, sitBlend;
+        float waterSpeed, poseWeight, swimPhase, jumpAge, verticalSpeed;
+        CanineMotionPose naturalPose;
         readonly System.Collections.Generic.HashSet<string> missingStates = new System.Collections.Generic.HashSet<string>();
         void Awake()
         {
@@ -20,12 +22,24 @@ namespace Sunward
                 if (t.name == "DEF_hips") hips = t;
             }
             if (hips) { hipsRest = hips.localPosition; hipsRestRotation = hips.localRotation; }
+            var motor = GetComponentInParent<WolfMotor>();
+            naturalPose = new CanineMotionPose(animator.transform, motor ? motor.transform : transform);
         }
 
         void LateUpdate()
         {
             if (rootBone)
                 rootBone.localPosition = Vector3.zero;
+            bool activePose = swimming || jumpPose || seated;
+            poseWeight = Mathf.MoveTowards(poseWeight, activePose ? 1 : 0, Time.deltaTime * 9);
+            if (poseWeight <= 0 || (activePose && !seated)) sitBlend = false;
+            swimPhase += Time.deltaTime * (waterSpeed > .2f ? 5.5f + Mathf.Min(waterSpeed, 4) * 1.1f : 3.2f);
+            if (jumpPose) jumpAge += Time.deltaTime;
+            if (naturalPose != null && poseWeight > 0)
+            {
+                naturalPose.Apply(swimming, swimPhase, verticalSpeed, jumpAge, poseWeight, sitBlend);
+                return;
+            }
             // Calm only the grounded gait's pelvis motion, not jumps/attacks or
             // bone scale. The source wolf mesh, markings and animation clips stay intact.
             if (hips && groundedGait && !animator.IsInTransition(0))
@@ -64,6 +78,42 @@ namespace Sunward
                 if (c.name == state)
                     return c.length;
             return 1;
+        }
+
+        public void NaturalJump(bool second, float speed)
+        {
+            jumpAge = 0;
+            jumpPose = true;
+            // Source jumps were ~1.8 s while the motor's ballistic arc is ~.7 s.
+            // Retain the source actions but fit their timing to the actual jump.
+            Play(second ? "Jump_Double" : speed > 4 ? "Jump_Sprint" : speed > 1 ? "Jump_Jog" : "Jump_Standing", .06f, .70f, true);
+        }
+
+        public void SetWaterMotion(bool inWater, float speed, bool grounded, float vertical)
+        {
+            swimming = inWater;
+            waterSpeed = speed;
+            verticalSpeed = vertical;
+            if (grounded || inWater) jumpPose = false;
+        }
+
+        public void SitObserve(bool active)
+        {
+            seated = active;
+            if (!active) return;
+            sitBlend = true;
+            swimming = jumpPose = groundedGait = false;
+            Play("Idle_Natural", .18f);
+            if (animator) animator.speed = .45f;
+        }
+
+        public void Swim(float speed)
+        {
+            // The native 47-state controller stays intact. A low-rate idle drives
+            // secondary details while the same skeleton performs authored paddles.
+            Play("Idle_Natural", .18f);
+            groundedGait = false;
+            if (animator) animator.speed = .45f;
         }
 
         public void Locomotion(float speed, float turn, bool air, float vy)

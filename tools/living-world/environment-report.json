@@ -1,0 +1,17 @@
+{
+  "redBridgeRailsModified": 0,
+  "bridgeDecks": 2,
+  "arenaLogs": 28,
+  "bambooClumps": 7,
+  "homeOutlines": 2,
+  "waterfallSource": true,
+  "millPillarRockRemoved": "Grounded stone 104 \u00b7 source 793",
+  "ricePestleDrivenByWheel": true,
+  "fallingGrains": 8,
+  "waterfallPosition": [
+    -22.691049535874367,
+    0,
+    43.4
+  ],
+  "riverAtSourceX": -22.691049535874367
+}

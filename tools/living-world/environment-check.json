@@ -1,0 +1,10 @@
+{
+  "result": "passed",
+  "checkedAssets": 42,
+  "vertices": 166592,
+  "sharedMeshTriangles": 186444,
+  "uniqueBambooClumps": 7,
+  "redBridgeObjectsUntouched": 6,
+  "unityRendered": false,
+  "sceneSaved": false
+}

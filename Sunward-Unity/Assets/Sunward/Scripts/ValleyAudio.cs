@@ -15,7 +15,7 @@ namespace Sunward
             ambience = gameObject.AddComponent<AudioSource>();
             ambience.volume = .018f;
             ambience.loop = true;
-            jump = Tone(520, .18f, .4f);
+            jump = PawTakeoff();
             land = Tone(90, .16f, 2);
             attack = Tone(240, .15f, 1.5f);
             impact = Tone(120, .18f, 3);
@@ -57,6 +57,26 @@ namespace Sunward
             var loop = new float[count - fade];
             System.Array.Copy(samples, loop, loop.Length);
             clip.SetData(loop, 0);
+            return clip;
+        }
+
+        // Short padded paw/air sound without a pitched oscillator or metallic ding.
+        static AudioClip PawTakeoff()
+        {
+            const int rate = 22050, count = 3528;
+            var samples = new float[count];
+            uint seed = 113;
+            float low = 0;
+            for (int i = 0; i < count; i++)
+            {
+                seed = 1664525 * seed + 1013904223;
+                float noise = (seed >> 8) / 16777216f * 2 - 1;
+                low += (noise - low) * .09f;
+                float t = i / (float)(count - 1);
+                samples[i] = low * Mathf.Sin(Mathf.PI * t) * Mathf.Exp(-t * 5) * .32f;
+            }
+            var clip = AudioClip.Create("Soft paw takeoff · no tonal ding", count, 1, rate, false);
+            clip.SetData(samples, 0);
             return clip;
         }
 

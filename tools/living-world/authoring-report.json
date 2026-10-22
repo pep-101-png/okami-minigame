@@ -1,0 +1,93 @@
+{
+  "environment": {
+    "redBridgeRailsModified": 0,
+    "bridgeDecks": 2,
+    "arenaLogs": 28,
+    "bambooClumps": 7,
+    "homeOutlines": 2,
+    "waterfallSource": true,
+    "millPillarRockRemoved": "Grounded stone 104 \u00b7 source 793",
+    "ricePestleDrivenByWheel": true,
+    "fallingGrains": 8,
+    "waterfallPosition": [
+      -22.691049535874367,
+      0,
+      43.4
+    ],
+    "riverAtSourceX": -22.691049535874367
+  },
+  "places": {
+    "rooms": 2,
+    "stalls": 4,
+    "trainingDummies": 2,
+    "restPlaces": 2,
+    "nightLanterns": 8,
+    "newObjects": 78,
+    "outlineMeshes": 61
+  },
+  "characters": {
+    "retainedResidentRigs": 13,
+    "costumeRoles": [
+      "Gardener",
+      "Merchant",
+      "Elder",
+      "Samurai",
+      "ShrineMaiden",
+      "Geisha",
+      "Chef"
+    ],
+    "models": {
+      "Gardener": "50b6f382fa9b8303795cb80b5e300e8b",
+      "Merchant": "87af013a20f98da88167a714536c41d6",
+      "Elder": "c674803dab069275332fddc38f143105",
+      "Samurai": "305ee7bb86d5a61b7af859bf75cec61b",
+      "ShrineMaiden": "fcb73407d62153df75bceeced57f41b3",
+      "Geisha": "4d14b80a6c929ccb58f997cab2661c8b",
+      "Chef": "5b062cf4891ba4e0ddaa2bb0bcba1468"
+    },
+    "material": "f408fff36d122339e5d272719010477c",
+    "skinnedInkOutlines": 18,
+    "trainingStudents": 2,
+    "foodHallPerformers": 3,
+    "conversationWalkers": 6
+  },
+  "combat": {
+    "wisp": {
+      "meshTriangles": 2052,
+      "articulatedParts": 6,
+      "outlinedParts": 6,
+      "prefabRootPreserved": 8244752933840424166
+    },
+    "reed": {
+      "meshTriangles": 7416,
+      "articulatedParts": 6,
+      "outlinedParts": 6,
+      "prefabRootPreserved": 6718543548399274062
+    },
+    "heavy": {
+      "meshTriangles": 8504,
+      "articulatedParts": 6,
+      "outlinedParts": 6,
+      "prefabRootPreserved": 4544599440953741393
+    },
+    "ranged": {
+      "meshTriangles": 1466,
+      "articulatedParts": 6,
+      "outlinedParts": 6,
+      "prefabRootPreserved": 813931634924766766
+    },
+    "elite": {
+      "meshTriangles": 7524,
+      "articulatedParts": 6,
+      "outlinedParts": 6,
+      "prefabRootPreserved": 3653945641635979712
+    },
+    "boss": {
+      "meshTriangles": 6210,
+      "articulatedParts": 6,
+      "outlinedParts": 6,
+      "prefabRootPreserved": 7652329259476934107
+    }
+  },
+  "sceneSha256": "3ba22bb4a2de11e5982ceaf1a445f65adc241bb4e5c98587a4431ffda1522808"
+}

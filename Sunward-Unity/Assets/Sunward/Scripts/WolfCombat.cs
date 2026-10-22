@@ -14,12 +14,15 @@ namespace Sunward
 
         WeaponDefinition weapon;
         GameObject spearView, discView;
+        Transform discAnchor;
+        SundialFlames discFlames;
+        bool resting;
         Strike strike;
         float elapsed, hold, grace;
         int chain;
         bool heavy, queued, queuedHeavy, charging;
         Vector3 spearRest, discRest;
-        Quaternion spearRotation, discRotation;
+        Quaternion spearRotation, discRotation, discChestBind;
         readonly AttackSequence sequence = new AttackSequence();
         readonly HashSet<EnemyBrain> hit = new HashSet<EnemyBrain>();
         readonly Collider[] contacts = new Collider[48];
@@ -27,13 +30,21 @@ namespace Sunward
         void Start()
         {
             spearView = Instantiate(spear.visual, headSocket);
-            discView = Instantiate(sundial.visual, headSocket);
+            // Imported disc geometry lies in XY. The back socket supplies its
+            // animated chest position; a separate pivot keeps spins centred.
+            discAnchor = new GameObject("Sundial · back shield pivot").transform;
+            discAnchor.SetParent(transform, false);
+            discView = Instantiate(sundial.visual, discAnchor);
             discView.transform.localScale = Vector3.one * .9f;
-            discView.transform.localPosition = new Vector3(-.12f, .12f, 0);
+            discView.transform.localPosition = Vector3.zero;
+            discView.transform.localRotation = Quaternion.identity;
+            discFlames = discView.AddComponent<SundialFlames>();
+            discFlames.Initialize(game.Fx.ink);
             spearRest = spearView.transform.localPosition;
             discRest = discView.transform.localPosition;
             spearRotation = spearView.transform.localRotation;
             discRotation = discView.transform.localRotation;
+            discChestBind = backSocket ? Quaternion.Inverse(transform.rotation) * backSocket.rotation : Quaternion.identity;
             Equip();
         }
 
@@ -43,16 +54,17 @@ namespace Sunward
             if (spearView)
             {
                 spearView.SetActive(game.InTrial && !motor.Locked && weapon == spear);
-                discView.SetActive(game.InTrial && !motor.Locked && weapon == sundial);
+                discView.SetActive(!resting && !motor.Locked && weapon == sundial);
             }
         }
 
         public void Rest(bool rest)
         {
+            resting = rest;
             if (spearView)
                 spearView.SetActive(!rest && game.InTrial && game.Profile.equipped == "spear");
             if (discView)
-                discView.SetActive(!rest && game.InTrial && game.Profile.equipped == "sundial");
+                discView.SetActive(!rest && game.Profile.equipped == "sundial");
         }
 
         public void Cancel()
@@ -83,6 +95,11 @@ namespace Sunward
         {
             if (!game || !game.InTrial || game.Blocked || motor.Locked)
                 return;
+            if (motor.Swimming)
+            {
+                if (Busy) Cancel();
+                return;
+            }
             float dt = Time.deltaTime;
             barkCooldown = Mathf.Max(0, barkCooldown - dt);
             grace -= dt;
@@ -191,15 +208,22 @@ namespace Sunward
         {
             if (!spearView || !discView)
                 return;
-            bool show = game.InTrial && !motor.Locked && game.Panel != "result";
-            spearView.SetActive(show && weapon == spear);
+            bool show = !resting && !motor.Locked && game.Panel != "result";
+            spearView.SetActive(show && game.InTrial && weapon == spear);
             discView.SetActive(show && weapon == sundial);
+            discAnchor.position = backSocket ? backSocket.position : transform.TransformPoint(new Vector3(0, 1.25f, -.10f));
+            // The imported engraved face points along local -Z; tilt it
+            // upwards/rearwards so the gameplay camera sees the actual crest.
+            Quaternion chestMotion = backSocket ? Quaternion.Inverse(transform.rotation) * backSocket.rotation * Quaternion.Inverse(discChestBind) : Quaternion.identity;
+            discAnchor.rotation = transform.rotation * chestMotion * Quaternion.Euler(55, 0, 0);
             float p = strike != null ? Mathf.Clamp01(elapsed / strike.duration) : 0;
             float accent = Mathf.Sin(p * Mathf.PI);
             spearView.transform.localPosition = spearRest + Vector3.back * (strike != null ? accent * (heavy ? .18f : .38f) : 0);
             spearView.transform.localRotation = spearRotation * Quaternion.Euler(heavy ? -22 * accent : 0, strike != null && strike.clip == "Sweep" ? Mathf.Sin(p * Mathf.PI * 2) * 35 : 0, 0);
-            discView.transform.localPosition = discRest + new Vector3(Mathf.Sin(p * Mathf.PI * 2) * .35f, accent * .22f, -accent * .4f);
-            discView.transform.localRotation = discRotation * Quaternion.Euler(0, accent * 24, (strike != null ? p * 720 : Time.time * 14));
+            // Spin about the disc normal, never orbit the head or imported offsets.
+            discView.transform.localPosition = discRest + Vector3.back * (accent * .12f);
+            discView.transform.localRotation = discRotation * Quaternion.AngleAxis(strike != null ? p * 720 : Mathf.Sin(Time.time * .6f) * 3, Vector3.forward);
+            if (discFlames) discFlames.Intensity = strike != null ? accent : charging ? .5f : 0;
         }
 
         void Hit()

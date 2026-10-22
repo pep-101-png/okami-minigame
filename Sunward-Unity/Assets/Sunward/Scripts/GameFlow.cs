@@ -122,10 +122,10 @@ namespace Sunward
 
         void Update()
         {
-            Time.timeScale = Panel == "pause" ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
+            Time.timeScale = Panel == "pause" || Panel == "controls" ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
             if (Time.unscaledTime > messageUntil)
                 Message = "";
-            if (Player.input.Pause.WasPressedThisFrame() && !Home.Active)
+            if (Player.input.Pause.WasPressedThisFrame() && !Home.Active && VillageRest.ActiveRest == null)
             {
                 if (Panel == "result")
                     ReturnHome();
@@ -133,10 +133,17 @@ namespace Sunward
                     SetPanel(Panel == "" ? "pause" : "");
             }
 
-            if (Player.input.Journal.WasPressedThisFrame() && !InTrial && !Home.Active)
+            if (Player.input.Journal.WasPressedThisFrame() && !InTrial && !Home.Active && VillageRest.ActiveRest == null)
                 SetPanel(Panel == "" ? "shop" : "");
             if (Blocked)
                 return;
+            // A village bed or listening mat owns interaction until Ammy rises.
+            // Avoid opening a nearby trader/dialogue during the same key press.
+            if (VillageRest.ActiveRest != null)
+            {
+                Prompt = "Resting · E or movement to rise";
+                return;
+            }
             Enemies.RemoveAll(e => !e);
             if (InTrial)
             {
@@ -164,6 +171,12 @@ namespace Sunward
                 return;
             }
 
+            VillageRest villageRest = !Home.Active ? VillageRest.Nearby(Player.transform.position) : null;
+            if (villageRest && Player.input.Interact.WasPressedThisFrame())
+            {
+                villageRest.Begin();
+                return;
+            }
             string action = Nearest();
             Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "shop" ? "E · Taro · weapons & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
             if (Player.input.Interact.WasPressedThisFrame() && !Home.Active)

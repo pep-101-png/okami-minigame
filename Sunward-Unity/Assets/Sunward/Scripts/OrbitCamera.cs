@@ -12,6 +12,7 @@ namespace Sunward
         float yaw = 37, pitch = 25, distance = 15;
         Vector3 focus;
         bool initialized;
+        readonly RaycastHit[] obstructions = new RaycastHit[32];
         void LateUpdate()
         {
             if (!target)
@@ -38,8 +39,20 @@ namespace Sunward
 
             focus = Vector3.Lerp(focus, desiredFocus, 1 - Mathf.Exp(-Time.deltaTime * 8));
             Vector3 offset = Quaternion.Euler(pitch, yaw, 0) * Vector3.back * distance, position = focus + offset;
-            if (Physics.SphereCast(focus, .25f, offset.normalized, out var hit, distance, 1 << 6, QueryTriggerInteraction.Ignore))
-                position = focus + offset.normalized * Mathf.Max(.35f, hit.distance - .28f);
+            // Cutaway rooms keep their walls solid for Ammy, while the camera
+            // can look through the hidden panels instead of zooming into her.
+            int hits = Physics.SphereCastNonAlloc(focus, .25f, offset.normalized,
+                obstructions, distance, 1 << 6, QueryTriggerInteraction.Ignore);
+            float nearest = distance;
+            for (int i = 0; i < hits; i++)
+            {
+                var hit = obstructions[i];
+                if (!hit.collider) continue;
+                var interior = hit.collider.GetComponentInParent<VillageInterior>();
+                if (interior && interior.Contains(target.transform.position)) continue;
+                nearest = Mathf.Min(nearest, Mathf.Max(.35f, hit.distance - .28f));
+            }
+            position = focus + offset.normalized * nearest;
             virtualCamera.transform.SetPositionAndRotation(position, Quaternion.LookRotation(focus - position));
         }
     }

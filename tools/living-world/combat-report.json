@@ -1,0 +1,38 @@
+{
+  "wisp": {
+    "meshTriangles": 2052,
+    "articulatedParts": 6,
+    "outlinedParts": 6,
+    "prefabRootPreserved": 8244752933840424166
+  },
+  "reed": {
+    "meshTriangles": 7416,
+    "articulatedParts": 6,
+    "outlinedParts": 6,
+    "prefabRootPreserved": 6718543548399274062
+  },
+  "heavy": {
+    "meshTriangles": 8504,
+    "articulatedParts": 6,
+    "outlinedParts": 6,
+    "prefabRootPreserved": 4544599440953741393
+  },
+  "ranged": {
+    "meshTriangles": 1466,
+    "articulatedParts": 6,
+    "outlinedParts": 6,
+    "prefabRootPreserved": 813931634924766766
+  },
+  "elite": {
+    "meshTriangles": 7524,
+    "articulatedParts": 6,
+    "outlinedParts": 6,
+    "prefabRootPreserved": 3653945641635979712
+  },
+  "boss": {
+    "meshTriangles": 6210,
+    "articulatedParts": 6,
+    "outlinedParts": 6,
+    "prefabRootPreserved": 7652329259476934107
+  }
+}

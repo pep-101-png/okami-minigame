@@ -43,6 +43,13 @@ namespace Sunward
             float z = -p.z;
             if (OnBridge(p.x, z))
                 return 0;
+            return WaterDepth(p);
+        }
+
+        // Geometry of the river bed, including water beneath bridge decks.
+        public static float WaterDepth(Vector3 p)
+        {
+            float z = -p.z;
             float width = 2.45f + .40f * Mathf.Sin(z * .17f + .4f) + .25f * Mathf.Cos(z * .31f), n = Mathf.Abs(p.x - RiverX(z)) / width;
             float deep = 1.15f + .35f * Mathf.Sin(z * .10f + .4f), bed = (-.34f - deep) * (1 - Smooth(.56f, 1.12f, n)) + .10f * Smooth(.56f, 1.12f, n);
             return Mathf.Max(0, -.34f - bed);
@@ -50,24 +57,8 @@ namespace Sunward
 
         public Vector3 GuardRiver(Vector3 previous, Vector3 next)
         {
-            if (Depth(next) <= .34f)
-                return next;
-            // If already in deep water, allow escape rather than pinning both ends
-            // of the bisection inside the river. WaterContact supplies the failsafe.
-            if (Depth(previous) > .34f)
-                return next;
-            Vector3 lo = previous, hi = next;
-            for (int i = 0; i < 12; i++)
-            {
-                Vector3 mid = (lo + hi) * .5f;
-                if (Depth(mid) > .32f)
-                    hi = mid;
-                else
-                    lo = mid;
-            }
-
-            next.x = lo.x;
-            next.z = lo.z;
+            // Swimming now owns deep-water movement. Keep the compatibility entry
+            // point for callers; boundaries/solid-world sweeps remain in WolfMotor.
             return next;
         }
 
