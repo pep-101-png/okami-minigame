@@ -90,6 +90,21 @@ namespace Sunward.Editor
                         family = painting == "Bark" ? "wood" : painting.StartsWith("Rock-") ? "stone" : "";
                         if (family == "") throw new InvalidDataException("Unexpected village-finish painting: " + asset);
                     }
+                    else if (asset.StartsWith("Assets/Sunward/Textures/InkWorld/"))
+                    {
+                        string painting = Path.GetFileNameWithoutExtension(asset);
+                        switch (painting)
+                        {
+                            case "Timber": family = "wood"; break;
+                            case "Cliff": family = "stone"; break;
+                            case "Roof":
+                            case "RoofIndigo": family = "roof"; break;
+                            case "Plaster": family = "plaster"; break;
+                            case "Meadow": family = "meadow"; break;
+                            case "Path": family = "path"; break;
+                            default: throw new InvalidDataException("Unexpected ink-world painting: " + asset);
+                        }
+                    }
                     else throw new InvalidDataException("Unexpected environment-art source: " + asset);
                     families.Add(family);
                     assigned++;

@@ -1,0 +1,126 @@
+{
+  "assets": [
+    {
+      "name": "Roof-House-0-wood",
+      "guid": "6dd3638ec38195bb2f6aa627ab7d7a96",
+      "triangles": 1024,
+      "houseIndex": 0,
+      "localPosition": [
+        0,
+        0,
+        0
+      ],
+      "sourceRoof": "House-24-closed.asset",
+      "eaveY": 2.65,
+      "ridgeY": 4.75
+    },
+    {
+      "name": "Roof-House-0-paper",
+      "guid": "c5dadccb0c46044aa213c7b9ac690f34",
+      "triangles": 288,
+      "houseIndex": 0,
+      "localPosition": [
+        0,
+        0,
+        0
+      ],
+      "sourceRoof": "House-24-closed.asset",
+      "eaveY": 2.65,
+      "ridgeY": 4.75
+    },
+    {
+      "name": "Roof-House-0-tiles",
+      "guid": "2fa242f0e62a90a34435685043a22ed0",
+      "triangles": 3412,
+      "houseIndex": 0,
+      "localPosition": [
+        0,
+        0,
+        0
+      ],
+      "sourceRoof": "House-24-closed.asset",
+      "eaveY": 2.65,
+      "ridgeY": 4.75
+    },
+    {
+      "name": "Roof-House-3-wood",
+      "guid": "4b97cd9430ffa507e853a6fe473b2ced",
+      "triangles": 1024,
+      "houseIndex": 3,
+      "localPosition": [
+        0,
+        0,
+        0
+      ],
+      "sourceRoof": "House-132-closed.asset",
+      "eaveY": 2.65,
+      "ridgeY": 4.75
+    },
+    {
+      "name": "Roof-House-3-paper",
+      "guid": "64f31491042b0f43659b7c905c094246",
+      "triangles": 288,
+      "houseIndex": 3,
+      "localPosition": [
+        0,
+        0,
+        0
+      ],
+      "sourceRoof": "House-132-closed.asset",
+      "eaveY": 2.65,
+      "ridgeY": 4.75
+    },
+    {
+      "name": "Roof-House-3-tiles",
+      "guid": "a5e7de7b0c55fd44f190c88c7a770c58",
+      "triangles": 3412,
+      "houseIndex": 3,
+      "localPosition": [
+        0,
+        0,
+        0
+      ],
+      "sourceRoof": "House-132-closed.asset",
+      "eaveY": 2.65,
+      "ridgeY": 4.75
+    },
+    {
+      "name": "Roof-Tower-timber",
+      "guid": "500594b2e5b41c00ead599d79d360d98",
+      "triangles": 4016,
+      "houseIndex": 8,
+      "localPosition": [
+        0,
+        3.85,
+        0
+      ],
+      "keepExistingRoof": true
+    },
+    {
+      "name": "Roof-Tower-plaster",
+      "guid": "5814e8a637022e51280090dffd0e5111",
+      "triangles": 816,
+      "houseIndex": 8,
+      "localPosition": [
+        0,
+        3.85,
+        0
+      ],
+      "keepExistingRoof": true
+    },
+    {
+      "name": "Roof-Tower-tiles",
+      "guid": "87300cb98316b9441d305f0a823fe0bf",
+      "triangles": 2872,
+      "houseIndex": 8,
+      "localPosition": [
+        0,
+        3.85,
+        0
+      ],
+      "keepExistingRoof": true
+    }
+  ],
+  "triangles": 17152,
+  "unityRendered": false
+}

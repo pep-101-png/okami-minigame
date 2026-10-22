@@ -1,0 +1,675 @@
+{
+  "units": "metres",
+  "generator": "tools/ink-world/geometry.py",
+  "unityRendered": false,
+  "assets": [
+    {
+      "name": "Pine-0-trunk",
+      "guid": "73c9b9d206664e806d5d682061484761",
+      "materialFamily": "wood",
+      "purpose": "Sculptural asymmetrical Japanese pine; base at origin",
+      "vertices": 3728,
+      "triangles": 6940,
+      "min": [
+        -1.3571323702721119,
+        -0.08432993810941913,
+        -2.081288806086816
+      ],
+      "max": [
+        2.8739677705898923,
+        5.561842659262633,
+        2.1891920879087845
+      ],
+      "size": [
+        4.231100140862004,
+        5.646172597372052,
+        4.2704808939956
+      ]
+    },
+    {
+      "name": "Pine-0-foliage",
+      "guid": "3b825e4ee17985684f2a32efa5e68b0b",
+      "materialFamily": "foliage",
+      "purpose": "Sculptural asymmetrical Japanese pine; base at origin",
+      "vertices": 13064,
+      "triangles": 10488,
+      "min": [
+        -1.9946760571741455,
+        2.18,
+        -2.699783029333631
+      ],
+      "max": [
+        3.5533910324795066,
+        5.807791370653519,
+        2.69772800547144
+      ],
+      "size": [
+        5.548067089653652,
+        3.627791370653519,
+        5.3975110348050706
+      ]
+    },
+    {
+      "name": "Pine-1-trunk",
+      "guid": "5fe615a70c7ba31aceeafb4350e254be",
+      "materialFamily": "wood",
+      "purpose": "Sculptural asymmetrical Japanese pine; base at origin",
+      "vertices": 3728,
+      "triangles": 6940,
+      "min": [
+        -2.2976229426275605,
+        -0.08432993810941913,
+        -1.8259258347026723
+      ],
+      "max": [
+        1.9069673408818715,
+        5.561376140365897,
+        2.4054505397647836
+      ],
+      "size": [
+        4.204590283509432,
+        5.645706078475316,
+        4.231376374467456
+      ]
+    },
+    {
+      "name": "Pine-1-foliage",
+      "guid": "1bb8f9ea40cbdcd76da81498217705b1",
+      "materialFamily": "foliage",
+      "purpose": "Sculptural asymmetrical Japanese pine; base at origin",
+      "vertices": 13064,
+      "triangles": 10488,
+      "min": [
+        -3.029532587024327,
+        2.18,
+        -2.450668235769691
+      ],
+      "max": [
+        2.7869449354772238,
+        5.767314562202031,
+        2.860849811364903
+      ],
+      "size": [
+        5.81647752250155,
+        3.5873145622020313,
+        5.311518047134594
+      ]
+    },
+    {
+      "name": "Pine-2-trunk",
+      "guid": "302c11943401bb909ae1d79d3a75fcfc",
+      "materialFamily": "wood",
+      "purpose": "Sculptural asymmetrical Japanese pine; base at origin",
+      "vertices": 3728,
+      "triangles": 6940,
+      "min": [
+        -1.7545098519651938,
+        -0.08432993810941913,
+        -2.2288092633301053
+      ],
+      "max": [
+        2.6457522498233774,
+        5.561842659262633,
+        2.642481756154683
+      ],
+      "size": [
+        4.400262101788571,
+        5.646172597372052,
+        4.871291019484788
+      ]
+    },
+    {
+      "name": "Pine-2-foliage",
+      "guid": "79b4e905d76fab2663fc7dacf93e3753",
+      "materialFamily": "foliage",
+      "purpose": "Sculptural asymmetrical Japanese pine; base at origin",
+      "vertices": 13064,
+      "triangles": 10488,
+      "min": [
+        -2.3380541027565305,
+        2.18,
+        -2.7691300039778817
+      ],
+      "max": [
+        3.4318932944649334,
+        5.72007095430446,
+        3.229276014416524
+      ],
+      "size": [
+        5.769947397221464,
+        3.54007095430446,
+        5.998406018394405
+      ]
+    },
+    {
+      "name": "Cherry-0-trunk",
+      "guid": "bce7cdd45d33865dc4c6c64f1bc80c92",
+      "materialFamily": "wood",
+      "purpose": "Twisted wide cherry silhouette; base at origin",
+      "vertices": 3465,
+      "triangles": 6390,
+      "min": [
+        -1.5405798679968963,
+        -0.04768469786284274,
+        -2.631431624325101
+      ],
+      "max": [
+        2.6860703458188744,
+        3.644919960045576,
+        2.729636064365395
+      ],
+      "size": [
+        4.226650213815771,
+        3.692604657908419,
+        5.361067688690496
+      ]
+    },
+    {
+      "name": "Cherry-0-blossom",
+      "guid": "159da16745a9c18e458ba7b89e347989",
+      "materialFamily": "foliage",
+      "purpose": "Twisted wide cherry silhouette; base at origin",
+      "vertices": 10044,
+      "triangles": 11232,
+      "min": [
+        -1.922223128011042,
+        2.62,
+        -3.0642153944063226
+      ],
+      "max": [
+        3.154530524118936,
+        3.9344335737625187,
+        3.219073638886481
+      ],
+      "size": [
+        5.0767536521299785,
+        1.3144335737625186,
+        6.283289033292803
+      ]
+    },
+    {
+      "name": "Cherry-1-trunk",
+      "guid": "3dfb2c315ee8803f9bca9c45080796ce",
+      "materialFamily": "wood",
+      "purpose": "Twisted wide cherry silhouette; base at origin",
+      "vertices": 3465,
+      "triangles": 6390,
+      "min": [
+        -2.1013411239401667,
+        -0.04768469786284274,
+        -2.095218344492739
+      ],
+      "max": [
+        2.7216921852593714,
+        3.644888463148364,
+        2.671952542814036
+      ],
+      "size": [
+        4.823033309199538,
+        3.692573161011207,
+        4.767170887306775
+      ]
+    },
+    {
+      "name": "Cherry-1-blossom",
+      "guid": "b5ce259de2b5780fcc989d01003510c9",
+      "materialFamily": "foliage",
+      "purpose": "Twisted wide cherry silhouette; base at origin",
+      "vertices": 10044,
+      "triangles": 11232,
+      "min": [
+        -2.5056542389148264,
+        2.62,
+        -2.613563721790819
+      ],
+      "max": [
+        3.1841554152500775,
+        3.9344335737625187,
+        3.101918835824073
+      ],
+      "size": [
+        5.689809654164904,
+        1.3144335737625186,
+        5.715482557614893
+      ]
+    },
+    {
+      "name": "Ink-tree-trunk",
+      "guid": "85db052423d00608514cfdb5f7c95b7f",
+      "materialFamily": "wood",
+      "purpose": "Angular umber branches, sparse pointed olive foliage; reference-inspired silhouette",
+      "vertices": 2769,
+      "triangles": 5142,
+      "min": [
+        -2.448184651675405,
+        -0.0721510256801272,
+        -2.3230103421032444
+      ],
+      "max": [
+        2.700828747709639,
+        4.606304836086819,
+        2.3114559404596644
+      ],
+      "size": [
+        5.149013399385044,
+        4.678455861766946,
+        4.634466282562909
+      ]
+    },
+    {
+      "name": "Ink-tree-olive",
+      "guid": "8ecaf0bd9d9f98fd6e914b5f39da6f23",
+      "materialFamily": "foliage",
+      "purpose": "Angular umber branches, sparse pointed olive foliage; reference-inspired silhouette",
+      "vertices": 9216,
+      "triangles": 4608,
+      "min": [
+        -2.619755257505805,
+        2.08,
+        -2.546310742398823
+      ],
+      "max": [
+        2.86437552883575,
+        4.663891388368283,
+        2.5430013229441135
+      ],
+      "size": [
+        5.484130786341556,
+        2.583891388368283,
+        5.089312065342936
+      ]
+    },
+    {
+      "name": "Cliff-0-stone",
+      "guid": "390808d6880906c26ba03bee73bda71f",
+      "materialFamily": "stone",
+      "purpose": "Layered six-metre escarpment; use around existing boundary collision",
+      "vertices": 1720,
+      "triangles": 3360,
+      "min": [
+        -3.45741451088811,
+        0.0,
+        -0.6905677248118236
+      ],
+      "max": [
+        3.510773747472493,
+        3.7922755094383382,
+        1.1676180900882331
+      ],
+      "size": [
+        6.968188258360604,
+        3.7922755094383382,
+        1.8581858149000567
+      ]
+    },
+    {
+      "name": "Cliff-0-moss",
+      "guid": "bc198123353bcc776a7ebe8ae33aac35",
+      "materialFamily": "foliage",
+      "purpose": "Layered six-metre escarpment; use around existing boundary collision",
+      "vertices": 2064,
+      "triangles": 4032,
+      "min": [
+        -3.052354913052634,
+        1.6115841327637443,
+        -0.6328714940052099
+      ],
+      "max": [
+        2.943828143459514,
+        3.797275509438338,
+        0.9718583050413387
+      ],
+      "size": [
+        5.996183056512148,
+        2.185691376674594,
+        1.6047297990465488
+      ]
+    },
+    {
+      "name": "Cliff-1-stone",
+      "guid": "c3229c6eb1e3f4e9d6233963da750e56",
+      "materialFamily": "stone",
+      "purpose": "Layered six-metre escarpment; use around existing boundary collision",
+      "vertices": 1720,
+      "triangles": 3360,
+      "min": [
+        -3.0192988123079165,
+        0.0,
+        -0.9282278079678467
+      ],
+      "max": [
+        3.51989270588657,
+        4.11185679962789,
+        0.9598568447291457
+      ],
+      "size": [
+        6.539191518194487,
+        4.11185679962789,
+        1.8880846526969923
+      ]
+    },
+    {
+      "name": "Cliff-1-moss",
+      "guid": "ab1a7d5aa1b618774dbaf26d22815d46",
+      "materialFamily": "foliage",
+      "purpose": "Layered six-metre escarpment; use around existing boundary collision",
+      "vertices": 2064,
+      "triangles": 4032,
+      "min": [
+        -2.84699334792669,
+        1.8826233203317797,
+        -0.809751756583449
+      ],
+      "max": [
+        3.009201646117636,
+        4.1168567996278895,
+        0.8775597856104761
+      ],
+      "size": [
+        5.856194994044326,
+        2.23423347929611,
+        1.687311542193925
+      ]
+    },
+    {
+      "name": "Cliff-2-stone",
+      "guid": "f577e5451e65e9af6eaca6d7083a7f79",
+      "materialFamily": "stone",
+      "purpose": "Layered six-metre escarpment; use around existing boundary collision",
+      "vertices": 1720,
+      "triangles": 3360,
+      "min": [
+        -3.602558070759064,
+        0.0,
+        -1.1139321427350288
+      ],
+      "max": [
+        3.498394159211603,
+        7.323385117109409,
+        0.9955467884891784
+      ],
+      "size": [
+        7.100952229970667,
+        7.323385117109409,
+        2.1094789312242073
+      ]
+    },
+    {
+      "name": "Cliff-2-moss",
+      "guid": "bca5bc7d331cef8e73b5ba172a84e511",
+      "materialFamily": "foliage",
+      "purpose": "Layered six-metre escarpment; use around existing boundary collision",
+      "vertices": 2064,
+      "triangles": 4032,
+      "min": [
+        -3.243139091974387,
+        3.590498042249911,
+        -0.8383296312495755
+      ],
+      "max": [
+        2.901634726317324,
+        7.328385117109406,
+        0.8845799173752864
+      ],
+      "size": [
+        6.144773818291711,
+        3.737887074859495,
+        1.722909548624862
+      ]
+    },
+    {
+      "name": "Ridge-crest-ceramic",
+      "guid": "7ee2ac6a68a8ad1f06e6ea595f9167f1",
+      "materialFamily": "roof",
+      "purpose": "Roof ridge center at origin, +Y up, front +Z",
+      "vertices": 260,
+      "triangles": 348,
+      "min": [
+        -0.6030362530487082,
+        0.0,
+        -0.15
+      ],
+      "max": [
+        0.6147295483862076,
+        0.68545304963277,
+        0.15
+      ],
+      "size": [
+        1.2177658014349158,
+        0.68545304963277,
+        0.3
+      ]
+    },
+    {
+      "name": "Ridge-crest-sun",
+      "guid": "6c5fe53a3f7a6c202728c9052b931fcb",
+      "materialFamily": "gold",
+      "purpose": "Roof ridge center at origin, +Y up, front +Z",
+      "vertices": 238,
+      "triangles": 432,
+      "min": [
+        -0.5213009029391381,
+        0.10806369847408138,
+        -0.10539230484541326
+      ],
+      "max": [
+        0.5213009029391381,
+        0.645,
+        0.04500000000000001
+      ],
+      "size": [
+        1.0426018058782762,
+        0.5369363015259186,
+        0.15039230484541327
+      ]
+    },
+    {
+      "name": "Gable-timber",
+      "guid": "433a630c3a91070e954c122af37c661c",
+      "materialFamily": "wood",
+      "purpose": "Entrance karahafu fascia; base center origin, front +Z; nominal width 2.16m",
+      "vertices": 1024,
+      "triangles": 1800,
+      "min": [
+        -1.08,
+        -0.2912775210818613,
+        -0.08715528495131539
+      ],
+      "max": [
+        1.08,
+        0.684515929873519,
+        0.08715528495131539
+      ],
+      "size": [
+        2.16,
+        0.9757934509553803,
+        0.17431056990263077
+      ]
+    },
+    {
+      "name": "Gable-paper",
+      "guid": "dd024f2d778feb4fc8a985432fade747",
+      "materialFamily": "plaster",
+      "purpose": "Entrance karahafu fascia; base center origin, front +Z; nominal width 2.16m",
+      "vertices": 68,
+      "triangles": 34,
+      "min": [
+        -0.94,
+        0.1358973913282802,
+        0.012
+      ],
+      "max": [
+        1.01,
+        0.6094695788309886,
+        0.012
+      ],
+      "size": [
+        1.95,
+        0.47357218750270846,
+        0.0
+      ]
+    },
+    {
+      "name": "Gable-gold",
+      "guid": "60051449e98b109b83d4e51d4e313c19",
+      "materialFamily": "gold",
+      "purpose": "Entrance karahafu fascia; base center origin, front +Z; nominal width 2.16m",
+      "vertices": 240,
+      "triangles": 400,
+      "min": [
+        -0.12196162047563143,
+        0.22803837952436856,
+        0.04858732180445815
+      ],
+      "max": [
+        0.12196162047563143,
+        0.4719616204756314,
+        0.07141267819554184
+      ],
+      "size": [
+        0.24392324095126286,
+        0.24392324095126283,
+        0.02282535639108369
+      ]
+    },
+    {
+      "name": "Carved-bracket",
+      "guid": "b7315abf7b968dfbc3f105df58ecfaae",
+      "materialFamily": "wood",
+      "purpose": "Below eave; matching top mounting edge at Y=.27m",
+      "vertices": 336,
+      "triangles": 336,
+      "min": [
+        -0.4316736625301217,
+        -0.11,
+        -0.105
+      ],
+      "max": [
+        0.4349018116461966,
+        0.27,
+        0.105
+      ],
+      "size": [
+        0.8665754741763183,
+        0.38,
+        0.21
+      ]
+    },
+    {
+      "name": "Stone-lantern-stone",
+      "guid": "6967d53bca09fab8dd9bd91357eaf763",
+      "materialFamily": "stone",
+      "purpose": "Open-chamber garden lantern sculpture; 1.83m height",
+      "vertices": 202,
+      "triangles": 376,
+      "min": [
+        -0.48,
+        0.0,
+        -0.48
+      ],
+      "max": [
+        0.48,
+        1.83,
+        0.48
+      ],
+      "size": [
+        0.96,
+        1.83,
+        0.96
+      ]
+    },
+    {
+      "name": "Stone-lantern-light",
+      "guid": "96a2f2e36b75e598979dc3f2f45689c2",
+      "materialFamily": "gold",
+      "purpose": "Open-chamber garden lantern sculpture; 1.83m height",
+      "vertices": 26,
+      "triangles": 48,
+      "min": [
+        -0.1155,
+        1.0299999999999998,
+        -0.1155
+      ],
+      "max": [
+        0.1155,
+        1.26,
+        0.1155
+      ],
+      "size": [
+        0.231,
+        0.2300000000000002,
+        0.231
+      ]
+    },
+    {
+      "name": "Prayer-stand-timber",
+      "guid": "5754d0b86a50ce45d9392fa74611c4fc",
+      "materialFamily": "wood",
+      "purpose": "Small shimenawa prayer stand, +Z front; no collider or interaction",
+      "vertices": 100,
+      "triangles": 192,
+      "min": [
+        -0.8631451702018632,
+        -0.0036279603441178657,
+        -0.06994539156052186
+      ],
+      "max": [
+        0.8666125281815538,
+        2.0845298623556503,
+        0.10947432679561425
+      ],
+      "size": [
+        1.729757698383417,
+        2.088157822699768,
+        0.17941971835613613
+      ]
+    },
+    {
+      "name": "Prayer-stand-paper",
+      "guid": "bfc14cb3aaf55ca4d66eadc3696a4b4c",
+      "materialFamily": "plaster",
+      "purpose": "Small shimenawa prayer stand, +Z front; no collider or interaction",
+      "vertices": 64,
+      "triangles": 32,
+      "min": [
+        -0.6000000000000001,
+        1.329934911635962,
+        0.03
+      ],
+      "max": [
+        0.67,
+        1.7629551018760201,
+        0.045
+      ],
+      "size": [
+        1.27,
+        0.4330201902400581,
+        0.015
+      ]
+    },
+    {
+      "name": "Prayer-stand-rope",
+      "guid": "d7e2c93bf201598610345ecd305d467a",
+      "materialFamily": "rope",
+      "purpose": "Small shimenawa prayer stand, +Z front; no collider or interaction",
+      "vertices": 302,
+      "triangles": 600,
+      "min": [
+        -0.8159544122474097,
+        1.6278979252411765,
+        -0.05257417400105847
+      ],
+      "max": [
+        0.8151972301897423,
+        1.9092890240167621,
+        0.05280000000000002
+      ],
+      "size": [
+        1.631151642437152,
+        0.28139109877558566,
+        0.10537417400105849
+      ]
+    }
+  ],
+  "totalLibraryTriangles": 124052
+}

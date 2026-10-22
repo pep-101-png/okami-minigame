@@ -1,0 +1,68 @@
+{
+  "west-bank-bridge-mill.jpg": {
+    "sourceSceneSha256": "b877c35c73087462c238f3db5515b593cf095ba46ac476d2f55c52832e2f3782",
+    "renderer": "Blender Cycles layout approximation",
+    "unityRendered": false,
+    "cameraUnity": [
+      -12,
+      11,
+      -17
+    ],
+    "lookAtUnity": [
+      -27,
+      1.9,
+      2.5
+    ],
+    "orthographicWidthMetres": 33,
+    "resolution": [
+      1280,
+      840
+    ],
+    "samples": 12,
+    "ambient": "Explicit Blender world fill; not Unity lighting"
+  },
+  "village-street-gables.jpg": {
+    "sourceSceneSha256": "b877c35c73087462c238f3db5515b593cf095ba46ac476d2f55c52832e2f3782",
+    "renderer": "Blender Cycles layout approximation",
+    "unityRendered": false,
+    "cameraUnity": [
+      -5,
+      9,
+      -22
+    ],
+    "lookAtUnity": [
+      3,
+      1.6,
+      -8
+    ],
+    "orthographicWidthMetres": 27,
+    "resolution": [
+      1280,
+      840
+    ],
+    "samples": 12,
+    "ambient": "Explicit Blender world fill; not Unity lighting"
+  },
+  "village-hall-and-gables.jpg": {
+    "sourceSceneSha256": "b877c35c73087462c238f3db5515b593cf095ba46ac476d2f55c52832e2f3782",
+    "renderer": "Blender Cycles layout approximation",
+    "unityRendered": false,
+    "cameraUnity": [
+      -18,
+      15,
+      4
+    ],
+    "lookAtUnity": [
+      0,
+      2.8,
+      19
+    ],
+    "orthographicWidthMetres": 30,
+    "resolution": [
+      1280,
+      840
+    ],
+    "samples": 12,
+    "ambient": "Explicit Blender world fill; not Unity lighting"
+  }
+}

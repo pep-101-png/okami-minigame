@@ -1,0 +1,142 @@
+{
+  "Plaster": {
+    "description": "Warm plaster, dry ochre washes and narrow faded hairline cracks",
+    "size": [
+      512,
+      512
+    ],
+    "worldTiling": 0.75,
+    "guids": {
+      "color": "875de273d601c944ad9cfb6b3a7335da",
+      "normal": "41d193d7c2b8f373622e5ca8e9c8dabb"
+    },
+    "edgeDifference": 1.87,
+    "ordinaryDifference": 1.77,
+    "averageAlbedoRGB": [
+      0.866,
+      0.78,
+      0.598
+    ],
+    "storageBytes": 268011
+  },
+  "Timber": {
+    "description": "Japanese timber grain with flowing knots, dry brush fissures and exposed fibres",
+    "size": [
+      512,
+      512
+    ],
+    "worldTiling": 0.6,
+    "guids": {
+      "color": "d61f2fa3f14947567dffe6f60b2da403",
+      "normal": "b2d92e6a295aebea1b3e817a88dc0752"
+    },
+    "edgeDifference": 9.35,
+    "ordinaryDifference": 7.7,
+    "averageAlbedoRGB": [
+      0.625,
+      0.435,
+      0.246
+    ],
+    "storageBytes": 379876
+  },
+  "Roof": {
+    "description": "Burnt orange glazed ceramic tiles, four staggered courses, expressive dark lips and chalky highlights",
+    "size": [
+      512,
+      512
+    ],
+    "worldTiling": 1.2,
+    "guids": {
+      "color": "104b2990f3171635e8729a361ae1d187",
+      "normal": "5d317c685e042537a1f7050b67abd186"
+    },
+    "edgeDifference": 0.0,
+    "ordinaryDifference": 3.82,
+    "averageAlbedoRGB": [
+      0.73,
+      0.45,
+      0.241
+    ],
+    "storageBytes": 123709
+  },
+  "RoofIndigo": {
+    "description": "Indigo glazed ceramic tiles, four staggered courses, expressive dark lips and chalky highlights",
+    "size": [
+      512,
+      512
+    ],
+    "worldTiling": 1.2,
+    "guids": {
+      "color": "9c12515665f928025614ffdcecb442ae",
+      "normal": "1075757175b84d47abb98914ff6e7d84"
+    },
+    "edgeDifference": 0.0,
+    "ordinaryDifference": 3.33,
+    "averageAlbedoRGB": [
+      0.42,
+      0.501,
+      0.507
+    ],
+    "storageBytes": 124393
+  },
+  "Cliff": {
+    "description": "Golden ochre sheer cliff planes, dipping mineral strata, split crevices and weathered bristles",
+    "size": [
+      512,
+      512
+    ],
+    "worldTiling": 0.24,
+    "guids": {
+      "color": "472522a8814a050321e4f25e77cf48f0",
+      "normal": "61b9459c843247dcc707775adcfad0a1"
+    },
+    "edgeDifference": 0.0,
+    "ordinaryDifference": 3.75,
+    "averageAlbedoRGB": [
+      0.726,
+      0.605,
+      0.394
+    ],
+    "storageBytes": 343029
+  },
+  "Path": {
+    "description": "Golden ochre footpath with directional dry washes and small handpainted pebbles",
+    "size": [
+      512,
+      512
+    ],
+    "worldTiling": 0.35,
+    "guids": {
+      "color": "46aaef26a3e84dee27784725b131b752",
+      "normal": "791408b063b48f70d276ab4a8c934431"
+    },
+    "edgeDifference": 0.46,
+    "ordinaryDifference": 0.94,
+    "averageAlbedoRGB": [
+      0.769,
+      0.623,
+      0.37
+    ],
+    "storageBytes": 210025
+  },
+  "Meadow": {
+    "description": "Sage meadow wash with ochre patches, hooked grass strokes and deep green bristles",
+    "size": [
+      512,
+      512
+    ],
+    "worldTiling": 0.4,
+    "guids": {
+      "color": "cd309deb182811a4e1e1ea4026891332",
+      "normal": "fd5efad891ae4f7c555563ef9651ad80"
+    },
+    "edgeDifference": 2.58,
+    "ordinaryDifference": 2.15,
+    "averageAlbedoRGB": [
+      0.512,
+      0.605,
+      0.309
+    ],
+    "storageBytes": 352597
+  }
+}
