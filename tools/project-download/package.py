@@ -7,7 +7,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 PROJECT = ROOT / 'Sunward-Unity'
-OUTPUT = ROOT / 'download-output' / 'Sunward-River-and-Lanterns-2026-10-23.zip'
+OUTPUT = ROOT / 'download-output' / 'Sunward-Player-Fixes-2-2026-10-23.zip'
 MANIFEST = json.loads((HERE / 'project-manifest.json').read_text())
 IDLE = 'Sunward-Unity/Assets/Sunward/Generated/Animations/Idle_Natural.anim'
 

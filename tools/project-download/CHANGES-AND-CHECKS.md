@@ -1,78 +1,51 @@
-# River & Lanterns — Windflower update
+# Sunward — Player fixes 2 — 23 October 2026
 
-This pass improves the existing Unity game. It preserves Amaterasu's model,
-materials, existing 47 animation clips, controller, progression and Windows sync.
-Delivery is a complete project ZIP. A separate download branch packages it on
-GitHub; the integration branch, PC syncing and installed tasks are unchanged.
+This is a correction to the existing River & Lanterns project, based on your 17-point list and the two screenshots you sent. It preserves Amaterasu's model, design, rig, original animation clips, progression and the red bridge rails. It does not install or alter Windows tasks or the existing syncing system. Delivery is a complete standalone Unity project ZIP; no integration merge or PowerShell installation is needed.
 
-## Implemented requests
+## What changed
 
-1. All 13 original NPCs: rebuilt seven Japanese costume/face silhouettes; retained
-   rigs, blended knee/elbow weights, bounded planted feet and gentler walking.
-2. Both bridge decks: 54 separate coloured, grained, nailed boards each. Existing
-   red rails, gold crests and their outlines are byte-for-byte preserved.
-3. Added explicit ink shells to NPCs, new rooms/stalls, bridge decks, arena timber,
-   bamboo and all six enemy families; completed the home shell outlines.
-4. Swimming: buoyant dog paddling on the existing skeleton, including beneath
-   bridges. Deep-water rejection and timed shore ejection removed. Collision,
-   world limits and invalid-position recovery remain.
-5. Double jump available without buying an upgrade, including a second jump after
-   leaping out of water. Third jumps rejected.
-6. Four patterned, orderly market stalls; paired shoppers with gestures and quiet
-   spatial wordless chatter.
-7. Wicker market dog bed: E rests and changes between morning and evening.
-8. Twenty-minute day/night cycle, moon/stars, glowing lantern paper and eight
-   bounded coloured lights. New lights have no realtime shadow cost.
-9. Enterable enlarged Windflower training shrine, straw dummies and two samurai
-   students with timed sword practice and quiet wooden impacts.
-10. All 28 arena logs: grooved bark, knots, irregular profiles and cut growth rings.
-11. Six spirit models with articulated limbs/ink contours, committed windups,
-    pounces, sweeps, slams, projectile fans and wall-aware attacks.
-12. Sundial attaches to the animated back instead of the head. Corrected centred
-    spins and six pooled spectral flame ribbons; visible while equipped in the
-    village. Home display stays intact.
-13. Home shell outlines follow the existing indoor roof cutaway.
-14. Existing wheel drives visible rice pounding and falling grain; the specific
-    boulder intersecting its pillar is removed.
-15. Waterfall moved to the actual river head, with a source cleft/feeder and flowing
-    layered shader, replacing stationary offset cards.
-16. Seven different seeded bamboo clumps, varied culm heights and many leaf fans.
-17. Permanent bottom instructions/buttons removed. Health/level remain. Controls,
-    interaction help and retreat are in the pause menu.
-18. Enlarged enterable food hall, diner traffic through its real doorway, eating
-    guests, a bowing violin performer, tables/tableware and an Ammy listening mat.
-    Music is an original synthesized bowed-string approximation, not a recorded
-    violin performance. E on the listening mat uses an authored seated pose.
-19. Quiet noise-based paw takeoff replaces the jump ding; source jump timing fits
-    the physical arc, with a rest-relative gathered-paw skeletal pose.
-20. Checks and limitations are recorded below; gameplay success is not assumed.
+| Your issue | Work completed | What still needs checking in Unity |
+|---|---|---|
+| 1. Sundial below Ammy | Replaced the legacy animated socket placement with a dedicated back mount. The old socket's stored offset was pulling the disc below her feet. The mount follows a bounded amount of chest motion, with a shield-like tilt. Inspected the actual wolf and disc geometry together in Blender. | Fit during running, turning, jumping and attacks. Blender fit is not a Unity runtime test. |
+| 2. Weapon outside arena | Centralised arena-only visibility and applied it on equip, rest and every presentation update, for both weapons. Result/rest/locked states also hide them. | Enter and leave the arena, switch weapons, rest, and finish a trial. |
+| 3. Hitting noise | Verified that the Sundial prefab has no collider, Rigidbody or AudioSource, so physical floor contact is not a confirmed explanation. Suppressed landing sounds from tiny ground gaps by requiring a meaningful airborne interval and downward speed. Distant practice taps are also gated by player distance. | Whether the unwanted noise is gone. Its exact original source could not be established from screenshots; it is not claimed fixed merely by moving the shield. |
+| 4. Swimming | Lowered the floating root by 24 cm, preserving buoyancy and escape/double-jump rules. Reversed the paddle ellipse's vertical phase so the backward power stroke is submerged and the forward recovery lifts. | Waterline around the body, forward/reverse paddle appearance and transitions at riverbanks. |
+| 5. Rock and coloured bridge remnants | Removed two grounded stones intersecting the bridge walking footprints, including matching nearby collision proxies. Disabled the old green/red planar wash meshes above the bridge, and the obsolete duplicated river-stone source batch. | Both bridges from all approach angles. |
+| 6. Bridge boards | Made the deck boards a rich red, with restrained width/height/warp variation and varied nails and knots. All eight original rail, gold and ink parts are byte-for-byte preserved. | Final colour balance and walking surface. |
+| 7. Glued-on stumps/tree bases | Added five varied root-flare designs and leaf litter around 21 tree bases. Varied the proportions of all 28 arena logs while keeping their lowest point seated, and gave the three log mesh variants irregular broken/sawn lips. The arena logs are horizontal, so upright stump roots were not blindly attached to them. | Whether a particular stump you meant remains unfinished; no close-up identifying it was received. |
+| 8. Old identical bamboo | Audited and disabled all 35 original bamboo source parts. The seven replacement clumps retain their different stalk heights and leaf patterns. | The exact leftover patch you meant was not identified: the received pictures showed the market and village, not a bamboo close-up. This is a global source cleanup, not a claimed reproduction of that specific patch. |
+| 9. Roof/door arch clipping | Lowered and flattened all 42 curved entrance fascia parts and moved them forward below the eaves. Their attached ink remains. | View every doorway, particularly from the side. |
+| 10. Broken lanterns | Replaced the rendered parts of all 19 stone-lantern assemblies with a coherent shared stone frame, open chamber, light insert and ink. Audited seven original paper-lantern renderers and assigned glowing paper. Kept existing light/collider objects. The eight newer living-place lanterns retain their dedicated glowing material. | Final appearance across the map, including the arena, by day and night. This was a saved-scene audit, not a rendered Unity sweep. |
+| 11. Mill rock | Removed four grounded stone pieces intruding into the mill footprint, plus their nearby collision proxies. The previous update had removed only one of these stones. | Walk around and inside the mill. |
+| 12. Night-market black shapes and poles | Retired eight leftover decoration/support objects; moved new rope posts clear of stalls and neighbouring houses; matched hanging cords to rope height. Closed awning geometry, disabled shadow casting on small paper/ink/rope/awning decoration renderers, and disabled harsh night-time directional shadows while restoring day shadows. Other directional fill lights now dim at night. | The angular black shapes are consistent with hard shadows from thin/folded decorations and overlapping old geometry. That is the likely cause, not a proven identification of each screenshot pixel. Unity inspection is still needed to confirm they are gone. |
+| 13. Identical stalls | Built four different actual inventories: red fish stall with trays/fins/eyes; blue tea and pottery shelves/cups/teapot; green vegetables/fruit; orange cooked food/noodles/pots/dango. These are different meshes, not just different colours. | In-game readability and NPC access. |
+| 14. Hall/music/seating/pillow | Enlarged the hall from 7.4 × 8.6 m to 10.2 × 12 m; separated three dining tables, stage and cushions; replaced the oversized listening bed with a small roughly 0.92 × 1.12 m pillow. Diners have seated leg poses, bowls and animated tea cups, hidden when walking. Updated their routes through separate door lanes. Fixed the musician's short audio cutoff relative to the high gameplay camera, removed Doppler wobble, improved the generated music waveform/loop, and muted the competing background tune inside the hall. | Hearing and watching the performance, sitting transitions, navigation and proportions in the actual game. Music is an original synthesised violin-style approximation, not a recorded violin. PCM checks passed; audio was not listened to in Unity here. |
+| 15. Student swords | Bound the actual swords to a controlled grip, added two-arm inverse kinematics and coordinated windup/strike/recovery. Repositioned students and dummies within reach. Inspected three sampled poses in Blender. | Smooth motion and actual dummy contact timing in Unity. |
+| 16. Shrine overlaps neighbour | Moved the shrine and adjusted its dimensions, students and dummies. Both new room roof bounds pass checks against every active original house roof. | Full scene composition and entrances in Unity; bounds tests do not prove every possible decorative overlap absent. |
+| 17. Sundial animation and effects | Added a referenced URP additive spectral-flame material/shader, ten pooled animated ribbons, counter-orbits, broad tapered tongues and attack flares. Added slow idle disc rotation/breathing and 720°/1080° attack spins with pose accents. Effects stay parented to the equipped instance to prevent stray trails. | Actual URP shader compilation, effect brightness, blending and animations. The Blender fit image uses illustrative emission curves, not a render of the Unity shader. |
 
-## Evidence and limitations
+## Checks completed
 
-- All project C# passed Roslyn syntax parsing in Editor and Player configurations.
-  This does not replace Unity API/assembly compilation.
-- Checked native vertex/index/normal/bounds/skin streams, local/GUID references and
-  new runtime component bindings. Existing bridge sides and animation clips kept.
-- Seven saved skins and 720 leg IK samples passed. Thirteen swim/jump policy cases
-  and three-minute buoyancy simulations at 30/60/144 FPS passed.
-- Room openings, floor boundaries, stalls, bed size, environment assets and enemy
-  prefab identities passed the focused authoring checks.
-- Blender stills of NPC costumes/weighted walk phases, wolf poses, spirits,
-  environment details, rooms and stalls were rendered and visually inspected.
-  They are asset previews, not Unity screenshots or continuous motion tests.
-- Unity 6000.6.6f1 is unavailable here. Unity import/shader compilation, controller
-  collisions, room traffic, continuous animation, sound quality, final lighting
-  and hardware performance remain unverified. Recordings were left alone at the
-  user's request. No claim of a completed autonomous visual validation loop.
+- C# syntax checked across 87 editor/player files using Roslyn. This is syntax validation, **not** compilation against Unity's API assemblies.
+- Shield policy tests passed all 16 visibility combinations, swim-depth checks and conservative floor-clearance bounds.
+- Water movement tests passed 13 scenarios and three-minute buoyancy simulations at 30, 60 and 144 FPS.
+- Combat asset/prefab integrity: 114 checks passed.
+- NPC skinning/limb checks: seven saved models and 720 inverse-kinematics samples passed.
+- Saved scene: 4,189 GameObjects; no new dangling scene references or missing asset GUIDs; 297 changed/shared mesh assets checked for finite vertices, normals, bounds and valid indices.
+- Four inventories have different geometry; two held practice swords and both diner bowl/cup bindings are present; both room roofs clear original active house roofs; bridge footprint checks find no active grounded-stone obstructions.
+- Music PCM checks passed: non-silent, unclipped and zeroed loop endpoints.
+- Original animation files, Amaterasu appearance assets, eight red bridge rail parts and syncing files were preserved.
+- Rendered and inspected **Blender previews only**: shield fit with the actual wolf mesh, three student poses, seated diner and musician props, four stalls, enlarged hall and shrine geometry. These previews are in `tools/player-review/previews` on the download branch.
+- The standalone package workflow checks every project file against a size/SHA-256 manifest and reads each ZIP member back. The full 159,951,318-byte Idle_Natural animation is required, rather than its LFS pointer.
 
-## Reproduction for development
+## Limits and what to test
 
-`python tools/living-world/build.py` explicitly authors the existing scene from
-its reviewed artwork base, then applies environment, places, residents and combat.
-It is not a runtime builder. Do not execute the older whole-project scene builder
-to install this update: the delivered scene already contains the work.
+No Unity executable is available in this cloud environment. I have **not** compiled this revision in Unity 6000.6.6f1, played it, inspected a new Unity screenshot, listened to its in-game audio, measured its frame rate or verified your PC. Existing screenshots informed these corrections; they do not show the corrected revision.
 
-Checks: `check_update.py`, `check_places.py`, `check_environment.py`,
-`check_combat.py`, `test_residents.py`, `Check-CSharp.ps1`, and
-`movement/Test-WaterMovement.ps1`. Shader contract checks are not GPU compilation.
-No commands or authoring steps are required for the ZIP recipient.
+Open the new standalone project and check: arena-only shield placement/spins/flames; river depth/paddling; both bridge decks; mill interior; all lanterns and door arches; market day/night shadows and unique stock; seated diners/music/pillow; shrine spacing and student swords; remaining stumps/bamboo. No 14-video process is required. Report any remaining problems normally.
+
+## Opening the download
+
+Close Unity first. Extract the ZIP into a **new separate folder**, then in Unity Hub use **Add project from disk** and select its `Sunward-Unity` folder. Do not merge the ZIP into the old synced project: copying over it can retain old files and make it unclear which revision is running. Open `Assets/Sunward/Scenes/Windflower.unity` after import.
+
+The welcome/pause screen must say **River & Lanterns · Player fixes 2 · 23 October 2026**. The ZIP includes all Assets, Packages and ProjectSettings, plus this report and checks. Library/Temp/Logs/Obj/.git and Windows task installers are excluded. Unity recreates its import cache and may retrieve its already-declared packages on first opening.

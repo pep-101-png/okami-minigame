@@ -1,18 +1,24 @@
-SUNWARD — RIVER & LANTERNS
+SUNWARD — PLAYER FIXES 2 — 23 OCTOBER 2026
 
-1. Extract this ZIP into a NEW folder, separate from your existing synced project.
+1. Close Unity and extract this ZIP into a NEW separate folder.
 2. In Unity Hub choose Add > Add project from disk.
-3. Select the extracted Sunward-Unity folder and open with Unity 6000.6.6f1.
-4. Let Unity finish its first import, then open Assets/Sunward/Scenes/Windflower.unity and press Play.
+3. Select the extracted Sunward-Unity folder. Open with Unity 6000.6.6f1.
+4. Let the first import finish, then open Assets/Sunward/Scenes/Windflower.unity and press Play.
 
-The welcome and pause menus show: River & Lanterns update · 23 October 2026.
+The welcome and pause menus must show:
+River & Lanterns · Player fixes 2 · 23 October 2026
 
-This package includes the new gameplay and village changes listed in CHANGES-AND-CHECKS.md.
+Read CHANGES-AND-CHECKS.md for the full report covering all 17 issues.
 All Assets, Packages and ProjectSettings are included, with full LFS asset contents.
-Library, Temp, Logs, Obj, .git and PC syncing/tasks are excluded. No scripts are required to install.
-Unity recreates Library; it may download its declared packages on first import.
+Library, Temp, Logs, Obj, .git and PC syncing/task installers are excluded.
+No PowerShell or merging is required. Unity rebuilds Library and may retrieve
+its already-declared packages on first import.
 
-Asset/code checks and ZIP integrity passed. Unity compilation, live animations,
-lighting, sounds and gameplay still require checking inside Unity.
+Keep the old project as a backup. Do not copy this over the synced folder;
+opening this separate project prevents leftover files and revision confusion.
 
-Source commit: 900d786a9f6964fb529b1bf9c40efcaf600355d7
+Code syntax, asset checks and Blender geometry previews passed.
+Actual Unity compilation, live movement, shader effects, sound and lighting
+are NOT verified here. Please inspect them normally when playing.
+
+Source game commit: db338fed2824a5648cd279a2c30bbb03ae2520cb
