@@ -2,7 +2,7 @@
   "kind": "changed-files update only",
   "baseGameDownload": "Sunward Player Fixes 2",
   "baseCommit": "76880f186845bfa7a16618985b0cffe5ed4fb0d8",
-  "gameCommit": "98a73b05f48b7ec439a025a248f5d2c4e9899bb9",
+  "gameCommit": "2e3964dafd2641ca3df203b8bd8765080edecf61",
   "deletedFiles": [],
   "files": [
     {
@@ -1857,8 +1857,8 @@
     },
     {
       "path": "Assets/Sunward/Scripts/ResidentLocomotion.cs",
-      "bytes": 9596,
-      "sha256": "1f9d922afa198ae51f2e13a744c6536880aa1337a4f2eee20203912b198ab11d"
+      "bytes": 9562,
+      "sha256": "87ba1d4d523bdc520478b03731b32285aedddc5062ae825caac4a576ae0fe90e"
     },
     {
       "path": "Assets/Sunward/Scripts/ResidentPerformance.cs",

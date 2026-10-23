@@ -78,3 +78,7 @@ No Unity executable is available in this cloud environment. **Unity compilation,
 Close Unity. Extract the ZIP. Drag the extracted **Assets** folder into your existing **Sunward-Unity** folder (the folder that already contains Assets, Packages and ProjectSettings). Allow folders to merge and choose Replace for matching files. Do not delete your existing Assets folder and do not put the patch's Assets folder inside it.
 
 Open your existing project normally. After importing, the welcome/pause menu should say **River & Lanterns · Player fixes 3 · 23 October 2026**. Test NPC sound at close/far distances, day/night market decoration, mill marks, roots/bamboo, door arches, both weapons in the arena, jumping/running/landing, student swords, the musician, and P on/off. The report identifies uncertain results rather than calling them passed.
+
+## Unity compilation correction
+
+Removed the obsolete Object.GetInstanceID call from resident footstep pitch after a confirmed Unity CS0619 report. Pitch is now neutral; distance gates, quiet volume and global rate limits are unchanged. All 88 C# files passed syntax parsing, the source audit found no remaining GetInstanceID calls, and footstep simulations passed. Actual Unity compilation on the Windows PC remains unverified. Download ZIPs contain project files only.

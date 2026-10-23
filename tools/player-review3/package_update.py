@@ -19,11 +19,9 @@ def main():
    if source.stat().st_size<1024:assert not source.read_bytes().startswith(b'version https://git-lfs.github.com/spec/v1'),name
    info=zipfile.ZipInfo(name);info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16
    z.writestr(info,source.read_bytes())
-  docs={'START-HERE.txt':HERE/'START-HERE.txt','UPDATE-REPORT.md':HERE/'REPORT.md','ST0-INSPECTION.md':HERE/'ST0-INSPECTION.md','UPDATE-CONTENTS.json':HERE/'update-manifest.json','CHECK-RESULTS.json':HERE/'checks.json'}
-  for name,path in docs.items():
-   info=zipfile.ZipInfo(name);info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o100644<<16;z.writestr(info,path.read_bytes())
  with zipfile.ZipFile(OUTPUT) as z:
   assert z.testzip() is None
+  assert set(z.namelist()) == {item['path'] for item in manifest['files']}, 'Project files only; no reports in the download'
   assert not any(p.startswith(('Sunward-Unity/','Library/','Temp/')) for p in z.namelist())
   for item in manifest['files']:
    b=z.read(item['path']);assert len(b)==item['bytes'] and hashlib.sha256(b).hexdigest()==item['sha256'],item['path']

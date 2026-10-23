@@ -22,7 +22,9 @@ jobs:
           lfs: false
           persist-credentials: false
       - name: Verify and package only the required changed files
-        run: python3 tools/player-review3/package_update.py
+        run: |
+          python3 tools/player-review3/package_update.py
+          python3 tools/player-review3/package_unity_fix.py
       - name: Publish a direct update ZIP download
         env:
           GH_TOKEN: ${{ github.token }}
@@ -38,4 +40,20 @@ jobs:
               --target "$SOURCE_COMMIT" --prerelease --latest=false \
               --title "Sunward Player Fixes 3 — changed-files update only" \
               --notes-file tools/player-review3/REPORT.md
+          fi
+      - name: Publish the small Safe Mode repair download
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ github.sha }}
+        shell: bash
+        run: |
+          tag=sunward-safe-mode-fix-2026-10-23
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" download-output/Sunward-Safe-Mode-Fix.zip download-output/Sunward-Safe-Mode-Fix.zip.sha256 --clobber
+          else
+            gh release create "$tag" download-output/Sunward-Safe-Mode-Fix.zip download-output/Sunward-Safe-Mode-Fix.zip.sha256 \
+              --target "$SOURCE_COMMIT" --prerelease --latest=false \
+              --title "Sunward — Unity Safe Mode code repair" \
+              --notes "Repairs the reported ResidentLocomotion CS0619 compilation error by removing GetInstanceID from footstep pitch. ZIP contains only the script and its unchanged Unity metadata. Extract Assets into the existing Sunward-Unity folder and replace matching files. Static syntax and footstep simulations passed; Unity compilation on the PC remains unverified."
           fi
