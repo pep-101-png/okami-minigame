@@ -61,20 +61,24 @@ def add(scene,name,mesh,mat,parent=0,p=(0,0,0),scale=(1,1,1),outline=True,shadow
 
 def deck():
  mesh=Mesh();rng=random.Random(21103)
- for j in range(54):
-  u=(j+.5)/54;x=-4.8+9.6*u;y=.10+.42*max(0,math.sin(math.pi*u))**1.5
-  tone=rng.uniform(.87,1.13);color=np.array((.54,.34,.16))*tone
-  mesh.box((x,y-.045,0),(9.6/54-.004,.09,2.51),color,bevel=.009)
-  # Shallow dark brush-cut grain runs along each board, rather than a flat tint.
+ widths=np.array([rng.uniform(.88,1.12) for _ in range(54)]);widths*=9.6/widths.sum();edge=-4.8
+ for j,width in enumerate(widths):
+  x=edge+width/2;edge+=width;u=(x+4.8)/9.6;y=.10+.42*max(0,math.sin(math.pi*u))**1.5+rng.uniform(-.004,.004)
+  start=len(mesh.v);tone=rng.uniform(.86,1.12);color=np.array((.62,.115,.065))*tone
+  mesh.box((x,y-.045,0),(width-.006,.09,2.51+rng.uniform(-.025,.025)),color,bevel=.009)
   for line in range(3):
-   xx=x+(line-1)*.041+rng.uniform(-.006,.006)
-   path=[(xx+.006*math.sin(k*1.2+j),y+.001,-1.19+k*2.38/9) for k in range(10)]
-   mesh.tube(path,[.0028]*10,np.array((.25,.15,.07))*rng.uniform(.8,1.1),n=3)
-  for z in [-1.08,1.08]:mesh.ellipsoid((x,y+.003,z),(.012,.004,.012),(.12,.10,.08),n=6,rows=3)
-  if j%9==3:
-   for radius in [.019,.031]:
-    path=[(x+math.sin(a)*radius,y+.004,math.cos(a)*radius*3) for a in np.linspace(0,math.tau,19)]
-    mesh.tube(path,[.0028]*19,(.23,.13,.06),n=3)
+   xx=x+(line-1)*width*.23+rng.uniform(-.008,.008)
+   path=[(xx+.004*math.sin(k*1.2+j),y+.001,-1.19+k*2.38/9) for k in range(10)]
+   mesh.tube(path,[.0025]*10,(.22,.043,.026),n=3)
+  for z in [-rng.uniform(1.02,1.14),rng.uniform(1.02,1.14)]:
+   mesh.ellipsoid((x+rng.uniform(-width*.20,width*.20),y+.003,z),(.011,.004,.011),(.12,.09,.07),n=6,rows=3)
+  if rng.random()<.24:
+   kz=rng.uniform(-.88,.88)
+   for radius in [.016,.027]:
+    path=[(x+math.sin(a)*radius,y+.003,kz+math.cos(a)*radius*2.7) for a in np.linspace(0,math.tau,17)]
+    mesh.tube(path,[.0025]*17,(.19,.04,.022),n=3)
+  for k in range(start,len(mesh.v)):
+   px,py,pz=mesh.v[k];mesh.v[k]=(px+.0025*math.sin(pz*2+j),py+.002*math.sin(pz*3+j*.7),pz)
  return mesh
 
 
@@ -106,6 +110,11 @@ def log(seed):
  for r in [.10,.17,.23]:
   p=[(math.sin(a)*r,.04+math.cos(a)*r*.29,.985+.013*math.sin(a*3)) for a in np.linspace(0,math.tau,19)]
   m.tube(p,[.012]*19,(.14,.085,.04),n=3)
+ # Broken, asymmetric sawn lips rather than perfectly level cylinders.
+ for i,(x,y,z) in enumerate(m.v):
+  if y>.34:
+   wave=.045*math.sin(math.atan2(z,x)*3+seed)+.024*math.sin(math.atan2(z,x)*7+seed*.3)
+   m.v[i]=(x,y+wave*(y-.34)/.164,z)
  return m
 
 

@@ -1,0 +1,15 @@
+{
+  "renderer": "Blender Cycles native asset model review",
+  "unityRendered": false,
+  "scene": "actual saved Windflower scene, place geometry subset",
+  "sceneSha256": "9a0b5102af9622d0f23ccaf766c964fbca24457191292e0e1f0349a346a72bd7",
+  "limitations": [
+    "No Unity lighting, shader, interaction, collision or motion validation",
+    "Residents are inspected separately; not included in these place-only previews"
+  ],
+  "images": [
+    "market-stalls.jpg",
+    "shrine-interior.jpg",
+    "foodhall-interior.jpg"
+  ]
+}

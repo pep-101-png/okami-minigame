@@ -101,7 +101,7 @@ namespace Sunward
                     float reach = i < 2 ? .30f : .19f;
                     float lift = i < 2 ? .22f : .16f;
                     target = footRest[i] + frame.forward * (Mathf.Cos(p) * reach)
-                        + Vector3.up * (.18f + Mathf.Sin(p) * lift);
+                        + Vector3.up * (.12f - Mathf.Sin(p) * lift);
                 }
                 else
                 {

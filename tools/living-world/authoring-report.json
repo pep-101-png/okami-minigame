@@ -22,8 +22,8 @@
     "trainingDummies": 2,
     "restPlaces": 2,
     "nightLanterns": 8,
-    "newObjects": 78,
-    "outlineMeshes": 61
+    "newObjects": 81,
+    "outlineMeshes": 64
   },
   "characters": {
     "retainedResidentRigs": 13,
@@ -89,5 +89,55 @@
       "prefabRootPreserved": 7652329259476934107
     }
   },
-  "sceneSha256": "3ba22bb4a2de11e5982ceaf1a445f65adc241bb4e5c98587a4431ffda1522808"
+  "playerReview": {
+    "retiredSourceMeshes": [
+      371,
+      408,
+      409
+    ],
+    "legacyBambooPartsDisabled": 35,
+    "removedIntrudingStones": [
+      {
+        "name": "Grounded stone 4 \u00b7 source 371",
+        "reason": "mill"
+      },
+      {
+        "name": "Grounded stone 105 \u00b7 source 793",
+        "reason": "mill"
+      },
+      {
+        "name": "Grounded stone 110 \u00b7 source 793",
+        "reason": "bridge"
+      },
+      {
+        "name": "Grounded stone 5 \u00b7 source 371",
+        "reason": "mill"
+      },
+      {
+        "name": "Grounded stone 103 \u00b7 source 793",
+        "reason": "mill"
+      },
+      {
+        "name": "Grounded stone 10 \u00b7 source 371",
+        "reason": "bridge"
+      }
+    ],
+    "retiredMarketDecorations": [
+      "Festival cedar support",
+      "Cedar support",
+      "Cedar support",
+      "Cedar support",
+      "Market \u00b7 supported festival line",
+      "Festival cedar support",
+      "Market \u00b7 five vibrant festival spans",
+      "Cedar support"
+    ],
+    "doorFasciaPartsRepositioned": 42,
+    "rebuiltStoneLanterns": 19,
+    "paperLanternRenderersAudited": 7,
+    "smallDecorationShadowCastersDisabled": 557,
+    "treeRootTransitions": 21,
+    "uprightStumpRoots": 0
+  },
+  "sceneSha256": "9a0b5102af9622d0f23ccaf766c964fbca24457191292e0e1f0349a346a72bd7"
 }

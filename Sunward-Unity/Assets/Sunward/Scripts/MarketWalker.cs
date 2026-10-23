@@ -100,7 +100,7 @@ namespace Sunward
             if (!foodHallRoute) return VillageNavigation.SegmentClear(game.valley.Data, from, to);
             // This exception is restricted to the authored food-hall entrance
             // corridor. Actual walls/door jambs remain authoritative obstacles.
-            if (to.x < 2.2f || to.x > 7.25f || to.z < 6.5f || to.z > 11.5f || Valley.Depth(to) > .1f) return false;
+            if (to.x < 2.2f || to.x > 7.25f || to.z < 6.5f || to.z > 13.3f || Valley.Depth(to) > .1f) return false;
             Vector3 delta = to - from;
             delta.y = 0;
             if (delta.sqrMagnitude < .000001f) return true;

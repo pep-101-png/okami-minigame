@@ -156,7 +156,7 @@ namespace Sunward
             {
                 case "welcome":
                     GUILayout.Label("A light in the mist.", title);
-                    GUILayout.Label("River & Lanterns update · 23 October 2026", small);
+                    GUILayout.Label("River & Lanterns · Player fixes 2 · 23 October 2026", small);
                     GUILayout.Label("Welcome to Windflower. Cross the red bridges, meet the villagers and challenge the Hollow Bell. Your earned rewards are permanent.\n\nOpen the pause menu whenever you need controls or village help.", body);
                     if (Button("ENTER WINDFLOWER →", button))
                         game.Close();
@@ -211,7 +211,7 @@ namespace Sunward
                     break;
                 case "pause":
                     GUILayout.Label("A moment of stillness.", title);
-                    GUILayout.Label("River & Lanterns update · 23 October 2026", small);
+                    GUILayout.Label("River & Lanterns · Player fixes 2 · 23 October 2026", small);
                     if (game.Message != "")
                         GUILayout.Label(game.Message, body);
                     if (Button("CONTROLS & VILLAGE HELP", button))

@@ -27,8 +27,8 @@ for p in (ASSETS/'Generated/LivingCombat').glob('*.asset'):
  # The prescribed 24-byte outline layout must match its shader inputs.
  if p.name.startswith('Contour-'):assert stride==24
 wolf=(ASSETS/'Scripts/WolfCombat.cs').read_text()
-assert 'Instantiate(sundial.visual, discAnchor)' in wolf and 'discAnchor.position = backSocket ? backSocket.position' in wolf
-assert 'p * 720' in wolf and 'Vector3.forward' in wolf
+assert 'Instantiate(sundial.visual, discAnchor)' in wolf and 'discAnchor.localPosition = new Vector3(0, ShieldPresentationRules.MountHeight' in wolf
+assert 'heavy ? 1080 : 720' in wolf and 'ShieldPresentationRules.Visible' in wolf
 assert 'if (motor.Swimming)' in wolf
 brain=(ASSETS/'Scripts/EnemyBrain.cs').read_text();assert brain.index('fallVelocity = motor.isGrounded')<brain.index('if (stun > 0)')
 print(f'PASS: {checks} prefab/artifact integrity checks; stable six spirit identities; weapon back anchor/swim guard. Unity rendering/combat playtest NOT performed.')

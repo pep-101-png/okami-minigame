@@ -18,14 +18,16 @@ def generate():
  # vibrato/slow bow envelopes avoid the prior metallic cue-like timbre.
  notes=[(62,0,1.5),(65,1.5,1),(67,2.5,2),(69,4.5,1.5),(67,6,2),(65,8,1),(62,9,2.5),(60,12,1.5),(62,13.5,1),(65,14.5,2),(67,16.5,1.5),(65,18,2),(62,20,3)]
  for midi,start,length in notes:
-  t=np.arange(int(RATE*length))/RATE;freq=440*2**((midi-69)/12);phase=2*math.pi*freq*(t+.0009*np.sin(t*math.tau*5))
+  t=np.arange(int(RATE*length))/RATE;freq=440*2**((midi-69)/12);phase=np.cumsum((math.tau*freq/RATE)*(1+.0025*np.sin(t*math.tau*5)))
   tone=np.zeros(len(t))
-  for k in range(1,11):
+  for k in range(1,8):
    # Bow bridge body resonance; higher harmonics reduced to keep night music soft.
-   amp=(1/k**1.35)*(.45+.55*math.exp(-((k*freq-1700)/1600)**2));tone+=np.sin(phase*k)*amp
+   amp=(1/k**1.65)*(.45+.55*math.exp(-((k*freq-1700)/1600)**2));tone+=np.sin(phase*k)*amp
   env=np.minimum(1,t/.18)*np.minimum(1,(length-t)/.25)
-  tone=(tone*.17+rng.normal(0,.002,len(t)))*env*(.94+.06*np.sin(t*math.tau*1.3))
+  tone=(tone*.17+rng.normal(0,.0006,len(t)))*env*(.94+.06*np.sin(t*math.tau*1.3))
   i=int(start*RATE);music[i:i+len(t)]+=tone
+ # Both loop endpoints have half a second of silence, avoiding a seam click.
+ music[:RATE//3]*=np.linspace(0,1,RATE//3);music[-RATE//3:]*=np.linspace(1,0,RATE//3)
  chatter=np.zeros(int(RATE*2.4))
  for start,dur,freq,vowel in [(.10,.23,146,0),(.38,.15,153,1),(.60,.27,138,2),(1.28,.22,205,1),(1.58,.30,192,0),(1.98,.15,201,2)]:
   t=np.arange(int(dur*RATE))/RATE;voice=np.zeros(len(t));f1,f2=[(600,1100),(400,1700),(700,1300)][vowel]

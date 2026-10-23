@@ -1,0 +1,11 @@
+{
+  "scope": "Static/asset tests only; Unity rendering and runtime remain unverified",
+  "nonoverlappingRoomRoofs": 2,
+  "uniqueStallInventories": 4,
+  "heldPracticeSwords": 2,
+  "dinerBowlAndCupBindings": 2,
+  "legacyBambooPartsHidden": 35,
+  "shieldCollidersAndAudioSources": 0,
+  "musicPCMAndLoop": "passed",
+  "bridgeObstructions": "none"
+}

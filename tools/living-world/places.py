@@ -71,31 +71,77 @@ def room_mesh(w,d):
  return timber,panels,floor,doorwall,roof(w,d,3.15)
 
 def stall(seed):
- wood=Mesh();cloth=Mesh();goods=Mesh();dark=Mesh();width=2.5;col=[(.67,.12,.08),(.20,.31,.42),(.32,.43,.22),(.74,.48,.12)][seed]
+ wood=Mesh();cloth=Mesh();goods=Mesh();dark=Mesh();rng=np.random.default_rng(450+seed)
+ col=[(.65,.095,.06),(.16,.27,.40),(.27,.40,.16),(.77,.43,.09)][seed]
  for x in [-1.18,1.18]:
-  for z in [-.62,.62]:wood.tube([(x,0,z),(x,2.38,z)],[.065,.055],WOOD,n=10,groove=.09)
+  for z in [-.62,.62]:wood.tube([(x,0,z),(x,2.38+(seed==1)*.10,z)],[.065,.052],WOOD,n=10,groove=.09)
  for x in np.arange(-1.1,1.11,.22):wood.box((x,.80,0),(.21,.1,1.3),np.array(WOOD)*(1+.1*math.sin(x*4)),bevel=.012)
  for z in [-.60,.60]:wood.box((0,.56,z),(2.44,.39,.12),WOOD,bevel=.018)
- # Deep segmented awning with scalloped valance; no flat primitive rectangles.
- for j,x in enumerate(np.linspace(-1.30,1.30,17)[:-1]):
-  xx=x+2.6/16
-  for k,z in enumerate(np.linspace(-.85,.85,9)[:-1]):
-   zz=z+1.7/8
-   def yy(a,b):return 2.32+.23*math.cos(b/.85*math.pi/2)+.025*math.sin(a*8)
-   cloth.face([(x,yy(x,z),z),(x,yy(x,zz),zz),(xx,yy(xx,zz),zz),(xx,yy(xx,z),z)],np.array(col)*(1+.1*math.cos(j*.8)))
-  bottom=2.04-.06*math.sin((j+.5)*math.pi/4)
-  cloth.box(((x+xx)/2,(2.33+bottom)/2,-.83),(xx-x+.003,2.33-bottom,.045),col,bevel=.004)
-  if j%4==0:dark.box((x,2.18,-.862),(.027,.26,.018),GOLD,bevel=.003)
- # Bold geometric wave / sakura stencil bands printed on the cloth.
+ # Closed cloth panels prevent inverted open surfaces becoming black wedges.
+ for j in range(16):
+  x=-1.30+j*2.6/16;xx=x+2.6/16
+  for k in range(8):
+   z=-.85+k*1.7/8;zz=z+1.7/8
+   def yy(a,b):return 2.34+(.24 if seed!=3 else .12)*math.cos(b/.85*math.pi/2)+(.04*math.sin(a*2) if seed==0 else .04*seed*b)
+   pts=[(x,yy(x,z),z),(x,yy(x,zz),zz),(xx,yy(xx,zz),zz),(xx,yy(xx,z),z)]
+   cloth.face(pts,np.array(col)*(1+.07*math.sin(j)));cloth.face([(a,b-.025,c) for a,b,c in pts[::-1]],np.array(col)*.72)
+  if seed!=3:
+   bottom=2.05-.07*math.sin((j+.5)*math.pi/(3 if seed==2 else 5))
+   cloth.box(((x+xx)/2,(2.33+bottom)/2,-.83),(xx-x+.003,2.33-bottom,.045),col,bevel=.004)
+ # Distinct shop emblems: fish, tea leaf, harvest sun, noodle bowl.
+ sign=Mesh();sign.loft([(0,0,0,.18,.18),(0,.035,0,.18,.18)],GOLD,n=20)
+ # Timber sign face is authored separately from the food so silhouettes differ.
+ wood.box((1.28,1.75,-.73),(.30,.43,.07),WOOD,bevel=.03)
+ if seed==0:
+  for row in range(2):
+   wood.box((0,.91,(row-.5)*.48),(2.12,.15,.42),(.28,.15,.08),bevel=.02)
+   for k in range(4):
+    x=-.78+k*.50;z=(row-.5)*.48
+    goods.ellipsoid((x,1.03,z),(.19,.055,.08),(.40,.57,.60),n=16,rows=6)
+    goods.face([(x-.17,1.03,z),(x-.28,1.03,z-.09),(x-.28,1.03,z+.09)],(.23,.36,.42))
+    goods.tube([(x-.04,1.055,z),(x+.12,1.045,z)],[.006,.003],(.09,.18,.20),n=4)
+    goods.ellipsoid((x+.13,1.065,z+.055),(.009,.007,.007),INK,n=6,rows=4)
+  dark.tube([(-.23,2.17,-.87),(0,2.22,-.87),(.23,2.17,-.87)],[.02,.03,.01],PAPER,n=5)
+ elif seed==1:
+  for y in [1.06,1.40,1.74]:
+   wood.box((0,y,.51),(2.22,.07,.22),WOOD,bevel=.015)
+   for k in range(6):goods.loft([(-.90+k*.36,y+.05,.51,.065,.065),(-.90+k*.36,y+.17,.51,.080,.080)],(.75,.76,.63),n=14)
+  goods.ellipsoid((-.55,1.02,-.20),(.22,.17,.18),(.24,.39,.31),n=20,rows=8)
+  goods.tube([(-.38,1.06,-.20),(-.25,1.13,-.20),(-.18,1.18,-.20)],[.065,.035,.026],(.24,.39,.31),n=10)
+  goods.loft([(-.55,1.16,-.20,.13,.12),(-.55,1.20,-.20,.08,.07)],(.31,.45,.35),n=18)
+  goods.tube([(-.72,1.04,-.20),(-.85,1.18,-.20),(-.72,1.19,-.20)],[.025,.025,.025],GOLD,n=8)
+  for x in [.10,.45,.80]:goods.loft([(x,.87,-.28,.08,.08),(x,1.03,-.28,.10,.10)],(.86,.78,.56),n=16)
+  for k in range(3):dark.leaf((-.45+k*.3,2.10,-.88),.22,.09,0,PAPER,tip=.03)
+ elif seed==2:
+  for j in range(3):
+   x=(j-1)*.74;wood.box((x,.92,.04),(.66,.18,.90),WOOD,bevel=.025)
+   for k in range(9):
+    xx=x+(k%3-1)*.18;z=(k//3-1)*.24
+    if j==0:
+     goods.loft([(xx,.99,z,.055,.055),(xx,1.21,z,.035,.035)],(.88,.46,.12),n=9)
+     for a in [0,2.1,4.2]:goods.leaf((xx,1.20,z),.15,.035,a,(.22,.41,.14),tip=.13)
+    else:goods.ellipsoid((xx,1.06+(k%2)*.05,z),(.09,.09,.085),(.73,.15,.065) if j==1 else (.35,.49,.16),n=12,rows=7)
+  for k in range(5):dark.ellipsoid((-.08+k*.035,2.18,-.86),(.013,.05,.009),PAPER,n=8,rows=4)
+ else:
+  wood.box((-.47,.98,.11),(.83,.28,.90),(.21,.16,.11),bevel=.045)
+  goods.loft([(-.47,1.09,.11,.32,.30),(-.47,1.37,.11,.36,.34)],(.18,.22,.22),n=24)
+  goods.loft([(-.47,1.37,.11,.34,.32),(-.47,1.38,.11,.31,.29)],(.72,.49,.22),n=24)
+  for x in [.32,.83]:
+   goods.loft([(x,.88,-.12,.13,.13),(x,1.04,-.12,.20,.20)],(.77,.69,.51),n=18)
+   for k in range(4):
+    pts=[(x+math.sin(a)*(.07+k*.018),1.04,-.12+math.cos(a)*(.07+k*.018)) for a in np.linspace(0,math.tau,18)]
+    goods.tube(pts,[.009]*len(pts),(.91,.77,.41),n=4)
+  for x in [-.9,-.3,.3,.9]:
+   wood.tube([(x,2.3,-.78),(x,1.95,-.78)],[.012,.012],INK,n=6)
+   for k in range(3):goods.ellipsoid((x,2.23-k*.09,-.78),(.045,.045,.045),(.85,.76,.49),n=8,rows=5)
+ if seed==3:
+  dark.tube([(math.cos(a)*.22,2.15+math.sin(a)*.12,-.87) for a in np.linspace(math.pi,math.tau,18)],[.014]*18,PAPER,n=5)
+  for x in [-.09,0,.09]:dark.tube([(x,2.18,-.87),(x+.035,2.28,-.87)],[.009,.006],PAPER,n=5)
  for j in range(7):
-  points=[(-1.13+j*.35+.10*math.cos(a),2.17+.08*math.sin(a),-.868) for a in np.linspace(0,math.pi*1.6,12)]
-  dark.tube(points,[.012]*len(points),PAPER,n=5)
- for j in range(3):
-  x=(j-1)*.73;wood.box((x,.9,.08),(.65,.17,.75),WOOD,bevel=.024)
-  for k in range(7):
-   if seed%2:goods.loft([(x+(k%3-1)*.16,.99+(k//3)*.08,(k//3-1)*.16,.065,.065),(x+(k%3-1)*.16,1.08+(k//3)*.08,(k//3-1)*.16,.06,.06)],(.78,.67,.36),n=10)
-   else:goods.ellipsoid((x+(k%3-1)*.16,1.02+(k//3)*.08,(k//3-1)*.15),(.085,.085,.075),[(.70,.12,.07),(.65,.57,.12),(.27,.47,.16)][j],n=10,rows=6)
+  pts=[(-1.13+j*.35+.10*math.cos(a),2.17+.055*math.sin(a),-.868) for a in np.linspace(0,math.pi*1.6,10)]
+  if seed in [0,1]:dark.tube(pts,[.009]*len(pts),PAPER,n=4)
  return wood,cloth,goods,dark
+
 
 def dog_bed():
  basket=Mesh();cushion=Mesh();ink=Mesh()
@@ -108,6 +154,17 @@ def dog_bed():
   pts=[(x,.19,z) for z in np.linspace(-.40,.40,9)];ink.tube(pts,[.012]*9,PAPER,n=6)
  for part in [basket,cushion,ink]:part.v=[(v[0]*.75,v[1],v[2]*2.4) for v in part.v]
  return basket,cushion,ink
+
+def listening_pillow():
+ cloth=Mesh();top=Mesh();stitch=Mesh()
+ cloth.box((0,.07,0),(.92,.14,1.12),(.46,.18,.14),bevel=.05)
+ top.ellipsoid((0,.11,0),(.43,.07,.52),(.61,.26,.16),n=24,rows=6)
+ for side in [-1,1]:
+  for axis in [0,1]:
+   pts=[(side*.41,.13,z) for z in np.linspace(-.48,.48,14)] if axis==0 else [(x,.13,side*.48) for x in np.linspace(-.41,.41,14)]
+   stitch.tube(pts,[.006]*len(pts),GOLD,n=4)
+ return cloth,top,stitch
+
 
 def table():
  m=Mesh()
@@ -146,6 +203,7 @@ def apply(s):
   if yaw:s.set(t,'m_LocalRotation','{x: 0, y: %g, z: 0, w: %g}'%(math.sin(math.radians(yaw)/2),math.cos(math.radians(yaw)/2)))
   if outline:
    shell=inkmod.shell_mesh(OUT/(name+'.asset'),cache);o=s.add('Living ink · '+name,shell,mats['ink'],parent=t);s.set(s.component(o,23),'m_CastShadows',0)
+  if any(word in name for word in ['awning','ornaments','lantern','sagging']):s.set(s.component(go,23),'m_CastShadows',0)
   new.append(go);return go
  def empty(name,p,parent=0):
   # Reuse a tiny authored marker, hidden visual; no collider.
@@ -155,7 +213,7 @@ def apply(s):
  valley=next(i for i,b in s.blocks.items() if s.kind(i)==114 and 'Assembly-CSharp::Sunward.Valley\n' in b)
  # Replace old enclosed shell visual parts, preserving every other village house.
  rooms=[]
- for index,center,w,d,yaw in [(8,(0,0,26),10.6,7.6,0),(5,(9,0,9),7.4,8.6,90)]:
+ for index,center,w,d,yaw in [(8,(-.5,0,29.2),9.0,7.2,0),(5,(10.5,0,10),10.2,12.0,90)]:
   legacy=(0,25) if index==8 else (9,9)
   for i in list(s.blocks):
    if s.kind(i)==1 and (s.name(i).startswith('Village house '+str(index)+' ·') or s.name(i).startswith('Ink contour · Village house '+str(index)+' ·')):
@@ -187,7 +245,7 @@ def apply(s):
   rooms.append(group)
  # Hide only superseded stall hierarchy. Existing merchant interactions remain in GameFlow.
  for i in list(s.blocks):
-  if s.kind(i)==1 and s.name(i)=='Market · crafted stalls and arranged goods':s.set(i,'m_IsActive',0)
+  if s.kind(i)==1 and s.name(i) in ('Market · crafted stalls and arranged goods','Market · five vibrant festival spans','Market · supported festival line'):s.set(i,'m_IsActive',0)
  for i,b in list(s.blocks.items()):
   if s.kind(i)==65:
    o=s.owner(i);t=s.transform(o);p=vec(s.blocks[t],'m_LocalPosition') if t else np.zeros(3)
@@ -197,29 +255,32 @@ def apply(s):
   for part,m,mat in zip(['cedar frame','dyed wave awning','hand arranged produce','printed brush ornaments'],stall(k),['wood','cloth','goods','cloth']):go=add('stall '+str(k)+' '+part,m,mat,parent=rt)
   box(s,root,(0,.6,0),(2.6,1.2,1.4))
  # Three real straw dummies preserve a clear central walking route.
- for k,(x,z) in enumerate([(-2.7,25.8),(2.7,25.8)]):
+ for k,(x,z) in enumerate([(-2.7,29.55),(1.7,29.55)]):
   for part,m,mat in zip(['timber','woven straw','binding'],dummy(),['wood','straw','wood']):go=add('training dummy '+str(k)+' '+part,m,mat,p=(x,0,z))
   box(s,go,(0,.8,0),(.7,1.6,.5))
- for k,z in enumerate([7,11]):
-  go=add('food hall low table '+str(k),table(),p=(8,0,z));box(s,go,(0,.3,0),(1.5,.6,.8))
+ for k,(x,z) in enumerate([(8.2,7),(8.2,12.5),(12.4,7)]):
+  go=add('food hall low table '+str(k),table(),p=(x,0,z));box(s,go,(0,.3,0),(1.5,.6,.8))
+ for i,z in enumerate([7,12.5]):
+  pad=Mesh();pad.box((0,.14,0),(.76,.26,.76),(.36,.24,.18),bevel=.06)
+  add('diner floor cushion '+str(i),pad,'cloth',p=(6.8,0,z))
  # Raised musician dais on east side with lacquer trim.
- stage=Mesh();stage.box((0,.08,0),(1.7,.16,2.3),WOOD,bevel=.025);stage_go=add('food hall musician dais',stage,p=(11.7,0,10.8));box(s,stage_go,(0,.08,0),(1.7,.16,2.3),False)
+ stage=Mesh();stage.box((0,.08,0),(1.7,.16,2.3),WOOD,bevel=.025);stage_go=add('food hall musician dais',stage,p=(14.6,0,12.1));box(s,stage_go,(0,.08,0),(1.7,.16,2.3),False)
  # Lantern strings have actual grounded posts, not floating lengths of rope.
- for row,z in enumerate([-4,4]):
+ for row,z in enumerate([-5.5,0]):
   posts=Mesh();rope=Mesh()
-  for x in [-5.5,5.5]:
+  for x in [-5.14,5.14]:
    posts.tube([(x,0,0),(x,3.65,0)],[.085,.065],WOOD,n=12,groove=.08)
    posts.box((x,.10,0),(.28,.20,.28),INK,bevel=.045)
-  pts=[(x,3.25+.40*(x/5.5)**2,0) for x in np.linspace(-5.5,5.5,45)]
+  pts=[(x,3.25+.40*(x/5.14)**2,0) for x in np.linspace(-5.14,5.14,45)]
   rope.tube(pts,[.018]*len(pts),INK,n=7,groove=.10)
   add('market supported lantern posts '+str(row),posts,p=(0,0,z));add('market sagging lantern rope '+str(row),rope,p=(0,0,z))
  # Four vermilion hanging market strings with lanterns and physically bounded point lights.
  light_source=next(i for i,b in s.blocks.items() if s.kind(i)==108 and '  m_Type: 2\n' in b)
- for i,(x,z,c) in enumerate([(-3,-4,(1,.42,.12)),(3,-4,(.36,.55,1)),(-3,4,(1,.23,.32)),(3,4,(.30,1,.70)),(7,9,(1,.54,.20)),(11,9,(1,.47,.18)),(-2.5,24,(1,.57,.24)),(2.5,24,(1,.57,.24))]):
+ for i,(x,z,c) in enumerate([(-3,-5.5,(1,.42,.12)),(3,-5.5,(.36,.55,1)),(-3,0,(1,.23,.32)),(3,0,(.30,1,.70)),(8,10,(1,.54,.20)),(14,10,(1,.47,.18)),(-2.5,28,(1,.57,.24)),(2,28,(1,.57,.24))]):
   m=Mesh();m.loft([(0,-.26,0,.13,.13),(0,-.21,0,.22,.22),(0,.18,0,.22,.22),(0,.25,0,.13,.13)],c,n=18,flute=.035)
-  g=add('evening lantern '+str(i),m,'lantern',p=(x,2.5,z));lid=s.alloc();raw=s.blocks[light_source];raw=re.sub(r'^--- !u!108 &-?\d+',f'--- !u!108 &{lid}',raw);raw=re.sub(r'm_GameObject: \{fileID: -?\d+\}',f'm_GameObject: {{fileID: {g}}}',raw);raw=re.sub(r'  m_Color: .*','  m_Color: {r: %g, g: %g, b: %g, a: 1}'%c,raw);raw=re.sub(r'  m_Intensity: .*','  m_Intensity: 2.0',raw);raw=re.sub(r'  m_Range: .*','  m_Range: 5.5',raw);raw=re.sub(r'(  m_Shadows:\n    m_Type:) \d+',r'\g<1> 0',raw);s.blocks[lid]=raw;s.blocks[g]=s.blocks[g].replace('  m_Component:\n',f'  m_Component:\n  - component: {{fileID: {lid}}}\n');lights.append(lid)
+  g=add('evening lantern '+str(i),m,'lantern',p=(x,2.72 if i<4 else 2.5,z));lid=s.alloc();raw=s.blocks[light_source];raw=re.sub(r'^--- !u!108 &-?\d+',f'--- !u!108 &{lid}',raw);raw=re.sub(r'm_GameObject: \{fileID: -?\d+\}',f'm_GameObject: {{fileID: {g}}}',raw);raw=re.sub(r'  m_Color: .*','  m_Color: {r: %g, g: %g, b: %g, a: 1}'%c,raw);raw=re.sub(r'  m_Intensity: .*','  m_Intensity: 2.0',raw);raw=re.sub(r'  m_Range: .*','  m_Range: 5.5',raw);raw=re.sub(r'(  m_Shadows:\n    m_Type:) \d+',r'\g<1> 0',raw);s.blocks[lid]=raw;s.blocks[g]=s.blocks[g].replace('  m_Component:\n',f'  m_Component:\n  - component: {{fileID: {lid}}}\n');lights.append(lid)
   # Actual attached hanging cord and top/bottom lacquer rings.
-  cord=Mesh();cord.tube([(0,.25,0),(0,.9,0)],[.012,.012],INK,n=6)
+  cord=Mesh();top=(3.25+.40*(x/5.14)**2)-2.72 if i<4 else .55;cord.tube([(0,.25,0),(0,top,0)],[.012,.012],INK,n=6)
   for y in [-.26,.25]:cord.loft([(0,y-.018,0,.14,.14),(0,y+.018,0,.14,.14)],RED,n=18)
   add('evening lantern cord '+str(i),cord,parent=s.transform(g))
  cycle_obj=empty('day and night rhythm',(0,0,0));sun=next(i for i,b in s.blocks.items() if s.kind(i)==108 and '  m_Type: 1\n' in b)
@@ -227,9 +288,9 @@ def apply(s):
  cycle=mono(s,cycle_obj,'DayNightCycle',f'  game: {{fileID: {game}}}\n  sun: {{fileID: {sun}}}\n  hour: 9\n  dayMinutes: 20\n  lanterns:\n'+''.join(f'  - {{fileID: {i}}}\n' for i in existing)+'  lanternPaper: []\n')
  # Remove old stall analytic boxes with a dedicated interior cleanup, no changes to source Valley.json.
  cleanup=mono(s,cycle_obj,'MarketLayout','  valley: {fileID: '+str(valley)+'}\n')
- for name,p,watch in [('market bed',(-2.7,.10,7.0),False),('food hall listening mat',(10,.05,9),True)]:
+ for name,p,watch in [('market bed',(-2.7,.10,7.0),False),('food hall listening mat',(12.5,.05,11.2),True)]:
   objs=[]
-  for part,m,mat in zip(['woven wicker','soft cushion','stitching'],dog_bed(),['wood','cloth','cloth']):objs.append(add(name+' '+part,m,mat,p=p,yaw=45 if watch else 0))
+  for part,m,mat in zip(['woven wicker','soft cushion','stitching'],listening_pillow() if watch else dog_bed(),['cloth','cloth','cloth'] if watch else ['wood','cloth','cloth']):objs.append(add(name+' '+part,m,mat,p=p,yaw=45 if watch else 0))
   s.set(objs[0],'m_Name','Living places · '+name)
   mono(s,objs[0],'VillageRest',f'  game: {{fileID: {game}}}\n  cycle: {{fileID: {cycle}}}\n  displayName: '+json.dumps('Sit and listen to the musician' if watch else 'Rest until morning or evening')+f'\n  watchOnly: {1 if watch else 0}\n  radius: 1.65\n')
  return {'rooms':len(rooms),'stalls':4,'trainingDummies':2,'restPlaces':2,'nightLanterns':len(lights),'newObjects':len(new),'outlineMeshes':len(cache)}

@@ -11,12 +11,21 @@ namespace Sunward
         public float dayMinutes = 20;
         public Light[] lanterns = new Light[0];
         public Renderer[] lanternPaper = new Renderer[0];
-        float[] intensities;
+        float[] intensities, fillIntensity;
+        Light[] fillLights;
+        LightShadows sunShadows;
         public float Hour => hour;
         public bool IsNight => hour < 6 || hour >= 18;
 
         void Awake()
         {
+            sunShadows = sun ? sun.shadows : LightShadows.None;
+            var lights = new System.Collections.Generic.List<Light>();
+            foreach (var light in FindObjectsByType<Light>(FindObjectsSortMode.None))
+                if (light != sun && light.type == LightType.Directional) lights.Add(light);
+            fillLights = lights.ToArray();
+            fillIntensity = new float[fillLights.Length];
+            for (int i = 0; i < fillLights.Length; i++) fillIntensity[i] = fillLights[i].intensity;
             intensities = new float[lanterns.Length];
             for (int i = 0; i < lanterns.Length; i++)
                 intensities[i] = lanterns[i] ? lanterns[i].intensity : 0;
@@ -45,8 +54,13 @@ namespace Sunward
                 // Moonlight remains directional/readable, rather than pitching the village black.
                 sun.transform.rotation = Quaternion.Euler(Mathf.Lerp(28, 66, daylight), hour * 15 - 100, 0);
                 sun.color = Color.Lerp(new Color(.42f, .53f, .86f), new Color(1, .91f, .72f), daylight);
-                sun.intensity = Mathf.Lerp(.28f, 1.5f, daylight);
+                sun.intensity = Mathf.Lerp(.32f, 1.5f, daylight);
+                // Low moonlight plus paper/awning geometry produced long hard
+                // ground wedges. Night uses shadowless moon and practical lights.
+                sun.shadows = night > .5f ? LightShadows.None : sunShadows;
             }
+            for (int i = 0; i < fillLights.Length; i++)
+                if (fillLights[i]) fillLights[i].intensity = fillIntensity[i] * Mathf.Lerp(.10f, 1, daylight);
             RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Trilight;
             RenderSettings.ambientSkyColor = Color.Lerp(new Color(.095f, .12f, .25f), new Color(.52f, .61f, .67f), daylight);
             RenderSettings.ambientEquatorColor = Color.Lerp(new Color(.095f, .10f, .18f), new Color(.46f, .43f, .32f), daylight);

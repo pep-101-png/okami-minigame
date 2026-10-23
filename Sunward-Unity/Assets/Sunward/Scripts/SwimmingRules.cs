@@ -4,7 +4,7 @@ namespace Sunward
     public static class SwimmingRules
     {
         public const float WaterLevel = -.34f;
-        public const float FloatRoot = WaterLevel - .48f;
+        public const float FloatRoot = WaterLevel - .72f;
         public const float JumpImpulse = 7.2f;
         public const float DoubleJumpImpulse = 7.4f;
 

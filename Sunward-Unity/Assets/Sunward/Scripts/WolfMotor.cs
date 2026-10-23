@@ -25,7 +25,7 @@ namespace Sunward
 
         Vector3 horizontal, dodgeDirection;
         WolfBodyCollision bodyCollision;
-        float dodgeTimer, coyote, jumpBuffer, landing;
+        float dodgeTimer, coyote, jumpBuffer, landing, airborneTime;
         bool doubleUsed, underBridge;
         public bool Dodging => dodgeTimer > 0;
 
@@ -183,6 +183,7 @@ namespace Sunward
                 Vertical = Mathf.Min(Vertical, -12);
             Vector3 movement = (Dodging ? dodgeDirection * 9 : horizontal) * dt + Vector3.up * Vertical * dt;
             bool wasAir = !Grounded;
+            airborneTime = !Grounded && !Swimming ? airborneTime + dt : 0;
             Vector3 beforeMove = transform.position;
             Push(movement);
             h = GroundHeight();
@@ -198,7 +199,8 @@ namespace Sunward
             {
                 landing = previousY < -9 ? .38f : .20f;
                 animationView.Play(previousY < -9 ? "Land_Heavy" : "Land_Soft", .05f, landing);
-                game.Audio.Cue("land");
+                if (airborneTime > .12f && previousY < -2.5f) game.Audio.Cue("land");
+                airborneTime = 0;
             }
 
             landing = Mathf.Max(0, landing - dt);

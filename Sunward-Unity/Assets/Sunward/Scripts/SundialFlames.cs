@@ -6,7 +6,7 @@ namespace Sunward
     // orphaned world-space trails when teleporting, resting or switching weapon.
     public sealed class SundialFlames : MonoBehaviour
     {
-        const int Count = 6, Points = 18;
+        const int Count = 10, Points = 24;
         readonly LineRenderer[] ribbons = new LineRenderer[Count];
         float clock;
         Material flameMaterial;
@@ -23,7 +23,7 @@ namespace Sunward
             flameMaterial = new Material(material);
             flameMaterial.name = "Sundial spectral light";
             flameMaterial.SetColor("_BaseColor", Color.white);
-            flameMaterial.SetFloat("_Barrier", 0);
+            if (flameMaterial.HasProperty("_Barrier")) flameMaterial.SetFloat("_Barrier", 0);
             for (int i = 0; i < Count; i++)
             {
                 var go = new GameObject("Spectral flame ribbon " + i);
@@ -32,7 +32,7 @@ namespace Sunward
                 line.sharedMaterial = flameMaterial;
                 line.useWorldSpace = false;
                 line.positionCount = Points;
-                line.widthMultiplier = i % 2 == 0 ? .065f : .04f;
+                line.widthMultiplier = i % 2 == 0 ? .10f : .065f;
                 line.widthCurve = new AnimationCurve(new Keyframe(0, .12f), new Keyframe(.25f, 1), new Keyframe(.7f, .5f), new Keyframe(1, 0));
                 line.startColor = i % 3 == 0 ? new Color(.35f, .82f, 1, .8f) : new Color(1, .64f, .18f, .9f);
                 line.endColor = i % 3 == 0 ? new Color(.1f, .5f, 1, 0) : new Color(.95f, .16f, .035f, 0);
@@ -56,9 +56,9 @@ namespace Sunward
                 for (int j = 0; j < Points; j++)
                 {
                     float u = j / (float)(Points - 1);
-                    float a = clock * (i % 2 == 0 ? .85f : -.63f) + i * Mathf.PI / 3 + u * .85f;
-                    float radius = .56f + u * (.22f + Intensity * .10f) + Mathf.Sin(u * 7 + clock * 3 + i) * .018f * u;
-                    ribbons[i].SetPosition(j, new Vector3(Mathf.Cos(a) * radius, Mathf.Sin(a) * radius, -.16f + Mathf.Sin(u * 5 + clock * 2 + i) * .06f * u));
+                    float a = clock * (i % 2 == 0 ? 1.3f : -.95f) + i * Mathf.PI * 2 / Count + u * (.85f + Intensity * .9f);
+                    float radius = .49f + u * (.31f + Intensity * .25f) + Mathf.Sin(u * 7 + clock * 3 + i) * .018f * u;
+                    ribbons[i].SetPosition(j, new Vector3(Mathf.Cos(a) * radius, Mathf.Sin(a) * radius, -.18f - u * .10f + Mathf.Sin(u * 5 + clock * 2 + i) * .075f * u));
                 }
             }
         }

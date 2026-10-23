@@ -11,6 +11,8 @@ namespace Sunward
         public Transform[] thighs, shins, feet, arms, forearms;
         public GameFlow game;
         public bool stallkeeper;
+        public bool Seated;
+        float seatedBlend;
         public AudioSource stepSource;
         public AudioClip footstep;
         Vector3 previous, hipRest;
@@ -147,6 +149,17 @@ namespace Sunward
                 float trade = stallkeeper ? Mathf.Sin(Time.time * 1.1f + i) * 3 * (1 - blend) : 0;
                 arms[i].localRotation = Quaternion.Euler(-swing + trade, 0, i == 0 ? 4 : -4);
                 forearms[i].localRotation = Quaternion.Euler(-5 - Mathf.Abs(trade), 0, 0);
+            }
+            seatedBlend = Mathf.MoveTowards(seatedBlend, Seated ? 1 : 0, dt * 2.6f);
+            if (seatedBlend > 0)
+            {
+                hips.localPosition = Vector3.Lerp(hips.localPosition, hipRest + Vector3.down * .50f, seatedBlend);
+                for (int i = 0; i < 2; i++)
+                {
+                    thighs[i].localRotation = Quaternion.Slerp(thighs[i].localRotation, Quaternion.Euler(-80, 0, 0), seatedBlend);
+                    shins[i].localRotation = Quaternion.Slerp(shins[i].localRotation, Quaternion.Euler(138, 0, 0), seatedBlend);
+                    feet[i].rotation = Quaternion.Slerp(feet[i].rotation, transform.rotation, seatedBlend);
+                }
             }
         }
     }

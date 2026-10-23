@@ -5,7 +5,7 @@ import bpy,numpy as np
 from mathutils import Matrix,Quaternion,Vector
 ROOT=Path(__file__).resolve().parents[2];sys.path.insert(0,str(ROOT/'tools/village'))
 from native import Scene,ASSETS,vec
-s=Scene(Path('/tmp/sunward-places-preview.unity'));paths={re.search(r'guid: (\w+)',p.read_text())[1]:p.with_suffix('') for p in (ASSETS/'Generated/LivingPlaces').glob('*.asset.meta')}
+s=Scene(ASSETS/'Scenes/Windflower.unity');paths={re.search(r'guid: (\w+)',p.read_text())[1]:p.with_suffix('') for p in (ASSETS/'Generated/LivingPlaces').glob('*.asset.meta')}
 convert=Matrix(((1,0,0,0),(0,0,-1,0),(0,1,0,0),(0,0,0,1)));cache={}
 def world(t):
  if t in cache:return cache[t]
@@ -30,12 +30,12 @@ for i in s.blocks:
  if outline:obj.visible_shadow=False;obj.visible_diffuse=False;obj.visible_glossy=False
 bpy.ops.object.light_add(type='SUN',location=(0,-10,20));bpy.context.object.rotation_euler=(.3,-.4,-.7);bpy.context.object.data.energy=2
 scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=12;scene.cycles.use_denoising=False;scene.world.use_nodes=True;scene.world.node_tree.nodes['Background'].inputs['Color'].default_value=(.62,.56,.42,1);scene.world.node_tree.nodes['Background'].inputs['Strength'].default_value=.7;scene.view_settings.view_transform='Standard';scene.view_settings.look='None';scene.render.image_settings.file_format='JPEG';scene.render.image_settings.quality=88
-outdir=ROOT/'tools/living-world/previews';outdir.mkdir(exist_ok=True)
-for name,p,target,width,interior in [('market-stalls',(-8,9,-12),(0,1,0),18,False),('shrine-interior',(-8,10,17),(0,.7,25),15,True),('foodhall-interior',(0,10,2),(9,.6,9),14,True)]:
+outdir=ROOT/'tools/player-review/previews';outdir.mkdir(exist_ok=True)
+for name,p,target,width,interior in [('market-stalls',(-8,9,-12),(0,1,0),18,False),('shrine-interior',(-10,13,19),(-.5,.7,29.2),17,True),('foodhall-interior',(-1,15,1),(10.5,.6,10),20,True)]:
  for obj in objects:obj.hide_render=interior and any(k in obj.name for k in ['roof','shoji walls','door jamb panels'])
  bpy.ops.object.camera_add(location=(convert@Vector((*p,1))).xyz);camera=bpy.context.object;t=(convert@Vector((*target,1))).xyz;camera.rotation_euler=(t-camera.location).to_track_quat('-Z','Y').to_euler();camera.data.type='ORTHO';camera.data.ortho_scale=width;scene.camera=camera
  text=bpy.data.curves.new('Limitation','FONT');text.body='BLENDER MODEL PREVIEW — NOT UNITY';text.size=width*.014;label=bpy.data.objects.new('Preview limitation label',text);bpy.context.collection.objects.link(label);label.parent=camera;label.location=(-width*.48,width*.32,-1);text.materials.append(mat)
  scene.render.resolution_x=960;scene.render.resolution_y=660;scene.render.resolution_percentage=100;scene.render.filepath=str(outdir/(name+'.jpg'));bpy.ops.render.render(write_still=True);bpy.data.objects.remove(label,do_unlink=True);bpy.data.objects.remove(camera,do_unlink=True)
 
 import hashlib,json
-(outdir/'places-preview-metadata.json').write_text(json.dumps({'renderer':'Blender Cycles native asset model review','unityRendered':False,'scene':'temporary preview graph: integrated baseline + places.apply only','sceneSha256':hashlib.sha256(Path('/tmp/sunward-places-preview.unity').read_bytes()).hexdigest(),'limitations':['No Unity lighting, shader, interaction, collision or motion validation','Residents are inspected separately; not included in these place-only previews'],'images':['market-stalls.jpg','shrine-interior.jpg','foodhall-interior.jpg']},indent=2)+'\n')
+(outdir/'places-preview-metadata.json').write_text(json.dumps({'renderer':'Blender Cycles native asset model review','unityRendered':False,'scene':'actual saved Windflower scene, place geometry subset','sceneSha256':hashlib.sha256((ASSETS/'Scenes/Windflower.unity').read_bytes()).hexdigest(),'limitations':['No Unity lighting, shader, interaction, collision or motion validation','Residents are inspected separately; not included in these place-only previews'],'images':['market-stalls.jpg','shrine-interior.jpg','foodhall-interior.jpg']},indent=2)+'\n')

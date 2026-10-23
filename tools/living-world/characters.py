@@ -208,7 +208,8 @@ def artistic_props():
  bow=Mesh();bow.tube([(-.19,0,0),(.20,0,0)],[.003,.003],(.38,.19,.08),n=6);bow.tube([(-.18,-.018,0),(.19,-.018,0)],[.0018,.0018],IVORY,n=4)
  bokken=Mesh();bokken.tube([(0,-.11,0),(0,.04,0),(0,.46,.024),(0,.67,.04)],[.017,.018,.014,.005],(.45,.26,.10),n=10,groove=.015);bokken.box((0,.06,0),(.08,.015,.045),INK,bevel=.003)
  bowl=Mesh();bowl.loft([(0,0,0,.045,.045),(0,.04,0,.07,.07),(0,.055,0,.075,.075)],(.28,.14,.085),n=24);bowl.loft([(0,.056,0,.066,.066),(0,.057,0,.065,.065)],(.89,.80,.58),n=24)
- return {'violin':violin.save('Violin-carved-body'),'bow':bow.save('Violin-horsehair-bow'),'bokken':bokken.save('Practice-bokken'),'bowl':bowl.save('Rice-bowl')}
+ cup=Mesh();cup.loft([(0,0,0,.052,.052),(0,.10,0,.067,.067)],(.68,.76,.63),n=20);cup.loft([(0,.10,0,.055,.055),(0,.103,0,.052,.052)],(.19,.26,.12),n=20)
+ return {'cup':cup.save('Tea-cup'), 'violin':violin.save('Violin-carved-body'),'bow':bow.save('Violin-horsehair-bow'),'bokken':bokken.save('Practice-bokken'),'bowl':bowl.save('Rice-bowl')}
 
 def ground(x,z):
  data=json.loads((ASSETS/'Data/Valley.json').read_text())['world']['terrain'];u=(x-data['minX'])/data['step'];v=(-z-data['minZ'])/data['step'];i=max(0,min(data['nx']-2,int(u)));j=max(0,min(data['nz']-2,int(v)));u-=i;v-=j
@@ -221,8 +222,8 @@ def apply(scene,places=None):
  if not any(scene.kind(i)==1 and scene.name(i)=='Dojo student · left' for i in scene.blocks):
   source=next(i for i in scene.blocks if scene.kind(i)==1 and scene.name(i).startswith('Ambient shopper'))
   for n,(name,x,z,yaw,role,activity) in enumerate([
-   ('Dojo student · left',-2.7,24.65,0,'Samurai',1),('Dojo student · right',2.7,24.65,0,'Samurai',1),
-   ('Food hall · violin performer',11.7,10.8,-90,'Geisha',3),('Food hall · guest one',6.8,7,90,'Chef',2),('Food hall · guest two',6.8,11,90,'Merchant',2)]):
+   ('Dojo student · left',-2.7,28.60,0,'Samurai',1),('Dojo student · right',1.7,28.60,0,'Samurai',1),
+   ('Food hall · violin performer',14.6,12.1,-90,'Geisha',3),('Food hall · guest one',6.8,7,90,'Chef',2),('Food hall · guest two',6.8,12.5,90,'Merchant',2)]):
    go,gait=clone_actor(scene,source,name,(x,ground(x,z)+(.17 if activity==3 else .07),z),yaw,role,models,mat)
    rig=int(re.search(r'hips: \{fileID: (-?\d+)\}',scene.blocks[gait])[1]);rig=int(re.search(r'm_Father: \{fileID: (-?\d+)\}',scene.blocks[rig])[1]);riggo=scene.owner(rig)
    add_component(scene,riggo,'ResidentPerformance',f'  activity: {activity}\n  gait: {{fileID: {gait}}}\n  variation: {n}\n')
@@ -231,8 +232,8 @@ def apply(scene,places=None):
  for n,go in enumerate(i for i in list(scene.blocks) if scene.kind(i)==1 and scene.name(i).startswith('Food hall · guest')):
   walker=next(i for i in scene.refs(go) if scene.kind(i)==114 and 'Sunward.MarketWalker' in scene.blocks[i])
   scene.set(walker,'m_Enabled',1)
-  z=7 if n==0 else 11
-  route=[(6,ground(6,8.5)+.07,8.5),(2.5,ground(2.5,8.5),8.5),(2.5,ground(2.5,9.5),9.5),(6,ground(6,9.5)+.07,9.5),(6.8,ground(6.8,z)+.07,z)]
+  z=7 if n==0 else 12.5
+  route=[(6,ground(6,9.35)+.07,9.35),(2.5,ground(2.5,9.35),9.35),(2.5,ground(2.5,10.65),10.65),(6,ground(6,10.65)+.07,10.65),(6.8,ground(6.8,z)+.07,z)]
   raw=scene.blocks[walker];raw=re.sub(r'  route:.*?(?=  phase:)', '  route:\n'+''.join('  - '+fmt(p)+'\n' for p in route),raw,flags=re.S)
   raw=re.sub(r'  phase: .*',f'  phase: {n*9+2}',raw)
   for key in ('foodHallRoute','mealWaypoint','initialWaypoint','conversationPartner'):
@@ -252,11 +253,13 @@ def apply(scene,places=None):
   prefix=f'Living performance {perf} '
   if any(scene.kind(i)==1 and scene.name(i).startswith(prefix) for i in scene.blocks):continue
   if activity==1:
-   scene.add(prefix+'wooden practice sword',props['bokken'],mat,parent=hands[1],p=(.04,-.18,.06))
+   sword=scene.add(prefix+'wooden practice sword',props['bokken'],mat,parent=hands[1],p=(.10,-.24,.052));scene.blocks[perf]+=f'  practiceSword: {{fileID: {scene.transform(sword)}}}\n'
   elif activity==3:
    violin=scene.add(prefix+'carved violin',props['violin'],mat,parent=hands[0],p=(-.04,-.05,.15));bow=scene.add(prefix+'bow',props['bow'],mat,parent=hands[1],p=(.07,.12,.15))
    scene.blocks[perf]+=f'  instrument: {{fileID: {scene.transform(violin)}}}\n  bow: {{fileID: {scene.transform(bow)}}}\n'
-  elif activity==2:scene.add(prefix+'rice bowl',props['bowl'],mat,parent=hands[0],p=(-.04,-.18,.09))
+  elif activity==2:
+   bowl=scene.add(prefix+'rice bowl',props['bowl'],mat,parent=hands[0],p=(-.10,-.24,.052));cup=scene.add(prefix+'tea cup',props['cup'],mat,parent=hands[1],p=(.10,-.24,.052))
+   scene.blocks[perf]+=f'  mealBowl: {{fileID: {scene.transform(bowl)}}}\n  teaCup: {{fileID: {scene.transform(cup)}}}\n'
  # Keep shoppers on neat street-side routes with conversation pauses.
  walkers=[i for i,b in scene.blocks.items() if scene.kind(i)==114 and 'Sunward.MarketWalker' in b and '  m_Enabled: 1\n' in b and '  foodHallRoute: 1\n' not in b]
  pockets=[(-2,1.8),(-2.7,2.3),(2,-4.5),(2.7,-4.2),(-2.1,-1.3),(2.1,1.6)]
