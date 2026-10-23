@@ -113,7 +113,7 @@ namespace Sunward
                 {
                     // One quiet local step at a time, maximum five per second village-wide.
                     stepSource.Stop();
-                    stepSource.pitch = .96f + (GetInstanceID() & 7) * .012f;
+                    stepSource.pitch = 1f;
                     stepSource.PlayOneShot(footstep, .045f * (1 - distance / 5.5f));
                 }
             }

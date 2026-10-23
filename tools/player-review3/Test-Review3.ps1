@@ -1,5 +1,7 @@
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path (Split-Path $PSScriptRoot -Parent) -Parent
+$legacyCalls = @(Get-ChildItem (Join-Path $repo 'Sunward-Unity/Assets') -Recurse -Filter '*.cs' | Select-String -Pattern '\bGetInstanceID\s*\(')
+if ($legacyCalls.Count) { throw "Unity 6000.6 compilation blocker: $($legacyCalls -join '; ')" }
 Add-Type -Path (Join-Path $repo 'Sunward-Unity/Assets/Sunward/Scripts/ResidentStepClock.cs')
 Add-Type -Path (Join-Path $repo 'Sunward-Unity/Assets/Sunward/Scripts/ShieldPresentationRules.cs')
 foreach ($fps in @(30,60,144)) {
