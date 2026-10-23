@@ -1,0 +1,29 @@
+SUNWARD — PLAYER FIXES 3 — CHANGED FILES ONLY
+
+This is an UPDATE for your existing Sunward project, not the entire game.
+It follows the Player Fixes 2 download. Keep your existing project and save.
+
+1. Close Unity.
+2. Extract this ZIP.
+3. Drag its Assets folder into your existing Sunward-Unity folder — the folder
+   that already contains Assets, Packages and ProjectSettings.
+4. Allow the folders to merge and choose Replace for matching files.
+5. Open your existing Unity project normally and let it import the update.
+
+Do not delete your existing Assets folder. Do not put the new Assets folder
+INSIDE the old Assets folder. The folders must merge at the project root.
+There are no old files you need to delete for this update.
+No PowerShell, merging, new installation or full-project download is required.
+
+The welcome/pause screen must say:
+River & Lanterns · Player fixes 3 · 23 October 2026
+
+P temporarily toggles the Shiranui appearance preview. P again restores normal.
+This visual test does not change your save or unlock upgrades.
+
+Read UPDATE-REPORT.md for every change, tests and unverified results.
+Read ST0-INSPECTION.md for the findings from the archive you uploaded.
+Those report files are for reading; they do not need copying into Unity.
+
+Local code/asset checks and Blender previews were completed. Unity compilation,
+live animations, actual sound, shader appearance and your PC were NOT tested here.

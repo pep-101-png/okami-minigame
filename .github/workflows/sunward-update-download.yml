@@ -1,0 +1,41 @@
+name: Package Sunward changed-files update
+on:
+  push:
+    branches:
+      - fix/windflower-player-review-3
+    paths:
+      - .github/workflows/sunward-update-download.yml
+      - tools/player-review3/**
+permissions:
+  contents: write
+concurrency:
+  group: sunward-player-fixes-3-update-download
+  cancel-in-progress: false
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Retrieve the updated source without downloading unchanged LFS animations
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          lfs: false
+          persist-credentials: false
+      - name: Verify and package only the required changed files
+        run: python3 tools/player-review3/package_update.py
+      - name: Publish a direct update ZIP download
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          SOURCE_COMMIT: ${{ github.sha }}
+        shell: bash
+        run: |
+          tag=sunward-player-fixes-3-update-only-2026-10-23
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" download-output/Sunward-Player-Fixes-3-UPDATE-ONLY.zip download-output/Sunward-Player-Fixes-3-UPDATE-ONLY.zip.sha256 --clobber
+          else
+            gh release create "$tag" download-output/Sunward-Player-Fixes-3-UPDATE-ONLY.zip download-output/Sunward-Player-Fixes-3-UPDATE-ONLY.zip.sha256 \
+              --target "$SOURCE_COMMIT" --prerelease --latest=false \
+              --title "Sunward Player Fixes 3 — changed-files update only" \
+              --notes-file tools/player-review3/REPORT.md
+          fi
