@@ -12,6 +12,8 @@ namespace Sunward
         bool groundedGait, swimming, jumpPose, seated, sitBlend;
         float waterSpeed, poseWeight, swimPhase, jumpAge, verticalSpeed;
         CanineMotionPose naturalPose;
+        WolfMotor motor;
+        float gaitPhase, gaitWeight;
         readonly System.Collections.Generic.HashSet<string> missingStates = new System.Collections.Generic.HashSet<string>();
         void Awake()
         {
@@ -22,12 +24,16 @@ namespace Sunward
                 if (t.name == "DEF_hips") hips = t;
             }
             if (hips) { hipsRest = hips.localPosition; hipsRestRotation = hips.localRotation; }
-            var motor = GetComponentInParent<WolfMotor>();
+            motor = GetComponentInParent<WolfMotor>();
             naturalPose = new CanineMotionPose(animator.transform, motor ? motor.transform : transform);
         }
 
+        void Update() { if (naturalPose != null) naturalPose.Restore(); }
+        void OnDisable() { if (naturalPose != null) naturalPose.Restore(); }
+
         void LateUpdate()
         {
+            if (naturalPose == null) return;
             if (rootBone)
                 rootBone.localPosition = Vector3.zero;
             bool activePose = swimming || jumpPose || seated;
@@ -40,14 +46,17 @@ namespace Sunward
                 naturalPose.Apply(swimming, swimPhase, verticalSpeed, jumpAge, poseWeight, sitBlend);
                 return;
             }
-            // Calm only the grounded gait's pelvis motion, not jumps/attacks or
-            // bone scale. The source wolf mesh, markings and animation clips stay intact.
-            if (hips && groundedGait && !animator.IsInTransition(0))
+            if (motor && motor.game && motor.game.Combat && motor.game.Combat.Attacking)
             {
-                var p = hips.localPosition;
-                p.y = Mathf.Lerp(hipsRest.y, p.y, .70f);
-                hips.localPosition = p;
-                hips.localRotation = Quaternion.Slerp(hipsRestRotation, hips.localRotation, .82f);
+                naturalPose.Combat(motor.game.Combat.AttackProgress, motor.game.Combat.HeavyAttack, motor.game.Combat.AttackSide);
+                return;
+            }
+            gaitWeight = Mathf.MoveTowards(gaitWeight, groundedGait ? .78f : 0, Time.deltaTime * 5);
+            if (groundedGait && motor)
+            {
+                float stride = Mathf.Lerp(.68f, 1.60f, Mathf.InverseLerp(.8f, 7.2f, motor.Speed));
+                gaitPhase = Mathf.Repeat(gaitPhase + motor.Speed * Time.deltaTime / stride, 1);
+                naturalPose.Gait(gaitPhase, motor.Speed, gaitWeight);
             }
         }
 
@@ -86,7 +95,7 @@ namespace Sunward
             jumpPose = true;
             // Source jumps were ~1.8 s while the motor's ballistic arc is ~.7 s.
             // Retain the source actions but fit their timing to the actual jump.
-            Play(second ? "Jump_Double" : speed > 4 ? "Jump_Sprint" : speed > 1 ? "Jump_Jog" : "Jump_Standing", .06f, .70f, true);
+            Play(second ? "Jump_Double" : speed > 4 ? "Jump_Sprint" : speed > 1 ? "Jump_Jog" : "Jump_Standing", .12f, .76f, true);
         }
 
         public void SetWaterMotion(bool inWater, float speed, bool grounded, float vertical)
@@ -127,7 +136,7 @@ namespace Sunward
             filteredSpeed = Mathf.Lerp(filteredSpeed, speed, 1 - Mathf.Exp(-Time.deltaTime * 14));
             // Hysteresis prevents footstep/contact noise repeatedly restarting gaits.
             string gait = LocomotionTuning.Gait(filteredSpeed, turn, Current);
-            Play(gait, .18f);
+            Play(gait, .24f);
             float reference = LocomotionTuning.ReferenceSpeed(gait);
             float rate = filteredSpeed > .15f ? Mathf.Clamp(filteredSpeed / reference, .65f, 1.95f) : 1;
             animator.speed = Mathf.Lerp(animator.speed, rate, 1 - Mathf.Exp(-Time.deltaTime * 12));

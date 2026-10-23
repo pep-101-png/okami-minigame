@@ -53,37 +53,37 @@
   },
   "combat": {
     "wisp": {
-      "meshTriangles": 2052,
+      "meshTriangles": 2388,
       "articulatedParts": 6,
       "outlinedParts": 6,
       "prefabRootPreserved": 8244752933840424166
     },
     "reed": {
-      "meshTriangles": 7416,
+      "meshTriangles": 7856,
       "articulatedParts": 6,
       "outlinedParts": 6,
       "prefabRootPreserved": 6718543548399274062
     },
     "heavy": {
-      "meshTriangles": 8504,
+      "meshTriangles": 8944,
       "articulatedParts": 6,
       "outlinedParts": 6,
       "prefabRootPreserved": 4544599440953741393
     },
     "ranged": {
-      "meshTriangles": 1466,
+      "meshTriangles": 1802,
       "articulatedParts": 6,
       "outlinedParts": 6,
       "prefabRootPreserved": 813931634924766766
     },
     "elite": {
-      "meshTriangles": 7524,
+      "meshTriangles": 7964,
       "articulatedParts": 6,
       "outlinedParts": 6,
       "prefabRootPreserved": 3653945641635979712
     },
     "boss": {
-      "meshTriangles": 6210,
+      "meshTriangles": 6650,
       "articulatedParts": 6,
       "outlinedParts": 6,
       "prefabRootPreserved": 7652329259476934107
@@ -139,5 +139,13 @@
     "treeRootTransitions": 21,
     "uprightStumpRoots": 0
   },
-  "sceneSha256": "9a0b5102af9622d0f23ccaf766c964fbca24457191292e0e1f0349a346a72bd7"
+  "playerReview3": {
+    "orphanedLegacyInkTrianglesRemoved": 223,
+    "integratedRootedTrunks": 21,
+    "wallAnchoredFasciaParts": 42,
+    "colouredMarketLanterns": 24,
+    "nearMillStoneShadowCastersDisabled": 1,
+    "temporaryShiranuiManeBound": true
+  },
+  "sceneSha256": "24f05d5ad72d16fa23dc54e3c48b465d42e8cd44808628ee6342acbbefa6f071"
 }

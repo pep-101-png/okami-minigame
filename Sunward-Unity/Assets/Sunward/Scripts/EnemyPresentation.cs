@@ -40,13 +40,14 @@ namespace Sunward
             float stagger = brain.Stunned ? Mathf.Sin(t * 36) * 5 : 0;
             float crouch = windup * .10f + recover * .035f;
             transform.localPosition = rest + Vector3.up * (airborne ? .17f + Mathf.Sin(t * 2.3f) * .07f : .025f * step * step - crouch);
-            torso.localRotation = torsoRest * Quaternion.Euler(-windup * 12 + strike * 15 + stagger, brain.MoveName == "sweep" ? -windup * 30 + strike * 65 : step * 3, 0);
-            mask.localRotation = maskRest * Quaternion.Euler(windup * 8 - strike * 12, -step * 3, stagger * .4f);
-            float raise = brain.MoveName == "slam" ? windup * 145 - strike * 80 : windup * 65;
-            if (leftArm) leftArm.localRotation = Quaternion.Euler(-step * 18 - raise, 0, 9 + windup * 12);
-            if (rightArm) rightArm.localRotation = Quaternion.Euler(step * 18 - raise - strike * 55, brain.MoveName == "sweep" ? strike * 70 : 0, -9 - windup * 12);
-            if (leftLeg) leftLeg.localRotation = Quaternion.Euler(airborne ? 15 + Mathf.Sin(t * 2) * 7 : step * 16, 0, 0);
-            if (rightLeg) rightLeg.localRotation = Quaternion.Euler(airborne ? 23 - Mathf.Sin(t * 2) * 7 : -step * 16, 0, 0);
+            float smooth = 1 - Mathf.Exp(-Time.deltaTime * 14);
+            torso.localRotation = Quaternion.Slerp(torso.localRotation, torsoRest * Quaternion.Euler(-windup * 12 + strike * 15 + stagger, brain.MoveName == "sweep" ? -windup * 30 + strike * 65 : step * 3, Mathf.Sin(t * 1.5f) * 1.5f), smooth);
+            mask.localRotation = Quaternion.Slerp(mask.localRotation, maskRest * Quaternion.Euler(windup * 8 - strike * 12, -step * 3, stagger * .4f), smooth);
+            float raise = brain.MoveName == "slam" ? windup * 125 - strike * 65 : windup * 65;
+            if (leftArm) leftArm.localRotation = Quaternion.Slerp(leftArm.localRotation, Quaternion.Euler(-step * 18 - raise, 0, 9 + windup * 12), smooth);
+            if (rightArm) rightArm.localRotation = Quaternion.Slerp(rightArm.localRotation, Quaternion.Euler(step * 18 - raise - strike * 55, brain.MoveName == "sweep" ? strike * 70 : 0, -9 - windup * 12), smooth);
+            if (leftLeg) leftLeg.localRotation = Quaternion.Slerp(leftLeg.localRotation, Quaternion.Euler(airborne ? 15 + Mathf.Sin(t * 2) * 7 : step * 16, 0, 0), smooth);
+            if (rightLeg) rightLeg.localRotation = Quaternion.Slerp(rightLeg.localRotation, Quaternion.Euler(airborne ? 23 - Mathf.Sin(t * 2) * 7 : -step * 16, 0, 0), smooth);
         }
     }
 }

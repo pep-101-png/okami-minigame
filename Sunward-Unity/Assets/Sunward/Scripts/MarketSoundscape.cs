@@ -7,6 +7,12 @@ namespace Sunward
         public GameFlow game;
         public AudioSource music, market;
         float level;
+        void Start()
+        {
+            // Retire the old continuous noise bed. Dialogue now comes from nearby
+            // paired residents, with a shared cooldown rather than an overlapping loop.
+            if (market) { market.Stop(); market.enabled = false; }
+        }
         void Update()
         {
             if (!game || !game.Player)
@@ -17,7 +23,7 @@ namespace Sunward
             level = Mathf.MoveTowards(level, target, Time.unscaledDeltaTime * .4f);
             bool foodHall = p.x > 4 && p.x < 17 && p.z > 4 && p.z < 16;
             if (music) music.volume = level * (foodHall ? 0 : .04f);
-            if (market) market.volume = level * .035f;
+            if (market) market.volume = 0;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Sunward
             ambience.volume = .018f;
             ambience.loop = true;
             jump = PawTakeoff();
-            land = Tone(90, .16f, 2);
+            land = PawTakeoff();
             attack = Tone(240, .15f, 1.5f);
             impact = Tone(120, .18f, 3);
             heavy = Tone(135, .30f, 1.6f);
@@ -102,7 +102,7 @@ namespace Sunward
         {
             AudioClip clip = id == "bell" ? bell : id == "heavy" ? heavy : id == "heavy-impact" ? heavyImpact : id == "flame" ? flame : id == "flame-impact" ? flameImpact : id == "bark" ? bark : id == "hurt" ? hit : id == "growl" ? growl : id == "jump" ? jump : id == "land" ? land : id == "attack" ? attack : id == "impact" ? impact : id == "dash" ? dash : collect;
             if (clip)
-                effects.PlayOneShot(clip);
+                effects.PlayOneShot(clip, id == "land" ? .24f : id == "jump" ? .65f : 1);
         }
     }
 }

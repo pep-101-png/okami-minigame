@@ -119,22 +119,33 @@ def log(seed):
 
 
 def bamboo(seed):
- rng=random.Random(seed);stem=Mesh();leaves=Mesh();number=rng.randint(6,10)
+ rng=random.Random(seed);stem=Mesh();leaves=Mesh();number=rng.randint(8,14)
  for i in range(number):
-  a=i*2.4+rng.random();rad=rng.uniform(.12,1.05);x,z=math.cos(a)*rad,math.sin(a)*rad;h=rng.uniform(2.5,5.9);width=rng.uniform(.035,.082);lean=np.array([rng.uniform(-.35,.35),0,rng.uniform(-.35,.35)])
-  n=rng.randint(7,12);pts=[np.array([x,h*j/n,z])+lean*(j/n)**1.5 for j in range(n+1)]
-  stem.tube(pts,[width*(1-.53*j/n) for j in range(n+1)],(.35,.46,.17),n=9,groove=.035)
+  a=i*2.399+rng.uniform(-.45,.45);rad=math.sqrt(rng.random())*1.1;x,z=math.cos(a)*rad,math.sin(a)*rad
+  h=rng.uniform(2.0,6.4);width=rng.uniform(.028,.075);bend=rng.uniform(.15,.75)
+  lean=np.array([math.cos(a+.4)*bend,0,math.sin(a+.4)*bend]);n=rng.randint(7,13)
+  heights=np.linspace(0,1,n+1)**rng.uniform(.85,1.15)
+  pts=[np.array([x,h*u,z])+lean*u*u+np.array([.025*math.sin(u*4+i),0,.025*math.cos(u*4+i)]) for u in heights]
+  colors=[(.25,.39,.13),(.37,.48,.18),(.47,.53,.24),(.24,.36,.16)];color=colors[i%4]
+  stem.tube(pts,[width*(1-.65*u) for u in heights],color,n=12,groove=.05)
   for j in range(1,n):
-   p=pts[j];r=width*(1-.53*j/n)*1.16
-   stem.loft([(p[0],p[1]-.018,p[2],r,r),(p[0],p[1]+.018,p[2],r,r)],(.54,.60,.27),n=9)
-   if j<3 or rng.random()<.25:continue
-   # Many alternate fans along the culm, each with a curved twig and lance leaves.
-   angle=a+j*2.36+rng.uniform(-.8,.8);length=rng.uniform(.35,.85)*(j/n)
-   right=np.array([math.cos(angle),.22,math.sin(angle)]);tip=p+right*length
-   stem.tube([p,p+right*length*.48,tip],[.014,.010,.003],(.23,.34,.12),n=5)
-   for k in range(rng.randint(5,9)):
-    u=.22+.76*k/8;origin=p+right*length*u
-    leaves.leaf(origin,rng.uniform(.20,.39),rng.uniform(.035,.073),angle+(1 if k%2 else -1)*rng.uniform(.6,1.15),(.25+rng.random()*.15,.42+rng.random()*.12,.13),tip=rng.uniform(-.03,.06))
+   p=pts[j];r=width*(1-.65*heights[j])*1.17
+   stem.loft([(p[0],p[1]-.018,p[2],r,r),(p[0],p[1]+.018,p[2],r,r)],(.61,.64,.34),n=12)
+   if j<3:continue
+   angle=a+j*2.15+rng.uniform(-.7,.7);length=rng.uniform(.30,.85)*(heights[j]**.5)
+   direction=np.array([math.cos(angle),.18,math.sin(angle)]);mid=p+direction*length*.6;tip=p+direction*length+np.array([0,-.10,0])
+   stem.tube([p,mid,tip],[.013,.009,.0015],color,n=7)
+   for fan in range(2):
+    branchangle=angle+(-.7 if fan==0 else .65)
+    origin=p+direction*length*(.45+fan*.20);end=origin+np.array([math.cos(branchangle)*.30,.04,math.sin(branchangle)*.30])
+    stem.tube([origin,end],[.006,.001],color,n=5)
+    for k in range(rng.randint(8,13)):
+     u=(k+1)/13;root=origin+(end-origin)*u
+     leaves.leaf(root,rng.uniform(.22,.44),rng.uniform(.045,.075),branchangle+(-1 if k%2 else 1)*rng.uniform(.5,1.1),(.24+rng.random()*.18,.38+rng.random()*.19,.10+rng.random()*.09),tip=rng.uniform(-.10,.04))
+ # Basal young shoots give the clump a planted, layered silhouette.
+ for j in range(5):
+  a=rng.random()*math.tau;h=rng.uniform(.3,.9);x,z=math.cos(a)*.8,math.sin(a)*.8
+  stem.tube([(x,0,z),(x+.08,h,z+.06)],[.027,.003],(.38,.42,.16),n=9)
  return stem,leaves
 
 

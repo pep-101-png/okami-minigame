@@ -12,6 +12,9 @@ namespace Sunward
         public Material sundialFlameMaterial;
         public bool Busy => strike != null || charging || voice > 0;
         public bool Attacking => strike != null;
+        public float AttackProgress => strike != null ? Mathf.Clamp01(elapsed / strike.duration) : 0;
+        public bool HeavyAttack => heavy;
+        public int AttackSide => chain % 2 == 0 ? 1 : -1;
 
         WeaponDefinition weapon;
         GameObject spearView, discView;
@@ -89,10 +92,9 @@ namespace Sunward
             elapsed = 0;
             hit.Clear();
             charging = false;
-            motor.animationView.Play(next.clip, .06f, next.duration, true);
+            motor.animationView.Play(next.clip, .14f, next.duration, true);
             game.Audio.Cue(heavy ? "heavy" : weapon == sundial ? "flame" : "attack");
-            if (weapon == sundial)
-                game.Fx.SundialOrbit(transform.position, heavy);
+            // The equipped disc carries its own bounded flame/trail effect.
         }
 
         void Update()
@@ -220,16 +222,21 @@ namespace Sunward
             // with a bounded chest delta, instead of trusting that socket position.
             Vector3 motion = chest ? transform.InverseTransformPoint(chest.position) - chestRestLocal : Vector3.zero;
             motion = Vector3.ClampMagnitude(motion, ShieldPresentationRules.ChestMotionLimit);
-            discAnchor.localPosition = new Vector3(0, ShieldPresentationRules.MountHeight, -.10f) + motion;
-            discAnchor.localRotation = Quaternion.Euler(ShieldPresentationRules.TiltDegrees, Mathf.Sin(Time.time * 1.7f) * 2, Mathf.Sin(Time.time * 2.1f) * 2);
-            float p = strike != null ? Mathf.Clamp01(elapsed / strike.duration) : 0;
+            float p = AttackProgress;
             float accent = Mathf.Sin(p * Mathf.PI);
+            float reach = accent * accent;
+            float sweep = p * Mathf.PI * 2 - .6f;
+            // Float clear of the spine while idle; launch around the shoulders
+            // and return continuously, rather than rotating through the rear body.
+            discAnchor.localPosition = new Vector3(0, ShieldPresentationRules.MountHeight, -.02f) + motion
+                + new Vector3(Mathf.Cos(sweep) * .85f * AttackSide, .14f, .55f + Mathf.Sin(sweep) * .45f) * reach;
+            discAnchor.localRotation = Quaternion.Euler(ShieldPresentationRules.TiltDegrees + accent * 12, accent * AttackSide * 14, 0);
             spearView.transform.localPosition = spearRest + Vector3.back * (strike != null ? accent * (heavy ? .18f : .38f) : 0);
             spearView.transform.localRotation = spearRotation * Quaternion.Euler(heavy ? -22 * accent : 0, strike != null && strike.clip == "Sweep" ? Mathf.Sin(p * Mathf.PI * 2) * 35 : 0, 0);
-            // Spin about the disc normal, never orbit the head or imported offsets.
-            discView.transform.localPosition = discRest + Vector3.back * (accent * .12f);
-            discView.transform.localRotation = discRotation * Quaternion.Euler(heavy ? accent * 14 : accent * -8, accent * 10, strike != null ? p * (heavy ? 1080 : 720) : Time.time * 12);
-            discView.transform.localScale = Vector3.one * (.85f + accent * .06f + Mathf.Sin(Time.time * 2) * .008f);
+            discView.transform.localPosition = discRest;
+            discView.transform.localRotation = discRotation * Quaternion.Euler(0, 0, strike != null ? AttackSide * p * (heavy ? 1080 : 720) : Time.time * 16);
+            discView.transform.localScale = Vector3.one * (.82f + accent * .035f);
+
             if (discFlames) discFlames.Intensity = strike != null ? accent : charging ? .5f : 0;
         }
 

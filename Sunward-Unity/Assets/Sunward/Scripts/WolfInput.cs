@@ -5,7 +5,7 @@ namespace Sunward
 {
     public sealed class WolfInput : MonoBehaviour
     {
-        public InputAction Move, Look, Jump, Dodge, Light, Heavy, Interact, Switch, Bark, Sprint, Walk, Pause, Orbit, Zoom, Journal;
+        public InputAction Move, Look, Jump, Dodge, Light, Heavy, Interact, Switch, Bark, Sprint, Walk, Pause, Orbit, Zoom, Journal, ShiranuiTest;
         InputAction Button(string name, string key, string pad)
         {
             var a = new InputAction(name, InputActionType.Button);
@@ -40,6 +40,7 @@ namespace Sunward
             Sprint = Button("Sprint", "<Keyboard>/leftShift", "<Gamepad>/leftStickPress");
             Walk = Button("Walk", "<Keyboard>/leftCtrl", "<Gamepad>/leftTrigger");
             Pause = Button("Pause", "<Keyboard>/escape", "<Gamepad>/start");
+            ShiranuiTest = Button("ShiranuiTest", "<Keyboard>/p", null);
             Journal = Button("Journal", "<Keyboard>/tab", "<Gamepad>/select");
             Orbit = Button("Orbit", "<Mouse>/middleButton", null);
             Zoom = new InputAction("Zoom", binding: "<Mouse>/scroll/y");
@@ -63,6 +64,7 @@ namespace Sunward
                 Walk,
                 Pause,
                 Journal,
+                ShiranuiTest,
                 Orbit,
                 Zoom
             }

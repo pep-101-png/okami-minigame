@@ -6,10 +6,10 @@
     "ResidentPerformance": 18
   },
   "scope": "Serialized assets and references only; not Unity API compilation, render or gameplay",
-  "sceneObjects": 4189,
+  "sceneObjects": 4296,
   "preservedBridgeParts": 8,
-  "checkedChangedMeshes": 297,
-  "sharedLibraryTriangles": 478304,
+  "checkedChangedMeshes": 448,
+  "sharedLibraryTriangles": 1234334,
   "localReferences": "passed",
   "assetGuidReferences": "passed",
   "existingClips": "preserved",

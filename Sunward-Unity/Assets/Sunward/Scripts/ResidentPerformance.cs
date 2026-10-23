@@ -17,6 +17,10 @@ namespace Sunward
         MarketWalker diningWalker;
         Vector3 previous;
         float nextPhrase, previousBeat;
+        static float nextConversation;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetAudioClock() { nextConversation = 0; residents.Clear(); }
+
         void OnEnable() { residents.Add(this); }
         void OnDisable() { residents.Remove(this); if (gait) gait.Seated = false; }
         void Start()
@@ -73,7 +77,7 @@ namespace Sunward
             bool paused = gait.game.Blocked || gait.game.InTrial;
             float distance = Vector3.Distance(gait.transform.position, gait.game.Player.transform.position);
             float gain = 1 - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(3, activity == Activity.Violin ? 18 : 8, distance));
-            if (voice) voice.volume = Mathf.MoveTowards(voice.volume, paused ? 0 : gain * (activity == Activity.Violin ? .24f : .07f), Time.unscaledDeltaTime * .3f);
+            if (voice) voice.volume = Mathf.MoveTowards(voice.volume, paused ? 0 : gain * (activity == Activity.Violin ? .21f : .055f), Time.unscaledDeltaTime * .3f);
             Vector3 delta = gait.transform.position - previous; previous = gait.transform.position;
             bool dining = activity == Activity.Eating && (!diningWalker || diningWalker.Dining) && delta.sqrMagnitude < .000025f;
             gait.Seated = dining;
@@ -88,19 +92,21 @@ namespace Sunward
                 float recover = Mathf.SmoothStep(0, 1, Mathf.Clamp01((cycle - 1.80f) / .9f));
                 float pose = strike * (1 - recover);
                 gait.spine.localRotation = Quaternion.Euler(2 + pose * 7, 0, 0);
-                Prop(practiceSword, new Vector3(0, Mathf.Lerp(1.53f, 1.16f, pose), Mathf.Lerp(.13f, .33f, pose)), Quaternion.Euler(Mathf.Lerp(-18, 63, pose), 0, 0));
+                // Keep the whole blade in front of the face, including the windup.
+                // The wider guard and wrapped grip are actual authored geometry.
+                Prop(practiceSword, new Vector3(0, Mathf.Lerp(1.30f, 1.18f, pose), .43f), Quaternion.Euler(Mathf.Lerp(18, 102, pose), -5, 0));
                 Reach(1, practiceSword.position);
-                Reach(0, practiceSword.TransformPoint(Vector3.down * .075f));
+                Reach(0, practiceSword.TransformPoint(Vector3.down * .11f));
                 if (cycle >= 1.55f && previousBeat < 1.55f && voice && practice && gain > .01f) voice.PlayOneShot(practice, .42f);
                 previousBeat = cycle;
             }
             else if (activity == Activity.Violin && instrument && bow)
             {
                 gait.head.localRotation = Quaternion.Euler(5, -15, -7);
-                Prop(instrument, new Vector3(-.06f, 1.27f, .23f), Quaternion.Euler(0, 0, 62));
-                Prop(bow, new Vector3(.06f + Mathf.Sin(t * 2.3f) * .10f, 1.27f, .30f), Quaternion.Euler(0, 0, -12));
-                Reach(0, instrument.TransformPoint(new Vector3(0, .17f, .035f)));
-                Reach(1, bow.TransformPoint(new Vector3(.17f, 0, 0)));
+                Prop(instrument, new Vector3(-.06f, 1.29f, .30f), Quaternion.Euler(0, 0, 62));
+                Prop(bow, new Vector3(.08f + Mathf.Sin(t * 2.3f) * .15f, 1.27f, .41f), Quaternion.Euler(0, 0, -12));
+                Reach(0, instrument.TransformPoint(new Vector3(0, .24f, .045f)));
+                Reach(1, bow.TransformPoint(new Vector3(.21f, 0, 0)));
             }
             else if (dining)
             {
@@ -124,10 +130,11 @@ namespace Sunward
                 float yaw = Vector3.SignedAngle(gait.transform.forward, partner.gait.transform.position - gait.transform.position, Vector3.up);
                 gait.head.localRotation = Quaternion.Euler(Mathf.Sin(t * 2) * 2, Mathf.Clamp(yaw, -42, 42), 0);
                 gait.arms[variation % 2].localRotation = Quaternion.Euler(-12 + Mathf.Sin(t * 1.4f) * 7, 0, variation % 2 == 0 ? 8 : -8);
-                if (Time.time > nextPhrase)
+                if (Time.time > nextPhrase && Time.time > nextConversation && gain > .2f)
                 {
                     if (voice && conversation && gain > .01f) voice.PlayOneShot(conversation, .6f);
-                    nextPhrase = Time.time + 7 + variation % 4;
+                    nextConversation = Time.time + 4.5f;
+                    nextPhrase = Time.time + 11 + variation % 4;
                 }
             }
         }

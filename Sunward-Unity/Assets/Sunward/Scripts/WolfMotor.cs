@@ -197,8 +197,8 @@ namespace Sunward
 
             if (wasAir && Grounded)
             {
-                landing = previousY < -9 ? .38f : .20f;
-                animationView.Play(previousY < -9 ? "Land_Heavy" : "Land_Soft", .05f, landing);
+                landing = previousY < -9 ? .42f : .28f;
+                animationView.Play(previousY < -9 ? "Land_Heavy" : "Land_Soft", .10f, landing);
                 if (airborneTime > .12f && previousY < -2.5f) game.Audio.Cue("land");
                 airborneTime = 0;
             }

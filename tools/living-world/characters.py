@@ -33,28 +33,47 @@ def resident(role,variant=0):
  for a,b in [((-.12,1.38,.108),(.09,1.05,.152)),((.12,1.38,.108),(-.05,1.20,.157))]:
   m.tube([a,b],[.021,.020],IVORY,1,n=8)
   m.tube([(a[0]+.013,a[1],a[2]+.002),(b[0]+.013,b[1],b[2]+.002)],[.0035,.003],INK,1,n=5)
- # A short neck and rounded continuous face, with contained eyes and a shaped
- # jaw. Eyes use narrow painted lids rather than protruding white eyeballs.
- m.loft([(0,1.36,0,.064,.058),(0,1.52,0,.065,.06)],skin,2,n=20)
- hw=.132 if stocky else .119 if female else .125
- m.loft([(0,1.48,.012,.047,.052),(0,1.51,.018,.080,.074),(0,1.56,.012,hw*.91,.091),(0,1.64,0,hw,.105),(0,1.73,-.012,hw*.93,.095),(0,1.79,-.02,hw*.66,.069),(0,1.81,-.02,.025,.025)],skin,2,n=32)
+ # Anatomical facial planes: tapered jaw, cheekbones, brow and rounded crown.
+ # Eyelids sit on the face, rather than floating eyeballs or thick black bars.
+ m.loft([(0,1.36,-.008,.058,.054),(0,1.51,-.004,.061,.058)],skin,2,n=24)
+ hw=.130 if stocky else .112 if female else .121
+ profile=[(1.48,.040,.040,.018),(1.51,.071,.062,.020),(1.55,hw*.82,.080,.013),
+          (1.60,hw*.98,.099,.003),(1.66,hw,.104,-.006),(1.72,hw*.94,.100,-.012),
+          (1.77,hw*.78,.082,-.018),(1.80,hw*.45,.048,-.02),(1.81,.008,.008,-.02)]
+ m.loft([(0,y,z,rx,rz) for y,rx,rz,z in profile],skin,2,n=36)
  for side in (-1,1):
-  m.ellipsoid((side*(hw-.003),1.63,-.005),(.021,.033,.022),skin,2,n=12,rows=7)
-  m.tube([(side*.025,1.657,.102),(side*.052,1.665,.102),(side*.080,1.658,.094)],[.0035,.005,.003],HAIR,2,n=7)
-  m.ellipsoid((side*.051,1.653,.105),(.019,.006,.0038),(.18,.11,.09),2,n=12,rows=4)
-  m.tube([(side*.027,1.69,.097),(side*.055,1.695,.095),(side*.081,1.684,.085)],[.004,.004,.002],HAIR,2,n=6)
- m.ellipsoid((0,1.613,.111),(.016,.024,.018),skin*.92,2,n=14,rows=7)
- m.tube([(-.024,1.566,.095),(0,1.562,.103),(.024,1.566,.095)],[.0025,.003,.0025],(.45,.22,.19),2,n=6)
- m.loft([(0,1.70,-.027,hw*1.03,.096),(0,1.78,-.03,hw*.92,.079),(0,1.83,-.03,.049,.04)],HAIR,2,n=28)
+  m.ellipsoid((side*(hw-.002),1.625,-.012),(.016,.027,.018),skin*.94,2,n=14,rows=8)
+  # Painted almond lids and pupils contained within a thin warm-white sclera.
+  x=side*.048;y=1.651;z=.096
+  pts=[(x-side*.026,y,z-.002),(x,y+.006,z+.005),(x+side*.026,y+.001,z-.003),(x,y-.005,z+.005)]
+  m.face(pts if side<0 else pts[::-1],(.63,.56,.46),2)
+  m.ellipsoid((x, y+.001,z+.007),(.007,.005,.0025),(.105,.070,.055),2,n=10,rows=4)
+  m.tube([(x-side*.026,y+.001,z),(x,y+.008,z+.006),(x+side*.026,y+.002,z-.002)],[.0018,.0024,.0015],HAIR,2,n=5)
+  m.tube([(side*.025,1.680,.093),(side*.048,1.686,.096),(side*.076,1.679,.085)],[.0025,.0031,.0018],HAIR,2,n=5)
+  m.ellipsoid((side*.073,1.600,.084),(.023,.014,.002),skin*np.array([1.01,.94,.93]),2,n=12,rows=5)
+ # Nose bridge and alar planes instead of a protruding spherical button.
+ for side in (-1,1):
+  m.face([(0,1.663,.102),(side*.014,1.610,.108),(side*.010,1.598,.126),(0,1.601,.134)],skin*(.92 if side<0 else 1.02),2)
+  m.face([(0,1.601,.134),(side*.010,1.598,.126),(side*.015,1.593,.111),(0,1.591,.114)],skin*.90,2)
+ m.tube([(-.021,1.556,.092),(0,1.553,.101),(.021,1.556,.092)],[.0018,.0023,.0018],(.45,.24,.20),2,n=5)
+ m.loft([(0,1.70,-.027,hw*1.03,.096),(0,1.78,-.03,hw*.92,.079),(0,1.83,-.03,.049,.04)],HAIR,2,n=32)
  # Scalloped hairline and side locks leave the face visible.
  for side in (-1,1):m.tube([(side*.102,1.76,.025),(side*.12,1.69,.004),(side*.12,1.60,-.015)],[.026,.023,.013],HAIR,2,n=9)
  for side in (-1,1):
   arm=9 if side<0 else 11
   m.tube([(side*.23,1.375,0),(side*.32,1.29,0),(side*.42,1.18,0)],[.092,.102,.088],robe,arm,n=20,groove=.02)
   m.tube([(side*.42,1.18,0),(side*.48,1.07,.022),(side*.51,.98,.04)],[.088,.073,.055],robe,arm+1,n=20)
-  m.ellipsoid((side*.52,.94,.052),(.048,.068,.039),skin,arm+1,n=16,rows=8)
+  m.ellipsoid((side*.515,.953,.052),(.035,.051,.027),skin,arm+1,n=16,rows=8)
+  m.tube([(side*.484,.976,.071),(side*.475,.946,.083)],[.014,.010],skin,arm+1,n=8)
+  for finger in range(4):
+   x=side*(.491+finger*.015);m.tube([(x,.941,.060),(x,.902+(abs(finger-1.5)*.005),.069)],[.009,.0065],skin,arm+1,n=7)
   m.tube([(side*.47,.99,-.018),(side*.51,.99,.09)],[.007,.007],INK,arm+1,n=6)
   if female:m.loft([(side*.34,.95,-.025,.10,.125),(side*.32,1.25,-.01,.105,.11)],robe,arm,n=20)
+ for side in (-1,1):
+  for j in range(3):
+   x=side*(.10+j*.035)
+   m.tube([(x,.72,.145),(x*.93,.80,.157),(x*.9,.87,.159)],[.002,.004,.002],robe*.68,0,n=5)
+ m.loft([(0,1.36,-.015,.087,.071),(0,1.43,-.008,.076,.064)],robe,1,n=24)
  # Long garments end high enough for the planted feet to remain readable.
  if female or role=='Elder':
   skirt=(.65,.14,.12) if role=='ShrineMaiden' else robe
@@ -97,6 +116,9 @@ def resident(role,variant=0):
  elif role=='Merchant':
   m.loft([(0,1.77,-.02,.13,.105),(0,1.91,-.04,.105,.085),(0,1.96,-.045,.025,.025)],(.15,.20,.26),2,n=24)
   m.box((.18,.85,.13),(.15,.18,.10),(.47,.26,.11),0,.025)
+ # Slightly fuller faces improve street-distance readability without replacing rigs.
+ for i,((x,y,z),bone) in enumerate(zip(m.v,m.bones)):
+  if bone==2:m.v[i]=(x*1.10,1.48+(y-1.48)*1.035,z*1.045)
  return m
 
 def skin_weights(mesh,path):
@@ -107,12 +129,17 @@ def skin_weights(mesh,path):
    knee=np.clip((y-.32)/.16,0,1);pairs=[(bone,float(knee)),(bone+1,float(1-knee))]
    if y<.18:
     a=float(np.clip((y-.12)/.06,0,1));pairs=[(bone+1,a),(bone+2,1-a)]
+  elif bone==0 and .24<y<.80:
+   # Cloth hem follows a restrained amount of leg swing, not a rigid bell.
+   leg=3 if x<0 else 6;a=float(np.clip((.80-y)/.55,0,1))*.40
+   pairs=[(0,1-a),(leg,a)]
   elif bone==1 and y<1.20:
    a=float(np.clip((y-.88)/.30,0,1));pairs=[(0,1-a),(1,a)]
   # Smooth elbow skin at the actual elbow location, not separate sleeve rings.
   elif bone in (9,11):
    a=float(np.clip((1.26-y)/.08,0,1));pairs=[(bone,1-a),(bone+1,a)]
   pairs=[p for p in pairs if p[1]>.00001]
+  total=sum(v for _,v in pairs);pairs=[(b,v/total) for b,v in pairs]
   weights=[v for _,v in pairs]+[0.]*(4-len(pairs));bones=[b for b,_ in pairs]+[0]*(4-len(pairs))
   struct.pack_into('<4f4I',buf,i*80+48,*weights,*bones)
  s=re.sub(r'(?m)^    _typelessdata: .*','    _typelessdata: '+buf.hex(),s)
@@ -205,8 +232,15 @@ def artistic_props():
  violin.box((0,.012,.058),(.055,.015,.012),iv,bevel=.002)
  for x in np.linspace(-.013,.013,4):violin.tube([(x,-.06,.062),(x,.25,.045)],[.0012,.0012],iv,n=4)
  for side in (-1,1):violin.tube([(side*.044,-.036,.055),(side*.037,-.01,.057),(side*.047,.02,.055)],[.0025,.0025,.0025],INK,n=5)
- bow=Mesh();bow.tube([(-.19,0,0),(.20,0,0)],[.003,.003],(.38,.19,.08),n=6);bow.tube([(-.18,-.018,0),(.19,-.018,0)],[.0018,.0018],IVORY,n=4)
- bokken=Mesh();bokken.tube([(0,-.11,0),(0,.04,0),(0,.46,.024),(0,.67,.04)],[.017,.018,.014,.005],(.45,.26,.10),n=10,groove=.015);bokken.box((0,.06,0),(.08,.015,.045),INK,bevel=.003)
+ for i,v in enumerate(violin.v):violin.v[i]=tuple(np.array(v)*1.50)
+ bow=Mesh();bow.tube([(-.34,0,0),(.36,0,0)],[.003,.003],(.38,.19,.08),n=6);bow.tube([(-.33,-.024,0),(.35,-.024,0)],[.0018,.0018],IVORY,n=4)
+ bokken=Mesh();
+ bokken.loft([(0,-.19,0,.025,.023),(0,.03,0,.027,.024)],(.15,.10,.07),n=12)
+ for y in np.linspace(-.18,.015,11):bokken.tube([(-.022,y,-.015),(.022,y+.012,.015)],[.006,.006],(.70,.48,.22),n=5)
+ bokken.loft([(0,.025,0,.090,.060),(0,.050,0,.090,.060)],(.20,.115,.055),n=18)
+ bokken.tube([(0,.05,0),(0,.36,.022),(0,.66,.058),(0,.88,.09)],[.033,.029,.023,.008],(.64,.40,.17),n=14,groove=.03)
+ bokken.tube([(-.021,.08,.020),(-.020,.38,.045),(-.014,.66,.080),(0,.87,.098)],[.004,.004,.003,.001],(.23,.13,.055),n=5)
+
  bowl=Mesh();bowl.loft([(0,0,0,.045,.045),(0,.04,0,.07,.07),(0,.055,0,.075,.075)],(.28,.14,.085),n=24);bowl.loft([(0,.056,0,.066,.066),(0,.057,0,.065,.065)],(.89,.80,.58),n=24)
  cup=Mesh();cup.loft([(0,0,0,.052,.052),(0,.10,0,.067,.067)],(.68,.76,.63),n=20);cup.loft([(0,.10,0,.055,.055),(0,.103,0,.052,.052)],(.19,.26,.12),n=20)
  return {'cup':cup.save('Tea-cup'), 'violin':violin.save('Violin-carved-body'),'bow':bow.save('Violin-horsehair-bow'),'bokken':bokken.save('Practice-bokken'),'bowl':bowl.save('Rice-bowl')}
@@ -275,8 +309,12 @@ def apply(scene,places=None):
  for perf,b in list(scene.blocks.items()):
   if scene.kind(perf)!=114 or 'Sunward.ResidentPerformance' not in b:continue
   for field,g in audio.items():
+   if field=='sole':continue
    scene.blocks[perf]=re.sub(r'  '+field+r':.*\n','',scene.blocks[perf])
    scene.blocks[perf]+=f'  {field}: {{fileID: 8300000, guid: {g}, type: 3}}\n'
+ for gait,b in list(scene.blocks.items()):
+  if scene.kind(gait)==114 and 'Sunward.ResidentLocomotion' in b:
+   scene.set(gait,'footstep','{fileID: 8300000, guid: '+audio['sole']+', type: 3}')
  # Explicit skinned contours share the exact body mesh, bones and weights.
  contour=OUT/'Villager-ink-contour.mat'
  text=(ASSETS/'Generated/InkWorld/Ink-contour.mat').read_text().replace('m_Name: Ink-contour','m_Name: Villager-ink-contour')

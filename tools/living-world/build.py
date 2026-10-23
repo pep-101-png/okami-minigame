@@ -28,6 +28,11 @@ def run():
     repair=importlib.util.module_from_spec(spec);spec.loader.exec_module(repair)
     reports['playerReview']=repair.apply(scene)
     print('playerReview',json.dumps(reports['playerReview']),flush=True)
+    repair_path=ROOT/'tools/player-review3/apply.py'
+    spec=importlib.util.spec_from_file_location('player_review3_fixes',repair_path)
+    repair=importlib.util.module_from_spec(spec);spec.loader.exec_module(repair)
+    reports['playerReview3']=repair.apply(scene)
+    print('playerReview3',json.dumps(reports['playerReview3']),flush=True)
     scene.save()
     reports['sceneSha256']=hashlib.sha256(SCENE.read_bytes()).hexdigest()
     Path(__file__).with_name('authoring-report.json').write_text(json.dumps(reports,indent=2)+'\n')

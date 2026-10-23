@@ -4,7 +4,7 @@ Shader "Sunward/Spectral Flame"
  SubShader
  {
   Tags {"RenderPipeline"="UniversalPipeline" "Queue"="Transparent+10" "RenderType"="Transparent"}
-  Blend SrcAlpha One
+  Blend SrcAlpha OneMinusSrcAlpha
   ZWrite Off Cull Off
   Pass
   {
@@ -23,7 +23,7 @@ Shader "Sunward/Spectral Flame"
    {
     float edge=pow(saturate(1-abs(i.uv.y*2-1)),.55);
     float shimmer=.9+.1*sin(i.uv.x*24-_Time.y*5);
-    return half4(i.color.rgb*1.7,i.color.a*edge*shimmer);
+    return half4(i.color.rgb*1.15,i.color.a*edge*shimmer);
    }
    ENDHLSL
   }

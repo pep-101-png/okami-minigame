@@ -149,6 +149,19 @@ def parts(kind):
    bell.tube([(math.cos(a)*.46,-.05,math.sin(a)*.27),(math.cos(a)*.31,.23,math.sin(a)*.225)],[.009,.009],accent,n=6)
   bell.ellipsoid((0,.13,.24),(.11,.12,.035),(.83,.64,.25),n=14,rows=7)
   result['torso']=(bell,(0,.68,0))
+ # Carved split-mask channels, tied paper talismans and layered cloth hems.
+ # These belong to existing articulated parts and inherit their joint motion.
+ carved=result['mask'][0]
+ for side in [-1,1]:
+  carved.tube([(side*.18,.16,.135),(side*.15,.04,.168),(side*.12,-.03,.177)],[.0045,.006,.002],INK,n=5)
+  for j in range(3):carved.tube([(side*(.15-j*.015),.02-j*.025,.175),(side*(.19-j*.012),.005-j*.025,.157)],[.004,.0015],accent,n=5)
+ bodymesh=result['torso'][0]
+ for j in range(3 if kind in ('wisp','ranged') else 5):
+  x=(j-1 if kind in ('wisp','ranged') else j-2)*.085
+  pts=[(x-.032,-.08,.17),(x+.034,-.08,.17),(x+.045,-.28-(j%2)*.05,.15),(x-.04,-.25,.16)]
+  bodymesh.face(pts,face)
+  bodymesh.face([(x,y,z-.009) for x,y,z in pts[::-1]],np.array(face)*.68)
+  for y in [-.12,-.17,-.22]:bodymesh.tube([(x-.018,y,.176),(x+.020,y-.007,.176)],[.003,.002],INK,n=4)
  return result
 
 def apply(scene=None):

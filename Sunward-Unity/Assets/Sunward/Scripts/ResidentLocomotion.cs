@@ -22,7 +22,12 @@ namespace Sunward
         readonly bool[] stance = new bool[2];
         readonly Quaternion[] plantedRotation = new Quaternion[2];
         bool initialized;
+        readonly ResidentStepClock stepClock = new ResidentStepClock();
+        static readonly ResidentSoundBudget soundBudget = new ResidentSoundBudget();
         readonly RaycastHit[] groundHits = new RaycastHit[12];
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void ResetAudioClock() { soundBudget.Reset(); }
 
         void Start()
         {
@@ -34,6 +39,13 @@ namespace Sunward
                 return;
             }
             hipRest = hips.localPosition;
+            if (stepSource)
+            {
+                stepSource.Stop();
+                stepSource.loop = false;
+                stepSource.playOnAwake = false;
+                stepSource.spatialBlend = 0; // Gate by player, not the elevated camera.
+            }
             ResetFeet();
         }
 
@@ -93,6 +105,18 @@ namespace Sunward
             float dt = Mathf.Max(Time.deltaTime, .0001f);
             float speed = moved / dt;
             blend = Mathf.MoveTowards(blend, speed > .035f ? 1 : 0, dt * 6);
+            bool realStep = stepClock.Advance(moved, dt, !Seated && speed > .12f);
+            if (realStep && stepSource && footstep && game.Player && !game.InTrial)
+            {
+                float distance = Vector3.Distance(transform.position, game.Player.transform.position);
+                if (distance < 5.5f && soundBudget.Allow(Time.time))
+                {
+                    // One quiet local step at a time, maximum five per second village-wide.
+                    stepSource.Stop();
+                    stepSource.pitch = .96f + (GetInstanceID() & 7) * .012f;
+                    stepSource.PlayOneShot(footstep, .045f * (1 - distance / 5.5f));
+                }
+            }
             phase = Mathf.Repeat(phase + moved / .64f, 1);
             float cycle = phase * Mathf.PI * 2;
             hips.localPosition = hipRest + new Vector3(0, -.018f * blend + Mathf.Cos(cycle * 2) * .006f * blend, 0);
@@ -118,7 +142,7 @@ namespace Sunward
                     planted[i] = feet[i].position;
                     planted[i].y = Floor(planted[i]) + .065f;
                     plantedRotation[i] = transform.rotation;
-                    if (stepSource && footstep) stepSource.PlayOneShot(footstep, .065f);
+                    // Replanting is a pose correction, never an audio event.
                 }
                 if (!contact && stance[i]) swingFrom[i] = feet[i].position;
                 stance[i] = contact;
