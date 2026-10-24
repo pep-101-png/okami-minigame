@@ -1,0 +1,13 @@
+{
+  "filename": "Sunward-Separate-Unity-Village-Demo.zip",
+  "bytes": 57445045,
+  "sha256": "478d11d23816ef29c8edb5861bccb17926a08605694544eaeaf34175b1a76ea8",
+  "fileCount": 330,
+  "zipCrcPassed": true,
+  "originalFilesVerifiedUnchanged": 4767,
+  "standaloneUnityProject": true,
+  "windowsExecutableIncluded": false,
+  "UnityCompilationTested": false,
+  "UnityVisualsTested": false,
+  "blenderPreviewsInspected": true
+}
