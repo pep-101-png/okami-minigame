@@ -1,0 +1,63 @@
+{
+  "zip": "Sunward-Village-Test-Scene.zip",
+  "bytes": 12967443,
+  "sha256": "4260f342109211ccd05107534d8307231ec430b3ea0d419747eebec36e21fddd",
+  "members": [
+    {
+      "path": "Sunward-Village-Test.blend",
+      "bytes": 11440418,
+      "sha256": "5f06a6e1b68c00fafedb40c386225524c6124cf56f45b49878f68ebe58bf860b"
+    },
+    {
+      "path": "Open-in-Blender.txt",
+      "bytes": 603,
+      "sha256": "be5d51daa4263009a9acd24c827c0b63231b1f6e1f59f2f57d9d102c5df574ab"
+    },
+    {
+      "path": "Previews/Market-and-Courtyard.jpg",
+      "bytes": 666138,
+      "sha256": "e232f06388a381708f95b55328027061cd18eec451e8aed0a8f59fba2c30bd63"
+    },
+    {
+      "path": "Previews/River-and-Houses.jpg",
+      "bytes": 536829,
+      "sha256": "0522b26d24e1f467297066e17e8d65e1ac6d4c94a2f61edd2398f506d8f298ce"
+    },
+    {
+      "path": "Previews/Village-Overview.jpg",
+      "bytes": 426505,
+      "sha256": "1495dc01e2fa4f5cde59dbd38d4311475d822481152b108fca9d6a76e572257f"
+    }
+  ],
+  "sceneValidation": {
+    "scene": "Sunward-Village-Test.blend",
+    "bytes": 11440418,
+    "sha256": "5f06a6e1b68c00fafedb40c386225524c6124cf56f45b49878f68ebe58bf860b",
+    "allNineNewEnvironmentAssetsUsed": [
+      "Bellflower-Verge",
+      "Blossom-Guardian",
+      "Brush-Meadow",
+      "Painted-River",
+      "Pilgrim-Lantern",
+      "Split-Ink-Boulder",
+      "Tea-and-Dango-Stall",
+      "Village-Path",
+      "Wind-Bamboo"
+    ],
+    "approvedHouseCopiesUsed": [
+      "Willow-Hearth",
+      "Red-Carp-House"
+    ],
+    "externalLinkedBlendDependencies": 0,
+    "packedImages": 12,
+    "freshReopeningWithAllLooseTexturePathsInvalid": true,
+    "UnityProjectImportedOrModified": false,
+    "BlenderVersion": "4.3.2"
+  },
+  "protectedFiles": {
+    "protectedSourceFiles": 4766,
+    "changed": [],
+    "added": [],
+    "removed": []
+  }
+}
