@@ -1,0 +1,962 @@
+{
+  "zip": "Sunward-Painted-Environment-First-Batch.zip",
+  "bytes": 51246597,
+  "sha256": "6b7d39791fc38ca74bce71d10bc596c5b3079e3bdf888fc7e3c894b928e9640f",
+  "blendFiles": 9,
+  "previewAngles": 27,
+  "UnityProjectIncluded": false,
+  "approvedHouseBlendsIncludedOrModified": false,
+  "fullLibraryComplete": false,
+  "members": [
+    {
+      "path": "CONTINUE-HERE.md",
+      "bytes": 1772,
+      "sha256": "2c5dee13b9155c9b102501cdba4330c760ce8d4828d6654be68886a6c368e3c4"
+    },
+    {
+      "path": "Catalogue/Approved-Houses-and-New-Library.jpg",
+      "bytes": 566661,
+      "sha256": "75c7c3d8379cdfbc644ae05be30f76e2711b3dc0fb58161202d5ff00eda465b4"
+    },
+    {
+      "path": "Catalogue/Bellflower-Verge-Three-Views.jpg",
+      "bytes": 223148,
+      "sha256": "e23343b229fea2a821e7b0bae5e075af7845d569321790cc3c3a440de20e513d"
+    },
+    {
+      "path": "Catalogue/Blossom-Guardian-Three-Views.jpg",
+      "bytes": 239770,
+      "sha256": "76ca53a8ccdf46b55c66df4ec780f3f82c1a5f485058eab922cb825c7f452a17"
+    },
+    {
+      "path": "Catalogue/Brush-Meadow-Three-Views.jpg",
+      "bytes": 232465,
+      "sha256": "38c5398f7b16f91ec31fc73773093de532988ecd6ac39c1730a57f115ad26c63"
+    },
+    {
+      "path": "Catalogue/First-Batch-Catalogue.jpg",
+      "bytes": 608916,
+      "sha256": "7fd3e9d8f38cf62c812d7dd7484e077ee63719f7dba6faf5522c25e84eb2f5af"
+    },
+    {
+      "path": "Catalogue/Painted-River-Three-Views.jpg",
+      "bytes": 207387,
+      "sha256": "af0c1c44d8fd5b867b571c9b8f6884d5b25f248263b4a1b54c09f65c974f31d5"
+    },
+    {
+      "path": "Catalogue/Pilgrim-Lantern-Three-Views.jpg",
+      "bytes": 209466,
+      "sha256": "0029cca5cdaa607869e480e2739a20a3af39f573d3bb53b0392fb0ee82d65f9b"
+    },
+    {
+      "path": "Catalogue/Split-Ink-Boulder-Three-Views.jpg",
+      "bytes": 172720,
+      "sha256": "880ba4b51a6b0eba17579197e328a26a2919b82a76ad301ef977b0fd79fa7e59"
+    },
+    {
+      "path": "Catalogue/Tea-and-Dango-Stall-Three-Views.jpg",
+      "bytes": 250823,
+      "sha256": "53840fc32ce9b606a58890a896cfc23e9d68fca4b56c8a9c8cb18f929b6ebea9"
+    },
+    {
+      "path": "Catalogue/Village-Path-Three-Views.jpg",
+      "bytes": 169579,
+      "sha256": "53bd8d7d6796295ec5caece0afadb2248364b2fc7f903eaf8c5d402bb952690e"
+    },
+    {
+      "path": "Catalogue/Wind-Bamboo-Three-Views.jpg",
+      "bytes": 223600,
+      "sha256": "32c0ab065c10d4d6dfd7d96c4a8e135bdc95a182880e944f6ac95dc88eb894a1"
+    },
+    {
+      "path": "Catalogue/catalogue.json",
+      "bytes": 4060,
+      "sha256": "de26e2c597ddcb1e131ab28a9c71c7ce3b51dbec64d337db8f5edb6ab3c7feeb"
+    },
+    {
+      "path": "Catalogue/index.html",
+      "bytes": 5003,
+      "sha256": "bf4fbb5e4e963db03f253313928d314fd6afac1e094c3600f05d22ab4b252465"
+    },
+    {
+      "path": "Comparisons/Bellflower-Verge-Source-Comparison.jpg",
+      "bytes": 224784,
+      "sha256": "806517841cdc917ffa4ae3dbf0e9b5f2bf175cd72e1c2db26e14590acbbe17ac"
+    },
+    {
+      "path": "Comparisons/Blossom-Guardian-Source-Comparison.jpg",
+      "bytes": 242790,
+      "sha256": "44148f7f465f7fc27970c7f5130c570ad09b6e7434ecabec173ec5841d257791"
+    },
+    {
+      "path": "Comparisons/Brush-Meadow-Source-Comparison.jpg",
+      "bytes": 216643,
+      "sha256": "4ec5f50dbd336826a96b5c2854c0a8475520e30ee4c90758a5868e7707eb4229"
+    },
+    {
+      "path": "Comparisons/Painted-River-Source-Comparison.jpg",
+      "bytes": 192573,
+      "sha256": "a57d53273bc8fd11b392e57cb17818480cac0e739e89e7a9fc913b8df84b0ef8"
+    },
+    {
+      "path": "Comparisons/Pilgrim-Lantern-Source-Comparison.jpg",
+      "bytes": 224796,
+      "sha256": "13cd40825435a1de2dadf37eb9dc3cd199d9b5c82de3257897a5aa60def1da5d"
+    },
+    {
+      "path": "Comparisons/Split-Ink-Boulder-Source-Comparison.jpg",
+      "bytes": 200866,
+      "sha256": "2753328f4082530b712bc163c0ea5e9a43d983d241249f7b901569f16b120c0e"
+    },
+    {
+      "path": "Comparisons/Tea-and-Dango-Stall-Source-Comparison.jpg",
+      "bytes": 231710,
+      "sha256": "9179a4bcf5201d05ab235cb9ea0e9771b2b8304249822bb107fd2eb438500081"
+    },
+    {
+      "path": "Comparisons/Village-Path-Source-Comparison.jpg",
+      "bytes": 190055,
+      "sha256": "b274f366adf8b00bb708f055f9d9f07a2c583a5cf2787625f2b090370ff5babf"
+    },
+    {
+      "path": "Comparisons/Wind-Bamboo-Source-Comparison.jpg",
+      "bytes": 225268,
+      "sha256": "56732bdbabdf77f4d63f784693ab4a274432b45c621bfdff06e4573085064183"
+    },
+    {
+      "path": "Comparisons/sunward-reference-bindings.json",
+      "bytes": 8510,
+      "sha256": "98fc2cee12b78fe907f1dccb618048e32e41cf168a23f4b0d6485e3d610ddef0"
+    },
+    {
+      "path": "Inventory/README.md",
+      "bytes": 3459,
+      "sha256": "bcee98ce8e1765fea25aea2577305c398cfaa6949a19e29532fb8ea29107e46b"
+    },
+    {
+      "path": "Inventory/asset-families.json",
+      "bytes": 366160,
+      "sha256": "0bbe85ea620f81ad254456f66ee1d48a240362f94cc319b21bfc6af829912462"
+    },
+    {
+      "path": "Inventory/material-catalogue.json",
+      "bytes": 2383735,
+      "sha256": "43bbb577ca5dfa641e312ba2810af1f81e57d39c04eec2bd211b4b706ad4e285"
+    },
+    {
+      "path": "Inventory/npc-roles.json",
+      "bytes": 4114,
+      "sha256": "c2ad4171431803f0545f7f2a9f0aca5353377974872b87887e5a454c973c62fe"
+    },
+    {
+      "path": "Inventory/prefab-instances.json",
+      "bytes": 1535,
+      "sha256": "93a8b09c4aabaeb2e25012e30a91bd61379b1dc043d379d928390c0661ee78c4"
+    },
+    {
+      "path": "Inventory/project-assets.csv",
+      "bytes": 263177,
+      "sha256": "fc032eea16fcab5f71f41da99184ff6471c279788a7e7e74c495748bb5c7c698"
+    },
+    {
+      "path": "Inventory/project-assets.json",
+      "bytes": 543718,
+      "sha256": "89e5eb3724ee08be47d979cb10c343d9e347bb06e8607b096596794f8ee44cf0"
+    },
+    {
+      "path": "Inventory/runtime-construction.json",
+      "bytes": 6537,
+      "sha256": "de7bc21d252895d948e9c6144d1cc61e1636216b77afeb874bfdec5fb02ac4c4"
+    },
+    {
+      "path": "Inventory/scene-asset-bindings.csv",
+      "bytes": 4484830,
+      "sha256": "25679a01f3861b6c56bdcea68326435965afc0c5f05defb920a20fe9f090f356"
+    },
+    {
+      "path": "Inventory/scene-asset-bindings.json",
+      "bytes": 8282251,
+      "sha256": "1b86bc8ca8a2b9739092ddb2067b65430c3069764b2cee71ce944239b6ce7c3e"
+    },
+    {
+      "path": "Inventory/script-bindings.json",
+      "bytes": 114378,
+      "sha256": "53a9c1e0d89a6dd86f631d7935107ea21b48ddd68f90acefe7c155a3578218f0"
+    },
+    {
+      "path": "Inventory/summary.json",
+      "bytes": 2689,
+      "sha256": "ff377d4410f6cef79a7c76bd96fa9d55f487a8bc75132ee7258a02d9df9cc85b"
+    },
+    {
+      "path": "Inventory/unresolved-references.json",
+      "bytes": 753,
+      "sha256": "f508aa92ad0c3cf8e9416a4fb87072c6c7dc862ab05468a5b5cc87a1394dc35b"
+    },
+    {
+      "path": "Inventory/world-data.json",
+      "bytes": 1267145,
+      "sha256": "86cf1a67dc99da676735fe902af128c0b2a57b1288a92e44556c65e8f6539de1"
+    },
+    {
+      "path": "Library/Buildings and Markets/Tea-and-Dango-Stall.blend",
+      "bytes": 2983423,
+      "sha256": "8b56d5889b67891078298dfa8f25b96b15b7f706922544ff42df97f9f2398c01"
+    },
+    {
+      "path": "Library/Ground and Paths/Village-Path.blend",
+      "bytes": 423271,
+      "sha256": "be98042b26abe86099969adafc1cdea168dd0922b307ea8b7c4516ab8a2036df"
+    },
+    {
+      "path": "Library/How-to-open.txt",
+      "bytes": 620,
+      "sha256": "4138802b4f280429a7e6f7753225424f823a7007fe86c5615f1be718991f9de9"
+    },
+    {
+      "path": "Library/Lanterns and Decorations/Pilgrim-Lantern.blend",
+      "bytes": 6150450,
+      "sha256": "6dc5acb530e04f5034ffdac9eef5668f55cc95a0512609153166768e09197e25"
+    },
+    {
+      "path": "Library/Plants and Flowers/Bellflower-Verge.blend",
+      "bytes": 3615172,
+      "sha256": "c1a7c775f0d80753cac31fd4106d742764dc15697c3d7ed666caf9b46abe900a"
+    },
+    {
+      "path": "Library/Plants and Flowers/Brush-Meadow.blend",
+      "bytes": 3562061,
+      "sha256": "ea495afd433d688bc62d7c1f144d0b579952670d98fb4bffd1ae049753fa5db4"
+    },
+    {
+      "path": "Library/Rocks and Terrain/Split-Ink-Boulder.blend",
+      "bytes": 287685,
+      "sha256": "ca81d114be5a39d012e1dcd0d350705ccef5876a22ef0d1325f3143307a26956"
+    },
+    {
+      "path": "Library/Trees and Bamboo/Blossom-Guardian.blend",
+      "bytes": 5256935,
+      "sha256": "bc6d5da6086d997d5eb372ecf67a72478e8c7648e33786d745374def6f8bfda4"
+    },
+    {
+      "path": "Library/Trees and Bamboo/Wind-Bamboo.blend",
+      "bytes": 3877700,
+      "sha256": "9a8b7f12b82371276f3c1d953f57fc81982753c10e7ce14a2818fc832559971e"
+    },
+    {
+      "path": "Library/Water and Rivers/Painted-River.blend",
+      "bytes": 3591140,
+      "sha256": "0b3b82a090de36f0b1f3160f771fc3484fe43dd8650f2bfe76f3c54fe10284b4"
+    },
+    {
+      "path": "Library/blender_assets.cats.txt",
+      "bytes": 744,
+      "sha256": "bd79c4a560910d92e3582cbc6529a8ca0319229ed66c832035d9210c3d2d0d2b"
+    },
+    {
+      "path": "PROGRESS.md",
+      "bytes": 5037,
+      "sha256": "d3a26c1456e6c06b2607f3d97245410efe273a828fe37e49f776629c691d65ae"
+    },
+    {
+      "path": "Previews/Bellflower-Verge-Front-three-quarter.jpg",
+      "bytes": 330693,
+      "sha256": "c2de162da51cc3cf441ca84d2788b4599f027f01a6fdf1cc1dd2d1a7235f420c"
+    },
+    {
+      "path": "Previews/Bellflower-Verge-Rear-three-quarter.jpg",
+      "bytes": 323083,
+      "sha256": "cb71ccaf2ad5623c4512d366ef311fac77ff9bea65902996e6316e891098146b"
+    },
+    {
+      "path": "Previews/Bellflower-Verge-Side.jpg",
+      "bytes": 333415,
+      "sha256": "a3ad796cd6b7d6092d5bd3686eba54752cb195f0c12a30c3291ea0f07a958b49"
+    },
+    {
+      "path": "Previews/Blossom-Guardian-Front-three-quarter.jpg",
+      "bytes": 340756,
+      "sha256": "779edfc42cccd50878ea99b4df4bd917ca6ee1d2db3764c54bafdd8cbb03d3b0"
+    },
+    {
+      "path": "Previews/Blossom-Guardian-Rear-three-quarter.jpg",
+      "bytes": 340326,
+      "sha256": "517cf2bf95062e849e4579eb6364228da58f1bd6042330d029119262bd93219b"
+    },
+    {
+      "path": "Previews/Blossom-Guardian-Side.jpg",
+      "bytes": 345720,
+      "sha256": "f980def58c6d07288c936b209da6c91f0bc6a8904cb8573e98b18eafd6205ef4"
+    },
+    {
+      "path": "Previews/Brush-Meadow-Front-three-quarter.jpg",
+      "bytes": 342260,
+      "sha256": "3a6e200e468be6804ea263f9ae6f2b3978f9f71cb6bdbc2968a426267b369c4c"
+    },
+    {
+      "path": "Previews/Brush-Meadow-Rear-three-quarter.jpg",
+      "bytes": 340673,
+      "sha256": "201b83677d3972d7e5c7fcc30f30bd3b4e553de6b184473441c6d592982a06f3"
+    },
+    {
+      "path": "Previews/Brush-Meadow-Side.jpg",
+      "bytes": 347828,
+      "sha256": "4f8552666b8fca63ef4ef84d282f0ae290d34aee32e8d024a19b98c516928b58"
+    },
+    {
+      "path": "Previews/Painted-River-Front-three-quarter.jpg",
+      "bytes": 282967,
+      "sha256": "3b77cbbf43e9d2425fb17452cd94a1df7aad2b4cc79ad128ffb6b694205d8725"
+    },
+    {
+      "path": "Previews/Painted-River-Rear-three-quarter.jpg",
+      "bytes": 274341,
+      "sha256": "f01ce504faf3130b9121ee3a77f77cc2e4e97aa02d9afbed303d079fc7eeccdc"
+    },
+    {
+      "path": "Previews/Painted-River-Side.jpg",
+      "bytes": 313381,
+      "sha256": "26b4797a33b0d384339da91b3ca30f758e6231955f42b16aeb32f4e80abe1104"
+    },
+    {
+      "path": "Previews/Pilgrim-Lantern-Front-three-quarter.jpg",
+      "bytes": 301855,
+      "sha256": "77822c24993797b7749464d035a6a091b32eac3d9d64c5d10d14dcd34d52a161"
+    },
+    {
+      "path": "Previews/Pilgrim-Lantern-Rear-three-quarter.jpg",
+      "bytes": 312738,
+      "sha256": "95a8578d670b04deeb6b0087c917f4c737a0297074b8d74be8c1bff5b4cda286"
+    },
+    {
+      "path": "Previews/Pilgrim-Lantern-Side.jpg",
+      "bytes": 331869,
+      "sha256": "a542ab23e7fec8bada50dfe1501bd0f1375ecd08eb68d62bfae62cb0b68bbf52"
+    },
+    {
+      "path": "Previews/Split-Ink-Boulder-Front-three-quarter.jpg",
+      "bytes": 236741,
+      "sha256": "86d66090ab63665ccee9ebe9f6ad520e1628febd0f57484582c139e7654fdf08"
+    },
+    {
+      "path": "Previews/Split-Ink-Boulder-Rear-three-quarter.jpg",
+      "bytes": 243054,
+      "sha256": "a3d7e15f95b32ce26ed81ba84fe9be5f8d4cefb9a8d35ed30a34b03b3178182e"
+    },
+    {
+      "path": "Previews/Split-Ink-Boulder-Side.jpg",
+      "bytes": 273948,
+      "sha256": "36f357df8319c6a1224d96f0321bdbf6e72aea5e91b9d4642cd23f92e50dd3bf"
+    },
+    {
+      "path": "Previews/Tea-and-Dango-Stall-Front-three-quarter.jpg",
+      "bytes": 333719,
+      "sha256": "06be46df9a30b22dadffc4a9d67a2f883d27e6f4419a19dd5994b57930a4a896"
+    },
+    {
+      "path": "Previews/Tea-and-Dango-Stall-Rear-three-quarter.jpg",
+      "bytes": 339811,
+      "sha256": "e71df819da1b06b5ed9b427107f911bf841bf5c0f1cdbb45c5abe5291317ca3a"
+    },
+    {
+      "path": "Previews/Tea-and-Dango-Stall-Side.jpg",
+      "bytes": 346173,
+      "sha256": "c2d8d6b584a8c89f1c1d1b21102e0068bd28ad5a8921930e58a3d6592cc07a69"
+    },
+    {
+      "path": "Previews/Village-Path-Front-three-quarter.jpg",
+      "bytes": 235867,
+      "sha256": "8aa41fc50787e80f4309cb60862ab6df298862312727edf4d50563ae4709b0f2"
+    },
+    {
+      "path": "Previews/Village-Path-Rear-three-quarter.jpg",
+      "bytes": 230636,
+      "sha256": "5d1d858dba894eafe33307601977beacc3f26ace09e6b719e3921ef6aa078a24"
+    },
+    {
+      "path": "Previews/Village-Path-Side.jpg",
+      "bytes": 281292,
+      "sha256": "33a734656d1a71bed6dde8cda88a23a77d4a3c104d825454c1252eb622d87633"
+    },
+    {
+      "path": "Previews/Wind-Bamboo-Front-three-quarter.jpg",
+      "bytes": 319202,
+      "sha256": "425bfffe14203bbaf379f2bf440d6c758759157023bfe8ef7989fded805ec8d0"
+    },
+    {
+      "path": "Previews/Wind-Bamboo-Rear-three-quarter.jpg",
+      "bytes": 311859,
+      "sha256": "c7554ecfcc9e6806ea69a3dab55d91b074909f4ebe9aa8bca66fb0ebddbe9f6e"
+    },
+    {
+      "path": "Previews/Wind-Bamboo-Side.jpg",
+      "bytes": 342107,
+      "sha256": "7b1b890e0d95792271a234330803f878312de618e1f3c4c3454d0f1fd7d8fdb9"
+    },
+    {
+      "path": "References/Approved-R2-Houses.jpg",
+      "bytes": 933661,
+      "sha256": "962314595cfbc326a0f58a7a129d5698e0954092b4cee153d8067e181e44d6ac"
+    },
+    {
+      "path": "References/Newly-Created-Nature-Atlas.png",
+      "bytes": 3266400,
+      "sha256": "72e6bfad30defdda117479cc11e508b395d926bd5398ba71f4877453be79e9be"
+    },
+    {
+      "path": "References/OriginalTextures/00ab1b88de9ea0ea.png",
+      "bytes": 8237,
+      "sha256": "3382794669c3741e7d81b388bfff6718c9d9cff7a7d441e2bb78ef7c5bc6b698"
+    },
+    {
+      "path": "References/OriginalTextures/03108c0b5c6798c5.png",
+      "bytes": 3992,
+      "sha256": "87813d74f795153ce88df8e41b5765a1b569bd14ef3f334347682b6746fdbbac"
+    },
+    {
+      "path": "References/OriginalTextures/051484d5a84b7d14.png",
+      "bytes": 4151,
+      "sha256": "399dcdd013fbf5a146e78160e1819c0f5a4b4f86f801e39e96e51b1941aa3e7b"
+    },
+    {
+      "path": "References/OriginalTextures/0524f846fe193c91.png",
+      "bytes": 293998,
+      "sha256": "5c39ca3a3e29a1fcec2fdc6ed1e0dd99f3f6aeb9a506662c423f72524d7b07ff"
+    },
+    {
+      "path": "References/OriginalTextures/055373eb87e822f4.png",
+      "bytes": 3971,
+      "sha256": "478f352e1f09ffc7a8b6110303587872113dd2c2efc3b70575deabf76a453937"
+    },
+    {
+      "path": "References/OriginalTextures/07757d64b44d6ab5.png",
+      "bytes": 85856,
+      "sha256": "56839ee22630aca2d283142fab378372169c26695bd8709eb65f2b45228c4170"
+    },
+    {
+      "path": "References/OriginalTextures/0c697b207d9faad4.png",
+      "bytes": 101571,
+      "sha256": "e7c4f8a5347a6e689d74381bb7b2279480df64e261afa33918d21baf7119547b"
+    },
+    {
+      "path": "References/OriginalTextures/1373c6b8d9a0fd13.png",
+      "bytes": 97695,
+      "sha256": "b4f9a040c2886e1be5af0d45070efb9a9cd3a14df87d96623441467d17acc7db"
+    },
+    {
+      "path": "References/OriginalTextures/1406b4aef290e4e5.png",
+      "bytes": 5866,
+      "sha256": "7777cb3abf5795e79c4b8eaf738b2c2c64ef8176846d11334b1c8f79317f492a"
+    },
+    {
+      "path": "References/OriginalTextures/180ba0fb922bb631.png",
+      "bytes": 6516,
+      "sha256": "dca03a0b6bfc4de450775f1a8319bc541afc0eb76af153a08754e6505a83a039"
+    },
+    {
+      "path": "References/OriginalTextures/1ac6f1bfa14ddf12.png",
+      "bytes": 8446,
+      "sha256": "ef38a1a2da926561ee1ddd877140a86832e7644c3a58321cdb5dca8fd7eb374f"
+    },
+    {
+      "path": "References/OriginalTextures/1c43b50699e85ef8.png",
+      "bytes": 2332,
+      "sha256": "898116157703d9006c822b716d58809aa9afaedf4ae12469891a68e9c1ca0b88"
+    },
+    {
+      "path": "References/OriginalTextures/20f96529617e17bd.png",
+      "bytes": 3784,
+      "sha256": "40a455208268ac61f679b96b1065f0415435e956889e73e64b29baf3815180a2"
+    },
+    {
+      "path": "References/OriginalTextures/2c6e4cdfad7ff58c.png",
+      "bytes": 5322,
+      "sha256": "6e1259e9dd596efcd0ea24e562c34142f3c04203970d148c70dfc34d97ca1930"
+    },
+    {
+      "path": "References/OriginalTextures/2d1affdba3bdfe17.png",
+      "bytes": 14747,
+      "sha256": "ab34ba63951da1a496c884ecb8a6acde96b235dcb2f16fc7c72534ae107e8feb"
+    },
+    {
+      "path": "References/OriginalTextures/2f88bf81e05757a5.png",
+      "bytes": 4738,
+      "sha256": "1cdc692014c75d8e23113787537cec3feed6b243215a8a1e0e50654fc9f408e9"
+    },
+    {
+      "path": "References/OriginalTextures/312e6205f3b1c6b5.png",
+      "bytes": 4598,
+      "sha256": "473fa459a3611e9705f59f5fde97253a4527748e052e9a62ac199bea17046609"
+    },
+    {
+      "path": "References/OriginalTextures/3145d855ef52d4f1.png",
+      "bytes": 21308,
+      "sha256": "1b78efd9b7a841b266f8c0eb441a2f594e96a99625aa54b59af22fed5709b9d7"
+    },
+    {
+      "path": "References/OriginalTextures/3c66c8851500ec25.png",
+      "bytes": 52952,
+      "sha256": "634a2572cfc95e92f39cf445c5115f4715926fecf578576c5c7988e34eca76fd"
+    },
+    {
+      "path": "References/OriginalTextures/3c82e422eb559344.png",
+      "bytes": 3451,
+      "sha256": "8c8591d9e4edba4eba81e6c20f3e6a80a3fdc6211b795f2d718a1374fd1adadb"
+    },
+    {
+      "path": "References/OriginalTextures/3ff1005fefcb1d32.png",
+      "bytes": 15492,
+      "sha256": "919c052fd8fd3e25d2c7ca7cbd4332d57c657d9bd5816299118cf8bd25390683"
+    },
+    {
+      "path": "References/OriginalTextures/421784b4c2ee7a6c.png",
+      "bytes": 4481,
+      "sha256": "840a321b079eb377c03904065aa66ca99bdeff15235cb4506d6cc82a4029f140"
+    },
+    {
+      "path": "References/OriginalTextures/4488a2668b16499c.png",
+      "bytes": 4505,
+      "sha256": "552f2c920b78ee0c5dfff33d74af560a1ae211dfc13b4ceb593f3267112aaa8d"
+    },
+    {
+      "path": "References/OriginalTextures/44fe94267c6f2d06.png",
+      "bytes": 7674,
+      "sha256": "7b5df1d2995668f15040c027c166ae3a8192d5816c990b29287d19a3f52f1c73"
+    },
+    {
+      "path": "References/OriginalTextures/470878392572ebab.png",
+      "bytes": 3459,
+      "sha256": "a705287b634110ae2eeb804176435701e89db2ede3c6303035f753211f5bb021"
+    },
+    {
+      "path": "References/OriginalTextures/495cbc395a648180.png",
+      "bytes": 7167,
+      "sha256": "6c21e686ba035594800cb121a99767914a9bc6e78d40397b3ef58a0ceb54597f"
+    },
+    {
+      "path": "References/OriginalTextures/4b4ba358434596c7.png",
+      "bytes": 6604,
+      "sha256": "39ad421e16de1921780f5e6e6a7c10e959f11dfe3e776b87836887c409068991"
+    },
+    {
+      "path": "References/OriginalTextures/4c1726b58d950eed.png",
+      "bytes": 83,
+      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
+    },
+    {
+      "path": "References/OriginalTextures/4fb4ae257d8af2e6.png",
+      "bytes": 87601,
+      "sha256": "40533d3de938b0a3210fabf504f8bd7b0efcf6bb836db46816e4f054bfb262de"
+    },
+    {
+      "path": "References/OriginalTextures/53c2d154c581abdc.png",
+      "bytes": 7051,
+      "sha256": "b22484d48353be6cdd2258a7337ad32e63703828e1b6646c4f288b9b4bb26094"
+    },
+    {
+      "path": "References/OriginalTextures/548a77b8cc2a7026.png",
+      "bytes": 45539,
+      "sha256": "110b9da041f3dca191c104a45f6e9193f7e5bf4633f014299d6d9008c7d3b729"
+    },
+    {
+      "path": "References/OriginalTextures/575f91d14627f328.png",
+      "bytes": 10429,
+      "sha256": "007fb692fe5d8ec5add3d6ff5a1287f5b08948bc276e56e6b1d9cb0ee376173d"
+    },
+    {
+      "path": "References/OriginalTextures/5d99f390d9dafff5.png",
+      "bytes": 45566,
+      "sha256": "21461af2c3d03e1696d7f3fbd7396746f4a9c9d3605d042406c6f7dcee24289b"
+    },
+    {
+      "path": "References/OriginalTextures/5e4d3606e1a880a6.png",
+      "bytes": 477,
+      "sha256": "5f544231b15cae04fc85de5a4ade36514510f3f9bb8243bacbdedf264ab0c7b5"
+    },
+    {
+      "path": "References/OriginalTextures/63237e9c3d5e2419.png",
+      "bytes": 22008,
+      "sha256": "df2b5dfbdeb619415a1078bfaa134d7706fb486964f01a9712f71b9dba46cd77"
+    },
+    {
+      "path": "References/OriginalTextures/65460d87483a3f30.png",
+      "bytes": 4441,
+      "sha256": "ff0e56734cfec13204bbf247176c36a166cc8679e79488cb3e5020790eeb231b"
+    },
+    {
+      "path": "References/OriginalTextures/67e1414a5bbea331.png",
+      "bytes": 35592,
+      "sha256": "5ada056be9d070c27ddfa9e52f0365d77ee5beeb513077bd5066e7d69fcac6a3"
+    },
+    {
+      "path": "References/OriginalTextures/6c0974a63e3c5373.png",
+      "bytes": 20321,
+      "sha256": "6f2cc86cbf06945a8055ca4f2fde64f518901524dfc1b8ed677a18f5f3c63ff4"
+    },
+    {
+      "path": "References/OriginalTextures/6d85bde0dc514b95.png",
+      "bytes": 7108,
+      "sha256": "840b6dfcc0ba9572e80e21751c2d78c2ea6e90257b4e1a22702f544f192e222e"
+    },
+    {
+      "path": "References/OriginalTextures/6ee459636059d8d7.png",
+      "bytes": 8740,
+      "sha256": "d35dc6f1012662a965b3e5c3a593a4922e8a5ffb08938c234d53ee0e2333d14c"
+    },
+    {
+      "path": "References/OriginalTextures/6fccc675bfaaacaa.png",
+      "bytes": 4508,
+      "sha256": "1d5af636ab7e1187380bba81347b32ea372015afd31baa082d947d8b16c7a4c9"
+    },
+    {
+      "path": "References/OriginalTextures/718636dfb1c61c5b.png",
+      "bytes": 42060,
+      "sha256": "80c2f33e40bd275616f177370257ad7a139ef173a94068877739294ee0336de8"
+    },
+    {
+      "path": "References/OriginalTextures/718a2b7b9456e04d.png",
+      "bytes": 102083,
+      "sha256": "90acb9f4c56d3a4742ab7046410e42e527da976a3db615cad110b6814950f59a"
+    },
+    {
+      "path": "References/OriginalTextures/7439ad0a2b1fc3e7.png",
+      "bytes": 83512,
+      "sha256": "3551a105e3b3c796bfbcc4805deaa808279db7ea6977421ef1677d3d66b345b2"
+    },
+    {
+      "path": "References/OriginalTextures/7cf9d5444458166c.png",
+      "bytes": 77963,
+      "sha256": "6a23c42bfe28078462ecb521cb15b713b8df20db0d4e6dee3efeb43c744443c2"
+    },
+    {
+      "path": "References/OriginalTextures/7e06693dced7e990.png",
+      "bytes": 8977,
+      "sha256": "30788f9d48a036ab245c5bb17c220148c3d066f1b7a3588a053aa31b175cea88"
+    },
+    {
+      "path": "References/OriginalTextures/7ff91b7d6c4fa761.png",
+      "bytes": 25091,
+      "sha256": "178ae6b70d958be879b3242b9a1fa04c89879c6a2b2455d95ca75c05bab867fb"
+    },
+    {
+      "path": "References/OriginalTextures/8254f1fa816ab1a6.png",
+      "bytes": 8267,
+      "sha256": "3cbc97293d8ada387e5b9924895bc969c3fbbee3dbcedb4f7c73386d9ab5b513"
+    },
+    {
+      "path": "References/OriginalTextures/834be181fc9e7902.png",
+      "bytes": 78334,
+      "sha256": "27ac3bc6cc022ae9867315e378674e0dcc33bb83af3836631d46d160dc284e40"
+    },
+    {
+      "path": "References/OriginalTextures/86fb6fa913ba9195.png",
+      "bytes": 72084,
+      "sha256": "5331c0b2a659944b9fd8bd2d305177348709d56653bb0cf34112109b8b49b0c7"
+    },
+    {
+      "path": "References/OriginalTextures/88b14c1b033e0e54.png",
+      "bytes": 4236,
+      "sha256": "b398f680cae29477f728195f928d748e884a0f365e324e2c9b3b47d3e3d9ce80"
+    },
+    {
+      "path": "References/OriginalTextures/8edf1539331b3941.png",
+      "bytes": 5697,
+      "sha256": "51f09037d077b581eabe36dba07494a41210790bf510dfdfc7a05bfa2c85df9f"
+    },
+    {
+      "path": "References/OriginalTextures/8f79211ad0849f4a.png",
+      "bytes": 3364,
+      "sha256": "b7ee127ff8cfc52fcf45fc8cef7bbe732f6f1bbfaf2435a05c411411c1a406df"
+    },
+    {
+      "path": "References/OriginalTextures/90ca0299f973a596.png",
+      "bytes": 12787,
+      "sha256": "b721acd8e8d8a2732e8dc3c5da496fcfa285cef22f6d9e1a7f4fd9cb04b39ac8"
+    },
+    {
+      "path": "References/OriginalTextures/94538cb7a668b8dc.png",
+      "bytes": 2987,
+      "sha256": "920dc4f6f11f18c5db99e1c03ba50d7db20bfd9e2de60ce32a0c1da5f2759c7e"
+    },
+    {
+      "path": "References/OriginalTextures/947cc7835f206700.png",
+      "bytes": 693,
+      "sha256": "cac10550be9975813b07b86afbf81753ad21b7af28aeef842dcab1728bf05854"
+    },
+    {
+      "path": "References/OriginalTextures/961fc95cd9a88ed1.png",
+      "bytes": 3827,
+      "sha256": "3f1825a53083b946f61482a4481df4828a060f40bf45b49dca53398105517b28"
+    },
+    {
+      "path": "References/OriginalTextures/98502007931cf33f.png",
+      "bytes": 363,
+      "sha256": "a462aa51cbf584d865124b274ec2baca4a6df883a30f4b90040860cc0db92258"
+    },
+    {
+      "path": "References/OriginalTextures/987bcf2ad120b209.png",
+      "bytes": 3960,
+      "sha256": "a29a7d910c46bfadb44a58891ce8b20bbfdccbe28d5436794f1e608bd694d270"
+    },
+    {
+      "path": "References/OriginalTextures/9899520c81ceac01.png",
+      "bytes": 9463,
+      "sha256": "6729df424df677dfc64635f93397f01ce998499178a111578c869e8b68426496"
+    },
+    {
+      "path": "References/OriginalTextures/9a59444938724c9f.png",
+      "bytes": 4317,
+      "sha256": "5a6433b6257473a16a0b327ee5b04826baacc41ab82ed8933e1f69ac37a2fbeb"
+    },
+    {
+      "path": "References/OriginalTextures/9adfa694fe4ebeef.png",
+      "bytes": 41580,
+      "sha256": "cce2ef44db6a54559d0b18bc8bd0b394e9366e8b899ab0ad19f676fec6a1ba3e"
+    },
+    {
+      "path": "References/OriginalTextures/9d0d0860f1b12929.png",
+      "bytes": 1096,
+      "sha256": "074065f07e35265d9695cced0f42844dbb02e5766c4ed185d0a372b2d033b093"
+    },
+    {
+      "path": "References/OriginalTextures/a0646e7bd49408bf.png",
+      "bytes": 5075,
+      "sha256": "f828c6adab7a54367afca3e2873568905c39d74a268f8718422f53ae5b3c7929"
+    },
+    {
+      "path": "References/OriginalTextures/a65490c72118900f.png",
+      "bytes": 12764,
+      "sha256": "cfd9701f02bb3e5783a874f02799e71bb5056e4fe6f4f376982091681a59db47"
+    },
+    {
+      "path": "References/OriginalTextures/a7b2726c56ede0cc.png",
+      "bytes": 99608,
+      "sha256": "548b8db01883f2effe6a3fa358e2f0f55b047d92fb5c8fa9726504015e304bba"
+    },
+    {
+      "path": "References/OriginalTextures/b5bb1125fde0c21a.png",
+      "bytes": 42057,
+      "sha256": "c263b614db277c5673dbc20758343f782ea4f1e88d45b6bcb3ccab7ed86868c0"
+    },
+    {
+      "path": "References/OriginalTextures/bd767cfba27ac963.png",
+      "bytes": 5059,
+      "sha256": "d67bb4050b1937518e7e30e9a2d31f8ff35cd786465b94e8b97387e1cf955a77"
+    },
+    {
+      "path": "References/OriginalTextures/beb25debe718bf01.png",
+      "bytes": 1210,
+      "sha256": "64b216357e34f26fc9b4d659cacac1881d1c3511365e05e477e902ac5ce519b8"
+    },
+    {
+      "path": "References/OriginalTextures/bfc0a8fa2154619a.png",
+      "bytes": 6418,
+      "sha256": "e85a0d9e517131796f24ae4dc449cead7c86df7bd11870140660f195d27d9ce1"
+    },
+    {
+      "path": "References/OriginalTextures/c1c55f16b5746224.png",
+      "bytes": 106066,
+      "sha256": "40cb1542cb65c337d2a50420fa934cc50178493fba168b1c5685bdbd0e317e4d"
+    },
+    {
+      "path": "References/OriginalTextures/c40a8783f4279629.png",
+      "bytes": 280,
+      "sha256": "20be4ca8fb743594ab1dd7b83c4eefc8f3edf9dbdd692686b68da83a3ac40520"
+    },
+    {
+      "path": "References/OriginalTextures/c6b37e26881dbdf6.png",
+      "bytes": 10476,
+      "sha256": "1231f9a1da3552b977009c28ff038764b6ccc5b9a7e3477c9800493eb4ec3335"
+    },
+    {
+      "path": "References/OriginalTextures/c8965b755382b931.png",
+      "bytes": 4391,
+      "sha256": "94940881bcb6adb053627a379a769346d61f62194c233435e63a344bb66444b0"
+    },
+    {
+      "path": "References/OriginalTextures/ca9a3bba4c3e3d47.png",
+      "bytes": 4011,
+      "sha256": "d2173dc48fbee5fee9bcb34f1f1eca987aec149d02bbcb2a5072a6d2c79ebe28"
+    },
+    {
+      "path": "References/OriginalTextures/ced3b5ba21fcd025.png",
+      "bytes": 6433,
+      "sha256": "d78bcd4336d72c606e57d520347244f0fb6e9988848e915a6ad058ef4a8bdfc5"
+    },
+    {
+      "path": "References/OriginalTextures/d54df80e581fa985.png",
+      "bytes": 3346,
+      "sha256": "1f60a0eb25261503fe016575c6e28c8641ec31124f51e7945f1a9552b2fa6ee6"
+    },
+    {
+      "path": "References/OriginalTextures/d654d3f1f66259d8.png",
+      "bytes": 5847,
+      "sha256": "d2f7217f728038aefbefce2a01ba3c972517e1c826150b6747d494e6f582edb1"
+    },
+    {
+      "path": "References/OriginalTextures/d79ed60dbdbadd19.png",
+      "bytes": 122936,
+      "sha256": "1ba00b6147c431b9686b33b5748b14b3437c6e223f8a4ecb7631faf274b362fc"
+    },
+    {
+      "path": "References/OriginalTextures/d7ecbf8c49ef842c.png",
+      "bytes": 12433,
+      "sha256": "1ffcd1af17d297e690265c2ea67227ad013c48646c69df4dd18f5be5045c2c2b"
+    },
+    {
+      "path": "References/OriginalTextures/db4da1739ff87f0d.png",
+      "bytes": 11736,
+      "sha256": "a51bdacc5927fa3e2302c21f03e6c2e4abbbac40aa56a4779129dc0ce2ae2604"
+    },
+    {
+      "path": "References/OriginalTextures/db7b0a3b5893317d.png",
+      "bytes": 3675,
+      "sha256": "10cf6254de3601b3ef76fd92f5f83da2892e92aebcd98ab4c2b9a998c6d2ce49"
+    },
+    {
+      "path": "References/OriginalTextures/dbe3b74318ce9917.png",
+      "bytes": 1938,
+      "sha256": "7f727c731c247f24a5a4748f252a3739fdeed6f53d24f2e957c71af8d6eda542"
+    },
+    {
+      "path": "References/OriginalTextures/dfb7121980de9918.png",
+      "bytes": 8201,
+      "sha256": "41b8a5585a013e4acbf8b5444c7ca24bfafd6386f3107b24fe72c919a94e82c3"
+    },
+    {
+      "path": "References/OriginalTextures/e19e7d2ee3006d9d.png",
+      "bytes": 3403,
+      "sha256": "8a66b423182289e7b8bc25aa887c212f0f32ff110fceb1cb9d627ac988725975"
+    },
+    {
+      "path": "References/OriginalTextures/e36d43e482738284.png",
+      "bytes": 1288,
+      "sha256": "f3407dcc80b09f7efe8a5ba996779f1d814e26c27fedf1f66238270b2006c810"
+    },
+    {
+      "path": "References/OriginalTextures/e502d7eba4bd7277.png",
+      "bytes": 7933,
+      "sha256": "0fa8edde817c4238f3e3aea8f4e2dbdf31fef8c4233cb3fb8ded19c855504a50"
+    },
+    {
+      "path": "References/OriginalTextures/ee120cc6b330322d.png",
+      "bytes": 5157,
+      "sha256": "5220852669c92cc2f8000d38aa85ae15dab1a31538327806dbda8159a380385b"
+    },
+    {
+      "path": "References/OriginalTextures/eefcbe6cfd2f501a.png",
+      "bytes": 7542,
+      "sha256": "ef444fd71cd3da970493ea102da8e776213ac8d754949a1c4eb05fb548ca77be"
+    },
+    {
+      "path": "References/OriginalTextures/f53374175ed63a22.png",
+      "bytes": 93575,
+      "sha256": "630df1742b029a561438715811a29355e31702147c0a69912a86441e601c28a8"
+    },
+    {
+      "path": "References/OriginalTextures/f9551cfdacf9d2b3.png",
+      "bytes": 3456,
+      "sha256": "b87f1c3e43c5bf9ba65c0832a0aaea22825c112e667b2d45e81cc971e45fbe54"
+    },
+    {
+      "path": "References/OriginalTextures/fc39e8a2410e05df.png",
+      "bytes": 12521,
+      "sha256": "7c2f681de60de94305781d68b1c3835c5bea3ce0d430833f7f147fed369740f4"
+    },
+    {
+      "path": "References/OriginalTextures/fcfc54757b41eb5b.png",
+      "bytes": 7386,
+      "sha256": "1c918e04741f3e6e9f487c6c5b015baeb29168ffb30110468beb3dd5358cb4f9"
+    },
+    {
+      "path": "References/OriginalTextures/ffc8416792735059.png",
+      "bytes": 96926,
+      "sha256": "2c94eadf5ff82dcfb164ce4a64a5f6a435d28e7a1725ac73521ce661f97dc405"
+    },
+    {
+      "path": "References/archive-extraction-inspection.json",
+      "bytes": 71062,
+      "sha256": "3b63a8b255c96afeac9b796547c6ae3bec2e7b1afedf5cc857d7101ed0d60ea1"
+    },
+    {
+      "path": "References/category-reference-map.json",
+      "bytes": 3503,
+      "sha256": "8278ea904ed6bbe7d6500898e086090588256f45b48e1f507124c9758f512db0"
+    },
+    {
+      "path": "References/confirmed-architecture-texture-indices.json",
+      "bytes": 776,
+      "sha256": "50f8fbfbcf910615c0617167c2c111e7af371ec996874a6345e8cb29161129b9"
+    },
+    {
+      "path": "References/model-contact-0.jpg",
+      "bytes": 108480,
+      "sha256": "f382ea8d871addf972777579b9084a1a925f6cfca272191254c3af718f3b01b0"
+    },
+    {
+      "path": "References/model-contact-1.jpg",
+      "bytes": 104716,
+      "sha256": "4f457d7d543160fe5ab2e93d78c8db5631d553833f53420fe1a13f00e9133b1f"
+    },
+    {
+      "path": "References/original-models.json",
+      "bytes": 11759,
+      "sha256": "9246dafb5b2c955d41595c77aa73792b83701779f822c787da7e2f60190399bb"
+    },
+    {
+      "path": "References/reference-summary.json",
+      "bytes": 987,
+      "sha256": "0b40836cf4f7eb2c23ad0ee53f4f87d092aa27f4795727d0d6f5764f3e63ec65"
+    },
+    {
+      "path": "References/texture-catalogue.json",
+      "bytes": 132161,
+      "sha256": "7603fa9391bab9757bc19894e19cc9ead8833e6f379fd31d419a9c8891c02dd3"
+    },
+    {
+      "path": "References/textures-0.jpg",
+      "bytes": 155882,
+      "sha256": "cbeee54c09c607322a248a7b9c94c13df3ba92d126bb7c56aad1b08c31c421d9"
+    },
+    {
+      "path": "References/textures-1.jpg",
+      "bytes": 127107,
+      "sha256": "14373fdb8f9271e666f8f53a26c3d0296865193249e82eea93073ad0ecb06e47"
+    },
+    {
+      "path": "START-HERE.txt",
+      "bytes": 2392,
+      "sha256": "af8a9ba6eb0300a4edd18e1f74eb56a5f3febee615da87e4fa5669c3f0e05f89"
+    },
+    {
+      "path": "Sources.json",
+      "bytes": 25125,
+      "sha256": "c8cbe2f362df2e69355216bc3a9e7213d6826345815941d358263b59e325afe7"
+    },
+    {
+      "path": "Validation/preview-validation.json",
+      "bytes": 7676,
+      "sha256": "7e3aa8d3ccd1cd7fdd11014e0851c81f116ec20932c1d70318233e0e6481467d"
+    },
+    {
+      "path": "Validation/protected-verification.json",
+      "bytes": 150,
+      "sha256": "94e269e3a62e51215e3d17dc2fb37161fe6bb3cffb44e758fce8bf33bb96927d"
+    },
+    {
+      "path": "Validation/reopen-validation.json",
+      "bytes": 5381,
+      "sha256": "29788d3901c4caffcf94c2a7c6f2a7b3ee2288fe6b5b07e3abfd5a40e606c736"
+    },
+    {
+      "path": "Validation/visual-review.json",
+      "bytes": 6155,
+      "sha256": "0c31b799627eeb5187f907e1c59f603a28ab68089028dc4355146253254e9ca2"
+    },
+    {
+      "path": "progress.json",
+      "bytes": 9363,
+      "sha256": "dd596f2b918abd210c457e4a36b9df5407428673f09f989ede93aabbfd49e8aa"
+    }
+  ]
+}
