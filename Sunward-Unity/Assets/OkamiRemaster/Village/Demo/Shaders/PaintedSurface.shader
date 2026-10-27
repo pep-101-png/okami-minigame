@@ -22,14 +22,14 @@ Shader "VillageDemo/Painted Surface" {
   CBUFFER_START(UnityPerMaterial)
   float4 _Color, _UVMatrix, _UVOffset, _FlowSpeed; float _RepeatUV, _Cutoff, _WindStrength, _WaterMode, _FlowTime, _WaveStrength;
   CBUFFER_END
-  struct appdata { float4 vertex:POSITION;float3 normal:NORMAL;float2 uv:TEXCOORD0;float4 color:COLOR; };
+  struct appdata { float4 vertex:POSITION;float3 normal:NORMAL;float2 uv:TEXCOORD0;float4 color:COLOR; UNITY_VERTEX_INPUT_INSTANCE_ID };
   struct v2f { float4 pos:SV_POSITION;float2 uv:TEXCOORD0;float3 normal:TEXCOORD1;float3 world:TEXCOORD2;float4 color:COLOR; };
   float ripple(float2 p,float t) { return sin(dot(p,float2(1.7,.8))-t*1.5)*.6+sin(dot(p,float2(-.7,2.2))+t*1.1)*.4; }
   appdata deform(appdata v) { float3 world = TransformObjectToWorld(v.vertex.xyz);
    float sway = sin(_Time.y*1.15+world.x*.8+world.z*.47)*_WindStrength*v.color.a;
    v.vertex.x += sway; v.vertex.z += sway*.38;
    v.vertex.y += _WaterMode*_WaveStrength*sin(world.x*2.1+world.z*1.6+_FlowTime*1.7)*v.color.a; return v; }
-  v2f vert(appdata v) { v=deform(v);v2f o;o.pos=TransformObjectToHClip(v.vertex.xyz);o.world=TransformObjectToWorld(v.vertex.xyz);o.normal=TransformObjectToWorldNormal(v.normal);o.uv=v.uv;o.color=v.color;return o; }
+  v2f vert(appdata v) { UNITY_SETUP_INSTANCE_ID(v);v=deform(v);v2f o;o.pos=TransformObjectToHClip(v.vertex.xyz);o.world=TransformObjectToWorld(v.vertex.xyz);o.normal=TransformObjectToWorldNormal(v.normal);o.uv=v.uv;o.color=v.color;return o; }
   half4 frag(v2f i):SV_Target { float2 uv=i.uv+_WaterMode*_FlowTime*_FlowSpeed.xy;
    if (_RepeatUV>.5 || _WaterMode>.5) uv=frac(uv);
    uv=float2(dot(_UVMatrix.xy,uv),dot(_UVMatrix.zw,uv))+_UVOffset.xy;
@@ -42,6 +42,7 @@ Shader "VillageDemo/Painted Surface" {
    Name "PaintedForward"
    Tags { "LightMode"="UniversalForwardOnly" }
    HLSLPROGRAM
+   #pragma multi_compile_instancing
    #pragma target 3.5
    #pragma vertex vert
    #pragma fragment frag
@@ -54,11 +55,12 @@ Shader "VillageDemo/Painted Surface" {
    Tags { "LightMode"="ShadowCaster" }
    ZWrite On ZTest LEqual ColorMask 0
    HLSLPROGRAM
+   #pragma multi_compile_instancing
    #pragma target 3.5
    #pragma vertex vertShadow
    #pragma fragment fragShadow
    #pragma multi_compile_vertex _ _CASTING_PUNCTUAL_LIGHT_SHADOW
-   v2f vertShadow(appdata v) { v=deform(v);v2f o=(v2f)0;o.pos=VillageShadowPosition(v.vertex.xyz,v.normal);o.uv=v.uv;return o; }
+   v2f vertShadow(appdata v) { UNITY_SETUP_INSTANCE_ID(v);v=deform(v);v2f o=(v2f)0;o.pos=VillageShadowPosition(v.vertex.xyz,v.normal);o.uv=v.uv;return o; }
    half4 fragShadow(v2f i):SV_Target { float2 uv=i.uv+_WaterMode*_FlowTime*_FlowSpeed.xy;
    if (_RepeatUV>.5 || _WaterMode>.5) uv=frac(uv);
    uv=float2(dot(_UVMatrix.xy,uv),dot(_UVMatrix.zw,uv))+_UVOffset.xy;

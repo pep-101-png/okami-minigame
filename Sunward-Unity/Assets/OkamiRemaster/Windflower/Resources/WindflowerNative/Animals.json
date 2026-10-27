@@ -1,0 +1,476 @@
+{
+  "actors": [
+    {
+      "asset": "cow",
+      "name": "Windflower cow \u00b7 Cattle paddock cow",
+      "position": {
+        "x": -49,
+        "y": 0,
+        "z": 12
+      },
+      "path": [
+        {
+          "x": -49,
+          "y": 12
+        },
+        {
+          "x": -48.45,
+          "y": 12
+        },
+        {
+          "x": -48.45,
+          "y": 12.65
+        },
+        {
+          "x": -49,
+          "y": 12.65
+        }
+      ],
+      "yaw": 0,
+      "seed": 0.0
+    },
+    {
+      "asset": "cow",
+      "name": "Windflower cow \u00b7 Sheltered stable cow",
+      "position": {
+        "x": -49,
+        "y": 0,
+        "z": 16
+      },
+      "path": [
+        {
+          "x": -49,
+          "y": 16
+        },
+        {
+          "x": -48.45,
+          "y": 16
+        },
+        {
+          "x": -48.45,
+          "y": 16.65
+        },
+        {
+          "x": -49,
+          "y": 16.65
+        }
+      ],
+      "yaw": 180,
+      "seed": 0.713
+    },
+    {
+      "asset": "pig",
+      "name": "Windflower pig \u00b7 Pig by wallow",
+      "position": {
+        "x": -49,
+        "y": 0,
+        "z": 25
+      },
+      "path": [
+        {
+          "x": -49,
+          "y": 25
+        },
+        {
+          "x": -48.45,
+          "y": 25
+        },
+        {
+          "x": -48.45,
+          "y": 25.65
+        },
+        {
+          "x": -49,
+          "y": 25.65
+        }
+      ],
+      "yaw": 0,
+      "seed": 1.426
+    },
+    {
+      "asset": "pig",
+      "name": "Windflower pig \u00b7 Pig by shelter",
+      "position": {
+        "x": -47,
+        "y": 0,
+        "z": 26
+      },
+      "path": [
+        {
+          "x": -47,
+          "y": 26
+        },
+        {
+          "x": -46.45,
+          "y": 26
+        },
+        {
+          "x": -46.45,
+          "y": 26.65
+        },
+        {
+          "x": -47,
+          "y": 26.65
+        }
+      ],
+      "yaw": 95,
+      "seed": 2.139
+    },
+    {
+      "asset": "rooster",
+      "name": "Windflower rooster \u00b7 Rooster near grain",
+      "position": {
+        "x": -37,
+        "y": 0,
+        "z": 29
+      },
+      "path": [
+        {
+          "x": -37,
+          "y": 29
+        },
+        {
+          "x": -36.45,
+          "y": 29
+        },
+        {
+          "x": -36.45,
+          "y": 29.65
+        },
+        {
+          "x": -37,
+          "y": 29.65
+        }
+      ],
+      "yaw": 0,
+      "seed": 2.852
+    },
+    {
+      "asset": "rooster",
+      "name": "Windflower rooster \u00b7 Rooster near coop",
+      "position": {
+        "x": -39,
+        "y": 0,
+        "z": 29
+      },
+      "path": [
+        {
+          "x": -39,
+          "y": 29
+        },
+        {
+          "x": -38.45,
+          "y": 29
+        },
+        {
+          "x": -38.45,
+          "y": 29.65
+        },
+        {
+          "x": -39,
+          "y": 29.65
+        }
+      ],
+      "yaw": 20,
+      "seed": 3.565
+    },
+    {
+      "asset": "rabbit",
+      "name": "Windflower rabbit \u00b7 White rabbit",
+      "position": {
+        "x": -18,
+        "y": 0,
+        "z": 26
+      },
+      "path": [
+        {
+          "x": -18,
+          "y": 26
+        },
+        {
+          "x": -17.45,
+          "y": 26
+        },
+        {
+          "x": -17.45,
+          "y": 26.65
+        },
+        {
+          "x": -18,
+          "y": 26.65
+        }
+      ],
+      "yaw": 0,
+      "seed": 4.278
+    },
+    {
+      "asset": "rabbit",
+      "name": "Windflower rabbit \u00b7 White rabbit by hutch",
+      "position": {
+        "x": -18,
+        "y": 0,
+        "z": 29
+      },
+      "path": [
+        {
+          "x": -18,
+          "y": 29
+        },
+        {
+          "x": -17.45,
+          "y": 29
+        },
+        {
+          "x": -17.45,
+          "y": 29.65
+        },
+        {
+          "x": -18,
+          "y": 29.65
+        }
+      ],
+      "yaw": 70,
+      "seed": 4.991
+    },
+    {
+      "asset": "panda-rabbit",
+      "name": "Windflower panda-rabbit \u00b7 Panda rabbit",
+      "position": {
+        "x": -17,
+        "y": 0,
+        "z": 28
+      },
+      "path": [
+        {
+          "x": -17,
+          "y": 28
+        },
+        {
+          "x": -16.45,
+          "y": 28
+        },
+        {
+          "x": -16.45,
+          "y": 28.65
+        },
+        {
+          "x": -17,
+          "y": 28.65
+        }
+      ],
+      "yaw": 240,
+      "seed": 5.704
+    },
+    {
+      "asset": "dog",
+      "name": "Windflower dog \u00b7 Farm dog",
+      "position": {
+        "x": -33,
+        "y": 0,
+        "z": -26
+      },
+      "path": [
+        {
+          "x": -33,
+          "y": -26
+        },
+        {
+          "x": -32.45,
+          "y": -26
+        },
+        {
+          "x": -32.45,
+          "y": -25.35
+        },
+        {
+          "x": -33,
+          "y": -25.35
+        }
+      ],
+      "yaw": 0,
+      "seed": 6.417
+    },
+    {
+      "asset": "cat",
+      "name": "Windflower cat \u00b7 Barn cat",
+      "position": {
+        "x": -37,
+        "y": 0,
+        "z": -24
+      },
+      "path": [
+        {
+          "x": -37,
+          "y": -24
+        },
+        {
+          "x": -36.45,
+          "y": -24
+        },
+        {
+          "x": -36.45,
+          "y": -23.35
+        },
+        {
+          "x": -37,
+          "y": -23.35
+        }
+      ],
+      "yaw": 135,
+      "seed": 7.13
+    },
+    {
+      "asset": "boar",
+      "name": "Windflower boar \u00b7 Woodland boar",
+      "position": {
+        "x": -52,
+        "y": 0,
+        "z": -30
+      },
+      "path": [
+        {
+          "x": -52,
+          "y": -30
+        },
+        {
+          "x": -51.45,
+          "y": -30
+        },
+        {
+          "x": -51.45,
+          "y": -29.35
+        },
+        {
+          "x": -52,
+          "y": -29.35
+        }
+      ],
+      "yaw": 0,
+      "seed": 7.843
+    },
+    {
+      "asset": "piglet",
+      "name": "Windflower piglet \u00b7 Striped boar piglet",
+      "position": {
+        "x": -50,
+        "y": 0,
+        "z": -28
+      },
+      "path": [
+        {
+          "x": -50,
+          "y": -28
+        },
+        {
+          "x": -49.45,
+          "y": -28
+        },
+        {
+          "x": -49.45,
+          "y": -27.35
+        },
+        {
+          "x": -50,
+          "y": -27.35
+        }
+      ],
+      "yaw": 30,
+      "seed": 8.556
+    }
+  ],
+  "barnCenter": {
+    "x": -29.7,
+    "y": 0.19,
+    "z": 14.8
+  },
+  "animalCount": 13,
+  "pens": [
+    {
+      "name": "Cattle paddock",
+      "bounds": [
+        -37.8,
+        -30.6,
+        2.6,
+        9.6
+      ]
+    },
+    {
+      "name": "Pig paddock",
+      "bounds": [
+        -26.8,
+        -19.8,
+        3.8,
+        9.8
+      ]
+    },
+    {
+      "name": "Chicken run",
+      "bounds": [
+        -26.8,
+        -20.0,
+        -6.4,
+        -0.7
+      ]
+    },
+    {
+      "name": "Rabbit garden",
+      "bounds": [
+        -37.8,
+        -31.0,
+        -6.7,
+        -1.25
+      ]
+    },
+    {
+      "name": "Boar woodland enclosure",
+      "bounds": [
+        -38.5,
+        -35.8,
+        12.0,
+        20.7
+      ]
+    },
+    {
+      "name": "Cattle watering trough",
+      "position": [
+        -36.3,
+        8.5
+      ]
+    },
+    {
+      "name": "Pig watering trough",
+      "position": [
+        -20.9,
+        8.8
+      ]
+    },
+    {
+      "name": "Chicken shallow drinking tray",
+      "position": [
+        -21.2,
+        -1.7
+      ]
+    },
+    {
+      "name": "Rabbit low watering dish",
+      "position": [
+        -32.0,
+        -2.2
+      ]
+    },
+    {
+      "name": "Stable stone watering trough",
+      "position": [
+        -33.45,
+        17.1
+      ]
+    },
+    {
+      "name": "Boar woodland water",
+      "position": [
+        -37.1,
+        19.7
+      ]
+    }
+  ]
+}
