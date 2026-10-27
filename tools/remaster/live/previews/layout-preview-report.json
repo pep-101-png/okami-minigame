@@ -1,0 +1,13 @@
+{
+  "source": "Sunward-Unity/Assets/Sunward/Scenes/Windflower.unity",
+  "sourceSceneSha256": "25552710b0457e7ad6b404221b59acaea2dedf663e483189f318a0a0c6795621",
+  "unityRendered": false,
+  "savedActiveObjects": 2037,
+  "visiblePrefabMeshes": 126,
+  "unsupportedMeshesSkipped": 0,
+  "limitations": [
+    "Blender layout render, not Unity; no wolf motion, gameplay or performance verification",
+    "Pigment texture mixing approximated in Blender; Unity shaders/water/fog not reproduced",
+    "Explicit outline shells approximated with fixed .026m expansion instead of Unity pixel-space width"
+  ]
+}

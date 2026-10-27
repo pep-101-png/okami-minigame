@@ -83,5 +83,5 @@ def export(pl,wp,output):
     (output/'original-component-index.json').write_text(json.dumps(manifest,indent=2)+'\n')
     return dict(reviewModels=3,uniqueAmmyPayloads=len(motions),solarFlareComponentFiles=len(manifest))
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--pl',type=Path,required=True);parser.add_argument('--wp',type=Path,required=True);parser.add_argument('--output',type=Path,default=Path(__file__).resolve().parents[2]/'Sunward-Unity/Assets/OkamiRemaster/NativeReview');args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--pl',type=Path,required=True);parser.add_argument('--wp',type=Path,required=True);parser.add_argument('--output',type=Path,default=Path(__file__).resolve().parents[2]/'tools/remaster/reference/NativeSources');args=parser.parse_args()
     print(json.dumps(export(args.pl,args.wp,args.output)))
