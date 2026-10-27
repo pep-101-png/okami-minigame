@@ -1,0 +1,13 @@
+{
+  "file": "Sunward-Remaster-Stage1-Review-Update.zip",
+  "bytes": 73434275,
+  "sha256": "905ec6ed635ea916fec56644ba5f07fdf90ed3e4c1158d7e0724b8e2e8227419",
+  "sourceCommit": "1ba3426de6557d7bd494f6ba0deb7ef55aa6a354",
+  "baselineCommit": "00fd8695363df01de80b012d68feb20c9961e8a9",
+  "additiveSourceFiles": 1166,
+  "allArchiveMembersReReadAndByteVerified": true,
+  "includesBaselineGame": false,
+  "UnityCompiled": false,
+  "UnityPlayed": false,
+  "completeRemaster": false
+}
