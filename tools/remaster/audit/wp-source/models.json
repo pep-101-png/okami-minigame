@@ -1,0 +1,1377 @@
+[
+  {
+    "key": "wp00",
+    "package": "wp00",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 68,
+    "triangles": 44,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp01",
+    "package": "wp01",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 142,
+    "triangles": 78,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp02",
+    "package": "wp02",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 612,
+    "triangles": 492,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp03",
+    "package": "wp03",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 564,
+    "triangles": 280,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp04",
+    "package": "wp04",
+    "nativeBones": 5,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 232,
+    "triangles": 192,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp05",
+    "package": "wp05",
+    "nativeBones": 18,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 818,
+    "triangles": 714,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp06",
+    "package": "wp06",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 4,
+    "triangles": 2,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp07",
+    "package": "wp07",
+    "nativeBones": 2,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 148,
+    "triangles": 108,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp09",
+    "package": "wp09",
+    "nativeBones": 2,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 294,
+    "triangles": 232,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp0b",
+    "package": "wp0b",
+    "nativeBones": 1,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 140,
+    "triangles": 96,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp0c",
+    "package": "wp0c",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 104,
+    "triangles": 80,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp0d",
+    "package": "wp0d",
+    "nativeBones": 1,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 128,
+    "triangles": 64,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp0e",
+    "package": "wp0e",
+    "nativeBones": 1,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 184,
+    "triangles": 144,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp0f",
+    "package": "wp0f",
+    "nativeBones": 2,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 294,
+    "triangles": 232,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp10",
+    "package": "wp10",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 206,
+    "triangles": 160,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp11",
+    "package": "wp11",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 206,
+    "triangles": 160,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp12",
+    "package": "wp12",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 152,
+    "triangles": 112,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp13",
+    "package": "wp13",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 38,
+    "triangles": 20,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp14",
+    "package": "wp14",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 3,
+    "triangles": 1,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp14-EMD",
+    "package": "wp14",
+    "nativeBones": 1,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 243,
+    "triangles": 89,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp15",
+    "package": "wp15",
+    "nativeBones": 3,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 492,
+    "triangles": 396,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp16",
+    "package": "wp16",
+    "nativeBones": 3,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 788,
+    "triangles": 550,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp17",
+    "package": "wp17",
+    "nativeBones": 3,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 998,
+    "triangles": 614,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp18",
+    "package": "wp18",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 3,
+    "triangles": 1,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp18-EMD",
+    "package": "wp18",
+    "nativeBones": 1,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 243,
+    "triangles": 89,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp19",
+    "package": "wp19",
+    "nativeBones": 36,
+    "meshObjects": 1,
+    "materialDivisions": 2,
+    "storedVertices": 2739,
+    "triangles": 1835,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp1a",
+    "package": "wp1a",
+    "nativeBones": 4,
+    "meshObjects": 6,
+    "materialDivisions": 8,
+    "storedVertices": 534,
+    "triangles": 360,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp1b",
+    "package": "wp1b",
+    "nativeBones": 1,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 276,
+    "triangles": 224,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp1c",
+    "package": "wp1c",
+    "nativeBones": 1,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 276,
+    "triangles": 224,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp1d",
+    "package": "wp1d",
+    "nativeBones": 3,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 648,
+    "triangles": 368,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp1e",
+    "package": "wp1e",
+    "nativeBones": 2,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 854,
+    "triangles": 728,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp1f",
+    "package": "wp1f",
+    "nativeBones": 3,
+    "meshObjects": 1,
+    "materialDivisions": 2,
+    "storedVertices": 618,
+    "triangles": 380,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp20",
+    "package": "wp20",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 804,
+    "triangles": 652,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp21",
+    "package": "wp21",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1296,
+    "triangles": 840,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp22",
+    "package": "wp22",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 946,
+    "triangles": 652,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp23",
+    "package": "wp23",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 766,
+    "triangles": 550,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp24",
+    "package": "wp24",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 6,
+    "storedVertices": 743,
+    "triangles": 517,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp25",
+    "package": "wp25",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 964,
+    "triangles": 604,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp26",
+    "package": "wp26",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1094,
+    "triangles": 692,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp27",
+    "package": "wp27",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 964,
+    "triangles": 616,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp28",
+    "package": "wp28",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1012,
+    "triangles": 678,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp29",
+    "package": "wp29",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 6,
+    "storedVertices": 848,
+    "triangles": 516,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp2a",
+    "package": "wp2a",
+    "nativeBones": 16,
+    "meshObjects": 6,
+    "materialDivisions": 6,
+    "storedVertices": 1176,
+    "triangles": 888,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp2b",
+    "package": "wp2b",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1140,
+    "triangles": 792,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp2c",
+    "package": "wp2c",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 10,
+    "storedVertices": 1080,
+    "triangles": 840,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp2d",
+    "package": "wp2d",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1440,
+    "triangles": 960,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp2e",
+    "package": "wp2e",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1336,
+    "triangles": 792,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp30",
+    "package": "wp30",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 804,
+    "triangles": 652,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp31",
+    "package": "wp31",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1296,
+    "triangles": 840,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp32",
+    "package": "wp32",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 940,
+    "triangles": 652,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp33",
+    "package": "wp33",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 766,
+    "triangles": 550,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp34",
+    "package": "wp34",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 6,
+    "storedVertices": 743,
+    "triangles": 517,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp35",
+    "package": "wp35",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 521,
+    "triangles": 339,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp36",
+    "package": "wp36",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 669,
+    "triangles": 407,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp37",
+    "package": "wp37",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 519,
+    "triangles": 355,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp38",
+    "package": "wp38",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 733,
+    "triangles": 481,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp39",
+    "package": "wp39",
+    "nativeBones": 15,
+    "meshObjects": 5,
+    "materialDivisions": 6,
+    "storedVertices": 469,
+    "triangles": 283,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp3a",
+    "package": "wp3a",
+    "nativeBones": 16,
+    "meshObjects": 6,
+    "materialDivisions": 6,
+    "storedVertices": 1176,
+    "triangles": 888,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp3b",
+    "package": "wp3b",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1140,
+    "triangles": 792,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp3c",
+    "package": "wp3c",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 10,
+    "storedVertices": 1080,
+    "triangles": 840,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp3d",
+    "package": "wp3d",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1440,
+    "triangles": 960,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp3e",
+    "package": "wp3e",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 1299,
+    "triangles": 769,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp3f",
+    "package": "wp3f",
+    "nativeBones": 16,
+    "meshObjects": 5,
+    "materialDivisions": 5,
+    "storedVertices": 804,
+    "triangles": 652,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp40",
+    "package": "wp40",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 3,
+    "triangles": 1,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp40-EMD",
+    "package": "wp40",
+    "nativeBones": 1,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 243,
+    "triangles": 89,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp41",
+    "package": "wp41",
+    "nativeBones": 12,
+    "meshObjects": 2,
+    "materialDivisions": 4,
+    "storedVertices": 3890,
+    "triangles": 2610,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp42",
+    "package": "wp42",
+    "nativeBones": 7,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 1860,
+    "triangles": 1244,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp43",
+    "package": "wp43",
+    "nativeBones": 6,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 1900,
+    "triangles": 1270,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp44",
+    "package": "wp44",
+    "nativeBones": 3,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 330,
+    "triangles": 180,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp45",
+    "package": "wp45",
+    "nativeBones": 3,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 376,
+    "triangles": 256,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp46",
+    "package": "wp46",
+    "nativeBones": 3,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 1284,
+    "triangles": 912,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp47",
+    "package": "wp47",
+    "nativeBones": 2,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 294,
+    "triangles": 232,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp48",
+    "package": "wp48",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 544,
+    "triangles": 392,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp49",
+    "package": "wp49",
+    "nativeBones": 3,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 106,
+    "triangles": 58,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp4a",
+    "package": "wp4a",
+    "nativeBones": 3,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 160,
+    "triangles": 118,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp4b",
+    "package": "wp4b",
+    "nativeBones": 3,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 222,
+    "triangles": 116,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp4c",
+    "package": "wp4c",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 3,
+    "triangles": 1,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp4d",
+    "package": "wp4d",
+    "nativeBones": 5,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 897,
+    "triangles": 743,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp4e",
+    "package": "wp4e",
+    "nativeBones": 18,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 818,
+    "triangles": 714,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp4f",
+    "package": "wp4f",
+    "nativeBones": 3,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 2073,
+    "triangles": 1155,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp50",
+    "package": "wp50",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 3,
+    "triangles": 1,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp50-EMD",
+    "package": "wp50",
+    "nativeBones": 1,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 243,
+    "triangles": 89,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp51",
+    "package": "wp51",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 544,
+    "triangles": 392,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp52",
+    "package": "wp52",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 446,
+    "triangles": 282,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp53",
+    "package": "wp53",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 398,
+    "triangles": 258,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp54",
+    "package": "wp54",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 394,
+    "triangles": 258,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp55",
+    "package": "wp55",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 206,
+    "triangles": 160,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp56",
+    "package": "wp56",
+    "nativeBones": 16,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 298,
+    "triangles": 164,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp57",
+    "package": "wp57",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 349,
+    "triangles": 201,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp58",
+    "package": "wp58",
+    "nativeBones": 1,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 3,
+    "triangles": 1,
+    "skinWeightsPresent": false,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp59",
+    "package": "wp59",
+    "nativeBones": 2,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 294,
+    "triangles": 232,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp5a",
+    "package": "wp5a",
+    "nativeBones": 2,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 96,
+    "triangles": 60,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp5b",
+    "package": "wp5b",
+    "nativeBones": 2,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 294,
+    "triangles": 232,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp5d",
+    "package": "wp5d",
+    "nativeBones": 2,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 206,
+    "triangles": 160,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp5e",
+    "package": "wp5e",
+    "nativeBones": 8,
+    "meshObjects": 8,
+    "materialDivisions": 8,
+    "storedVertices": 1690,
+    "triangles": 1184,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  },
+  {
+    "key": "wp5f",
+    "package": "wp5f",
+    "nativeBones": 2,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 206,
+    "triangles": 160,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ],
+    "differentSkeletonsBetweenParts": false
+  }
+]
