@@ -2,32 +2,112 @@
   "date": "2026-10-27",
   "baselineCommit": "00fd8695363df01de80b012d68feb20c9961e8a9",
   "branch": "remaster/okami-native-integration",
-  "overall": "in_progress_blocked_at_Unity_review_gate",
+  "overall": "existing_Windflower_environment_implemented_native_player_weapon_and_Unity_verification_unfinished",
   "completeRemaster": false,
-  "activeLiveReplacements": 0,
-  "baselineProjectFilesBytePreserved": 3731,
+  "activeLiveReplacements": {
+    "houses": 14,
+    "marketRoofs": 2,
+    "bridges": 2,
+    "rocks": 122,
+    "cherryTrees": 11,
+    "bambooArtwork": 7,
+    "grassArtwork": 360,
+    "decorativeFlowerArtwork": 180,
+    "ambientAnimalsConfigured": 13
+  },
+  "baselineProjectFilesBytePreserved": 3729,
   "phases": [
-    {"phase": 1, "name": "Audit", "status": "file_inventory_and_candidate_matrix_complete_exact_matches_pending", "unclassifiedAssets": 387},
-    {"phase": 2, "name": "Protection", "status": "complete", "rollbackBranch": "backup/sunward-pre-native-remaster-20261027", "localHydratedArchiveVerified": true},
-    {"phase": 3, "name": "Amaterasu", "status": "native_model_review_and_165_source_motions_staged_no_live_adapter"},
-    {"phase": 4, "name": "Solar Flare", "status": "wp24_wp34_review_staged_original_effect_dispatcher_unverified_Sundial_retained"},
-    {"phase": 5, "name": "Village", "status": "additional_editor_review_scene_port_prepared_Unity_validation_pending"},
-    {"phase": 6, "name": "Live environment", "status": "candidate_catalogue_only_no_live_replacements"},
-    {"phase": 7, "name": "Animals", "status": "13_actors_9_types_in_review_scene_no_Windflower_population"},
-    {"phase": 8, "name": "NPCs", "status": "all_existing_preserved_no_verified_role_matched_native_replacements"},
-    {"phase": 9, "name": "Arena/gameplay", "status": "all_baseline_files_preserved_runtime_regressions_pending"},
-    {"phase": 10, "name": "Art direction", "status": "source_provenance_recorded_shader_port_visual_approval_pending"},
-    {"phase": 11, "name": "Performance", "status": "redundant_opaque_faces_filtered_full_Unity_profile_pending"},
-    {"phase": 12, "name": "Validation", "status": "offline_integrity_passed_Unity_compilation_rendering_gameplay_not_run"},
-    {"phase": 13, "name": "Delivery", "status": "first_review_stage_documented_draft_not_finished_game"}
+    {
+      "phase": 1,
+      "name": "Audit",
+      "status": "file_inventory_and_candidate_matrix_complete_exact_matches_pending",
+      "unclassifiedAssets": 387
+    },
+    {
+      "phase": 2,
+      "name": "Protection",
+      "status": "complete",
+      "rollbackBranch": "backup/sunward-pre-native-remaster-20261027",
+      "localHydratedArchiveVerified": true
+    },
+    {
+      "phase": 3,
+      "name": "Amaterasu",
+      "status": "native_model_review_and_165_source_motions_staged_no_live_adapter"
+    },
+    {
+      "phase": 4,
+      "name": "Solar Flare",
+      "status": "wp24_wp34_review_staged_original_effect_dispatcher_unverified_Sundial_retained"
+    },
+    {
+      "phase": 5,
+      "name": "Village",
+      "status": "main_Windflower_scene_modified_review_scene_archived_outside_Assets"
+    },
+    {
+      "phase": 6,
+      "name": "Live environment",
+      "status": "multiple_live_environment_batches_implemented_runtime_verification_pending"
+    },
+    {
+      "phase": 7,
+      "name": "Animals",
+      "status": "13_native_ambient_actors_configured_in_Windflower_playback_unverified"
+    },
+    {
+      "phase": 8,
+      "name": "NPCs",
+      "status": "all_existing_preserved_no_verified_role_matched_native_replacements"
+    },
+    {
+      "phase": 9,
+      "name": "Arena/gameplay",
+      "status": "all_baseline_files_preserved_runtime_regressions_pending"
+    },
+    {
+      "phase": 10,
+      "name": "Art direction",
+      "status": "source_provenance_recorded_shader_port_visual_approval_pending"
+    },
+    {
+      "phase": 11,
+      "name": "Performance",
+      "status": "mesh_material_reuse_and_repeated_asset_instancing_enabled_actual_profile_pending"
+    },
+    {
+      "phase": 12,
+      "name": "Validation",
+      "status": "offline_integrity_passed_Unity_compilation_rendering_gameplay_not_run"
+    },
+    {
+      "phase": 13,
+      "name": "Delivery",
+      "status": "actual_game_environment_source_implementation_not_complete_remaster"
+    }
   ],
-  "immediateGate": "Unity 6000.6.6f1 import, C# compilation, URP shader compilation and review-scene play/visual results for this branch",
-  "unavailableCapabilities": ["Unity Editor/runtime", "Control of user's PC"],
+  "immediateGate": "Actual Unity 6000.6.6f1 import, C#/shader compilation and play-mode verification of Windflower; native Ammy and Solar Flare adapters still required.",
+  "unavailableCapabilities": [
+    "Unity Editor/runtime",
+    "Control of user's PC"
+  ],
   "latestFeedback": {
     "commit": "aefd595771e933a3313ecb4170251764c94ab1e3",
     "runId": "20261021T092745607Z-9936e8",
     "clips": 14,
     "allClipCoverageIncomplete": true,
     "validatesCurrentBranch": false
-  }
+  },
+  "modifiedExistingScenes": [
+    "Assets/Sunward/Scenes/Windflower.unity"
+  ],
+  "modifiedExistingPrefabFiles": [],
+  "AmmyGameplayAnimationsReplaced": 0,
+  "SolarFlareGameplayReplaced": false,
+  "UnityCompilationVerified": false,
+  "UnityPlayVerified": false,
+  "runningGameScreenshotsAvailable": false,
+  "modifiedExistingEditorFiles": [
+    "Assets/Editor/WindflowerDiagnostics.cs"
+  ]
 }

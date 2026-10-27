@@ -1,25 +1,25 @@
-# Required Unity gates — none marked passed without a current-build result
+# Actual Windflower acceptance gates — runtime results pending
 
-Record the exact Git commit, Unity version, renderer/backend, result, log and screenshots/video for each gate. Older feedback from a different commit is not a pass. Existing automation may publish feedback normally; this stage does not start, enable or modify installed Windows tasks.
+The existing **Assets/Sunward/Scenes/Windflower.unity** is the target. Never use the separate demo scene or a Blender image as proof of running-game verification. Record exact source commit, Unity version/backend, logs and actual captures.
 
-| Gate | Acceptance | Current status |
-| --- | --- | --- |
-| Import/compile | Unity 6000.6.6f1 opens the actual project; no C# errors, missing script or importer errors | Not run |
-| Shaders | All eight review shaders compile for the actual platform, including cutout shadows, water, ink and transparent passes | Not run |
-| Asset validation | Run Sunward/Remaster/Validate Village Assets; inspect JSON and actual scene, not JSON alone | Not run |
-| Review navigation | Overview/on-foot controls, mouse capture/release, null input devices, doors, all stairs, room collisions, bridge, river banks | Not run |
-| Review presentation | Compare source village artwork/UVs, ink hull coverage, alpha/cutouts, foliage sway, petals, water flow, splashes and steam | Not run |
-| Opaque optimization | Compare filter on/off captures; no missing faces, alpha changes or collision differences; profile actual draw cost and startup allocations | Not run |
-| Animals | 13 actors/nine types; grounded idle/walk loops, sensible paths, doors/props not trapping animals, pet interaction and soft chime | Not run |
-| Native models | Default Ammy/38 bones and Solar Flare/16 bones; material flags, original texture slots, native scale, axis/winding, ink, bind pose | Not run |
-| Live movement | Walk/jog/sprint, stop/turn, slope/steps, jump/double jump, fall/land, all dodge directions; no neck/leg/tail breaks or sliding | Not run; live assets unchanged |
-| Combat | Both weapons; light chains, heavy, charge/release, air strike, switching, damage/hit windows/line of sight/stagger | Not run; live systems unchanged |
-| Native animation conversion | Verified original interpolation/Euler order/FPS; confirmed action map, root-motion policy, pose/foot/transition comparison | Not implemented |
-| Native Solar Flare | Verified original activation/flame/trail/impact sequencing and attachment; old custom effects disabled together only after approval | Not implemented; Sundial retained |
-| NPCs/quests | All seven named NPCs plus shoppers; dialogue, role interactions, flower quest, shop, routes and doorway clearance | Not run; all baseline bytes preserved |
-| Arena | Entry bell, enemy spawning, all four waves, elites, Kurogane, completion/rewards and return | Not run; all baseline bytes preserved |
-| Progression | Collectibles, permanent upgrades, economy, equipment and unlocks remain stable | Not run; baseline preserved |
-| Save/load | Existing save opens; temporary verified writes and backup recovery work; home/mirror/rest/UI unchanged | Not run; format/code preserved |
-| Audio/UI/camera | Existing sounds/menus, prompts, home cutaway, equipment UI and camera; no duplicate audio listener when changing scenes | Not run |
-| Performance/build | Startup memory/time, actual triangles/batches, CPU/GPU frame time, GC, Resources build-size increase and Windows build | Not run |
-| Final review | All live-world replacements rendered and all regression gates passed on the exact final build | Not reached |
+| Gate | Status |
+| --- | --- |
+| Existing scene/layout/gameplay-object preservation | Offline object/component and file comparisons pass; play verification pending |
+| Actual house/market/ST2 rock/bridge/torii replacements | Saved scene bindings and native mesh/material data checked; Unity rendering pending |
+| Cherry/bamboo/grass/decorative flower integration | Saved live bindings checked; alpha/wind/lighting/play verification pending |
+| River and recessed pond | Actual material bindings checked; shader compilation/refraction/depth/shore/bridge play pending |
+| Native ambient animals | 13 actors/nine types configured; static route clearance checked; actual spawning, foot contact, loops, avoidance and performance unverified |
+| Unity import/C#/shaders | Not run; 78 C# files pass syntax parsing only |
+| Ammy native idle/walk/run/sprint/jump/landing/dodge/combat | Not integrated; 38/74-bone rig/action/root-motion adaptation and actual playback tests required |
+| Solar Flare model/texture/animation/effects | Not integrated; native effect/attachment/choreography interpretation and actual playback tests required; existing Sundial retained |
+| Player movement/combat/equipment | Existing controls/data/code preserved; full play regression pending |
+| All NPC roles/dialogue/quests/shop/routes | Existing data/rigs/components preserved; interactions/navigation play regression pending |
+| Home/interior/cutaway/mirror/rest | Existing logic preserved; clearance/cutaway/save play regression pending |
+| Arena entry/four waves/elites/Kurogane/rewards/return | Existing logic/data preserved; play regression pending |
+| Existing save loading/writing/backup recovery/permanent upgrades/collectibles/UI/audio | Existing runtime files preserved; play regression pending |
+| CPU/GPU/memory/load-time/build size/Windows build | Not measured or built |
+| Actual screenshots/video of changed Windflower | Not available; current comparison images are explicitly Blender layout previews |
+
+The existing Editor **Sunward/Verify Windflower Connections** diagnostic now recognises the new painting paths and river shader and checks assigned remaster shaders for errors. It has not been executed here. No Windows task, automation dispatch or paid service is enabled by this work.
+
+The full remaster remains incomplete until the missing player/weapon integrations and actual runtime gates pass.
