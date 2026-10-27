@@ -1,0 +1,2 @@
+Sunward-Windflower-Game-Project-WIP.zip filter=lfs diff=lfs merge=lfs -text
+Sunward-Windflower-Assets-Update-WIP.zip -filter -diff -merge -text

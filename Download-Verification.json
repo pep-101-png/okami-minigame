@@ -1,0 +1,46 @@
+{
+  "downloads": [
+    {
+      "file": "Sunward-Windflower-Game-Project-WIP.zip",
+      "bytes": 227472396,
+      "sha256": "f95e3f44184911847ce8cde351620fd0c961400e5f66ab5d9249b0bf9cb75fae",
+      "zipCRCVerified": true,
+      "allProjectMembersReReadAndHashVerified": true,
+      "sourceCommit": "5c1cbca62d7f62dbf426d33aa26618afb514ab6c",
+      "baselineCommit": "00fd8695363df01de80b012d68feb20c9961e8a9",
+      "sceneSHA256": "25552710b0457e7ad6b404221b59acaea2dedf663e483189f318a0a0c6795621",
+      "completeRemaster": false,
+      "AmmyAnimationsReplaced": 0,
+      "SolarFlareReplaced": false,
+      "UnityCompiled": false,
+      "UnityPlayed": false,
+      "projectFiles": 4729,
+      "uncompressedProjectBytes": 1614730604,
+      "includesOriginalIdleLFSPayload": true
+    },
+    {
+      "file": "Sunward-Windflower-Assets-Update-WIP.zip",
+      "bytes": 29516648,
+      "sha256": "6f09b03d9e5598f85c96f939954ce56a2a9e69026cb2229e82bc6eab075d1809",
+      "zipCRCVerified": true,
+      "allProjectMembersReReadAndHashVerified": true,
+      "sourceCommit": "5c1cbca62d7f62dbf426d33aa26618afb514ab6c",
+      "baselineCommit": "00fd8695363df01de80b012d68feb20c9961e8a9",
+      "sceneSHA256": "25552710b0457e7ad6b404221b59acaea2dedf663e483189f318a0a0c6795621",
+      "completeRemaster": false,
+      "AmmyAnimationsReplaced": 0,
+      "SolarFlareReplaced": false,
+      "UnityCompiled": false,
+      "UnityPlayed": false,
+      "requiresWorkingBaselineProject": true
+    }
+  ],
+  "sourceCommit": "5c1cbca62d7f62dbf426d33aa26618afb514ab6c",
+  "baselineCommit": "00fd8695363df01de80b012d68feb20c9961e8a9",
+  "sceneSHA256": "25552710b0457e7ad6b404221b59acaea2dedf663e483189f318a0a0c6795621",
+  "completeRemaster": false,
+  "AmmyAnimationsReplaced": 0,
+  "SolarFlareReplaced": false,
+  "UnityCompiled": false,
+  "UnityPlayed": false
+}
