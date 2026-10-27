@@ -63,7 +63,7 @@
     {
       "phase": 9,
       "name": "Arena/gameplay",
-      "status": "all_baseline_files_preserved_runtime_regressions_pending"
+      "status": "existing_runtime_code_and_gameplay_components_preserved_actual_play_tests_pending"
     },
     {
       "phase": 10,
