@@ -33,7 +33,7 @@ for meta in (ROOT/'Sunward-Unity/Assets').rglob('*.meta'):
 CONVERT=Matrix(((1,0,0,0),(0,0,-1,0),(0,1,0,0),(0,0,0,1)))
 MESHES={};MATERIALS={};WORLD={};ACTIVE={};NATIVE_HULLS=[]
 OVERRIDES={}
-for m in re.finditer(r'    - target: \{fileID: (-?\d+),[^\n]+\}\n      propertyPath: ([^\n]+)\n      value: ([^\n]*)\n      objectReference: ([^\n]+)',SCENE.blocks[SOURCES.instance]):
+for m in re.finditer(r'    - target: \{fileID: (-?\d+),[^\n]+\}\n      propertyPath: ([^\n]+)\n      value:[ \t]*([^\n]*)\n      objectReference: ([^\n]+)',SCENE.blocks[SOURCES.instance]):
     OVERRIDES[(int(m[1]),m[2].strip("'"))]=(m[3],m[4])
 
 

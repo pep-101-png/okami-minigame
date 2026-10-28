@@ -9,6 +9,10 @@ namespace Sunward.Remaster
     [DefaultExecutionOrder(-90)]
     public sealed class NativeSolarFlare : MonoBehaviour
     {
+        public float visualScale = 1;
+        public Vector3 visualOffset;
+        public Quaternion visualRotation = Quaternion.identity;
+        public bool freezePose;
         public bool Ready { get; private set; }
         NativePaintedRig rig;
         NativePoseBank bank;
@@ -28,6 +32,9 @@ namespace Sunward.Remaster
                 clip = bank.Find("wp24_000");
                 if (clip == null) throw new InvalidOperationException("Original Solar Flare motion is missing");
                 rig = new NativePaintedRig("NativePlayer/wp24", transform);
+                rig.Root.transform.localPosition = visualOffset;
+                rig.Root.transform.localRotation = visualRotation;
+                rig.Root.transform.localScale = Vector3.one * visualScale;
                 if (bank.BoneCount != rig.Bones.Length) throw new InvalidOperationException("Solar Flare rig/motion mismatch");
                 position = new Vector3[bank.BoneCount]; rotation = new Quaternion[bank.BoneCount]; scale = new Vector3[bank.BoneCount];
                 for (int i = 0; i < bank.BoneCount; i++) { position[i] = rig.Bones[i].localPosition; rotation[i] = Quaternion.identity; scale[i] = Vector3.one; }
@@ -40,7 +47,7 @@ namespace Sunward.Remaster
             }
         }
         void Apply() { bank.Sample(clip, time, rig.Bones, position, rotation, scale, 1, clip.Loop); }
-        void LateUpdate() { if (Ready) { time += Time.deltaTime; Apply(); } }
+        void LateUpdate() { if (Ready && !freezePose) { time += Time.deltaTime; Apply(); } }
         void Show(bool native)
         {
             if (rig != null && rig.Root) rig.Root.SetActive(native);

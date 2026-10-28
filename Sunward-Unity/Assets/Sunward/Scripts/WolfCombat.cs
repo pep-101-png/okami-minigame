@@ -32,15 +32,17 @@ namespace Sunward
             if (nativeBody && nativeBody.Ready)
             {
                 headSocket = nativeBody.AttachSocket(headSocket, nativeBody.Head, "Native head weapon socket");
-                backSocket = nativeBody.AttachSocket(backSocket, nativeBody.Back, "Native back weapon socket");
+                backSocket = nativeBody.CreateBackSocket();
             }
             spearView = Instantiate(spear.visual, headSocket);
             discView = Instantiate(sundial.visual, headSocket);
             nativeDisc = discView.GetComponent<Sunward.Remaster.NativeSolarFlare>();
             if (nativeDisc && nativeDisc.Ready && nativeBody && nativeBody.Ready)
                 discView.transform.SetParent(backSocket, false);
-            discView.transform.localScale = Vector3.one * .9f;
-            discView.transform.localPosition = new Vector3(-.12f, .12f, 0);
+            bool originalDisc = nativeDisc && nativeDisc.Ready && nativeBody && nativeBody.Ready;
+            discView.transform.localScale = originalDisc ? Vector3.one : Vector3.one * .9f;
+            discView.transform.localPosition = originalDisc ? Vector3.zero : new Vector3(-.12f, .12f, 0);
+            if (originalDisc) discView.transform.localRotation = Quaternion.identity;
             spearRest = spearView.transform.localPosition;
             discRest = discView.transform.localPosition;
             spearRotation = spearView.transform.localRotation;
@@ -209,8 +211,18 @@ namespace Sunward
             float accent = Mathf.Sin(p * Mathf.PI);
             spearView.transform.localPosition = spearRest + Vector3.back * (strike != null ? accent * (heavy ? .18f : .38f) : 0);
             spearView.transform.localRotation = spearRotation * Quaternion.Euler(heavy ? -22 * accent : 0, strike != null && strike.clip == "Sweep" ? Mathf.Sin(p * Mathf.PI * 2) * 35 : 0, 0);
-            discView.transform.localPosition = discRest + new Vector3(Mathf.Sin(p * Mathf.PI * 2) * .35f, accent * .22f, -accent * .4f);
-            discView.transform.localRotation = discRotation * Quaternion.Euler(0, accent * 24, (strike != null ? p * 720 : Time.time * 14));
+            if (nativeDisc && nativeDisc.Ready)
+            {
+                // Native body bone 30 and wp24's own rig supply the pose.
+                // Do not add the old mouth-disc orbit or perpetual 14 deg/s spin.
+                discView.transform.localPosition = discRest;
+                discView.transform.localRotation = discRotation;
+            }
+            else
+            {
+                discView.transform.localPosition = discRest + new Vector3(Mathf.Sin(p * Mathf.PI * 2) * .35f, accent * .22f, -accent * .4f);
+                discView.transform.localRotation = discRotation * Quaternion.Euler(0, accent * 24, (strike != null ? p * 720 : Time.time * 14));
+            }
         }
 
         void Hit()

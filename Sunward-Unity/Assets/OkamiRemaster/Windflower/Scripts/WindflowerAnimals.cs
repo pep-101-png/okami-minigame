@@ -16,9 +16,11 @@ namespace Sunward.Remaster
         public int AnimalCount { get { return actors.Count; } }
         [Serializable] sealed class Layout { public Placement[] actors; public Vector3 farmArrival, farmOverview; }
         [Serializable] sealed class Placement { public string asset, name; public Vector3 position; public Vector2[] path; public float yaw, seed; }
+        [Serializable] sealed class Clearance { public Blocker[] blockers; }
+        [Serializable] sealed class Blocker { public string kind; public Vector2 center, half; }
         sealed class Clip { public string source; public float duration, speed, lift; public int count; public Vector3[] position, scale; public Quaternion[] rotation; public float[] ground; }
         sealed class Part { public Mesh mesh; public Material material; }
-        sealed class AnimalAsset { public string name; public int[] parents; public Vector3[] bind; public Vector3 offset; public Part[] parts; public Clip idle, walk; public float height; }
+        sealed class AnimalAsset { public string name; public int[] parents; public Vector3[] bind; public Vector3 offset; public Part[] parts; public Clip idle, walk; public float height, radius; }
         sealed class Actor
         {
             public AnimalAsset asset; public Placement placement; public Transform root, model; public Transform[] bones;
@@ -28,6 +30,8 @@ namespace Sunward.Remaster
         readonly List<Actor> actors = new List<Actor>();
         readonly List<Mesh> ownedMeshes = new List<Mesh>();
         readonly List<Material> ownedMaterials = new List<Material>();
+        Blocker[] blockers = new Blocker[0];
+        static readonly Vector3[] GroundProbes = { Vector3.zero, Vector3.right, Vector3.left, Vector3.forward, Vector3.back };
         static Vector3 Vector(BinaryReader r) { return new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle()); }
         static string Text(BinaryReader r)
         {
@@ -59,6 +63,8 @@ namespace Sunward.Remaster
                 TextAsset data = Resources.Load<TextAsset>("Farm/Animals");
                 TextAsset layoutData = Resources.Load<TextAsset>("WindflowerNative/Animals");
                 Material template = Resources.Load<Material>("Farm/AnimalPaint");
+                TextAsset clearance = Resources.Load<TextAsset>("WindflowerNative/PlacementBounds");
+                if (clearance != null) blockers = JsonUtility.FromJson<Clearance>(clearance.text).blockers;
                 if (data == null || layoutData == null || template == null) throw new InvalidDataException("Farm resources are missing. Copy all files from the update Assets folder.");
                 Dictionary<string,Material> materials = new Dictionary<string,Material>();
                 using (MemoryStream input = new MemoryStream(data.bytes, false))
@@ -82,7 +88,12 @@ namespace Sunward.Remaster
                             string textureId = Text(reader); int nv = Count(reader, 30000), ni = Count(reader, 100000);
                             if (ni % 3 != 0) throw new InvalidDataException("Invalid animal triangle count.");
                             Vector3[] vertices = new Vector3[nv]; Vector2[] uv = new Vector2[nv]; Color32[] colors = new Color32[nv]; BoneWeight[] weights = new BoneWeight[nv];
-                            for (int i = 0; i < nv; ++i) vertices[i] = Vector(reader);
+                            for (int i = 0; i < nv; ++i)
+                            {
+                                vertices[i] = Vector(reader);
+                                Vector3 point = vertices[i] + a.offset;
+                                a.radius = Mathf.Max(a.radius, new Vector2(point.x, point.z).magnitude + .12f);
+                            }
                             for (int i = 0; i < nv; ++i) uv[i] = new Vector2(reader.ReadSingle(),reader.ReadSingle());
                             for (int i = 0; i < nv; ++i) colors[i] = new Color32(reader.ReadByte(),reader.ReadByte(),reader.ReadByte(),reader.ReadByte());
                             for (int i = 0; i < nv; ++i)
@@ -129,6 +140,11 @@ namespace Sunward.Remaster
         void Spawn(Placement p)
         {
             AnimalAsset asset;if(!assets.TryGetValue(p.asset,out asset))throw new InvalidDataException("Unknown farm animal "+p.asset);
+            if (!Clear(p.position, asset.radius, true))
+            {
+                Debug.LogWarning("Skipped blocked animal spawn: " + p.name + ". The complete painted body needs a clear footprint.", this);
+                return;
+            }
             Actor a=new Actor{asset=asset,placement=p,time=p.seed*2.3f,walkTime=p.seed,wait=2+p.seed%3};
             GameObject root=new GameObject(p.name);root.transform.SetParent(transform,false);root.transform.localPosition=p.position;root.transform.localRotation=Quaternion.Euler(0,p.yaw,0);a.root=root.transform;
             GameObject model=new GameObject("Original rig and painted skin");model.transform.SetParent(root.transform,false);model.transform.localPosition=asset.offset+Vector3.up*asset.idle.lift;a.model=model.transform;
@@ -142,6 +158,30 @@ namespace Sunward.Remaster
             // Ambient actors do not add solid obstacles to existing NPC/player routes.
             Vector3 ground = root.transform.position; ground.y = game.valley.Height(ground); root.transform.position = ground;
             actors.Add(a);ApplyPose(a);
+        }
+        bool Clear(Vector3 p, float radius, bool otherAnimals, Actor ignore = null)
+        {
+            var world = game.valley.Data; var b = world.bounds;
+            if (p.x < b.minX + radius || p.x > b.maxX - radius || p.z < -b.maxZ + radius || p.z > -b.minZ - radius) return false;
+            float h = game.valley.Height(p);
+            foreach (var d in GroundProbes)
+            {
+                Vector3 q = p + d * radius;
+                if (Valley.Depth(q) > .08f || Mathf.Abs(game.valley.Height(q) - h) > .28f) return false;
+            }
+            if (blockers != null) foreach (var blocker in blockers)
+            {
+                float dx = Mathf.Max(0, Mathf.Abs(p.x - blocker.center.x) - blocker.half.x);
+                float dz = Mathf.Max(0, Mathf.Abs(p.z - blocker.center.y) - blocker.half.y);
+                if (dx * dx + dz * dz < (radius + .08f) * (radius + .08f)) return false;
+            }
+            // Full-body vertical capsule: a centre ray/small sphere misses rocks
+            // containing the spawn point, long cows and low rails at the feet.
+            Vector3 low = new Vector3(p.x, h + radius + .10f, p.z);
+            if (Physics.CheckCapsule(low, low + Vector3.up * .20f, radius, 1 << 6, QueryTriggerInteraction.Ignore)) return false;
+            if (otherAnimals) foreach (var actor in actors)
+                if (actor != ignore && Vector2.Distance(new Vector2(p.x, p.z), new Vector2(actor.root.position.x, actor.root.position.z)) < radius + actor.asset.radius + .15f) return false;
+            return true;
         }
         static void Sample(Clip clip,float time,int bone,int nb,out Vector3 position,out Quaternion rotation,out Vector3 scale)
         {
@@ -171,9 +211,10 @@ namespace Sunward.Remaster
             if(Paused || LastError!=null || game==null || game.Blocked || game.valley.Data==null) return;float dt=Mathf.Min(Time.deltaTime,.075f);
             foreach(Actor a in actors)
             {
-                a.time+=dt;float desired=0;Vector2[] path=a.placement.path;Vector3 direction=Vector3.zero;
+                a.time+=dt;float desired=0,remaining=0;Vector2[] path=a.placement.path;Vector3 direction=Vector3.zero;
                 bool held=false;
-                bool visitorNear=(game.Player.transform.position-a.root.position).sqrMagnitude<1.25f*1.25f;
+                float visitorDistance = a.asset.radius + .85f;
+                bool visitorNear=(game.Player.transform.position-a.root.position).sqrMagnitude<visitorDistance*visitorDistance;
                 if(path!=null&&path.Length>1&&!held&&!visitorNear)
                 {
                     if(a.wait>0)a.wait-=dt;
@@ -185,6 +226,7 @@ namespace Sunward.Remaster
                         {
                             Quaternion heading=Quaternion.LookRotation(-delta.normalized,Vector3.up);float angle=Quaternion.Angle(a.root.localRotation,heading);
                             a.root.localRotation=Quaternion.RotateTowards(a.root.localRotation,heading,80*dt);direction=delta.normalized;
+                            remaining=delta.magnitude;
                             float turn=1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(15,75,angle));float arrival=Mathf.Clamp01(delta.magnitude/.40f);
                             desired=a.asset.walk.speed*turn*arrival;
                         }
@@ -192,18 +234,22 @@ namespace Sunward.Remaster
                 }
                 a.speed=Mathf.SmoothDamp(a.speed,desired,ref a.speedVelocity,.24f,4,dt);
                 if(direction.sqrMagnitude>.01f)a.heading=direction;
-                if(a.heading.sqrMagnitude>.01f&&a.speed>.005f)
+                float travelled=0;
+                if(direction.sqrMagnitude>.01f&&a.speed>.005f)
                 {
                     Vector3 before=a.root.position;
-                    Vector3 next=game.valley.GuardRiver(before,before+a.heading*a.speed*dt);
-                    float radius=Mathf.Clamp(a.asset.height*.20f,.12f,.30f);
+                    Vector3 next=game.valley.GuardRiver(before,before+direction*Mathf.Min(remaining,a.speed*dt));
+                    float radius=a.asset.radius;
                     Vector3 delta=next-before;
-                    bool obstacle=delta.sqrMagnitude>.000001f && Physics.SphereCast(before+Vector3.up*(radius+.15f),radius,delta.normalized,out _,delta.magnitude+.03f,1<<6,QueryTriggerInteraction.Ignore);
+                    bool obstacle=!Clear(next,radius,true,a) || (delta.sqrMagnitude>.000001f && Physics.SphereCast(before+Vector3.up*(radius+.15f),radius,delta.normalized,out _,delta.magnitude+.03f,1<<6,QueryTriggerInteraction.Ignore));
                     if(obstacle) { a.speed=0;a.wait=1.5f;if(path!=null&&path.Length>1)a.nextPoint=(a.nextPoint+1)%path.Length; }
-                    else a.root.position=next;
+                    else { a.root.position=next;travelled=Vector3.Distance(before,next); }
                 }
                 else if(desired==0)a.speed=Mathf.MoveTowards(a.speed,0,dt*1.8f);
-                float weight=Mathf.Clamp01(a.speed/Mathf.Max(.01f,a.asset.walk.speed));a.blend=Mathf.MoveTowards(a.blend,weight,dt*3);
+                float weight=Mathf.Clamp01(travelled/Mathf.Max(.00001f,dt*a.asset.walk.speed));
+                // Movement rate controls the native clock, not the amount of
+                // walk pose mixed with idle. Slow animals still use full strides.
+                a.blend=Mathf.MoveTowards(a.blend,weight>.015f?1:0,dt*5);
                 Vector3 ground=a.root.position;ground.y=game.valley.Height(ground);a.root.position=ground;
                 a.walkTime+=dt*weight;ApplyPose(a);
             }

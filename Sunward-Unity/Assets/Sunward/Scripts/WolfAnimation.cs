@@ -16,6 +16,7 @@ namespace Sunward
         {
             native = GetComponent<Sunward.Remaster.NativeAmaterasu>();
             if (!animator) return;
+            if (native && native.Ready) animator.enabled = false;
             foreach (var t in animator.GetComponentsInChildren<Transform>())
             {
                 if (t.name == "CTRL_root") rootBone = t;
@@ -26,6 +27,7 @@ namespace Sunward
 
         void LateUpdate()
         {
+            if (native && native.Ready && native.Visible) return;
             if (rootBone)
                 rootBone.localPosition = Vector3.zero;
             // Calm only the grounded gait's pelvis motion, not jumps/attacks or
@@ -43,8 +45,18 @@ namespace Sunward
 
         public void Play(string state, float blend = .12f, float duration = 0, bool restart = false)
         {
-            if (!animator || (state == Current && !restart))
+            if (state == Current && !restart)
                 return;
+            groundedGait = state.StartsWith("Walk_") || state.StartsWith("Jog_") || state.StartsWith("Sprint_");
+            bool nativePhase = groundedGait && (Current.StartsWith("Walk_") || Current.StartsWith("Jog_") || Current.StartsWith("Sprint_"));
+            if (native && native.Ready && native.Play(state, blend, duration, restart, nativePhase))
+            {
+                Current = state;
+                if (animator) animator.enabled = false;
+                return;
+            }
+            if (!animator) return;
+            animator.enabled = true;
             if (!animator.HasState(0, Animator.StringToHash(state)))
             {
                 if (missingStates.Add(state))
@@ -55,7 +67,6 @@ namespace Sunward
             groundedGait = state.StartsWith("Walk_") || state.StartsWith("Jog_") || state.StartsWith("Sprint_");
             bool phaseMatch = groundedGait && (Current.StartsWith("Walk_") || Current.StartsWith("Jog_") || Current.StartsWith("Sprint_"));
             float phase = phaseMatch ? Mathf.Repeat((animator.IsInTransition(0) ? animator.GetNextAnimatorStateInfo(0) : animator.GetCurrentAnimatorStateInfo(0)).normalizedTime, 1) : 0;
-            if (native) native.Play(state, blend, duration, restart, phaseMatch);
             Current = state;
             animator.speed = duration > 0 ? ClipLength(state) / duration : 1;
             animator.CrossFadeInFixedTime(state, blend, 0, phase * ClipLength(state));
@@ -88,8 +99,8 @@ namespace Sunward
             Play(gait, .18f);
             float reference = LocomotionTuning.ReferenceSpeed(gait);
             float rate = filteredSpeed > .15f ? Mathf.Clamp(filteredSpeed / reference, .65f, 1.95f) : 1;
-            animator.speed = Mathf.Lerp(animator.speed, rate, 1 - Mathf.Exp(-Time.deltaTime * 12));
-            if (native && native.Ready) native.GaitRate(animator.speed);
+            if (native && native.Ready && native.Visible) native.GaitSpeed(filteredSpeed);
+            else if (animator) animator.speed = Mathf.Lerp(animator.speed, rate, 1 - Mathf.Exp(-Time.deltaTime * 12));
         }
     }
 }

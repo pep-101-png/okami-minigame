@@ -1,0 +1,44 @@
+{
+  "scene": "Assets/Sunward/Scenes/Windflower.unity",
+  "activeEditorRenderers": 2955,
+  "resolvedPrefabInstances": 9,
+  "activeVisualReferences": 11293,
+  "distinctVisualAssets": 719,
+  "distinctAssetCategories": {
+    "old Sunward artwork": 349,
+    "approved material conversion": 182,
+    "retained paint conversion": 8,
+    "unverified": 3,
+    "temporary/composite artwork": 105,
+    "retained source paint; provenance incomplete": 27,
+    "mixed original and authored": 9,
+    "approved original conversion": 35,
+    "authored layout mask": 1
+  },
+  "completeOriginalArtReplacement": false,
+  "mainHomeExactOriginalFound": false,
+  "originalPLModels": 16,
+  "originalWPModels": 96,
+  "rawSourceArchives": [
+    "pl.zip",
+    "wp.zip"
+  ],
+  "additionalAvailableSourcesInspected": [
+    "12 available ZIPs including prior Sunward projects/updates",
+    "retained native environmental mesh divisions and source bindings",
+    "WindflowerRemake.fbx",
+    "Amaterasu.fbx",
+    "sunward-wolf.blend",
+    "sunward-wolf.glb",
+    "fox-reference.glb"
+  ],
+  "unavailableSources": [
+    "Two Nippon example Tree.blend files are LFS pointers; remote server denied access"
+  ],
+  "limitations": [
+    "Editor renderer list includes fallbacks that runtime adapters hide after loading",
+    "Dynamic gameplay effect visibility and instantiated enemy prefabs require Unity verification",
+    "Retained village paint is not automatically proof of original archive provenance"
+  ],
+  "UnityVerified": false
+}

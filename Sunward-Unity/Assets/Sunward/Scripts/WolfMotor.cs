@@ -12,6 +12,7 @@ namespace Sunward
         public CharacterController controller;
         public WolfInput input;
         public const float WalkSpeed = LocomotionTuning.WalkSpeed, JogSpeed = LocomotionTuning.JogSpeed, SprintSpeed = LocomotionTuning.SprintSpeed;
+        public const float Gravity = 21f;
         public float Speed { get; private set; }
         public float Vertical { get; private set; }
 
@@ -139,7 +140,7 @@ namespace Sunward
             }
 
             float previousY = Vertical;
-            Vertical -= 21 * dt;
+            Vertical -= Gravity * dt;
             if (game.Combat.Attacking && animationView.Current == "AirStrike" && !Grounded)
                 Vertical = Mathf.Min(Vertical, -12);
             Vector3 movement = (Dodging ? dodgeDirection * 9 : horizontal) * dt + Vector3.up * Vertical * dt;

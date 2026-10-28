@@ -11,6 +11,7 @@ namespace Sunward.Remaster
         {
             public string state, clip, intro;
             public bool loop, mirror;
+            public float referenceSpeed;
         }
         [Serializable] sealed class Bindings { public Binding[] bindings; }
         public bool Ready { get; private set; }
@@ -18,6 +19,10 @@ namespace Sunward.Remaster
         public Transform Head => Ready ? rig.Bones[8] : null;  // Original MD bone 7, skull/ear parent.
         public Transform Back => Ready ? rig.Bones[31] : null; // Original MD bone 30, dorsal attachment.
         public Transform[] PowerBones => Ready ? new[] { rig.Bones[9], rig.Bones[14], rig.Bones[13], rig.Bones[18], rig.Bones[21], rig.Bones[25] } : null;
+        public Transform[] Feet => Ready ? new[] { rig.Bones[18], rig.Bones[13], rig.Bones[26], rig.Bones[22] } : null;
+        public float PlaybackRate => rate;
+        public float Phase => clip == null ? 0 : time / Mathf.Max(.001f, clip.Duration + (intro != null ? intro.Duration : 0));
+        public float BlendPhase => blendDuration > 0 ? Mathf.Clamp01(blendTime / blendDuration) : 1;
         NativePaintedRig rig;
         NativePoseBank bank;
         Binding[] bindings;
@@ -28,6 +33,7 @@ namespace Sunward.Remaster
         Binding binding;
         NativePoseBank.Clip clip, intro;
         float time, rate = 1, blendTime, blendDuration;
+        string jumpState;
         WolfMotor motor;
         sealed class Socket { public Transform bone, socket; public Vector3 offset; public Quaternion rotation; }
         readonly List<Socket> sockets = new List<Socket>();
@@ -37,6 +43,16 @@ namespace Sunward.Remaster
             socket.SetParent(transform, false);
             socket.SetPositionAndRotation(original.position, original.rotation);
             sockets.Add(new Socket { bone = bone, socket = socket, offset = bone.InverseTransformPoint(original.position), rotation = Quaternion.Inverse(bone.rotation) * original.rotation });
+            return socket;
+        }
+        public Transform CreateBackSocket()
+        {
+            // Original MD bone 30 is the dorsal weapon attachment. Import no
+            // offsets/rotation from the unrelated FBX or its paw sockets.
+            var socket = new GameObject("Original dorsal weapon attachment").transform;
+            socket.SetParent(transform, false);
+            sockets.Add(new Socket { bone = Back, socket = socket, offset = Vector3.zero, rotation = Quaternion.identity });
+            socket.SetPositionAndRotation(Back.position, Back.rotation);
             return socket;
         }
 
@@ -77,9 +93,19 @@ namespace Sunward.Remaster
         {
             if (!Ready || !isActiveAndEnabled) return false;
             var next = Find(state);
+            if (state == "Air_Fall")
+            {
+                string fall = jumpState == "Jump_Sprint" ? "Fall_Sprint" : jumpState == "Jump_Jog" || jumpState == "Jump_Walk" ? "Fall_Jog" : jumpState == "Jump_Double" ? "Fall_Double" : state;
+                next = Find(fall) ?? next;
+            }
             if (state == "AirStrike" && motor && motor.game && motor.game.Profile.equipped != "sundial") next = Find("AirStrike_Glaive");
             if (next == null) { Show(false); return false; }
+            if (state.StartsWith("Land_") || state.StartsWith("Walk_") || state.StartsWith("Jog_") || state.StartsWith("Sprint_") || state == "Idle_Natural") jumpState = null;
             if (binding == next && !restart && Visible) return true;
+            if (!restart && Visible && binding != null && next.clip == binding.clip && next.intro == binding.intro && next.mirror == binding.mirror)
+            {
+                binding = next; return true; // Turn aliases keep the same native gait clock.
+            }
             float phase = phaseMatch && clip != null ? Mathf.Repeat(time, clip.Duration) / clip.Duration : 0;
             // Capture the displayed pose, so crossfades remain continuous even
             // if another action interrupts an existing transition.
@@ -92,6 +118,17 @@ namespace Sunward.Remaster
             binding = next; clip = bank.Find(next.clip); intro = string.IsNullOrEmpty(next.intro) ? null : bank.Find(next.intro);
             time = phase * clip.Duration; blendTime = 0; blendDuration = Mathf.Max(0, blend);
             float length = clip.Duration + (intro != null ? intro.Duration : 0);
+            if (state.StartsWith("Jump") && motor && motor.Vertical > 0)
+            {
+                jumpState = state;
+                duration = motor.Vertical / WolfMotor.Gravity;
+            }
+            else if (state == "Air_Fall" && motor && motor.valley)
+            {
+                float height = Mathf.Max(0, transform.position.y - motor.valley.Height(transform.position));
+                float v = motor.Vertical;
+                duration = Mathf.Max(.08f, (v + Mathf.Sqrt(v * v + 2 * WolfMotor.Gravity * height)) / WolfMotor.Gravity);
+            }
             rate = duration > 0 ? length / duration : 1;
             Show(true); Apply(); return true;
         }
@@ -101,7 +138,13 @@ namespace Sunward.Remaster
             if (!Ready || !isActiveAndEnabled || b == null) return 0;
             return bank.Find(b.clip).Duration + (string.IsNullOrEmpty(b.intro) ? 0 : bank.Find(b.intro).Duration);
         }
-        public void GaitRate(float value) { rate = Mathf.Clamp(value, .1f, 3); }
+        public void GaitSpeed(float metresPerSecond)
+        {
+            // Calibrated from original mtb3 travel at the same 0.075 m/unit as
+            // the model, rather than the old FBX's unrelated stride speeds.
+            float target = binding != null && binding.referenceSpeed > 0 ? metresPerSecond / binding.referenceSpeed : 1;
+            rate = Mathf.Lerp(rate, Mathf.Clamp(target, 0, 3), 1 - Mathf.Exp(-Time.deltaTime * 12));
+        }
         void Show(bool show)
         {
             Visible = show;

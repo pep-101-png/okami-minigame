@@ -1,127 +1,28 @@
 {
   "date": "2026-10-28",
-  "baselineCommit": "00fd8695363df01de80b012d68feb20c9961e8a9",
-  "branch": "remaster/okami-native-integration",
-  "overall": "existing_game_environment_and_native_player_visual_adapters_implemented_complete_Solar_particles_and_Unity_acceptance_unfinished",
+  "branch": "repair/windflower-native-polish",
+  "repairBaseline": "be9f4a045125750e187b6b58e49c65d3ba92cb80",
+  "rollbackBranch": "backup/sunward-native-player-before-repair-20261028",
   "completeRemaster": false,
-  "activeLiveReplacements": {
-    "houses": 14,
-    "marketRoofs": 2,
-    "bridges": 2,
-    "rocks": 122,
-    "cherryTrees": 11,
-    "bambooArtwork": 7,
-    "grassArtwork": 360,
-    "decorativeFlowerArtwork": 180,
-    "ambientAnimalsConfigured": 13
-  },
-  "baselineProjectFilesBytePreserved": 3725,
-  "phases": [
-    {
-      "phase": 1,
-      "name": "Audit",
-      "status": "file_inventory_and_candidate_matrix_complete_exact_matches_pending",
-      "unclassifiedAssets": 387
-    },
-    {
-      "phase": 2,
-      "name": "Protection",
-      "status": "complete",
-      "rollbackBranch": "backup/sunward-pre-native-remaster-20261027",
-      "localHydratedArchiveVerified": true
-    },
-    {
-      "phase": 3,
-      "name": "Amaterasu",
-      "status": "original_38_bone_body_and_34_native_motions_bound_to_47_states_Unity_playback_unverified"
-    },
-    {
-      "phase": 4,
-      "name": "Solar Flare",
-      "status": "native_wp24_model_paint_and_skeletal_flames_configured_EST_SEQ_particles_and_original_attack_path_incomplete"
-    },
-    {
-      "phase": 5,
-      "name": "Village",
-      "status": "main_Windflower_scene_modified_review_scene_archived_outside_Assets"
-    },
-    {
-      "phase": 6,
-      "name": "Live environment",
-      "status": "multiple_live_environment_batches_implemented_runtime_verification_pending"
-    },
-    {
-      "phase": 7,
-      "name": "Animals",
-      "status": "13_native_ambient_actors_configured_in_Windflower_playback_unverified"
-    },
-    {
-      "phase": 8,
-      "name": "NPCs",
-      "status": "all_existing_preserved_no_verified_role_matched_native_replacements"
-    },
-    {
-      "phase": 9,
-      "name": "Arena/gameplay",
-      "status": "existing_runtime_code_and_gameplay_components_preserved_actual_play_tests_pending"
-    },
-    {
-      "phase": 10,
-      "name": "Art direction",
-      "status": "source_provenance_recorded_shader_port_visual_approval_pending"
-    },
-    {
-      "phase": 11,
-      "name": "Performance",
-      "status": "mesh_material_reuse_and_repeated_asset_instancing_enabled_actual_profile_pending"
-    },
-    {
-      "phase": 12,
-      "name": "Validation",
-      "status": "offline_integrity_passed_Unity_compilation_rendering_gameplay_not_run"
-    },
-    {
-      "phase": 13,
-      "name": "Delivery",
-      "status": "existing_game_native_player_weapon_visual_implementation_WIP_not_completed_remaster"
-    }
+  "activeGameplayScene": "Assets/Sunward/Scenes/Windflower.unity",
+  "implementedUnityUnverified": [
+    "native gait clocks calibrated to original source travel",
+    "native jump/fall timing and alias transitions",
+    "native dorsal Solar Flare socket and home weapon display",
+    "continuous ground painting material bound to existing terrain",
+    "coherent prototype house proportions and grounding",
+    "native boulder proportions and matching collision meshes",
+    "tree and rock placement with protected home/NPC approaches",
+    "full-footprint animal routes and movement-driven native animation"
   ],
-  "immediateGate": "Actual Unity import/compile/play verification of installed native visual adapters; complete Solar EST/SEQ particle dispatcher and verify original choreography.",
-  "unavailableCapabilities": [
-    "Unity Editor/runtime",
-    "Control of user's PC"
-  ],
-  "latestFeedback": {
-    "commit": "aefd595771e933a3313ecb4170251764c94ab1e3",
-    "runId": "20261021T092745607Z-9936e8",
-    "clips": 14,
-    "allClipCoverageIncomplete": true,
-    "validatesCurrentBranch": false
-  },
-  "modifiedExistingScenes": [
-    "Assets/Sunward/Scenes/Windflower.unity"
-  ],
-  "modifiedExistingPrefabFiles": [
-    "Assets/Sunward/Generated/Sundial.prefab"
-  ],
-  "SolarFlareGameplayReplaced": false,
-  "UnityCompilationVerified": false,
-  "UnityPlayVerified": false,
-  "runningGameScreenshotsAvailable": false,
-  "modifiedExistingEditorFiles": [
-    "Assets/Editor/WindflowerDiagnostics.cs"
-  ],
-  "modifiedExistingRuntimeFiles": [
-    "Assets/Sunward/Scripts/WolfAnimation.cs",
-    "Assets/Sunward/Scripts/WolfCombat.cs",
-    "Assets/Sunward/Scripts/DivineGrowth.cs"
-  ],
-  "AmmyNativeGameStatesBound": 47,
-  "AmmyDistinctOriginalMotionsBound": 34,
-  "AmmyLegacyAnimFilesOverwritten": 0,
-  "AmmyNativePlaybackVerified": false,
-  "SolarFlareOriginalModelConfigured": true,
-  "SolarFlareOriginalPaintConfigured": true,
-  "SolarFlareNativeSkeletalFlamesConfigured": true,
-  "SolarFlareFullParticleDispatcherImplemented": false
+  "originalHomeReplacement": false,
+  "remainingArtwork": "Old Sunward and composite/prototype geometry remains where verified originals were not found; see tools/repair/asset-audit-checks.json",
+  "SolarFlareFullNativeEffects": false,
+  "offlineChecks": "tools/repair/checks.json",
+  "UnityLaunched": false,
+  "UnityCompiled": false,
+  "UnityGameplayVerified": false,
+  "previews": "tools/repair/previews; Blender only, not Unity screenshots",
+  "latestFeedbackSource": "aefd595771e933a3313ecb4170251764c94ab1e3",
+  "latestFeedbackValidatesRepair": false
 }
