@@ -9,8 +9,13 @@
   "camerasBytePreserved": 1,
   "existingObjectsDeleted": 0,
   "existingTransformsMoved": 0,
-  "otherBaselineFilesBytePreserved": 3729,
+  "otherBaselineFilesBytePreserved": 3725,
   "modifiedExistingEditorDiagnostics": "Native painting paths and recovered river shader recognition only",
+  "modifiedExistingRuntimeScripts": [
+    "WolfAnimation.cs: native visual playback bridge",
+    "WolfCombat.cs: native socket attachment in Start only; combat functions unchanged",
+    "DivineGrowth.cs: attach earned power curls to native bones with the appropriate visual scale"
+  ],
   "activeGameplayScenes": [
     "Assets/Sunward/Scenes/Windflower.unity"
   ],
@@ -684,8 +689,8 @@
     "rooster"
   ],
   "animalPathConflicts": [],
-  "csharpSyntaxFiles": 78,
-  "sceneSHA256": "25552710b0457e7ad6b404221b59acaea2dedf663e483189f318a0a0c6795621",
+  "csharpSyntaxFiles": 82,
+  "sceneSHA256": "14e6df18bb737e50863c232c7dea78d94bae17c1ce7ca0bfa9d42af5115734fc",
   "UnityExecuted": false,
   "gameplayTested": false,
   "UnityVisualsVerified": false

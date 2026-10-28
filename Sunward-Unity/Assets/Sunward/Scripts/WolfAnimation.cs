@@ -10,9 +10,11 @@ namespace Sunward
         Quaternion hipsRestRotation;
         float filteredSpeed;
         bool groundedGait;
+        Sunward.Remaster.NativeAmaterasu native;
         readonly System.Collections.Generic.HashSet<string> missingStates = new System.Collections.Generic.HashSet<string>();
         void Awake()
         {
+            native = GetComponent<Sunward.Remaster.NativeAmaterasu>();
             if (!animator) return;
             foreach (var t in animator.GetComponentsInChildren<Transform>())
             {
@@ -53,6 +55,7 @@ namespace Sunward
             groundedGait = state.StartsWith("Walk_") || state.StartsWith("Jog_") || state.StartsWith("Sprint_");
             bool phaseMatch = groundedGait && (Current.StartsWith("Walk_") || Current.StartsWith("Jog_") || Current.StartsWith("Sprint_"));
             float phase = phaseMatch ? Mathf.Repeat((animator.IsInTransition(0) ? animator.GetNextAnimatorStateInfo(0) : animator.GetCurrentAnimatorStateInfo(0)).normalizedTime, 1) : 0;
+            if (native) native.Play(state, blend, duration, restart, phaseMatch);
             Current = state;
             animator.speed = duration > 0 ? ClipLength(state) / duration : 1;
             animator.CrossFadeInFixedTime(state, blend, 0, phase * ClipLength(state));
@@ -60,6 +63,11 @@ namespace Sunward
 
         public float ClipLength(string state)
         {
+            if (native && native.Ready)
+            {
+                float originalLength = native.ClipLength(state);
+                if (originalLength > 0) return originalLength;
+            }
             foreach (var c in animator.runtimeAnimatorController.animationClips)
                 if (c.name == state)
                     return c.length;
@@ -81,6 +89,7 @@ namespace Sunward
             float reference = LocomotionTuning.ReferenceSpeed(gait);
             float rate = filteredSpeed > .15f ? Mathf.Clamp(filteredSpeed / reference, .65f, 1.95f) : 1;
             animator.speed = Mathf.Lerp(animator.speed, rate, 1 - Mathf.Exp(-Time.deltaTime * 12));
+            if (native && native.Ready) native.GaitRate(animator.speed);
         }
     }
 }

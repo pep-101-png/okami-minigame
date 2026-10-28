@@ -4,7 +4,7 @@ The actual modified game scene is **`Sunward-Unity/Assets/Sunward/Scenes/Windflo
 
 The live scene now references replacement houses/markets, ST2 bridges/rocks/torii, painted reference cherry trees, recovered environmental/botanical paintings and an ambient native-animal component. The existing layout, NPCs, arena, systems and save code remain. Read [REPORT.md](REPORT.md) for actual counts, provenance and limits.
 
-**Ammy's original animations and the complete Solar Flare replacement are still unfinished. Unity compilation/play/visual verification is unavailable here. This is not a completed remaster.**
+**Original Ammy skin/rig and 34 original motions are now connected to all 47 existing action states through a native visual adapter. Solar Flare's original model, paint and skeletal flame motion are configured. Its separate native particle/trail/impact dispatcher remains incomplete. Unity compilation/play/visual verification is unavailable here: this is still an unfinished remaster.**
 
 The `tools` folder contains reports, authoring/research inputs and offline checks. You do not need to run or copy it to play the updated Unity project. Active assets are saved in Assets, including Windflower's existing scene file. Reference scenes/menus are archived outside Assets.
 
@@ -16,4 +16,4 @@ Developer checks require Python, NumPy, Pillow, tree-sitter and tree-sitter-c-sh
 python tools/remaster/check_review.py
 ```
 
-Authoring is reproducible from retained reference inputs with `python tools/remaster/live/apply_windflower.py`. That command starts from the protected scene snapshot and writes the actual scene, so it is for developers—not an installation step. Runtime acceptance gates are documented in VALIDATION-CHECKLIST.md.
+Authoring is reproducible from retained reference inputs with `python tools/remaster/live/apply_windflower.py`. Then run `export_player.py` and `install_player.py` from the same folder to install the native adapters. The environment authoring command starts from the protected scene snapshot and writes the actual scene, so it is for developers—not an installation step. Runtime acceptance gates are documented in VALIDATION-CHECKLIST.md.

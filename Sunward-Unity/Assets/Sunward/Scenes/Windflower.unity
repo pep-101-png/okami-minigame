@@ -179276,6 +179276,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1713185874664353117, guid: 52f64adb2bcfddb45acb71e708bf1fe9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1873811290}
+    - targetCorrespondingSourceObject: {fileID: 1713185874664353117, guid: 52f64adb2bcfddb45acb71e708bf1fe9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8100000000000010001}
   m_SourcePrefab: {fileID: 100100000, guid: 52f64adb2bcfddb45acb71e708bf1fe9, type: 3}
 --- !u!4 &1873811280 stripped
 Transform:
@@ -416858,6 +416861,18 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.Remaster.WindflowerAnimals
   game: {fileID: 369893204}
+--- !u!114 &8100000000000010001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873811283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bfdfc088df82b961089d3b1ffe5ee83, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Sunward.Remaster.NativeAmaterasu
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

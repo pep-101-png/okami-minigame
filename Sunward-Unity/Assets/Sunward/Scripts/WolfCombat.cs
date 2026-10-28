@@ -14,6 +14,8 @@ namespace Sunward
 
         WeaponDefinition weapon;
         GameObject spearView, discView;
+        Sunward.Remaster.NativeAmaterasu nativeBody;
+        Sunward.Remaster.NativeSolarFlare nativeDisc;
         Strike strike;
         float elapsed, hold, grace;
         int chain;
@@ -26,8 +28,17 @@ namespace Sunward
         float barkCooldown, voice;
         void Start()
         {
+            nativeBody = GetComponent<Sunward.Remaster.NativeAmaterasu>();
+            if (nativeBody && nativeBody.Ready)
+            {
+                headSocket = nativeBody.AttachSocket(headSocket, nativeBody.Head, "Native head weapon socket");
+                backSocket = nativeBody.AttachSocket(backSocket, nativeBody.Back, "Native back weapon socket");
+            }
             spearView = Instantiate(spear.visual, headSocket);
             discView = Instantiate(sundial.visual, headSocket);
+            nativeDisc = discView.GetComponent<Sunward.Remaster.NativeSolarFlare>();
+            if (nativeDisc && nativeDisc.Ready && nativeBody && nativeBody.Ready)
+                discView.transform.SetParent(backSocket, false);
             discView.transform.localScale = Vector3.one * .9f;
             discView.transform.localPosition = new Vector3(-.12f, .12f, 0);
             spearRest = spearView.transform.localPosition;

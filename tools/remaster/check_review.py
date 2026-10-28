@@ -6,6 +6,7 @@ from pathlib import Path
 import hashlib,json,subprocess,sys
 ROOT=Path(__file__).resolve().parents[2]
 subprocess.run([sys.executable,str(ROOT/'tools/remaster/live/check_windflower.py')],cwd=ROOT,check=True)
+subprocess.run([sys.executable,str(ROOT/'tools/remaster/live/check_player.py')],cwd=ROOT,check=True)
 source=ROOT/'tools/remaster/reference/NativeSources'
 index=json.loads((source/'motion-source-index.json').read_text())
 for item in index['motions']:

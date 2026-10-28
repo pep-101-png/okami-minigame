@@ -1,8 +1,8 @@
 {
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "baselineCommit": "00fd8695363df01de80b012d68feb20c9961e8a9",
   "branch": "remaster/okami-native-integration",
-  "overall": "existing_Windflower_environment_implemented_native_player_weapon_and_Unity_verification_unfinished",
+  "overall": "existing_game_environment_and_native_player_visual_adapters_implemented_complete_Solar_particles_and_Unity_acceptance_unfinished",
   "completeRemaster": false,
   "activeLiveReplacements": {
     "houses": 14,
@@ -15,7 +15,7 @@
     "decorativeFlowerArtwork": 180,
     "ambientAnimalsConfigured": 13
   },
-  "baselineProjectFilesBytePreserved": 3729,
+  "baselineProjectFilesBytePreserved": 3725,
   "phases": [
     {
       "phase": 1,
@@ -33,12 +33,12 @@
     {
       "phase": 3,
       "name": "Amaterasu",
-      "status": "native_model_review_and_165_source_motions_staged_no_live_adapter"
+      "status": "original_38_bone_body_and_34_native_motions_bound_to_47_states_Unity_playback_unverified"
     },
     {
       "phase": 4,
       "name": "Solar Flare",
-      "status": "wp24_wp34_review_staged_original_effect_dispatcher_unverified_Sundial_retained"
+      "status": "native_wp24_model_paint_and_skeletal_flames_configured_EST_SEQ_particles_and_original_attack_path_incomplete"
     },
     {
       "phase": 5,
@@ -83,10 +83,10 @@
     {
       "phase": 13,
       "name": "Delivery",
-      "status": "actual_game_environment_source_implementation_not_complete_remaster"
+      "status": "existing_game_native_player_weapon_visual_implementation_WIP_not_completed_remaster"
     }
   ],
-  "immediateGate": "Actual Unity 6000.6.6f1 import, C#/shader compilation and play-mode verification of Windflower; native Ammy and Solar Flare adapters still required.",
+  "immediateGate": "Actual Unity import/compile/play verification of installed native visual adapters; complete Solar EST/SEQ particle dispatcher and verify original choreography.",
   "unavailableCapabilities": [
     "Unity Editor/runtime",
     "Control of user's PC"
@@ -101,13 +101,27 @@
   "modifiedExistingScenes": [
     "Assets/Sunward/Scenes/Windflower.unity"
   ],
-  "modifiedExistingPrefabFiles": [],
-  "AmmyGameplayAnimationsReplaced": 0,
+  "modifiedExistingPrefabFiles": [
+    "Assets/Sunward/Generated/Sundial.prefab"
+  ],
   "SolarFlareGameplayReplaced": false,
   "UnityCompilationVerified": false,
   "UnityPlayVerified": false,
   "runningGameScreenshotsAvailable": false,
   "modifiedExistingEditorFiles": [
     "Assets/Editor/WindflowerDiagnostics.cs"
-  ]
+  ],
+  "modifiedExistingRuntimeFiles": [
+    "Assets/Sunward/Scripts/WolfAnimation.cs",
+    "Assets/Sunward/Scripts/WolfCombat.cs",
+    "Assets/Sunward/Scripts/DivineGrowth.cs"
+  ],
+  "AmmyNativeGameStatesBound": 47,
+  "AmmyDistinctOriginalMotionsBound": 34,
+  "AmmyLegacyAnimFilesOverwritten": 0,
+  "AmmyNativePlaybackVerified": false,
+  "SolarFlareOriginalModelConfigured": true,
+  "SolarFlareOriginalPaintConfigured": true,
+  "SolarFlareNativeSkeletalFlamesConfigured": true,
+  "SolarFlareFullParticleDispatcherImplemented": false
 }

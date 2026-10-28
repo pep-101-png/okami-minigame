@@ -28,6 +28,7 @@ for i,text in base.blocks.items():
      text=match[0];target=int(re.search(r'fileID: (-?\d+)',text)[1]);property=re.search(r'propertyPath: (.*)',text)[1].strip("'")
      if property=='m_Materials.Array.data[0]' or (property=='m_Enabled' and target in allowed_renderer_ids):return ''
      return text
+    x=re.sub(r'    - targetCorrespondingSourceObject: \{fileID: 1713185874664353117, guid: 52f64adb2bcfddb45acb71e708bf1fe9, type: 3\}\n      insertIndex: -1\n      addedObject: \{fileID: 8100000000000010001\}\n','',x)
     return re.sub(r'    - target: .*\n      propertyPath: [^\n]*\n      value:[^\n]*\n      objectReference: [^\n]*\n',override,x)
    assert scrub(a)==scrub(text),('Changed non-material prefab override',i)
   elif kind==1660057539:
@@ -39,10 +40,11 @@ report['existingObjectsDeleted']=0;report['existingTransformsMoved']=0
 # All baseline project files except the deliberately updated scene remain intact.
 manifest=json.loads((ROOT/'tools/remaster/audit/baseline-file-manifest.json').read_text())['files'];unchanged=0
 for name,record in manifest.items():
- if name in [str(path.relative_to(ROOT)),'Sunward-Unity/Assets/Editor/WindflowerDiagnostics.cs']:continue
+ if name in [str(path.relative_to(ROOT)),'Sunward-Unity/Assets/Editor/WindflowerDiagnostics.cs','Sunward-Unity/Assets/Sunward/Generated/Sundial.prefab','Sunward-Unity/Assets/Sunward/Scripts/WolfAnimation.cs','Sunward-Unity/Assets/Sunward/Scripts/WolfCombat.cs','Sunward-Unity/Assets/Sunward/Scripts/DivineGrowth.cs']:continue
  file=ROOT/name;assert file.exists() and hashlib.sha256(file.read_bytes()).hexdigest()==record['sha256'],name;unchanged+=1
 report['otherBaselineFilesBytePreserved']=unchanged
 report['modifiedExistingEditorDiagnostics']='Native painting paths and recovered river shader recognition only'
+report['modifiedExistingRuntimeScripts']=['WolfAnimation.cs: native visual playback bridge','WolfCombat.cs: native socket attachment in Start only; combat functions unchanged','DivineGrowth.cs: attach earned power curls to native bones with the appropriate visual scale']
 assert len(list(A.rglob('*.unity')))==1
 report['activeGameplayScenes']=['Assets/Sunward/Scenes/Windflower.unity']
 meta={}

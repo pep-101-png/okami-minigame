@@ -1,0 +1,396 @@
+{
+  "status": "Original effect bytes retained; emitter semantics and game-code dispatch unresolved",
+  "records": [
+    {
+      "package": "wp24",
+      "name": "pl00_500_0",
+      "type": "SEQ",
+      "bytes": 32,
+      "sha256": "55d7db58eaf19d677e11fdd1e156493235bf14d6d6724ff75f12f20ac2b08676",
+      "wordsLE": [
+        24,
+        65560,
+        28,
+        28,
+        0,
+        0,
+        2147486728,
+        0
+      ],
+      "decodedEventOpcodes": false
+    },
+    {
+      "package": "wp24",
+      "name": "pl00_501_0",
+      "type": "SEQ",
+      "bytes": 32,
+      "sha256": "781c995b3b5c23444722d13afea07192db0ab408376c228fe9e646b68d297e3a",
+      "wordsLE": [
+        24,
+        65560,
+        28,
+        28,
+        0,
+        0,
+        2147485956,
+        0
+      ],
+      "decodedEventOpcodes": false
+    },
+    {
+      "package": "wp24",
+      "name": "pl00_502_0",
+      "type": "SEQ",
+      "bytes": 32,
+      "sha256": "760263ad2634575097dd4273c2f56301135ea5fe09fac3f07a33929c2b865d7f",
+      "wordsLE": [
+        24,
+        65560,
+        28,
+        28,
+        0,
+        0,
+        2147486214,
+        0
+      ],
+      "decodedEventOpcodes": false
+    },
+    {
+      "package": "wp24",
+      "name": "pl00_503_0",
+      "type": "SEQ",
+      "bytes": 32,
+      "sha256": "49e578dde8611305ecc58464f2c42fcf5a35da7706b39b64d3c7765164913d37",
+      "wordsLE": [
+        24,
+        65560,
+        28,
+        28,
+        0,
+        0,
+        2147486470,
+        0
+      ],
+      "decodedEventOpcodes": false
+    },
+    {
+      "package": "wp24",
+      "name": "pl00_504_0",
+      "type": "SEQ",
+      "bytes": 32,
+      "sha256": "50f2334890a66276bb090a35bc7b3724cd4d1d99ab8895c8a7962cc83f6f8f5e",
+      "wordsLE": [
+        24,
+        65560,
+        28,
+        28,
+        0,
+        0,
+        2147487756,
+        0
+      ],
+      "decodedEventOpcodes": false
+    },
+    {
+      "package": "wp24",
+      "name": "pl00_505_0",
+      "type": "SEQ",
+      "bytes": 32,
+      "sha256": "93ef9bff02534e67d240b56e597a866a16c66400ee02727faf229a0d8930900c",
+      "wordsLE": [
+        24,
+        65560,
+        28,
+        28,
+        0,
+        0,
+        2147487745,
+        0
+      ],
+      "decodedEventOpcodes": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_000",
+      "type": "EST",
+      "bytes": 3024,
+      "sha256": "d4375dae25df174944fbb0bf35f2ac5d08fe562097a2bacaef49007f4a35b869",
+      "particleRecords": 4,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_008",
+      "type": "EST",
+      "bytes": 768,
+      "sha256": "7bf06738920fa37ff4c8995b77089f740ddf98f7b3bd8ffc2a631d6061db1f47",
+      "particleRecords": 1,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_010",
+      "type": "EST",
+      "bytes": 768,
+      "sha256": "6f7a0e938b9ebdffe92c786101c7b2c49448f81935670b5cd746309955a24748",
+      "particleRecords": 1,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_011",
+      "type": "EST",
+      "bytes": 2272,
+      "sha256": "979c9981cbf8aabb71ce3048d9df82af45ca66dd93d0eba58b70fe8e7aa3e8ed",
+      "particleRecords": 3,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_020",
+      "type": "EST",
+      "bytes": 3776,
+      "sha256": "db088d4ab3395495a4f2a41463069fce1559ffaf5da6b93b05910b330bffd69d",
+      "particleRecords": 5,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_021",
+      "type": "EST",
+      "bytes": 11296,
+      "sha256": "c7cb069d35201d392b0025859438919c92f30675a221fb925b57425cc43a9ee7",
+      "particleRecords": 15,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_022",
+      "type": "EST",
+      "bytes": 3776,
+      "sha256": "db088d4ab3395495a4f2a41463069fce1559ffaf5da6b93b05910b330bffd69d",
+      "particleRecords": 5,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_023",
+      "type": "EST",
+      "bytes": 17312,
+      "sha256": "73e25a2d3bcda3269f55384d5ae958e057ebb67d40f2da0041fd724d964db617",
+      "particleRecords": 23,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_024",
+      "type": "EST",
+      "bytes": 11296,
+      "sha256": "acfe273c5144f47314c7e8664480f38f3c4a0e321bea005c3f35b916fadae06a",
+      "particleRecords": 15,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_025",
+      "type": "EST",
+      "bytes": 17312,
+      "sha256": "82be540a4cba6f26c2d7b53ea508ee5784d8a6c8dc0daa5d53d812873822c439",
+      "particleRecords": 23,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_030",
+      "type": "EST",
+      "bytes": 1520,
+      "sha256": "118e11cb6c302db2fbcfc1d1a0fd327e7798d75cabc615e30eb6ea6634a331ec",
+      "particleRecords": 2,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_031",
+      "type": "EST",
+      "bytes": 1520,
+      "sha256": "4a1d8feeba12ef1a349bc10456378d67c8dce330c56e47e9e5227ec16998df92",
+      "particleRecords": 2,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_032",
+      "type": "EST",
+      "bytes": 5280,
+      "sha256": "a6171c8b9b56689073124660c415f3a83038b14326c608ac77e5f62d058d737d",
+      "particleRecords": 7,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp24",
+      "name": "wp24_033",
+      "type": "EST",
+      "bytes": 5280,
+      "sha256": "edee594e6e967cba19841935c464e338c1c3b795c4027413b08fa46fc7e8ba13",
+      "particleRecords": 7,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_000",
+      "type": "EST",
+      "bytes": 3024,
+      "sha256": "d4375dae25df174944fbb0bf35f2ac5d08fe562097a2bacaef49007f4a35b869",
+      "particleRecords": 4,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_008",
+      "type": "EST",
+      "bytes": 768,
+      "sha256": "7bf06738920fa37ff4c8995b77089f740ddf98f7b3bd8ffc2a631d6061db1f47",
+      "particleRecords": 1,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_010",
+      "type": "EST",
+      "bytes": 768,
+      "sha256": "6f7a0e938b9ebdffe92c786101c7b2c49448f81935670b5cd746309955a24748",
+      "particleRecords": 1,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_011",
+      "type": "EST",
+      "bytes": 2272,
+      "sha256": "979c9981cbf8aabb71ce3048d9df82af45ca66dd93d0eba58b70fe8e7aa3e8ed",
+      "particleRecords": 3,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_020",
+      "type": "EST",
+      "bytes": 3776,
+      "sha256": "db088d4ab3395495a4f2a41463069fce1559ffaf5da6b93b05910b330bffd69d",
+      "particleRecords": 5,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_021",
+      "type": "EST",
+      "bytes": 11296,
+      "sha256": "c7cb069d35201d392b0025859438919c92f30675a221fb925b57425cc43a9ee7",
+      "particleRecords": 15,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_022",
+      "type": "EST",
+      "bytes": 3776,
+      "sha256": "db088d4ab3395495a4f2a41463069fce1559ffaf5da6b93b05910b330bffd69d",
+      "particleRecords": 5,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_023",
+      "type": "EST",
+      "bytes": 17312,
+      "sha256": "73e25a2d3bcda3269f55384d5ae958e057ebb67d40f2da0041fd724d964db617",
+      "particleRecords": 23,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_024",
+      "type": "EST",
+      "bytes": 11296,
+      "sha256": "acfe273c5144f47314c7e8664480f38f3c4a0e321bea005c3f35b916fadae06a",
+      "particleRecords": 15,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_025",
+      "type": "EST",
+      "bytes": 17312,
+      "sha256": "82be540a4cba6f26c2d7b53ea508ee5784d8a6c8dc0daa5d53d812873822c439",
+      "particleRecords": 23,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_030",
+      "type": "EST",
+      "bytes": 1520,
+      "sha256": "118e11cb6c302db2fbcfc1d1a0fd327e7798d75cabc615e30eb6ea6634a331ec",
+      "particleRecords": 2,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_031",
+      "type": "EST",
+      "bytes": 1520,
+      "sha256": "4a1d8feeba12ef1a349bc10456378d67c8dce330c56e47e9e5227ec16998df92",
+      "particleRecords": 2,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_032",
+      "type": "EST",
+      "bytes": 5280,
+      "sha256": "a6171c8b9b56689073124660c415f3a83038b14326c608ac77e5f62d058d737d",
+      "particleRecords": 7,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    },
+    {
+      "package": "wp34",
+      "name": "wp24_033",
+      "type": "EST",
+      "bytes": 5280,
+      "sha256": "edee594e6e967cba19841935c464e338c1c3b795c4027413b08fa46fc7e8ba13",
+      "particleRecords": 7,
+      "recordBytes": 752,
+      "decodedEmitterFields": false
+    }
+  ],
+  "uniqueESTPayloads": 13,
+  "missingVerifiedWeaponAudioBank": true,
+  "nativeESTRendererImplemented": false
+}
