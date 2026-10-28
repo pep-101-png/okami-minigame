@@ -99,6 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7077684446113434911}
+  - component: {fileID: 8100000000000010002}
   m_Layer: 0
   m_Name: Sundial
   m_TagString: Untagged
@@ -759,3 +760,15 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8100000000000010002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316439225924063651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a3f193122b44916c770fe80e50eb11, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Sunward.Remaster.NativeSolarFlare

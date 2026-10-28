@@ -1,0 +1,7 @@
+{
+  "WillowHouse": {"indices": [0,34], "bodyIndex": 5, "yaw": 6, "kind": "Recovered finished village house; composite authored geometry and painted artwork"},
+  "CarpHouse": {"indices": [37,75], "bodyIndex": 43, "yaw": -3, "kind": "Recovered finished village house; composite authored geometry and painted artwork"},
+  "CommunityHall": {"indices": [319,381], "bodyIndex": 322, "yaw": 0, "kind": "Recovered finished village hall; composite authored geometry and painted artwork"},
+  "ST2Bridge": {"indices": [417,420], "kind": "Original ST2 r200.dat/3.SCR, with separately identified authored bridge-board/ink additions"},
+  "ST2Torii": {"indices": [425,428], "kind": "Original ST2 r200.dat/35.SCR"}
+}
