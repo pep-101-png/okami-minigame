@@ -1,0 +1,20 @@
+SUNWARD WINDFLOWER REPAIR — WORK IN PROGRESS
+
+Saved changes target the EXISTING gameplay scene:
+Assets/Sunward/Scenes/Windflower.unity
+
+ASSETS UPDATE: Close Unity and back up your working project. Merge this ZIP's
+Assets folder into your existing Sunward-Unity/Assets folder, replacing matching
+files. Keep all other existing files. Do not delete your entire Assets folder.
+Reopen the same project; open Windflower.unity if it is not already open.
+No tools folder, review menu, extra scene or Python command is required.
+
+FULL PROJECT: Contains Assets, Packages and ProjectSettings for Unity 6000.6.6f1.
+This is an optional complete project copy, not an executable.
+
+UNVERIFIED IN UNITY: native animation timing, dorsal Solar Flare attachment,
+continuous ground shader, placement/collision repairs and animal movement.
+Offline integrity/layout checks passed; Unity compilation and gameplay were not
+run. The original main-house replacement and full native Solar Flare particles
+remain incomplete. Old Sunward/prototype art remains where originals were not
+found. This archive does not represent a completed remaster.
