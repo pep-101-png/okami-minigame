@@ -17,7 +17,7 @@ UNIT = .075
 def half(x):
     return (-1 if x & 32768 else 1)*2**(((x >> 9) & 63)-47)*(1+(x & 511)/512)
 
-def parse(data, bones):
+def parse(data, bones, allow_duplicate_channels=False):
     assert data[:4] == b'mtb3'
     frames, count, loop = struct.unpack_from('<HBB', data, 4)
     channels = {}
@@ -45,7 +45,7 @@ def parse(data, bones):
         else:
             raise ValueError(('Unsupported MOT channel', prop))
         assert values and all(values[i][0] < values[i+1][0] for i in range(len(values)-1))
-        assert (bone+1, prop) not in channels
+        assert allow_duplicate_channels or (bone+1, prop) not in channels
         channels[bone+1, prop] = np.asarray(values, dtype=float)
     return frames, bool(loop), channels
 

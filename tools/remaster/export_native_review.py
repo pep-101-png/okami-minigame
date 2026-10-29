@@ -8,7 +8,7 @@ from pathlib import Path
 from PIL import Image
 
 def sha(data): return hashlib.sha256(data).hexdigest()
-def read_model(data, inventory, package, root, target):
+def read_model(data, inventory, package, root, target, allow_vertex_only=False):
     assert data[:4] == b'scr\0'
     version, count = struct.unpack_from('<II', data, 4); assert version == 0
     bones = None; parts = []; textures = {}
@@ -37,14 +37,22 @@ def read_model(data, inventory, package, root, target):
                 # DDS image origin is top-left; Unity UV origin is bottom-left.
                 uv.extend([u/4096,1-v/4096])
                 colors.extend([x/128 for x in data[loc+co+4*i:loc+co+4*i+4]] if co else [1,1,1,1])
-                assert wo, 'This review converter expects native skinned MD'
-                raw=data[loc+wo+8*i:loc+wo+8*i+8];bi=list(raw[1:4]);we=list(raw[4:7])
+                if wo:
+                    raw=data[loc+wo+8*i:loc+wo+8*i+8];bi=list(raw[1:4]);we=list(raw[4:7])
+                else:
+                    assert allow_vertex_only, 'This review converter expects native skinned MD'
+                    # No native weight stream: retain the rigid model-space
+                    # division on the virtual root, not an arbitrary deform bone.
+                    bi=[-1,-1,-1];we=[255,0,0]
                 assert max(bi)<nb and abs(sum(we)-255)<=1
                 bone_indices.extend(bi);weights.extend([v/255 for v in we])
             if tex not in textures:
-                e=next(e for e in inventory if e['package']==package and e['type']=='DDS' and e['index']==tex)
-                image=Image.open(root/e['path']); image.load(); name='Texture-'+str(tex)+'.png';image.save(target/name)
-                textures[tex]=dict(index=tex,path=name,sourceSHA256=e['sha256'])
+                if tex == 255 and allow_vertex_only:
+                    textures[tex]=dict(index=tex,path='',vertexOnly=True)
+                else:
+                    e=next(e for e in inventory if e['package']==package and e['type']=='DDS' and e['index']==tex)
+                    image=Image.open(root/e['path']); image.load(); name='Texture-'+str(tex)+'.png';image.save(target/name)
+                    textures[tex]=dict(index=tex,path=name,sourceSHA256=e['sha256'])
             parts.append(dict(name=f'Native-{part}-{division}',texture=tex,positions=positions,indices=indices,uv=uv,colors=colors,boneIndices=bone_indices,weights=weights))
     return dict(version=1,name=package,sourceSHA256=sha(data),sourceUnits='Unscaled native coordinates; not gameplay calibrated',bones=bones,parts=parts,textures=list(textures.values()))
 

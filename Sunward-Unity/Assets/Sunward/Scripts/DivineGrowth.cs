@@ -17,6 +17,13 @@ namespace Sunward
             // No persistent movement aura/indicator around Amaterasu. Keep the
             // earned power curls and short, event-driven combat effects.
             wind = new LineRenderer[0];
+            if (GetComponent<Sunward.Remaster.NativeAmaterasu>())
+            {
+                // Source MD markings remain intact. No invented curl geometry
+                // is added to the original rig; earned combat power is unchanged.
+                curls = new Transform[0];
+                return;
+            }
 
             var list = new System.Collections.Generic.List<Transform>();
             var native = GetComponent<Sunward.Remaster.NativeAmaterasu>();

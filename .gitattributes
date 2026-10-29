@@ -33,3 +33,10 @@ Sunward-Unity/Assets/Sunward/Textures/InkWorld/*.png -filter -diff -merge -text
 Sunward-Unity/Assets/OkamiRemaster/Player/**/*.png -filter -diff -merge -text
 # Bounded repair paintings/layout masks are ordinary Unity project assets.
 Sunward-Unity/Assets/OkamiRemaster/Windflower/Textures/*.png -filter -diff -merge -text
+
+# Bounded original paintings and short decoded PL voices for the source-only port.
+Sunward-Unity/Assets/OkamiRemaster/Original/**/*.png -filter -diff -merge -text
+Sunward-Unity/Assets/OkamiRemaster/Original/**/*.wav -filter -diff -merge -text
+
+# Keep review images directly downloadable with this source update.
+tools/original-remake/previews/*.png -filter -diff -merge -text

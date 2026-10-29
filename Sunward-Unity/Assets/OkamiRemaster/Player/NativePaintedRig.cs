@@ -10,7 +10,7 @@ namespace Sunward.Remaster
     public sealed class NativePaintedRig : IDisposable
     {
         [Serializable] sealed class Bone { public int parent; public float[] position; }
-        [Serializable] sealed class TextureReference { public int index; public string path; }
+        [Serializable] sealed class TextureReference { public int index; public string path; public bool vertexOnly; }
         [Serializable] sealed class Part
         {
             public string name; public int texture;
@@ -52,10 +52,14 @@ namespace Sunward.Remaster
                 var materials = new Dictionary<int, Material>();
                 foreach (var reference in model.textures)
                 {
-                    var texture = Resources.Load<Texture2D>(resource + "/" + Path.GetFileNameWithoutExtension(reference.path));
-                    if (!texture) throw new InvalidDataException("Missing native texture: " + reference.path);
                     var material = new Material(template) { name = "Original painted texture " + reference.index };
-                    material.SetTexture("_MainTex", texture); materials.Add(reference.index, material); owned.Add(material);
+                    if (!reference.vertexOnly)
+                    {
+                        var texture = Resources.Load<Texture2D>(resource + "/" + Path.GetFileNameWithoutExtension(reference.path));
+                        if (!texture) { UnityEngine.Object.Destroy(material); throw new InvalidDataException("Missing native texture: " + reference.path); }
+                        material.SetTexture("_MainTex", texture);
+                    }
+                    materials.Add(reference.index, material); owned.Add(material);
                 }
                 foreach (var part in model.parts)
                 {
@@ -71,7 +75,7 @@ namespace Sunward.Remaster
                         int k = i * 3; float sum = part.weights[k] + part.weights[k + 1] + part.weights[k + 2];
                         if (sum < .99f || sum > 1.01f) throw new InvalidDataException("Invalid native skin weight sum");
                         for (int j = 0; j < 3; j++)
-                            if (part.boneIndices[k + j] < 0 || part.boneIndices[k + j] >= model.bones.Length)
+                            if (part.boneIndices[k + j] < -1 || part.boneIndices[k + j] >= model.bones.Length)
                                 throw new InvalidDataException("Invalid native skin bone");
                         weights[i] = new BoneWeight { boneIndex0 = part.boneIndices[k] + 1, boneIndex1 = part.boneIndices[k + 1] + 1, boneIndex2 = part.boneIndices[k + 2] + 1,
                             weight0 = part.weights[k] / sum, weight1 = part.weights[k + 1] / sum, weight2 = part.weights[k + 2] / sum };

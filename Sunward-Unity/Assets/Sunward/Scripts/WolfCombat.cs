@@ -16,6 +16,7 @@ namespace Sunward
         GameObject spearView, discView;
         Sunward.Remaster.NativeAmaterasu nativeBody;
         Sunward.Remaster.NativeSolarFlare nativeDisc;
+        Sunward.Remaster.OriginalActor nativeGlaive;
         Strike strike;
         float elapsed, hold, grace;
         int chain;
@@ -35,6 +36,14 @@ namespace Sunward
                 backSocket = nativeBody.CreateBackSocket();
             }
             spearView = Instantiate(spear.visual, headSocket);
+            nativeGlaive = spearView.GetComponent<Sunward.Remaster.OriginalActor>();
+            if (nativeGlaive && nativeGlaive.Ready && nativeBody && nativeBody.Ready)
+            {
+                spearView.transform.SetParent(backSocket, false);
+                spearView.transform.localPosition = Vector3.zero;
+                spearView.transform.localRotation = Quaternion.identity;
+                spearView.transform.localScale = Vector3.one;
+            }
             discView = Instantiate(sundial.visual, headSocket);
             nativeDisc = discView.GetComponent<Sunward.Remaster.NativeSolarFlare>();
             if (nativeDisc && nativeDisc.Ready && nativeBody && nativeBody.Ready)
@@ -106,7 +115,7 @@ namespace Sunward
             {
                 if (System.Array.IndexOf(game.Profile.owned, "sundial") < 0)
                 {
-                    game.Notify("Unlock Sundial Flame at Taro for 110 sun coins. Both weapons are displayed at home.");
+                    game.Notify("Unlock Solar Flare at Taro for 110 sun coins. Both weapons are displayed at home.");
                     return;
                 }
 
@@ -209,8 +218,16 @@ namespace Sunward
             discView.SetActive(show && weapon == sundial);
             float p = strike != null ? Mathf.Clamp01(elapsed / strike.duration) : 0;
             float accent = Mathf.Sin(p * Mathf.PI);
-            spearView.transform.localPosition = spearRest + Vector3.back * (strike != null ? accent * (heavy ? .18f : .38f) : 0);
-            spearView.transform.localRotation = spearRotation * Quaternion.Euler(heavy ? -22 * accent : 0, strike != null && strike.clip == "Sweep" ? Mathf.Sin(p * Mathf.PI * 2) * 35 : 0, 0);
+            if (nativeGlaive && nativeGlaive.Ready)
+            {
+                spearView.transform.localPosition = spearRest;
+                spearView.transform.localRotation = spearRotation;
+            }
+            else
+            {
+                spearView.transform.localPosition = spearRest + Vector3.back * (strike != null ? accent * (heavy ? .18f : .38f) : 0);
+                spearView.transform.localRotation = spearRotation * Quaternion.Euler(heavy ? -22 * accent : 0, strike != null && strike.clip == "Sweep" ? Mathf.Sin(p * Mathf.PI * 2) * 35 : 0, 0);
+            }
             if (nativeDisc && nativeDisc.Ready)
             {
                 // Native body bone 30 and wp24's own rig supply the pose.
