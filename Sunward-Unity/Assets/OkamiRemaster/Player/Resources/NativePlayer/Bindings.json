@@ -1,0 +1,463 @@
+{
+  "bindings": [
+    {
+      "state": "Idle_Natural",
+      "clip": "pl00_000",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Walk_Natural",
+      "clip": "pl00_010",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Original cyclic walk; motor turns the character, same original gait for turn variants",
+      "referenceSpeed": 2.07000732421875
+    },
+    {
+      "state": "Walk_Turn_L",
+      "clip": "pl00_010",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Original cyclic walk; motor turns the character, same original gait for turn variants",
+      "referenceSpeed": 2.07000732421875
+    },
+    {
+      "state": "Walk_Turn_R",
+      "clip": "pl00_010",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Original cyclic walk; motor turns the character, same original gait for turn variants",
+      "referenceSpeed": 2.07000732421875
+    },
+    {
+      "state": "Jog_Natural",
+      "clip": "pl00_011",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 8.80321796123798
+    },
+    {
+      "state": "Jog_Turn_L",
+      "clip": "pl00_011",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 8.80321796123798
+    },
+    {
+      "state": "Jog_Turn_R",
+      "clip": "pl00_011",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 8.80321796123798
+    },
+    {
+      "state": "Sprint_Fluid",
+      "clip": "pl00_012",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 16.540216619318183
+    },
+    {
+      "state": "Sprint_Turn_L",
+      "clip": "pl00_012",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 16.540216619318183
+    },
+    {
+      "state": "Sprint_Turn_R",
+      "clip": "pl00_012",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 16.540216619318183
+    },
+    {
+      "state": "Sleep_Down",
+      "clip": "pl00_005",
+      "loop": false,
+      "intro": "pl00_003",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Sleep_Down_Legacy",
+      "clip": "pl00_005",
+      "loop": false,
+      "intro": "pl00_003",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Sleep_Loop",
+      "clip": "pl00_004",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Sleep_Loop_Legacy",
+      "clip": "pl00_004",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Sleep_Up",
+      "clip": "pl00_006",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Sleep_Up_Legacy",
+      "clip": "pl00_006",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Jump_Standing",
+      "clip": "pl00_021",
+      "loop": false,
+      "intro": "pl00_020",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Jump_Jog",
+      "clip": "pl00_025",
+      "loop": false,
+      "intro": "pl00_024",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Jump_Walk",
+      "clip": "pl00_025",
+      "loop": false,
+      "intro": "pl00_024",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Jump_Sprint",
+      "clip": "pl00_029",
+      "loop": false,
+      "intro": "pl00_027",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Jump_Double",
+      "clip": "pl00_02c",
+      "loop": true,
+      "intro": "pl00_02b",
+      "mirror": false,
+      "evidence": "Original second-jump launch and airborne loop; runtime acceptance pending",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Air_Fall",
+      "clip": "pl00_022",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Land_Soft",
+      "clip": "pl00_02d",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Land_Heavy",
+      "clip": "pl00_02d",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Dodge_Forward",
+      "clip": "pl00_017",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Dodge_Jog",
+      "clip": "pl00_017",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Dodge_Sprint",
+      "clip": "pl00_017",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Dodge_Walk",
+      "clip": "pl00_017",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Dodge_Back",
+      "clip": "pl00_018",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Dodge_Right",
+      "clip": "pl00_019",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Dodge_Left",
+      "clip": "pl00_019",
+      "loop": false,
+      "intro": "",
+      "mirror": true,
+      "evidence": "Original side roll mirrored in bone transforms; no negative renderer scale",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Bark",
+      "clip": "pl00_04e",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Disc1",
+      "clip": "pl00_500",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Disc2",
+      "clip": "pl00_501",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Disc3",
+      "clip": "pl00_502",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "DiscHeavy",
+      "clip": "pl00_503",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "DiscCharged",
+      "clip": "pl00_504",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "ChargeLight",
+      "clip": "pl00_511",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "ChargeHeavy",
+      "clip": "pl00_511",
+      "loop": true,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "AirStrike",
+      "clip": "pl00_505",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "AirStrike_Glaive",
+      "clip": "pl00_525",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Thrust",
+      "clip": "pl00_520",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Sweep",
+      "clip": "pl00_521",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Finish",
+      "clip": "pl00_522",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "HeavyArc",
+      "clip": "pl00_523",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "HeavyReturn",
+      "clip": "pl00_524",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "ChargedThrust",
+      "clip": "pl00_523",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "ChargedHeavy",
+      "clip": "pl00_524",
+      "loop": false,
+      "intro": "",
+      "mirror": false,
+      "evidence": "Pose inspected; action binding is a Sunward adaptation, not an original action-name table",
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Fall_Jog",
+      "clip": "pl00_026",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Matching native jump-family falling stage selected by controller vertical phase; runtime acceptance pending"
+    },
+    {
+      "state": "Fall_Sprint",
+      "clip": "pl00_02a",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Matching native jump-family falling stage selected by controller vertical phase; runtime acceptance pending"
+    },
+    {
+      "state": "Fall_Double",
+      "clip": "pl00_02c",
+      "intro": "",
+      "loop": true,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Matching native jump-family falling stage selected by controller vertical phase; runtime acceptance pending"
+    }
+  ]
+}

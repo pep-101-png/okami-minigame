@@ -10,6 +10,10 @@ namespace Sunward
         public bool Dead => Hp <= 0;
         public bool Phase2 => definition.id == "boss" && Hp < MaxHp * .5f;
         public string State { get; private set; } = "approach";
+        public float VisualStateDuration => State == "windup" ? definition.windup * (Phase2 ? .8f : 1) :
+            State == "strike" ? (move == "charge" ? (definition.id == "boss" ? .65f : .32f) : .18f) :
+            State == "recover" ? (definition.id == "boss" ? .95f : .65f) : 1.1f;
+        public float VisualStateProgress => Mathf.Clamp01(1 - timer / Mathf.Max(.001f, VisualStateDuration));
 
         CharacterController motor;
         Transform visual;
@@ -20,6 +24,7 @@ namespace Sunward
         bool struck;
         LineRenderer tell;
         Vector3 visualBase;
+        bool originalVisual;
         public void Init(GameFlow flow, EnemyDefinition spec)
         {
             game = flow;
@@ -33,6 +38,7 @@ namespace Sunward
             visual = Instantiate(spec.visual, transform).transform;
             visual.localScale = Vector3.one * spec.scale;
             visualBase = visual.localPosition;
+            originalVisual = visual.GetComponentInChildren<Sunward.Remaster.OriginalActor>(true) != null;
         }
 
         public void Stun(float time)
@@ -78,8 +84,11 @@ namespace Sunward
             clock += dt;
             if (Dead)
             {
-                visual.localScale = Vector3.one * definition.scale * Mathf.Max(0, 1 - (clock - timer));
-                visual.Rotate(0, dt * 40, 0);
+                if (!originalVisual)
+                {
+                    visual.localScale = Vector3.one * definition.scale * Mathf.Max(0, 1 - (clock - timer));
+                    visual.Rotate(0, dt * 40, 0);
+                }
                 return;
             }
 
@@ -89,8 +98,11 @@ namespace Sunward
             bool boss = definition.id == "boss", ranged = definition.id == "ranged";
             if (diff.sqrMagnitude > .01f)
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(diff), dt * 7);
-            visual.localPosition = visualBase + Vector3.up * (definition.id == "wisp" || ranged ? .12f + Mathf.Sin(clock * 4) * .10f : Mathf.Abs(Mathf.Sin(clock * 6)) * .035f);
-            visual.localRotation = Quaternion.Euler(State == "windup" ? -12 : Mathf.Sin(clock * 5) * 3, 0, State == "approach" ? Mathf.Sin(clock * 6) * 3 : 0);
+            if (!originalVisual)
+            {
+                visual.localPosition = visualBase + Vector3.up * (definition.id == "wisp" || ranged ? .12f + Mathf.Sin(clock * 4) * .10f : Mathf.Abs(Mathf.Sin(clock * 6)) * .035f);
+                visual.localRotation = Quaternion.Euler(State == "windup" ? -12 : Mathf.Sin(clock * 5) * 3, 0, State == "approach" ? Mathf.Sin(clock * 6) * 3 : 0);
+            }
             if (stun > 0)
             {
                 stun -= dt;

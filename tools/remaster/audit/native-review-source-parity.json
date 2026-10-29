@@ -1,0 +1,17 @@
+[
+  {
+    "package": "pl00",
+    "independentPriorParserMatches": true,
+    "originalDecodedTexturePixelsMatch": true
+  },
+  {
+    "package": "wp24",
+    "independentPriorParserMatches": true,
+    "originalDecodedTexturePixelsMatch": true
+  },
+  {
+    "package": "wp34",
+    "independentPriorParserMatches": true,
+    "originalDecodedTexturePixelsMatch": true
+  }
+]

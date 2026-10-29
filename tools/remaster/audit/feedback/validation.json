@@ -1,0 +1,69 @@
+{
+    "status": "passed",
+    "unityVersion": "6000.6.6f1",
+    "scene": "Assets/Sunward/Scenes/Windflower.unity",
+    "scope": "Editor import/compilation/static validation; not a Play Mode or visual approval",
+    "checks": [
+        {
+            "name": "version",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "Windflower scene",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "missing scripts/references",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "scene dependencies",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "serialized asset GUID references",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "material shaders",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "Amaterasu 74-bone hierarchy / 47 clips",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "existing imported-project checks",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "existing animation-scale checks",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "existing scene connection checks",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "existing scene bounds checks",
+            "status": "passed",
+            "detail": ""
+        },
+        {
+            "name": "existing village checks",
+            "status": "passed",
+            "detail": ""
+        }
+    ],
+    "logErrors": []
+}

@@ -1,0 +1,10 @@
+{
+  "baselineCommit": "00fd8695363df01de80b012d68feb20c9961e8a9",
+  "rollbackBranch": "backup/sunward-pre-native-remaster-20261027",
+  "projectFiles": 3731,
+  "uncompressedBytes": 1536040197,
+  "archiveBytes": 217258466,
+  "archiveSHA256": "5d5e1cb0cf2b6d90567cf988e25042bc94619391e3ad7f9009963fe7c84d064b",
+  "unresolvedLFSPointers": [],
+  "everyArchiveMemberByteVerified": true
+}

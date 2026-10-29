@@ -1,0 +1,2747 @@
+{
+  "source": "Village Breeze prototype 53b468f48ba0f91d46eb0f80d609713e7667a295",
+  "baselineGuidCollisions": [],
+  "baselineResourceCollisions": [],
+  "files": [
+    {
+      "path": "Demo/Scenes.meta",
+      "bytes": 169,
+      "sourceSHA256": "ce0e6f64695bfc0f769e351cfb1ff20b9ebe15c981db93f07520faf4cac994bf"
+    },
+    {
+      "path": "Demo/Textures.meta",
+      "bytes": 169,
+      "sourceSHA256": "d6c9408d91057dbd3de47adfb259de2c4a00f533b1ba4984376d074c99bd0ab3"
+    },
+    {
+      "path": "Demo/ST2SurfaceBindings.json",
+      "bytes": 6495,
+      "sourceSHA256": "f47ec7a166497de1e4e6ba778ed57522ac243c2953b58d5ef9fd599665c3e72b"
+    },
+    {
+      "path": "Demo/Shaders.meta",
+      "bytes": 169,
+      "sourceSHA256": "821d7ecb7c15ff1ee2a120cfa685138b2c06090f304f039e8e1eccbc5977acb4"
+    },
+    {
+      "path": "Demo/Scripts.meta",
+      "bytes": 169,
+      "sourceSHA256": "e778e42d28d7e8af0cbbbf0e31e0825396f0ff8ea1797ed1eb3cf0eb441d0fe5"
+    },
+    {
+      "path": "Demo/ST2SurfaceBindings.json.meta",
+      "bytes": 155,
+      "sourceSHA256": "ec91e9809a10dc2638e2d437dc2cb54fa30bb04e777fad9519a163dca45a0241"
+    },
+    {
+      "path": "Demo/Scenes/VillageDemo.unity.meta",
+      "bytes": 152,
+      "sourceSHA256": "c0f93f1be3127777e9ccfeccdc2096f34589cf083f8754841883a174240e827c"
+    },
+    {
+      "path": "Demo/Scenes/VillageDemo.unity",
+      "bytes": 14719,
+      "sourceSHA256": "5e19c33f24cbb1ac315c51b5cdedf640293a0894c27662a708302d7c2b93d87b"
+    },
+    {
+      "path": "Demo/Shaders/PaintedFoam.shader.meta",
+      "bytes": 201,
+      "sourceSHA256": "c176a2d2caf3a98630420789d6270f8c6ce4f8fed577477e000c570400d8a592"
+    },
+    {
+      "path": "Demo/Shaders/FarmAnimals.shader",
+      "bytes": 1893,
+      "sourceSHA256": "3cdaf404092084dc276307d9bc05413e66a32715202b4d121ef820dd8f041099"
+    },
+    {
+      "path": "Demo/Shaders/BlossomPetals.shader.meta",
+      "bytes": 201,
+      "sourceSHA256": "883c38cc5901be3bdd234e4990bc6bb7e1500b85052ecf5f99fdc402f1d27c5b"
+    },
+    {
+      "path": "Demo/Shaders/InkHull.shader",
+      "bytes": 1136,
+      "sourceSHA256": "631c3fce473c0140b44b46e6dc10a982eb532e0e95696a1bb51213b1a3600419"
+    },
+    {
+      "path": "Demo/Shaders/PaintedSurface.shader",
+      "bytes": 3716,
+      "sourceSHA256": "4c3425840d660e8a4adf4f027ccff50dea9221dc2be851b108c69cd8dda50177"
+    },
+    {
+      "path": "Demo/Shaders/PaintedFoam.shader",
+      "bytes": 2233,
+      "sourceSHA256": "00472cede2e748f5f8ff9cbeba33e31f772b99f1c81d34831457fab425d10711"
+    },
+    {
+      "path": "Demo/Shaders/BlossomPetals.shader",
+      "bytes": 780,
+      "sourceSHA256": "43c3e5d3c5fc14a003a216e37d73b67544bf3e6808e8661413469c9ba3ab9d79"
+    },
+    {
+      "path": "Demo/Shaders/PettingHearts.shader.meta",
+      "bytes": 201,
+      "sourceSHA256": "4801f6ae176e79f06afbbe877d24649e9e6f69729da8eb1ee3c48ec1b7df85aa"
+    },
+    {
+      "path": "Demo/Shaders/InkHull.shader.meta",
+      "bytes": 201,
+      "sourceSHA256": "bb53d928fc1c9e2e6248d46402c15aea67e6bb9e586314f7b793202c0603ab99"
+    },
+    {
+      "path": "Demo/Shaders/PaintedGround.shader.meta",
+      "bytes": 201,
+      "sourceSHA256": "e5bc1b1ff211dbd9e48721cecfa519b4ebe47d1af6d49b93304edaa89c5602e3"
+    },
+    {
+      "path": "Demo/Shaders/PaintedSurface.shader.meta",
+      "bytes": 201,
+      "sourceSHA256": "0226a864dacd84c8d185eca02c2be80103dcd846d290d98ff5ac7469ab1b21b1"
+    },
+    {
+      "path": "Demo/Shaders/PettingHearts.shader",
+      "bytes": 722,
+      "sourceSHA256": "830cec7c2c0bf3969354f1b9e4a9aad94d46ac313b58bac4db91fc809d794f57"
+    },
+    {
+      "path": "Demo/Shaders/FarmAnimals.shader.meta",
+      "bytes": 201,
+      "sourceSHA256": "ba8ba26a0409342dc3c814890cc71fdbdd27fbc044a3592f310fc85b6f51eed7"
+    },
+    {
+      "path": "Demo/Shaders/PaintedWater.shader",
+      "bytes": 2822,
+      "sourceSHA256": "37b37bc1d2275aa2c71c1cebdf2ce7aae43e8b667ca224c5def040fbef002db0"
+    },
+    {
+      "path": "Demo/Shaders/PaintedGround.shader",
+      "bytes": 1677,
+      "sourceSHA256": "cb65982bfb84e371a2a59f180bacce3575432656058dedabaa71d9e61d218a11"
+    },
+    {
+      "path": "Demo/Shaders/PaintedWater.shader.meta",
+      "bytes": 201,
+      "sourceSHA256": "3712a74e8f2ffa5af7afd697982a1315fb7ae65853d13506e746f41776d9f5e3"
+    },
+    {
+      "path": "Demo/Scripts/DemoPettingEffects.cs.meta",
+      "bytes": 236,
+      "sourceSHA256": "8faaa5ecaaa9397e43954569f6b875e0800f0139c4226858e282add5d15140d6"
+    },
+    {
+      "path": "Demo/Scripts/DemoFarmAnimals.cs.meta",
+      "bytes": 236,
+      "sourceSHA256": "18f7427fdc6de10b4867667b670174da688686eadf3128f5b370689dca79c04c"
+    },
+    {
+      "path": "Demo/Scripts/DemoWaterAtmosphere.cs.meta",
+      "bytes": 240,
+      "sourceSHA256": "f7b92d4862e6434df3bc46d58749ca2900b5ed04a0e289d65c62278e172fd817"
+    },
+    {
+      "path": "Demo/Scripts/DemoHouseDoors.cs.meta",
+      "bytes": 236,
+      "sourceSHA256": "76f5f9fdc66ac2f3292df1ffc2be1b6460377944ae6808df2695fa6100270731"
+    },
+    {
+      "path": "Demo/Scripts/DemoBlossomPetals.cs.meta",
+      "bytes": 236,
+      "sourceSHA256": "6fa83482570933425fe6a06a179ef25b045aca86ee8a26c4d1800b9d9eeab158"
+    },
+    {
+      "path": "Demo/Scripts/DemoStairCollision.cs.meta",
+      "bytes": 236,
+      "sourceSHA256": "1c516cc850f5125b236562fc117a080d83074f9a57ca0a78fb2bd951ac6267ae"
+    },
+    {
+      "path": "Demo/Scripts/DemoWorld.cs.meta",
+      "bytes": 236,
+      "sourceSHA256": "c5ae9069ddf3b1eb97dd8b007e2ade28541bc0195a77d20acb79ecd42ff1d4de"
+    },
+    {
+      "path": "Demo/Scripts/DemoStairCollision.cs",
+      "bytes": 2203,
+      "sourceSHA256": "1100abb07df80c7e435142eefc798879cc43271c72c8f878ce76f93ea2196be4"
+    },
+    {
+      "path": "Demo/Scripts/DemoBlossomPetals.cs",
+      "bytes": 8569,
+      "sourceSHA256": "392e4803f2770c170b2a87958550b9f36cdf126bbb9b74d2c13918259cf3fd32"
+    },
+    {
+      "path": "Demo/Scripts/DemoExplorer.cs",
+      "bytes": 6652,
+      "sourceSHA256": "3d64523a32411ca024270f6a58c74870de0c6f15070c814e572d90d264688edb"
+    },
+    {
+      "path": "Demo/Scripts/DemoWorld.cs",
+      "bytes": 9449,
+      "sourceSHA256": "4432e96086dd016d51e9f8ca0657e33f6212f1d6b8c04026de659b1f6d4c561e"
+    },
+    {
+      "path": "Demo/Scripts/DemoWaterMotion.cs.meta",
+      "bytes": 236,
+      "sourceSHA256": "43d7f7533b1bf26714b715cf4d6a5d3ccd0bacd16aa7651bd6fd15044219438a"
+    },
+    {
+      "path": "Demo/Scripts/DemoWaterMotion.cs",
+      "bytes": 3280,
+      "sourceSHA256": "885a1238ab3b7da3cb01688674d34934b475678944f09fb66399468442db8d7f"
+    },
+    {
+      "path": "Demo/Scripts/DemoExplorer.cs.meta",
+      "bytes": 236,
+      "sourceSHA256": "fabea5ba4712816c71db1cd14aeee5308d78fde652f63d7fce21a018af744a82"
+    },
+    {
+      "path": "Demo/Scripts/DemoHouseDoors.cs",
+      "bytes": 6925,
+      "sourceSHA256": "8d5dd7d9252cd6dfb8bab98fb6a8aeeb1527c67d7a49b64f8f8890ffe5ab8b84"
+    },
+    {
+      "path": "Demo/Scripts/DemoWaterAtmosphere.cs",
+      "bytes": 4812,
+      "sourceSHA256": "7496c15f180ffa53ca64cc7cd649a427edb111c9283aa876d15eee35eaace5ee"
+    },
+    {
+      "path": "Demo/Scripts/DemoPettingEffects.cs",
+      "bytes": 3989,
+      "sourceSHA256": "859f9af5b18368098919782ce21ff7af1668470cf03f32338b3b6c269f753ef7"
+    },
+    {
+      "path": "Demo/Scripts/DemoFarmAnimals.cs",
+      "bytes": 18827,
+      "sourceSHA256": "196277d2f702300375cd4474a5830cb4446b955d6bc36aa2c48cc5bc9a862b76"
+    },
+    {
+      "path": "Demo/Textures/e5b84b8b92252d5f.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "6dc53c87b8e0f7a1089acc9066556187ba63ad0a2a993a8066e0ec4274033268"
+    },
+    {
+      "path": "Demo/Textures/839d4f4ec5a16948.png",
+      "bytes": 34392,
+      "sourceSHA256": "839d4f4ec5a16948966db93d4fbba8ba3d12a80f77789e6a4f558b57e975ac3c"
+    },
+    {
+      "path": "Demo/Textures/09258987af631f33.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "d53fad3e8ff4613a3150bfc689c88011af86198136bb0bf7e1c9acbb714501e4"
+    },
+    {
+      "path": "Demo/Textures/b8d8fa9ab817e8dd.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "02cf47aa986a983a78b1b5c7e63a3bc1935828cd00f81e51ee97b46d6a6cc386"
+    },
+    {
+      "path": "Demo/Textures/552f2c920b78ee0c.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "1f2ed153b4932a3c270ccbb29f10db8844c2aecdc459b22e9b783e3f299f4e18"
+    },
+    {
+      "path": "Demo/Textures/51f09037d077b581.png",
+      "bytes": 5697,
+      "sourceSHA256": "51f09037d077b581eabe36dba07494a41210790bf510dfdfc7a05bfa2c85df9f"
+    },
+    {
+      "path": "Demo/Textures/0c07a946a2e6fdc5.png",
+      "bytes": 239976,
+      "sourceSHA256": "0c07a946a2e6fdc5f71c57c66a880a4d779ad4eb12b98b5615b1fc2bbd127f52"
+    },
+    {
+      "path": "Demo/Textures/60e6e0132d439d4c.png",
+      "bytes": 39932,
+      "sourceSHA256": "60e6e0132d439d4cd55aefa45fd80955596e659c15d956fec78cde351056796b"
+    },
+    {
+      "path": "Demo/Textures/b8d8fa9ab817e8dd.png",
+      "bytes": 120644,
+      "sourceSHA256": "b8d8fa9ab817e8dd8ca6f78cb3de76f66cd5794b4fedc51585a09360c3830c04"
+    },
+    {
+      "path": "Demo/Textures/72e6bfad30defdda.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "3773557ffedd81c904495a471c2e9ded14ddeeed1fdb1635f3296e9e218ad97a"
+    },
+    {
+      "path": "Demo/Textures/178ae6b70d958be8.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "9a5b98d8c4c90f4a5e65abc0f50112105bd71f3db3b5be1a9faa47d3a178423a"
+    },
+    {
+      "path": "Demo/Textures/91b5ed75723a7cc7.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "8c265b924a4d078d04cba01d0eb3013d97f82028e7c13f4cb2b4509e86a7896a"
+    },
+    {
+      "path": "Demo/Textures/0c07a946a2e6fdc5.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "53ef065a9866bc8a457630bf78de4cd45ec2ab1721f50495b7402f1bb362a523"
+    },
+    {
+      "path": "Demo/Textures/011831fc6fd0991f.png",
+      "bytes": 20431,
+      "sourceSHA256": "011831fc6fd0991f722c11865ed305b82dd3cc1db025251c329d507c7558071f"
+    },
+    {
+      "path": "Demo/Textures/BreezeTimber1.png",
+      "bytes": 200124,
+      "sourceSHA256": "2defa86049feb64b98d63c83e6a362846fe2239da91d699f98031fda682876c2"
+    },
+    {
+      "path": "Demo/Textures/9b5658f0f592d717.png",
+      "bytes": 2635766,
+      "sourceSHA256": "9b5658f0f592d71777aeff63e2fbc4bc796314a47816a64f74f7446b7dbf19a4"
+    },
+    {
+      "path": "Demo/Textures/91b5ed75723a7cc7.png",
+      "bytes": 16747,
+      "sourceSHA256": "91b5ed75723a7cc7d354333f52496a9239786333e51769293edb6f4903c16e88"
+    },
+    {
+      "path": "Demo/Textures/40cb1542cb65c337.png",
+      "bytes": 106066,
+      "sourceSHA256": "40cb1542cb65c337d2a50420fa934cc50178493fba168b1c5685bdbd0e317e4d"
+    },
+    {
+      "path": "Demo/Textures/df2b5dfbdeb61941.png",
+      "bytes": 22008,
+      "sourceSHA256": "df2b5dfbdeb619415a1078bfaa134d7706fb486964f01a9712f71b9dba46cd77"
+    },
+    {
+      "path": "Demo/Textures/62b39d49f23acd53.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "3811715d2a5c7fbb8d9f29ec956fd2ac63c155a9024a2d1ca96bb14020bf19c8"
+    },
+    {
+      "path": "Demo/Textures/deaa8c298e9437f0.png",
+      "bytes": 24194,
+      "sourceSHA256": "deaa8c298e9437f0abc7c72f29a24f300508e32efcd75d8c7b065d7f99013c53"
+    },
+    {
+      "path": "Demo/Textures/60b5f4784670a158.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "3bdf8e35c9221daa9bce7912bf3f64382dd1fc4048ca3ab45334c10730dea8aa"
+    },
+    {
+      "path": "Demo/Textures/BreezeTimber3.png",
+      "bytes": 201107,
+      "sourceSHA256": "0a3fb490b28bf88197d5bb480c74916d050b9f2536893920dd8d4aecc4084f4b"
+    },
+    {
+      "path": "Demo/Textures/cf624b161b793c31.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "92e4f008502ce0115a95f356895827a2975cc8b00a3c2c979f61cce1e56ac9b2"
+    },
+    {
+      "path": "Demo/Textures/30788f9d48a036ab.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "1f2885631946374195388d813f73f0859578fd97129c141105c0472ffe75483e"
+    },
+    {
+      "path": "Demo/Textures/fb0f45faf3b99087.png",
+      "bytes": 18297,
+      "sourceSHA256": "fb0f45faf3b9908778b8c753065acdffa60258ae8dfe97f7ad87ed9505a4e2d0"
+    },
+    {
+      "path": "Demo/Textures/b87f1c3e43c5bf9b.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "63195ea30dde07c6a9bc29048da00074b69d773808ac0944c3639c6266800d81"
+    },
+    {
+      "path": "Demo/Textures/2be109eb4c20c350.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "b281a406c978917c9b7d016ce8e8b275f8a3e504795679715e2acd2041656604"
+    },
+    {
+      "path": "Demo/Textures/3b420db4083b6cfb.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "d604fe2beb981d0d9e09bd1e70318fa9320ff46ea4973d4674bb77d5763b5ee5"
+    },
+    {
+      "path": "Demo/Textures/BreezeTimber2.png",
+      "bytes": 200841,
+      "sourceSHA256": "0f06ac8db487df4cf9d92f974fd9ad5100cc1f19d7503447286204af71d1406f"
+    },
+    {
+      "path": "Demo/Textures/fb0f45faf3b99087.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "788d38691d1a0a327a8029bd271d3b5656e05134eada670303098a99a4328943"
+    },
+    {
+      "path": "Demo/Textures/450763a575c8b868.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "cf8b208d8b292357a76b4ee19e8bc3a8180da6c3b6d51577b8754b952e2f96df"
+    },
+    {
+      "path": "Demo/Textures/202ee133f8ed0d5e.png",
+      "bytes": 39111,
+      "sourceSHA256": "202ee133f8ed0d5e1ef7b7a3d49c7567413258d8961f6c4b6f17497124e52bd3"
+    },
+    {
+      "path": "Demo/Textures/1ffcd1af17d297e6.png",
+      "bytes": 12433,
+      "sourceSHA256": "1ffcd1af17d297e690265c2ea67227ad013c48646c69df4dd18f5be5045c2c2b"
+    },
+    {
+      "path": "Demo/Textures/78bec84e9880e930.png",
+      "bytes": 122407,
+      "sourceSHA256": "78bec84e9880e930a20d2bb0212906431262d3ff2287e72b6e1d79d3f9664d41"
+    },
+    {
+      "path": "Demo/Textures/78bec84e9880e930.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "c186a4a6a51f313e725adb80895e90573d4bea37c65c27ab8d6c2d1dc626200a"
+    },
+    {
+      "path": "Demo/Textures/178ae6b70d958be8.png",
+      "bytes": 25091,
+      "sourceSHA256": "178ae6b70d958be879b3242b9a1fa04c89879c6a2b2455d95ca75c05bab867fb"
+    },
+    {
+      "path": "Demo/Textures/785b0937e96edcee.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "87d39a3b76ceb9d7739a192c9f3bc2344ae964872adb5fb4999cebb130eb31dd"
+    },
+    {
+      "path": "Demo/Textures/6ffca85ed32c104b.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "cb84275a7fc20282929dd3a9645368bbfa68cbc6fb03e8717b5956bf8987eb93"
+    },
+    {
+      "path": "Demo/Textures/BreezeTimber1.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "d1e22892b382c81b43c4273c23772c1758d635bb60673990619b483772ea00db"
+    },
+    {
+      "path": "Demo/Textures/110b9da041f3dca1.png",
+      "bytes": 45539,
+      "sourceSHA256": "110b9da041f3dca191c104a45f6e9193f7e5bf4633f014299d6d9008c7d3b729"
+    },
+    {
+      "path": "Demo/Textures/62b39d49f23acd53.png",
+      "bytes": 292315,
+      "sourceSHA256": "62b39d49f23acd53d9dcd36da97655cc5b52425b959ed61ede1b629a9736cb62"
+    },
+    {
+      "path": "Demo/Textures/785b0937e96edcee.png",
+      "bytes": 4108,
+      "sourceSHA256": "785b0937e96edcee2b331caca0de18574f385371741663c3c9132b3144d35e52"
+    },
+    {
+      "path": "Demo/Textures/110b9da041f3dca1.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "6206094e408e9d973f52c6328e507eaa55239f48c75116677546a9d4afa4e8c7"
+    },
+    {
+      "path": "Demo/Textures/BreezeTimber3.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "eb31d7ea27fa203d32cfc598f66fe617152a7cf81d1c22631baee5985be747b3"
+    },
+    {
+      "path": "Demo/Textures/04dcbdd946fa0e43.png",
+      "bytes": 23108,
+      "sourceSHA256": "04dcbdd946fa0e43272b4be230fa076894264976885cd6a47ab760e2af3b66c8"
+    },
+    {
+      "path": "Demo/Textures/a8afa877e5cc4cfe.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "5c433f1a0599ec68083c51d46bab65feed4daa4cc3ba2adbc73b7f34c496d820"
+    },
+    {
+      "path": "Demo/Textures/3b420db4083b6cfb.png",
+      "bytes": 76602,
+      "sourceSHA256": "3b420db4083b6cfb080763ada3e6c35a4493282b2c0f3879d998f59e9ee60710"
+    },
+    {
+      "path": "Demo/Textures/4f7452f318222f9e.png",
+      "bytes": 28299,
+      "sourceSHA256": "4f7452f318222f9e95699f6b613b1cd5d3a6b0afc2fbcc38b8a5b30a9554a9fc"
+    },
+    {
+      "path": "Demo/Textures/51f09037d077b581.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "33187b32947eae1ac985dd89e1a2d6893a5fc7de5eef9a56aae7c2ae3087f953"
+    },
+    {
+      "path": "Demo/Textures/3cbc97293d8ada38.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "7485377ac48ffa76aad005289cd65712b37a8a0c049a14bf253d45f1cfb6837d"
+    },
+    {
+      "path": "Demo/Textures/60e6e0132d439d4c.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "abce3508aa581e2d57322f923fc9c884f70d845c6388de792d1a95e2df3f804e"
+    },
+    {
+      "path": "Demo/Textures/d5e57ac6a94f320c.png",
+      "bytes": 58144,
+      "sourceSHA256": "d5e57ac6a94f320c9b0fae10cf832cfd266d2fdeefe17b01cab5528317ce73be"
+    },
+    {
+      "path": "Demo/Textures/04dcbdd946fa0e43.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "91c04fb19153ffde1fe140ca4c5098e2cafdc8715a57bb6ac5dce3934fe4810d"
+    },
+    {
+      "path": "Demo/Textures/450763a575c8b868.png",
+      "bytes": 111640,
+      "sourceSHA256": "450763a575c8b86871548d339133551c7619cbd1d19759d42de046c069a18e8c"
+    },
+    {
+      "path": "Demo/Textures/cf624b161b793c31.png",
+      "bytes": 3388,
+      "sourceSHA256": "cf624b161b793c311d7e25d63290aab5b37298c835e1c8e472cddbb543ae3e80"
+    },
+    {
+      "path": "Demo/Textures/011831fc6fd0991f.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "d07ee6d0eb7448e9466c633da9479f5ef41c6bef4d0bb6829c28c79647cc177d"
+    },
+    {
+      "path": "Demo/Textures/202ee133f8ed0d5e.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "12ddb50937b12ab7e11e4972e1b0380bcf513d1478728aec37258b60c3224a0f"
+    },
+    {
+      "path": "Demo/Textures/60b5f4784670a158.png",
+      "bytes": 139955,
+      "sourceSHA256": "60b5f4784670a158cc75b0cb24824baebc1a5e88e11b893c77ab8b648d6a7f48"
+    },
+    {
+      "path": "Demo/Textures/4f7452f318222f9e.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "5ad442a5918aacc4fcb9611c4c2f228d23c6ef1924779450e96951f54352bf28"
+    },
+    {
+      "path": "Demo/Textures/BreezeTimber2.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "5d062aecc634e6456489bf41b5ec3f4890e47ce158a723c1664bda42ca6fa59f"
+    },
+    {
+      "path": "Demo/Textures/a52f24539cda3b17.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "54d1eb51de2e0d0d561f5169bcd21faf7055d29f49550dae88f8200f18bbbc84"
+    },
+    {
+      "path": "Demo/Textures/30788f9d48a036ab.png",
+      "bytes": 8977,
+      "sourceSHA256": "30788f9d48a036ab245c5bb17c220148c3d066f1b7a3588a053aa31b175cea88"
+    },
+    {
+      "path": "Demo/Textures/d5e57ac6a94f320c.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "53a7ec60eb19853420d4ef0909ad90639fa9ddba92c140fef4b4b09b16491ff5"
+    },
+    {
+      "path": "Demo/Textures/a52f24539cda3b17.png",
+      "bytes": 16755,
+      "sourceSHA256": "a52f24539cda3b1735ac00d0ff9ac0143f8662ca0d0902bc40f551753025f18b"
+    },
+    {
+      "path": "Demo/Textures/deaa8c298e9437f0.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "b7d60afac727db947573abbaf7c2b30721118e368ea96d70b230f2419460f6fc"
+    },
+    {
+      "path": "Demo/Textures/6382dcda765585b6.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "511a5a22e43f82372324a4ef18402e11f1406470306733ca2b38744ae6764604"
+    },
+    {
+      "path": "Demo/Textures/552f2c920b78ee0c.png",
+      "bytes": 4505,
+      "sourceSHA256": "552f2c920b78ee0c5dfff33d74af560a1ae211dfc13b4ceb593f3267112aaa8d"
+    },
+    {
+      "path": "Demo/Textures/c318c2581cf4f8e2.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "72e037a222f3099e9e286dbaee9921e523ac791617de7bb4236d82c5016ba344"
+    },
+    {
+      "path": "Demo/Textures/2be109eb4c20c350.png",
+      "bytes": 135397,
+      "sourceSHA256": "2be109eb4c20c35000729d57f56e3036553613ec54e57e684746451e008221c3"
+    },
+    {
+      "path": "Demo/Textures/09258987af631f33.png",
+      "bytes": 141289,
+      "sourceSHA256": "09258987af631f339ce690b69b6fb35d4ef6f04399b9386a672d84d6e0b3e760"
+    },
+    {
+      "path": "Demo/Textures/6382dcda765585b6.png",
+      "bytes": 104811,
+      "sourceSHA256": "6382dcda765585b6a134cb456f22c28fdf8f0ce94c48dfdde223161ef6ff19df"
+    },
+    {
+      "path": "Demo/Textures/839d4f4ec5a16948.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "39695a09add230195b76b8a5701d24a4dee7634c0749c124ffdfa7357f74e966"
+    },
+    {
+      "path": "Demo/Textures/a8afa877e5cc4cfe.png",
+      "bytes": 4130,
+      "sourceSHA256": "a8afa877e5cc4cfe65472c247bfad69a9972d2e5ace2a6d4a47e0df553a7dbda"
+    },
+    {
+      "path": "Demo/Textures/72e6bfad30defdda.png",
+      "bytes": 3266400,
+      "sourceSHA256": "72e6bfad30defdda117479cc11e508b395d926bd5398ba71f4877453be79e9be"
+    },
+    {
+      "path": "Demo/Textures/76ff781de92de803.png",
+      "bytes": 385349,
+      "sourceSHA256": "76ff781de92de803202b36db4cb0ab6b6b6095363214f97f6988449c1ade5b10"
+    },
+    {
+      "path": "Demo/Textures/6ffca85ed32c104b.png",
+      "bytes": 4949,
+      "sourceSHA256": "6ffca85ed32c104ba36fb619d5f558b3434aa03dd3496d3f68e988de3a0dbce6"
+    },
+    {
+      "path": "Demo/Textures/b87f1c3e43c5bf9b.png",
+      "bytes": 3456,
+      "sourceSHA256": "b87f1c3e43c5bf9ba65c0832a0aaea22825c112e667b2d45e81cc971e45fbe54"
+    },
+    {
+      "path": "Demo/Textures/9b5658f0f592d717.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "c4a7bc4507d2fdfc8d841c4f5503a14524ac63c380e5356358a6797ba5172be8"
+    },
+    {
+      "path": "Demo/Textures/40cb1542cb65c337.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "1890b5ea5ae1774775ed58a2d9d1e1a3b8c58f4d7644ae58402a0b4491574408"
+    },
+    {
+      "path": "Demo/Textures/54a8b04b2c21ee46.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "48e0626054e2e3503ef0fcee4089f3eb5cfb549856ad11883711f4b321efe177"
+    },
+    {
+      "path": "Demo/Textures/3e132e46e78a2fc6.png",
+      "bytes": 278195,
+      "sourceSHA256": "3e132e46e78a2fc6550dae48afb1fa6763ff4b455a2c8a32452d888008fcb799"
+    },
+    {
+      "path": "Demo/Textures/3cbc97293d8ada38.png",
+      "bytes": 8267,
+      "sourceSHA256": "3cbc97293d8ada387e5b9924895bc969c3fbbee3dbcedb4f7c73386d9ab5b513"
+    },
+    {
+      "path": "Demo/Textures/c318c2581cf4f8e2.png",
+      "bytes": 55151,
+      "sourceSHA256": "c318c2581cf4f8e22d7e1776975759b0f02644b2e3bb35ece40c14b23bee068c"
+    },
+    {
+      "path": "Demo/Textures/df2b5dfbdeb61941.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "3f66a7e06692c8ff6891a51eeb7475445c29ec0220f673dd095a6f53106aea76"
+    },
+    {
+      "path": "Demo/Textures/e5b84b8b92252d5f.png",
+      "bytes": 36336,
+      "sourceSHA256": "e5b84b8b92252d5f4789a02cd36b64505f8dff2ea2aca2e3ce9fc4a50bbba53a"
+    },
+    {
+      "path": "Demo/Textures/BreezeTimber0.png",
+      "bytes": 200290,
+      "sourceSHA256": "c595e49ba9161455f30b0ba3fcd9debd7f1f8e76ac42365fa4b19567a6ed753e"
+    },
+    {
+      "path": "Demo/Textures/54a8b04b2c21ee46.png",
+      "bytes": 122665,
+      "sourceSHA256": "54a8b04b2c21ee462c16897cce1230e44f0ffdf75ba038a8c5aa47957f04f1df"
+    },
+    {
+      "path": "Demo/Textures/1ffcd1af17d297e6.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "9a50912d93fa78034c2ea24dcb57a24d342011557ae6ab42ac4528e1d05864ae"
+    },
+    {
+      "path": "Demo/Textures/76ff781de92de803.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "84bb16727d99ae9a7b216cb3ddbe6327860408fa98a73f8fc4e19dfde26b66c0"
+    },
+    {
+      "path": "Demo/Textures/BreezeTimber0.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "7c34bc6f1eac050e0488d7823a3324468fb504a8da9be92f0542b902f98e6cc0"
+    },
+    {
+      "path": "Demo/Textures/3e132e46e78a2fc6.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "5a6f058514aa95cd90c52c46a24636d4961d14277a50da43df0392070151333d"
+    },
+    {
+      "path": "Resources/DemoGeometry.meta",
+      "bytes": 169,
+      "sourceSHA256": "0673585c3a6ceb4da8c8c18d27fa23f26bca8e1dac86a578e228e767c48626a9"
+    },
+    {
+      "path": "Resources/DemoMaterials.meta",
+      "bytes": 169,
+      "sourceSHA256": "db2acf17bcf7ba5bcd52fbe47c1bf90033864d57881a5e42213020482367f0f2"
+    },
+    {
+      "path": "Resources/Farm/BlossomPetal1.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "769f81f1fbd92cef85f5afe1e4c58f2c3709bfccef79c4b65a70f949f8c9ea5e"
+    },
+    {
+      "path": "Resources/Farm/PetalPaint0.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "84471f2565e3bb367905c43015a906eda552a2cf151bdad6cb8d947f63268bc2"
+    },
+    {
+      "path": "Resources/Farm/HeartPaint.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "3e7b0cc6bb0d216ebfe97597def885d359c422317637b207ea9f8b35bc7357b0"
+    },
+    {
+      "path": "Resources/Farm/PettingHeart.png",
+      "bytes": 13518,
+      "sourceSHA256": "32a92ba174d02a38e46328280948b490bf14186b5e0db91626d9faaf97b6cdff"
+    },
+    {
+      "path": "Resources/Farm/PettingChime.wav.meta",
+      "bytes": 449,
+      "sourceSHA256": "fb75b81d60c34f92279d39b9cc165a1719a7df81ed1927b2c0bbf1ba42d16d6d"
+    },
+    {
+      "path": "Resources/Farm/PettingHeart.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "736d63827fa8bdff73a1700bb2b5646816be90fbf0377df10a2e6ed98ed32c6e"
+    },
+    {
+      "path": "Resources/Farm/Layout.json.meta",
+      "bytes": 155,
+      "sourceSHA256": "1559944b5e0989514a93f8f1c7dbc9fc409475883652e49d43aee9c572dcbd49"
+    },
+    {
+      "path": "Resources/Farm/BlossomPetal0.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "fc0bfa348a07e58e0232ff4eda27c8e89901f83b4fc17224ce5f47068dbe1014"
+    },
+    {
+      "path": "Resources/Farm/Animals.bytes",
+      "bytes": 392423,
+      "sourceSHA256": "e1029156368dba483a1cb8fb6fbb529384db4ab195019422d2bce87cf9ff5244"
+    },
+    {
+      "path": "Resources/Farm/BlossomPetal0.png",
+      "bytes": 4130,
+      "sourceSHA256": "a8afa877e5cc4cfe65472c247bfad69a9972d2e5ace2a6d4a47e0df553a7dbda"
+    },
+    {
+      "path": "Resources/Farm/PetalPaint2.mat",
+      "bytes": 482,
+      "sourceSHA256": "c1b9684ff8b13cafece5af1fc056a27eeea2ed17f7691ac19308857aa21f81d8"
+    },
+    {
+      "path": "Resources/Farm/HeartPaint.mat",
+      "bytes": 481,
+      "sourceSHA256": "570ae183ee201ba5af25e39769dae5c97ff95f7faf15b8b283c40bfb1636f27b"
+    },
+    {
+      "path": "Resources/Farm/BreezeSteam.png",
+      "bytes": 5697,
+      "sourceSHA256": "86a8dfa1334ab1b3a8edeb2989687f40df1db489c9811aef84162a9f567ef1cb"
+    },
+    {
+      "path": "Resources/Farm/Layout.json",
+      "bytes": 5587,
+      "sourceSHA256": "359e6940355c0612b71181cab9e0958611a67ae576e20bec6cbdcfd8d4c7f1b1"
+    },
+    {
+      "path": "Resources/Farm/BlossomPetal2.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "745e87635dcb9eaf8ff05027d2286cb269bf414fac437547ff481378b618b2f5"
+    },
+    {
+      "path": "Resources/Farm/AnimalPaint.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "c0714df6bf9123b1a1dbcf5a72db5f34bbc3de892e804ae66b99a3857a81e04f"
+    },
+    {
+      "path": "Resources/Farm/AnimalPaint.mat",
+      "bytes": 374,
+      "sourceSHA256": "81ec38dbf5bd85d5056013e3b53cc8d803fa83f099c7c0522eaeab7cab8676c0"
+    },
+    {
+      "path": "Resources/Farm/PettingChime.wav",
+      "bytes": 21212,
+      "sourceSHA256": "749216ab9d20fd221333729fad6dccdbd2e6c5ee969d2be1417e29345f7e4b81"
+    },
+    {
+      "path": "Resources/Farm/BlossomPetal1.png",
+      "bytes": 4108,
+      "sourceSHA256": "785b0937e96edcee2b331caca0de18574f385371741663c3c9132b3144d35e52"
+    },
+    {
+      "path": "Resources/Farm/BreezeSteam.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "ef74cba70570f1d5c4d6d149de88b98ae0a20ad0fd2dfffdf74020d79385b1a0"
+    },
+    {
+      "path": "Resources/Farm/Animals.bytes.meta",
+      "bytes": 155,
+      "sourceSHA256": "b74e17a8e0c6a9fe773ed9ec52ff1205768f8a17f22ac568bb09dc161ba8dac9"
+    },
+    {
+      "path": "Resources/Farm/PetalPaint0.mat",
+      "bytes": 482,
+      "sourceSHA256": "6a7fe119ac6acef81494e430eef2779fb9075b1a88eb4f9e8b158d52c05006ff"
+    },
+    {
+      "path": "Resources/Farm/PetalPaint1.mat",
+      "bytes": 482,
+      "sourceSHA256": "3dd4a533fc9be3dd43da5f9338d11abce7d3dbc7c3f5bd474b967b27d1da6aff"
+    },
+    {
+      "path": "Resources/Farm/PetalPaint2.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "f9326762eb0da11c3e5f61ccdb2233874a18e20a1ba96d9702129b88c26fecbd"
+    },
+    {
+      "path": "Resources/Farm/PetalPaint1.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "cb288eda5e09d0e113ced273c412d5df70891c1c5fc22d8f573dc9d0d9d12c20"
+    },
+    {
+      "path": "Resources/Farm/BlossomPetal2.png",
+      "bytes": 3388,
+      "sourceSHA256": "cf624b161b793c311d7e25d63290aab5b37298c835e1c8e472cddbb543ae3e80"
+    },
+    {
+      "path": "Resources/FarmTextures/9d96aac21a86168c.png",
+      "bytes": 31325,
+      "sourceSHA256": "b7a4236db4fd247807056be38ee4b4c3c4928e062ef885531c73d9c065a87745"
+    },
+    {
+      "path": "Resources/FarmTextures/f530158debc6cc9f.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "ccba70edd80196841e892c5f2427b85819c854203372af0887b3b8ac6f4327ad"
+    },
+    {
+      "path": "Resources/FarmTextures/cb9e4b2e19afe630.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "94bb0ee6f5a80c976870ec5e3e9d01e23c4594a8bcfe3e4f30ec7771e845153b"
+    },
+    {
+      "path": "Resources/FarmTextures/00a55cad1f111a9c.png",
+      "bytes": 48522,
+      "sourceSHA256": "67c404a2b62f4df0780a3075240fd0f2213ea48f90de06e49f5d12059fc9e36d"
+    },
+    {
+      "path": "Resources/FarmTextures/00a55cad1f111a9c.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "795f3e4db814b96775058a4452bbe79b76a6a0875bff261ece158499fdb36a2f"
+    },
+    {
+      "path": "Resources/FarmTextures/f530158debc6cc9f.png",
+      "bytes": 69892,
+      "sourceSHA256": "300be9320ede22ac768e3d3097f67939630a94377b31172d19fdb34936fe80f3"
+    },
+    {
+      "path": "Resources/FarmTextures/eb9b3024e59e595b.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "bfe0fadc3013c09dc5de4668b8f840adc92cd222823c1e5bf7b8fa7ffaa54664"
+    },
+    {
+      "path": "Resources/FarmTextures/775be7218326f7e9.png",
+      "bytes": 45225,
+      "sourceSHA256": "19eee98c4084c14e9d2a16e595238f725045a1bf6e9fa1b2a1ce3d251b1d5301"
+    },
+    {
+      "path": "Resources/FarmTextures/18dca56d0f3fa562.png",
+      "bytes": 12913,
+      "sourceSHA256": "3083b28bc54c9c54570435efe5b0b3552facfc91cb121c256c0abc8da4c62f34"
+    },
+    {
+      "path": "Resources/FarmTextures/775be7218326f7e9.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "bbbcb6ec152e040c5cb098cee87c31ca1d7122c4c5078cc8c64f6938252e8bf1"
+    },
+    {
+      "path": "Resources/FarmTextures/ae5a2dc0b783be36.png",
+      "bytes": 56553,
+      "sourceSHA256": "74677535ba99146873ceb9486e3f21ba7c5f1be4c7db046a630ab60f141ef22b"
+    },
+    {
+      "path": "Resources/FarmTextures/cb9e4b2e19afe630.png",
+      "bytes": 67246,
+      "sourceSHA256": "2ccaa62989a01db755cdeda8f8f69270aede7b2adf748e806969ba6e23314636"
+    },
+    {
+      "path": "Resources/FarmTextures/6c435ae72db869b6.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "7ec50a9a2ba8324dd761f0c29928cacd3f62c83b54d93d5012d09b52e6782743"
+    },
+    {
+      "path": "Resources/FarmTextures/18dca56d0f3fa562.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "f2ae42660401277ec099d3207f14cbe1d349a23bb83e87980c425d151827f6bf"
+    },
+    {
+      "path": "Resources/FarmTextures/ae5a2dc0b783be36.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "b44999e50376a7c5b168f9dd9fd72115e9deb93f4a518048b05c8e01bb7d84cb"
+    },
+    {
+      "path": "Resources/FarmTextures/e1869837bda5c769.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "de4fc4bd7f9edd8c3af101faa2992512cb07e5353b49754ca1cb63ad24c5dd1f"
+    },
+    {
+      "path": "Resources/FarmTextures/9d96aac21a86168c.png.meta",
+      "bytes": 572,
+      "sourceSHA256": "4251f2a8ce4bee122b8fec30e6b9db52cbcb814d2292d82ed05a582125cf432c"
+    },
+    {
+      "path": "Resources/FarmTextures/eb9b3024e59e595b.png",
+      "bytes": 36879,
+      "sourceSHA256": "1b2c923081425e2d314e7bbf3010b0a8f0df55f319152d8a9f04c403c1eb68a7"
+    },
+    {
+      "path": "Resources/FarmTextures/e1869837bda5c769.png",
+      "bytes": 49172,
+      "sourceSHA256": "fe0e067caf50c86ba462d80e87b65b07113728cece57f804a90102ff2563c010"
+    },
+    {
+      "path": "Resources/FarmTextures/6c435ae72db869b6.png",
+      "bytes": 62929,
+      "sourceSHA256": "1d90331407522cc22b69ea43f061d15998d26b76eee01d873e1036107a75b7ea"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-00611bec97cad4.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "65d062b5dd579d6434f1ac922a27a3e249b4e306ef9e5378eeb07e4637cdf396"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-90968ad7bdf3fb.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "52ddbeebb2f3647abab7a75c7ed15122e10e44044107a6839c52b75a6bf5091f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-35f7462fde9cf4.mat",
+      "bytes": 1224,
+      "sourceSHA256": "391f7ba451cde4c05cd2aff437cf541aab5141bd8481ac24bbc04c51c11445fa"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b906eee817ab98.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "a647797c2b62d3a6fbccbeb9a5aca0c0846ae03fc89ec0bb61d3e9e88e8e524e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-03a9e2a195a2f8.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8b1d5cbfcd5b90fb86b55abd673d62129f08847e19e837b9605378c24f89f273"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c192bd7bc2a365.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "7dcffd1a122d50835fe7bec7371ca6ace9f87fe5f7dbe8c2d28ea09b385a388d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6dae75f849b5ae.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "1f7a1ebb8c7403b8883b9901143077f2e3ca390fa99f18427a5997a5221d18eb"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4eef38a1ca5a76.mat",
+      "bytes": 1247,
+      "sourceSHA256": "a9e358bfa9975d007699b974a1f0157c4ab542dfb970855bdd0af90d34f76728"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cd5b5937b5a9e5.mat",
+      "bytes": 1176,
+      "sourceSHA256": "291ee1f1fd00262dc116c9fe63c2e9e083585ef37bfbac499d4fca22f37bd5e5"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ad0ead3d03caaf.mat",
+      "bytes": 1178,
+      "sourceSHA256": "f48b8857224c191e203bb589c73299978156f44f11432c0df0d91e9e2248f770"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3424210bdba04f.mat",
+      "bytes": 1292,
+      "sourceSHA256": "3c1355661ef9bcfcdaf86b49b347effea2f27f1aec8b6f8237d67166a39b85af"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-230c405b9c9541.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "e6d54d6d5b0b8d998dc74100ec841bb1606f9ba548cecc141103e834ad9254f6"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-df623796e8004d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "df8cfa83e87aa28179fc92c1bf3823380cdb41ade09514d4419e6da2b2423698"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a2b1964c2f8d2c.mat",
+      "bytes": 1219,
+      "sourceSHA256": "2ac88691215f941e7f302ec3c48a9b854f4aacb81780f291561b4b12becddfa0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-26ac051a4a986c.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "dfa6fc5260e10b8d80868402ba0eba4294badc88ca6dc3c6cbb04e103ee9a42e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-5d60755fdded6c.mat",
+      "bytes": 1214,
+      "sourceSHA256": "fe04d55daf95ab5b6a2d4a50b38db5dbba3c9eef46cb17e3d4d53112ab20b752"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-376b5e264cd575.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "deeb38b3d2ddc051e50c352ac0d7661b71224e6a66a1abf137b52950f94ab071"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bfa84962a7282d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8685a5328fa8ade90eb621cbae0063c5dd4004c181e2622c196bbee4e4773962"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-8de99d9ec6c120.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8b4d03c88fc5a91ac13a7e873958ff8148755b6a32c512bae9c68416be95849c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-837a8467c7cb42.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "b0a3334ad42afd888c8165f170f90d088d3aba4c755ddb6a9ccf6f8f5ec5adc4"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fca8a7a36cb95c.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "7f9550504646414aa26e2b358b00ec60d0b7f9bf2c9501a20e353064ea3d66a9"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-d4365566beac0d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "148b273765f04e4ffaf98ba9f150e0fa1997000e27e05a89f424a95de0232df8"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ca0c8e006f6e03.mat",
+      "bytes": 1223,
+      "sourceSHA256": "6ecae86473bafee07b45bd71d0ee7e6d73d8eb0ec5c729ae532d0575f1339597"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-329ce83bdc4401.mat",
+      "bytes": 1225,
+      "sourceSHA256": "330b0e42ee964fb473609e379276a77dda0c2d1026b13333688afd4f5375afe3"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4d2cc23eecffff.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "ee21a3f03fdbff6b5d5281974e1214f0dd22f812413f0fe91432871332da3792"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0d62b84a191a7f.mat",
+      "bytes": 1252,
+      "sourceSHA256": "14752360e94cdff9adfa35ec4dff2d528174268715ac9d764a073fc4308d5e4f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-39bb5654634028.mat",
+      "bytes": 1259,
+      "sourceSHA256": "40e3c991898832ddcd24b2b85e5b53268715f257e785280d3a4e12ec755c94f1"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-11bc410611a055.mat",
+      "bytes": 1195,
+      "sourceSHA256": "74696445028f61e0a0393d338c40cdf38bef6d88a69f82b7ae313a5c366f2f3e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-53c85608bdfc6a.mat",
+      "bytes": 1225,
+      "sourceSHA256": "b565a0c6083010f272207d18f5ef5b5fd679e7f33ae922b85ac9143dbdb2ce76"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-318098bc0aea22.mat",
+      "bytes": 1254,
+      "sourceSHA256": "3a76879520ca5e47ab07ba44b8685fd2dd5476f122d44df38cd408f73cddd7cf"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0518fb885a3112.mat",
+      "bytes": 1225,
+      "sourceSHA256": "5c276433ad5c34f0b9baf50f03bf2817e1676ab59646a7013042d4fc840e7980"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7c984ffefbcd73.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "7ff20cd03b927777cb2d18a3e806a5e0856ba9915b42e665e7f9f5a3684118cf"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4d2cc23eecffff.mat",
+      "bytes": 1224,
+      "sourceSHA256": "c308273bdfb73cea535fcfac369a24504930030f47086e24aa54c25047cd8992"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3dc96315fa35ad.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "c212a5307a5f389a8d22f1aebee18a95d627d70b49911ae75aca667b48e9fdd9"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e92f8b7ae40911.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "ec72355315c06b54efa79592ff0cd63138da15394b98c63d29e0d6e278887309"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e75eeced24a85f.mat",
+      "bytes": 1228,
+      "sourceSHA256": "a1e44dc4641cdcbedb3d75e628e041b32e18ed29a59723b536da760d4a51c248"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cfeb87e27ef618.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "b48b40c2769936969d35323edc746522c47b2b532fba2a19cbc8d54cb6d9accd"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3dc96315fa35ad.mat",
+      "bytes": 1298,
+      "sourceSHA256": "a105fe6f1e669d2e650e9999d93c49cfa4bf2fb5377d24056261189a96801aac"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-d8787235ad5a42.mat",
+      "bytes": 1181,
+      "sourceSHA256": "1d36c605af8251e5f39f166e0acbf1718735b839e10a17fba12cf8da18c1d69c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-96aa2009c3d1c5.mat",
+      "bytes": 1227,
+      "sourceSHA256": "b8cf8ceb16d169b680861a43ae92fd5962555620d6ac99f125750f503cab6b0e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-31e0e0c480a7be.mat",
+      "bytes": 1259,
+      "sourceSHA256": "ffede72b606135c5c5fb6773f91a25459f25460f3f58345c75403f3a1b56695f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-554155182153fb.mat",
+      "bytes": 1180,
+      "sourceSHA256": "ddf75566a934934d8871f68762a901cd93daa773b857a79de69da5f130b7abff"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-5d60755fdded6c.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "21352d27af76aba58bbf66f754fa74e6b35deef3533243e302a86d4aea4e996b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4dc50d86950cc0.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "9035b9802d2acf1e081e951dbb7470123d9708153611e644988bb51afb62a06b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0997df0728473b.mat",
+      "bytes": 1181,
+      "sourceSHA256": "3de6b9bb4b41e2d1f9b972c697ff91d02edea50961bd1e86ec8eae30968fede6"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e8bc753b7febd1.mat",
+      "bytes": 1184,
+      "sourceSHA256": "41c6c9940fad27617020a7f98cb004f987d06b5ff19e8b26697a0491f2825c23"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-d7844ded55e65a.mat",
+      "bytes": 1279,
+      "sourceSHA256": "e1c48b741ba07a995e9c78ffbf8c772e2324051c0b9e9acffebc754d9aa6f091"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-79b588e564ee9e.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "03f84f2787f6542d134df7f1963233e1efa60618ca777d21b9b4d15b50b63b9b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-5ea3c9e5171949.mat",
+      "bytes": 1221,
+      "sourceSHA256": "31e243e1c9f5580dfecfe24fc0eabe6a5559128223d0c46366a333710f40293c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-98efc5e07887da.mat",
+      "bytes": 1273,
+      "sourceSHA256": "38b7e3b0875c54fcc9f2b65ded344f6512fd9ac04da948cfadda535e7f7b2072"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b7355d36fd17e6.mat",
+      "bytes": 1174,
+      "sourceSHA256": "4b464da51952b4801e4b08036f5f1ac9d1081b0d10133a1939a295f7652cd628"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ec76bca2dd44dc.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "9cc324fd0fdec6f60ed2a8b18b0f5e097dbfdd901810db5cdd9ad15f35b5e235"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6ced6865b87701.mat",
+      "bytes": 1223,
+      "sourceSHA256": "01d853bea4e062ad82b8ef3793419a2cc4fd84a3a60dabab2c0cbac0bd3a4cca"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2a0e422d3a6d29.mat",
+      "bytes": 1188,
+      "sourceSHA256": "59bcfc125e52a212a034e9433778cfc243512a202f12b1a222f4d06e2168adba"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1fee3e307fe88f.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8456478f0571a623cf43e85cfdcb8152eb0dd0cf1b2c2f8f9bf43ad67fd0d845"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2fd56cf136fe6f.mat",
+      "bytes": 1180,
+      "sourceSHA256": "c3ca543dd4f3638dcfd7eb6d487565aa5aed65a5ae1f79aa4f8a7f158eb51a39"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fcc9e0953023da.mat",
+      "bytes": 1277,
+      "sourceSHA256": "7b2c2e7e4353738b8cb854ab2e4b7fe4e78d85c4b420030b313d94d498ed89a5"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-01d93e7863e9cf.mat",
+      "bytes": 1184,
+      "sourceSHA256": "8e7d01a165ba1151cf387c144ac7fcae9c3786356a5474dcf85a651d02238973"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-97fa41c79261dc.mat",
+      "bytes": 1265,
+      "sourceSHA256": "f7c3d6ed615a32e3c4ddcc790995b4a7152fd772ecf13f5115843f67bdc456ec"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-84b91c26558a38.mat",
+      "bytes": 1256,
+      "sourceSHA256": "dd0862a3d3dee8ad940a497e8d330a2cac8cd6b7220952a1c91584ea5999f81a"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4d9425b6854d8e.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "983ba8b28c0eb7bb56b3f412190b3031cedf3baa2d1cc73a6945f47022204ecb"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-00611bec97cad4.mat",
+      "bytes": 1259,
+      "sourceSHA256": "dbeb3dc685fd13134efd22b7f4bd4e73d30159ad21e6e585196a16e3ca7bed1d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3ee0b6fe1ff786.mat",
+      "bytes": 1252,
+      "sourceSHA256": "5e79b00852852118384ff75be7d4b926f55b99ca70fb755a46490498bae7ff0c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1af3d7ea974efd.mat",
+      "bytes": 1243,
+      "sourceSHA256": "dbd51c76dd0f18cdba57ce3893acead6934bab64161a97aa46ac4e7f3108ab39"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-02b8dd63dad3e7.mat",
+      "bytes": 1273,
+      "sourceSHA256": "856bc5034a6e5581b5b95061efbf847b6c8801b0c9df785a8c70c75a353a4eb8"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-02b8dd63dad3e7.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "f0ab5928ede54dcf9e41b68e4ab9f5f85f34c087c1ece0350268e571e733abbf"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6f13e63dc66483.mat",
+      "bytes": 1278,
+      "sourceSHA256": "18f19729b747da0328405861406d3f9f89d87a3a79fc7b4ecb343330c98b79f2"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c89414c82d2baa.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "0c31457ab51b181fe457b5ebd71812499e24213e2773d601f64b38ce52c94008"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-11bc410611a055.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "85a8c87bc4458e8d45f19822af93bcb6587325cf57d3b805034ac3580c9e4a33"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7794f955cdc50b.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "09c2d8a4c9a2e81f66f45d7091c3a02f4ba77b6e58f8ab9c0f24cacdd8170ef7"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-475973580b2cbb.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "cf21521ff3b884a526aa607540065a9ff344d4c93d337a221db8624ae5b993ae"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a33159a6746139.mat",
+      "bytes": 1182,
+      "sourceSHA256": "7bdd84625872dbeb5f034301872784e4102d858cf6034b1d5c7a72b8b421fed9"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-75d17bb21ed84a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d7fdd70b70dc2badb9c7d6f2a2caa776d4f5fc9c6b95df6d57b20c2a19ac0514"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bad7a2a76acf8b.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "61cc22add9f35e134b63fd3f07cd7da428d2f8961b7bea982def6e6edb5dbd19"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-8399c07a82d593.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "f169510fa84ad3a878392588b032203f1a42b9710bd6ba5b9e2503c34e509e0d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1ae63f62109108.mat",
+      "bytes": 1180,
+      "sourceSHA256": "5b96149d8646f6f7733a1d1fa40b4ef88cfe9925d02f1bd3f3e6262a74cf2057"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ef3927d006c149.mat",
+      "bytes": 1270,
+      "sourceSHA256": "ae6fa6a8cb38df5bd00fd138fdf0493d2b0c91b081775c114fd7becc92d4f0ce"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2d01c6d00832e9.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "f67ea78f0b0b9abb52c1a59e025bd5b11d4908cc0b6763243e52a08556af27ec"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cd5b5937b5a9e5.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "2bd85eec3ac497e982289d313aa84eb315be42dbf46219027016666cf15c3edc"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ef3927d006c149.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "0bba4f74b71c73a4f95858c85315e6dcc09a8b64682bcf94b9fbd9e3c545d62f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-50ce4cc3b05c88.mat",
+      "bytes": 1265,
+      "sourceSHA256": "34b35c73702448d8a89a7ad7b1ebcf7f71be6dc104e0699eeebd082bed9e1ce0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-56a0d5da0a481c.mat",
+      "bytes": 1242,
+      "sourceSHA256": "f889a0b8b4077e37aa0e7dc7dcae899f7ff3bef537eb9cf87ed50ac4f110e276"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6f13e63dc66483.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "c654f40e1b33ddea22992bc0021e64515af54423ca670cd26cd4b59bde4be3a0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4dc50d86950cc0.mat",
+      "bytes": 1242,
+      "sourceSHA256": "229862050098b7b86ec2488f581ed894ec11b340cd1a53204527967b1294c561"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cc9da29b383b4d.mat",
+      "bytes": 1244,
+      "sourceSHA256": "1f0215583fac6ed9864b49fd173accddf4b638a3573afaf41049139ea0413924"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e2b88f8cd37de8.mat",
+      "bytes": 1193,
+      "sourceSHA256": "aeae17576c0c44d0d19fecc8381746dd489f743e3a34cab07ffeae7194deff1a"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bf8f4f55702fb8.mat",
+      "bytes": 1296,
+      "sourceSHA256": "0bd1dcf43f61cff04d65c1f5e46ea43841f9aea84ce57871e9bf59c47ce3fc9d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-dc458a26552faa.mat",
+      "bytes": 1280,
+      "sourceSHA256": "3778c1784a0bbfeb38ead86dde93e90e3e6c02c87650f279919a6590be1c7412"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c4d9a4ed325683.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "145efb9ba27b639239ab16fb8ed588186b9392f38a4f7c2fcbcf57af81af9ce6"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-56a0d5da0a481c.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d555480a571151fab1d4d1dd67e2a6fc965f31731163a57f26451dcfdf04d0de"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-327193ba1a0df5.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "a4aba31757a60d626ddeb1afe9b2ccfd53f143fc138a664abcdc16124e3a57f0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f04cf6243b45d3.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "b55d45234cd4bc8bb46f2a1cb231fcff47e9cd2130960c6bcf18a81d75e917f3"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3648f27235ce90.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "005cc6fea56f64a41cbeb319c95c8546e7540d9a58f8fec999ff322e483b73fc"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1ae63f62109108.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "202440d5f6faf5acec4299e3f83bdac75a3f53f0c43f3b8766778cb9d7f57815"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f9e8dd35e9cf91.mat",
+      "bytes": 1252,
+      "sourceSHA256": "6f5543caa839f1af3bc215548452a7888e798e1db5071bbf55dbba03df9a6266"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-97fa41c79261dc.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "97c9e17aac6379c06898bf6e8f651104c60c6d5c45aef7aae6ab1fcf4f445f83"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7794f955cdc50b.mat",
+      "bytes": 1178,
+      "sourceSHA256": "61e77e934296f669eaaae0124de65d77485748955717975e67cd6d80ff570186"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-36f199c4f6185a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "9075667361e670c65f0ae3e6deab504329153f1f19d6d89ae2e7d19fa0ac1f39"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a01958ce826512.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "5ea2e6869a66bd133cd38629c0cf5f2d308cc06358b1c7f97e97981b71c74565"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1f4e5d5c67c45d.mat",
+      "bytes": 1275,
+      "sourceSHA256": "8ebda85b688991845c6f7302023a95541b853e143c591bd3a169cb59304fe5c3"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-5e4c084993d4fa.mat",
+      "bytes": 1252,
+      "sourceSHA256": "e44a358e485b68bbb44e809ca80aa9b9fb5bf3167f9634cfc2fb0b720ba40e8d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-034ac18b3a2b8a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "3e04e31d288deed1c4635c862183760d55d4820c2c9586bbe18384fb3e1a3541"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-98eb0571fcd295.mat",
+      "bytes": 1225,
+      "sourceSHA256": "e636656cdf9ef6288c05dfeda179484246aebb11bfca0bae5b37f26970741076"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-d7844ded55e65a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "cc5a5d9d26bd3b679b3d615f7a571deaba602f74ab7e0bc9c5a61770d619f959"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-d8787235ad5a42.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "4c2089d45244251277d089161971862e4b6f16dcdb1f4f46c3309ab93b130334"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e7e14580aea41a.mat",
+      "bytes": 1281,
+      "sourceSHA256": "265dd35b4d81a70b0b9b2dd36f4a5763c48dac8527a5eb25a54c984632bb7162"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1bc1c1c61108ac.mat",
+      "bytes": 1277,
+      "sourceSHA256": "6dcb06c54f8dea691aa23e32de83ef6d2b6d6c2a1af382f43aa1498b0dfb8f6d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-39bb5654634028.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "de902c3b34724aff1910c23aedc0d46414bffa43b449463b340947fdb9fa7bcd"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f60376dac5e571.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "fd73a787190a66568bf326f4906915871b74bdaf91a53881e18b53ec197b7ab5"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2fd56cf136fe6f.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "b2cc5e6c281f2e34c5fe71043be9259a0ee1f06bf29bced83341686f3b1a3afd"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-849e4580894e60.mat",
+      "bytes": 1255,
+      "sourceSHA256": "978220ef01d22f3f44914aedbcfb62fb131659111c9fd136a846416fdccb33e5"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-889f3d7e3d7e63.mat",
+      "bytes": 1193,
+      "sourceSHA256": "5c19eb8d36e1092fb3348293bc7e29f261fda6e19771dd9b2bd2806903f5706a"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b1a3a524ef2a95.mat",
+      "bytes": 1197,
+      "sourceSHA256": "05500964e6fa2b5bff3bd2c32be24bfabcd8e6341fdd414609966d0d2ca8b8e4"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-99c73166562054.mat",
+      "bytes": 1252,
+      "sourceSHA256": "5201ecc30d28957848dc68086191a9fc0bff27919309ddf8b031827996773015"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b3ab501c715797.mat",
+      "bytes": 1182,
+      "sourceSHA256": "426be96042dc1354af82df070117828ee2d9c955254b1812da49d438816650a2"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1fee3e307fe88f.mat",
+      "bytes": 1180,
+      "sourceSHA256": "7fcd5d9e88cba80338fb39124b3564f9eaf0c20e483414712e6d04aedf916aef"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-98eb0571fcd295.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "5fda70a89803e545e1f6c7426d9245938fbb177074801909ade4805953960c62"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7f685622f7ed79.mat",
+      "bytes": 1234,
+      "sourceSHA256": "dee9e337240e5961684edf1ec36ee0638e9be878e6b905740bf44ff046e1bda2"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c82ef0c5a2125c.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "354c481c24232eb4c4408090797637b87f4687662156480f2e4ae5b8c0694c54"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-117f52aea497a8.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "0345653c6f9a719aff20ad1761369a3dfb28ee5d9f695f54a41e02f618968a7b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4eb86a3939bb3d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "248cdd5a1b159c2a722438e00fd65c19ceec0d4cf5bb092b385740f2e4744d64"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-de24131bb571c1.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "6b979f3e8f3672534816c32853cd9bd9ec67d33f46942b88bdcde2776ff2beec"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-8c59bf82738311.mat",
+      "bytes": 1175,
+      "sourceSHA256": "047820521d2aef86684aea55646d9fc92504381c5f545f9c8b00dcfe5883a2da"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0e9b32d4b81376.mat",
+      "bytes": 1248,
+      "sourceSHA256": "0f31bf416cd7eac7149c1751f77341fb78cca1a81b00cfcacdb1dc9b57cfd888"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1c2be837860a20.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "cafd17053b56140b5cfb140d9ea5aa8de775d16a297db42b063ce224bbf04010"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bf59723548a7b9.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "229c78e1f0ffb7890d14b7a031780e7d31cef2eaa7425b90fa586855db4f34d4"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-18926d4721eb5d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "da4850ec0bf94fdc1ac363262f32d6454af3cbfe2071e5e78e867bbb401ffb03"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a2b1964c2f8d2c.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "969ee91c6fc1beabdb5608f652c64c902f8fdab9dd41c222ac0a1630e9922f76"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1fb785246b5e45.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "fff09952c29f139259cb7685bd107eccb9549df1e189fb709472621f3f7ed4d9"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-57153e87630a9d.mat",
+      "bytes": 1225,
+      "sourceSHA256": "6b6dfec59039eba821f59d2a48d374850e127e0f7ce8c1e4775e71e33db31119"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-53c85608bdfc6a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "51deb453af0ac6f55e5ba83830485cc8cb8972d5c09175ae2f7297988cc364bf"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-31e0e0c480a7be.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "c4db7230aacefe37162db85b71d6b8d1fb9f604d85f5627e4fb8f1a9a60400b0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-df76dd14f2a1ab.mat",
+      "bytes": 1218,
+      "sourceSHA256": "e95cc24a6df9e52ee52042cce35f86d697e9ff7cb080be09074eb2f391086276"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-76310f0e436e48.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "7fa9f957a16e07997e1c107d013b43dced7eed316fdc78a824b611ea5ead2812"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-dc458a26552faa.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "848d14a76f4716453adb494044b50acb7520f31c76318b53317fb51ddc702e3c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c89414c82d2baa.mat",
+      "bytes": 1277,
+      "sourceSHA256": "8aa3bff09e4bcf82181340cdd78455462592e706d6603aab5f5355a5d233a3a0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-62d6b6515bc5e7.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "401235a1cde2742ffd78da830633fdfeb63029faba597f5314994a2f59fd940e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b45ef4607d978d.mat",
+      "bytes": 1178,
+      "sourceSHA256": "8e91c35852eebe3b40fcba1c0b8a3c68637dd39d766da4078bfeb100715db58c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bfa84962a7282d.mat",
+      "bytes": 1261,
+      "sourceSHA256": "384a54c1591029a1c56989105c77fc55ab0d442fb3f87f158d253a89cf98b99c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-907ee3575c5110.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "f9b44b8ceb2255bfc70ffd35d2662f3560162ea0ea345854da767156f1f3c840"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-087ca079758334.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "ab133128be60c653dd10431816d4ad3f1a83480f37c2b0071870a568faaf4634"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4d9425b6854d8e.mat",
+      "bytes": 1256,
+      "sourceSHA256": "eda8e0dee75f660bdc7eae3b9ca9e551edb874e7064c49e19b65f6f7e8f6ec2a"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c08672746886ae.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "807469c9bf63a6d55d7e9a393efb424327baf05196a3d8f9c2fc29ad6381fdca"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ad0ead3d03caaf.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "09248ec038a401ee879e0cb629ea88f0395de6646c1aed5db7cf2f56a72120ba"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b7355d36fd17e6.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "9c2467ee724812a33a037a6fd586db302ae020ee4d236f9238d9baf10a7fe7a8"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-33639b0fa28b79.mat",
+      "bytes": 1287,
+      "sourceSHA256": "17c30e97bd0b9337ff0d521ae5b831cc97ec59619ddfc8a7546a02a6914cfeff"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-676f8d5b947db4.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "7a484bfc94c1df610867583ee537f9138a0bab435e789111a74790c2f2e84b71"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-5e4c084993d4fa.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "3f06b04723bbbfee0d5693dac93d1053f57af04b579bf9a05953a8faa27b0527"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-59b41506682803.mat",
+      "bytes": 1246,
+      "sourceSHA256": "e8e59159ca57c6070e058ab59fe773a9020fa68c268af5c8e2ab8b7ca682e65e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fc96bdca205243.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "1bbf5bce826fb77699759762976ea92ded88f60c3ef0103992607e28fcfa139c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bb4a9e5d505050.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "3bf36abe5584d97c6f97c0d8dd94e0a9d7a3a187f1a6461ac53c127506cdb8b2"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-9b636c0083742f.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8ddf383b98a99784d76ce87fda561c09cfb3b1b8ba3c80518f06d581ef245cdf"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-96aa2009c3d1c5.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8536fddf13a0937c1d01a1421d450056ca63a67b6e1b43105b0672a277c42049"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a2b73e8f49a2f0.mat",
+      "bytes": 1195,
+      "sourceSHA256": "fa3ff331e33c96f9b018f265589f1bccf88804319ef74d53ab27743f4a898c25"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7d5cbb99788289.mat",
+      "bytes": 1236,
+      "sourceSHA256": "9481103eb0bd9c672e897890893838c1ef2c927640ede781f6fb4b6bfab3f488"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e8bc753b7febd1.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "b7a66e0e8b25020205199a40dce157c143637934cd55562399d7ba8df61538c1"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-329ce83bdc4401.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "4a14232ddfe6e083063715ff577f4c2eb7cb65c2756973ed0e4fd4226d8273cb"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c7b4bd012ef440.mat",
+      "bytes": 1191,
+      "sourceSHA256": "edc56c09da539f25729ccf829eca4e934b8e1407e7aeaea29dec95135c1dc3f8"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a5261a478c92c3.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d9e8e5a18d0d37ec76208e98707a3a6a00d3bdc8cef61679d63111e6b10469e0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2afcf8eb2a1a8b.mat",
+      "bytes": 1278,
+      "sourceSHA256": "7c3d00dcc532f4a7a0dc3f74fefaa14d4ae2776226e612357699af30a07f99f7"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-75d17bb21ed84a.mat",
+      "bytes": 1250,
+      "sourceSHA256": "8bf3850375363478b2d82c145755e0c110e4b1600d283470f2eb88ce25879ce1"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3ecd90cc5e2869.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "b9f9a8b71abc20912bfcb90c35aaf41c2f9f9642241ffc914ce4759116769698"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6dae75f849b5ae.mat",
+      "bytes": 1234,
+      "sourceSHA256": "d5b84dc9d70b1ee863c74485786c0836afdf01d652cd9594df23dccd01056242"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ef1ded9307b51a.mat",
+      "bytes": 1218,
+      "sourceSHA256": "1cde02be55ebe9ef0fdbad071e0be8480efeb9365cc650dfaa2aba32508762cb"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3648f27235ce90.mat",
+      "bytes": 1234,
+      "sourceSHA256": "b934061a73c04fc0d4e8c01676c302b36471b90eb42e81cd52af1d838fb47104"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-8c59bf82738311.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "9206727d40ee56185db1a08178b68df14374fe7a665af975a89b3044bbaa4f9d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-327193ba1a0df5.mat",
+      "bytes": 1245,
+      "sourceSHA256": "30e8c037901a8c956d5b0a926a66a082c627ab440ea935ff4ca727ba4a3da926"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e0534a7bc82d09.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "0a4d8d12852837bbdaddf444975285b8562201a42c45656e02254a4bacc32cdd"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-230c405b9c9541.mat",
+      "bytes": 1240,
+      "sourceSHA256": "194b91c8f53038e3c3e25f2781681b147c7317064a544db0d05aefa62c5504fc"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f79159d15025df.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "f4973416bc72356356c786244dd23a79fe3ce76178c872317afd623e3678370c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-67bcfc568f1b17.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "eb065e64e5b60f61b369d98d632abc26b04c7a4ffa4e59626acc4693f6322443"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-02ff1be7eb2640.mat",
+      "bytes": 1256,
+      "sourceSHA256": "c28a80fc998a742ecffd83d773e2ec3e4b1ec9a66e5af8c98f83fea7e1bb62f7"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-79b588e564ee9e.mat",
+      "bytes": 1178,
+      "sourceSHA256": "20175477715ce74f2fa7618045ad85d34bd24c96086721ba88f63f9ae0cbce6b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-277083ea2727ab.mat",
+      "bytes": 1193,
+      "sourceSHA256": "1d7926acca5f835c734435ac14d1e57e805c3ee7bbf37843d78517643766bb16"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cf18da2e432bce.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "55ab17147c009027ef34de58be82d753c41a9c2aa5c0c516159bd184f2c0f94f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-83172cf3db7f13.mat",
+      "bytes": 1255,
+      "sourceSHA256": "4b3c62853f542699708ecac347f6d7cb4ba974e2f1f8c34d52de0c6d995d638d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-de24131bb571c1.mat",
+      "bytes": 1195,
+      "sourceSHA256": "b63d203ffc5947d9b45632882ee7a29a02e1f3dfa750d41227f04185cb70bf2c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7c3fc3a89b2ab4.mat",
+      "bytes": 1243,
+      "sourceSHA256": "fb7e0ec6042919e86185f2edeaaba7d1cbb2292bbb321c0c2f51a057f360d3cd"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1af3d7ea974efd.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "4d86e79907aec875fe62923f006d9f18c1ed389ba9f0d94e860aedc4e1dcdf22"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fc96bdca205243.mat",
+      "bytes": 1177,
+      "sourceSHA256": "d6102bf9b4faf032fecc9184b6141ad0ef82de8261e7bc345f31ecfb2f240fba"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-90b0e3b41eb3e5.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "f096f3ee51d14c5846788c5177f0a0cd639eb8fe39edb2afb7ede04765474874"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e2b88f8cd37de8.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "88dd411eaa2f704890f96db3dfcdfd3243a009faa9fd77a12cdae220f187994f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ca0c8e006f6e03.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "ccb192a2bf6efeb39608fd8828d5965cb7b7f28bc8b525675f5ad6a53df3cba7"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-806ce9b121255a.mat",
+      "bytes": 1257,
+      "sourceSHA256": "12e334d69522b8e9fa90a6c7704df6f513c23a683c9048632b2511fcf8b60dd4"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-81f2c2c42f133f.mat",
+      "bytes": 1227,
+      "sourceSHA256": "8559c65b6af1751a26c9b8dd8a05187d9b6e411c7a4a859533f6d79af313a5cb"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1fcbc0087b56f6.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "0439741f06a52653d935925ac0a6807aeed33cba5e8eee9d472a060670fd1528"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cb79641f8a8047.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "9fc5b4d58c81610639ee0f51213eb8355aa85072c528cfb758264b49ce7c6544"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-10f1bb3e02c0e5.mat",
+      "bytes": 1225,
+      "sourceSHA256": "9695bc9a88194ea3cf3f6e0de07a9857141771727a20e6400f96b56677a831d3"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7f5bb2a1e5cf7f.mat",
+      "bytes": 1227,
+      "sourceSHA256": "6b0c910530388fed510f8604381c3f64eca92a2e12f7edd331b416c73da15125"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cb79641f8a8047.mat",
+      "bytes": 1236,
+      "sourceSHA256": "3d2721ffb9a41d604b98544ff18fd33f9a0e146088c9c5713ebe6c4c95f997e0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7c7bafe3eb2e5a.mat",
+      "bytes": 1237,
+      "sourceSHA256": "1f6815ab03680320609472d31b571ecd9e34b55688066cd9ee3886732c0f8664"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-81500256b88d69.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "2f96d50c6b494de62bf63911d1b0cb238f56b1067d20947a549cce0dd4851f2b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b4708ace433112.mat",
+      "bytes": 1283,
+      "sourceSHA256": "2b379ec9c852095d1ff920f09e0bb38f9db70efd4af41dedae3a7f129cba3174"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7c984ffefbcd73.mat",
+      "bytes": 1222,
+      "sourceSHA256": "f6378b53122e299bcb513cb3dc44175cd5423605283962b273a4af9be792e623"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b3ab501c715797.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "de783829c1be5b6ce63182e8bdab59e8423d61abb2b96457373e954951428492"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0997df0728473b.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "7e5c717873d794b94754fcd51ba7fa6178abb873f837ca566aac50d6d9e6c1e8"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2430d8ca23c3e8.mat",
+      "bytes": 1197,
+      "sourceSHA256": "c076a4a4676b760d8179bf19628144e848a96218549e01859076428f2df916ea"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3ecd90cc5e2869.mat",
+      "bytes": 1218,
+      "sourceSHA256": "bbb41821c3853047956f61be8f555cb7230abcbbb9b3b6c1b7165ff168cc9184"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-192f1423bbc553.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "afae8ce1d2add293b4c1fe3fcbf36a53cac4dc4191d3ee005520eb0efc0edf19"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fcc9e0953023da.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d6dccdc62f737edb78decc85e3bb1b95ffb81c5f8efe483a9a811216f0ccf884"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-376b5e264cd575.mat",
+      "bytes": 1188,
+      "sourceSHA256": "a947e924d1c49361ffadf4ba3913c166182c2a39e6c57b998a5300c1ee7b512e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c08672746886ae.mat",
+      "bytes": 1177,
+      "sourceSHA256": "f36a36bc6184db99f14a1340339c97c9ef3202a5eeb72ad7406df2f27a60f7c6"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fe9a66d190aee3.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "c770fb316d3d4bf8a93bdc79c9ce029c66f616eea0a51e3e72f776c2f274e7ad"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-26ac051a4a986c.mat",
+      "bytes": 1180,
+      "sourceSHA256": "636a50dbedfad5efba69e7369d0e152cdf512fc8e5d00874a894da1dd0068b45"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-59b41506682803.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "e8577f3deecaf6edfdbe49a101102617f2b1bec527dd31b211f5dff556ddd7f4"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6671c623fd6d23.mat",
+      "bytes": 1242,
+      "sourceSHA256": "16b09e8912ce9b5c06b17593f9cabd35b90385c91d679a83308fe3244f79f950"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f9e8dd35e9cf91.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "c1177d9b376161b5506966bcc4da1a93538517b26fb63c3b538a1c58f07395b0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-554155182153fb.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "764e751823e5b4e76ed15acbb6c522f5b93c2ae6ffcf2507689e36a78774ff25"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-907ee3575c5110.mat",
+      "bytes": 1178,
+      "sourceSHA256": "212da190b0bfe875d17972d0e6f7d43b0ed2bac4b98fc9716e2a2efb7e62bcbe"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-05664732b0d3f3.mat",
+      "bytes": 1301,
+      "sourceSHA256": "b6ead704459dbb3d2f23d107bac256b2c05f8f07dd0159ae9a3bd753899432c2"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-81500256b88d69.mat",
+      "bytes": 1221,
+      "sourceSHA256": "35038609e42f27d5ce0dc59f661d38b12cfd506387fbe973809823241fa418da"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2430d8ca23c3e8.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d6d9fb3159bc76ebf62a077cc729e30c7d01a0f389fe7a2db9ca0375661557cd"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-087ca079758334.mat",
+      "bytes": 1289,
+      "sourceSHA256": "d438edf14fd221ea5663bdf9602b8b14a5f88ca7d4b3c886072ea833987d8326"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bf8f4f55702fb8.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "af0cccf4963e56aa97d4c0377fcc616834078e9c3847807aee7b32498336c085"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-36f199c4f6185a.mat",
+      "bytes": 1176,
+      "sourceSHA256": "331d9921062fe0c569c6e91612f241a5f388c08ea7db757730962667859be360"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ef1ded9307b51a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "52efbf36a9a9a656ac50a02cf534ffce103070edbcf145ccee53c2e6fb0c9a14"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-034ac18b3a2b8a.mat",
+      "bytes": 1258,
+      "sourceSHA256": "3b015c02630126c25b020a5d3856805e462cb9bf2c376402fcb84f8965f48685"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6c02fbe099d887.mat",
+      "bytes": 1254,
+      "sourceSHA256": "34459132058fef27af854d3236c0f803d625f710096c7bb557c5a9de6f2fb139"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-9b636c0083742f.mat",
+      "bytes": 1178,
+      "sourceSHA256": "65836197e647737d190b3c767b02585a283ee1099b7e54a1d80b4bb40ef0e29e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3424210bdba04f.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "621abe9c76bfc608734d9773aff05b7c1abb5b36e7ea4486f550ee906c713b59"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-676f8d5b947db4.mat",
+      "bytes": 1195,
+      "sourceSHA256": "f5009f8bb20c1d0d1e7b368e8528e3080a23bd592c3737e30e382bdb101c5879"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-9d6b6da1de13d0.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "dc3d6186671192153575325334835d7c9ba89633d3a4306322afc73847ce2b8e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c82ef0c5a2125c.mat",
+      "bytes": 1258,
+      "sourceSHA256": "1fcd5948f4c8f69be5b43a08efd5098691ec0c48c16710b9a503801b7b78ace5"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cc9da29b383b4d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "7e41e5d58b3f7289ef24b4f01625abb93908f66aed193b6b9f58af81ce1ffcc2"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-61f171d80c2667.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "436097eba792b1b215040735a8a6fdd773e3f418c36648b65c8b5df6f9ac606a"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1fb785246b5e45.mat",
+      "bytes": 1274,
+      "sourceSHA256": "9e89f43e67d50e65527bde11aa4d05ea2d235cc8c43b56838e29320427d10ce2"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b4708ace433112.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "64198a50b910b8ed0c8c4362c12c469d52b641a8834d3f0885f319d2e61999a0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-192f1423bbc553.mat",
+      "bytes": 1269,
+      "sourceSHA256": "beae24f543461ec86a55a179df83bf086a610450afb3f551e0612ed087a87366"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-9c509b2d1be03b.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8ed19ae2987c05ea86001bd2df828b11a8f7b7a2af7a5687b192b686c1ca3c28"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cd110970ed0b70.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "b8450e451d83b3bc581e0aeb7edc503ea9ff6a3f721b18fdc66fdce8050392ff"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2afcf8eb2a1a8b.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "3d6999a59de231f0731557804bd35e9600410716a4266e3da7c16ecd8fb59f35"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-80baa4517e219e.mat",
+      "bytes": 1175,
+      "sourceSHA256": "a99eaa5164f7529f14a4c153f6f90a7a81c456b3ffaadc0aea899a6c02d77e48"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-257f9c92004240.mat",
+      "bytes": 1184,
+      "sourceSHA256": "00f4e132d0485599c197d10722e2b6dc682ed5b31f5a935209812a0a8fa665f8"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-90b0e3b41eb3e5.mat",
+      "bytes": 1273,
+      "sourceSHA256": "739305de820f351220ea71125ab815fc97ded392d1a8cb22b98f2bd18db8f21f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4a2546e6801ca3.mat",
+      "bytes": 1179,
+      "sourceSHA256": "d043551eb5f2277c47f0ce6de1afe836a567ca26f9e9f69fea0477a4493c0f3e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-5ea3c9e5171949.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "6c8a13d06c32e70bfa2ba97c676b037d1eefe91a78d9f4c8c35eb4ea8c2440e9"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-3ee0b6fe1ff786.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "5b859e1bf1dc494ff396811dfda5c0d95e87226a1a66ae8aab752ebad7e5ba19"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b45ef4607d978d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "fb22f11202dd2e7f15e0ff910a2bde02ea0e402336030ca169403b737650f1ad"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-50ce4cc3b05c88.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "1640112f9b864aa6115c6357d5df2ea3df31309393da8650895d326c113aa527"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c7b4bd012ef440.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "37f02e0f291cd021392790ff0f01bf8d104bd46939f9c0566b3742cfc4454906"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f4295d437b554e.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "2c84a0a467f4c7922d3d13f132641cc4c16a68efe40f8ad5603edc9dc013d67b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c192bd7bc2a365.mat",
+      "bytes": 1225,
+      "sourceSHA256": "63e1eb00032be4409fdca73c0cf20ab90cbbeaf59d9da548a055f2d20e0f1a84"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7c7bafe3eb2e5a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "1c07759eb622b4809531e606dd855d7214f2abba1c70ef8bf3d8c0d5e1b1491a"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0d62b84a191a7f.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8c19719dbb60881efa296f3a0486709a55d97df7ebb9939f049c69a5ac32f577"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-76310f0e436e48.mat",
+      "bytes": 1225,
+      "sourceSHA256": "462a05602ade7ae1323da5409ec7c909c53ddf933468b7d37b13a8528191f26b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fdb93c1b17d8c9.mat",
+      "bytes": 1252,
+      "sourceSHA256": "b7a59d607e2a6490dd3a8af9dcec3239096436adf06b2bb3189488f30d9f236e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-9312181df9e779.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "7cee53e8544ae27f29c9e0ab67fcc9191ee565070ad1547471062f2262e02e33"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-73807bf4e5323f.mat",
+      "bytes": 1258,
+      "sourceSHA256": "3b9b15d2f208616aa1727028bfdfbf5a3d0400730e7bfbe4782d2ff1278df194"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-52e56d122b6988.mat",
+      "bytes": 1172,
+      "sourceSHA256": "87b4088e176eed2cc3aa1ccfb468e40e10c3d2a512ab9ca68d0573ec597d87a7"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-587fc68337d837.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "9e5ba0318a931b8098df0e6f9ac8709e2b5db5082ef601143eaadad26a28e332"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-475973580b2cbb.mat",
+      "bytes": 1155,
+      "sourceSHA256": "445d997e114bb8eff91289c3093fcedb35a7c0c2178610a06c784d9c24e4cc76"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7d5cbb99788289.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "f4a5f5a5f21e63d7a408a08ef2c96c3413ec149bede5925e9e2c659c9a639624"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a51d1314672e19.mat",
+      "bytes": 1258,
+      "sourceSHA256": "0b5e71c0f69e25920c93b58ed574cca38ce30ca1b3eba7e0664e72224df57b70"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-62d6b6515bc5e7.mat",
+      "bytes": 1225,
+      "sourceSHA256": "ced671bf9f750c6190c0fc8e5adb685ac623918d6a8b6ce1f0b010f8e2de2e84"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fe9a66d190aee3.mat",
+      "bytes": 1247,
+      "sourceSHA256": "4ade03014817557aa666fcd47844255af7aa52cbae047b7cffc6db2a572d55de"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a33159a6746139.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d25a800f4382b08a8b29361e95bb862b5988bd9a4229ccfb6ee51a8f15991728"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bf59723548a7b9.mat",
+      "bytes": 1286,
+      "sourceSHA256": "093e336dee0fa7588069f8c3fb8b4d3f7442f442a3350da4045bd288143a01f6"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7c3fc3a89b2ab4.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8973e0dfc4c5d484e59271bfc9b24da2b61ca52ca1d119a9db01283cad38f7ba"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-18926d4721eb5d.mat",
+      "bytes": 1258,
+      "sourceSHA256": "5f8839f344a9639d0c4c4f204318c1422e6e3d718acff564611f500165cdbefb"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f0c19783f64026.mat",
+      "bytes": 1223,
+      "sourceSHA256": "a8e7cfec9587b70a61121423fea341c7602b27935b71399607c1cf4c59bceaed"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1fcbc0087b56f6.mat",
+      "bytes": 1248,
+      "sourceSHA256": "2c9068fc505cc40e55a89f7e64265c1c9d00f8d393ca4a14b89cac9fd82a0f41"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-117f52aea497a8.mat",
+      "bytes": 1230,
+      "sourceSHA256": "a4a20cc45e34fa02a4a1e9f692bae554e4d96f60a4863f813b169fb026d0e5ca"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-411d2f2bf0f97d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "bdd652c43491f72907ffbd404b03a604b0c55d34929137072c716490014db407"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2b2efd1a8734d6.mat",
+      "bytes": 1219,
+      "sourceSHA256": "95d6127cc485761b5cc1790d07507644a840c94373db6b5c5321e08625e9689e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-10f1bb3e02c0e5.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "a16b16a7b741acd4e7ab0c0b27ec97d2cc51e276f82ca64a1265ab179ce51cdc"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f79159d15025df.mat",
+      "bytes": 1197,
+      "sourceSHA256": "c70a504c8a42626bce3d4ac6c6942db7fbe40f6b4d18553e585fa742d22c62f1"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-81f2c2c42f133f.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "6a0e332f12769ac448125f51862283249ddf16a8d0bcba9a136211176f550913"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6671c623fd6d23.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "81f0ffd00d38df55dc48a0ae19635240d5f3deb62bebb8f2615d7502fdf04e42"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0cfee069fbcc0a.mat",
+      "bytes": 1248,
+      "sourceSHA256": "ae43287bf73ea6f140e51d8c7ddd5571f4c6647617bb6e71607286d34f9acd01"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cfeb87e27ef618.mat",
+      "bytes": 1277,
+      "sourceSHA256": "f1f3e466c4590cd88f47b2bd5dbb5553241d29418ce63c3f1c0c95af88d29527"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ac9091d0b55e21.mat",
+      "bytes": 1256,
+      "sourceSHA256": "181a2de07685798ad8e7fe3853099f7bc7c021150bb3b459d41121756b4a6ec4"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-df623796e8004d.mat",
+      "bytes": 1174,
+      "sourceSHA256": "e57d376b2e9cada2eadb7e2b8aa29cc05adfb5a76ace2b2ca370490dca349f9a"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-98efc5e07887da.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "9873816c792357206cf849452b7bb2e564b1437ec88ee345e90833efef001bd6"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e0534a7bc82d09.mat",
+      "bytes": 1227,
+      "sourceSHA256": "9227e60f980d7ece1d2876106f0baec0b88ad2f93c0ba208ad177aa15ccd99ae"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-73807bf4e5323f.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "3441fcfe606ffe3ab9c131b100c10df90712b7d34ebd8166ead8d9d5d40be2ea"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-38eca9165299c8.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "5e2214e32fc72423d752ce167b3a0e40600eef625080be0dddf72a236b130f90"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a51d1314672e19.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "2ce2adb077415a54486315f8a5d49fae603c0678644f2f1cc889c1e9e13d3597"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bb4a9e5d505050.mat",
+      "bytes": 1177,
+      "sourceSHA256": "4a7e639b023c74a3fdeeb21a4cafc5bde3ba36ff5cc43bf057286c39b37f8863"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e7e14580aea41a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "cce81104d545d4b1a709de83175188815230a4a5b2d0f9f4322bebe09fa5ed00"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-d3fc8a9964b57e.mat",
+      "bytes": 1178,
+      "sourceSHA256": "907f4c76f141a9f8b254ff04b3385dac180c4903ed85e345bf2dae23226c1a7d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-83172cf3db7f13.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "82b5c5acd6670a538539eee8a04827b1591312616528bd814b0a80ffb9433dad"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-52e56d122b6988.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "dec20b23790c2922b84778f0364a4ce7d2c382c171d92d028911515a1374a29d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-67bcfc568f1b17.mat",
+      "bytes": 1218,
+      "sourceSHA256": "d58d9c94c024f30aace96dafca95f3a7dfdaec26064ee6506911ede67cd25f2c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-849e4580894e60.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "db87381c5d9b0354ad685861ee9f9f9523d07b909085e80fc96c40c493cbc3ee"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4eef38a1ca5a76.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d55adc568222a886f3b5a9625aff04dd012e7081a4f4c6d5fdb97e5e09a74e11"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-33639b0fa28b79.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "6744384cff38e9b1fc406b9c9b5b15abbadc56d74519620b3198818bec8bc1af"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4eb86a3939bb3d.mat",
+      "bytes": 1286,
+      "sourceSHA256": "37a740fac6c9bd4586cdb1f5b653e09368cdf4c3d86e2a58b65b3b476ad7dcca"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a5cb849fd315dd.mat",
+      "bytes": 1263,
+      "sourceSHA256": "5dab7c03d2a432ef87c1f259563cc50ca9b121b340c16b787afd0ddac61bcd44"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-03a9e2a195a2f8.mat",
+      "bytes": 1221,
+      "sourceSHA256": "dc816d6777430e1c1564f1508b3f447b46b5c73eb7d630a105d22c8011c8518b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ec76bca2dd44dc.mat",
+      "bytes": 1241,
+      "sourceSHA256": "fce06be7e219aaf65f16524232605ac926ee30234884e72e69b1a8f956673e32"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-df76dd14f2a1ab.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "9f37ca1c27ac3237eee7785816b8924caba0e5c27d13ab91c0c1074fe3002d0a"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-90968ad7bdf3fb.mat",
+      "bytes": 1237,
+      "sourceSHA256": "c3620fb079f4650bb4b4721f25b8109e61ecaeb1d6e65c584877f3c2bcdf1ee9"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f0c19783f64026.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "5c564aeec53d43c15dc5d0f863b6d9b753115d402b2bffaba04c8193e661c33c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-277083ea2727ab.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "2d01a738efa8789b909b43c975a1ab3f8d606884186671a0789fed52dfdb3e62"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-9d6b6da1de13d0.mat",
+      "bytes": 1271,
+      "sourceSHA256": "b8e60d7978fd213aa86c749d8d34fe4c82116ce8a8de5d86811e5b7330b70a35"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fca8a7a36cb95c.mat",
+      "bytes": 1227,
+      "sourceSHA256": "15f10e18638b297f6cbab04cee7dcf58a1b287ab7feaba2beed157776e12e653"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2a0e422d3a6d29.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "1ec6be75ac60c8f137c6c9a818e7d04a7e17128dc1ac046731477740db93dde4"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a5cb849fd315dd.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "3ae3908195dcfa8ed5de0e88d482e45ddb6def524fd949d5f7e4f73a799e59d0"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-38eca9165299c8.mat",
+      "bytes": 1195,
+      "sourceSHA256": "7c03af94aa8216094fa15195d15fbe086c81b3a791a0638c9d49f1cb2813ba74"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e92f8b7ae40911.mat",
+      "bytes": 1243,
+      "sourceSHA256": "896015cc10488b904e16be62d77a5cce2e3dbfc749c627f3854719b814c37b8e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2b2efd1a8734d6.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "768e294460e697960309f442599c2d81baec93b6c3ecdd1e7fb3bfed63e59e8b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6ced6865b87701.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "02b09db8bb2bedbc3d77508ccb23830f854fda39d0239d19dadd9986f0393718"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-02ff1be7eb2640.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "c798b39b78c66e4e49ea9919e7be10775515fb331e5fe7cfd4d6d57abc973694"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0cfee069fbcc0a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "5bdf573d9b704db97823cf92397caabe1a5a3dc09adcec6651e83b5fb8642e25"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-318098bc0aea22.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d0f757e710ad2c5deebb715fa458c05f2f3e692e66483f03ac6d84dbeb6e34e9"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7f685622f7ed79.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8f8324c561cc0fcbd2eae8f9529e32899124f819fbca329d1ec88330de83a342"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-837a8467c7cb42.mat",
+      "bytes": 1178,
+      "sourceSHA256": "1d4ce5adc0e19398851ad9b229345898e680c8ee5acb5e0854854b7f0496779f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-889f3d7e3d7e63.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "cf10edf3aa55c82381ef7a784d84e15dba323f924291c3e18ab3d3404301f8ac"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-6c02fbe099d887.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "409b4156f0343eec247ce5c591cf6c8348db3125eb4f0e684f39ec79f658511b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-57153e87630a9d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "2a45112f9593e312b11f5378ee2246114dba8d63e49cef3a9da52e3132e2e851"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-d3fc8a9964b57e.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "ab9a8cc716782df3240914ae03a4d87677695032e55d72c795e6b12192fbf07a"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-ac9091d0b55e21.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "6979bd0c075457214718305a7099e91bafdeb9c37327be4e9ded55daea5af06c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-7f5bb2a1e5cf7f.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "ae313ee2349e16ae7d2b51e163627c51ca3e81e6f6b4bb79ec38f350144a90ce"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b1a3a524ef2a95.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "03e7928c6c6ed93201fdfd50c5fe58c8fdc1a04dcea5134152687bbb80f20a97"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-84b91c26558a38.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "a61d2645963182ada1155cbd46d02aa1596e9fb36b67d9979ad06f0557005194"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-25416b909a0a22.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "c17c84a15322682c27f2b385e6a6159d7f7888a60ba8854e536cf8b396292ec9"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f04cf6243b45d3.mat",
+      "bytes": 1278,
+      "sourceSHA256": "4535a95cdd807765d296ca7c2d894c0578b05dd98d3f4290a2d77298184dbd7f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-fdb93c1b17d8c9.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "f1e4e6b6cbec9574f60c91bf3a1b8219232a7ad5be23c5cb4d611e203f7a09ac"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a2b73e8f49a2f0.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "dc3fe484c07d141f84ecf401789d529683531a4f152c3d2eaf9faf9cda3bc310"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-4a2546e6801ca3.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "0598e388fb3f124ae40661c0e31643084e683cb807f8107167ce66c6e9a34a18"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-8399c07a82d593.mat",
+      "bytes": 1221,
+      "sourceSHA256": "5539bbd924abf4de60a19b9192b6d63ffb080d4aa909e2efd5789c853ef66bc9"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f4295d437b554e.mat",
+      "bytes": 1266,
+      "sourceSHA256": "7eb130424444e47686afd98f8f778d43d84ac19e5146aada9c8d9ff5534bc164"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-c4d9a4ed325683.mat",
+      "bytes": 1197,
+      "sourceSHA256": "2a574dcba79b0846729058f091533431ea46e5202aff62d438e4ec0c807acd2d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1c2be837860a20.mat",
+      "bytes": 1221,
+      "sourceSHA256": "88339dfca3ccf46cbc4955224c988cdaea9a767f977b23e36914bfdfa91a3ab7"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-35f7462fde9cf4.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d4640754fb964cad34549eff9d6a5960ac0b21a65b046637b3eae782b31f7316"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0518fb885a3112.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "2f7dfa46105307d152611cc422492ad662fd751b550da3c893cdc6c0b19ba446"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-9c509b2d1be03b.mat",
+      "bytes": 1180,
+      "sourceSHA256": "a8f930263900f869ca743aacf0feec2bb5e4e5db36b25dd443917159ddecefbf"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1bc1c1c61108ac.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "8dfedc7bbc23b0a3618eb96acfcdb5c124af0f6c6f5aa2a82380d09fd2e32568"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cd110970ed0b70.mat",
+      "bytes": 1180,
+      "sourceSHA256": "1a430f49927b8336c5ec8026fe0401a96a274e21a9ad8cb17ef70359523edd58"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-e75eeced24a85f.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "1875929edc1ce148e2f781f008fa4ce4334ce8f143d8108da8c5e630477b8baf"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-67d280a2b075ad.mat",
+      "bytes": 1222,
+      "sourceSHA256": "fbe54c5c4afb48617ba1480eb51a573de55b1d43f804f235d9e329a272d3c025"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-cf18da2e432bce.mat",
+      "bytes": 1178,
+      "sourceSHA256": "e111b3357390446fd37a36dba28ecc119201f7259201dbae0f19d5a848fbfd75"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-9312181df9e779.mat",
+      "bytes": 1284,
+      "sourceSHA256": "7cb3deed9a2f6ce646db47c58e1a72888dbbb84260f4196f63ce918033064dcf"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-257f9c92004240.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "83b6993ec8be3533f11d2c7e5c4315985a24fe56cab147ebb230f57af6d5abbe"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-25416b909a0a22.mat",
+      "bytes": 1250,
+      "sourceSHA256": "2cde7d598e49f99a880987b7ef5fe7516578ab5c57309c9d955660b0a061fba3"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-01d93e7863e9cf.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "25149bf81364b5916822ff1dfff70ccd26f57f784c3ed52381897fa2b9b3244f"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-67d280a2b075ad.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "80fa4eebb216171edd7460e66f07805cb0b939881af73b83044e7310c81626dc"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-411d2f2bf0f97d.mat",
+      "bytes": 1248,
+      "sourceSHA256": "c8b7dd608b2d27ea374fd30a78e3fcb05f4a1355ec4b1627fb6479f466b1759d"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-f60376dac5e571.mat",
+      "bytes": 1225,
+      "sourceSHA256": "cf00240646ebdc460b9451b87538e73cd856849074909930c8740d4729ba937e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-1f4e5d5c67c45d.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "1c523aa77069eabf31c88004338becfdaafc47d0101cb7a390888c8d1204dfd6"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-0e9b32d4b81376.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "d6bc6d806a08d84ab6aa2b37ba86f1c07b7a4fbca6d61f4d7cf93005b3e76ca4"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-806ce9b121255a.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "85ff5cd2435c37fba32c3a7c4f5387a23e87e68945ca812f939ace5eecb7c427"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-2d01c6d00832e9.mat",
+      "bytes": 1280,
+      "sourceSHA256": "e6782e154e4bab177c5616ee4d1631a0460471c7d4edfcb7e9b27a556c55195c"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-61f171d80c2667.mat",
+      "bytes": 1195,
+      "sourceSHA256": "29f6821217520fc7baa3315ba4dc337443eebf54f5224ca9946a1c0c6fddc474"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b906eee817ab98.mat",
+      "bytes": 1259,
+      "sourceSHA256": "ca6e32cca28e86b82aa5be3bbab79414b16204b6943f9ff60844adfabded5946"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-05664732b0d3f3.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "30ceeb11d7ba8004f4a6da60d06032e740cec2b6238c195359ed1e1f5c91e2e8"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a01958ce826512.mat",
+      "bytes": 1170,
+      "sourceSHA256": "5384a677deab07c964aff0b78032e94b1cff25cb33d262ced81ae061a542fd5b"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b9e297b0c76507.mat",
+      "bytes": 1280,
+      "sourceSHA256": "fb30404776658058bed0a3bfa1c955a25554e6c495f9753d7ecb1d254753957e"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-b9e297b0c76507.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "57bc994575c93773e35d4f521511d3f7eb0aecff44359aa3296706d1719bd312"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-d4365566beac0d.mat",
+      "bytes": 1217,
+      "sourceSHA256": "6f7a36cb3aa0eb21dba4a8e8a8f540639388a35639ccd3d8d9bb8005b83e7502"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-99c73166562054.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "cce7fc9694a8cf99a8450b15838b6597f2123f936786ac4aaaf762a513028de8"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-587fc68337d837.mat",
+      "bytes": 1220,
+      "sourceSHA256": "48fcc0bf45c50202188f3f148529191ee459d0a5175a1dca8630549521a99531"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-a5261a478c92c3.mat",
+      "bytes": 1221,
+      "sourceSHA256": "86636b3c6b3dfc800637ac997e392cb13820c6170b387c6fe8b0daf0b0254f56"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-8de99d9ec6c120.mat",
+      "bytes": 1223,
+      "sourceSHA256": "d1d79621f31f1ea4e27cfb0d79251306799dc7b4b484c1e6934660a7272c0feb"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-bad7a2a76acf8b.mat",
+      "bytes": 1275,
+      "sourceSHA256": "774896e362a9ffa891d66fa678911fd007444a4d37af1b1cc93c5aa725e9af71"
+    },
+    {
+      "path": "Resources/DemoMaterials/Mat-80baa4517e219e.mat.meta",
+      "bytes": 185,
+      "sourceSHA256": "304fde4664322c60b562a2da5cc91aa0264aa5bc8d8f896b61d7439d6d33288d"
+    },
+    {
+      "path": "Resources/DemoGeometry/VillageWorld.bytes",
+      "bytes": 62565062,
+      "sourceSHA256": "f2b851ed11bb0e1827d3956b5afbe63d5530a4eaee71428d770ab7be9adcd753"
+    },
+    {
+      "path": "Resources/DemoGeometry/VillageHomes.json",
+      "bytes": 90364,
+      "sourceSHA256": "438b5704060cc2933739899401ca5293ca0c5ecb60b22a46a2c5a89c4c9a2884"
+    },
+    {
+      "path": "Resources/DemoGeometry/CollisionProxies.json.meta",
+      "bytes": 155,
+      "sourceSHA256": "ca04552095fb91004ae723c18890cdb1090d444ac3dae7db51d842700f07558d"
+    },
+    {
+      "path": "Resources/DemoGeometry/VillageWorld.bytes.meta",
+      "bytes": 155,
+      "sourceSHA256": "d04ef8f814581a062162d14f5f881d40a86c34fcddc1932f21fa22bc5a351c89"
+    },
+    {
+      "path": "Resources/DemoGeometry/VillageHomes.json.meta",
+      "bytes": 155,
+      "sourceSHA256": "08f9d05e46c002b98cbdc95a8991983e3ce8b271b528e61f662d967e2552f33f"
+    },
+    {
+      "path": "Resources/DemoGeometry/BlossomTrees.json.meta",
+      "bytes": 155,
+      "sourceSHA256": "dba25719bcaf7efc6d7ac65ea993c438a67d46530efe2068e1057b73649876b2"
+    },
+    {
+      "path": "Resources/DemoGeometry/StairRamps.json.meta",
+      "bytes": 155,
+      "sourceSHA256": "fba511fb7d7f4d5c94c79ba05946c78ad35186a8424528846360fca89dc3cc0b"
+    },
+    {
+      "path": "Resources/DemoGeometry/BlossomTrees.json",
+      "bytes": 4304,
+      "sourceSHA256": "51b46e83fff3875ccbb8828c3c0508b7b8fa2a4940160f1adfab088d1f722f58"
+    },
+    {
+      "path": "Resources/DemoGeometry/CollisionProxies.json",
+      "bytes": 19407,
+      "sourceSHA256": "1cb242f34d73543a52538e05f1c6d2451b5f2ee317caa77e90858c5bccae5d72"
+    },
+    {
+      "path": "Resources/DemoGeometry/StairRamps.json",
+      "bytes": 5462,
+      "sourceSHA256": "99b972ed1669ba536b6f11984264c72a2042b7eabe2e3d0aa53661c8c02d50a0"
+    }
+  ]
+}

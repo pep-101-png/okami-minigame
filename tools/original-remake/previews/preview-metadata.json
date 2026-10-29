@@ -1,0 +1,44 @@
+[
+  {
+    "image": "village.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "bb40416bc85258c2d6dc0e97972e499e00465220193b3f7bbdd14c718a960cba",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "market.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "bb40416bc85258c2d6dc0e97972e499e00465220193b3f7bbdd14c718a960cba",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "houses.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "bb40416bc85258c2d6dc0e97972e499e00465220193b3f7bbdd14c718a960cba",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "arena.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "bb40416bc85258c2d6dc0e97972e499e00465220193b3f7bbdd14c718a960cba",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "farm.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "bb40416bc85258c2d6dc0e97972e499e00465220193b3f7bbdd14c718a960cba",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "home.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "bb40416bc85258c2d6dc0e97972e499e00465220193b3f7bbdd14c718a960cba",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  }
+]

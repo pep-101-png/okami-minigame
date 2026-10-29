@@ -1,0 +1,1738 @@
+[
+  {
+    "archive": "wp00.dat",
+    "bytes": 13216,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp01.dat",
+    "bytes": 47776,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp02.dat",
+    "bytes": 249824,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 40,
+      "SEQ": 24,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 40,
+      "SEQ": 24,
+      "EFF": 1,
+      "TBL": 2,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp03.dat",
+    "bytes": 45824,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 3,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp04.dat",
+    "bytes": 97120,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 3,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 3
+    }
+  },
+  {
+    "archive": "wp05.dat",
+    "bytes": 738816,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 7,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 7
+    }
+  },
+  {
+    "archive": "wp06.dat",
+    "bytes": 8032,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp07.dat",
+    "bytes": 180416,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp09.dat",
+    "bytes": 54336,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp0b.dat",
+    "bytes": 91776,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp0c.dat",
+    "bytes": 25952,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp0d.dat",
+    "bytes": 25920,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp0e.dat",
+    "bytes": 10816,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp0f.dat",
+    "bytes": 32224,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp10.dat",
+    "bytes": 29152,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp11.dat",
+    "bytes": 29152,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp12.dat",
+    "bytes": 93024,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp13.dat",
+    "bytes": 89312,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp14.dat",
+    "bytes": 381920,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "EFF": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 58,
+      "EMD": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1
+    }
+  },
+  {
+    "archive": "wp15.dat",
+    "bytes": 60224,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp16.dat",
+    "bytes": 69696,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp17.dat",
+    "bytes": 207424,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp18.dat",
+    "bytes": 368704,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "EFF": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 58,
+      "EMD": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1
+    }
+  },
+  {
+    "archive": "wp19.dat",
+    "bytes": 480288,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 3,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 3
+    }
+  },
+  {
+    "archive": "wp1a.dat",
+    "bytes": 194528,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp1b.dat",
+    "bytes": 95040,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp1c.dat",
+    "bytes": 95040,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp1d.dat",
+    "bytes": 109184,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp1e.dat",
+    "bytes": 116224,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp1f.dat",
+    "bytes": 195648,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp20.dat",
+    "bytes": 265280,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp21.dat",
+    "bytes": 362016,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 15,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp22.dat",
+    "bytes": 355488,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp23.dat",
+    "bytes": 216832,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp24.dat",
+    "bytes": 441152,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 6,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp25.dat",
+    "bytes": 314720,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 6,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 19,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp26.dat",
+    "bytes": 278048,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 20,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp27.dat",
+    "bytes": 294080,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 6,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 19,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp28.dat",
+    "bytes": 273376,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 20,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp29.dat",
+    "bytes": 324896,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 6,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 19,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2a.dat",
+    "bytes": 264608,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2b.dat",
+    "bytes": 265728,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2c.dat",
+    "bytes": 273984,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2d.dat",
+    "bytes": 286624,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2e.dat",
+    "bytes": 337632,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp30.dat",
+    "bytes": 187040,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp31.dat",
+    "bytes": 239872,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp32.dat",
+    "bytes": 232928,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp33.dat",
+    "bytes": 160224,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp34.dat",
+    "bytes": 274432,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 3,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp35.dat",
+    "bytes": 190656,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 18,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp36.dat",
+    "bytes": 197024,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 18,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp37.dat",
+    "bytes": 180896,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 18,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp38.dat",
+    "bytes": 200000,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 18,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp39.dat",
+    "bytes": 203904,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 19,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3a.dat",
+    "bytes": 121536,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 11,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3b.dat",
+    "bytes": 120352,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 11,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3c.dat",
+    "bytes": 118528,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 11,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3d.dat",
+    "bytes": 130400,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 11,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3e.dat",
+    "bytes": 148832,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3f.dat",
+    "bytes": 181824,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 8,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 8,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp40.dat",
+    "bytes": 349248,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "EFF": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 58,
+      "EMD": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1
+    }
+  },
+  {
+    "archive": "wp41.dat",
+    "bytes": 477856,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp42.dat",
+    "bytes": 237312,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp43.dat",
+    "bytes": 237664,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp44.dat",
+    "bytes": 208448,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp45.dat",
+    "bytes": 56800,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp46.dat",
+    "bytes": 85856,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp47.dat",
+    "bytes": 32224,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp48.dat",
+    "bytes": 108832,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 5,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 5
+    }
+  },
+  {
+    "archive": "wp49.dat",
+    "bytes": 26528,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 2,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 2
+    }
+  },
+  {
+    "archive": "wp4a.dat",
+    "bytes": 28320,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 2,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 2
+    }
+  },
+  {
+    "archive": "wp4b.dat",
+    "bytes": 19040,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp4c.dat",
+    "bytes": 768,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp4d.dat",
+    "bytes": 118048,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 3,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 3
+    }
+  },
+  {
+    "archive": "wp4e.dat",
+    "bytes": 388672,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 7,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 7
+    }
+  },
+  {
+    "archive": "wp4f.dat",
+    "bytes": 176864,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp50.dat",
+    "bytes": 368704,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "EFF": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 58,
+      "EMD": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1
+    }
+  },
+  {
+    "archive": "wp51.dat",
+    "bytes": 107072,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 4,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 4
+    }
+  },
+  {
+    "archive": "wp52.dat",
+    "bytes": 38336,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 4,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 4
+    }
+  },
+  {
+    "archive": "wp53.dat",
+    "bytes": 36800,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 4,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 4
+    }
+  },
+  {
+    "archive": "wp54.dat",
+    "bytes": 36672,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 4,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 4
+    }
+  },
+  {
+    "archive": "wp55.dat",
+    "bytes": 29152,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp56.dat",
+    "bytes": 185728,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp57.dat",
+    "bytes": 33760,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp58.dat",
+    "bytes": 385152,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 66,
+      "SEQ": 61,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 66,
+      "SEQ": 61
+    }
+  },
+  {
+    "archive": "wp59.dat",
+    "bytes": 32224,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp5a.dat",
+    "bytes": 25952,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp5b.dat",
+    "bytes": 32224,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp5d.dat",
+    "bytes": 29152,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp5e.dat",
+    "bytes": 147584,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 3,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 3
+    }
+  },
+  {
+    "archive": "wp5f.dat",
+    "bytes": 29408,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  }
+]

@@ -1,0 +1,112 @@
+{
+  "repair-street.jpg": {
+    "sourceSceneSha256": "1dded28b9a34fa1911dd19b8f737d537d0df20a8831142a2d384acb7bd56026f",
+    "renderer": "Blender Cycles layout approximation",
+    "unityRendered": false,
+    "cameraUnity": [
+      -5,
+      9,
+      -22
+    ],
+    "lookAtUnity": [
+      3,
+      1.6,
+      -8
+    ],
+    "orthographicWidthMetres": 27,
+    "resolution": [
+      1100,
+      720
+    ],
+    "samples": 8,
+    "ambient": "Explicit Blender world fill; not Unity lighting"
+  },
+  "repair-village.jpg": {
+    "sourceSceneSha256": "1dded28b9a34fa1911dd19b8f737d537d0df20a8831142a2d384acb7bd56026f",
+    "renderer": "Blender Cycles layout approximation",
+    "unityRendered": false,
+    "cameraUnity": [
+      -25,
+      34,
+      -20
+    ],
+    "lookAtUnity": [
+      -4,
+      0,
+      0
+    ],
+    "orthographicWidthMetres": 75,
+    "resolution": [
+      1100,
+      720
+    ],
+    "samples": 8,
+    "ambient": "Explicit Blender world fill; not Unity lighting"
+  },
+  "repair-arena.jpg": {
+    "sourceSceneSha256": "1dded28b9a34fa1911dd19b8f737d537d0df20a8831142a2d384acb7bd56026f",
+    "renderer": "Blender Cycles layout approximation",
+    "unityRendered": false,
+    "cameraUnity": [
+      35,
+      27,
+      28
+    ],
+    "lookAtUnity": [
+      35,
+      0,
+      0
+    ],
+    "orthographicWidthMetres": 46,
+    "resolution": [
+      1100,
+      720
+    ],
+    "samples": 8,
+    "ambient": "Explicit Blender world fill; not Unity lighting"
+  },
+  "repair-animals.jpg": {
+    "sourceSceneSha256": "1dded28b9a34fa1911dd19b8f737d537d0df20a8831142a2d384acb7bd56026f",
+    "renderer": "Blender Cycles layout approximation",
+    "unityRendered": false,
+    "cameraUnity": [
+      -39,
+      10,
+      26
+    ],
+    "lookAtUnity": [
+      -42,
+      0,
+      18
+    ],
+    "orthographicWidthMetres": 25,
+    "resolution": [
+      1100,
+      720
+    ],
+    "samples": 8,
+    "ambient": "Explicit Blender world fill; not Unity lighting"
+  },
+  "repair-solar.jpg": {
+    "sourceSceneSha256": "1dded28b9a34fa1911dd19b8f737d537d0df20a8831142a2d384acb7bd56026f",
+    "renderer": "Blender Cycles layout approximation",
+    "unityRendered": false,
+    "cameraUnity": [
+      -38,
+      2.8,
+      -25
+    ],
+    "lookAtUnity": [
+      -34,
+      1,
+      -22
+    ],
+    "orthographicWidthMetres": 4.6,
+    "resolution": [
+      1100,
+      720
+    ],
+    "samples": 8,
+    "ambient": "Explicit Blender world fill; not Unity lighting"
+  }
+}

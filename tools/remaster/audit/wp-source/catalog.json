@@ -1,0 +1,2934 @@
+[
+  {
+    "archive": "wp00.dat",
+    "identification": "Green feather/leaf-shaped object",
+    "model": {
+      "key": "wp00",
+      "package": "wp00",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 68,
+      "triangles": 44,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp01.dat",
+    "identification": "Long smoking pipe; texture kiseru",
+    "model": {
+      "key": "wp01",
+      "package": "wp01",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 142,
+      "triangles": 78,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp02.dat",
+    "identification": "Additional amber beaded weapon with player and weapon motion bank",
+    "model": {
+      "key": "wp02",
+      "package": "wp02",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 612,
+      "triangles": 492,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 40,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 24,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 40,
+      "SEQ": 24,
+      "EFF": 1,
+      "TBL": 2,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp03.dat",
+    "identification": "Spiked ball",
+    "model": {
+      "key": "wp03",
+      "package": "wp03",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 564,
+      "triangles": 280,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 3,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 3,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp04.dat",
+    "identification": "Egg/seed-shaped and carved round projectiles",
+    "model": {
+      "key": "wp04",
+      "package": "wp04",
+      "nativeBones": 5,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 232,
+      "triangles": 192,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 3,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 3
+    }
+  },
+  {
+    "archive": "wp05.dat",
+    "identification": "Long thin articulated creature/effect mesh; exact role unconfirmed",
+    "model": {
+      "key": "wp05",
+      "package": "wp05",
+      "nativeBones": 18,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 818,
+      "triangles": 714,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 4,
+    "nativeMotionFiles": 7,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 7
+    }
+  },
+  {
+    "archive": "wp06.dat",
+    "identification": "Minimal quad/triangle effect carrier",
+    "model": {
+      "key": "wp06",
+      "package": "wp06",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 4,
+      "triangles": 2,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 1,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp07.dat",
+    "identification": "Stone pillar/spike",
+    "model": {
+      "key": "wp07",
+      "package": "wp07",
+      "nativeBones": 2,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 148,
+      "triangles": 108,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp09.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp09",
+      "package": "wp09",
+      "nativeBones": 2,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 294,
+      "triangles": 232,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp0b.dat",
+    "identification": "Rock projectiles",
+    "model": {
+      "key": "wp0b",
+      "package": "wp0b",
+      "nativeBones": 1,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 140,
+      "triangles": 96,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 1,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp0c.dat",
+    "identification": "Fireball-like sphere",
+    "model": {
+      "key": "wp0c",
+      "package": "wp0c",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 104,
+      "triangles": 80,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp0d.dat",
+    "identification": "Striped arrow/dart",
+    "model": {
+      "key": "wp0d",
+      "package": "wp0d",
+      "nativeBones": 1,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 128,
+      "triangles": 64,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp0e.dat",
+    "identification": "Red lacquered bowl/cup",
+    "model": {
+      "key": "wp0e",
+      "package": "wp0e",
+      "nativeBones": 1,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 184,
+      "triangles": 144,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp0f.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp0f",
+      "package": "wp0f",
+      "nativeBones": 2,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 294,
+      "triangles": 232,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp10.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp10",
+      "package": "wp10",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 206,
+      "triangles": 160,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp11.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp11",
+      "package": "wp11",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 206,
+      "triangles": 160,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp12.dat",
+    "identification": "Toothed jaw-shaped object",
+    "model": {
+      "key": "wp12",
+      "package": "wp12",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 152,
+      "triangles": 112,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp13.dat",
+    "identification": "Decorated folding fan",
+    "model": {
+      "key": "wp13",
+      "package": "wp13",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 38,
+      "triangles": 20,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp14.dat",
+    "identification": "Fire/effect carrier with enemy-labelled motions and embedded effect geometry",
+    "model": {
+      "key": "wp14",
+      "package": "wp14",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 3,
+      "triangles": 1,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 40,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 40,
+    "effectRecords": 58,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 58,
+      "EMD": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1
+    }
+  },
+  {
+    "archive": "wp15.dat",
+    "identification": "Clawed shield/door/plate-like objects",
+    "model": {
+      "key": "wp15",
+      "package": "wp15",
+      "nativeBones": 3,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 492,
+      "triangles": 396,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp16.dat",
+    "identification": "Clawed shield/door/plate-like objects",
+    "model": {
+      "key": "wp16",
+      "package": "wp16",
+      "nativeBones": 3,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 788,
+      "triangles": 550,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp17.dat",
+    "identification": "Clawed shield/door/plate-like objects",
+    "model": {
+      "key": "wp17",
+      "package": "wp17",
+      "nativeBones": 3,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 998,
+      "triangles": 614,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp18.dat",
+    "identification": "Fire/effect carrier with enemy-labelled motions and embedded effect geometry",
+    "model": {
+      "key": "wp18",
+      "package": "wp18",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 3,
+      "triangles": 1,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 40,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 40,
+    "effectRecords": 58,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 58,
+      "EMD": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1
+    }
+  },
+  {
+    "archive": "wp19.dat",
+    "identification": "Large articulated armored/mechanical assembly with fire marking",
+    "model": {
+      "key": "wp19",
+      "package": "wp19",
+      "nativeBones": 36,
+      "meshObjects": 1,
+      "materialDivisions": 2,
+      "storedVertices": 2739,
+      "triangles": 1835,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 3,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 3
+    }
+  },
+  {
+    "archive": "wp1a.dat",
+    "identification": "Rope-bound stone/weight with lock-like detail",
+    "model": {
+      "key": "wp1a",
+      "package": "wp1a",
+      "nativeBones": 4,
+      "meshObjects": 6,
+      "materialDivisions": 8,
+      "storedVertices": 534,
+      "triangles": 360,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp1b.dat",
+    "identification": "Decorated round spinning-prop variants",
+    "model": {
+      "key": "wp1b",
+      "package": "wp1b",
+      "nativeBones": 1,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 276,
+      "triangles": 224,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp1c.dat",
+    "identification": "Decorated round spinning-prop variants",
+    "model": {
+      "key": "wp1c",
+      "package": "wp1c",
+      "nativeBones": 1,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 276,
+      "triangles": 224,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp1d.dat",
+    "identification": "Samurai-style sword",
+    "model": {
+      "key": "wp1d",
+      "package": "wp1d",
+      "nativeBones": 3,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 648,
+      "triangles": 368,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp1e.dat",
+    "identification": "Articulated engraved/cracked sphere",
+    "model": {
+      "key": "wp1e",
+      "package": "wp1e",
+      "nativeBones": 2,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 854,
+      "triangles": 728,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 1,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp1f.dat",
+    "identification": "Fox/Ninetails-like mask/head component",
+    "model": {
+      "key": "wp1f",
+      "package": "wp1f",
+      "nativeBones": 3,
+      "meshObjects": 1,
+      "materialDivisions": 2,
+      "storedVertices": 618,
+      "triangles": 380,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp20.dat",
+    "identification": "Divine Retribution \u2014 main weapon asset",
+    "model": {
+      "key": "wp20",
+      "package": "wp20",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 804,
+      "triangles": 652,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 4,
+    "nativeMotionFiles": 24,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 14,
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp21.dat",
+    "identification": "Snarling Beast \u2014 main weapon asset",
+    "model": {
+      "key": "wp21",
+      "package": "wp21",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1296,
+      "triangles": 840,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 24,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 15,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 15,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp22.dat",
+    "identification": "Infinity Judge \u2014 main weapon asset",
+    "model": {
+      "key": "wp22",
+      "package": "wp22",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 946,
+      "triangles": 652,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 24,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 14,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp23.dat",
+    "identification": "Trinity Mirror \u2014 main weapon asset",
+    "model": {
+      "key": "wp23",
+      "package": "wp23",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 766,
+      "triangles": 550,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 24,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 14,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp24.dat",
+    "identification": "Solar Flare \u2014 main weapon asset",
+    "model": {
+      "key": "wp24",
+      "package": "wp24",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 6,
+      "storedVertices": 743,
+      "triangles": 517,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1,
+        2
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 6,
+    "nativeMotionFiles": 24,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 14,
+    "types": {
+      "DDP": 1,
+      "DDS": 6,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 24,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp25.dat",
+    "identification": "Tsumugari \u2014 main weapon asset",
+    "model": {
+      "key": "wp25",
+      "package": "wp25",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 964,
+      "triangles": 604,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1,
+        2
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 6,
+    "nativeMotionFiles": 22,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 19,
+    "types": {
+      "DDP": 1,
+      "DDS": 6,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 19,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp26.dat",
+    "identification": "Seven Strike \u2014 main weapon asset",
+    "model": {
+      "key": "wp26",
+      "package": "wp26",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1094,
+      "triangles": 692,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 4,
+    "nativeMotionFiles": 22,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 20,
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 20,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp27.dat",
+    "identification": "Blade of Kusanagi \u2014 main weapon asset",
+    "model": {
+      "key": "wp27",
+      "package": "wp27",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 964,
+      "triangles": 616,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1,
+        2
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 6,
+    "nativeMotionFiles": 22,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 19,
+    "types": {
+      "DDP": 1,
+      "DDS": 6,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 19,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp28.dat",
+    "identification": "Eighth Wonder \u2014 main weapon asset",
+    "model": {
+      "key": "wp28",
+      "package": "wp28",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1012,
+      "triangles": 678,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 4,
+    "nativeMotionFiles": 22,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 20,
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 20,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp29.dat",
+    "identification": "Thunder Edge \u2014 main weapon asset",
+    "model": {
+      "key": "wp29",
+      "package": "wp29",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 6,
+      "storedVertices": 848,
+      "triangles": 516,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1,
+        2
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 6,
+    "nativeMotionFiles": 22,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 6,
+    "effectRecords": 19,
+    "types": {
+      "DDP": 1,
+      "DDS": 6,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 22,
+      "SEQ": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 19,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2a.dat",
+    "identification": "Devout Beads \u2014 main weapon asset",
+    "model": {
+      "key": "wp2a",
+      "package": "wp2a",
+      "nativeBones": 16,
+      "meshObjects": 6,
+      "materialDivisions": 6,
+      "storedVertices": 1176,
+      "triangles": 888,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 30,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 14,
+    "effectRecords": 12,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2b.dat",
+    "identification": "Life Beads \u2014 main weapon asset",
+    "model": {
+      "key": "wp2b",
+      "package": "wp2b",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1140,
+      "triangles": 792,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 30,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 14,
+    "effectRecords": 12,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2c.dat",
+    "identification": "Exorcism Beads \u2014 main weapon asset",
+    "model": {
+      "key": "wp2c",
+      "package": "wp2c",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 10,
+      "storedVertices": 1080,
+      "triangles": 840,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 4,
+    "nativeMotionFiles": 30,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 14,
+    "effectRecords": 12,
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2d.dat",
+    "identification": "Resurrection Beads \u2014 main weapon asset",
+    "model": {
+      "key": "wp2d",
+      "package": "wp2d",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1440,
+      "triangles": 960,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 30,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 14,
+    "effectRecords": 12,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp2e.dat",
+    "identification": "Tundra Beads \u2014 main weapon asset",
+    "model": {
+      "key": "wp2e",
+      "package": "wp2e",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1336,
+      "triangles": 792,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 4,
+    "nativeMotionFiles": 30,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 14,
+    "effectRecords": 13,
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 30,
+      "SEQ": 14,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp30.dat",
+    "identification": "Divine Retribution \u2014 paired weapon variant",
+    "model": {
+      "key": "wp30",
+      "package": "wp30",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 804,
+      "triangles": 652,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 9,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 13,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp31.dat",
+    "identification": "Snarling Beast \u2014 paired weapon variant",
+    "model": {
+      "key": "wp31",
+      "package": "wp31",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1296,
+      "triangles": 840,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 9,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 14,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp32.dat",
+    "identification": "Infinity Judge \u2014 paired weapon variant",
+    "model": {
+      "key": "wp32",
+      "package": "wp32",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 940,
+      "triangles": 652,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 9,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 13,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp33.dat",
+    "identification": "Trinity Mirror \u2014 paired weapon variant",
+    "model": {
+      "key": "wp33",
+      "package": "wp33",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 766,
+      "triangles": 550,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 9,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 13,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp34.dat",
+    "identification": "Solar Flare \u2014 paired weapon variant",
+    "model": {
+      "key": "wp34",
+      "package": "wp34",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 6,
+      "storedVertices": 743,
+      "triangles": 517,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1,
+        2
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 3,
+    "nativeMotionFiles": 9,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 14,
+    "types": {
+      "DDP": 1,
+      "DDS": 3,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 9,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 14,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp35.dat",
+    "identification": "Tsumugari \u2014 paired weapon variant",
+    "model": {
+      "key": "wp35",
+      "package": "wp35",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 521,
+      "triangles": 339,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 11,
+    "motionLabelledSequencePlaceholders": 4,
+    "sequenceFiles": 13,
+    "effectRecords": 18,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 18,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp36.dat",
+    "identification": "Seven Strike \u2014 paired weapon variant",
+    "model": {
+      "key": "wp36",
+      "package": "wp36",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 669,
+      "triangles": 407,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 10,
+    "motionLabelledSequencePlaceholders": 5,
+    "sequenceFiles": 13,
+    "effectRecords": 18,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 18,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp37.dat",
+    "identification": "Blade of Kusanagi \u2014 paired weapon variant",
+    "model": {
+      "key": "wp37",
+      "package": "wp37",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 519,
+      "triangles": 355,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 11,
+    "motionLabelledSequencePlaceholders": 4,
+    "sequenceFiles": 13,
+    "effectRecords": 18,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 18,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp38.dat",
+    "identification": "Eighth Wonder \u2014 paired weapon variant",
+    "model": {
+      "key": "wp38",
+      "package": "wp38",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 733,
+      "triangles": 481,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 10,
+    "motionLabelledSequencePlaceholders": 5,
+    "sequenceFiles": 13,
+    "effectRecords": 18,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 18,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp39.dat",
+    "identification": "Thunder Edge \u2014 paired weapon variant",
+    "model": {
+      "key": "wp39",
+      "package": "wp39",
+      "nativeBones": 15,
+      "meshObjects": 5,
+      "materialDivisions": 6,
+      "storedVertices": 469,
+      "triangles": 283,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 11,
+    "motionLabelledSequencePlaceholders": 4,
+    "sequenceFiles": 13,
+    "effectRecords": 19,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 15,
+      "SEQ": 13,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 19,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3a.dat",
+    "identification": "Devout Beads \u2014 paired weapon variant",
+    "model": {
+      "key": "wp3a",
+      "package": "wp3a",
+      "nativeBones": 16,
+      "meshObjects": 6,
+      "materialDivisions": 6,
+      "storedVertices": 1176,
+      "triangles": 888,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 6,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 11,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 11,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3b.dat",
+    "identification": "Life Beads \u2014 paired weapon variant",
+    "model": {
+      "key": "wp3b",
+      "package": "wp3b",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1140,
+      "triangles": 792,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 6,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 11,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 11,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3c.dat",
+    "identification": "Exorcism Beads \u2014 paired weapon variant",
+    "model": {
+      "key": "wp3c",
+      "package": "wp3c",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 10,
+      "storedVertices": 1080,
+      "triangles": 840,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 6,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 11,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 11,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3d.dat",
+    "identification": "Resurrection Beads \u2014 paired weapon variant",
+    "model": {
+      "key": "wp3d",
+      "package": "wp3d",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1440,
+      "triangles": 960,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 6,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 11,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 11,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3e.dat",
+    "identification": "Tundra Beads \u2014 paired weapon variant",
+    "model": {
+      "key": "wp3e",
+      "package": "wp3e",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 1299,
+      "triangles": 769,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 6,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 12,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 6,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 12,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp3f.dat",
+    "identification": "Additional Divine Retribution-like weapon variant",
+    "model": {
+      "key": "wp3f",
+      "package": "wp3f",
+      "nativeBones": 16,
+      "meshObjects": 5,
+      "materialDivisions": 5,
+      "storedVertices": 804,
+      "triangles": 652,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 8,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 13,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 8,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 13,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "wp40.dat",
+    "identification": "Fire/effect carrier with enemy-labelled motions and embedded effect geometry",
+    "model": {
+      "key": "wp40",
+      "package": "wp40",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 3,
+      "triangles": 1,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 40,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 40,
+    "effectRecords": 58,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 58,
+      "EMD": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1
+    }
+  },
+  {
+    "archive": "wp41.dat",
+    "identification": "Armored/dragon-like head and jaw components",
+    "model": {
+      "key": "wp41",
+      "package": "wp41",
+      "nativeBones": 12,
+      "meshObjects": 2,
+      "materialDivisions": 4,
+      "storedVertices": 3890,
+      "triangles": 2610,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 1,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp42.dat",
+    "identification": "Armored/dragon-like head and jaw components",
+    "model": {
+      "key": "wp42",
+      "package": "wp42",
+      "nativeBones": 7,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 1860,
+      "triangles": 1244,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 1,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp43.dat",
+    "identification": "Armored/dragon-like head and jaw components",
+    "model": {
+      "key": "wp43",
+      "package": "wp43",
+      "nativeBones": 6,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 1900,
+      "triangles": 1270,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 1,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 1
+    }
+  },
+  {
+    "archive": "wp44.dat",
+    "identification": "Sword variants with kutonesirika texture: Kutone Shirka-associated",
+    "model": {
+      "key": "wp44",
+      "package": "wp44",
+      "nativeBones": 3,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 330,
+      "triangles": 180,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp45.dat",
+    "identification": "Pale curved/notched blade",
+    "model": {
+      "key": "wp45",
+      "package": "wp45",
+      "nativeBones": 3,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 376,
+      "triangles": 256,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp46.dat",
+    "identification": "Tsukuyomi-associated sword; texture tukuyomi",
+    "model": {
+      "key": "wp46",
+      "package": "wp46",
+      "nativeBones": 3,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 1284,
+      "triangles": 912,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp47.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp47",
+      "package": "wp47",
+      "nativeBones": 2,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 294,
+      "triangles": 232,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp48.dat",
+    "identification": "Skull objects",
+    "model": {
+      "key": "wp48",
+      "package": "wp48",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 544,
+      "triangles": 392,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 5,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 5
+    }
+  },
+  {
+    "archive": "wp49.dat",
+    "identification": "Roof-tile/slab-shaped object",
+    "model": {
+      "key": "wp49",
+      "package": "wp49",
+      "nativeBones": 3,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 106,
+      "triangles": 58,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 2,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 2
+    }
+  },
+  {
+    "archive": "wp4a.dat",
+    "identification": "Rock projectiles",
+    "model": {
+      "key": "wp4a",
+      "package": "wp4a",
+      "nativeBones": 3,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 160,
+      "triangles": 118,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 2,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 2
+    }
+  },
+  {
+    "archive": "wp4b.dat",
+    "identification": "Waka-associated slim sword; texture usiwaka2",
+    "model": {
+      "key": "wp4b",
+      "package": "wp4b",
+      "nativeBones": 3,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 222,
+      "triangles": 116,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp4c.dat",
+    "identification": "Minimal quad/triangle effect carrier",
+    "model": {
+      "key": "wp4c",
+      "package": "wp4c",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 3,
+      "triangles": 1,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp4d.dat",
+    "identification": "Egg/seed-shaped and carved round projectiles",
+    "model": {
+      "key": "wp4d",
+      "package": "wp4d",
+      "nativeBones": 5,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 897,
+      "triangles": 743,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 3,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 3
+    }
+  },
+  {
+    "archive": "wp4e.dat",
+    "identification": "Long thin articulated creature/effect mesh; exact role unconfirmed",
+    "model": {
+      "key": "wp4e",
+      "package": "wp4e",
+      "nativeBones": 18,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 818,
+      "triangles": 714,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 7,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 7
+    }
+  },
+  {
+    "archive": "wp4f.dat",
+    "identification": "Barbed/segmented sword-like weapon",
+    "model": {
+      "key": "wp4f",
+      "package": "wp4f",
+      "nativeBones": 3,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 2073,
+      "triangles": 1155,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0,
+        1
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 2,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 2,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp50.dat",
+    "identification": "Fire/effect carrier with enemy-labelled motions and embedded effect geometry",
+    "model": {
+      "key": "wp50",
+      "package": "wp50",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 3,
+      "triangles": 1,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 40,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 40,
+    "effectRecords": 58,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 5,
+      "MD": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 58,
+      "EMD": 1,
+      "MOT": 40,
+      "SEQ": 40,
+      "CAM": 1
+    }
+  },
+  {
+    "archive": "wp51.dat",
+    "identification": "Skull objects",
+    "model": {
+      "key": "wp51",
+      "package": "wp51",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 544,
+      "triangles": 392,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 4,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 4
+    }
+  },
+  {
+    "archive": "wp52.dat",
+    "identification": "Gold-face/mask, horned-head and pointed-helmet objects",
+    "model": {
+      "key": "wp52",
+      "package": "wp52",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 446,
+      "triangles": 282,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 4,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 4
+    }
+  },
+  {
+    "archive": "wp53.dat",
+    "identification": "Gold-face/mask, horned-head and pointed-helmet objects",
+    "model": {
+      "key": "wp53",
+      "package": "wp53",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 398,
+      "triangles": 258,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 4,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 4
+    }
+  },
+  {
+    "archive": "wp54.dat",
+    "identification": "Gold-face/mask, horned-head and pointed-helmet objects",
+    "model": {
+      "key": "wp54",
+      "package": "wp54",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 394,
+      "triangles": 258,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 4,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 4
+    }
+  },
+  {
+    "archive": "wp55.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp55",
+      "package": "wp55",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 206,
+      "triangles": 160,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp56.dat",
+    "identification": "Sword variants with kutonesirika texture: Kutone Shirka-associated",
+    "model": {
+      "key": "wp56",
+      "package": "wp56",
+      "nativeBones": 16,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 298,
+      "triangles": 164,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp57.dat",
+    "identification": "Wooden practice dummy with talisman",
+    "model": {
+      "key": "wp57",
+      "package": "wp57",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 349,
+      "triangles": 201,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp58.dat",
+    "identification": "Minimal carrier plus large em60 animation/sequence bank",
+    "model": {
+      "key": "wp58",
+      "package": "wp58",
+      "nativeBones": 1,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 3,
+      "triangles": 1,
+      "skinWeightsPresent": false,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 66,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 61,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 66,
+      "SEQ": 61
+    }
+  },
+  {
+    "archive": "wp59.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp59",
+      "package": "wp59",
+      "nativeBones": 2,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 294,
+      "triangles": 232,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp5a.dat",
+    "identification": "Wave/shard-shaped projectile",
+    "model": {
+      "key": "wp5a",
+      "package": "wp5a",
+      "nativeBones": 2,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 96,
+      "triangles": 60,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp5b.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp5b",
+      "package": "wp5b",
+      "nativeBones": 2,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 294,
+      "triangles": 232,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp5d.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp5d",
+      "package": "wp5d",
+      "nativeBones": 2,
+      "meshObjects": 1,
+      "materialDivisions": 1,
+      "storedVertices": 206,
+      "triangles": 160,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  },
+  {
+    "archive": "wp5e.dat",
+    "identification": "Seed/nut-like pod with leaves",
+    "model": {
+      "key": "wp5e",
+      "package": "wp5e",
+      "nativeBones": 8,
+      "meshObjects": 8,
+      "materialDivisions": 8,
+      "storedVertices": 1690,
+      "triangles": 1184,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 3,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 3
+    }
+  },
+  {
+    "archive": "wp5f.dat",
+    "identification": "Ball/orb projectiles, including patterned temari and colour variants",
+    "model": {
+      "key": "wp5f",
+      "package": "wp5f",
+      "nativeBones": 2,
+      "meshObjects": 2,
+      "materialDivisions": 2,
+      "storedVertices": 206,
+      "triangles": 160,
+      "skinWeightsPresent": true,
+      "texturesUsed": [
+        0
+      ],
+      "differentSkeletonsBetweenParts": false
+    },
+    "images": 1,
+    "nativeMotionFiles": 0,
+    "motionLabelledSequencePlaceholders": 0,
+    "sequenceFiles": 0,
+    "effectRecords": 0,
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1
+    }
+  }
+]

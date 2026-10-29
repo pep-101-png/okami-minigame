@@ -55,37 +55,12 @@ namespace Sunward
             return click;
         }
 
-        Texture2D Tex(Color c)
-        {
-            bool parchment = c.a < 1;
-            int size = parchment ? 256 : 1;
-            var t = new Texture2D(size, size)
-            {
-                wrapMode = TextureWrapMode.Clamp,
-                filterMode = FilterMode.Bilinear
-            };
-            var random = new System.Random(197);
-            for (int y = 0; y < size; y++)
-                for (int x = 0; x < size; x++)
-                {
-                    float noise = parchment ? ((float)random.NextDouble() - .5f) * .035f : 0;
-                    float edge = parchment ? Mathf.Min(Mathf.Min(x, size - 1 - x), Mathf.Min(y, size - 1 - y)) : 10;
-                    float ripple = parchment ? 1.5f + Mathf.Sin(x * .14f + y * .09f) * 1.2f : 0;
-                    float alpha = parchment ? Mathf.Clamp01((edge - ripple) / 2) : 1;
-                    float ink = parchment ? 1 - Mathf.Exp(-Mathf.Pow((edge - 4 - ripple) / 1.1f, 2)) * .24f : 1;
-                    t.SetPixel(x, y, new Color((c.r + noise) * ink, (c.g + noise) * ink, (c.b + noise) * ink, c.a * alpha));
-                }
-
-            t.Apply();
-            return t;
-        }
-
         void Styles()
         {
             if (body != null)
                 return;
-            paper = Tex(new Color(.91f, .86f, .73f, .95f));
-            red = Tex(new Color(.64f, .19f, .15f));
+            paper = Resources.Load<Texture2D>("Okami/UI/Paper");
+            red = Resources.Load<Texture2D>("Okami/UI/Ink");
             body = new GUIStyle(GUI.skin.label)
             {
                 fontSize = 17,
@@ -130,7 +105,7 @@ namespace Sunward
             DrawPaper(new Rect(w - 350, 18, 330, 112));
             GUILayout.BeginArea(new Rect(w - 336, 26, 308, 100));
             GUILayout.Label(game.Profile.coins + " sun coins · Level " + ProgressionRules.Level(game.Profile), body);
-            GUILayout.Label(game.Profile.equipped == "spear" ? "REED SPEAR" : "SUNDIAL FLAME", body);
+            GUILayout.Label(game.Profile.equipped == "spear" ? "OKAMI GLAIVE" : "SOLAR FLARE", body);
             GUILayout.Label("Power " + ProgressionRules.Power(game.Profile).ToString("0") + " · " + game.Save.Status, small);
             GUILayout.EndArea();
             var boss = game.Enemies.Find(e => e && !e.Dead && e.definition.id == "boss");
@@ -138,7 +113,7 @@ namespace Sunward
             {
                 DrawPaper(new Rect(w * .5f - 250, 20, 500, 64));
                 GUILayout.BeginArea(new Rect(w * .5f - 236, 26, 472, 58));
-                GUILayout.Label("KUROGANE · THE HOLLOW BELL · " + (boss.Phase2 ? "PHASE II" : "PHASE I"), body);
+                GUILayout.Label("CRIMSON HELM · THE HOLLOW BELL · " + (boss.Phase2 ? "PHASE II" : "PHASE I"), body);
                 Bar(470, boss.Hp / boss.MaxHp);
                 GUILayout.EndArea();
             }
@@ -159,7 +134,7 @@ namespace Sunward
             {
                 case "welcome":
                     GUILayout.Label("A light in the mist.", title);
-                    GUILayout.Label("Explore the painted valley, cross its bridges, visit Taro for permanent blessings, then challenge the Hollow Bell. Rewards survive victory and defeat.\n\nThis separate Unity port reuses the existing wolf and V3 town. Controller: left stick moves, right stick looks, A jumps, B dodges, X interacts, RB/RT attack, LB barks, D-pad right switches weapons.", body);
+                    GUILayout.Label("Explore the painted valley, cross its bridges, visit Taro for permanent blessings, then challenge the Hollow Bell. Rewards survive victory and defeat.\n\nController: left stick moves, right stick looks, A jumps, B dodges, X interacts, RB/RT attack, LB barks, D-pad right switches weapons.", body);
                     if (Button("ENTER WINDFLOWER →", button))
                         game.Close();
                     break;
@@ -249,10 +224,10 @@ namespace Sunward
             GUILayout.Label(game.Profile.coins + " coins · permanent upgrades survive defeat.", body);
             if (System.Array.IndexOf(game.Profile.owned, "sundial") < 0)
             {
-                if (Button("UNLOCK SUNDIAL FLAME · 110 coins", button))
+                if (Button("UNLOCK SOLAR FLARE · 110 coins", button))
                     game.Buy("unlock-sundial");
             }
-            else if (Button("EQUIP " + (game.Profile.equipped == "spear" ? "SUNDIAL FLAME" : "REED SPEAR"), button))
+            else if (Button("EQUIP " + (game.Profile.equipped == "spear" ? "SOLAR FLARE" : "OKAMI GLAIVE"), button))
             {
                 game.Profile.equipped = game.Profile.equipped == "spear" ? "sundial" : "spear";
                 game.Save.Save();
