@@ -28,10 +28,11 @@ namespace Sunward.Remaster
         string activity;
         float activityRate=1;
         bool activityLoop;
+        public string seatedArmMotion;
         public float ActivityLength(string name) => bank!=null && bank.Find(name)!=null?bank.Find(name).Duration:0;
         public void PlayActivity(string name,bool loop,float rate=1,float phase=0)
         {
-            if(!Ready || bank.Find(name)==null)return;
+            if(!Ready || string.IsNullOrEmpty(name) || bank.Find(name)==null)return;
             activity=name;activityLoop=loop;activityRate=rate;Change(name);
             time=Mathf.Clamp01(phase)*current.Duration;
         }
@@ -133,6 +134,8 @@ namespace Sunward.Remaster
                 sampleTime = current.Duration * Mathf.Lerp(start, end, enemy.VisualStateProgress);
             }
             bank.Sample(current, sampleTime, rig.Bones, fromPosition, fromRotation, fromScale, Mathf.Clamp01(blendTime / .12f), loop);
+            if(!string.IsNullOrEmpty(seatedArmMotion) && activity!=null)
+                bank.SampleArmRotations(bank.Find(seatedArmMotion),time,rig.Bones,.7f);
         }
 
         void OnDestroy() { if (rig != null) rig.Dispose(); }

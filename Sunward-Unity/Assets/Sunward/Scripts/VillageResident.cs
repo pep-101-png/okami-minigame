@@ -7,6 +7,8 @@ namespace Sunward
         public GameFlow game;
         public int index;
         public bool stallkeeper;
+        public bool hasStation;
+        public Vector3 station;
         public Vector3[] route = new Vector3[0];
         readonly Collider[] nearby = new Collider[12];
         Vector3 home, destination;
@@ -16,6 +18,12 @@ namespace Sunward
         void Start()
         {
             body = GetComponent<Rigidbody>();
+            if(stallkeeper && hasStation)
+            {
+                home=destination=station;transform.position=station;
+                if(body){body.isKinematic=true;body.position=station;}
+                return;
+            }
             if (!VillageNavigation.FindSafe(game.valley.Data, transform.position, out home))
                 throw new System.InvalidOperationException("No safe village spawn for " + name);
             transform.position = destination = home;

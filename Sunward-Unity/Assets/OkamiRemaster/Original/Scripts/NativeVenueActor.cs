@@ -9,6 +9,7 @@ namespace Sunward.Remaster
         public OriginalActor actor;
         public TrainingDummy dummy;
         public string role, motion;
+        public string seatedMotion, handMotion;
         public float seed;
         GameFlow game;
         bool ready, performing, contacted;
@@ -25,7 +26,12 @@ namespace Sunward.Remaster
             if(!ready)
             {
                 ready=true;timer=.5f+Mathf.Repeat(seed,2.5f);performing=false;
-                if(role!="training")actor.PlayActivity("venue_seated",true,.75f,Mathf.Repeat(seed,.9f));
+                if(role!="training")
+                {
+                    if(string.IsNullOrEmpty(seatedMotion))seatedMotion=actor.idle;
+                    actor.seatedArmMotion=handMotion;
+                    actor.PlayActivity(seatedMotion,true,.65f,Mathf.Repeat(seed,.9f));
+                }
             }
             timer-=Time.deltaTime;
             if(role=="training")
@@ -48,12 +54,9 @@ namespace Sunward.Remaster
                 }
                 else{actor.EndActivity();timer=1.3f+Mathf.Repeat(seed,1.7f);}
             }
-            else if(timer<=0)
-            {
-                performing=!performing;
-                actor.PlayActivity(performing?"venue_hands":"venue_seated",true,role=="musician"?.8f:.65f,Mathf.Repeat(seed,.7f));
-                timer=role=="musician"?3.5f:4.5f+Mathf.Repeat(seed,3);
-            }
+            // Seated actors keep their own native seated clip. Their own arm
+            // clip is layered without copying pelvis/leg translations from a
+            // different rig or a standing gesture.
         }
     }
 }

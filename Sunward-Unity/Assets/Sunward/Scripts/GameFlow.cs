@@ -258,8 +258,8 @@ namespace Sunward
 
             Consider("bed", HomeLayout.Bed, 1.9f);
             Consider("mirror", HomeLayout.Mirror, 2.1f);
-            Consider("weapons", new Vector3(5.8f, 0, -2.4f), 3);
-            Consider("shop", new Vector3(-5.8f, 0, -2.4f), 3);
+            Consider("weapons", new Vector3(7, 0, -3.2f), 3);
+            Consider("shop", new Vector3(-7, 0, -3.2f), 3);
             Consider("arena", new Vector3(12.8f, 0, 0));
             Consider("venue:dojo", Sunward.Remaster.VillageServices.DojoDoor, 3.5f);
             Consider("venue:food", Sunward.Remaster.VillageServices.FoodDoor, 3.5f);
@@ -284,7 +284,7 @@ namespace Sunward
                         Consider("flower:" + ids[j], points[j], 1.8f);
             }
 
-            Consider("offering", new Vector3(0, 0, 20), 2);
+            Consider("offering", new Vector3(0, 0, 10), 2);
             if (result == "")
                 for (int i = 0; i < npcData.Length; i++)
                     Consider("npc:" + i, npcObjects[i].transform.position, 2.4f);

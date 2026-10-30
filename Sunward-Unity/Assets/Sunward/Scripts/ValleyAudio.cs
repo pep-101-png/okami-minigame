@@ -47,7 +47,11 @@ namespace Sunward
         }
         void Loop(AudioSource source,string cue)
         {
-            var clip=Clip(cue);if(!clip)return;source.clip=clip;source.Play();
+            source.Stop();source.clip=null;
+            // Only the long battle track has been identified by the playtester.
+            // Short cleansing/save cues must never become looping background music.
+            if(cue!="battle")return;
+            var clip=Clip(cue);if(!clip || clip.length<45)return;source.clip=clip;source.Play();
         }
         void Start()
         {
@@ -60,7 +64,9 @@ namespace Sunward
                 var listener=head.AddComponent<AudioListener>();
                 foreach(var old in FindObjectsByType<AudioListener>(FindObjectsSortMode.None))if(old!=listener)old.enabled=false;
             }
-            Loop(wind,"wind");Loop(river,"river");
+            // ST102 clips were assigned as ambience without identifying their
+            // contents. Do not loop an unidentified animal/event sample globally.
+            wind.Stop();river.Stop();
         }
         void LateUpdate()
         {
@@ -104,7 +110,7 @@ namespace Sunward
             // World actors must supply a position; never route them through 2D playback.
             if(id=="cow" || id=="pig" || id=="rooster" || id.StartsWith("npc") || id.StartsWith("enemy"))return;
             if(!Allow(id,id=="step"?.16f:id=="water"?.35f:.07f))return;
-            var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="step"?.60f:id=="jump" || id=="land" || id=="dash"?.35f:.75f);
+            var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="step"?.045f:id=="jump" || id=="land" || id=="dash"?.35f:.75f);
         }
         public bool World(string cue,Vector3 position,float range=10,float volume=.65f)
         {
@@ -128,7 +134,7 @@ namespace Sunward
         public void Animal(string species,Vector3 position)
         {
             if(Time.unscaledTime<nextAnimal)return;
-            if(World(species,position,species=="rooster"?6:9,species=="rooster"?.32f:.5f))nextAnimal=Time.unscaledTime+12;
+            if(World(species,position,species=="rooster"?3:7,species=="rooster"?.04f:.18f))nextAnimal=Time.unscaledTime+12;
         }
         public void Npc(int index) { Npc(index,game && game.Player?game.Player.transform.position:transform.position); }
         public void Npc(int index,Vector3 position)

@@ -42,6 +42,19 @@ namespace Sunward.Remaster
                 if (reader.BaseStream.Position != reader.BaseStream.Length) throw new InvalidDataException("Unexpected native bank trailing bytes");
             }
         }
+        public void SampleArmRotations(Clip clip,float time,Transform[] bones,float amount)
+        {
+            // Same-rig upper-body layering: keep the character's own seated
+            // pelvis/leg pose; sample only its own original arm rotations.
+            if(clip==null)return;
+            float frame=Mathf.Repeat(time,clip.Duration)/clip.Duration*(clip.Samples-1);
+            int a=Mathf.FloorToInt(frame),b=Mathf.Min(a+1,clip.Samples-1);float u=frame-a;
+            for(int i=6;i<=11 && i<BoneCount;i++)
+            {
+                var q=Quaternion.Slerp(clip.Rotation[a*BoneCount+i],clip.Rotation[b*BoneCount+i],u);
+                bones[i].localRotation=Quaternion.Slerp(bones[i].localRotation,q,amount);
+            }
+        }
         static Vector3 Vector(BinaryReader reader) => new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
         public Clip Find(string name) => clips.TryGetValue(name, out var clip) ? clip : null;
         public void Sample(Clip clip, float time, Transform[] bones, Vector3[] fromPosition, Quaternion[] fromRotation, Vector3[] fromScale, float blend, bool loop, bool mirror = false)

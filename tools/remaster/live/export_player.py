@@ -33,12 +33,12 @@ def parse(data, bones, allow_duplicate_channels=False):
                 dt, a, b, c1 = struct.unpack_from('<4B', data, offset+12+j*4)
                 time += dt; values.append((time, c[0]+c[1]*a, c[2]+c[3]*b, c[4]+c[5]*c1))
             prop -= 16
-        elif 50 <= prop <= 58:
+        elif 48 <= prop <= 56:
             c = struct.unpack_from('<6f', data, offset); values = []
             for j in range(n):
                 t, a, b, c1 = struct.unpack_from('<4H', data, offset+24+j*8)
                 values.append((t, c[0]+c[1]*a, c[2]+c[3]*b, c[4]+c[5]*c1))
-            prop -= 50
+            prop -= 48
         elif 80 <= prop <= 88:
             values = [struct.unpack_from('<HHfff', data, offset+j*16) for j in range(n)]
             values = [(t, a, b, c) for t, pad, a, b, c in values]; prop -= 80

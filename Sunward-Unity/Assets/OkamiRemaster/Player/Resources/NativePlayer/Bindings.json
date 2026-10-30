@@ -461,21 +461,21 @@
     },
     {
       "state": "Swim_Idle",
-      "clip": "pl00_01d",
+      "clip": "pl00_013",
       "intro": "",
       "loop": true,
       "mirror": false,
       "referenceSpeed": 0,
-      "evidence": "Original motion curves; Sunward state assignment; source cycle inspected, runtime review pending"
+      "evidence": "Native horizontal paddle cycle selected after comparing full gait cycles; replaces carrying/crouched land gait 01d/01e. Runtime review pending."
     },
     {
       "state": "Swim_Move",
-      "clip": "pl00_01e",
+      "clip": "pl00_013",
       "intro": "",
       "loop": true,
       "mirror": false,
       "referenceSpeed": 0,
-      "evidence": "Original motion curves; Sunward state assignment; source cycle inspected, runtime review pending"
+      "evidence": "Native horizontal paddle cycle selected after comparing full gait cycles; replaces carrying/crouched land gait 01d/01e. Runtime review pending."
     },
     {
       "state": "Beads1",

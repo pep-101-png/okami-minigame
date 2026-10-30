@@ -54,7 +54,10 @@ def read_pose(path,name,end=False,phase=0):
         if label==name:return values[-1] if end else values[round(phase*(samples-1))]
     raise ValueError(name)
 def actor(record,matrix=None):
-    resource=record['resource'];folder=next(p/resource for p in A.rglob('Resources') if (p/resource/'Model.json').exists());model=json.loads((folder/'Model.json').read_text());pose=read_pose(folder/'Poses.bytes',record['bindings']['idle'],record.get('holdIdlePose',False),record.get('posePhase',0));verts=skin(model,pose);local=np.eye(4);local[:3,:3]*=record['modelScale'];local[:3,3]=record['modelOffset'];root=(np.asarray(record['matrix']) if matrix is None else matrix)@local
+    resource=record['resource'];folder=next(p/resource for p in A.rglob('Resources') if (p/resource/'Model.json').exists());model=json.loads((folder/'Model.json').read_text());pose=read_pose(folder/'Poses.bytes',record['bindings']['idle'],record.get('holdIdlePose',False),record.get('posePhase',0)).copy();
+    if record.get('armMotion'):
+        arms=read_pose(folder/'Poses.bytes',record['armMotion'],phase=record.get('posePhase',0));q=arms[6:12,3:7].copy();base=pose[6:12,3:7];q[np.sum(base*q,axis=1)<0]*=-1;q=base*.3+q*.7;pose[6:12,3:7]=q/np.linalg.norm(q,axis=1)[:,None]
+    verts=skin(model,pose);local=np.eye(4);local[:3,:3]*=record['modelScale'];local[:3,3]=record['modelOffset'];root=(np.asarray(record['matrix']) if matrix is None else matrix)@local
     for part,v in zip(model['parts'],verts):
         if model.get('visibleGroups') and int(part['name'].split('-')[1]) not in model['visibleGroups']:continue
         t=next(t for t in model['textures'] if t['index']==part['texture'])
@@ -98,9 +101,9 @@ def saved_actor(source,id,instance=0):
     phase=0
     if activity:
         role=re.search(r'^  role: (.+)',activity,re.M)[1]
-        idle=re.search(r'^  motion: (.+)',activity,re.M)[1] if role=='training' else 'venue_hands'
+        idle=re.search(r'^  '+('motion' if role=='training' else 'seatedMotion')+r': (.+)',activity,re.M)[1]
         phase=.55
-    return dict(resource=resource,bindings=dict(idle=idle),modelScale=float(re.search(r'^  modelScale: (.+)',raw,re.M)[1]),modelOffset=vec(raw,'modelOffset').tolist(),matrix=w.matrix(instance,source.transform(go)).tolist(),holdIdlePose='  holdIdlePose: 1\n' in raw,posePhase=phase)
+    return dict(resource=resource,bindings=dict(idle=idle),modelScale=float(re.search(r'^  modelScale: (.+)',raw,re.M)[1]),modelOffset=vec(raw,'modelOffset').tolist(),matrix=w.matrix(instance,source.transform(go)).tolist(),holdIdlePose='  holdIdlePose: 1\n' in raw,posePhase=phase,armMotion=(re.search(r'^  handMotion: (.+)',activity,re.M)[1] if activity and role!='training' else None))
 
 for instance,source in [(0,w.scene),*w.prefabs.items()]:
     for id,raw in source.blocks.items():

@@ -1,0 +1,34 @@
+{
+  "saveProgressionPlayerMotorWorldDataEnemyDefinitionsAndBuildScenesUnchanged": true,
+  "existingColliderBlocksUnchanged": 353,
+  "savedReferencesAndTransformOrderingChecked": true,
+  "modelsChecked": 159,
+  "finiteNormalizedMotionBanksChecked": 43,
+  "savedActorBindingsChecked": 22,
+  "completeWheelFullTurnWithoutVerticalBobbing": true,
+  "swimBindingChangedTo013": true,
+  "swimOriginalActionNameConfirmed": false,
+  "merchantStationsCentredAndNativeSeated": 2,
+  "pubFloorAndEntryMatched": true,
+  "homeFurnitureVisibilityGuarded": true,
+  "enemyAttackBindingsChanged": 3,
+  "chargeTravelWindowPreserved": true,
+  "originalAudioFilesStillHashVerified": 42,
+  "globalUnidentifiedAmbienceDisabled": true,
+  "townAndPubMusicPendingIdentification": true,
+  "CSharpSyntaxFiles": 94,
+  "CSharpSyntaxErrors": [],
+  "UnityCompilationVerified": false,
+  "UnityPlaybackVerified": false,
+  "audibleBalanceVerified": false,
+  "activePreciseChannelSourceMatches": [
+    {
+      "package": "vt6a",
+      "motion": "vt6a_000"
+    },
+    {
+      "package": "vt6a",
+      "motion": "vt6a_001"
+    }
+  ]
+}

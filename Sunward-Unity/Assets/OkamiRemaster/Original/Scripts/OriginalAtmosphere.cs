@@ -82,8 +82,8 @@ namespace Sunward.Remaster
                     }
                 }
                 bool active=native.Shiranui && !game.Blocked && body;
-                var e=spirit.emission;e.rateOverTime=active?24:0;
-                if(spiritGlow){var g=spiritGlow.emission;g.rateOverTime=active?12:0;}
+                var e=spirit.emission;e.rateOverTime=active?48:0;
+                if(spiritGlow){var g=spiritGlow.emission;g.rateOverTime=active?24:0;}
                 if(!active){spirit.Clear();if(spiritGlow)spiritGlow.Clear();}
             }
             if(game.Player.Swimming && game.Player.Speed>.15f && !game.Blocked && Time.time>=nextWake)

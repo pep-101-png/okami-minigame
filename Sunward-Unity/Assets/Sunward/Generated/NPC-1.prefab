@@ -1000,6 +1000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3679930619537277936}
   - component: {fileID: 8000000000000000001}
+  - component: {fileID: 8000000000000000002}
   m_Layer: 0
   m_Name: NPC-1
   m_TagString: Untagged
@@ -1501,13 +1502,30 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.Remaster.OriginalActor
   resource: Okami/hm29
-  idle: hm92_000
-  walk: hm92_010
-  run: hm92_012
-  windup: hm29_020
-  strike: hm92_021
-  recover: hm92_030
-  death: hm92_040
-  modelOffset: {x: -0.01156313, y: 0.01168564, z: 0.2362891}
+  idle: hm92_003
+  walk: hm92_003
+  run: hm92_003
+  windup: hm92_003
+  strike: hm92_003
+  recover: hm92_003
+  death: hm92_003
+  modelOffset: {x: 0.01863449, y: 0.1488033, z: 0.3490854}
   modelScale: 0.7931992286338151
   game: {fileID: 0}
+  seatedArmMotion: hm29_020
+--- !u!114 &8000000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7603551471299879342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50789e814e840cc1ed55c96ae7882f51, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Sunward.Remaster.NativeVenueActor
+  actor: {fileID: 8000000000000000001}
+  role: merchant
+  seatedMotion: hm92_003
+  handMotion: hm29_020

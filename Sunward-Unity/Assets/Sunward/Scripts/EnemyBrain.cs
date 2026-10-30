@@ -28,6 +28,7 @@ namespace Sunward
         LineRenderer tell;
         Vector3 visualBase;
         bool originalVisual;
+        float nativeAttackLength, chargeRemaining;
         float nextVoice;
         public void Init(GameFlow flow, EnemyDefinition spec)
         {
@@ -42,7 +43,9 @@ namespace Sunward
             visual = Instantiate(spec.visual, transform).transform;
             visual.localScale = Vector3.one * spec.scale;
             visualBase = visual.localPosition;
-            originalVisual = visual.GetComponentInChildren<Sunward.Remaster.OriginalActor>(true) != null;
+            var native = visual.GetComponentInChildren<Sunward.Remaster.OriginalActor>(true);
+            originalVisual = native != null;
+            if(native && native.Ready && native.splitAttackClip)nativeAttackLength=native.ActivityLength(native.strike);
         }
 
         public void Stun(float time)
@@ -133,7 +136,7 @@ namespace Sunward
                         "fan"
                     }[attacks % 3] : ranged ? "shot" : definition.id == "heavy" ? "slam" : "charge";
                     State = "windup";
-                    timer = definition.windup * (Phase2 ? .8f : 1);
+                    timer = Mathf.Max(definition.windup * (Phase2 ? .8f : 1),nativeAttackLength*.25f);
                     visualDuration=timer;
                     struck = false;
                     tell = game.Fx.Ring(move == "slam" ? transform.position : game.Player.transform.position, new Color(.75f, .24f, .17f), move == "slam" ? (boss ? 5 : 3) : .7f, timer + .1f);
@@ -142,7 +145,8 @@ namespace Sunward
             else if (State == "windup" && timer <= 0)
             {
                 State = "strike";
-                timer = move == "charge" ? (boss ? .65f : .32f) : .18f;
+                chargeRemaining = move == "charge" ? (boss ? .65f : .32f) : 0;
+                timer = Mathf.Max(move == "charge" ? chargeRemaining : .18f,nativeAttackLength*.37f);
                 visualDuration=timer;
                 if (move == "fan" || move == "shot")
                 {
@@ -163,10 +167,11 @@ namespace Sunward
             }
             else if (State == "strike")
             {
-                if (move == "charge")
+                if (move == "charge" && chargeRemaining>0)
                 {
                     Vector3 before = transform.position;
-                    Move(direction * dt * (boss ? 10 : 7));
+                    float chargeStep=Mathf.Min(dt,chargeRemaining);chargeRemaining-=chargeStep;
+                    Move(direction * chargeStep * (boss ? 10 : 7));
                     Vector3 a = game.Player.transform.position - before, travel = transform.position - before;
                     float t = travel.sqrMagnitude < .0001f ? 0 : Mathf.Clamp01(Vector3.Dot(a, travel) / travel.sqrMagnitude);
                     if (!struck && Vector3.Distance(before + travel * t, game.Player.transform.position) < (boss ? 2 : 1.1f))
@@ -179,7 +184,7 @@ namespace Sunward
                 if (timer <= 0)
                 {
                     State = "recover";
-                    timer = boss ? .95f : .65f;
+                    timer = Mathf.Max(boss ? .95f : .65f,nativeAttackLength*.38f);
                     visualDuration=timer;
                 }
             }
