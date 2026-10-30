@@ -49,7 +49,8 @@ namespace Sunward
             }
             if (handle) Destroy(handle.gameObject);
         }
-        public GameObject Boundary(Vector3 center, float radius) => Ring(center, Color.red, radius, float.PositiveInfinity).gameObject;
+        public GameObject Boundary(Vector3 center, float radius) => Sunward.Remaster.OriginalAtmosphere.Boundary(center, radius);
+        public void JumpLeaves(Vector3 center) => Sunward.Remaster.OriginalAtmosphere.Jump(center);
         public void AttachProjectile(GameObject owner)
         {
             Load();

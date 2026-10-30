@@ -25,6 +25,7 @@ namespace Sunward
         LineRenderer tell;
         Vector3 visualBase;
         bool originalVisual;
+        float nextVoice;
         public void Init(GameFlow flow, EnemyDefinition spec)
         {
             game = flow;
@@ -51,6 +52,7 @@ namespace Sunward
             if (Dead)
                 return;
             Hp -= damage;
+            if (game.Audio && (Dead || Time.time >= nextVoice)) { game.Audio.Enemy(definition.id); nextVoice = Time.time + .9f; }
             Stun(stagger);
             if (motor.enabled)
                 motor.Move(away * .15f);

@@ -1,0 +1,2349 @@
+[
+  {
+    "package": "em00",
+    "visibleGroups": [
+      0,
+      3
+    ],
+    "reason": "Source group diagnostics; mutually exclusive body/form/prop selection"
+  },
+  {
+    "package": "em01",
+    "visibleGroups": [
+      0,
+      3
+    ],
+    "reason": "Source group diagnostics; mutually exclusive body/form/prop selection"
+  },
+  {
+    "package": "em02",
+    "visibleGroups": [
+      0,
+      3
+    ],
+    "reason": "Source group diagnostics; mutually exclusive body/form/prop selection"
+  },
+  {
+    "package": "em03",
+    "visibleGroups": [
+      0,
+      3
+    ],
+    "reason": "Source group diagnostics; mutually exclusive body/form/prop selection"
+  },
+  {
+    "package": "em04",
+    "visibleGroups": [
+      0,
+      3
+    ],
+    "reason": "Source group diagnostics; mutually exclusive body/form/prop selection"
+  },
+  {
+    "package": "em11",
+    "visibleGroups": [
+      0,
+      2
+    ],
+    "reason": "Source group diagnostics; mutually exclusive body/form/prop selection"
+  },
+  {
+    "package": "hm29",
+    "visibleGroups": [
+      0,
+      1
+    ],
+    "reason": "Source group diagnostics; mutually exclusive body/form/prop selection"
+  },
+  {
+    "package": "vt6a",
+    "visibleGroups": [
+      0
+    ],
+    "reason": "Source group diagnostics; mutually exclusive body/form/prop selection"
+  },
+  {
+    "package": "hm09",
+    "group": "HM",
+    "sourceSHA256": "27dc870a2da38fdb1b6a283dda89314f010cb5f9a44a0bb825693f63f2877d2e",
+    "visibleGroups": [
+      0,
+      1
+    ],
+    "boundsMin": [
+      -0.5219842119758302,
+      0.0057230972823324455,
+      -0.35651868285421956
+    ],
+    "boundsMax": [
+      0.4826736563679926,
+      2.0862225921442685,
+      0.24699663433817373
+    ],
+    "meshes": [
+      {
+        "mesh": "02cb7fae757072589078c881eb06026d",
+        "material": "157f23e2dc491de4d70ed4ab3b7ea613"
+      }
+    ],
+    "motions": [
+      {
+        "name": "hm05_000",
+        "sha256": "218af5e8b02016e0ef7713fd4aa178a4645e293e9e0df7998326344f2f1d4dd1"
+      },
+      {
+        "name": "hm05_010",
+        "sha256": "a45e8f4606cd6ee63832b2492b46299efcd3294c3fb238137e6b2463a9d6d228"
+      },
+      {
+        "name": "hm05_011",
+        "sha256": "1d3f3eae662ee06f143364533e2d7ff8ac5a22f6dfb9274ab5b70dac4ee2c797"
+      },
+      {
+        "name": "hm05_012",
+        "sha256": "e08feff986417999885daa5d9107a7fade14978d24950f5d458c6c65d94866bd"
+      },
+      {
+        "name": "hm05_020",
+        "sha256": "6bf86acc6fc51a689c7bb2094f06ba2aa5dc9142a8a05012b41b247012e1f350"
+      },
+      {
+        "name": "hm05_021",
+        "sha256": "56944a85e39d432fab8ab66944f342e48a92b1a091b11f6a959ae48769f8ea1f"
+      },
+      {
+        "name": "hm05_030",
+        "sha256": "87fbc966d8bbcd9950bbaaa12ba56d1a9c443c63b7ff71f2ebfdf6192c1390d4"
+      },
+      {
+        "name": "hm05_032",
+        "sha256": "e5cdea1cc01c300d1b4cbb2d87b57c2f3d8ea5fe26478f06df6a4d187061839e"
+      },
+      {
+        "name": "hm05_037",
+        "sha256": "0cde129e9ee8f25258cf22c66c3bc965f173f7bce639c0051c636d71e636483e"
+      },
+      {
+        "name": "hm05_040",
+        "sha256": "e1e8d54c1ce4532bf713ebe68edda493c4f7463f36b3cb7c7c29c15f94e003d9"
+      }
+    ]
+  },
+  {
+    "package": "hm2d",
+    "group": "HM",
+    "sourceSHA256": "7dc85ad06dfb53f17a21af80e9e1962e1d31b5e4df42cd79556de614f78633b5",
+    "visibleGroups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "boundsMin": [
+      -0.8763910235122742,
+      0.027457331836018443,
+      -0.8358238408473536
+    ],
+    "boundsMax": [
+      0.9798073558995632,
+      2.4262522986648216,
+      0.7177635367308721
+    ],
+    "meshes": [
+      {
+        "mesh": "5b23bf5ae60bab5b8100d20b0a177c7d",
+        "material": "1a1f467b1ac3238144987c645a2614a0"
+      },
+      {
+        "mesh": "d314996a76a4bceba6cccc2ce8c21228",
+        "material": "0ffe3a6e06204cd3e466a0b9d2b4606d"
+      }
+    ],
+    "motions": [
+      {
+        "name": "hm2d_000",
+        "sha256": "918a24e70ad7e9dfc11135775756d9200b7196b4a513fb07a195c25d2b9a1cb8"
+      },
+      {
+        "name": "hm92_010",
+        "sha256": "d362e29e1bb8343c1d69f2a3c9f6ba01627ebc01f3adaaaf3d867663ff28f5e7"
+      },
+      {
+        "name": "hm92_011",
+        "sha256": "cdf1e3a01c50df15f0d69c895284abc5ccb7de0962e25c537ee4d31f12a8568f"
+      },
+      {
+        "name": "hm92_012",
+        "sha256": "da116c24ba9707665b91e93c06bd751e004b4a0c65b41e317c9c1e9a55b22928"
+      },
+      {
+        "name": "hm92_020",
+        "sha256": "8cc7121eefd693d17e2db50e5c7f618fa176e747aaa3073a57dff4fe1b726dbd"
+      },
+      {
+        "name": "hm92_021",
+        "sha256": "d7480b48b24d4680495ae9ff3c18f1c1855a5827cc62af2fc47c84cb37521915"
+      },
+      {
+        "name": "hm92_030",
+        "sha256": "6a51e7980b985dc773fd44cba1cbf9983e24ba4e23e7cc525e644a5aabc8f6c7"
+      },
+      {
+        "name": "hm92_032",
+        "sha256": "124dcdc13f9178d03145c28f26d1de5c0cbbacab414e2d14f619946868795d13"
+      },
+      {
+        "name": "hm92_040",
+        "sha256": "9bf0b955003686822dd8803b73d27fdc29af6fcb2af4cde28d60ef5bce2624c4"
+      },
+      {
+        "name": "hm2d_080",
+        "sha256": "0618b5ba243ef9fad0fdd14674828b6c04a63d71e4e3f27e333787d9d6cec798"
+      }
+    ]
+  },
+  {
+    "package": "hm44",
+    "group": "HM",
+    "sourceSHA256": "de8597ac8ca4d84d5caefb72c9db216f3e101ee467f311e89419bcf04b107be1",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.40314643091656255,
+      -0.12050712134345065,
+      -0.21591883352437113
+    ],
+    "boundsMax": [
+      0.39127370164695335,
+      1.3297793994975864,
+      1.3179751986355523
+    ],
+    "meshes": [
+      {
+        "mesh": "4f2f67aeeb8ee287c0bb212e45307d2e",
+        "material": "6b6c8e25455daeb7e4f5a4c69eec4d75"
+      }
+    ],
+    "motions": [
+      {
+        "name": "hme5_000",
+        "sha256": "348fbe2efe79eb22ed55e1fe852b055c7a3c55bba07ce977c1d8157b72acfc68"
+      },
+      {
+        "name": "hme5_010",
+        "sha256": "c3eee12450899edf032122d48c42690896f364724b1d31c6fcb08fe7dfcbcccf"
+      },
+      {
+        "name": "hme5_011",
+        "sha256": "5c868362e0a620d2893444996cb5ce091281d3063e01bb0106719a7a752a1ec8"
+      },
+      {
+        "name": "hme5_012",
+        "sha256": "61e118cbdf0cf1558885ab235b1898e9ef223c015c08d03cceba96b2a51a6a5d"
+      },
+      {
+        "name": "hme5_020",
+        "sha256": "0ec14ad438dc8646030a051388f0c177e0a5cade02b7f187139a0cb7a61ea1e3"
+      },
+      {
+        "name": "hme5_021",
+        "sha256": "55d348679f4dd304c5f345fb5945b850bb0a9d9705d8a813f1c8b633c192f689"
+      },
+      {
+        "name": "hme5_030",
+        "sha256": "5457e3c715b15500ca29c071b8ce06ecd4603ee9b6b40262bae0a3a6523ab0ca"
+      },
+      {
+        "name": "hm94_032",
+        "sha256": "0bf362e5a0454892b743739e7c01a769b6b0fbd522bc8c4d9a8b7fce47fa71f0"
+      },
+      {
+        "name": "hme5_040",
+        "sha256": "2236682640e3a90052613a505a4482d4c5782d474edf03f3a8bb2dacd88bc97c"
+      }
+    ]
+  },
+  {
+    "package": "pl0d",
+    "group": "PL",
+    "sourceSHA256": "ccf9d9ae10410a317955175695f184c2082bb8cc2134a1850b702fc950c145c3",
+    "visibleGroups": null,
+    "boundsMin": [
+      -0.49110598081591994,
+      -0.02710440057707758,
+      -1.0092505464634636
+    ],
+    "boundsMax": [
+      0.4940809044979006,
+      1.1540929722221198,
+      0.6373414234395087
+    ],
+    "meshes": [
+      {
+        "mesh": "ed5656235fd75dded1caa9c19fed969f",
+        "material": "ca2b14cc7508014b74f6c14346166542"
+      },
+      {
+        "mesh": "cb8c839ab40184fe6e800eb5689aed8d",
+        "material": "4994c6c9c0bbc44180b3b67492b7b06c"
+      },
+      {
+        "mesh": "27ccd079ded01ceaa309335be474cd0f",
+        "material": "2a52f722b4b1dee4b6c0679c570f4d22"
+      },
+      {
+        "mesh": "9d70d11322a1ffb543ce3c5bda6070e3",
+        "material": "4994c6c9c0bbc44180b3b67492b7b06c"
+      },
+      {
+        "mesh": "00a73bb1692f49d3d2a46016c96c7987",
+        "material": "2a52f722b4b1dee4b6c0679c570f4d22"
+      },
+      {
+        "mesh": "aafe698fb314b72941dae7c58bc9a55a",
+        "material": "4994c6c9c0bbc44180b3b67492b7b06c"
+      },
+      {
+        "mesh": "93310a993ace1db445842cdeeda8c245",
+        "material": "2a52f722b4b1dee4b6c0679c570f4d22"
+      },
+      {
+        "mesh": "fc797bc40e09cb74c82603a9bf41aab0",
+        "material": "cf2e374793611e57b0f8644c706696ce"
+      },
+      {
+        "mesh": "9e5aa0bb3f0f581fc1ebb9587424be8b",
+        "material": "4994c6c9c0bbc44180b3b67492b7b06c"
+      }
+    ],
+    "motions": [
+      {
+        "name": "pl00_000",
+        "sha256": "5bc2a94b08ba820535aae3a33c9a05f9229bc2c63f04b344e1b541a2880ec4cf"
+      },
+      {
+        "name": "pl00_010",
+        "sha256": "1b23de694c1a7e8d47c10d1458bbe913135b9ef1e4e90bda8220ea6a69025af3"
+      },
+      {
+        "name": "pl00_020",
+        "sha256": "c511463a344a7e0191fec7e293bd8cce71e2364250eaf4905175a3ab5c01fe56"
+      },
+      {
+        "name": "pl00_030",
+        "sha256": "807f101027aeb74aada6fe14f663555068703648ae5f916c158fa94d7edecdb6"
+      }
+    ]
+  },
+  {
+    "package": "wp20",
+    "group": "WP",
+    "sourceSHA256": "8dac8b57f1b5735a38152866cff0be2aebf396678adf112c908299261ab9fab9",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.6098084304550151,
+      -0.8882981986242481,
+      -0.1414678303428772
+    ],
+    "boundsMax": [
+      0.4925302806320552,
+      0.3749997317790985,
+      7.500000000018903
+    ],
+    "meshes": [
+      {
+        "mesh": "5239f0c247c8e938aac80996c70092a3",
+        "material": "b2f826caa8399f3aa75a0dedb2286387"
+      },
+      {
+        "mesh": "20292b858471d0dd86a485fcdabf01f9",
+        "material": "b2f826caa8399f3aa75a0dedb2286387"
+      },
+      {
+        "mesh": "1ea30637bfd68e5f65bd27725713d6c1",
+        "material": "b2f826caa8399f3aa75a0dedb2286387"
+      },
+      {
+        "mesh": "52e079e88114073bc25efa88cd42a622",
+        "material": "113fa4a9c405b36dec9c4c5007a960fe"
+      },
+      {
+        "mesh": "6220d549ffa1b135d235e9160f029564",
+        "material": "113fa4a9c405b36dec9c4c5007a960fe"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp20_000",
+        "sha256": "e4fd5e8fa4a474291eba6d1cdcd47eb5606b5d2af6cc18b1bbbaad3d66dc9977"
+      },
+      {
+        "name": "wp20_001",
+        "sha256": "cb394e22d0ddc14b298c7ecff3b5b21fb8f1f95c111e8d16270d11d17142166b"
+      },
+      {
+        "name": "wp20_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp20_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp21",
+    "group": "WP",
+    "sourceSHA256": "0d377c718cf30be54df8e6d27a6db76ae25a35a3f8bb897862441a79d8da063f",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.7781482815170673,
+      -1.0078284648519125,
+      -0.28427029107272284
+    ],
+    "boundsMax": [
+      0.7781482815170673,
+      1.429281006370367,
+      7.454959522067853
+    ],
+    "meshes": [
+      {
+        "mesh": "4f489b1102ec5fb460d3836af8e3e8ba",
+        "material": "4f0432bb65c2356eb126d7ce982f3be8"
+      },
+      {
+        "mesh": "8f9ad142fd0a2f07c129b9c2fec2e5e6",
+        "material": "4f0432bb65c2356eb126d7ce982f3be8"
+      },
+      {
+        "mesh": "dad4fffb8bd8e1d7b57a5862353e9464",
+        "material": "4f0432bb65c2356eb126d7ce982f3be8"
+      },
+      {
+        "mesh": "0592f88ffa66366bbcc9f835142c97f0",
+        "material": "4f0432bb65c2356eb126d7ce982f3be8"
+      },
+      {
+        "mesh": "f3d57db29f30bc9359542923417b25a4",
+        "material": "4f0432bb65c2356eb126d7ce982f3be8"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp21_000",
+        "sha256": "01b866593189a5939074b021d0f51aea861097aa953a2910ee1f7548a61137dd"
+      },
+      {
+        "name": "wp21_001",
+        "sha256": "cb394e22d0ddc14b298c7ecff3b5b21fb8f1f95c111e8d16270d11d17142166b"
+      },
+      {
+        "name": "wp21_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp21_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp22",
+    "group": "WP",
+    "sourceSHA256": "7accf4fe6d7da8ccfdef7d5e6293e106c8f5775180ec5471be5f6fa431ae6325",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.4160514878362222,
+      -7.664590030908585,
+      -0.375
+    ],
+    "boundsMax": [
+      0.41686211153240915,
+      0.24520691316776186,
+      0.375
+    ],
+    "meshes": [
+      {
+        "mesh": "d347d0b289f9a5f50d9b99ff246b91b0",
+        "material": "2385c0c5cb58d425e712aa09220fdfa6"
+      },
+      {
+        "mesh": "6e0448e9f1c6c5233dfc56380c65f154",
+        "material": "2385c0c5cb58d425e712aa09220fdfa6"
+      },
+      {
+        "mesh": "88c7fdcba0ae792c1652b56d707294d1",
+        "material": "2385c0c5cb58d425e712aa09220fdfa6"
+      },
+      {
+        "mesh": "b50b75be402da6d713804b13de1c1c61",
+        "material": "2385c0c5cb58d425e712aa09220fdfa6"
+      },
+      {
+        "mesh": "5ccca1c608571e8ef388f4282125182f",
+        "material": "2385c0c5cb58d425e712aa09220fdfa6"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp22_000",
+        "sha256": "c1a772ccdb61525b976e3024ff32b02781b8d75dc27d12da709ae357ff1efcd7"
+      },
+      {
+        "name": "wp22_001",
+        "sha256": "cb394e22d0ddc14b298c7ecff3b5b21fb8f1f95c111e8d16270d11d17142166b"
+      },
+      {
+        "name": "wp22_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp22_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp23",
+    "group": "WP",
+    "sourceSHA256": "89e535b20edecc1b6d737827ed2da68a2e1ecd213a5b928a2efd38311b679228",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.49156406804860137,
+      -0.7275516726076603,
+      -0.15206371956477926
+    ],
+    "boundsMax": [
+      0.4889958301054857,
+      1.6783542968332767,
+      7.484187014400959
+    ],
+    "meshes": [
+      {
+        "mesh": "d93639190772f470cab72be7afc126c0",
+        "material": "7ce5def28ca5478e9115699b22b89471"
+      },
+      {
+        "mesh": "f9bed2c25700ca37f06d04ae7a0675d2",
+        "material": "7ce5def28ca5478e9115699b22b89471"
+      },
+      {
+        "mesh": "c928dbddaba72355dee61f29f2ed2e37",
+        "material": "7ce5def28ca5478e9115699b22b89471"
+      },
+      {
+        "mesh": "bb3cd89c5c7db594ed043950d897f2d2",
+        "material": "7ce5def28ca5478e9115699b22b89471"
+      },
+      {
+        "mesh": "c549f19c1ffeaf5ea9dc42b3c0449475",
+        "material": "7ce5def28ca5478e9115699b22b89471"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp23_000",
+        "sha256": "b707fbc957b4a67e13a00c213aa7c40b9d395413e0074a16e1f01f7d9de1c356"
+      },
+      {
+        "name": "wp23_001",
+        "sha256": "cb394e22d0ddc14b298c7ecff3b5b21fb8f1f95c111e8d16270d11d17142166b"
+      },
+      {
+        "name": "wp23_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp23_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp24",
+    "group": "WP",
+    "sourceSHA256": "7850904c48ed5fd7e94f2abdf66eaae6461a3018a3ef7d094efa1078bbafc19c",
+    "visibleGroups": [
+      0,
+      1
+    ],
+    "boundsMin": [
+      -0.4143624462738884,
+      -2.05978571480659,
+      -0.0795852725033213
+    ],
+    "boundsMax": [
+      0.40703553272875753,
+      0.2746611162928466,
+      0.5920302294746691
+    ],
+    "meshes": [
+      {
+        "mesh": "7ae9da9a3bf057888316ac1e22f927cb",
+        "material": "6c9acaccc036cad8afd9115d75a537e1"
+      },
+      {
+        "mesh": "cba6e2ac5c0221175afb509a9a2389ae",
+        "material": "c9a654b15c25c65a5406124921a5144f"
+      },
+      {
+        "mesh": "45eb0b2d8b2e23f7b78d48b37cedb8bf",
+        "material": "02a8cf5a19a534739c128cdd660320d0"
+      },
+      {
+        "mesh": "e1f9bb55816fb0d4accde053e7d276ed",
+        "material": "02a8cf5a19a534739c128cdd660320d0"
+      },
+      {
+        "mesh": "5cc340091d7ac2825773e8f92d5c8b6c",
+        "material": "02a8cf5a19a534739c128cdd660320d0"
+      },
+      {
+        "mesh": "11f5c0e464bc2bb3b17f04882483c6ca",
+        "material": "6c9acaccc036cad8afd9115d75a537e1"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp24_000",
+        "sha256": "c0dd56bea7ac2829d31a29746b9b9ca6f012edcb94901a4adb44003a75e35b76"
+      },
+      {
+        "name": "wp24_001",
+        "sha256": "cb394e22d0ddc14b298c7ecff3b5b21fb8f1f95c111e8d16270d11d17142166b"
+      },
+      {
+        "name": "wp24_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp24_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp25",
+    "group": "WP",
+    "sourceSHA256": "0e267a173b1b067464f222e66f86d850281ca8d1acc5cbebe2aa0b13fd3c9703",
+    "visibleGroups": [
+      3
+    ],
+    "boundsMin": [
+      -0.5465257977095307,
+      -1.2309148840028397,
+      -0.23176262145055543
+    ],
+    "boundsMax": [
+      0.6000795520178897,
+      0.7611652172307712,
+      0.24668865335307888
+    ],
+    "meshes": [
+      {
+        "mesh": "8e31b4ba5712d55817d86ccf9bce0ab0",
+        "material": "8186262acfcd5941d20963ad2716f1d7"
+      },
+      {
+        "mesh": "2bcd06514122cefbc035645e5aecf164",
+        "material": "8186262acfcd5941d20963ad2716f1d7"
+      },
+      {
+        "mesh": "b05a01efafd6f49cf43565f651efd6dd",
+        "material": "6e20aa7a5e5db750f11baa2ac1516971"
+      },
+      {
+        "mesh": "817807080ba50161e55cee54f3476bc7",
+        "material": "276dfaff948cd3b06b71d340518251d4"
+      },
+      {
+        "mesh": "4c9cf47c1703ecdc1ced473b6e92cdb0",
+        "material": "8186262acfcd5941d20963ad2716f1d7"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp25_000",
+        "sha256": "37dc78ea8ffc7ffe79047bd74c5e95a282a49365733f9b433e8873e71e96b6e1"
+      },
+      {
+        "name": "wp25_001",
+        "sha256": "888569b3fc77cfc4aea497bcf59f9d092e9d08a51afe890ca2e3d320bc134895"
+      },
+      {
+        "name": "wp25_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp25_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp26",
+    "group": "WP",
+    "sourceSHA256": "b2beff56c9f4238b6a1a7e2f2bab803dc968aa5f6039e00fc4a8a086a98224ea",
+    "visibleGroups": [
+      3
+    ],
+    "boundsMin": [
+      -0.9247543556537344,
+      -1.7588959925125822,
+      -0.20755046807698843
+    ],
+    "boundsMax": [
+      0.4301176280893904,
+      0.6160314352183108,
+      0.4884254171818822
+    ],
+    "meshes": [
+      {
+        "mesh": "674b18af43d8e69bf36f304b6bf7767c",
+        "material": "4171b8a77f59eb17e57e311d01486358"
+      },
+      {
+        "mesh": "959bb9efea758d17b61a30f51483670e",
+        "material": "56002e5bdf50a37d76e1a2471ad690a0"
+      },
+      {
+        "mesh": "bf0110bfdc3bafab89829b7a11858b0b",
+        "material": "56002e5bdf50a37d76e1a2471ad690a0"
+      },
+      {
+        "mesh": "0a07bca4510a6a14de932a475b83be9c",
+        "material": "56002e5bdf50a37d76e1a2471ad690a0"
+      },
+      {
+        "mesh": "8f3cf137333d5034ad4cc9ec685db7c2",
+        "material": "56002e5bdf50a37d76e1a2471ad690a0"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp26_000",
+        "sha256": "c8339fe939667fd22de1d572ca7a0538b728db1b466e27c01b26bd3d9af11b3b"
+      },
+      {
+        "name": "wp26_001",
+        "sha256": "888569b3fc77cfc4aea497bcf59f9d092e9d08a51afe890ca2e3d320bc134895"
+      },
+      {
+        "name": "wp26_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp26_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp27",
+    "group": "WP",
+    "sourceSHA256": "1a25e2a792eb9040b1782da3d6b6d4948c5ed11d20791646699223dc0d460c5b",
+    "visibleGroups": [
+      3
+    ],
+    "boundsMin": [
+      -0.7566439875687917,
+      -1.6215846674127732,
+      -0.26528349257561046
+    ],
+    "boundsMax": [
+      0.6279143135927767,
+      0.7140521273012812,
+      0.3950473972404552
+    ],
+    "meshes": [
+      {
+        "mesh": "edb47633127f174d0df51ec26b62f6f8",
+        "material": "b8201b8c00dfdc1aa0a8ae29baf71b4e"
+      },
+      {
+        "mesh": "77c8d8a324245bcb74735cb020f6b3f4",
+        "material": "b8201b8c00dfdc1aa0a8ae29baf71b4e"
+      },
+      {
+        "mesh": "5878766364722366c4e9d7b4255714c5",
+        "material": "b2b5fe7a9f1092b694b81cd2165e0e53"
+      },
+      {
+        "mesh": "9ed71bc207ce4e0db7d60406db166366",
+        "material": "a01d514270365687a169036ed1de5507"
+      },
+      {
+        "mesh": "65e52c4e133350e16261c286d91fdc35",
+        "material": "a01d514270365687a169036ed1de5507"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp27_000",
+        "sha256": "4054b2729c6354c43bea9256e808cc3942f0542a0aedfa97eac8e0c3ccb534d7"
+      },
+      {
+        "name": "wp27_001",
+        "sha256": "888569b3fc77cfc4aea497bcf59f9d092e9d08a51afe890ca2e3d320bc134895"
+      },
+      {
+        "name": "wp27_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp27_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp28",
+    "group": "WP",
+    "sourceSHA256": "36c42f0bdee030486d4ad9a368bd10eff25da065ccad95fb722f9d3925abadc2",
+    "visibleGroups": [
+      3
+    ],
+    "boundsMin": [
+      -0.6758011452442637,
+      -1.222135999758943,
+      -0.22619553118356575
+    ],
+    "boundsMax": [
+      0.6066408671934609,
+      0.6471655037838233,
+      0.27044768765998956
+    ],
+    "meshes": [
+      {
+        "mesh": "d23cd7496553067cc2ff056b10a021c6",
+        "material": "896988f679332345280b95bc9560b444"
+      },
+      {
+        "mesh": "9439dcd04307fcea2b7586752d0eb7b7",
+        "material": "169c1ecf58c74ab62708613607930dc1"
+      },
+      {
+        "mesh": "1a47ed1eb0ba146680fb189a1066855e",
+        "material": "169c1ecf58c74ab62708613607930dc1"
+      },
+      {
+        "mesh": "43e0a1a7bc623c43e11efec57b34efac",
+        "material": "169c1ecf58c74ab62708613607930dc1"
+      },
+      {
+        "mesh": "461714fa1fd5aa7df713967d913ea88a",
+        "material": "169c1ecf58c74ab62708613607930dc1"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp28_000",
+        "sha256": "21199ffba173c824440a1cb65ac28ea0c64700fb54d73cd919da08ee6c7c16ae"
+      },
+      {
+        "name": "wp28_001",
+        "sha256": "888569b3fc77cfc4aea497bcf59f9d092e9d08a51afe890ca2e3d320bc134895"
+      },
+      {
+        "name": "wp28_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp28_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp29",
+    "group": "WP",
+    "sourceSHA256": "7966f9447ad67add50eee729225afe72f3ea83fff09ff8ef1080b11b1d586d84",
+    "visibleGroups": [
+      3
+    ],
+    "boundsMin": [
+      -0.7072977509925551,
+      -1.5237619702313276,
+      -0.2333826720263436
+    ],
+    "boundsMax": [
+      0.5713482707283742,
+      0.743471340505991,
+      0.3183372079737251
+    ],
+    "meshes": [
+      {
+        "mesh": "0432c1e14d7b1d3d2ad65f7acc00b372",
+        "material": "396cea2dc94b8e282f300850ea7c34da"
+      },
+      {
+        "mesh": "e4006f9bdfce404ed5ea0edfbb3143cd",
+        "material": "970f74fbfa98f7277abfe0ed25d9fe55"
+      },
+      {
+        "mesh": "0006369bb255d7af04ae90ab838a2d98",
+        "material": "186aaf1d853cab2e0f61fa6600e0f1ec"
+      },
+      {
+        "mesh": "f89604d0fb4ba75a27533da1f2db4f5e",
+        "material": "186aaf1d853cab2e0f61fa6600e0f1ec"
+      },
+      {
+        "mesh": "0541a25085f3224412f949dcca360476",
+        "material": "186aaf1d853cab2e0f61fa6600e0f1ec"
+      },
+      {
+        "mesh": "2ff1562f9f1d6df920f494b10f49cc49",
+        "material": "186aaf1d853cab2e0f61fa6600e0f1ec"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp29_000",
+        "sha256": "5b5976261207836da024cde8ee4400044c95c0bdbe4d574a37a1827b82829245"
+      },
+      {
+        "name": "wp29_001",
+        "sha256": "888569b3fc77cfc4aea497bcf59f9d092e9d08a51afe890ca2e3d320bc134895"
+      },
+      {
+        "name": "wp29_002",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_003",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_004",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_005",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_006",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_007",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_008",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_009",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_00a",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_00b",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_00c",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp29_00f",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      }
+    ]
+  },
+  {
+    "package": "wp2a",
+    "group": "WP",
+    "sourceSHA256": "85051d23fb9883b612276134184609159e6be608d3f3cd9d7cc0d54c1b1aa0cb",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.4903771465681661,
+      -0.3169517219296303,
+      -0.2295422089275888
+    ],
+    "boundsMax": [
+      0.48882434834605915,
+      0.4156076567818561,
+      0.8080752759926106
+    ],
+    "meshes": [
+      {
+        "mesh": "06d8c1abc88190d23c80964050045a35",
+        "material": "48ece98ac20c04324cbd995a97f54c5f"
+      },
+      {
+        "mesh": "4946767a980da745fb547d13a8801675",
+        "material": "48ece98ac20c04324cbd995a97f54c5f"
+      },
+      {
+        "mesh": "ce49178f123ef2cdcd13672912634f39",
+        "material": "48ece98ac20c04324cbd995a97f54c5f"
+      },
+      {
+        "mesh": "4bd0c83dbe60a0cf0e7830b41f59a4af",
+        "material": "48ece98ac20c04324cbd995a97f54c5f"
+      },
+      {
+        "mesh": "8f63a96cabd8c41b9edc81d3723c768c",
+        "material": "48ece98ac20c04324cbd995a97f54c5f"
+      },
+      {
+        "mesh": "bc5d01e240153539f974be5d614df241",
+        "material": "48ece98ac20c04324cbd995a97f54c5f"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp2a_000",
+        "sha256": "661d26bd93e55131e74b6f7320b48a79adbc1ac8ed88ce90dcf81befb4f418c0"
+      },
+      {
+        "name": "wp2a_001",
+        "sha256": "db7a797d39671e950fa7672784aed859f5e5adc870b01a0b3df82050f1e2c57e"
+      },
+      {
+        "name": "wp2a_002",
+        "sha256": "e7d55e59f4864447987a6d66f02b72f89ff5cf0002d61a24edd8c084b3e97e4d"
+      },
+      {
+        "name": "wp2a_003",
+        "sha256": "191306a903e01358243c91b8f26ffc736d5e9d63004a1a4aff2411ce51302c92"
+      },
+      {
+        "name": "wp2a_004",
+        "sha256": "6215ec2d5709f20fa655de40eeb37c32fa56a9d925fdf47ffec975d0dccea581"
+      },
+      {
+        "name": "wp2a_005",
+        "sha256": "b66cd3b66616a29e660b45a86b696b9754feae6eb68116e6dab0d56f4b5692db"
+      },
+      {
+        "name": "wp2a_006",
+        "sha256": "8e830c30cfde6a60fef3d8d7ebffb6319c1e96a78a119c7b5b2623985a686b79"
+      },
+      {
+        "name": "wp2a_007",
+        "sha256": "4a23d1ef94c858ab055c06adc9c42eb2b393e5630be964893cc9585fefb08894"
+      },
+      {
+        "name": "wp2a_008",
+        "sha256": "db274735dce05fb82c91766ba5900c0945c1456d68e6443ccaca091b486edf12"
+      },
+      {
+        "name": "wp2a_009",
+        "sha256": "c0227628bae85408842c10c25a200ce7bd99486badaa4c50a8f2b12b3f64193c"
+      },
+      {
+        "name": "wp2a_00a",
+        "sha256": "7e1629bdc45e9c2bf924eca1acdc132d520fd0bfe134a0801c344badc62abb7c"
+      },
+      {
+        "name": "wp2a_00b",
+        "sha256": "4b797d8ea44dc8111fab571a3935496cfce469a6b8b9676520596f86aac53a39"
+      },
+      {
+        "name": "wp2a_00c",
+        "sha256": "c9e3e7bb88d4cfbe8686a8380d8190aabd2df4c26d7494767f39a4ac02776749"
+      },
+      {
+        "name": "wp2a_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2a_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2a_00f",
+        "sha256": "1b448d3a5741eca10fa992cf2cabfac0dd137695f7a644bad5440ffcdac8776f"
+      }
+    ]
+  },
+  {
+    "package": "wp2b",
+    "group": "WP",
+    "sourceSHA256": "9266eb6deda2404f275087ea43fb09812ad9b0346ad5434cea5147c54dffd463",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.47338487892195324,
+      -0.17094202442889617,
+      -0.27400259205528976
+    ],
+    "boundsMax": [
+      0.4717891711208123,
+      0.4734467452513419,
+      0.772562986091061
+    ],
+    "meshes": [
+      {
+        "mesh": "a7161e46a8ecd3eb425c7555c30cbe3d",
+        "material": "e0128fdeb6dafdf29189fec1b90d5ff0"
+      },
+      {
+        "mesh": "1187d9c5914c8e0a53dea01390af0919",
+        "material": "e0128fdeb6dafdf29189fec1b90d5ff0"
+      },
+      {
+        "mesh": "ee2339a57e5d7dea65d1d5f5ad6ac614",
+        "material": "e0128fdeb6dafdf29189fec1b90d5ff0"
+      },
+      {
+        "mesh": "e45a4ce73efbb21d4c6fe7128e7dc27e",
+        "material": "e0128fdeb6dafdf29189fec1b90d5ff0"
+      },
+      {
+        "mesh": "d9f592cee1c4eb1f7e646061b97ad6a1",
+        "material": "e0128fdeb6dafdf29189fec1b90d5ff0"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp2b_000",
+        "sha256": "661d26bd93e55131e74b6f7320b48a79adbc1ac8ed88ce90dcf81befb4f418c0"
+      },
+      {
+        "name": "wp2b_001",
+        "sha256": "db7a797d39671e950fa7672784aed859f5e5adc870b01a0b3df82050f1e2c57e"
+      },
+      {
+        "name": "wp2b_002",
+        "sha256": "e7d55e59f4864447987a6d66f02b72f89ff5cf0002d61a24edd8c084b3e97e4d"
+      },
+      {
+        "name": "wp2b_003",
+        "sha256": "191306a903e01358243c91b8f26ffc736d5e9d63004a1a4aff2411ce51302c92"
+      },
+      {
+        "name": "wp2b_004",
+        "sha256": "6215ec2d5709f20fa655de40eeb37c32fa56a9d925fdf47ffec975d0dccea581"
+      },
+      {
+        "name": "wp2b_005",
+        "sha256": "b66cd3b66616a29e660b45a86b696b9754feae6eb68116e6dab0d56f4b5692db"
+      },
+      {
+        "name": "wp2b_006",
+        "sha256": "8e830c30cfde6a60fef3d8d7ebffb6319c1e96a78a119c7b5b2623985a686b79"
+      },
+      {
+        "name": "wp2b_007",
+        "sha256": "4a23d1ef94c858ab055c06adc9c42eb2b393e5630be964893cc9585fefb08894"
+      },
+      {
+        "name": "wp2b_008",
+        "sha256": "db274735dce05fb82c91766ba5900c0945c1456d68e6443ccaca091b486edf12"
+      },
+      {
+        "name": "wp2b_009",
+        "sha256": "49157b9b8983ce33a60d719f1192f1f3d16e6e188f232a7faa1a28a96b2789d7"
+      },
+      {
+        "name": "wp2b_00a",
+        "sha256": "7e1629bdc45e9c2bf924eca1acdc132d520fd0bfe134a0801c344badc62abb7c"
+      },
+      {
+        "name": "wp2b_00b",
+        "sha256": "4b797d8ea44dc8111fab571a3935496cfce469a6b8b9676520596f86aac53a39"
+      },
+      {
+        "name": "wp2b_00c",
+        "sha256": "c9e3e7bb88d4cfbe8686a8380d8190aabd2df4c26d7494767f39a4ac02776749"
+      },
+      {
+        "name": "wp2b_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2b_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2b_00f",
+        "sha256": "1b448d3a5741eca10fa992cf2cabfac0dd137695f7a644bad5440ffcdac8776f"
+      }
+    ]
+  },
+  {
+    "package": "wp2c",
+    "group": "WP",
+    "sourceSHA256": "d6cf656cc3740842eed9a2ab9293edebf0ea4ca0f03beb593c557a6a909e9d3a",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.45412609109866825,
+      -0.7035009100122547,
+      -0.00790917901426788
+    ],
+    "boundsMax": [
+      0.4393727108979073,
+      0.21413741983295573,
+      0.4678060230881478
+    ],
+    "meshes": [
+      {
+        "mesh": "c018ee9bfaee7455072b3ed3fcadcf34",
+        "material": "aef441b9185d92a3fdaa80fc730434ea"
+      },
+      {
+        "mesh": "97f50a8ea5f2334dacb7d2e0cf5ead2a",
+        "material": "83959994210e839f7d7dc18d36ff2fdc"
+      },
+      {
+        "mesh": "c21498777008185d5fb0133e95fe2a33",
+        "material": "aef441b9185d92a3fdaa80fc730434ea"
+      },
+      {
+        "mesh": "088e8b291ead3cd59235afde6c7be5f2",
+        "material": "83959994210e839f7d7dc18d36ff2fdc"
+      },
+      {
+        "mesh": "16d0cf47604231b45c1ff7eec476f732",
+        "material": "aef441b9185d92a3fdaa80fc730434ea"
+      },
+      {
+        "mesh": "8db6689585837452967e4db73f6fadf2",
+        "material": "83959994210e839f7d7dc18d36ff2fdc"
+      },
+      {
+        "mesh": "f6d1132629e50d3143a223ce53c4ccc2",
+        "material": "aef441b9185d92a3fdaa80fc730434ea"
+      },
+      {
+        "mesh": "2a13d602a8d0b4f7b74fe7e5a6be5256",
+        "material": "83959994210e839f7d7dc18d36ff2fdc"
+      },
+      {
+        "mesh": "8b7e0bf7b7df189b44c5e4f1f7398440",
+        "material": "aef441b9185d92a3fdaa80fc730434ea"
+      },
+      {
+        "mesh": "1dedbd4ba7efb86ee366034238bc12ad",
+        "material": "83959994210e839f7d7dc18d36ff2fdc"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp2c_000",
+        "sha256": "0577871e9752a4637a917f6a7779bb6ba222d387d7eb39c34d110479e89d4fbf"
+      },
+      {
+        "name": "wp2c_001",
+        "sha256": "53e5d759f472194b8da3eafbae5f763d681cb65dd048e5f80c6bcbc940b66622"
+      },
+      {
+        "name": "wp2c_002",
+        "sha256": "32cb3e9dee19f542ad8213e4b0b76821dcc1c11a3405d42678196848c3542d7e"
+      },
+      {
+        "name": "wp2c_003",
+        "sha256": "8fd7848996cc16f68233eaaef822383d92ccb651e0fda94ac6535bd5728a9d99"
+      },
+      {
+        "name": "wp2c_004",
+        "sha256": "452c43cca3babc11441ae64c32372201312d01ddd0b7605ccb1cc7fd222dcbf1"
+      },
+      {
+        "name": "wp2c_005",
+        "sha256": "4be6aca0ce2b4e93cbd639a2badf0c05b7d885499a3a27b45a8f5aa48d1b5e1e"
+      },
+      {
+        "name": "wp2c_006",
+        "sha256": "528dce7551de934c1c04151b2d892b394cdc228aa8b6d25da4d84590e822db8f"
+      },
+      {
+        "name": "wp2c_007",
+        "sha256": "14475f7bb09602e055208b4a3ff86a105504466b7da6d21b2f21a4d465604029"
+      },
+      {
+        "name": "wp2c_008",
+        "sha256": "1d0b354cabbb52e570fda0fabf20a839dc306dc19309a59b1c756f2761ea8546"
+      },
+      {
+        "name": "wp2c_009",
+        "sha256": "43ddc61f7a356d3c56168dd7c549475e74872f811330da55f357148259f8de4a"
+      },
+      {
+        "name": "wp2c_00a",
+        "sha256": "7e1629bdc45e9c2bf924eca1acdc132d520fd0bfe134a0801c344badc62abb7c"
+      },
+      {
+        "name": "wp2c_00b",
+        "sha256": "4b797d8ea44dc8111fab571a3935496cfce469a6b8b9676520596f86aac53a39"
+      },
+      {
+        "name": "wp2c_00c",
+        "sha256": "c9e3e7bb88d4cfbe8686a8380d8190aabd2df4c26d7494767f39a4ac02776749"
+      },
+      {
+        "name": "wp2c_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2c_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2c_00f",
+        "sha256": "03f47a318b8a38168143dd476136b0c93f2187404c88163b1080d5cab0e2fdc3"
+      }
+    ]
+  },
+  {
+    "package": "wp2d",
+    "group": "WP",
+    "sourceSHA256": "2fc937257d8443b4c9f8d4afb8b3d7a3150c861d239f7e36e4c76c1052518f91",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.6335161588229918,
+      -0.672471127266458,
+      -0.3493107142363085
+    ],
+    "boundsMax": [
+      0.6353406355414476,
+      0.4959759419208657,
+      1.0590400181951258
+    ],
+    "meshes": [
+      {
+        "mesh": "dcfc354c9cd0ceebbc0f849fc43130b4",
+        "material": "91aa93500c69a34203f6464a6791f737"
+      },
+      {
+        "mesh": "3c75ccc878336a36e0d8cd1950e6bf29",
+        "material": "91aa93500c69a34203f6464a6791f737"
+      },
+      {
+        "mesh": "b163e1543c7ab8d35a35c8bebae5cf06",
+        "material": "91aa93500c69a34203f6464a6791f737"
+      },
+      {
+        "mesh": "64f48e44ddb2956957e9488aabc80e27",
+        "material": "91aa93500c69a34203f6464a6791f737"
+      },
+      {
+        "mesh": "81f6ce4b744c92f1d29a0340f59d2f97",
+        "material": "91aa93500c69a34203f6464a6791f737"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp2d_000",
+        "sha256": "984190a623908d539397f3ab85580e75e1154ec1b99ee013e484828c04c6a08c"
+      },
+      {
+        "name": "wp2d_001",
+        "sha256": "179d1d68a4cf65b686fff454c073ac5ff6888a88715bace21678e0b987f03721"
+      },
+      {
+        "name": "wp2d_002",
+        "sha256": "98b2b67e4ba6a1342a5454fef894ed6570eaccb104bd467813b6edf624bcaca2"
+      },
+      {
+        "name": "wp2d_003",
+        "sha256": "61ba159e42cd01c19c94bc38b223256036ef83d0a670cbc66563b8b1ed9a5a1c"
+      },
+      {
+        "name": "wp2d_004",
+        "sha256": "a86a04c042495b03bd07f4107e252bfa903815060246c56d60da05c315c02f5d"
+      },
+      {
+        "name": "wp2d_005",
+        "sha256": "860478df35c326cad81ce1a992f752710e1b106cca6c53643b77a319e239381d"
+      },
+      {
+        "name": "wp2d_006",
+        "sha256": "579e744827bfb04c7c6262393dd6c378294c21d92146c582391eb19dfcdd3b8d"
+      },
+      {
+        "name": "wp2d_007",
+        "sha256": "b77a696335ea520a4052c4e91ae8958ad842261d0ff0216426805c65b1cb5ea6"
+      },
+      {
+        "name": "wp2d_008",
+        "sha256": "6429fe74df2275b4953609fabc160955ff1ef8426fb1f50f8948227246f43593"
+      },
+      {
+        "name": "wp2d_009",
+        "sha256": "43ddc61f7a356d3c56168dd7c549475e74872f811330da55f357148259f8de4a"
+      },
+      {
+        "name": "wp2d_00a",
+        "sha256": "7e1629bdc45e9c2bf924eca1acdc132d520fd0bfe134a0801c344badc62abb7c"
+      },
+      {
+        "name": "wp2d_00b",
+        "sha256": "4b797d8ea44dc8111fab571a3935496cfce469a6b8b9676520596f86aac53a39"
+      },
+      {
+        "name": "wp2d_00c",
+        "sha256": "c9e3e7bb88d4cfbe8686a8380d8190aabd2df4c26d7494767f39a4ac02776749"
+      },
+      {
+        "name": "wp2d_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2d_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2d_00f",
+        "sha256": "8e45e4c985194ae58220bd8663794c4a526dcbea274b913724b8b31b714bacb2"
+      }
+    ]
+  },
+  {
+    "package": "wp2e",
+    "group": "WP",
+    "sourceSHA256": "64599535213f3bbeee6543d0cc7282c3f1bf1e2f1bed257b79acdcbfa3b12cce",
+    "visibleGroups": [
+      0
+    ],
+    "boundsMin": [
+      -0.6594775473864557,
+      -0.04122071120520543,
+      -0.3646325248646961
+    ],
+    "boundsMax": [
+      0.6604491578990845,
+      0.517286003027602,
+      0.8639655143713676
+    ],
+    "meshes": [
+      {
+        "mesh": "d817478dcb10d6a7bdd20bf5756ef30d",
+        "material": "c44376a3e698b04bdc94af078dd4a3fd"
+      },
+      {
+        "mesh": "68fb5ed94a4d8a9655130053d5e588e6",
+        "material": "36e7a1979bdac034c529ac58bc97141b"
+      },
+      {
+        "mesh": "b1aa6ee0f36f9164995aec363df74f0b",
+        "material": "36e7a1979bdac034c529ac58bc97141b"
+      },
+      {
+        "mesh": "cfe6da113218185e985bddcca5c6a098",
+        "material": "36e7a1979bdac034c529ac58bc97141b"
+      },
+      {
+        "mesh": "2c15de51da87ca0475cb6997d6dec12a",
+        "material": "36e7a1979bdac034c529ac58bc97141b"
+      }
+    ],
+    "motions": [
+      {
+        "name": "wp2e_000",
+        "sha256": "86fd42296264c22aaa0a5324baf342321a85952e5b8a44a7eced0dd85a927649"
+      },
+      {
+        "name": "wp2e_001",
+        "sha256": "1d6511e9228b4b6af22a66fc7ae94415d3e4e87eedbb2f57dbd0c69a6911587e"
+      },
+      {
+        "name": "wp2e_002",
+        "sha256": "73a70165da953339708d4b745ad2ee7668d7522512ce71fac0054b6ee442307c"
+      },
+      {
+        "name": "wp2e_003",
+        "sha256": "b58e9e5f25765453c6d3ff27f81ea3cdc34d2974c4d0e0c1400615b1b17d2295"
+      },
+      {
+        "name": "wp2e_004",
+        "sha256": "83c5c51f5056654a875c10d9d87001b809c7ebf38f0a75a4c93ce6d14b19c22b"
+      },
+      {
+        "name": "wp2e_005",
+        "sha256": "39df1c260c634e098d907636cd0cc7137f92574be96240e32d23408c427fdf18"
+      },
+      {
+        "name": "wp2e_006",
+        "sha256": "1f74a3470e72bbc4de371f8c69dbd0ebe4f6586c4447e31caa615ca839a9a4d0"
+      },
+      {
+        "name": "wp2e_007",
+        "sha256": "edf1d95ba65b270aeaad641d00da719b5e77f80022db1b58964af6bf4a5df5e6"
+      },
+      {
+        "name": "wp2e_008",
+        "sha256": "db49e8aad4fcaad071f265c7216a5793973fae3b989bd9aacaacad83baa3b8dc"
+      },
+      {
+        "name": "wp2e_009",
+        "sha256": "43ddc61f7a356d3c56168dd7c549475e74872f811330da55f357148259f8de4a"
+      },
+      {
+        "name": "wp2e_00a",
+        "sha256": "7e1629bdc45e9c2bf924eca1acdc132d520fd0bfe134a0801c344badc62abb7c"
+      },
+      {
+        "name": "wp2e_00b",
+        "sha256": "4b797d8ea44dc8111fab571a3935496cfce469a6b8b9676520596f86aac53a39"
+      },
+      {
+        "name": "wp2e_00c",
+        "sha256": "c9e3e7bb88d4cfbe8686a8380d8190aabd2df4c26d7494767f39a4ac02776749"
+      },
+      {
+        "name": "wp2e_00d",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2e_00e",
+        "sha256": "770349b16dc5d0a6179a3cffed84c0f5f68b1145e881616e9da1ef4d29d51ca0"
+      },
+      {
+        "name": "wp2e_00f",
+        "sha256": "18a457235402caf4fdfa0fb1a7acdfcf9cef333391816305c280e264f2284ffe"
+      }
+    ]
+  },
+  {
+    "package": "vta7",
+    "group": "VT",
+    "sourceSHA256": "69bfebd044364b2ae0a45c6d4d1e902f137e76bfe20ddbb9133432313f718cb3",
+    "visibleGroups": null,
+    "boundsMin": [
+      -7.613283920288086,
+      -0.11526097655296325,
+      -9.652606201171874
+    ],
+    "boundsMax": [
+      10.381435775756836,
+      20.672371673583985,
+      12.205700683593749
+    ],
+    "meshes": [
+      {
+        "mesh": "a09b6fba5c0eeecdf24b7daefb5fbfc3",
+        "material": "48e142c3ff86342598898a7ee54c10fb"
+      },
+      {
+        "mesh": "13e0dd41f6d08021d951a4edff7041d3",
+        "material": "5e45c5530e41ccc5e61d55a31e51ed44"
+      },
+      {
+        "mesh": "94bfac157934a25830df1629154b42b0",
+        "material": "48e142c3ff86342598898a7ee54c10fb"
+      },
+      {
+        "mesh": "0f806d62b9be39e706939b30715d8d4f",
+        "material": "a5cd0592eb12469e9b76574b5ade8447"
+      }
+    ],
+    "motions": [
+      {
+        "name": "vta7_000",
+        "sha256": "88b5a6e163a9984927566b696d5ec7318ec14661d31c8f8d51d1216b02bb6b4e"
+      },
+      {
+        "name": "vta7_010",
+        "sha256": "2f6f41cc29eb10a4abe0ee5678d6db7de23a27251dd1496ff4f88be26d5ba27b"
+      },
+      {
+        "name": "vta7_020",
+        "sha256": "9270021d9d26821ccd7426989ae7ad71e01309241d7e7212ee2bfa7e5543a19e"
+      }
+    ]
+  },
+  {
+    "package": "vtb1",
+    "group": "VT",
+    "sourceSHA256": "36a187879fabaa42da9cbac506091398d6de575844fc8e2f9f4195eeed9b0b72",
+    "visibleGroups": null,
+    "boundsMin": [
+      -14.61085968017578,
+      -0.0667863741517067,
+      -8.991798686981202
+    ],
+    "boundsMax": [
+      13.489997673034669,
+      26.79652166366577,
+      9.012901115417481
+    ],
+    "meshes": [
+      {
+        "mesh": "0a196227ea6a89f447f40f135c49cf2d",
+        "material": "6f4422fcb510aeec14d762698300b7c7"
+      },
+      {
+        "mesh": "a8d22c85c3bcba5486dddd54165c0004",
+        "material": "7c21ea2407b289b6521004c22e86ef6f"
+      },
+      {
+        "mesh": "0065c53e761609c232c1286711c5a23b",
+        "material": "ca616cc3aee91a59d643052388046250"
+      },
+      {
+        "mesh": "852ea44020c43d3566e284096d121e27",
+        "material": "6f4422fcb510aeec14d762698300b7c7"
+      },
+      {
+        "mesh": "df3e9411404ca26854db9d19ab5c33fd",
+        "material": "46add2ee1124cf8dbdaa8595c1b57c4c"
+      },
+      {
+        "mesh": "e6dc4ccd3fa51c1b4237d3a5dd9be30a",
+        "material": "114ef6afc039498012f0a8edae4e6507"
+      },
+      {
+        "mesh": "8f46496e4371ef49da307d1dd4948e70",
+        "material": "15cdf02121855b8a09f58e07bbbf02cc"
+      },
+      {
+        "mesh": "5524b7214fc2dce9e1904a913d168327",
+        "material": "6f4422fcb510aeec14d762698300b7c7"
+      },
+      {
+        "mesh": "6fa1d10dd114defdd8b16fd5657310c3",
+        "material": "6b2e83fe3104413ab460d856b488e444"
+      }
+    ],
+    "motions": [
+      {
+        "name": "vtb1_000",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vtb1_010",
+        "sha256": "648bf22a7638275651065719b50f53579808003b9fc86d05c698191bce7f3ba7"
+      },
+      {
+        "name": "vtb1_020",
+        "sha256": "76d342c13b0dffa37f57c76f33ac5dcecf721691043254a3c018023d90894fde"
+      }
+    ]
+  },
+  {
+    "package": "vta9",
+    "group": "VT",
+    "sourceSHA256": "ac6b5fe57bc65a52e85176da843434e182c9c532fff502bbacf2cf3cafcfd719",
+    "visibleGroups": null,
+    "boundsMin": [
+      -14.433495712280273,
+      -0.311915910243988,
+      -6.602707099914551
+    ],
+    "boundsMax": [
+      10.672210693359375,
+      11.624535369873046,
+      6.5940965652465815
+    ],
+    "meshes": [
+      {
+        "mesh": "bad4ca315a93a47559b663bdc1e17723",
+        "material": "cc07da566bcc021bf5da9244438acda1"
+      },
+      {
+        "mesh": "07c3406847c859f9ce2de014ec9f04a5",
+        "material": "aa6e5a148bede383c458b01f3f2c6d34"
+      },
+      {
+        "mesh": "9c45ea718ffd2d6dc57a6d9061f17e99",
+        "material": "957fe56be9ae79daf90179d377a0e13c"
+      }
+    ],
+    "motions": [
+      {
+        "name": "vta9_000",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vta9_010",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vta9_020",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      }
+    ]
+  },
+  {
+    "package": "vt9e",
+    "group": "VT",
+    "sourceSHA256": "78be74e9f2efb1f15a047b58ec4cf3fd82ce3b4036523fb073c47fd6bfde25be",
+    "visibleGroups": null,
+    "boundsMin": [
+      -0.3695052623748779,
+      0.007801425084471702,
+      -0.6466484785079956
+    ],
+    "boundsMax": [
+      0.3545708298683166,
+      2.727476406097412,
+      0.3187420606613159
+    ],
+    "meshes": [
+      {
+        "mesh": "0541711d9a82e8b4dd3807736185c0db",
+        "material": "81d07ae9e5eb1825ab3b75e3ca4fff01"
+      },
+      {
+        "mesh": "2d7b8cd7e29914e14171553fa210ebb0",
+        "material": "81d07ae9e5eb1825ab3b75e3ca4fff01"
+      }
+    ],
+    "motions": [
+      {
+        "name": "vt9e_000",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt9e_010",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt9e_020",
+        "sha256": "cb7f4bfbcab8283ea870184e967a848eb011336b1e22a6f62e2b4dd04e0e5ef0"
+      }
+    ]
+  },
+  {
+    "package": "vt9f",
+    "group": "VT",
+    "sourceSHA256": "4e217b810bcde5b185a38996b3abf486bdb96156b73c05cc4090e0e2a4a3c8f5",
+    "visibleGroups": null,
+    "boundsMin": [
+      -1.6426936626434325,
+      0.016638674587011338,
+      -0.44623986482620237
+    ],
+    "boundsMax": [
+      1.7123587131500244,
+      0.6787113189697266,
+      0.44757853746414183
+    ],
+    "meshes": [
+      {
+        "mesh": "5699541b52da8daadb5eae749cf5cd71",
+        "material": "705d5af07d83cdbfddcbbe4bfefa801a"
+      },
+      {
+        "mesh": "ba54abcd2b42526d9d2f5bd068226039",
+        "material": "705d5af07d83cdbfddcbbe4bfefa801a"
+      },
+      {
+        "mesh": "e2b321ca99e5319de8871afbf1ea0bad",
+        "material": "705d5af07d83cdbfddcbbe4bfefa801a"
+      },
+      {
+        "mesh": "9e17ff12ed7e3221845070ab9422fe31",
+        "material": "705d5af07d83cdbfddcbbe4bfefa801a"
+      },
+      {
+        "mesh": "e611685aeeaa1252768667e97d2e0d08",
+        "material": "705d5af07d83cdbfddcbbe4bfefa801a"
+      }
+    ],
+    "motions": [
+      {
+        "name": "vt9f_000",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt9f_010",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt9f_020",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      }
+    ]
+  },
+  {
+    "role": "UI paper",
+    "sourceSHA256": "f3fa7c16ba075f93c6adb3e289043b59fcdcd26c4d457691b6b54141be0e6153",
+    "crop": [
+      153,
+      122,
+      870,
+      901
+    ]
+  },
+  {
+    "role": "effect Leaf",
+    "name": "fallingleaf",
+    "sourceSHA256": "7034af571cb75c82f21a3d27cab215b2ceed89021389c578aa9fb210c66d3a72",
+    "parent": "/coreEff.EFF/coretex.TBL"
+  },
+  {
+    "role": "effect Blossom",
+    "name": "sakura",
+    "sourceSHA256": "7c9075f2c11798e0baeb1268fd6511748518b4ca60f8cdf070156b360cb3acec",
+    "parent": "/coreEff.EFF/coretex.TBL"
+  },
+  {
+    "role": "effect Steam",
+    "name": "fog1",
+    "sourceSHA256": "3278a84099b6150e983f9e160a4d40559676cf3d24ea29c1dd7187b80d40dff0",
+    "parent": "/coreEff.EFF/coretex.TBL"
+  },
+  {
+    "role": "effect Wind",
+    "name": "wind_03",
+    "sourceSHA256": "10f45597e08d52b8f94df213f0e29d0bb6c89e3dc9ca7e191619443cedfb09ce",
+    "parent": "/coreEff.EFF/coretex.TBL"
+  },
+  {
+    "role": "effect Cloud",
+    "name": "cloud_02",
+    "sourceSHA256": "ee4ce9070bc55dec7f7f6d83881e0e6677b37dab4822a7d6fb6b49bd6109f14e",
+    "parent": "/coreEff.EFF/coretex.TBL"
+  },
+  {
+    "role": "effect Flame",
+    "name": "fire_11",
+    "sourceSHA256": "c55758e67e1118f007ada882f77aed9f90060bb2e70206d0b681679f9162d910",
+    "parent": "/coreEff.EFF/coretex.TBL"
+  },
+  {
+    "role": "effect Spark",
+    "name": "water_spl00",
+    "sourceSHA256": "1f1688ab927f3cbcc11836ad9fc53ee9613948d9bdf2fad0e84e9761a6d3e1c2",
+    "parent": "/coreEff.EFF/coretex.TBL"
+  },
+  {
+    "package": "vt3c",
+    "group": "VT",
+    "sourceSHA256": "405e6067cac7848e98235a6918482f1dcb6497f36787c86ab72690cf26ae1420",
+    "visibleGroups": null,
+    "boundsMin": [
+      -1.313139009475708,
+      -0.008979224972426892,
+      -1.7327796936035156
+    ],
+    "boundsMax": [
+      1.0854696750640869,
+      2.731998252868652,
+      2.6777612686157224
+    ],
+    "meshes": [
+      {
+        "mesh": "948f8aa5a3408692a703e9da29edb55b",
+        "material": "fa85c1894e8c1f6e14c9b909bde9caa4"
+      },
+      {
+        "mesh": "a261f1e1fbbda3eb07da6e974126783f",
+        "material": "72572d1dc37e27049f4fc43610ef835b"
+      }
+    ],
+    "motions": [
+      {
+        "name": "vt3c_000",
+        "sha256": "464bd4c1f54cd9b96e979a806f05be9e5d210adb1a4e66f0749495ce883a68c8"
+      },
+      {
+        "name": "vt3c_010",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt3c_020",
+        "sha256": "6191e1820e24c6096d912191d6d88bdf906f29a147ac4e240d5a37e248ef09b0"
+      }
+    ]
+  },
+  {
+    "package": "hm0c",
+    "group": "HM",
+    "sourceSHA256": "88d03a1c70254e917370c6eb2c9edaa6fc04ff9a5e25531ac3153585f86ee00b",
+    "visibleGroups": [
+      0,
+      2
+    ],
+    "boundsMin": [
+      -0.877443265914917,
+      -0.03117793562247391,
+      -1.145641799716516
+    ],
+    "boundsMax": [
+      1.2760105803502695,
+      2.9702020269568554,
+      1.6515726760454013
+    ],
+    "meshes": [
+      {
+        "mesh": "a91f2ed7cc457c77144d2ee8ce10fe72",
+        "material": "9b00c5051612be7a2c2e6eea93f86561"
+      },
+      {
+        "mesh": "32a65e6c64a083dc955560f60797d275",
+        "material": "4006ee79ab692a41582d11e1836b9eba"
+      },
+      {
+        "mesh": "7a27a8458c03f360118c6920df9ec847",
+        "material": "9b00c5051612be7a2c2e6eea93f86561"
+      }
+    ],
+    "motions": [
+      {
+        "name": "hm92_000",
+        "sha256": "370497f033b63b8b6678017b813f2ca4dcd813a139b04f76c893269de43cd0cd"
+      },
+      {
+        "name": "hm0c_081",
+        "sha256": "b1ac676b2c029169bb7a7f58ac1f352215c15ab5a9b08402b3585fe0b894fc9a"
+      }
+    ]
+  }
+]

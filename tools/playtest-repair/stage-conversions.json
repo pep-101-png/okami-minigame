@@ -1,0 +1,348 @@
+[
+  {
+    "package": "dojo-floor",
+    "sourcePackage": "r10c",
+    "sourceName": "__LY08__jimen",
+    "sourceSHA256": "500dd4b667707e912a84b36cd42a72e301afc29f6bd0827153379ca47e8f621c",
+    "boundsMin": [
+      -28.5,
+      -6.3,
+      -36.824999999999996
+    ],
+    "boundsMax": [
+      28.65,
+      0.525,
+      36.824999999999996
+    ],
+    "meshes": [
+      {
+        "mesh": "9640bef47fecc75bcbd5d188be580479",
+        "material": "249631561128dd017da01405f0d9388f",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "242029a950aa270abccf6a48de0eecba",
+        "material": "a5c967cc7d9e62f6d44c6ba042f62237",
+        "sourceTextureSHA256": "d5360c7ae5de767481f7f1cf0698442ffab81703bfb36f602330af418619ccf1"
+      },
+      {
+        "mesh": "72bfbdf42d28df801a5133620f83c757",
+        "material": "9a48a8bef5306aaaad18be2832568a91",
+        "sourceTextureSHA256": "84de56c74047fd60dc37a217657b86555b7a84accc406fc585445aabe8325118"
+      },
+      {
+        "mesh": "7b310455db716a6ede0a421178660306",
+        "material": "87c5135092529ca81c46f720fef12d34",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      },
+      {
+        "mesh": "c1203a3e0eb867cbf7868191179ff8d2",
+        "material": "81ce49b0246b094c74117b1a53584610",
+        "sourceTextureSHA256": "36582f0bd43d35ca093006847b03fbd709838c5fe6baf53f9ea3d333e56f6a72"
+      },
+      {
+        "mesh": "a9ba80dbd502bc377eddbfe41d715812",
+        "material": "df98638bf7c6276ee9f7c10797547acf",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "8973c269a577700e897e59b748443c43",
+        "material": "58889246345504097d854fb48c835590",
+        "sourceTextureSHA256": "e4da3cb54d83dae399b838a1190dc4fb04a2c620f5d71ec5cbda3c5a26dddb6e"
+      },
+      {
+        "mesh": "287826852b9a3d24ab45345e2516a48c",
+        "material": "55a3842cf2f747290648a6d02e51280e",
+        "sourceTextureSHA256": "0aed698367684af03a73989f5efa21a11a5d373c3eafd9458694fb41dfad3822"
+      }
+    ]
+  },
+  {
+    "package": "dojo-wall",
+    "sourcePackage": "r10c",
+    "sourceName": "__LY07__wall",
+    "sourceSHA256": "84acecdb3bc6165dc576fbbd794cfbf156cec442cef883a57e96cc6d80144e5b",
+    "boundsMin": [
+      -30.45,
+      -2.6999999999999997,
+      -38.625
+    ],
+    "boundsMax": [
+      30.525,
+      24.9,
+      38.1
+    ],
+    "meshes": [
+      {
+        "mesh": "5a55d40bddf831a7189ed94952525021",
+        "material": "50ee38ac03fec83f3da58aaf8a312d6c",
+        "sourceTextureSHA256": "6edb3a3c2f6d968e69da26fa7afde5524d221bbcbb35b96246511c7a517762ff"
+      },
+      {
+        "mesh": "7d29c163fd5779d37adb736a9c521be4",
+        "material": "cf01b78d85bdb49ce6e8decd195d80dc",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      },
+      {
+        "mesh": "a932db5b738743479573a86d49377ab6",
+        "material": "02096cadd38486ca6911bb7350a1d589",
+        "sourceTextureSHA256": "0aed698367684af03a73989f5efa21a11a5d373c3eafd9458694fb41dfad3822"
+      },
+      {
+        "mesh": "b1f5a6cbb15e8268eb43bb8dc44aee28",
+        "material": "9ae1e084726407b7e2cde293667f1fa5",
+        "sourceTextureSHA256": "e671b0f1a610c5e1a3b0de13bbb93cc8eaf85cef2861261af6215c6919768fd7"
+      },
+      {
+        "mesh": "e479b0724e38ffe31b4ba381a4103b4f",
+        "material": "050e16d0e0dba1b34ef7678dadf6285b",
+        "sourceTextureSHA256": "0aed698367684af03a73989f5efa21a11a5d373c3eafd9458694fb41dfad3822"
+      }
+    ]
+  },
+  {
+    "package": "dojo-water",
+    "sourcePackage": "r10c",
+    "sourceName": "__LY01__water",
+    "sourceSHA256": "4f936b1b53988f8e82e1bbd3be455d400746815fa1684ebe885f604fe08f4970",
+    "boundsMin": [
+      -20.325,
+      -2.6999999999999997,
+      22.349999999999998
+    ],
+    "boundsMax": [
+      22.65,
+      -2.55,
+      32.85
+    ],
+    "meshes": [
+      {
+        "mesh": "1149de1eb94de76313821bbd0690d202",
+        "material": "a197a582df0002c9c595af0ac949bf2d",
+        "sourceTextureSHA256": "1c4a1f0bcac4498acbc238ec2a5c5711d6f64f4a6c2386a36d2da862b12350c0"
+      },
+      {
+        "mesh": "1b8436ac6a85e0395707d8d31ba00d73",
+        "material": "cc63f7c5c30a86883c88c5edb4924ecf",
+        "sourceTextureSHA256": "a871a32f02f0fc780b7014878afcf48b7c3c921083a0c9de37097688085aa178"
+      }
+    ]
+  },
+  {
+    "package": "dojo-ceiling",
+    "sourcePackage": "r10c",
+    "sourceName": "__LY06__tenjou",
+    "sourceSHA256": "facd80274a51289e39966fa304100e2a2accda1df28f1fca808438f690009ef2",
+    "boundsMin": [
+      -28.425,
+      21.974999999999998,
+      -36.75
+    ],
+    "boundsMax": [
+      28.575,
+      26.4,
+      37.275
+    ],
+    "meshes": [
+      {
+        "mesh": "ca3891b65cb0eacf7378a227aa5c5f99",
+        "material": "3041ac56373fc62010a3b4a23df0d491",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      },
+      {
+        "mesh": "de5fe38b04a0f3d0dfb7d1e5ab6cd126",
+        "material": "eb78bf9c3ca41c946be50c0955451602",
+        "sourceTextureSHA256": "efaf92d6a4fe0c8d026cdab207b17ac67956040ba95c993a58710b7e4422acbf"
+      },
+      {
+        "mesh": "a43f06efb8952768fd4ace9711b08205",
+        "material": "a4ff76a94ba2bc6b55904fd5456a18ab",
+        "sourceTextureSHA256": "7d7771e337984fc4c5d2038f65de114eb0f8c42464847fe1fc357dbb34aa08fd"
+      }
+    ]
+  },
+  {
+    "package": "dojo-sign",
+    "sourcePackage": "r10c",
+    "sourceName": "__LY05__kanban",
+    "sourceSHA256": "890e38b3c19efe1e543bd417afca9bd3d2f3efff8753a988d5a5ee37cc0a3f3b",
+    "boundsMin": [
+      -19.724999999999998,
+      8.549999999999999,
+      -33.675
+    ],
+    "boundsMax": [
+      17.4,
+      20.775,
+      -29.924999999999997
+    ],
+    "meshes": [
+      {
+        "mesh": "b50a0f6124984dc7f8863e3393aec847",
+        "material": "79cd451a7a1d78731850fa36b3cc5c15",
+        "sourceTextureSHA256": "08bc001af583791df51330155e06bc89fefaa8d79561d3fed5032fe528dc2696"
+      },
+      {
+        "mesh": "fae65a6cd1fc843add92da3d3d185159",
+        "material": "96594dc3948ecbee344c04d91e3ce8e2",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      }
+    ]
+  },
+  {
+    "package": "dojo-entry-roof",
+    "sourcePackage": "r10c",
+    "sourceName": "__LY02__kawara",
+    "sourceSHA256": "2424336ddd4eeefa28ced245616c99fb6c964479c635d0af799c33c4d792bcc0",
+    "boundsMin": [
+      -6.375,
+      -1.275,
+      13.275
+    ],
+    "boundsMax": [
+      6.45,
+      12.825,
+      34.574999999999996
+    ],
+    "meshes": [
+      {
+        "mesh": "0b40ec6bfba04a555ff4962cd752215a",
+        "material": "6dd4c3c725da1aac5cb50518250a7133",
+        "sourceTextureSHA256": "6edb3a3c2f6d968e69da26fa7afde5524d221bbcbb35b96246511c7a517762ff"
+      },
+      {
+        "mesh": "3a64b66244956561aaa500fc778582b4",
+        "material": "d312911e5ac3605b79f5dda76cf3344c",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "83ec899be952f1bef37a6093f8855f36",
+        "material": "67e5f0a865ee33401448ce6df34c5f6c",
+        "sourceTextureSHA256": "208ef9428703004ce796803b59f40c165169505493d771b45eb783f1ace81ad7"
+      },
+      {
+        "mesh": "6398e4a9d3355f37fded07978a6d834c",
+        "material": "c151737868b10482e84358665e497957",
+        "sourceTextureSHA256": "5699d29c66ac4ad3bd92c7ed7809cc06989bca7f6c11828388ada756fa85bad0"
+      },
+      {
+        "mesh": "f2ca491758e571877b4387aab653aeda",
+        "material": "94b35766fb4f166ac794f7e2b3cbac61",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      },
+      {
+        "mesh": "0e5873bd489cdc640765c41611b790dc",
+        "material": "3cd12293555f18e026b70ff4341967be",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      },
+      {
+        "mesh": "58eef07e2b45877188fe4772fc877cc7",
+        "material": "e75ffb51d90bae09e10cb9a7ef3b590d",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "189d62199ea30e1c52c134a3b307fab3",
+        "material": "285f21cf56ce7f0228fc8ce244c4ae05",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "868f8bc7c80d9a5bd38b2f8193500a11",
+        "material": "c0d30ce46b97572681bf2e3d30b83091",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "1be4a4f7fcee6bde5cf5a9c6cb575ff2",
+        "material": "2c9fe2c3355974a1b19315aa19efc5eb",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "13ae006f792c5b166bb59c35e91b74c8",
+        "material": "c6c098a99d9e9242fe62bbd08d0287e4",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "8a2c63c2d7e5e54e2403b0307a9ea0f9",
+        "material": "4a6b724575817a1dd85d8802e7ea3c3e",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "8b6b40d68f306875ecbcf75846da87dd",
+        "material": "8063ab02bca54c02d1ac69debd185ddb",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      },
+      {
+        "mesh": "237812ba0c2a9f7ac3d60c09a615338a",
+        "material": "35bdedb942c5486d5c10db41b7f98980",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "88b46b6ad948ff0211990ef7f0795939",
+        "material": "e94b6470e61eb54deeb3996d0f8a504b",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      },
+      {
+        "mesh": "d7f3d7268a72a6d37453fcd9da1f8e56",
+        "material": "846ae1925e4c7593c2da02698c9770ec",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      },
+      {
+        "mesh": "191762ce5def646750905719d489e4d5",
+        "material": "9915c3aec39c7a1217550c8cae3ae2cb",
+        "sourceTextureSHA256": "46600de84cbecd328bf35f9647cbbfe50a4ede28a27fc8da4fe33a4bf791b00b"
+      },
+      {
+        "mesh": "27ac9990dd87d6f87e2f5b3013976e85",
+        "material": "4510df4a7076a9001489eb8e966a66f2",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "7d3afc38d6f8e88e11e073b98b24d163",
+        "material": "9d216cf064996e636ba8629fa3a3bd9a",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "6142daa80782ab0cb62f89b1b47e199e",
+        "material": "f013fce310e1eaf5a770d0f13412eebb",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      }
+    ]
+  },
+  {
+    "package": "farm-fence",
+    "sourcePackage": "r10c",
+    "sourceName": "__LY04__saku",
+    "sourceSHA256": "2b25b90ae41d18b8b994e2d164678679b67b4a36433eb5c07cc366a66c514d12",
+    "boundsMin": [
+      -26.55,
+      -2.475,
+      19.349999999999998
+    ],
+    "boundsMax": [
+      27.0,
+      0.075,
+      20.625
+    ],
+    "meshes": [
+      {
+        "mesh": "57243e92e0913ae7e77632a38d25c701",
+        "material": "e4dac73cacd4670fc8310e3c55f4b186",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "a55910498747e668ce738db3e5810d29",
+        "material": "ade5650c4e4e1af6ab8184867caf9e5c",
+        "sourceTextureSHA256": "6edb3a3c2f6d968e69da26fa7afde5524d221bbcbb35b96246511c7a517762ff"
+      },
+      {
+        "mesh": "4d7dc855b52b7cbb3ff4704fe65f518e",
+        "material": "ef8d1f57942b5a0accb98836cbace99d",
+        "sourceTextureSHA256": "f314cffed5f263644bc4af3788aafe6913a5356e044b6b26ea94ad3ba0b38e55"
+      },
+      {
+        "mesh": "827e3afa5243020467c083c738d37952",
+        "material": "95928d6d5748f48b3aa1335a35064613",
+        "sourceTextureSHA256": "6edb3a3c2f6d968e69da26fa7afde5524d221bbcbb35b96246511c7a517762ff"
+      }
+    ]
+  }
+]

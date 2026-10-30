@@ -11,6 +11,25 @@ namespace Sunward.Editor
         [Serializable] sealed class Model { public Bone[] bones; }
         [Serializable] sealed class Bone { public int parent; public float[] position; }
         static void Need(bool value, string message) { if (!value) throw new InvalidOperationException(message); }
+        static void Shop()
+        {
+            // In-memory profiles only: never open or mutate the player's save.
+            var profile = new ProfileData { coins = 10000, xp = 91, wins = 3 };
+            foreach (var entry in OriginalWeaponCatalog.All)
+            {
+                Need(Resources.Load<TextAsset>("Okami/" + entry.resource + "/Model"), "Original shop model missing: " + entry.title);
+                Need(new NativePoseBank("Okami/" + entry.resource + "/Poses").Find(entry.resource + "_000") != null, "Original weapon motion missing: " + entry.title);
+                if (entry.id == "spear") continue;
+                int coins = profile.coins;
+                Need(ProgressionRules.Buy(profile, "weapon:" + entry.id), "Weapon purchase failed: " + entry.id);
+                Need(profile.coins == coins - entry.cost && OriginalWeaponCatalog.Owns(profile, entry.id), "Weapon purchase/currency invariant failed.");
+                Need(!ProgressionRules.Buy(profile, "weapon:" + entry.id) && profile.coins == coins - entry.cost, "Duplicate purchase charged the player.");
+            }
+            var restored = JsonUtility.FromJson<ProfileData>(JsonUtility.ToJson(profile));
+            Need(ProgressionRules.Validate(restored) && restored.owned.Length == 15 && restored.coins == profile.coins && restored.xp == 91 && restored.wins == 3, "Weapon inventory save round-trip failed.");
+            var poor = new ProfileData { coins = 0 };
+            Need(!ProgressionRules.Buy(poor, "weapon:wp29") && poor.coins == 0, "Insufficient-funds purchase changed progress.");
+        }
         static void Actor(OriginalActor actor)
         {
             Need(actor && actor.enabled, "Original actor binding missing.");
@@ -27,12 +46,15 @@ namespace Sunward.Editor
         public static void Validate()
         {
             Need(!EditorApplication.isPlaying, "Run static source validation outside Play Mode.");
+            Shop();
             var game = UnityEngine.Object.FindFirstObjectByType<GameFlow>();
             Need(game && game.Player && game.Combat && game.valley && game.Home && game.Shelf, "Existing Windflower gameplay references missing.");
             Need(game.Player.GetComponent<NativeAmaterasu>(), "Existing player is not bound to native Amaterasu.");
             var body = new NativePoseBank("NativePlayer/pl00/Poses");
             foreach (string name in new[] { "pl00_000", "pl00_010", "pl00_011", "pl00_012", "pl00_021", "pl00_02d", "pl00_500", "pl00_501" })
                 Need(body.Find(name) != null, "Original Amaterasu motion missing: " + name);
+            foreach (string name in new[] { "pl00_01d", "pl00_01e", "pl00_009", "pl00_540", "pl00_542", "pl00_544", "pl00_54f" })
+                Need(body.Find(name) != null, "Swimming/seated/rosary native motion missing: " + name);
             Need(game.npcObjects.Length == 7, "Existing NPC identity count changed.");
             foreach (var npc in game.npcObjects)
             {
@@ -52,7 +74,8 @@ namespace Sunward.Editor
             Need(new NativePoseBank("NativePlayer/wp24/Poses").Find("wp24_000") != null, "Original Solar Flare motion missing.");
             Need(Resources.Load<TextAsset>("Okami/Feedback"), "Original feedback resources missing.");
             Need(Resources.Load<Texture2D>("Okami/UI/Paper") && Resources.Load<Texture2D>("Okami/UI/Ink"), "Original UI painting missing.");
-            for (int i = 0; i < 3; i++) Need(Resources.Load<AudioClip>("Okami/Audio/Amaterasu-" + i), "Original Amaterasu voice missing.");
+            Need(Resources.Load<TextAsset>("Okami/NativeAudio"), "Original sound-bank bindings missing.");
+            Need(Resources.Load<Material>("Okami/Effects/Surface"), "Original effect sprite surface missing.");
             int visible = 0;
             foreach (var renderer in UnityEngine.Object.FindObjectsByType<MeshRenderer>(FindObjectsSortMode.None))
             {
@@ -65,8 +88,8 @@ namespace Sunward.Editor
                 visible++;
             }
             foreach (var particle in UnityEngine.Object.FindObjectsByType<ParticleSystemRenderer>(FindObjectsSortMode.None))
-                Need(!particle.enabled, "Unmapped legacy particle artwork is active: " + particle.name);
-            Debug.Log("Original Okami source connections checked: " + visible + " saved scene renderers, seven NPCs, six enemy roles, original player/weapon resources and voices. Static validation only; Unity Play Mode and visual approval are still required. Full EST/SEQ effects and authentic music/ambient banks remain unfinished.");
+                Need(!particle.enabled || particle.GetComponent<OriginalParticleMaterial>(), "Unmapped legacy particle artwork is active: " + particle.name);
+            Debug.Log("Original Okami connections checked: " + visible + " saved scene renderers, seven NPCs, six enemy roles, fifteen purchasable weapon resources, native player motions, audio bindings and source sprite resources. Static validation only; Play Mode and visual/audio review are still required. Full native EST/SEQ event dispatch remains unfinished.");
         }
     }
 }

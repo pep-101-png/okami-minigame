@@ -17,7 +17,7 @@ namespace Sunward.Remaster
             public float[] positions, uv, colors, weights;
             public int[] indices, boneIndices;
         }
-        [Serializable] sealed class Model { public int version; public Bone[] bones; public Part[] parts; public TextureReference[] textures; }
+        [Serializable] sealed class Model { public int version; public Bone[] bones; public Part[] parts; public TextureReference[] textures; public int[] visibleGroups; }
         public readonly GameObject Root;
         public readonly Transform[] Bones;
         readonly List<UnityEngine.Object> owned = new List<UnityEngine.Object>();
@@ -59,10 +59,21 @@ namespace Sunward.Remaster
                         if (!texture) { UnityEngine.Object.Destroy(material); throw new InvalidDataException("Missing native texture: " + reference.path); }
                         material.SetTexture("_MainTex", texture);
                     }
+                    else material.SetTexture("_MainTex", null); // Native untextured vertex pigment; discard the template's unrelated texture.
                     materials.Add(reference.index, material); owned.Add(material);
                 }
                 foreach (var part in model.parts)
                 {
+                    // MD groups can be mutually exclusive forms/LODs, separate
+                    // props, or body pieces. Use an inspected per-model mask;
+                    // never assume every group is another visible body part.
+                    if (model.visibleGroups != null && model.visibleGroups.Length > 0)
+                    {
+                        var pieces = part.name.Split('-');
+                        if (pieces.Length < 3 || !int.TryParse(pieces[1], out int group))
+                            throw new InvalidDataException("Native mesh group name is invalid");
+                        if (Array.IndexOf(model.visibleGroups, group) < 0) continue;
+                    }
                     int count = part.positions.Length / 3;
                     if (part.weights.Length != count * 3 || part.boneIndices.Length != count * 3 || part.uv.Length != count * 2 || part.colors.Length != count * 4)
                         throw new InvalidDataException("Native vertex streams disagree");

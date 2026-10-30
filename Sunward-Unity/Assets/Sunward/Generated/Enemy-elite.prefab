@@ -1235,7 +1235,7 @@ MonoBehaviour:
   strike: em00_130
   recover: em00_130
   death: em00_040
-  modelOffset: {x: 0.1700174, y: 0.07179488, z: -0.3557563}
-  modelScale: 0.796905664787263
+  modelOffset: {x: -0.1172062, y: 0.07295226, z: -0.4190359}
+  modelScale: 0.8097522785162592
   game: {fileID: 0}
   splitAttackClip: 1

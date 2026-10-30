@@ -3,12 +3,12 @@
 Never call these Unity screenshots, gameplay recordings or compilation evidence.
 """
 from pathlib import Path
-import bpy,json,math,re,struct,sys
+import bpy,json,math,re,struct,sys,os
 import numpy as np
 from mathutils import Matrix,Vector
 
-ROOT=Path(__file__).resolve().parents[2];A=ROOT/'Sunward-Unity/Assets';OUT=Path(__file__).with_name('previews');OUT.mkdir(exist_ok=True)
-sys.path.insert(0,str(ROOT/'tools/repair'));from scene_data import World,ref
+ROOT=Path(__file__).resolve().parents[2];A=ROOT/'Sunward-Unity/Assets';OUT=Path(os.environ.get('SUNWARD_PREVIEW_OUTPUT',str(Path(__file__).with_name('previews'))));OUT.mkdir(exist_ok=True)
+sys.path.insert(0,str(ROOT/'tools/repair'));from scene_data import World,ref,vec
 sys.path.insert(0,str(Path(__file__).parent));from export_assets import skin
 CONVERT=Matrix(((1,0,0,0),(0,0,-1,0),(0,1,0,0),(0,0,0,1)))
 MATERIALS={}
@@ -43,15 +43,16 @@ def ground_material():
     for axis,src,scale,offset in [(0,0,1/130,60/130),(1,1,-1/96,48/96)]:
         node=n.new('ShaderNodeMath');node.operation='MULTIPLY_ADD';l.new(sep.outputs[src],node.inputs[0]);node.inputs[1].default_value=scale;node.inputs[2].default_value=offset;l.new(node.outputs[0],comb.inputs[axis])
     l.new(comb.outputs[0],texnode.inputs['Vector']);return m
-def read_pose(path,name):
+def read_pose(path,name,end=False):
     data=path.read_bytes();magic,version,bones,count=struct.unpack_from('<4sIII',data);off=16;assert magic==b'OPB1'
     for _ in range(count):
         n=struct.unpack_from('<I',data,off)[0];off+=4;label=data[off:off+n].decode();off+=n;samples,duration,loop=struct.unpack_from('<IfI',data,off);off+=12;values=np.frombuffer(data,'<f4',samples*bones*10,off).reshape(samples,bones,10);off+=values.nbytes
-        if label==name:return values[0]
+        if label==name:return values[-1] if end else values[0]
     raise ValueError(name)
 def actor(record,matrix=None):
-    resource=record['resource'];folder=next(p/resource for p in A.rglob('Resources') if (p/resource/'Model.json').exists());model=json.loads((folder/'Model.json').read_text());pose=read_pose(folder/'Poses.bytes',record['bindings']['idle']);verts=skin(model,pose);local=np.eye(4);local[:3,:3]*=record['modelScale'];local[:3,3]=record['modelOffset'];root=(np.asarray(record['matrix']) if matrix is None else matrix)@local
+    resource=record['resource'];folder=next(p/resource for p in A.rglob('Resources') if (p/resource/'Model.json').exists());model=json.loads((folder/'Model.json').read_text());pose=read_pose(folder/'Poses.bytes',record['bindings']['idle'],record.get('holdIdlePose',False));verts=skin(model,pose);local=np.eye(4);local[:3,:3]*=record['modelScale'];local[:3,3]=record['modelOffset'];root=(np.asarray(record['matrix']) if matrix is None else matrix)@local
     for part,v in zip(model['parts'],verts):
+        if model.get('visibleGroups') and int(part['name'].split('-')[1]) not in model['visibleGroups']:continue
         t=next(t for t in model['textures'] if t['index']==part['texture'])
         if t.get('vertexOnly'):continue
         mesh(resource,v,np.asarray(part['indices']).reshape(-1,3),np.asarray(part['uv']).reshape(-1,2),texture_material(folder/t['path']),root,colors=np.asarray(part['colors']).reshape(-1,4))
@@ -70,7 +71,7 @@ def animals():
                 ix=part['bones'][:,k];posed+=part['weights'][:,k,None]*(np.einsum('nij,nj->ni',matrices[ix,:3,:3],v-bind[ix])+matrices[ix,:3,3])
             posed+=a['offset']+np.array([0,clip['ground'][0],0]);mesh(p['name'],posed,part['faces'],part['uv'],texture_material(A/'OkamiRemaster/Village/Resources/FarmTextures'/(part['texture']+'.png')),root)
 
-bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False);w=World();ground=ground_material();count=0
+bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False);w=World();ground=ground_material();count=0;renderer_objects={}
 billboards={w.scene.transform(w.scene.owner(i)) for i,b in w.scene.blocks.items() if 'Assembly-CSharp::Sunward.Remaster.OriginalBillboard\n' in b};billboard_objects=[]
 for r in w.renderers():
     if r['kind']!=23:continue
@@ -79,6 +80,7 @@ for r in w.renderers():
     n=len(data['vertices']);buf=bytes.fromhex(re.search(r'_typelessdata: ([0-9a-f]+)',data['raw'])[1]);streams=np.frombuffer(buf,'<f4').reshape(n,data['stride']//4);uv=streams[:,10:12] if data['stride']>=48 else np.zeros((n,2));colors=streams[:,6:10] if data['stride']>=48 else np.ones((n,4));g=r['materials'][0] if r['materials'] else None
     mat=ground if w.assets.get(g) and w.assets[g].name=='Original-Ground.mat' else material(g,w)
     ob=mesh(r['name'],data['vertices'],data['triangles'],uv,mat,r['matrix'],colors);count+=1
+    renderer_objects[r['instance'],r['renderer']]=ob
     if not r['instance']:
         t=w.scene.transform(r['go'])
         while t:
@@ -86,18 +88,38 @@ for r in w.renderers():
                 anchor=w.matrix(0,t);billboard_objects.append((ob,anchor,np.linalg.inv(anchor)@r['matrix']));break
             t=ref(w.scene.blocks[t],'m_Father')[0]
 report=json.loads(Path(__file__).with_name('world-install.json').read_text())
-for r in report['humanActors']:actor(r)
+def saved_actor(source,id,instance=0):
+    raw=source.blocks[id];resource=re.search(r'^  resource: (.+)',raw,re.M)[1];idle=re.search(r'^  idle: (.+)',raw,re.M)[1];go=source.owner(id)
+    return dict(resource=resource,bindings=dict(idle=idle),modelScale=float(re.search(r'^  modelScale: (.+)',raw,re.M)[1]),modelOffset=vec(raw,'modelOffset').tolist(),matrix=w.matrix(instance,source.transform(go)).tolist(),holdIdlePose='  holdIdlePose: 1\n' in raw)
+for instance,source in [(0,w.scene),*w.prefabs.items()]:
+    for id,raw in source.blocks.items():
+        if 'Assembly-CSharp::Sunward.Remaster.OriginalActor\n' in raw and '  m_Enabled: 0\n' not in raw:actor(saved_actor(source,id,instance))
 animals()
 player=dict(resource='NativePlayer/pl00',bindings=dict(idle='pl00_000'),modelScale=1,modelOffset=[0,0,0],matrix=np.eye(4).tolist());player['matrix'][0][3]=-34;player['matrix'][1][3]=-.057714887;player['matrix'][2][3]=-22;actor(player)
 for i,e in enumerate(report['enemyVisuals']):
     # Diagnostic arena lineup, not a claim of a recorded runtime wave.
+    from native import Scene
+    source=Scene(A/'Sunward/Generated'/('Enemy-'+e['role']+'.prefab'));id=next(id for id,raw in source.blocks.items() if 'Assembly-CSharp::Sunward.Remaster.OriginalActor\n' in raw);raw=source.blocks[id];e=dict(e,modelScale=float(re.search(r'^  modelScale: (.+)',raw,re.M)[1]),modelOffset=vec(raw,'modelOffset').tolist())
     root=np.eye(4);definition=(A/'Sunward/Generated'/('Spirit-'+e['role']+'.asset')).read_text();scale=float(re.search(r'^  scale: ([^\n]+)',definition,re.M)[1]);root[:3,:3]*=scale;root[:3,3]=[28+(i%3)*5,0,-5+(i//3)*8];actor(e,root)
 bpy.ops.object.light_add(type='SUN');sun=bpy.context.object;sun.rotation_euler=(.4,-.4,-.5);sun.data.energy=1.8;sun.data.angle=.18
 s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=8;s.cycles.use_denoising=False;s.cycles.max_bounces=4;s.cycles.transparent_max_bounces=12;s.world.use_nodes=True;s.world.node_tree.nodes['Background'].inputs['Color'].default_value=(.68,.67,.60,1);s.world.node_tree.nodes['Background'].inputs['Strength'].default_value=.7;s.view_settings.view_transform='Standard';s.view_settings.look='None';s.view_settings.exposure=-.3
 bpy.ops.object.camera_add();camera=bpy.context.object;camera.data.type='ORTHO';s.camera=camera
 shots=[('village',(-24,30,-28),(-4,0,1),73),('market',(-4,7,-15),(0,1,0),22),('houses',(-19,10,-23),(-8,2,-12),24),('arena',(31,22,24),(35,0,0),43),('farm',(-37,10,28),(-42,0,18),24),('home',(-43,10,-26),(-34,1,-16),22)]
+if (ROOT/'tools/playtest-repair/scene-repairs.json').exists():shots += [('dojo',(0,13,13),(0,1,25),23),('food-house',(18,10,-7),(10,1,-15),16)]
 receipts=[]
 for name,position,target,width in shots:
+    for ob in renderer_objects.values():ob.hide_render=False
+    for raw in w.scene.blocks.values():
+        if 'Assembly-CSharp::Sunward.Remaster.VenueVisibility\n' not in raw:continue
+        venue=re.search(r'^  venue: (.+)',raw,re.M)[1]
+        if (venue=='dojo' and name=='dojo') or (venue=='food' and name=='food-house'):
+            roof=re.search(r'  roof:\n(.*?)(?=  interiorSurfaces:|  contents:)',raw,re.S)[1]
+            for id in re.findall(r'fileID: (\d+)',roof):
+                if (0,int(id)) in renderer_objects:renderer_objects[0,int(id)].hide_render=True
+        elif '  interiorSurfaces:\n' in raw:
+            surfaces=re.search(r'  interiorSurfaces:\n(.*?)(?=  contents:)',raw,re.S)[1]
+            for id in re.findall(r'fileID: (\d+)',surfaces):
+                if (0,int(id)) in renderer_objects:renderer_objects[0,int(id)].hide_render=True
     for ob,base,relative in billboard_objects:
         forward=np.asarray(position)-base[:3,3];forward[1]=0;forward/=max(.001,np.linalg.norm(forward));right=np.cross([0,1,0],forward);new=base.copy();new[:3,:3]=np.column_stack([right,[0,1,0],forward])@np.diag(np.linalg.norm(base[:3,:3],axis=0));ob.matrix_world=CONVERT@Matrix(new@relative)
     camera.location=CONVERT@Vector(position);look=CONVERT@Vector(target);camera.rotation_euler=(look-camera.location).to_track_quat('-Z','Y').to_euler();camera.data.ortho_scale=width;s.render.resolution_x=1200;s.render.resolution_y=800;s.render.resolution_percentage=100;s.render.filepath=str(OUT/(name+'.png'));bpy.ops.render.render(write_still=True)

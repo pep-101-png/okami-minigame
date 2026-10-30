@@ -40,3 +40,7 @@ Sunward-Unity/Assets/OkamiRemaster/Original/**/*.wav -filter -diff -merge -text
 
 # Keep review images directly downloadable with this source update.
 tools/original-remake/previews/*.png -filter -diff -merge -text
+
+# Repair review images and bounded original audio ship directly with the update.
+tools/playtest-repair/previews/*.png -filter -diff -merge -text
+Sunward-Unity/Assets/OkamiRemaster/Original/**/*.ogg -filter -diff -merge -text

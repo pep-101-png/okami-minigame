@@ -63,27 +63,37 @@ namespace Sunward
             red = Resources.Load<Texture2D>("Okami/UI/Ink");
             body = new GUIStyle(GUI.skin.label)
             {
-                fontSize = 17,
+                fontSize = 19,
                 wordWrap = true
             };
-            body.normal.textColor = new Color(.20f, .19f, .16f);
+            body.normal.textColor = new Color(.075f, .055f, .035f, 1);
             body.font = Font.CreateDynamicFontFromOSFont(new[] { "Georgia", "Times New Roman", "Liberation Serif" }, 18);
             title = new GUIStyle(body)
             {
-                fontSize = 30,
+                fontSize = 27,
                 fontStyle = FontStyle.Bold
             };
             small = new GUIStyle(body)
             {
-                fontSize = 13
+                fontSize = 16
             };
             button = new GUIStyle(GUI.skin.button)
             {
-                fontSize = 16,
+                fontSize = 19,
+                font = body.font,
                 wordWrap = true,
                 padding = new RectOffset(12, 12, 10, 10)
             };
-            button.normal.textColor = body.normal.textColor;
+            // Never inherit translucent/dark editor-skin button states. Every
+            // panel and control uses the same clean original paper and ink.
+            foreach (var style in new[] { body, title, small, button })
+                foreach (var state in new[] { style.normal, style.hover, style.active, style.focused,
+                    style.onNormal, style.onHover, style.onActive, style.onFocused })
+                {
+                    state.textColor = body.normal.textColor;
+                    if (style == button) state.background = paper;
+                }
+            button.margin = new RectOffset(0, 0, 5, 5);
         }
 
         void OnGUI()
@@ -91,13 +101,16 @@ namespace Sunward
             if (!game || game.Save == null)
                 return;
             Styles();
+            GUI.color = Color.white;
+            GUI.contentColor = Color.white;
+            GUI.backgroundColor = Color.white;
             buttonCount = 0;
-            float scale = Mathf.Clamp(Screen.height / 900f, .65f, 1.6f);
+            float scale = Mathf.Clamp(Mathf.Min(Screen.height / 900f, Screen.width / 1000f), .75f, 1.6f);
             GUI.matrix = Matrix4x4.Scale(new Vector3(scale, scale, 1));
             float w = Screen.width / scale, h = Screen.height / scale;
             DrawPaper(new Rect(20, 18, 320, 132));
             GUILayout.BeginArea(new Rect(34, 24, 292, 120));
-            GUILayout.Label("SUNWARD · AMATERASU", title);
+            GUILayout.Label("SUNWARD · AMATERASU", small);
             GUILayout.Label("Vitality " + Mathf.CeilToInt(game.Health) + " / " + game.MaxHealth, body);
             Bar(280, game.Health / game.MaxHealth);
             GUILayout.Label("Stamina " + (int)game.Stamina + " · Ink " + (int)game.Energy, small);
@@ -105,7 +118,7 @@ namespace Sunward
             DrawPaper(new Rect(w - 350, 18, 330, 112));
             GUILayout.BeginArea(new Rect(w - 336, 26, 308, 100));
             GUILayout.Label(game.Profile.coins + " sun coins · Level " + ProgressionRules.Level(game.Profile), body);
-            GUILayout.Label(game.Profile.equipped == "spear" ? "OKAMI GLAIVE" : "SOLAR FLARE", body);
+            GUILayout.Label(game.Combat.EquippedTitle, body);
             GUILayout.Label("Power " + ProgressionRules.Power(game.Profile).ToString("0") + " · " + game.Save.Status, small);
             GUILayout.EndArea();
             var boss = game.Enemies.Find(e => e && !e.Dead && e.definition.id == "boss");
@@ -134,12 +147,15 @@ namespace Sunward
             {
                 case "welcome":
                     GUILayout.Label("A light in the mist.", title);
-                    GUILayout.Label("Explore the painted valley, cross its bridges, visit Taro for permanent blessings, then challenge the Hollow Bell. Rewards survive victory and defeat.\n\nController: left stick moves, right stick looks, A jumps, B dodges, X interacts, RB/RT attack, LB barks, D-pad right switches weapons.", body);
+                    GUILayout.Label("Explore the painted valley, cross its bridges, visit Taro for weapons and Hana for permanent blessings, then challenge the Hollow Bell. Visit the training hall or rest at the food house. Rewards survive victory and defeat.\n\nController: left stick moves, right stick looks, A jumps, B dodges, X interacts, RB/RT attack, LB barks, D-pad right switches owned weapons.", body);
                     if (Button("ENTER WINDFLOWER →", button))
                         game.Close();
                     break;
                 case "shop":
                     Shop();
+                    break;
+                case "weapons":
+                    Weapons();
                     break;
                 case "mirror":
                     GUILayout.Label("The Memory Mirror", title);
@@ -220,28 +236,38 @@ namespace Sunward
 
         void Shop()
         {
-            GUILayout.Label("Taro · weapons & blessings", title);
+            GUILayout.Label("Hana · upgrades & blessings", title);
             GUILayout.Label(game.Profile.coins + " coins · permanent upgrades survive defeat.", body);
-            if (System.Array.IndexOf(game.Profile.owned, "sundial") < 0)
-            {
-                if (Button("UNLOCK SOLAR FLARE · 110 coins", button))
-                    game.Buy("unlock-sundial");
-            }
-            else if (Button("EQUIP " + (game.Profile.equipped == "spear" ? "SOLAR FLARE" : "OKAMI GLAIVE"), button))
-            {
-                game.Profile.equipped = game.Profile.equipped == "spear" ? "sundial" : "spear";
-                game.Save.Save();
-                game.Combat.Equip();
-            }
-
+            if (Button("TARO'S WEAPON CATALOGUE →", button)) game.SetPanel("weapons");
             foreach (string id in ProgressionRules.Upgrades)
-                if (Button(id.ToUpperInvariant() + " · level " + game.Profile.upgrades.Get(id) + " · " + ProgressionRules.Cost(game.Profile, id) + " coins", button))
+            {
+                string label=id=="spear"?"GLAIVE MASTERY":id=="sundial"?"MIRROR & ROSARY MASTERY":id.ToUpperInvariant();
+                if (Button(label + " · level " + game.Profile.upgrades.Get(id) + " · " + ProgressionRules.Cost(game.Profile, id) + " coins", button))
                     game.Buy(id);
+            }
+        }
+        void Weapons()
+        {
+            GUILayout.Label("Taro · divine instruments", title);
+            GUILayout.Label(game.Profile.coins + " coins · purchased weapons stay in your save. Q cycles owned weapons in the arena.", body);
+            foreach (var entry in Sunward.Remaster.OriginalWeaponCatalog.All)
+            {
+                bool owned = Sunward.Remaster.OriginalWeaponCatalog.Owns(game.Profile, entry.id);
+                string label = entry.title + " · " + entry.family + (owned ? game.Profile.equipped == entry.id ? " · EQUIPPED" : " · EQUIP" : " · " + entry.cost + " coins");
+                if (!Button(label, button)) continue;
+                if (owned) { game.Profile.equipped = entry.id; game.Save.Save(); game.Combat.Equip(); }
+                else game.Buy("weapon:" + entry.id);
+            }
         }
 
         void DrawPaper(Rect r)
         {
-            GUI.DrawTexture(r, paper);
+            // Preserve the paper's aspect and opaque pixels, rather than
+            // stretching a small crop across a portrait-shaped menu.
+            Color old = GUI.color;
+            GUI.color = Color.white;
+            if (paper) GUI.DrawTexture(r, paper, ScaleMode.StretchToFill, false);
+            GUI.color = old;
         }
 
         void Bar(float width, float value)

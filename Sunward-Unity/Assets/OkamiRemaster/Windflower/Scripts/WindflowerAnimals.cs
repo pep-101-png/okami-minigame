@@ -24,7 +24,7 @@ namespace Sunward.Remaster
         sealed class Actor
         {
             public AnimalAsset asset; public Placement placement; public Transform root, model; public Transform[] bones;
-            public float time, walkTime, wait, blend, speed, speedVelocity; public int nextPoint; public Vector3 heading;
+            public float time, walkTime, wait, blend, speed, speedVelocity, voiceWait; public int nextPoint; public Vector3 heading;
         }
         readonly Dictionary<string, AnimalAsset> assets = new Dictionary<string, AnimalAsset>();
         readonly List<Actor> actors = new List<Actor>();
@@ -145,7 +145,7 @@ namespace Sunward.Remaster
                 Debug.LogWarning("Skipped blocked animal spawn: " + p.name + ". The complete painted body needs a clear footprint.", this);
                 return;
             }
-            Actor a=new Actor{asset=asset,placement=p,time=p.seed*2.3f,walkTime=p.seed,wait=2+p.seed%3};
+            Actor a=new Actor{asset=asset,placement=p,time=p.seed*2.3f,walkTime=p.seed,wait=2+p.seed%3,voiceWait=6+Mathf.Repeat(p.seed*7,14)};
             GameObject root=new GameObject(p.name);root.transform.SetParent(transform,false);root.transform.localPosition=p.position;root.transform.localRotation=Quaternion.Euler(0,p.yaw,0);a.root=root.transform;
             GameObject model=new GameObject("Original rig and painted skin");model.transform.SetParent(root.transform,false);model.transform.localPosition=asset.offset+Vector3.up*asset.idle.lift;a.model=model.transform;
             a.bones=new Transform[asset.parents.Length];
@@ -211,6 +211,12 @@ namespace Sunward.Remaster
             if(Paused || LastError!=null || game==null || game.Blocked || game.valley.Data==null) return;float dt=Mathf.Min(Time.deltaTime,.075f);
             foreach(Actor a in actors)
             {
+                a.voiceWait-=dt;
+                if(a.voiceWait<=0)
+                {
+                    if(game.Audio && Vector3.Distance(game.Player.transform.position,a.root.position)<12)game.Audio.Cue(a.asset.name);
+                    a.voiceWait=16+Mathf.Repeat(a.placement.seed*5+a.time,11);
+                }
                 a.time+=dt;float desired=0,remaining=0;Vector2[] path=a.placement.path;Vector3 direction=Vector3.zero;
                 bool held=false;
                 float visitorDistance = a.asset.radius + .85f;

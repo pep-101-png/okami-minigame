@@ -16,6 +16,7 @@ namespace Sunward.Remaster
         [Serializable] sealed class Bindings { public Binding[] bindings; }
         public bool Ready { get; private set; }
         public bool Visible { get; private set; }
+        public bool Shiranui { get; private set; }
         public Transform Head => Ready ? rig.Bones[8] : null;  // Original MD bone 7, skull/ear parent.
         public Transform Back => Ready ? rig.Bones[31] : null; // Original MD bone 30, dorsal attachment.
         public Transform[] PowerBones => Ready ? new[] { rig.Bones[9], rig.Bones[14], rig.Bones[13], rig.Bones[18], rig.Bones[21], rig.Bones[25] } : null;
@@ -24,6 +25,7 @@ namespace Sunward.Remaster
         public float Phase => clip == null ? 0 : time / Mathf.Max(.001f, clip.Duration + (intro != null ? intro.Duration : 0));
         public float BlendPhase => blendDuration > 0 ? Mathf.Clamp01(blendTime / blendDuration) : 1;
         NativePaintedRig rig;
+        NativePaintedRig amaterasuRig, shiranuiRig;
         NativePoseBank bank;
         Binding[] bindings;
         Renderer[] legacy;
@@ -72,6 +74,7 @@ namespace Sunward.Remaster
                     if (bank.Find(b.clip) == null || (!string.IsNullOrEmpty(b.intro) && bank.Find(b.intro) == null))
                         throw new InvalidOperationException("Missing original action for " + b.state);
                 rig = new NativePaintedRig("NativePlayer/pl00", transform);
+                amaterasuRig = rig;
                 if (bank.BoneCount != rig.Bones.Length) throw new InvalidOperationException("Original model and motion skeletons disagree");
                 fromPosition = new Vector3[bank.BoneCount]; fromRotation = new Quaternion[bank.BoneCount]; fromScale = new Vector3[bank.BoneCount];
                 Ready = true;
@@ -155,8 +158,33 @@ namespace Sunward.Remaster
         {
             if (!Ready || !Visible || clip == null) return;
             if (motor && motor.game && motor.game.Blocked) return;
+            if (UnityEngine.InputSystem.Keyboard.current != null && UnityEngine.InputSystem.Keyboard.current.pKey.wasPressedThisFrame)
+                ToggleShiranui();
             time += Time.deltaTime * rate; blendTime += Time.deltaTime;
             Apply();
+        }
+        void ToggleShiranui()
+        {
+            try
+            {
+                if (shiranuiRig == null) shiranuiRig = new NativePaintedRig("Okami/pl0d", transform);
+                if (shiranuiRig.Bones.Length != bank.BoneCount) throw new InvalidOperationException("Shiranui skeleton does not match the native player motion bank");
+                var previous = rig; Shiranui = !Shiranui; rig = Shiranui ? shiranuiRig : amaterasuRig;
+                for (int i = 0; i < rig.Bones.Length; i++)
+                {
+                    rig.Bones[i].localPosition = previous.Bones[i].localPosition;
+                    rig.Bones[i].localRotation = previous.Bones[i].localRotation;
+                    rig.Bones[i].localScale = previous.Bones[i].localScale;
+                }
+                foreach (var socket in sockets)
+                {
+                    int index = Array.IndexOf(previous.Bones, socket.bone);
+                    if (index >= 0) socket.bone = rig.Bones[index];
+                }
+                previous.Root.SetActive(false); rig.Root.SetActive(true);
+                if (motor && motor.game) motor.game.Notify(Shiranui ? "Shiranui · original karmic appearance · P to return" : "Amaterasu · P to test Shiranui");
+            }
+            catch (Exception error) { Debug.LogError("Original Shiranui appearance could not load: " + error.Message, this); }
         }
         void Apply()
         {
@@ -175,6 +203,6 @@ namespace Sunward.Remaster
         }
         void OnDisable() { Show(false); }
         void OnEnable() { if (Ready) Show(true); }
-        void OnDestroy() { if (rig != null) rig.Dispose(); }
+        void OnDestroy() { if (amaterasuRig != null) amaterasuRig.Dispose(); if (shiranuiRig != null) shiranuiRig.Dispose(); }
     }
 }

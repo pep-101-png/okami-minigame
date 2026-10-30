@@ -12,6 +12,7 @@ namespace Sunward.Remaster
         public Vector3 modelOffset;
         public float modelScale = 1;
         public bool splitAttackClip;
+        public bool holdIdlePose;
         public GameFlow game;
         public bool Ready { get; private set; }
         public string CurrentSourceMotion { get; private set; }
@@ -85,6 +86,7 @@ namespace Sunward.Remaster
             string state = enemy ? enemy.State : "village";
             string selected = speed > .03f ? walk : idle;
             bool loop = true;
+            if (holdIdlePose && selected == idle) loop = false;
             float duration = 0;
             if (enemy)
             {

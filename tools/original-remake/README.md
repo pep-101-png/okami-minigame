@@ -90,3 +90,6 @@ Reproduce source conversion outside Unity with `export_assets.py --inspection
 /path/to/full-asset-inspection`, then `install_world.py`, `bind_paint_audio.py
 /path/to/full-asset-inspection` and `verify.py`. The installer deliberately starts
 from the pinned rollback scene; do not run it over unrelated uncommitted scene edits.
+
+
+Follow-up: [Windflower playtest repairs](../playtest-repair/README.md) documents the current repair candidate and remaining verification limits.

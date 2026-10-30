@@ -33,6 +33,7 @@ namespace Sunward
 
         public GameObject[] npcObjects;
         public NpcData[] npcData;
+        public Sunward.Remaster.VillageServices Services { get; private set; }
         float messageUntil = 9, breakTimer, hitUntil;
         GameObject barrier;
         bool waiting;
@@ -70,6 +71,9 @@ namespace Sunward
         void Awake()
         {
             Save = new SaveStore();
+            Services = GetComponent<Sunward.Remaster.VillageServices>();
+            if (!Services) Services = gameObject.AddComponent<Sunward.Remaster.VillageServices>();
+            Services.game = this;
             Health = MaxHealth;
             Stamina = MaxStamina;
             Energy = MaxEnergy;
@@ -139,6 +143,7 @@ namespace Sunward
                 SetPanel(Panel == "" ? "shop" : "");
             if (Blocked)
                 return;
+            if (Services && Services.Resting) return;
             Enemies.RemoveAll(e => !e);
             if (InTrial)
             {
@@ -167,7 +172,8 @@ namespace Sunward
             }
 
             string action = Nearest();
-            Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "shop" ? "E · Taro · weapons & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
+            Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "weapons" ? "E · Weapons · fifteen divine instruments" : action == "shop" ? "E · Upgrades & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
+            if (action.StartsWith("venue:")) Prompt = Sunward.Remaster.VillageServices.Label(action,Player.transform.position);
             if (Player.input.Interact.WasPressedThisFrame() && !Home.Active)
             {
                 switch (action)
@@ -181,6 +187,9 @@ namespace Sunward
                         break;
                     case "shop":
                         SetPanel("shop");
+                        break;
+                    case "weapons":
+                        SetPanel("weapons");
                         break;
                     case "arena":
                         StartTrial();
@@ -199,6 +208,7 @@ namespace Sunward
                             Notify(Profile.shrine ? "The shrine remembers your blessing." : "Find all three windflowers in the village.");
                         break;
                     default:
+                        if (action.StartsWith("venue:")) { Services.Interact(action); break; }
                         if (action.StartsWith("flower:"))
                         {
                             string id = action.Substring(7);
@@ -216,6 +226,7 @@ namespace Sunward
                         if (action.StartsWith("npc:"))
                         {
                             int i = int.Parse(action.Substring(4));
+                            Audio.Npc(i);
                             Dialogue = npcData[i].name + "\n\n" + string.Join("\n\n", npcData[i].lines);
                             SetPanel("dialogue");
                         }
@@ -242,8 +253,13 @@ namespace Sunward
 
             Consider("bed", HomeLayout.Bed, 1.9f);
             Consider("mirror", HomeLayout.Mirror, 2.1f);
-            Consider("shop", npcObjects != null && npcObjects.Length > 1 && npcObjects[1] ? npcObjects[1].transform.position : new Vector3(3, 0, 0));
+            Consider("weapons", new Vector3(5.8f, 0, -2.4f), 3);
+            Consider("shop", new Vector3(-5.8f, 0, -2.4f), 3);
             Consider("arena", new Vector3(12.8f, 0, 0));
+            Consider("venue:dojo", Sunward.Remaster.VillageServices.DojoDoor, 3.5f);
+            Consider("venue:food", Sunward.Remaster.VillageServices.FoodDoor, 3.5f);
+            if (Sunward.Remaster.VillageServices.InFoodHouse(p)) Consider("venue:mat", Sunward.Remaster.VillageServices.Mat, 1.6f);
+            Consider("venue:farmer", Sunward.Remaster.VillageServices.Farmer, 2.4f);
             if (!Profile.shrine)
             {
                 string[] ids =

@@ -1508,6 +1508,6 @@ MonoBehaviour:
   strike: hm05_021
   recover: hm05_030
   death: hm05_040
-  modelOffset: {x: 0.008114105, y: 0.01230712, z: 0.09247725}
-  modelScale: 0.7939920141091197
+  modelOffset: {x: 0.01839013, y: 0.01480751, z: 0.03751802}
+  modelScale: 0.9553038369152034
   game: {fileID: 0}
