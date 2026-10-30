@@ -1,0 +1,29 @@
+{
+  "unchangedColliderBlocks": 315,
+  "saveProgressionPlayerMotorNPCNavigationWorldDataAndBuildScenePreserved": true,
+  "enemyAndWeaponMechanicsPreserved": true,
+  "preservedExternalPackageGuidsNotLocallyImported": [
+    "172515602e62fb746b5d573b38a5fe58",
+    "31321ba15b8f8eb4c954353edc038b1d",
+    "72ece51f2901e7445ab60da3685d6b5f",
+    "a79441f348de89743a2939f4d699eac1",
+    "f9dfa5b682dcd46bda6128250e975f58"
+  ],
+  "visibleSavedMeshRenderers": 1266,
+  "visibleLegacyArtBindings": [],
+  "convertedOriginalModels": 139,
+  "nativeVertexStreamsChecked": 201333,
+  "nativeTrianglesChecked": 117713,
+  "nativeScenePlacements": 856,
+  "villageHouseRootsReused": 14,
+  "humanActors": 13,
+  "enemyRoles": 6,
+  "actorMotionBindingsResolve": true,
+  "originalQuestFlowerRenderers": 3,
+  "UnityCompilationVerified": false,
+  "UnityPlaybackVerified": false,
+  "completeOriginalEffects": false,
+  "missingAuthenticSoundBanks": true,
+  "UIFontsOriginal": false,
+  "scope": "Offline data/preservation/reference verification only. No Unity editor is installed here."
+}

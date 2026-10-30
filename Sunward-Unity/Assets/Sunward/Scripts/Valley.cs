@@ -79,7 +79,7 @@ namespace Sunward
             return .10f + .42f * Mathf.Pow(arch, 1.5f);
         }
 
-        public float Height(Vector3 p) => SurfaceHeight(Data.terrain, p);
+        public float Height(Vector3 p) => Sunward.Remaster.VillageServices.Floor(p,out var room) ? room : SurfaceHeight(Data.terrain, p);
         public static float SurfaceHeight(TerrainData terrain, Vector3 p)
         {
             float z = -p.z;

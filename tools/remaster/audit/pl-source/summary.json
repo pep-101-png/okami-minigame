@@ -1,0 +1,338 @@
+[
+  {
+    "archive": "pl00.dat",
+    "bytes": 2456320,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  },
+  {
+    "archive": "pl01.dat",
+    "bytes": 418976,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 2
+    }
+  },
+  {
+    "archive": "pl02.dat",
+    "bytes": 230368,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "ICO": 2,
+      "SES": 1,
+      "MOT": 3,
+      "SEQ": 2,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "ICO": 2,
+      "SES": 1,
+      "MOT": 3,
+      "SEQ": 2
+    }
+  },
+  {
+    "archive": "pl03.dat",
+    "bytes": 922112,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 8,
+      "CAM": 1,
+      "EFF": 1,
+      "ICO": 1,
+      "SES": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 3,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 8,
+      "CAM": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 3,
+      "EMD": 1,
+      "ICO": 1,
+      "SES": 1
+    }
+  },
+  {
+    "archive": "pl04.dat",
+    "bytes": 607584,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 3,
+      "CAM": 1,
+      "EFF": 1,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 4,
+      "ROF": 5,
+      "MD": 1,
+      "MOT": 3,
+      "CAM": 1,
+      "EFF": 1,
+      "TBL": 2,
+      "EST": 2,
+      "EMD": 1
+    }
+  },
+  {
+    "archive": "pl05.dat",
+    "bytes": 994560,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 2,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 3,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 2
+    }
+  },
+  {
+    "archive": "pl06.dat",
+    "bytes": 76960,
+    "topLevelTypes": {
+      "DDP": 1,
+      "MD": 1,
+      "MOT": 3,
+      "SEQ": 2,
+      "ROF": 1
+    },
+    "types": {
+      "DDP": 1,
+      "DDS": 1,
+      "ROF": 2,
+      "MD": 1,
+      "MOT": 3,
+      "SEQ": 2
+    }
+  },
+  {
+    "archive": "pl07.dat",
+    "bytes": 3544512,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  },
+  {
+    "archive": "pl08.dat",
+    "bytes": 3548736,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  },
+  {
+    "archive": "pl09.dat",
+    "bytes": 3544384,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  },
+  {
+    "archive": "pl0a.dat",
+    "bytes": 3547584,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  },
+  {
+    "archive": "pl0b.dat",
+    "bytes": 3282496,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  },
+  {
+    "archive": "pl0c.dat",
+    "bytes": 2139072,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  },
+  {
+    "archive": "pl0d.dat",
+    "bytes": 3548608,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  },
+  {
+    "archive": "pl0e.dat",
+    "bytes": 2131008,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  },
+  {
+    "archive": "pl0f.dat",
+    "bytes": 3548864,
+    "topLevelTypes": {
+      "MD": 1,
+      "DDP": 1,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2,
+      "ROF": 1
+    },
+    "types": {
+      "MD": 1,
+      "DDP": 1,
+      "DDS": 16,
+      "ROF": 2,
+      "MOT": 98,
+      "SEQ": 26,
+      "CAM": 2
+    }
+  }
+]

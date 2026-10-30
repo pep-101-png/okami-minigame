@@ -1,0 +1,177 @@
+{
+  "commit": "aefd595771e933a3313ecb4170251764c94ab1e3",
+  "runId": "20261021T092745607Z-9936e8",
+  "validation": "passed",
+  "captureError": "",
+  "screenshots": [
+    "screenshots/amaterasu-front.png",
+    "screenshots/amaterasu-side.png",
+    "screenshots/architecture.png",
+    "screenshots/gameplay-camera-editmode.png",
+    "screenshots/gameplay-live-camera.png",
+    "screenshots/lighting-shadows-wide.png",
+    "screenshots/pose-Idle_Natural-quarter.png",
+    "screenshots/pose-Sprint_Fluid-quarter.png",
+    "screenshots/pose-Thrust-quarter.png",
+    "screenshots/pose-Walk_Natural-quarter.png",
+    "screenshots/river-water.png",
+    "screenshots/vegetation-terrain.png"
+  ],
+  "clips": [
+    {
+      "name": "walk-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 120,
+      "expectedFrames": 120,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/walk-side.mp4"
+      ]
+    },
+    {
+      "name": "walk-front",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 120,
+      "expectedFrames": 120,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/walk-front.mp4"
+      ]
+    },
+    {
+      "name": "walk-rear-quarter",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 120,
+      "expectedFrames": 120,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/walk-rear-quarter.mp4"
+      ]
+    },
+    {
+      "name": "jog-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 120,
+      "expectedFrames": 120,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/jog-side.mp4"
+      ]
+    },
+    {
+      "name": "jog-front",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 120,
+      "expectedFrames": 120,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/jog-front.mp4"
+      ]
+    },
+    {
+      "name": "jog-rear-quarter",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 120,
+      "expectedFrames": 120,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/jog-rear-quarter.mp4"
+      ]
+    },
+    {
+      "name": "sprint-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 120,
+      "expectedFrames": 120,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/sprint-side.mp4"
+      ]
+    },
+    {
+      "name": "sprint-front",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 120,
+      "expectedFrames": 120,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/sprint-front.mp4"
+      ]
+    },
+    {
+      "name": "sprint-rear-quarter",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 120,
+      "expectedFrames": 120,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/sprint-rear-quarter.mp4"
+      ]
+    },
+    {
+      "name": "jump-air-land-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 150,
+      "expectedFrames": 150,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/jump-air-land-side.mp4"
+      ]
+    },
+    {
+      "name": "gait-stop-turn-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 210,
+      "expectedFrames": 210,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/gait-stop-turn-side.mp4"
+      ]
+    },
+    {
+      "name": "dodge-directions-rear-quarter",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 150,
+      "expectedFrames": 150,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/dodge-directions-rear-quarter.mp4"
+      ]
+    },
+    {
+      "name": "combat-light-heavy-charge-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 270,
+      "expectedFrames": 270,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/combat-light-heavy-charge-side.mp4"
+      ]
+    },
+    {
+      "name": "windflower-gameplay-route",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "frames": 240,
+      "expectedFrames": 240,
+      "error": "",
+      "encodingStatus": "encoded_verified_unreviewed",
+      "videos": [
+        "videos/windflower-gameplay-route.mp4"
+      ]
+    }
+  ],
+  "visualReview": "NOT_PERFORMED: open actual images/video frames in the active Codex task"
+}

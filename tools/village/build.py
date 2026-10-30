@@ -32,9 +32,17 @@ class Sources:
   for m in re.finditer(r'    - target: \{fileID: (-?\d+),[^\n]+\}\n      propertyPath: ([^\n]+)\n      value: ([^\n]*)',scene.blocks[self.instance]):self.overrides[(int(m[1]),m[2].strip("'"))]=m[3]
  def patch(self,target,key,value=None,reference=None):
   raw=self.scene.blocks[self.instance]
-  pattern=r'    - target: \{fileID: '+str(target)+r',[^\n]+\}\n      propertyPath: [\x27]?'+re.escape(key)+r'[\x27]?\n      value: [^\n]*\n      objectReference: [^\n]*\n'
+  pattern=r'    - target: \{fileID: '+str(target)+r',[^\n]+\}\n      propertyPath: [\x27]?'+re.escape(key)+r'[\x27]?\n      value:[ \t]*[^\n]*\n      objectReference: [^\n]*\n'
   record=f'    - target: {{fileID: {target}, guid: {self.prefab_guid}, type: 3}}\n      propertyPath: {key}\n      value: {value if value is not None else ""}\n      objectReference: {reference or "{fileID: 0}"}\n'
-  raw,count=re.subn(pattern,lambda _:record,raw)
+  matches=list(re.finditer(pattern,raw));count=len(matches)
+  if matches:
+   # Unity serializes empty reference-only values as "value:". Match that
+   # form, replace the first occurrence and remove duplicates of this property.
+   first=True
+   def replace(match):
+    nonlocal first
+    value=record if first else '';first=False;return value
+   raw=re.sub(pattern,replace,raw)
   if not count:raw=raw.replace('    m_RemovedComponents:',record+'    m_RemovedComponents:')
   self.scene.blocks[self.instance]=raw
   self.overrides[(target,key)]=str(value)

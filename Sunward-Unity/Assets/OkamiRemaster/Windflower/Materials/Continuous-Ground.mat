@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_Name: Continuous recovered ground paintings
+  m_Shader: {fileID: 4800000, guid: 3dff1c04a407e30f8817c7cf2d2092eb, type: 3}
+  m_EnableInstancingVariants: 1
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _GrassTex:
+        m_Texture: {fileID: 2800000, guid: 56b5ae3e9c29a1f81af0b379ab666712, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EarthTex:
+        m_Texture: {fileID: 2800000, guid: 6f85c7c8f36d0f5474a6177ab09c17cd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LayoutMask:
+        m_Texture: {fileID: 2800000, guid: e58e886a7ca2a3d90b96e552ac681a4f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _GrassScale: 0.035
+    - _EarthScale: 0.05
+    m_Colors:
+    - _MapBounds: {r: -60, g: -48, b: 130, a: 96}

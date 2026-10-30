@@ -10,6 +10,13 @@ namespace Sunward
         public bool Dead => Hp <= 0;
         public bool Phase2 => definition.id == "boss" && Hp < MaxHp * .5f;
         public string State { get; private set; } = "approach";
+        // Snapshot durations when states begin. Phase-two health changes must
+        // not move the visible attack backwards while its timer is running.
+        float visualDuration=.9f;
+        public float VisualStateDuration => visualDuration;
+        public bool VisualStunned => !Dead && stun>0;
+
+        public float VisualStateProgress => Mathf.Clamp01(1 - timer / Mathf.Max(.001f, VisualStateDuration));
 
         CharacterController motor;
         Transform visual;
@@ -20,6 +27,8 @@ namespace Sunward
         bool struck;
         LineRenderer tell;
         Vector3 visualBase;
+        bool originalVisual;
+        float nextVoice;
         public void Init(GameFlow flow, EnemyDefinition spec)
         {
             game = flow;
@@ -33,6 +42,7 @@ namespace Sunward
             visual = Instantiate(spec.visual, transform).transform;
             visual.localScale = Vector3.one * spec.scale;
             visualBase = visual.localPosition;
+            originalVisual = visual.GetComponentInChildren<Sunward.Remaster.OriginalActor>(true) != null;
         }
 
         public void Stun(float time)
@@ -45,6 +55,7 @@ namespace Sunward
             if (Dead)
                 return;
             Hp -= damage;
+            if (game.Audio && (Dead || Time.time >= nextVoice)) { game.Audio.Enemy(definition.id,transform.position); nextVoice = Time.time + .9f; }
             Stun(stagger);
             if (motor.enabled)
                 motor.Move(away * .15f);
@@ -78,8 +89,11 @@ namespace Sunward
             clock += dt;
             if (Dead)
             {
-                visual.localScale = Vector3.one * definition.scale * Mathf.Max(0, 1 - (clock - timer));
-                visual.Rotate(0, dt * 40, 0);
+                if (!originalVisual)
+                {
+                    visual.localScale = Vector3.one * definition.scale * Mathf.Max(0, 1 - (clock - timer));
+                    visual.Rotate(0, dt * 40, 0);
+                }
                 return;
             }
 
@@ -89,8 +103,11 @@ namespace Sunward
             bool boss = definition.id == "boss", ranged = definition.id == "ranged";
             if (diff.sqrMagnitude > .01f)
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(diff), dt * 7);
-            visual.localPosition = visualBase + Vector3.up * (definition.id == "wisp" || ranged ? .12f + Mathf.Sin(clock * 4) * .10f : Mathf.Abs(Mathf.Sin(clock * 6)) * .035f);
-            visual.localRotation = Quaternion.Euler(State == "windup" ? -12 : Mathf.Sin(clock * 5) * 3, 0, State == "approach" ? Mathf.Sin(clock * 6) * 3 : 0);
+            if (!originalVisual)
+            {
+                visual.localPosition = visualBase + Vector3.up * (definition.id == "wisp" || ranged ? .12f + Mathf.Sin(clock * 4) * .10f : Mathf.Abs(Mathf.Sin(clock * 6)) * .035f);
+                visual.localRotation = Quaternion.Euler(State == "windup" ? -12 : Mathf.Sin(clock * 5) * 3, 0, State == "approach" ? Mathf.Sin(clock * 6) * 3 : 0);
+            }
             if (stun > 0)
             {
                 stun -= dt;
@@ -117,6 +134,7 @@ namespace Sunward
                     }[attacks % 3] : ranged ? "shot" : definition.id == "heavy" ? "slam" : "charge";
                     State = "windup";
                     timer = definition.windup * (Phase2 ? .8f : 1);
+                    visualDuration=timer;
                     struck = false;
                     tell = game.Fx.Ring(move == "slam" ? transform.position : game.Player.transform.position, new Color(.75f, .24f, .17f), move == "slam" ? (boss ? 5 : 3) : .7f, timer + .1f);
                 }
@@ -125,6 +143,7 @@ namespace Sunward
             {
                 State = "strike";
                 timer = move == "charge" ? (boss ? .65f : .32f) : .18f;
+                visualDuration=timer;
                 if (move == "fan" || move == "shot")
                 {
                     int count = move == "fan" ? (Phase2 ? 7 : 5) : 1;
@@ -161,6 +180,7 @@ namespace Sunward
                 {
                     State = "recover";
                     timer = boss ? .95f : .65f;
+                    visualDuration=timer;
                 }
             }
             else if (State == "recover" && timer <= 0)
