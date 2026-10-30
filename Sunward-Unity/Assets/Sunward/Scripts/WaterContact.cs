@@ -16,6 +16,7 @@ namespace Sunward
             var p = player.transform.position;
             timer -= Time.deltaTime;
             float depth = Valley.Depth(p);
+            if (player.Swimming && MeshSafety.Finite(p)) { submerged = 0; return; }
             if (!game.InTrial && player.Grounded && VillageNavigation.Clear(game.valley.Data, p, .5f))
             {
                 lastSafe = p;

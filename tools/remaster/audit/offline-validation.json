@@ -1,0 +1,75 @@
+{
+  "unchangedBaselineFiles": 3731,
+  "allNewAssetMetadataAndSerializedReferencesResolve": true,
+  "resourceKeysWithoutCollisions": 206,
+  "villageSourceFiles": 548,
+  "intentionalVillageAdaptations": [
+    "Demo/Shaders/FarmAnimals.shader",
+    "Demo/Shaders/InkHull.shader",
+    "Demo/Shaders/PaintedSurface.shader",
+    "Demo/Shaders/PaintedFoam.shader",
+    "Demo/Shaders/BlossomPetals.shader",
+    "Demo/Shaders/PettingHearts.shader",
+    "Demo/Shaders/PaintedWater.shader",
+    "Demo/Shaders/PaintedGround.shader",
+    "Demo/Scripts/DemoExplorer.cs",
+    "Demo/Scripts/DemoWorld.cs",
+    "Demo/Scripts/DemoHouseDoors.cs",
+    "Demo/Scripts/DemoFarmAnimals.cs"
+  ],
+  "villageGeometry": {
+    "batches": 659,
+    "vertices": 2877511,
+    "sourceTriangles": 6081995,
+    "meshColliders": 14,
+    "redundantOpaqueFaces": 1878957,
+    "expectedSubmittedTriangles": 4203038,
+    "sourceGeometryBytesUnchanged": true,
+    "collisionIndicesUnchanged": true,
+    "transparentIndicesUnchanged": true,
+    "renderingEquivalenceVerifiedInUnity": false
+  },
+  "farmActors": 13,
+  "farmSpecies": [
+    "boar",
+    "cat",
+    "cow",
+    "dog",
+    "panda-rabbit",
+    "pig",
+    "piglet",
+    "rabbit",
+    "rooster"
+  ],
+  "verifiedOriginalAmmyMotionPayloads": 165,
+  "nativeReviewModels": [
+    {
+      "name": "pl00",
+      "nativeBones": 38,
+      "parts": 9,
+      "vertices": 2969,
+      "triangles": 2183
+    },
+    {
+      "name": "wp24",
+      "nativeBones": 16,
+      "parts": 6,
+      "vertices": 743,
+      "triangles": 517
+    },
+    {
+      "name": "wp34",
+      "nativeBones": 16,
+      "parts": 6,
+      "vertices": 743,
+      "triangles": 517
+    }
+  ],
+  "csharpSyntaxFiles": 90,
+  "shaderSourcePorts": 8,
+  "UnityExecuted": false,
+  "UnityCompiled": false,
+  "UnityVisualsVerified": false,
+  "gameplayRegressionTested": false,
+  "allBaselineBytesPreserved": true
+}

@@ -1,0 +1,5 @@
+{
+    "scope":  "Execute-method reachability, not complete shader variant coverage",
+    "status":  "passed_execute_method_reached",
+    "editorLog":  "validation-editor.log"
+}

@@ -1,0 +1,4053 @@
+{
+  "status": "Original bytes only; native interpolation, action names, FPS and Unity playback not approved",
+  "uniqueAmmyPayloads": 165,
+  "motions": [
+    {
+      "path": "MotionSources/5bc2a94b08ba820535aae3a33c9a05f9229bc2c63f04b344e1b541a2880ec4cf.bytes",
+      "sha256": "5bc2a94b08ba820535aae3a33c9a05f9229bc2c63f04b344e1b541a2880ec4cf",
+      "bytes": 13408,
+      "frames": 121,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_000",
+          "sourcePath": "extracted/pl00/002-pl00_000.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/c74fbd581a16eb14b25e370a4b2f5bc706fd708a778e7c1060d2aa6cf5f574c6.bytes",
+      "sha256": "c74fbd581a16eb14b25e370a4b2f5bc706fd708a778e7c1060d2aa6cf5f574c6",
+      "bytes": 11200,
+      "frames": 91,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_001",
+          "sourcePath": "extracted/pl00/003-pl00_001.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/e01972c6a823018725b6547ca53e982bcecad95fd7bb816725b826777d285cd0.bytes",
+      "sha256": "e01972c6a823018725b6547ca53e982bcecad95fd7bb816725b826777d285cd0",
+      "bytes": 12864,
+      "frames": 121,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_002",
+          "sourcePath": "extracted/pl00/004-pl00_002.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/667c6e197488568b5e1fa1b8c6a092b77297a41f1825c0ccdd4525d1694c4ec2.bytes",
+      "sha256": "667c6e197488568b5e1fa1b8c6a092b77297a41f1825c0ccdd4525d1694c4ec2",
+      "bytes": 7488,
+      "frames": 47,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_003",
+          "sourcePath": "extracted/pl00/005-pl00_003.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/abdeb3159e23b9c8760cfdab396f21b550e4020dadd9e38f0544c598263dcbf8.bytes",
+      "sha256": "abdeb3159e23b9c8760cfdab396f21b550e4020dadd9e38f0544c598263dcbf8",
+      "bytes": 4608,
+      "frames": 33,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_004",
+          "sourcePath": "extracted/pl00/006-pl00_004.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/98163ac8528ecf531cf8e462db0c6868795fdb23a2d23dcbe195be243317beeb.bytes",
+      "sha256": "98163ac8528ecf531cf8e462db0c6868795fdb23a2d23dcbe195be243317beeb",
+      "bytes": 12192,
+      "frames": 106,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_005",
+          "sourcePath": "extracted/pl00/007-pl00_005.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/8ce9c1e4227303842125d066ecede0b0713adae134a5598cc4a56218d37c3dc4.bytes",
+      "sha256": "8ce9c1e4227303842125d066ecede0b0713adae134a5598cc4a56218d37c3dc4",
+      "bytes": 4512,
+      "frames": 15,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_006",
+          "sourcePath": "extracted/pl00/008-pl00_006.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/00b0d07df7721fad8767692149f4c65b3c4973a6d337a3bd95eb0b3d2f4a3d7c.bytes",
+      "sha256": "00b0d07df7721fad8767692149f4c65b3c4973a6d337a3bd95eb0b3d2f4a3d7c",
+      "bytes": 3968,
+      "frames": 16,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_008",
+          "sourcePath": "extracted/pl00/009-pl00_008.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/72caa78434275050aa5a7783753dab8a7be98b1a216b6b2c6872c693ea256a69.bytes",
+      "sha256": "72caa78434275050aa5a7783753dab8a7be98b1a216b6b2c6872c693ea256a69",
+      "bytes": 3840,
+      "frames": 16,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_009",
+          "sourcePath": "extracted/pl00/010-pl00_009.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/1b23de694c1a7e8d47c10d1458bbe913135b9ef1e4e90bda8220ea6a69025af3.bytes",
+      "sha256": "1b23de694c1a7e8d47c10d1458bbe913135b9ef1e4e90bda8220ea6a69025af3",
+      "bytes": 6752,
+      "frames": 37,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_010",
+          "sourcePath": "extracted/pl00/011-pl00_010.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2481f7972e0d29dd1aec432b66422c0999f67179243cc76484fa2e8edf90e5e9.bytes",
+      "sha256": "2481f7972e0d29dd1aec432b66422c0999f67179243cc76484fa2e8edf90e5e9",
+      "bytes": 5632,
+      "frames": 14,
+      "loop": true,
+      "propertyRecords": 138,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_011",
+          "sourcePath": "extracted/pl00/012-pl00_011.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/99a2342c3bb786dec4a81731abb9318ffeb5b13c22f0d7a8571ef4dd3371dd14.bytes",
+      "sha256": "99a2342c3bb786dec4a81731abb9318ffeb5b13c22f0d7a8571ef4dd3371dd14",
+      "bytes": 5088,
+      "frames": 12,
+      "loop": true,
+      "propertyRecords": 138,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_012",
+          "sourcePath": "extracted/pl00/013-pl00_012.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/28fca5c285cd4d28125f4c66bfada32cfa968a7c7146a876b6c846d111b3ec24.bytes",
+      "sha256": "28fca5c285cd4d28125f4c66bfada32cfa968a7c7146a876b6c846d111b3ec24",
+      "bytes": 4960,
+      "frames": 20,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_013",
+          "sourcePath": "extracted/pl00/014-pl00_013.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/adb99b193f0882507670727c4270933e96904fe8f3ecc8abc151bd58536de242.bytes",
+      "sha256": "adb99b193f0882507670727c4270933e96904fe8f3ecc8abc151bd58536de242",
+      "bytes": 5056,
+      "frames": 15,
+      "loop": false,
+      "propertyRecords": 127,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_017",
+          "sourcePath": "extracted/pl00/015-pl00_017.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/4847a301dd6c254ec819e63f52500c22f685e145109ec1bfe2b90e126b1c0a22.bytes",
+      "sha256": "4847a301dd6c254ec819e63f52500c22f685e145109ec1bfe2b90e126b1c0a22",
+      "bytes": 4896,
+      "frames": 15,
+      "loop": false,
+      "propertyRecords": 125,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_018",
+          "sourcePath": "extracted/pl00/016-pl00_018.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/e4d6f7eead867590db8394b5b83cd43738f372666b8ae0a2a0380000792b9b82.bytes",
+      "sha256": "e4d6f7eead867590db8394b5b83cd43738f372666b8ae0a2a0380000792b9b82",
+      "bytes": 4992,
+      "frames": 15,
+      "loop": false,
+      "propertyRecords": 127,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_019",
+          "sourcePath": "extracted/pl00/017-pl00_019.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/5a5ca026cfdbc345a615e1b32ca64163e22417f8a54c02ec735aadd7b45b41a5.bytes",
+      "sha256": "5a5ca026cfdbc345a615e1b32ca64163e22417f8a54c02ec735aadd7b45b41a5",
+      "bytes": 6784,
+      "frames": 37,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_01d",
+          "sourcePath": "extracted/pl00/018-pl00_01d.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2cadf10b184e972cfa948cd387aecd805cb9dc218ce5bf4d395cdb7575f271c3.bytes",
+      "sha256": "2cadf10b184e972cfa948cd387aecd805cb9dc218ce5bf4d395cdb7575f271c3",
+      "bytes": 4416,
+      "frames": 15,
+      "loop": true,
+      "propertyRecords": 118,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_01e",
+          "sourcePath": "extracted/pl00/019-pl00_01e.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/c511463a344a7e0191fec7e293bd8cce71e2364250eaf4905175a3ab5c01fe56.bytes",
+      "sha256": "c511463a344a7e0191fec7e293bd8cce71e2364250eaf4905175a3ab5c01fe56",
+      "bytes": 3808,
+      "frames": 5,
+      "loop": false,
+      "propertyRecords": 129,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_020",
+          "sourcePath": "extracted/pl00/020-pl00_020.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/349b100cd4f82bd068978e64eb54233554633121ea694a69fc9536ff3ed8ecd2.bytes",
+      "sha256": "349b100cd4f82bd068978e64eb54233554633121ea694a69fc9536ff3ed8ecd2",
+      "bytes": 5216,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 129,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_021",
+          "sourcePath": "extracted/pl00/021-pl00_021.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/661a225b77c7d796c805b8525715aab1ccd7bb1f7dff518afe17ef47671dcb3e.bytes",
+      "sha256": "661a225b77c7d796c805b8525715aab1ccd7bb1f7dff518afe17ef47671dcb3e",
+      "bytes": 5280,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 132,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_022",
+          "sourcePath": "extracted/pl00/022-pl00_022.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/1ad67430dd159a258cde47d21503a378a8b63680ec6638fd7d7cfdb6130d3e6c.bytes",
+      "sha256": "1ad67430dd159a258cde47d21503a378a8b63680ec6638fd7d7cfdb6130d3e6c",
+      "bytes": 3552,
+      "frames": 4,
+      "loop": false,
+      "propertyRecords": 133,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_024",
+          "sourcePath": "extracted/pl00/023-pl00_024.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/d4aca8a6491a545c2442d7e251f6378cbda1abbbdc22be789752d2ef6abd2fde.bytes",
+      "sha256": "d4aca8a6491a545c2442d7e251f6378cbda1abbbdc22be789752d2ef6abd2fde",
+      "bytes": 5568,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 133,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_025",
+          "sourcePath": "extracted/pl00/024-pl00_025.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/82554d48ee461f117789442b24919835ada64c533ae2bf3199a4d547a97594ca.bytes",
+      "sha256": "82554d48ee461f117789442b24919835ada64c533ae2bf3199a4d547a97594ca",
+      "bytes": 4896,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 129,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_026",
+          "sourcePath": "extracted/pl00/025-pl00_026.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/d87141b022921ee91edb11ef7b1308cf2907b747bde3ccf903dbcf657497b158.bytes",
+      "sha256": "d87141b022921ee91edb11ef7b1308cf2907b747bde3ccf903dbcf657497b158",
+      "bytes": 3264,
+      "frames": 4,
+      "loop": false,
+      "propertyRecords": 127,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_027",
+          "sourcePath": "extracted/pl00/026-pl00_027.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/67419a0b6b5dcff1fdaa7989cfbed2e839785aa030107d3d7de2d32e37dcbf2e.bytes",
+      "sha256": "67419a0b6b5dcff1fdaa7989cfbed2e839785aa030107d3d7de2d32e37dcbf2e",
+      "bytes": 5184,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 127,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_029",
+          "sourcePath": "extracted/pl00/027-pl00_029.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/f735aeae6a52f6b50603df4beb2776c9bb735b490c616f481783dd8ad52cea0a.bytes",
+      "sha256": "f735aeae6a52f6b50603df4beb2776c9bb735b490c616f481783dd8ad52cea0a",
+      "bytes": 4480,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_02a",
+          "sourcePath": "extracted/pl00/028-pl00_02a.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2a1c7f776bbb3c85780d9ab37d494e69df0f3c7dbd9d4b51ad9b5ea9a109362d.bytes",
+      "sha256": "2a1c7f776bbb3c85780d9ab37d494e69df0f3c7dbd9d4b51ad9b5ea9a109362d",
+      "bytes": 3456,
+      "frames": 5,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_02b",
+          "sourcePath": "extracted/pl00/029-pl00_02b.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/beccddc145a6af330529393e86cfd20cf5e5259b809978418b64ceb621ae0023.bytes",
+      "sha256": "beccddc145a6af330529393e86cfd20cf5e5259b809978418b64ceb621ae0023",
+      "bytes": 4320,
+      "frames": 21,
+      "loop": true,
+      "propertyRecords": 125,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_02c",
+          "sourcePath": "extracted/pl00/030-pl00_02c.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/cc4ec79ad4d0f47c1c37a9e11411ffcdcad302a00ffe582bdc601c95db476c17.bytes",
+      "sha256": "cc4ec79ad4d0f47c1c37a9e11411ffcdcad302a00ffe582bdc601c95db476c17",
+      "bytes": 3744,
+      "frames": 10,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_02d",
+          "sourcePath": "extracted/pl00/031-pl00_02d.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/3ec970609ac205f6040aab18f87cf7fada223bf4870b12b098c0bfecdf8abb6a.bytes",
+      "sha256": "3ec970609ac205f6040aab18f87cf7fada223bf4870b12b098c0bfecdf8abb6a",
+      "bytes": 3520,
+      "frames": 17,
+      "loop": false,
+      "propertyRecords": 114,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_02e",
+          "sourcePath": "extracted/pl00/032-pl00_02e.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/26accd42353a972c9321b11c1db4a6e218660b39f7f5a0b053346987c904cfd9.bytes",
+      "sha256": "26accd42353a972c9321b11c1db4a6e218660b39f7f5a0b053346987c904cfd9",
+      "bytes": 3296,
+      "frames": 17,
+      "loop": false,
+      "propertyRecords": 114,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_02f",
+          "sourcePath": "extracted/pl00/033-pl00_02f.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/807f101027aeb74aada6fe14f663555068703648ae5f916c158fa94d7edecdb6.bytes",
+      "sha256": "807f101027aeb74aada6fe14f663555068703648ae5f916c158fa94d7edecdb6",
+      "bytes": 4672,
+      "frames": 17,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_030",
+          "sourcePath": "extracted/pl00/034-pl00_030.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/9207d9fb9fcc7e548b6a345d535be4ca9d0954ce9d44690003ee140d7c720eb2.bytes",
+      "sha256": "9207d9fb9fcc7e548b6a345d535be4ca9d0954ce9d44690003ee140d7c720eb2",
+      "bytes": 6688,
+      "frames": 35,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_031",
+          "sourcePath": "extracted/pl00/035-pl00_031.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/393a546e435b6602aa40d495ae40b70363c6e457e1d6e0855915b7528936bb55.bytes",
+      "sha256": "393a546e435b6602aa40d495ae40b70363c6e457e1d6e0855915b7528936bb55",
+      "bytes": 4672,
+      "frames": 19,
+      "loop": false,
+      "propertyRecords": 124,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_032",
+          "sourcePath": "extracted/pl00/036-pl00_032.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/dc8c6b937d429aaff15190ebfd51cac29d395960d4b57a6c1aeb35c8a4e8bacc.bytes",
+      "sha256": "dc8c6b937d429aaff15190ebfd51cac29d395960d4b57a6c1aeb35c8a4e8bacc",
+      "bytes": 4128,
+      "frames": 13,
+      "loop": false,
+      "propertyRecords": 121,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_033",
+          "sourcePath": "extracted/pl00/037-pl00_033.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2da56cd0742c8711a121d6b27aecaeb7e5cda39e073be792e97f686e0acc5d63.bytes",
+      "sha256": "2da56cd0742c8711a121d6b27aecaeb7e5cda39e073be792e97f686e0acc5d63",
+      "bytes": 6976,
+      "frames": 55,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_034",
+          "sourcePath": "extracted/pl00/038-pl00_034.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/b8c401a971851a082a7d0bc1adc4c868650228c5001a1d04f7722df1ecd1b903.bytes",
+      "sha256": "b8c401a971851a082a7d0bc1adc4c868650228c5001a1d04f7722df1ecd1b903",
+      "bytes": 4512,
+      "frames": 40,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_035",
+          "sourcePath": "extracted/pl00/039-pl00_035.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/0b432f69c9a09e61b77863a4da23226cc6ce2a6ce4a81de9280509f31c37463d.bytes",
+      "sha256": "0b432f69c9a09e61b77863a4da23226cc6ce2a6ce4a81de9280509f31c37463d",
+      "bytes": 4448,
+      "frames": 15,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_036",
+          "sourcePath": "extracted/pl00/040-pl00_036.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/9a1adf34077718d484aa7213a8d9c03c9a45c034890d5a784810c8cec9c9e6c9.bytes",
+      "sha256": "9a1adf34077718d484aa7213a8d9c03c9a45c034890d5a784810c8cec9c9e6c9",
+      "bytes": 3712,
+      "frames": 6,
+      "loop": false,
+      "propertyRecords": 124,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_037",
+          "sourcePath": "extracted/pl00/041-pl00_037.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/07d4f658ef85826e514a242d4a6872113241778d5c53d73ffbd526a88b004079.bytes",
+      "sha256": "07d4f658ef85826e514a242d4a6872113241778d5c53d73ffbd526a88b004079",
+      "bytes": 3456,
+      "frames": 10,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_038",
+          "sourcePath": "extracted/pl00/042-pl00_038.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/b99e72c0a8474377a9b0638e1314c1cc2a3864e2573c01119846dc8b85804aa4.bytes",
+      "sha256": "b99e72c0a8474377a9b0638e1314c1cc2a3864e2573c01119846dc8b85804aa4",
+      "bytes": 4448,
+      "frames": 14,
+      "loop": false,
+      "propertyRecords": 124,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_039",
+          "sourcePath": "extracted/pl00/043-pl00_039.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/fa743b019b8c616730cc27fc90912884ebf818d836001214102e04b3b0102cef.bytes",
+      "sha256": "fa743b019b8c616730cc27fc90912884ebf818d836001214102e04b3b0102cef",
+      "bytes": 7296,
+      "frames": 49,
+      "loop": false,
+      "propertyRecords": 126,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_03a",
+          "sourcePath": "extracted/pl00/044-pl00_03a.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/49093356b01e496d59d1028cf5b6a1e2dc1fcaf9c6be5ef34f85a40f25739d6c.bytes",
+      "sha256": "49093356b01e496d59d1028cf5b6a1e2dc1fcaf9c6be5ef34f85a40f25739d6c",
+      "bytes": 8288,
+      "frames": 62,
+      "loop": false,
+      "propertyRecords": 130,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_03b",
+          "sourcePath": "extracted/pl00/045-pl00_03b.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/3df04e1c1deb2a608523ce559ac8dbbeabecc4cd41661e387a7e939c4752c822.bytes",
+      "sha256": "3df04e1c1deb2a608523ce559ac8dbbeabecc4cd41661e387a7e939c4752c822",
+      "bytes": 4864,
+      "frames": 17,
+      "loop": false,
+      "propertyRecords": 122,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_045",
+          "sourcePath": "extracted/pl00/046-pl00_045.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2936db8a9385d90ae4be7da5b3ef2612fe78a7eb3c2837b795aa50b9a2ee5f48.bytes",
+      "sha256": "2936db8a9385d90ae4be7da5b3ef2612fe78a7eb3c2837b795aa50b9a2ee5f48",
+      "bytes": 5120,
+      "frames": 17,
+      "loop": false,
+      "propertyRecords": 122,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_046",
+          "sourcePath": "extracted/pl00/047-pl00_046.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/7d4f909b9306c994289b8c99c527197ce1663745de8fe1f3db997717222c2c81.bytes",
+      "sha256": "7d4f909b9306c994289b8c99c527197ce1663745de8fe1f3db997717222c2c81",
+      "bytes": 4896,
+      "frames": 17,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_047",
+          "sourcePath": "extracted/pl00/048-pl00_047.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/4f7dce6a76ca7917ff86bb55dfc4c3f84b98d0c49679e5c4773eef3fdbee7296.bytes",
+      "sha256": "4f7dce6a76ca7917ff86bb55dfc4c3f84b98d0c49679e5c4773eef3fdbee7296",
+      "bytes": 4736,
+      "frames": 20,
+      "loop": false,
+      "propertyRecords": 125,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_048",
+          "sourcePath": "extracted/pl00/049-pl00_048.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/4e04305a8dc04b835b2c460bb52c2af48de391351cf9ad99ad089c77c6c66454.bytes",
+      "sha256": "4e04305a8dc04b835b2c460bb52c2af48de391351cf9ad99ad089c77c6c66454",
+      "bytes": 7232,
+      "frames": 59,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_04e",
+          "sourcePath": "extracted/pl00/050-pl00_04e.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/e21181618031b0851a9e1ba1e42b5592474acc643460db1ead265cbc6849ac1c.bytes",
+      "sha256": "e21181618031b0851a9e1ba1e42b5592474acc643460db1ead265cbc6849ac1c",
+      "bytes": 5152,
+      "frames": 21,
+      "loop": false,
+      "propertyRecords": 125,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_04f",
+          "sourcePath": "extracted/pl00/051-pl00_04f.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/979a6fb72b55542f49f05ef3b7c196ee235b1f2305a980c3f70b5d8e23bd07a4.bytes",
+      "sha256": "979a6fb72b55542f49f05ef3b7c196ee235b1f2305a980c3f70b5d8e23bd07a4",
+      "bytes": 2816,
+      "frames": 4,
+      "loop": false,
+      "propertyRecords": 127,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_053",
+          "sourcePath": "extracted/pl00/052-pl00_053.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/89ede65469bd51b8a55211ce3687e5f3645eb969bc005481509776c469fdb99e.bytes",
+      "sha256": "89ede65469bd51b8a55211ce3687e5f3645eb969bc005481509776c469fdb99e",
+      "bytes": 3904,
+      "frames": 8,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_05d",
+          "sourcePath": "extracted/pl00/053-pl00_05d.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/faa478c12a27b1406fc9dadf9f129c0ef8683a0c77f70c7edc327cebc8601de0.bytes",
+      "sha256": "faa478c12a27b1406fc9dadf9f129c0ef8683a0c77f70c7edc327cebc8601de0",
+      "bytes": 1856,
+      "frames": 11,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_05e",
+          "sourcePath": "extracted/pl00/054-pl00_05e.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/f0e0371fa61b2d317b5b9a8f8cf6c5e9f89ed896c4fb38dce8e2b2e66e401df7.bytes",
+      "sha256": "f0e0371fa61b2d317b5b9a8f8cf6c5e9f89ed896c4fb38dce8e2b2e66e401df7",
+      "bytes": 5440,
+      "frames": 24,
+      "loop": false,
+      "propertyRecords": 117,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_067",
+          "sourcePath": "extracted/pl00/055-pl00_067.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/5745660bd0cb8d42f5d86404afd7329f2a43bd1af66eba1d0bc8d8afd4315888.bytes",
+      "sha256": "5745660bd0cb8d42f5d86404afd7329f2a43bd1af66eba1d0bc8d8afd4315888",
+      "bytes": 5856,
+      "frames": 19,
+      "loop": false,
+      "propertyRecords": 131,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_070",
+          "sourcePath": "extracted/pl00/056-pl00_070.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/1dec0adfbb6c0cfdf08cdcd14171dcc857ba3544a293f50078b626b5e45d7021.bytes",
+      "sha256": "1dec0adfbb6c0cfdf08cdcd14171dcc857ba3544a293f50078b626b5e45d7021",
+      "bytes": 2848,
+      "frames": 3,
+      "loop": true,
+      "propertyRecords": 115,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_071",
+          "sourcePath": "extracted/pl00/057-pl00_071.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/12af02171d11b4154a932983241e6c6266c49b6c2285ca968cba6bd1896f2132.bytes",
+      "sha256": "12af02171d11b4154a932983241e6c6266c49b6c2285ca968cba6bd1896f2132",
+      "bytes": 5408,
+      "frames": 22,
+      "loop": false,
+      "propertyRecords": 118,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_072",
+          "sourcePath": "extracted/pl00/058-pl00_072.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2ea918b4f16d5774d71be94df7c650d25d1bc7a9cddae9434ebf80fabc70c89f.bytes",
+      "sha256": "2ea918b4f16d5774d71be94df7c650d25d1bc7a9cddae9434ebf80fabc70c89f",
+      "bytes": 5696,
+      "frames": 23,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_076",
+          "sourcePath": "extracted/pl00/059-pl00_076.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/6371b0931ca4fb48eb1fff74e3418c761592975f36195da5062da49bfc131d14.bytes",
+      "sha256": "6371b0931ca4fb48eb1fff74e3418c761592975f36195da5062da49bfc131d14",
+      "bytes": 3488,
+      "frames": 10,
+      "loop": false,
+      "propertyRecords": 119,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_077",
+          "sourcePath": "extracted/pl00/060-pl00_077.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/eca673506a1353860b953ed71b6aac93458a8b4468846fc1904bacf81a14654d.bytes",
+      "sha256": "eca673506a1353860b953ed71b6aac93458a8b4468846fc1904bacf81a14654d",
+      "bytes": 2720,
+      "frames": 13,
+      "loop": true,
+      "propertyRecords": 119,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_078",
+          "sourcePath": "extracted/pl00/061-pl00_078.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/9211b4fbf09b75d55768c8ac0daaa80341a60ecbe3b2f45b6fbe97df8a8dc6b1.bytes",
+      "sha256": "9211b4fbf09b75d55768c8ac0daaa80341a60ecbe3b2f45b6fbe97df8a8dc6b1",
+      "bytes": 4160,
+      "frames": 20,
+      "loop": false,
+      "propertyRecords": 114,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_084",
+          "sourcePath": "extracted/pl00/062-pl00_084.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/32cde788170c9264672a04ab8e58eada1b97f95ccdbe7c011073b28b31a0b769.bytes",
+      "sha256": "32cde788170c9264672a04ab8e58eada1b97f95ccdbe7c011073b28b31a0b769",
+      "bytes": 4096,
+      "frames": 20,
+      "loop": false,
+      "propertyRecords": 114,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_085",
+          "sourcePath": "extracted/pl00/063-pl00_085.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/990fd35620a48f736a7d465c96b6ebc7dda6c7d0bdbf17471e448533d835de78.bytes",
+      "sha256": "990fd35620a48f736a7d465c96b6ebc7dda6c7d0bdbf17471e448533d835de78",
+      "bytes": 3712,
+      "frames": 10,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_086",
+          "sourcePath": "extracted/pl00/064-pl00_086.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/055bbb70ede20040244e79e6e03c536b8b982044c16c42914ae94ccf7bf969f4.bytes",
+      "sha256": "055bbb70ede20040244e79e6e03c536b8b982044c16c42914ae94ccf7bf969f4",
+      "bytes": 12320,
+      "frames": 101,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_08b",
+          "sourcePath": "extracted/pl00/065-pl00_08b.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/f7d2765dbbe0fc19d16bd8b7098931a71406491ed60d58717911cc2689fa9e3b.bytes",
+      "sha256": "f7d2765dbbe0fc19d16bd8b7098931a71406491ed60d58717911cc2689fa9e3b",
+      "bytes": 13280,
+      "frames": 121,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_08d",
+          "sourcePath": "extracted/pl00/066-pl00_08d.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/312928c2c7772bd56a6fe9411e35d8bff4c494f664b6860647687ccd41ef87fa.bytes",
+      "sha256": "312928c2c7772bd56a6fe9411e35d8bff4c494f664b6860647687ccd41ef87fa",
+      "bytes": 6944,
+      "frames": 39,
+      "loop": false,
+      "propertyRecords": 118,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_090",
+          "sourcePath": "extracted/pl00/067-pl00_090.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/9a03559227b206945d8cca65d47629e45daf7acad3d973e2b5a4dfdf82bb5b88.bytes",
+      "sha256": "9a03559227b206945d8cca65d47629e45daf7acad3d973e2b5a4dfdf82bb5b88",
+      "bytes": 4480,
+      "frames": 21,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_092",
+          "sourcePath": "extracted/pl00/068-pl00_092.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/bd5e062475d6b587b429086b31e92a3ead46ab88d7d1e6b961e193ee74426c10.bytes",
+      "sha256": "bd5e062475d6b587b429086b31e92a3ead46ab88d7d1e6b961e193ee74426c10",
+      "bytes": 4896,
+      "frames": 21,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_093",
+          "sourcePath": "extracted/pl00/069-pl00_093.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/87b8d10ab0364fbcda48df55163a2db7b5cb0ebb138bd9e70cf43756b8315c4f.bytes",
+      "sha256": "87b8d10ab0364fbcda48df55163a2db7b5cb0ebb138bd9e70cf43756b8315c4f",
+      "bytes": 3104,
+      "frames": 8,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_094",
+          "sourcePath": "extracted/pl00/070-pl00_094.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/8d0510175a80d22e408417bc5572bf0e920bb0c08a28901cf2f0d0cd1e976e7c.bytes",
+      "sha256": "8d0510175a80d22e408417bc5572bf0e920bb0c08a28901cf2f0d0cd1e976e7c",
+      "bytes": 16576,
+      "frames": 121,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_095",
+          "sourcePath": "extracted/pl00/071-pl00_095.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/4863f62513b31a0762b699173e88ec648b82bc8250d6052889e53fdb25983896.bytes",
+      "sha256": "4863f62513b31a0762b699173e88ec648b82bc8250d6052889e53fdb25983896",
+      "bytes": 9760,
+      "frames": 76,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_096",
+          "sourcePath": "extracted/pl00/072-pl00_096.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/bddfdfa7c14f1b0ddf3a1909562c6ab99a19e4a9f7e8ce26015a8dbc59d63557.bytes",
+      "sha256": "bddfdfa7c14f1b0ddf3a1909562c6ab99a19e4a9f7e8ce26015a8dbc59d63557",
+      "bytes": 6944,
+      "frames": 39,
+      "loop": false,
+      "propertyRecords": 128,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_097",
+          "sourcePath": "extracted/pl00/073-pl00_097.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/3fb57f9b301f655f12350d0489eb5e61843fb40a5089cca9b98c6b0fef522bae.bytes",
+      "sha256": "3fb57f9b301f655f12350d0489eb5e61843fb40a5089cca9b98c6b0fef522bae",
+      "bytes": 7744,
+      "frames": 49,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_098",
+          "sourcePath": "extracted/pl00/074-pl00_098.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/25b56a5379f2312806203c3b570aaebb65c70ea6c1a83c569e06b966f4354a6c.bytes",
+      "sha256": "25b56a5379f2312806203c3b570aaebb65c70ea6c1a83c569e06b966f4354a6c",
+      "bytes": 6400,
+      "frames": 31,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_0a1",
+          "sourcePath": "extracted/pl00/075-pl00_0a1.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/0eb0ec217cbf83df73470074e0947afab22c25fad6aba7a48998721760097425.bytes",
+      "sha256": "0eb0ec217cbf83df73470074e0947afab22c25fad6aba7a48998721760097425",
+      "bytes": 5280,
+      "frames": 22,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_0a2",
+          "sourcePath": "extracted/pl00/076-pl00_0a2.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2e8b449c43b5fef4cd9ceb9aed464d72d2cd35418eef9d351eea3f13b2b66800.bytes",
+      "sha256": "2e8b449c43b5fef4cd9ceb9aed464d72d2cd35418eef9d351eea3f13b2b66800",
+      "bytes": 4640,
+      "frames": 31,
+      "loop": true,
+      "propertyRecords": 121,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_0a3",
+          "sourcePath": "extracted/pl00/077-pl00_0a3.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/bcbd91b5ab1e9910fd547e725e65deee3bc2ff4fc0a09f5d9faa4c6edaebc7e0.bytes",
+      "sha256": "bcbd91b5ab1e9910fd547e725e65deee3bc2ff4fc0a09f5d9faa4c6edaebc7e0",
+      "bytes": 7008,
+      "frames": 38,
+      "loop": true,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_0a4",
+          "sourcePath": "extracted/pl00/078-pl00_0a4.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/19feaad69c08031bfba753ccd9fefef42253a047577d207bab636551bea4580e.bytes",
+      "sha256": "19feaad69c08031bfba753ccd9fefef42253a047577d207bab636551bea4580e",
+      "bytes": 4896,
+      "frames": 21,
+      "loop": true,
+      "propertyRecords": 121,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_0a5",
+          "sourcePath": "extracted/pl00/079-pl00_0a5.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/640888e25926436c2c24828d825d1712c6d3a0863ab85dc6620626e7a4e93cc9.bytes",
+      "sha256": "640888e25926436c2c24828d825d1712c6d3a0863ab85dc6620626e7a4e93cc9",
+      "bytes": 6912,
+      "frames": 37,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_0a6",
+          "sourcePath": "extracted/pl00/080-pl00_0a6.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/e1224891294603d67e2928a654419f61ba6555452d4d737dc96904273d299d4d.bytes",
+      "sha256": "e1224891294603d67e2928a654419f61ba6555452d4d737dc96904273d299d4d",
+      "bytes": 6624,
+      "frames": 37,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_0a7",
+          "sourcePath": "extracted/pl00/081-pl00_0a7.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2962b9d551366c9b35eb28c93e3e2ab60f2bc695c56fd95f72615a88023de0ed.bytes",
+      "sha256": "2962b9d551366c9b35eb28c93e3e2ab60f2bc695c56fd95f72615a88023de0ed",
+      "bytes": 4736,
+      "frames": 19,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_0a8",
+          "sourcePath": "extracted/pl00/082-pl00_0a8.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/be6d65f54dd274b2ca4917709f5a8ba4e31795601d3081ef8aa768828819e821.bytes",
+      "sha256": "be6d65f54dd274b2ca4917709f5a8ba4e31795601d3081ef8aa768828819e821",
+      "bytes": 4864,
+      "frames": 19,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_0a9",
+          "sourcePath": "extracted/pl00/083-pl00_0a9.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/444de4491c5f17e44ae0c946fd1541668b767f7ac9062c7d2d89dbc7bc3aa498.bytes",
+      "sha256": "444de4491c5f17e44ae0c946fd1541668b767f7ac9062c7d2d89dbc7bc3aa498",
+      "bytes": 3936,
+      "frames": 5,
+      "loop": false,
+      "propertyRecords": 133,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_128",
+          "sourcePath": "extracted/pl00/084-pl00_128.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/fb1e6a1e343e0621e82ac63152da3b9cadccdfbda62c55a49884d4008986212f.bytes",
+      "sha256": "fb1e6a1e343e0621e82ac63152da3b9cadccdfbda62c55a49884d4008986212f",
+      "bytes": 5344,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 133,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_129",
+          "sourcePath": "extracted/pl00/085-pl00_129.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/1a43bea82fdde023be3ad5a49c127b760e463a6f8c5f911e6f26d880dcd27b55.bytes",
+      "sha256": "1a43bea82fdde023be3ad5a49c127b760e463a6f8c5f911e6f26d880dcd27b55",
+      "bytes": 5440,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 137,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_12a",
+          "sourcePath": "extracted/pl00/086-pl00_12a.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/9f12a4b0151f40503094285df74626055b243e109e24bb86ddaf79a1f8d0308d.bytes",
+      "sha256": "9f12a4b0151f40503094285df74626055b243e109e24bb86ddaf79a1f8d0308d",
+      "bytes": 3520,
+      "frames": 11,
+      "loop": false,
+      "propertyRecords": 115,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_12b",
+          "sourcePath": "extracted/pl00/087-pl00_12b.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/697b7f2aee90dd1466a3209b961fd9cd6e5cddbfe319fc51fb7bce2d88602310.bytes",
+      "sha256": "697b7f2aee90dd1466a3209b961fd9cd6e5cddbfe319fc51fb7bce2d88602310",
+      "bytes": 5152,
+      "frames": 48,
+      "loop": true,
+      "propertyRecords": 116,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_12c",
+          "sourcePath": "extracted/pl00/088-pl00_12c.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/429bbe3b621a22a221b84a125e66b111da1787a2126054830d60207a4fe5c200.bytes",
+      "sha256": "429bbe3b621a22a221b84a125e66b111da1787a2126054830d60207a4fe5c200",
+      "bytes": 1120,
+      "frames": 11,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_12e",
+          "sourcePath": "extracted/pl00/089-pl00_12e.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/703aceae8fc8f97b54dba8d5b943357a0336191737c11b657240a2f2988bf8c0.bytes",
+      "sha256": "703aceae8fc8f97b54dba8d5b943357a0336191737c11b657240a2f2988bf8c0",
+      "bytes": 4256,
+      "frames": 19,
+      "loop": false,
+      "propertyRecords": 121,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_12f",
+          "sourcePath": "extracted/pl00/090-pl00_12f.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/99c298f158ebc4a27ecf41b0fe0e17d0ab3c277760bb46a2641f377e0e1cfa30.bytes",
+      "sha256": "99c298f158ebc4a27ecf41b0fe0e17d0ab3c277760bb46a2641f377e0e1cfa30",
+      "bytes": 7808,
+      "frames": 46,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_130",
+          "sourcePath": "extracted/pl00/091-pl00_130.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/a53bd1fe03793084e2c190a553032c6e250ca1fdecb38198c72b4323f263bd06.bytes",
+      "sha256": "a53bd1fe03793084e2c190a553032c6e250ca1fdecb38198c72b4323f263bd06",
+      "bytes": 6272,
+      "frames": 31,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_131",
+          "sourcePath": "extracted/pl00/092-pl00_131.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/4774b216218f4744ba06574af7789d81aaaad56e3c4b69b5499a257717636f6c.bytes",
+      "sha256": "4774b216218f4744ba06574af7789d81aaaad56e3c4b69b5499a257717636f6c",
+      "bytes": 7168,
+      "frames": 40,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_132",
+          "sourcePath": "extracted/pl00/093-pl00_132.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/64771f4de13b22a4f82f93ed286a32007f9504de4d0248b2a2dea5532ce20264.bytes",
+      "sha256": "64771f4de13b22a4f82f93ed286a32007f9504de4d0248b2a2dea5532ce20264",
+      "bytes": 8416,
+      "frames": 46,
+      "loop": true,
+      "propertyRecords": 121,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_133",
+          "sourcePath": "extracted/pl00/094-pl00_133.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/1140b424c31056f77a8074909b8d4d935e3b1733b39f4e52c28baf8926e483df.bytes",
+      "sha256": "1140b424c31056f77a8074909b8d4d935e3b1733b39f4e52c28baf8926e483df",
+      "bytes": 5376,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_134",
+          "sourcePath": "extracted/pl00/095-pl00_134.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/e129c915286a55b8e7fd6169a506d8dade5c33459c003d65f8547bc180b311ab.bytes",
+      "sha256": "e129c915286a55b8e7fd6169a506d8dade5c33459c003d65f8547bc180b311ab",
+      "bytes": 5472,
+      "frames": 25,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_135",
+          "sourcePath": "extracted/pl00/096-pl00_135.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/a55798240f409fe473dbcaa5232a215f7ab5ab17a3011def90fb9b98b5f45d57.bytes",
+      "sha256": "a55798240f409fe473dbcaa5232a215f7ab5ab17a3011def90fb9b98b5f45d57",
+      "bytes": 3584,
+      "frames": 11,
+      "loop": false,
+      "propertyRecords": 127,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_150",
+          "sourcePath": "extracted/pl00/097-pl00_150.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/98cc1808b28036a6c08ba33795f401a4f68af96f80856ad8f4dc39490c74aaa9.bytes",
+      "sha256": "98cc1808b28036a6c08ba33795f401a4f68af96f80856ad8f4dc39490c74aaa9",
+      "bytes": 5888,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 133,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_151",
+          "sourcePath": "extracted/pl00/098-pl00_151.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/5daa179decb92d44481385589104e6468041721c443bbe9624d9dbcfcd1e403f.bytes",
+      "sha256": "5daa179decb92d44481385589104e6468041721c443bbe9624d9dbcfcd1e403f",
+      "bytes": 8160,
+      "frames": 38,
+      "loop": false,
+      "propertyRecords": 127,
+      "aliases": [
+        {
+          "archive": "pl",
+          "package": "pl00",
+          "name": "pl00_152",
+          "sourcePath": "extracted/pl00/099-pl00_152.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/08efc96b9fdeea6da245fca22a85e108292e8cffaea3920e83dafd4ba0560abe.bytes",
+      "sha256": "08efc96b9fdeea6da245fca22a85e108292e8cffaea3920e83dafd4ba0560abe",
+      "bytes": 6016,
+      "frames": 35,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c0",
+          "sourcePath": "extracted/wp02/018-pl00_0c0.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/5c81aaaee7a44bbeab2803ffd5665b33f459d91469e5988508e86d824ee293e3.bytes",
+      "sha256": "5c81aaaee7a44bbeab2803ffd5665b33f459d91469e5988508e86d824ee293e3",
+      "bytes": 6048,
+      "frames": 35,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c1",
+          "sourcePath": "extracted/wp02/019-pl00_0c1.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_1c1",
+          "sourcePath": "extracted/wp02/035-pl00_1c1.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/ce0888e77e5134372bbbcf93ec9c77e6782434d888078354c1580704e75f050c.bytes",
+      "sha256": "ce0888e77e5134372bbbcf93ec9c77e6782434d888078354c1580704e75f050c",
+      "bytes": 6016,
+      "frames": 35,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c2",
+          "sourcePath": "extracted/wp02/020-pl00_0c2.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_1c2",
+          "sourcePath": "extracted/wp02/036-pl00_1c2.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/7a4f47adc86379cfd872887b0de5e2949919bc392c2fe451c4bc61a1d528a3eb.bytes",
+      "sha256": "7a4f47adc86379cfd872887b0de5e2949919bc392c2fe451c4bc61a1d528a3eb",
+      "bytes": 5216,
+      "frames": 35,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c3",
+          "sourcePath": "extracted/wp02/021-pl00_0c3.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_1c3",
+          "sourcePath": "extracted/wp02/037-pl00_1c3.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/90451317cf27fd802f72962c8280f038606ce7b07d728bed91569e39987e18c2.bytes",
+      "sha256": "90451317cf27fd802f72962c8280f038606ce7b07d728bed91569e39987e18c2",
+      "bytes": 6080,
+      "frames": 35,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c4",
+          "sourcePath": "extracted/wp02/022-pl00_0c4.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_1c4",
+          "sourcePath": "extracted/wp02/038-pl00_1c4.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/62533c3b127be38cc5690483dff2dc6acb217fc6adc1d12770d202cbb92f2712.bytes",
+      "sha256": "62533c3b127be38cc5690483dff2dc6acb217fc6adc1d12770d202cbb92f2712",
+      "bytes": 992,
+      "frames": 10,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c5",
+          "sourcePath": "extracted/wp02/023-pl00_0c5.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_540",
+          "sourcePath": "extracted/wp2a/018-pl00_540.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_540",
+          "sourcePath": "extracted/wp2b/018-pl00_540.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_540",
+          "sourcePath": "extracted/wp2c/018-pl00_540.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_540",
+          "sourcePath": "extracted/wp2d/018-pl00_540.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_540",
+          "sourcePath": "extracted/wp2e/018-pl00_540.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3a",
+          "name": "pl00_550",
+          "sourcePath": "extracted/wp3a/004-pl00_550.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3b",
+          "name": "pl00_550",
+          "sourcePath": "extracted/wp3b/004-pl00_550.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3c",
+          "name": "pl00_550",
+          "sourcePath": "extracted/wp3c/004-pl00_550.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3d",
+          "name": "pl00_550",
+          "sourcePath": "extracted/wp3d/004-pl00_550.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3e",
+          "name": "pl00_550",
+          "sourcePath": "extracted/wp3e/004-pl00_550.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/3a05b0c5c32a06e8bc68471de3cf1e108232eb2439c2d6d824df73d259aa0381.bytes",
+      "sha256": "3a05b0c5c32a06e8bc68471de3cf1e108232eb2439c2d6d824df73d259aa0381",
+      "bytes": 2816,
+      "frames": 4,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c6",
+          "sourcePath": "extracted/wp02/024-pl00_0c6.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_541",
+          "sourcePath": "extracted/wp2a/019-pl00_541.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_541",
+          "sourcePath": "extracted/wp2b/019-pl00_541.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_541",
+          "sourcePath": "extracted/wp2c/019-pl00_541.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_541",
+          "sourcePath": "extracted/wp2d/019-pl00_541.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_541",
+          "sourcePath": "extracted/wp2e/019-pl00_541.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/69221fbac70c0fc87793b685d775816102398bc192460972c94430a9a8b710c0.bytes",
+      "sha256": "69221fbac70c0fc87793b685d775816102398bc192460972c94430a9a8b710c0",
+      "bytes": 4416,
+      "frames": 41,
+      "loop": false,
+      "propertyRecords": 117,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c7",
+          "sourcePath": "extracted/wp02/025-pl00_0c7.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2a324a1dda9e3a415b06c6ca7f46d9462eb4f8ac25dc49e6add739bdf34d0a9d.bytes",
+      "sha256": "2a324a1dda9e3a415b06c6ca7f46d9462eb4f8ac25dc49e6add739bdf34d0a9d",
+      "bytes": 5504,
+      "frames": 29,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c8",
+          "sourcePath": "extracted/wp02/026-pl00_0c8.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/1ceecbdd222c65882f50b2ca51d341a78bf26e302e3c0b7774b41f04c490a8d8.bytes",
+      "sha256": "1ceecbdd222c65882f50b2ca51d341a78bf26e302e3c0b7774b41f04c490a8d8",
+      "bytes": 7392,
+      "frames": 29,
+      "loop": false,
+      "propertyRecords": 135,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0c9",
+          "sourcePath": "extracted/wp02/027-pl00_0c9.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0cf",
+          "sourcePath": "extracted/wp02/033-pl00_0cf.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/62b661093d8d83f7d6dac06f63509f34abadf4fb09684a5821c18dbb95d55713.bytes",
+      "sha256": "62b661093d8d83f7d6dac06f63509f34abadf4fb09684a5821c18dbb95d55713",
+      "bytes": 3168,
+      "frames": 9,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0ca",
+          "sourcePath": "extracted/wp02/028-pl00_0ca.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/edb5d3149e0df953236a2fa2fbfd2e45e2a81519f84c7ba56e0f4dd1ebe79e6b.bytes",
+      "sha256": "edb5d3149e0df953236a2fa2fbfd2e45e2a81519f84c7ba56e0f4dd1ebe79e6b",
+      "bytes": 5216,
+      "frames": 25,
+      "loop": true,
+      "propertyRecords": 122,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0cb",
+          "sourcePath": "extracted/wp02/029-pl00_0cb.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/f3fad8604fba70f824e268a4db0e00b36f6276eaf1755fc0e9e31543513bbcb8.bytes",
+      "sha256": "f3fad8604fba70f824e268a4db0e00b36f6276eaf1755fc0e9e31543513bbcb8",
+      "bytes": 6752,
+      "frames": 31,
+      "loop": false,
+      "propertyRecords": 124,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0cc",
+          "sourcePath": "extracted/wp02/030-pl00_0cc.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/f7c084ddd17e839de874d0e1e480ad225758126d289b260f1ec0bfe845959ce3.bytes",
+      "sha256": "f7c084ddd17e839de874d0e1e480ad225758126d289b260f1ec0bfe845959ce3",
+      "bytes": 3968,
+      "frames": 7,
+      "loop": false,
+      "propertyRecords": 131,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0cd",
+          "sourcePath": "extracted/wp02/031-pl00_0cd.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/82cc62501dd29aa0edfe4fd159801b0fcc44304af4698dc003b6cd03d19ca08b.bytes",
+      "sha256": "82cc62501dd29aa0edfe4fd159801b0fcc44304af4698dc003b6cd03d19ca08b",
+      "bytes": 7936,
+      "frames": 35,
+      "loop": false,
+      "propertyRecords": 136,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_0ce",
+          "sourcePath": "extracted/wp02/032-pl00_0ce.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/b201334c9b28700fd6c1b2c9d159e9f10826a1b748949d6af804a93f0f756679.bytes",
+      "sha256": "b201334c9b28700fd6c1b2c9d159e9f10826a1b748949d6af804a93f0f756679",
+      "bytes": 5824,
+      "frames": 35,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_1c0",
+          "sourcePath": "extracted/wp02/034-pl00_1c0.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2e377aed3f949df611eb36a29b0f9fe5a54da15f83e8675f2de39fc3ff7c1b35.bytes",
+      "sha256": "2e377aed3f949df611eb36a29b0f9fe5a54da15f83e8675f2de39fc3ff7c1b35",
+      "bytes": 1152,
+      "frames": 11,
+      "loop": true,
+      "propertyRecords": 117,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_1c5",
+          "sourcePath": "extracted/wp02/039-pl00_1c5.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/bd150c3d840242a80c15fccd083eb16a3e68294680fdac2ecd442817c282a6f7.bytes",
+      "sha256": "bd150c3d840242a80c15fccd083eb16a3e68294680fdac2ecd442817c282a6f7",
+      "bytes": 64,
+      "frames": 31,
+      "loop": false,
+      "propertyRecords": 4,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_1c6",
+          "sourcePath": "extracted/wp02/040-pl00_1c6.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp02",
+          "name": "pl00_1c7",
+          "sourcePath": "extracted/wp02/041-pl00_1c7.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/b0c8f53c97a041ea13e7202fae172d946cb5183409038efc0f9808e39261afb6.bytes",
+      "sha256": "b0c8f53c97a041ea13e7202fae172d946cb5183409038efc0f9808e39261afb6",
+      "bytes": 4480,
+      "frames": 17,
+      "loop": true,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp06",
+          "name": "pl00_300",
+          "sourcePath": "extracted/wp06/002-pl00_300.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/ec7f5ee2a0f5d449d15486008cbbc01fba98b24cfa3b9773ea410637214646a6.bytes",
+      "sha256": "ec7f5ee2a0f5d449d15486008cbbc01fba98b24cfa3b9773ea410637214646a6",
+      "bytes": 4640,
+      "frames": 116,
+      "loop": false,
+      "propertyRecords": 116,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp14",
+          "name": "pl00_302",
+          "sourcePath": "extracted/wp14/041-pl00_302.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp18",
+          "name": "pl00_302",
+          "sourcePath": "extracted/wp18/041-pl00_302.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp40",
+          "name": "pl00_302",
+          "sourcePath": "extracted/wp40/041-pl00_302.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp50",
+          "name": "pl00_302",
+          "sourcePath": "extracted/wp50/041-pl00_302.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/143a048257e11eba22d0747ee4c793e32c58c0a6ccb0146f52b2176478ebdca2.bytes",
+      "sha256": "143a048257e11eba22d0747ee4c793e32c58c0a6ccb0146f52b2176478ebdca2",
+      "bytes": 5984,
+      "frames": 18,
+      "loop": false,
+      "propertyRecords": 136,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp20",
+          "name": "pl00_500",
+          "sourcePath": "extracted/wp20/018-pl00_500.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp21",
+          "name": "pl00_500",
+          "sourcePath": "extracted/wp21/018-pl00_500.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp22",
+          "name": "pl00_500",
+          "sourcePath": "extracted/wp22/018-pl00_500.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp23",
+          "name": "pl00_500",
+          "sourcePath": "extracted/wp23/018-pl00_500.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp24",
+          "name": "pl00_500",
+          "sourcePath": "extracted/wp24/018-pl00_500.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/0d1a158ddb6c13f8bedd44eb43d994764128d275bb5f8270c32dcb41809d722d.bytes",
+      "sha256": "0d1a158ddb6c13f8bedd44eb43d994764128d275bb5f8270c32dcb41809d722d",
+      "bytes": 7520,
+      "frames": 40,
+      "loop": false,
+      "propertyRecords": 131,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp20",
+          "name": "pl00_501",
+          "sourcePath": "extracted/wp20/019-pl00_501.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp21",
+          "name": "pl00_501",
+          "sourcePath": "extracted/wp21/019-pl00_501.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp22",
+          "name": "pl00_501",
+          "sourcePath": "extracted/wp22/019-pl00_501.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp23",
+          "name": "pl00_501",
+          "sourcePath": "extracted/wp23/019-pl00_501.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp24",
+          "name": "pl00_501",
+          "sourcePath": "extracted/wp24/019-pl00_501.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/a8f408923273d2857ebd5f0bd3e6a86cb320e6a18b3e5518e7bd3cf501b58cfb.bytes",
+      "sha256": "a8f408923273d2857ebd5f0bd3e6a86cb320e6a18b3e5518e7bd3cf501b58cfb",
+      "bytes": 7712,
+      "frames": 40,
+      "loop": false,
+      "propertyRecords": 131,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp20",
+          "name": "pl00_502",
+          "sourcePath": "extracted/wp20/020-pl00_502.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp21",
+          "name": "pl00_502",
+          "sourcePath": "extracted/wp21/020-pl00_502.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp22",
+          "name": "pl00_502",
+          "sourcePath": "extracted/wp22/020-pl00_502.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp23",
+          "name": "pl00_502",
+          "sourcePath": "extracted/wp23/020-pl00_502.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp24",
+          "name": "pl00_502",
+          "sourcePath": "extracted/wp24/020-pl00_502.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/d90d7bf60cda74b1f3cf07e3a08eb76ea581cbeb91745f5073db850fd0d0b3fd.bytes",
+      "sha256": "d90d7bf60cda74b1f3cf07e3a08eb76ea581cbeb91745f5073db850fd0d0b3fd",
+      "bytes": 7424,
+      "frames": 40,
+      "loop": false,
+      "propertyRecords": 131,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp20",
+          "name": "pl00_503",
+          "sourcePath": "extracted/wp20/021-pl00_503.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp21",
+          "name": "pl00_503",
+          "sourcePath": "extracted/wp21/021-pl00_503.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp22",
+          "name": "pl00_503",
+          "sourcePath": "extracted/wp22/021-pl00_503.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp23",
+          "name": "pl00_503",
+          "sourcePath": "extracted/wp23/021-pl00_503.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp24",
+          "name": "pl00_503",
+          "sourcePath": "extracted/wp24/021-pl00_503.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/430667f0ef0dfdad42ec7bf059141d66334e76dab4b687bf5cbdccab32687263.bytes",
+      "sha256": "430667f0ef0dfdad42ec7bf059141d66334e76dab4b687bf5cbdccab32687263",
+      "bytes": 6784,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 128,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp20",
+          "name": "pl00_504",
+          "sourcePath": "extracted/wp20/022-pl00_504.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp21",
+          "name": "pl00_504",
+          "sourcePath": "extracted/wp21/022-pl00_504.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp22",
+          "name": "pl00_504",
+          "sourcePath": "extracted/wp22/022-pl00_504.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp23",
+          "name": "pl00_504",
+          "sourcePath": "extracted/wp23/022-pl00_504.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp24",
+          "name": "pl00_504",
+          "sourcePath": "extracted/wp24/022-pl00_504.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/289ddbd7f97e53a4358c3eb3a8e03455d184fb9555ce36cccababc8763ce96d9.bytes",
+      "sha256": "289ddbd7f97e53a4358c3eb3a8e03455d184fb9555ce36cccababc8763ce96d9",
+      "bytes": 5312,
+      "frames": 21,
+      "loop": false,
+      "propertyRecords": 129,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp20",
+          "name": "pl00_505",
+          "sourcePath": "extracted/wp20/023-pl00_505.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp21",
+          "name": "pl00_505",
+          "sourcePath": "extracted/wp21/023-pl00_505.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp22",
+          "name": "pl00_505",
+          "sourcePath": "extracted/wp22/023-pl00_505.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp23",
+          "name": "pl00_505",
+          "sourcePath": "extracted/wp23/023-pl00_505.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp24",
+          "name": "pl00_505",
+          "sourcePath": "extracted/wp24/023-pl00_505.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/1e86184f9637df114bf15aa80af60cfe3f6edff6827dfeccb4f10b6aaedc15a1.bytes",
+      "sha256": "1e86184f9637df114bf15aa80af60cfe3f6edff6827dfeccb4f10b6aaedc15a1",
+      "bytes": 2880,
+      "frames": 2,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp20",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp20/024-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp21",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp21/024-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp22",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp22/024-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp23",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp23/024-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp24",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp24/024-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp30",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp30/004-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp31",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp31/004-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp32",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp32/004-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp33",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp33/004-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp34",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp34/004-pl00_510.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3f",
+          "name": "pl00_510",
+          "sourcePath": "extracted/wp3f/004-pl00_510.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/e4cb44c2bd687e91563fd4616d27fe62eb266caf74e8c85d65811b4be94c2f82.bytes",
+      "sha256": "e4cb44c2bd687e91563fd4616d27fe62eb266caf74e8c85d65811b4be94c2f82",
+      "bytes": 1088,
+      "frames": 6,
+      "loop": true,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp20",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp20/025-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp21",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp21/025-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp22",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp22/025-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp23",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp23/025-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp24",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp24/025-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp30",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp30/005-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp31",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp31/005-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp32",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp32/005-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp33",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp33/005-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp34",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp34/005-pl00_511.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3f",
+          "name": "pl00_511",
+          "sourcePath": "extracted/wp3f/005-pl00_511.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/c4e26033ec79be1435e7fb379a99f06b5f58cc67cf04743cfc267544fb94eb91.bytes",
+      "sha256": "c4e26033ec79be1435e7fb379a99f06b5f58cc67cf04743cfc267544fb94eb91",
+      "bytes": 9248,
+      "frames": 50,
+      "loop": false,
+      "propertyRecords": 136,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp25",
+          "name": "pl00_520",
+          "sourcePath": "extracted/wp25/018-pl00_520.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp26",
+          "name": "pl00_520",
+          "sourcePath": "extracted/wp26/018-pl00_520.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp27",
+          "name": "pl00_520",
+          "sourcePath": "extracted/wp27/018-pl00_520.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp28",
+          "name": "pl00_520",
+          "sourcePath": "extracted/wp28/018-pl00_520.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp29",
+          "name": "pl00_520",
+          "sourcePath": "extracted/wp29/018-pl00_520.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/4def9a8294632ea6946c1be54eb571136d40290569ba5f6c7b1556bb026b3c9d.bytes",
+      "sha256": "4def9a8294632ea6946c1be54eb571136d40290569ba5f6c7b1556bb026b3c9d",
+      "bytes": 7904,
+      "frames": 49,
+      "loop": false,
+      "propertyRecords": 135,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp25",
+          "name": "pl00_521",
+          "sourcePath": "extracted/wp25/019-pl00_521.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp26",
+          "name": "pl00_521",
+          "sourcePath": "extracted/wp26/019-pl00_521.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp27",
+          "name": "pl00_521",
+          "sourcePath": "extracted/wp27/019-pl00_521.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp28",
+          "name": "pl00_521",
+          "sourcePath": "extracted/wp28/019-pl00_521.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp29",
+          "name": "pl00_521",
+          "sourcePath": "extracted/wp29/019-pl00_521.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/23326aa10470d4811af26b9f33a32545e68174fb0616329371800a27fad6ccab.bytes",
+      "sha256": "23326aa10470d4811af26b9f33a32545e68174fb0616329371800a27fad6ccab",
+      "bytes": 8352,
+      "frames": 50,
+      "loop": false,
+      "propertyRecords": 139,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp25",
+          "name": "pl00_522",
+          "sourcePath": "extracted/wp25/020-pl00_522.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp26",
+          "name": "pl00_522",
+          "sourcePath": "extracted/wp26/020-pl00_522.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp27",
+          "name": "pl00_522",
+          "sourcePath": "extracted/wp27/020-pl00_522.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp28",
+          "name": "pl00_522",
+          "sourcePath": "extracted/wp28/020-pl00_522.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp29",
+          "name": "pl00_522",
+          "sourcePath": "extracted/wp29/020-pl00_522.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/73edbc2ecf58f33a6002d257e7e7ae0b223115ff4bd0898b4074259debc0fa27.bytes",
+      "sha256": "73edbc2ecf58f33a6002d257e7e7ae0b223115ff4bd0898b4074259debc0fa27",
+      "bytes": 8832,
+      "frames": 61,
+      "loop": false,
+      "propertyRecords": 137,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp25",
+          "name": "pl00_523",
+          "sourcePath": "extracted/wp25/021-pl00_523.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp26",
+          "name": "pl00_523",
+          "sourcePath": "extracted/wp26/021-pl00_523.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp27",
+          "name": "pl00_523",
+          "sourcePath": "extracted/wp27/021-pl00_523.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp28",
+          "name": "pl00_523",
+          "sourcePath": "extracted/wp28/021-pl00_523.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp29",
+          "name": "pl00_523",
+          "sourcePath": "extracted/wp29/021-pl00_523.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/d5d77bc2ab3cc3743050aa045c282b83b549f04d50481d7dddaef7fd6036f489.bytes",
+      "sha256": "d5d77bc2ab3cc3743050aa045c282b83b549f04d50481d7dddaef7fd6036f489",
+      "bytes": 3552,
+      "frames": 21,
+      "loop": false,
+      "propertyRecords": 125,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp25",
+          "name": "pl00_524",
+          "sourcePath": "extracted/wp25/022-pl00_524.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp26",
+          "name": "pl00_524",
+          "sourcePath": "extracted/wp26/022-pl00_524.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp27",
+          "name": "pl00_524",
+          "sourcePath": "extracted/wp27/022-pl00_524.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp28",
+          "name": "pl00_524",
+          "sourcePath": "extracted/wp28/022-pl00_524.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp29",
+          "name": "pl00_524",
+          "sourcePath": "extracted/wp29/022-pl00_524.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/3439921262cf8b9775c273dd5e239ee73d60c0b8365e3ab62aab38fe95f36ca3.bytes",
+      "sha256": "3439921262cf8b9775c273dd5e239ee73d60c0b8365e3ab62aab38fe95f36ca3",
+      "bytes": 7104,
+      "frames": 20,
+      "loop": false,
+      "propertyRecords": 161,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp25",
+          "name": "pl00_525",
+          "sourcePath": "extracted/wp25/023-pl00_525.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp26",
+          "name": "pl00_525",
+          "sourcePath": "extracted/wp26/023-pl00_525.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp27",
+          "name": "pl00_525",
+          "sourcePath": "extracted/wp27/023-pl00_525.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp28",
+          "name": "pl00_525",
+          "sourcePath": "extracted/wp28/023-pl00_525.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp29",
+          "name": "pl00_525",
+          "sourcePath": "extracted/wp29/023-pl00_525.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/d21b559bfc6b8dd910ed2c2c85bee5cb9ddc74a03afbbedb0d9e679287892b6c.bytes",
+      "sha256": "d21b559bfc6b8dd910ed2c2c85bee5cb9ddc74a03afbbedb0d9e679287892b6c",
+      "bytes": 1152,
+      "frames": 11,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_542",
+          "sourcePath": "extracted/wp2a/020-pl00_542.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_542",
+          "sourcePath": "extracted/wp2b/020-pl00_542.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_542",
+          "sourcePath": "extracted/wp2c/020-pl00_542.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_542",
+          "sourcePath": "extracted/wp2d/020-pl00_542.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_542",
+          "sourcePath": "extracted/wp2e/020-pl00_542.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3a",
+          "name": "pl00_552",
+          "sourcePath": "extracted/wp3a/006-pl00_552.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3b",
+          "name": "pl00_552",
+          "sourcePath": "extracted/wp3b/006-pl00_552.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3c",
+          "name": "pl00_552",
+          "sourcePath": "extracted/wp3c/006-pl00_552.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3d",
+          "name": "pl00_552",
+          "sourcePath": "extracted/wp3d/006-pl00_552.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3e",
+          "name": "pl00_552",
+          "sourcePath": "extracted/wp3e/006-pl00_552.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/e4de66a9ca4efa951a78fa95860eb05aeae1569c2e52c762f268b3a37bc4f190.bytes",
+      "sha256": "e4de66a9ca4efa951a78fa95860eb05aeae1569c2e52c762f268b3a37bc4f190",
+      "bytes": 2752,
+      "frames": 4,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_543",
+          "sourcePath": "extracted/wp2a/021-pl00_543.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_543",
+          "sourcePath": "extracted/wp2b/021-pl00_543.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_543",
+          "sourcePath": "extracted/wp2c/021-pl00_543.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_543",
+          "sourcePath": "extracted/wp2d/021-pl00_543.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_543",
+          "sourcePath": "extracted/wp2e/021-pl00_543.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/fc908afcb503f6326481da8b3cf4330148e0357e418ecc03e65e3bf29a0f0906.bytes",
+      "sha256": "fc908afcb503f6326481da8b3cf4330148e0357e418ecc03e65e3bf29a0f0906",
+      "bytes": 5760,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_544",
+          "sourcePath": "extracted/wp2a/022-pl00_544.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_544",
+          "sourcePath": "extracted/wp2b/022-pl00_544.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_544",
+          "sourcePath": "extracted/wp2c/022-pl00_544.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_544",
+          "sourcePath": "extracted/wp2d/022-pl00_544.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_544",
+          "sourcePath": "extracted/wp2e/022-pl00_544.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/07be7c3552c65c239f6769c6f1ccfb637f2163472438f2df962f976a079a7077.bytes",
+      "sha256": "07be7c3552c65c239f6769c6f1ccfb637f2163472438f2df962f976a079a7077",
+      "bytes": 5824,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_545",
+          "sourcePath": "extracted/wp2a/023-pl00_545.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_545",
+          "sourcePath": "extracted/wp2b/023-pl00_545.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_545",
+          "sourcePath": "extracted/wp2c/023-pl00_545.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_545",
+          "sourcePath": "extracted/wp2d/023-pl00_545.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_545",
+          "sourcePath": "extracted/wp2e/023-pl00_545.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/5743666c2cd8cd0c9c5246374e936f964e6cc7ce3b570d0024a8714eb31b4a59.bytes",
+      "sha256": "5743666c2cd8cd0c9c5246374e936f964e6cc7ce3b570d0024a8714eb31b4a59",
+      "bytes": 6208,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_546",
+          "sourcePath": "extracted/wp2a/024-pl00_546.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_546",
+          "sourcePath": "extracted/wp2b/024-pl00_546.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_546",
+          "sourcePath": "extracted/wp2c/024-pl00_546.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_546",
+          "sourcePath": "extracted/wp2d/024-pl00_546.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_546",
+          "sourcePath": "extracted/wp2e/024-pl00_546.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/37110edf3ee7a97dd33da9e87db5f745c5a3e0dbf4bd59fef90320bf515cb076.bytes",
+      "sha256": "37110edf3ee7a97dd33da9e87db5f745c5a3e0dbf4bd59fef90320bf515cb076",
+      "bytes": 5600,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_547",
+          "sourcePath": "extracted/wp2a/025-pl00_547.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_547",
+          "sourcePath": "extracted/wp2b/025-pl00_547.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_547",
+          "sourcePath": "extracted/wp2c/025-pl00_547.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_547",
+          "sourcePath": "extracted/wp2d/025-pl00_547.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_547",
+          "sourcePath": "extracted/wp2e/025-pl00_547.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/e2381e45d1e75b494bbcd52afe2ccc700b69ecde07d8e8a036e5c1ad0a3a6d16.bytes",
+      "sha256": "e2381e45d1e75b494bbcd52afe2ccc700b69ecde07d8e8a036e5c1ad0a3a6d16",
+      "bytes": 5088,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_548",
+          "sourcePath": "extracted/wp2a/026-pl00_548.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_548",
+          "sourcePath": "extracted/wp2b/026-pl00_548.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_548",
+          "sourcePath": "extracted/wp2c/026-pl00_548.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_548",
+          "sourcePath": "extracted/wp2d/026-pl00_548.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_548",
+          "sourcePath": "extracted/wp2e/026-pl00_548.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/1c9b64b4d0f4bdaec015935b3a302e437aaa14d9533e503ec2cf845e1a41afd2.bytes",
+      "sha256": "1c9b64b4d0f4bdaec015935b3a302e437aaa14d9533e503ec2cf845e1a41afd2",
+      "bytes": 5152,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_549",
+          "sourcePath": "extracted/wp2a/027-pl00_549.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_549",
+          "sourcePath": "extracted/wp2b/027-pl00_549.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_549",
+          "sourcePath": "extracted/wp2c/027-pl00_549.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_549",
+          "sourcePath": "extracted/wp2d/027-pl00_549.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_549",
+          "sourcePath": "extracted/wp2e/027-pl00_549.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/4bcbb1ffe97bc8b1e039cadb8802e236b778b171bcb1f384328d1a96fb6daa31.bytes",
+      "sha256": "4bcbb1ffe97bc8b1e039cadb8802e236b778b171bcb1f384328d1a96fb6daa31",
+      "bytes": 5728,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_54a",
+          "sourcePath": "extracted/wp2a/028-pl00_54a.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_54a",
+          "sourcePath": "extracted/wp2b/028-pl00_54a.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_54a",
+          "sourcePath": "extracted/wp2c/028-pl00_54a.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_54a",
+          "sourcePath": "extracted/wp2d/028-pl00_54a.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_54a",
+          "sourcePath": "extracted/wp2e/028-pl00_54a.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/91cdaf7033e59ac49a1cc13fe275548bc0f56843685cd500d8032a22d1ab8cc9.bytes",
+      "sha256": "91cdaf7033e59ac49a1cc13fe275548bc0f56843685cd500d8032a22d1ab8cc9",
+      "bytes": 5888,
+      "frames": 30,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_54b",
+          "sourcePath": "extracted/wp2a/029-pl00_54b.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_54b",
+          "sourcePath": "extracted/wp2b/029-pl00_54b.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_54b",
+          "sourcePath": "extracted/wp2c/029-pl00_54b.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_54b",
+          "sourcePath": "extracted/wp2d/029-pl00_54b.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_54b",
+          "sourcePath": "extracted/wp2e/029-pl00_54b.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/d0e9d59d3e473d10876abe381e5811df0aa160f0317e9f1f3b77c63ff64593fd.bytes",
+      "sha256": "d0e9d59d3e473d10876abe381e5811df0aa160f0317e9f1f3b77c63ff64593fd",
+      "bytes": 3264,
+      "frames": 11,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_54c",
+          "sourcePath": "extracted/wp2a/030-pl00_54c.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_54c",
+          "sourcePath": "extracted/wp2b/030-pl00_54c.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_54c",
+          "sourcePath": "extracted/wp2c/030-pl00_54c.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_54c",
+          "sourcePath": "extracted/wp2d/030-pl00_54c.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_54c",
+          "sourcePath": "extracted/wp2e/030-pl00_54c.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/b14a644b37d8d48b0f1345beb02d55900511fa0b80cd6acc760baa77db1bc494.bytes",
+      "sha256": "b14a644b37d8d48b0f1345beb02d55900511fa0b80cd6acc760baa77db1bc494",
+      "bytes": 5312,
+      "frames": 21,
+      "loop": false,
+      "propertyRecords": 130,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp2a",
+          "name": "pl00_54f",
+          "sourcePath": "extracted/wp2a/031-pl00_54f.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2b",
+          "name": "pl00_54f",
+          "sourcePath": "extracted/wp2b/031-pl00_54f.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2c",
+          "name": "pl00_54f",
+          "sourcePath": "extracted/wp2c/031-pl00_54f.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2d",
+          "name": "pl00_54f",
+          "sourcePath": "extracted/wp2d/031-pl00_54f.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp2e",
+          "name": "pl00_54f",
+          "sourcePath": "extracted/wp2e/031-pl00_54f.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/21d328ceee93d4fcdb82ef365bdf7f52261d0b8e8d35d4ea3681e7f02a133da2.bytes",
+      "sha256": "21d328ceee93d4fcdb82ef365bdf7f52261d0b8e8d35d4ea3681e7f02a133da2",
+      "bytes": 3968,
+      "frames": 13,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp30",
+          "name": "pl00_512",
+          "sourcePath": "extracted/wp30/006-pl00_512.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp31",
+          "name": "pl00_512",
+          "sourcePath": "extracted/wp31/006-pl00_512.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp32",
+          "name": "pl00_512",
+          "sourcePath": "extracted/wp32/006-pl00_512.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp33",
+          "name": "pl00_512",
+          "sourcePath": "extracted/wp33/006-pl00_512.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp34",
+          "name": "pl00_512",
+          "sourcePath": "extracted/wp34/006-pl00_512.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3f",
+          "name": "pl00_512",
+          "sourcePath": "extracted/wp3f/006-pl00_512.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/e6920951e3d015b317f081c585b27f1b62abc891ad69dba1e41ebb264299e6e2.bytes",
+      "sha256": "e6920951e3d015b317f081c585b27f1b62abc891ad69dba1e41ebb264299e6e2",
+      "bytes": 3808,
+      "frames": 13,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp30",
+          "name": "pl00_513",
+          "sourcePath": "extracted/wp30/007-pl00_513.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp31",
+          "name": "pl00_513",
+          "sourcePath": "extracted/wp31/007-pl00_513.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp32",
+          "name": "pl00_513",
+          "sourcePath": "extracted/wp32/007-pl00_513.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp33",
+          "name": "pl00_513",
+          "sourcePath": "extracted/wp33/007-pl00_513.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp34",
+          "name": "pl00_513",
+          "sourcePath": "extracted/wp34/007-pl00_513.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3f",
+          "name": "pl00_513",
+          "sourcePath": "extracted/wp3f/007-pl00_513.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/2b4870fcf210c7af773a41549de10ff648ae4a4698d0ff0423eea7ecea3fbffc.bytes",
+      "sha256": "2b4870fcf210c7af773a41549de10ff648ae4a4698d0ff0423eea7ecea3fbffc",
+      "bytes": 1088,
+      "frames": 6,
+      "loop": true,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp30",
+          "name": "pl00_514",
+          "sourcePath": "extracted/wp30/008-pl00_514.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp31",
+          "name": "pl00_514",
+          "sourcePath": "extracted/wp31/008-pl00_514.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp32",
+          "name": "pl00_514",
+          "sourcePath": "extracted/wp32/008-pl00_514.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp33",
+          "name": "pl00_514",
+          "sourcePath": "extracted/wp33/008-pl00_514.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp34",
+          "name": "pl00_514",
+          "sourcePath": "extracted/wp34/008-pl00_514.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3f",
+          "name": "pl00_514",
+          "sourcePath": "extracted/wp3f/008-pl00_514.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/bc597f9a80e597c9583410947eaca27eab4df2fb57b92861840732808baf8c91.bytes",
+      "sha256": "bc597f9a80e597c9583410947eaca27eab4df2fb57b92861840732808baf8c91",
+      "bytes": 3488,
+      "frames": 13,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp30",
+          "name": "pl00_515",
+          "sourcePath": "extracted/wp30/009-pl00_515.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp31",
+          "name": "pl00_515",
+          "sourcePath": "extracted/wp31/009-pl00_515.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp32",
+          "name": "pl00_515",
+          "sourcePath": "extracted/wp32/009-pl00_515.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp33",
+          "name": "pl00_515",
+          "sourcePath": "extracted/wp33/009-pl00_515.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp34",
+          "name": "pl00_515",
+          "sourcePath": "extracted/wp34/009-pl00_515.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3f",
+          "name": "pl00_515",
+          "sourcePath": "extracted/wp3f/009-pl00_515.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/f6d0260228e370580e107ce946b1ce36d809ce7faecc87df4f7a95e54de9b641.bytes",
+      "sha256": "f6d0260228e370580e107ce946b1ce36d809ce7faecc87df4f7a95e54de9b641",
+      "bytes": 5184,
+      "frames": 21,
+      "loop": false,
+      "propertyRecords": 129,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp30",
+          "name": "pl00_516",
+          "sourcePath": "extracted/wp30/010-pl00_516.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp31",
+          "name": "pl00_516",
+          "sourcePath": "extracted/wp31/010-pl00_516.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp32",
+          "name": "pl00_516",
+          "sourcePath": "extracted/wp32/010-pl00_516.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp33",
+          "name": "pl00_516",
+          "sourcePath": "extracted/wp33/010-pl00_516.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp34",
+          "name": "pl00_516",
+          "sourcePath": "extracted/wp34/010-pl00_516.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/5fce0f8e76870b307c3e6345a22232c3d9ae9ac199be1c9f28476e3c91e1ba8a.bytes",
+      "sha256": "5fce0f8e76870b307c3e6345a22232c3d9ae9ac199be1c9f28476e3c91e1ba8a",
+      "bytes": 7616,
+      "frames": 62,
+      "loop": false,
+      "propertyRecords": 121,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp35",
+          "name": "pl00_530",
+          "sourcePath": "extracted/wp35/004-pl00_530.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp36",
+          "name": "pl00_530",
+          "sourcePath": "extracted/wp36/004-pl00_530.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp37",
+          "name": "pl00_530",
+          "sourcePath": "extracted/wp37/004-pl00_530.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp38",
+          "name": "pl00_530",
+          "sourcePath": "extracted/wp38/004-pl00_530.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp39",
+          "name": "pl00_530",
+          "sourcePath": "extracted/wp39/004-pl00_530.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/d47046e5ab53514e6b29d25fa1e27a7e76af505b1811a6c9de2ab55dd7c7d5ec.bytes",
+      "sha256": "d47046e5ab53514e6b29d25fa1e27a7e76af505b1811a6c9de2ab55dd7c7d5ec",
+      "bytes": 4352,
+      "frames": 11,
+      "loop": false,
+      "propertyRecords": 126,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp35",
+          "name": "pl00_531",
+          "sourcePath": "extracted/wp35/005-pl00_531.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp36",
+          "name": "pl00_531",
+          "sourcePath": "extracted/wp36/005-pl00_531.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp37",
+          "name": "pl00_531",
+          "sourcePath": "extracted/wp37/005-pl00_531.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp38",
+          "name": "pl00_531",
+          "sourcePath": "extracted/wp38/005-pl00_531.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp39",
+          "name": "pl00_531",
+          "sourcePath": "extracted/wp39/005-pl00_531.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/1093166da47924487acc216b9d6d7484215b66f7aaeff4a5666825f8f7bca45d.bytes",
+      "sha256": "1093166da47924487acc216b9d6d7484215b66f7aaeff4a5666825f8f7bca45d",
+      "bytes": 1024,
+      "frames": 10,
+      "loop": true,
+      "propertyRecords": 124,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp35",
+          "name": "pl00_532",
+          "sourcePath": "extracted/wp35/006-pl00_532.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp36",
+          "name": "pl00_532",
+          "sourcePath": "extracted/wp36/006-pl00_532.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp37",
+          "name": "pl00_532",
+          "sourcePath": "extracted/wp37/006-pl00_532.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp38",
+          "name": "pl00_532",
+          "sourcePath": "extracted/wp38/006-pl00_532.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp39",
+          "name": "pl00_532",
+          "sourcePath": "extracted/wp39/006-pl00_532.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/09ab27442b16e7f4f8efde42a59a0ab8c3198b4d45c23264375dff5f002de528.bytes",
+      "sha256": "09ab27442b16e7f4f8efde42a59a0ab8c3198b4d45c23264375dff5f002de528",
+      "bytes": 7680,
+      "frames": 25,
+      "loop": false,
+      "propertyRecords": 160,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp35",
+          "name": "pl00_533",
+          "sourcePath": "extracted/wp35/007-pl00_533.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp36",
+          "name": "pl00_533",
+          "sourcePath": "extracted/wp36/007-pl00_533.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp37",
+          "name": "pl00_533",
+          "sourcePath": "extracted/wp37/007-pl00_533.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp38",
+          "name": "pl00_533",
+          "sourcePath": "extracted/wp38/007-pl00_533.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp39",
+          "name": "pl00_533",
+          "sourcePath": "extracted/wp39/007-pl00_533.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/980192e3068632317434074ea02c9dab78053e6e52b25237699288ec212c5bae.bytes",
+      "sha256": "980192e3068632317434074ea02c9dab78053e6e52b25237699288ec212c5bae",
+      "bytes": 5728,
+      "frames": 35,
+      "loop": false,
+      "propertyRecords": 126,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp35",
+          "name": "pl00_535",
+          "sourcePath": "extracted/wp35/009-pl00_535.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp37",
+          "name": "pl00_535",
+          "sourcePath": "extracted/wp37/009-pl00_535.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp39",
+          "name": "pl00_535",
+          "sourcePath": "extracted/wp39/009-pl00_535.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/63788867b53c2bdb608a8dfad7ffb3db04d789dabbede42e275636da3991d8af.bytes",
+      "sha256": "63788867b53c2bdb608a8dfad7ffb3db04d789dabbede42e275636da3991d8af",
+      "bytes": 4576,
+      "frames": 13,
+      "loop": false,
+      "propertyRecords": 127,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp35",
+          "name": "pl00_536",
+          "sourcePath": "extracted/wp35/010-pl00_536.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp37",
+          "name": "pl00_536",
+          "sourcePath": "extracted/wp37/010-pl00_536.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp39",
+          "name": "pl00_536",
+          "sourcePath": "extracted/wp39/010-pl00_536.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/558f7728a38f9bef3ef4568c957edb9cb21563315e7a0cf3ca65457be6ace16e.bytes",
+      "sha256": "558f7728a38f9bef3ef4568c957edb9cb21563315e7a0cf3ca65457be6ace16e",
+      "bytes": 6176,
+      "frames": 27,
+      "loop": false,
+      "propertyRecords": 125,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp35",
+          "name": "pl00_537",
+          "sourcePath": "extracted/wp35/011-pl00_537.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp37",
+          "name": "pl00_537",
+          "sourcePath": "extracted/wp37/011-pl00_537.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp39",
+          "name": "pl00_537",
+          "sourcePath": "extracted/wp39/011-pl00_537.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/ace4c3d2114747e22e26cc2fbcb9b039e075303edba965b3e1f3bc3ac1a5d468.bytes",
+      "sha256": "ace4c3d2114747e22e26cc2fbcb9b039e075303edba965b3e1f3bc3ac1a5d468",
+      "bytes": 4096,
+      "frames": 15,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp35",
+          "name": "pl00_53b",
+          "sourcePath": "extracted/wp35/015-pl00_53b.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp37",
+          "name": "pl00_53b",
+          "sourcePath": "extracted/wp37/015-pl00_53b.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp39",
+          "name": "pl00_53b",
+          "sourcePath": "extracted/wp39/015-pl00_53b.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/983d40375d4902e0efdbba469e2a584e271fb5a24da909349b084f024a9b13da.bytes",
+      "sha256": "983d40375d4902e0efdbba469e2a584e271fb5a24da909349b084f024a9b13da",
+      "bytes": 5568,
+      "frames": 27,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp35",
+          "name": "pl00_53c",
+          "sourcePath": "extracted/wp35/016-pl00_53c.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp37",
+          "name": "pl00_53c",
+          "sourcePath": "extracted/wp37/016-pl00_53c.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp39",
+          "name": "pl00_53c",
+          "sourcePath": "extracted/wp39/016-pl00_53c.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/86734ac669f6ad6c334f7c60d09943400bab80d749d2ff75f80855ff3e5e62ee.bytes",
+      "sha256": "86734ac669f6ad6c334f7c60d09943400bab80d749d2ff75f80855ff3e5e62ee",
+      "bytes": 7104,
+      "frames": 50,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp36",
+          "name": "pl00_534",
+          "sourcePath": "extracted/wp36/008-pl00_534.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp38",
+          "name": "pl00_534",
+          "sourcePath": "extracted/wp38/008-pl00_534.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/f8a266460a1cb5ace47a7f92e495fb0be05149be115b58072136e6fc66903f10.bytes",
+      "sha256": "f8a266460a1cb5ace47a7f92e495fb0be05149be115b58072136e6fc66903f10",
+      "bytes": 5600,
+      "frames": 23,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp36",
+          "name": "pl00_538",
+          "sourcePath": "extracted/wp36/012-pl00_538.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp38",
+          "name": "pl00_538",
+          "sourcePath": "extracted/wp38/012-pl00_538.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/622507138842c0b7f8921c7f9de256fb717ae6a9491dfb1b698399de4382f033.bytes",
+      "sha256": "622507138842c0b7f8921c7f9de256fb717ae6a9491dfb1b698399de4382f033",
+      "bytes": 8000,
+      "frames": 57,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp36",
+          "name": "pl00_539",
+          "sourcePath": "extracted/wp36/013-pl00_539.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp38",
+          "name": "pl00_539",
+          "sourcePath": "extracted/wp38/013-pl00_539.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/4353cb4223be1c318c52a7b4163aea25aeb2aa23c1e707bf111b1fe097e7a195.bytes",
+      "sha256": "4353cb4223be1c318c52a7b4163aea25aeb2aa23c1e707bf111b1fe097e7a195",
+      "bytes": 5760,
+      "frames": 23,
+      "loop": false,
+      "propertyRecords": 123,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp36",
+          "name": "pl00_53a",
+          "sourcePath": "extracted/wp36/014-pl00_53a.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp38",
+          "name": "pl00_53a",
+          "sourcePath": "extracted/wp38/014-pl00_53a.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/5664eadcd872258070e21e92d9e63b13d03f2bda15a05d190c69f1c230a2192b.bytes",
+      "sha256": "5664eadcd872258070e21e92d9e63b13d03f2bda15a05d190c69f1c230a2192b",
+      "bytes": 4768,
+      "frames": 24,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp3a",
+          "name": "pl00_551",
+          "sourcePath": "extracted/wp3a/005-pl00_551.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3b",
+          "name": "pl00_551",
+          "sourcePath": "extracted/wp3b/005-pl00_551.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3c",
+          "name": "pl00_551",
+          "sourcePath": "extracted/wp3c/005-pl00_551.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3d",
+          "name": "pl00_551",
+          "sourcePath": "extracted/wp3d/005-pl00_551.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3e",
+          "name": "pl00_551",
+          "sourcePath": "extracted/wp3e/005-pl00_551.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/ccf06ce713748addbb6eee84bd5a435a92dd4495e21f7143b3a8770e94acc4e7.bytes",
+      "sha256": "ccf06ce713748addbb6eee84bd5a435a92dd4495e21f7143b3a8770e94acc4e7",
+      "bytes": 2752,
+      "frames": 4,
+      "loop": false,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp3a",
+          "name": "pl00_553",
+          "sourcePath": "extracted/wp3a/007-pl00_553.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3b",
+          "name": "pl00_553",
+          "sourcePath": "extracted/wp3b/007-pl00_553.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3c",
+          "name": "pl00_553",
+          "sourcePath": "extracted/wp3c/007-pl00_553.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3d",
+          "name": "pl00_553",
+          "sourcePath": "extracted/wp3d/007-pl00_553.MOT"
+        },
+        {
+          "archive": "wp",
+          "package": "wp3e",
+          "name": "pl00_553",
+          "sourcePath": "extracted/wp3e/007-pl00_553.MOT"
+        }
+      ],
+      "unityPlayable": false
+    },
+    {
+      "path": "MotionSources/26b2b00eab5e6116f3fe434699ebd0665bf24666d13f836f1497d4c31072ad76.bytes",
+      "sha256": "26b2b00eab5e6116f3fe434699ebd0665bf24666d13f836f1497d4c31072ad76",
+      "bytes": 3680,
+      "frames": 16,
+      "loop": true,
+      "propertyRecords": 120,
+      "aliases": [
+        {
+          "archive": "wp",
+          "package": "wp58",
+          "name": "pl00_30a",
+          "sourcePath": "extracted/wp58/067-pl00_30a.MOT"
+        }
+      ],
+      "unityPlayable": false
+    }
+  ]
+}

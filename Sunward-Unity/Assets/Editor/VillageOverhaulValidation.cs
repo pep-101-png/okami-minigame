@@ -14,6 +14,11 @@ namespace Sunward.Editor
             var game = UnityEngine.Object.FindFirstObjectByType<GameFlow>();
             if (!game)
                 throw new InvalidOperationException("Open Windflower first.");
+            if (game.npcObjects.All(n => n && n.GetComponent<Sunward.Remaster.OriginalActor>()))
+            {
+                OriginalRemakeValidation.Validate();
+                return;
+            }
             var home = UnityEngine.Object.FindFirstObjectByType<HomeCutaway>();
             var renovation = home.transform.Find(WindflowerRenovation.RootName);
             if (!renovation)

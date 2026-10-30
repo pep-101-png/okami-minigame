@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-28",
+  "branch": "repair/windflower-native-polish",
+  "repairBaseline": "be9f4a045125750e187b6b58e49c65d3ba92cb80",
+  "rollbackBranch": "backup/sunward-native-player-before-repair-20261028",
+  "completeRemaster": false,
+  "activeGameplayScene": "Assets/Sunward/Scenes/Windflower.unity",
+  "implementedUnityUnverified": [
+    "native gait clocks calibrated to original source travel",
+    "native jump/fall timing and alias transitions",
+    "native dorsal Solar Flare socket and home weapon display",
+    "continuous ground painting material bound to existing terrain",
+    "coherent prototype house proportions and grounding",
+    "native boulder proportions and matching collision meshes",
+    "tree and rock placement with protected home/NPC approaches",
+    "full-footprint animal routes and movement-driven native animation"
+  ],
+  "originalHomeReplacement": false,
+  "remainingArtwork": "Old Sunward and composite/prototype geometry remains where verified originals were not found; see tools/repair/asset-audit-checks.json",
+  "SolarFlareFullNativeEffects": false,
+  "offlineChecks": "tools/repair/checks.json",
+  "UnityLaunched": false,
+  "UnityCompiled": false,
+  "UnityGameplayVerified": false,
+  "previews": "tools/repair/previews; Blender only, not Unity screenshots",
+  "latestFeedbackSource": "aefd595771e933a3313ecb4170251764c94ab1e3",
+  "latestFeedbackValidatesRepair": false
+}

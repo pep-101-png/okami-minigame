@@ -1,0 +1,380 @@
+[
+  {
+    "cue": "bark",
+    "resource": "Okami/NativeAudio/bark-0",
+    "source": "data_pc/se/pl/pl00.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "26c2454a3b7cc9ce5e03b359fcd22566225d4d672673da4b9a1f464d2dd9923f",
+    "outputSHA256": "9813427565c8c180a59002e744da12ceea1325215c1308ba05a4a79d62062df8",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "bark",
+    "resource": "Okami/NativeAudio/bark-1",
+    "source": "data_pc/se/pl/pl00.ses",
+    "stream": 1,
+    "sourceStreamSHA256": "d706e220e0ea8e9c4b6d74028aa0559b4ee69504c1c9ca4ca018a08e0713f76e",
+    "outputSHA256": "53d88c6c2d886170af04a9454042cfab3f6b423b850ec632c78d376aa4d1d667",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "growl",
+    "resource": "Okami/NativeAudio/growl-2",
+    "source": "data_pc/se/pl/pl00.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "2df74a63b39bfe20f603877202ba6128f104f85d2a4237320fcb5c4cafdcba38",
+    "outputSHA256": "4f0cde269d8b4af3c868c0de27b4bd6bc288439012f113d6569e60918eb5932d",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "hurt",
+    "resource": "Okami/NativeAudio/hurt-3",
+    "source": "data_pc/se/pl/pl00.ses",
+    "stream": 3,
+    "sourceStreamSHA256": "2f29aa3db6a1d06744d9eb9f7376e983debef393fb5e17fcab1c6c7ac84e37cd",
+    "outputSHA256": "67a4d3d1176072e59303106dfa07e170ff5752203f6ed75944f823ee0c63e620",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "jump",
+    "resource": "Okami/NativeAudio/jump-8",
+    "source": "data_pc/se/pl/pl00.ses",
+    "stream": 8,
+    "sourceStreamSHA256": "096932dd16d90328cf1e00ffd4b3ea8ed1c3678b9b90b64297c23f584686035a",
+    "outputSHA256": "472f83d154a6eb4be021e972c9322e1a602a963e53befd37be4bff2032ed7283",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "land",
+    "resource": "Okami/NativeAudio/land-10",
+    "source": "data_pc/se/pl/pl00.ses",
+    "stream": 10,
+    "sourceStreamSHA256": "7cbf5813202e4bb44a462d0d30a52fe39a59adb28938268d4990a25b16296c3b",
+    "outputSHA256": "5eebfdbf12f90507fc223ee49996c10c3f608b89c77ca1b741de4010f0b17140",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "dash",
+    "resource": "Okami/NativeAudio/dash-12",
+    "source": "data_pc/se/pl/pl00.ses",
+    "stream": 12,
+    "sourceStreamSHA256": "2155102e9f9cd872f7bfb3ee7951cea4b5d855a39eee82a830a787ea2fa77dfb",
+    "outputSHA256": "1ed498740792cbc41ea04feeb1ae94b643198aee2aa704b3a1febf51157226e7",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "step",
+    "resource": "Okami/NativeAudio/step-0",
+    "source": "data_pc/se/fs/fs102.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "fd7fc470be9a5e0b079c58d650795db4aff8d0cd86e21a8d6b5bbd3b4cfe68ba",
+    "outputSHA256": "3b162d5d02f3721762430166ff63babb2be62db50c663069053d13a199e8e9e4",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "step",
+    "resource": "Okami/NativeAudio/step-1",
+    "source": "data_pc/se/fs/fs102.ses",
+    "stream": 1,
+    "sourceStreamSHA256": "7daa88ee2f2df1de2a664f68821d0923fb57487dbe37b84a3811d3085fe47dde",
+    "outputSHA256": "1f9cd4043af2c7fd0f7b16a66c382b3cdca889b680b2acd83470b6bb5e195b3e",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "step",
+    "resource": "Okami/NativeAudio/step-2",
+    "source": "data_pc/se/fs/fs102.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "eba6ee7d0f560a003e3beaae39bb3ba711c94106c00c0c0a71900a469e5ae73c",
+    "outputSHA256": "13047c9df84a514964e784c5eb4773e0e15da6c58c8867d659ec9972bd11d789",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "step",
+    "resource": "Okami/NativeAudio/step-3",
+    "source": "data_pc/se/fs/fs102.ses",
+    "stream": 3,
+    "sourceStreamSHA256": "a2b557eead0eaf9ff9363771d76b76b7196e2f0705ed9b8df3689d377ce07f1c",
+    "outputSHA256": "ec78944dcf80b5934815cef8a6be68d1e4322786042ea78221d3cf402dbaa98d",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "flame",
+    "resource": "Okami/NativeAudio/flame-0",
+    "source": "data_pc/se/wp/wp24.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "6df9ef9768c839ee218a573597debe466b6490bef59fe93b3abdb4d57e174dc2",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "cow",
+    "resource": "Okami/NativeAudio/cow-0",
+    "source": "data_pc/se/an/an1f.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "f042cb39fb8f2de807f477e820179230af990fff0689d144876bdb50f9ce410b",
+    "outputSHA256": "d24393db4e37523b9aa9e547be0fafb61094ce2689dad68108d41f5e90a5efd8",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "pig",
+    "resource": "Okami/NativeAudio/pig-0",
+    "source": "data_pc/se/an/an0e.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "64b5f6351031714e3f9503d07e012d334a281cf71655ba3913df3428b567f038",
+    "outputSHA256": "378e1366ab8fceb63196f147777e3062058f4e8745acd5738dae2969bffaa388",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "rooster",
+    "resource": "Okami/NativeAudio/rooster-0",
+    "source": "data_pc/se/an/an0b.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "2bbcaaf4933dc69350faebf6ba2afb46d4772f25ed5c8986f88bdd224cb3afa6",
+    "outputSHA256": "4c0055f85d5935012703ece346fb8b0ff116c1fee013c89b1b2788008009a27c",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "attack",
+    "resource": "Okami/NativeAudio/attack-0",
+    "source": "data_pc/se/wp/wp25.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "41eb21500c79089ce2d12d19ad928550578099c9a167262142846e4b9c416b3a",
+    "outputSHA256": "0f48ef189b5f27a016dd5fcc2ae593848b8824032efbf0baac36e92519567e89",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "attack",
+    "resource": "Okami/NativeAudio/attack-1",
+    "source": "data_pc/se/wp/wp25.ses",
+    "stream": 1,
+    "sourceStreamSHA256": "3b4affd3f6ce64c5f8802b4e6f04680d021f3ab2e61d2dc7877e15a6d0fbf49a",
+    "outputSHA256": "3c8f0748e059b6d9a8ace6762da05e1002c8c861aa820e03def99241af10c2da",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "heavy",
+    "resource": "Okami/NativeAudio/heavy-2",
+    "source": "data_pc/se/wp/wp25.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "11f8613f67b217dbee1e44500e9ebfc17edba97fe644594dda41c6116cea43f9",
+    "outputSHA256": "a7d0f1840aeab63b9d48f095a5591cfe642940a95e3e906e5f37710bbd6f10b1",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "impact",
+    "resource": "Okami/NativeAudio/impact-20",
+    "source": "data_pc/se/core/core.ses",
+    "stream": 20,
+    "sourceStreamSHA256": "c25a13ee3c9d67a1183088c5e23f331dbfba4e6db02316f747164a4c84472e07",
+    "outputSHA256": "4a4bb1eb94f82cafce629a6e254d8cd46db4e071f2a852962ab5630d8551152d",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "heavy-impact",
+    "resource": "Okami/NativeAudio/heavy-impact-21",
+    "source": "data_pc/se/core/core.ses",
+    "stream": 21,
+    "sourceStreamSHA256": "80db9f316014e922c3ca7d312b65071483d7c21ad7d2370ab249796de13dc199",
+    "outputSHA256": "e9e562b17273827a546ffb492a53409219f39fc2beb01b170e03f3f359f13399",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "collect",
+    "resource": "Okami/NativeAudio/collect-2",
+    "source": "data_pc/se/core/core.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "cab9efb91394d95916ea5050e4fe6a4515b84fd1fbe8da093e0232de49e58839",
+    "outputSHA256": "4d838342b8efdf7214eac332ba6f752c227345fb46f4bfa7f7e4004a679c87d0",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "bell",
+    "resource": "Okami/NativeAudio/bell-15",
+    "source": "data_pc/se/core/core.ses",
+    "stream": 15,
+    "sourceStreamSHA256": "8ed0051c6b47981f018e1065c5c8afdd8e5eee961b157decc80600abab044bb6",
+    "outputSHA256": "697868c37d3de238708d16e9261e13b229de4640e92ba1879d183cf7ace463d0",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "menu",
+    "resource": "Okami/NativeAudio/menu-0",
+    "source": "data_pc/se/core/core.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "5250841a699ff65c9f814e287feb7b0c5c17139ddc76e1202295b78e8eb86a10",
+    "outputSHA256": "b41d609d65402acac0a2bf52ce0733a7a96509539283d4ad1fbfefc8a9a07b6e",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "water",
+    "resource": "Okami/NativeAudio/water-8",
+    "source": "data_pc/se/core/core.ses",
+    "stream": 8,
+    "sourceStreamSHA256": "54fd982c2f597f6ebe4d366e3a73e61881d00bff0b74845c01cddf128785ce0a",
+    "outputSHA256": "abc09cd7de725830c139e34c79d056f09d33bf9dd4328a7442ed3852f14cd1f4",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "npc0",
+    "resource": "Okami/NativeAudio/npc0-0",
+    "source": "HM/hm01",
+    "stream": 0,
+    "sourceStreamSHA256": "e7349e82a946ece914d5fe41a9e64e8115d57b8980d0928a27ac1b442ff38fb7",
+    "outputSHA256": "7f820957f715f299df541403dbefb99554cd6714320e2835e932b54bc915a0ea",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "npc1",
+    "resource": "Okami/NativeAudio/npc1-1",
+    "source": "HM/hm29",
+    "stream": 1,
+    "sourceStreamSHA256": "be3b74c13ab9839d616e18e2a8d0904b998f022739453ea1a3e037f88d6b058e",
+    "outputSHA256": "2bf8f161cb20f2b049589583387b218076ed4883caa9a1e60bec2c15f17def6f",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "npc2",
+    "resource": "Okami/NativeAudio/npc2-2",
+    "source": "HM/hm44",
+    "stream": 2,
+    "sourceStreamSHA256": "7ac1bd4b0e4f05fd83914331687fa614e46dc93716b450c72681d82212bf2791",
+    "outputSHA256": "49f2e989f742b338a74a5a7104b17f90f22a8508038ae02ab7226408ce86e50b",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "npc3",
+    "resource": "Okami/NativeAudio/npc3-3",
+    "source": "HM/hm00",
+    "stream": 3,
+    "sourceStreamSHA256": "6ba3999fd97c5478e5ea9788272c89994572f0fdea725575421a5118cd17232d",
+    "outputSHA256": "3f3daa28ab822bd4922b8bca370c048cf4b4e3670b12836ca48a1274196168cc",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "npc4",
+    "resource": "Okami/NativeAudio/npc4-4",
+    "source": "HM/hm05",
+    "stream": 4,
+    "sourceStreamSHA256": "acbe1f1d85181b852dfb84af1398ee9871f233607afa0ef1e2a65bab0e504129",
+    "outputSHA256": "0efe8e316a0e42c61684fee6258d45106c1cc1b359eb03debc04db195d1485ba",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "npc5",
+    "resource": "Okami/NativeAudio/npc5-5",
+    "source": "HM/hm68",
+    "stream": 5,
+    "sourceStreamSHA256": "764b8f8d4d763551525a1b511c934f51f2fcaca647c70844ef9f98ef1381c184",
+    "outputSHA256": "f0b4eaed6683a0660f2af7b2893ac88e83752778a19c00bc67a3b1c1957fc57c",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "npc6",
+    "resource": "Okami/NativeAudio/npc6-6",
+    "source": "HM/hm0f",
+    "stream": 6,
+    "sourceStreamSHA256": "aeb5690f3f036d36bea581500374f001671ee1cc4796308981f2a0e0b8c44242",
+    "outputSHA256": "56906f063d0333661db343b9a858d0aa8fb261d746e5ebc473ed38c256ec9f40",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "enemy0",
+    "resource": "Okami/NativeAudio/enemy0-0",
+    "source": "data_pc/se/em/em00.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "d9d827bcbb779623f8f57e912ecc0793ddd832d23d48338d49fcdf9cbde2e0d0",
+    "outputSHA256": "6597f1c341c91f51ab6a2cf4076006106200e22e55342befcff357b9b78413b0",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "enemy1",
+    "resource": "Okami/NativeAudio/enemy1-1",
+    "source": "data_pc/se/em/em01.ses",
+    "stream": 1,
+    "sourceStreamSHA256": "cc741c0a43345514674aa36f3ba9bbc32d678e63ec941becfdc88e2ca737604f",
+    "outputSHA256": "f524108f2ab657bf7a7344e2b33fd82230e2a77a6711105855d9ae495f75f8d3",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "enemy2",
+    "resource": "Okami/NativeAudio/enemy2-2",
+    "source": "data_pc/se/em/em02.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "0512c06cbfb7bd0418a6c722c7a1783cbcde1c8d7cce2abd6597b63952d99ab3",
+    "outputSHA256": "c03fc98fe588c1cd13f0e6d7e8ce61e146072093cdab688762daebb50f9aef9c",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "enemy3",
+    "resource": "Okami/NativeAudio/enemy3-3",
+    "source": "data_pc/se/em/em03.ses",
+    "stream": 3,
+    "sourceStreamSHA256": "0b871ba8965294f50bf9100a7c92a29e09bfb55ab726ff2f69d89326c4fb4188",
+    "outputSHA256": "735cbe986b1fa29ab88169f98c62429411978189c5eb3951f6444e4c42e34ced",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "enemy4",
+    "resource": "Okami/NativeAudio/enemy4-4",
+    "source": "data_pc/se/em/em04.ses",
+    "stream": 4,
+    "sourceStreamSHA256": "5489c087a9743c21a6ed8bd561922ba51c2da3b17cd3f74a4b3a967d6b6e3d50",
+    "outputSHA256": "7e5c494c99521fab6b27461d69e0bf0272146ea500cdae2590c7d1a192f5ce29",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "enemy5",
+    "resource": "Okami/NativeAudio/enemy5-5",
+    "source": "data_pc/se/em/em11.ses",
+    "stream": 5,
+    "sourceStreamSHA256": "9b9c8ed2a58cf388fae3f432fd40b4598fba09ee9c32edce0c214c49b5665884",
+    "outputSHA256": "7c6d6839703e0304884a36a08582a86b764852f58efad4274908a43959dd8af4",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "town",
+    "resource": "Okami/NativeAudio/town-1",
+    "source": "data_pc/bgm/bgm00.afs2",
+    "stream": 1,
+    "sourceStreamSHA256": "c9e9137013a306bb0fd2b0b73e659eed143c2594abde004871106391bf4bc8ab",
+    "outputSHA256": "7cc5da2724f0c15aa2629426d37de438149abeb427e54344ab6a95d05ab89780",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "battle",
+    "resource": "Okami/NativeAudio/battle-10",
+    "source": "data_pc/bgm/bgm00.afs2",
+    "stream": 10,
+    "sourceStreamSHA256": "6281113b1ab73ddfc5eb24ae2602b7d63d49659a4fefdde6e154eec3783d9fe5",
+    "outputSHA256": "468f0ea2a8307346bd6695ea6c0a8a949596067e75faa32805bdaf42c181c320",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "housemusic",
+    "resource": "Okami/NativeAudio/housemusic-5",
+    "source": "data_pc/bgm/bgm00.afs2",
+    "stream": 5,
+    "sourceStreamSHA256": "fbe58af89f30fcf2c9c2b851fd86f71b6bd4b166efecfd2b20bad4e3dd807c2d",
+    "outputSHA256": "ff0f64d8e4d143794b976adab3ea042c4db98a02e62669c20c9b9fecc6faf3d0",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "wind",
+    "resource": "Okami/NativeAudio/wind-0",
+    "source": "data_pc/se/st/st102.afs2",
+    "stream": 0,
+    "sourceStreamSHA256": "5c7dcebb04ef8ed8d8dd6dc28c2b34cb76bf81144bcf703658a1a730ecfe525b",
+    "outputSHA256": "5b40e590b860a3c5aa069caef92a585ba3a36717b90641dd93365c05e6ddfa0b",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  },
+  {
+    "cue": "river",
+    "resource": "Okami/NativeAudio/river-2",
+    "source": "data_pc/se/st/st102.afs2",
+    "stream": 2,
+    "sourceStreamSHA256": "0280f85c17b9ecc7297b762f2c746896a1366245b2eccf129fd6e22646be9dab",
+    "outputSHA256": "78d5d6679d6edbebae5115535317c2aff2b490d4d2045cf52c87fd56ed3ffaf8",
+    "assignment": "Sunward cue adaptation; original waveform retained/transcoded, no generated audio"
+  }
+]

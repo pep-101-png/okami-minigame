@@ -1,0 +1,10 @@
+{
+  "nativeAmaterasuComponent": 8100000000000010001,
+  "nativeSolarComponent": 8100000000000010002,
+  "stateBindings": 48,
+  "distinctAmmySourceMotions": 34,
+  "modifiedScene": "Assets/Sunward/Scenes/Windflower.unity",
+  "modifiedPrefab": "Assets/Sunward/Generated/Sundial.prefab",
+  "UnityVerified": false,
+  "completeSolarEffects": false
+}

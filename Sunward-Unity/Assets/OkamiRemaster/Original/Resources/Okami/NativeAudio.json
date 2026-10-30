@@ -1,0 +1,172 @@
+{
+  "cues": [
+    {
+      "cue": "bark",
+      "resource": "Okami/NativeAudio/bark-0"
+    },
+    {
+      "cue": "bark",
+      "resource": "Okami/NativeAudio/bark-1"
+    },
+    {
+      "cue": "growl",
+      "resource": "Okami/NativeAudio/growl-2"
+    },
+    {
+      "cue": "hurt",
+      "resource": "Okami/NativeAudio/hurt-3"
+    },
+    {
+      "cue": "jump",
+      "resource": "Okami/NativeAudio/jump-8"
+    },
+    {
+      "cue": "land",
+      "resource": "Okami/NativeAudio/land-10"
+    },
+    {
+      "cue": "dash",
+      "resource": "Okami/NativeAudio/dash-12"
+    },
+    {
+      "cue": "step",
+      "resource": "Okami/NativeAudio/step-0"
+    },
+    {
+      "cue": "step",
+      "resource": "Okami/NativeAudio/step-1"
+    },
+    {
+      "cue": "step",
+      "resource": "Okami/NativeAudio/step-2"
+    },
+    {
+      "cue": "step",
+      "resource": "Okami/NativeAudio/step-3"
+    },
+    {
+      "cue": "flame",
+      "resource": "Okami/NativeAudio/flame-0"
+    },
+    {
+      "cue": "cow",
+      "resource": "Okami/NativeAudio/cow-0"
+    },
+    {
+      "cue": "pig",
+      "resource": "Okami/NativeAudio/pig-0"
+    },
+    {
+      "cue": "rooster",
+      "resource": "Okami/NativeAudio/rooster-0"
+    },
+    {
+      "cue": "attack",
+      "resource": "Okami/NativeAudio/attack-0"
+    },
+    {
+      "cue": "attack",
+      "resource": "Okami/NativeAudio/attack-1"
+    },
+    {
+      "cue": "heavy",
+      "resource": "Okami/NativeAudio/heavy-2"
+    },
+    {
+      "cue": "impact",
+      "resource": "Okami/NativeAudio/impact-20"
+    },
+    {
+      "cue": "heavy-impact",
+      "resource": "Okami/NativeAudio/heavy-impact-21"
+    },
+    {
+      "cue": "collect",
+      "resource": "Okami/NativeAudio/collect-2"
+    },
+    {
+      "cue": "bell",
+      "resource": "Okami/NativeAudio/bell-15"
+    },
+    {
+      "cue": "menu",
+      "resource": "Okami/NativeAudio/menu-0"
+    },
+    {
+      "cue": "water",
+      "resource": "Okami/NativeAudio/water-8"
+    },
+    {
+      "cue": "npc0",
+      "resource": "Okami/NativeAudio/npc0-0"
+    },
+    {
+      "cue": "npc1",
+      "resource": "Okami/NativeAudio/npc1-1"
+    },
+    {
+      "cue": "npc2",
+      "resource": "Okami/NativeAudio/npc2-2"
+    },
+    {
+      "cue": "npc3",
+      "resource": "Okami/NativeAudio/npc3-3"
+    },
+    {
+      "cue": "npc4",
+      "resource": "Okami/NativeAudio/npc4-4"
+    },
+    {
+      "cue": "npc5",
+      "resource": "Okami/NativeAudio/npc5-5"
+    },
+    {
+      "cue": "npc6",
+      "resource": "Okami/NativeAudio/npc6-6"
+    },
+    {
+      "cue": "enemy0",
+      "resource": "Okami/NativeAudio/enemy0-0"
+    },
+    {
+      "cue": "enemy1",
+      "resource": "Okami/NativeAudio/enemy1-1"
+    },
+    {
+      "cue": "enemy2",
+      "resource": "Okami/NativeAudio/enemy2-2"
+    },
+    {
+      "cue": "enemy3",
+      "resource": "Okami/NativeAudio/enemy3-3"
+    },
+    {
+      "cue": "enemy4",
+      "resource": "Okami/NativeAudio/enemy4-4"
+    },
+    {
+      "cue": "enemy5",
+      "resource": "Okami/NativeAudio/enemy5-5"
+    },
+    {
+      "cue": "town",
+      "resource": "Okami/NativeAudio/town-1"
+    },
+    {
+      "cue": "battle",
+      "resource": "Okami/NativeAudio/battle-10"
+    },
+    {
+      "cue": "housemusic",
+      "resource": "Okami/NativeAudio/housemusic-5"
+    },
+    {
+      "cue": "wind",
+      "resource": "Okami/NativeAudio/wind-0"
+    },
+    {
+      "cue": "river",
+      "resource": "Okami/NativeAudio/river-2"
+    }
+  ]
+}
