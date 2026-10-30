@@ -11,16 +11,16 @@ records=[];cues=[]
 def convert(cue,raw,source,index,loop=False):
     original=WORK/'audio-extracted'/('source-'+hashlib.sha256(raw).hexdigest()+'.adx');original.write_bytes(raw)
     name=cue+'-'+str(index);target=OUT/(name+('.ogg' if loop else '.wav'))
-    command=['ffmpeg','-v','error','-i',str(original),'-ac','2' if loop else '1','-ar','32000']
-    command+=['-c:a','libvorbis','-q:a','5'] if loop else ['-c:a','pcm_s16le']
-    subprocess.run(command+['-y',str(target)],check=True)
+    sys.path.insert(0,str(ROOT/'tools/playtest-followup'))
+    from repair_audio import render
+    decoding=render(raw,target,cue,loop)
     g=hashlib.sha256(('OriginalOnly/'+str(target.relative_to(A))).encode()).hexdigest()[:32]
     template=(RES/'Audio/Amaterasu-0.wav.meta').read_text();import re
     template=re.sub(r'^guid: \w+','guid: '+g,template,flags=re.M)
     if loop:template=template.replace('loadType: 0','loadType: 1')
     Path(str(target)+'.meta').write_text(template)
     cues.append(dict(cue=cue,resource='Okami/NativeAudio/'+name))
-    records.append(dict(cue=cue,resource='Okami/NativeAudio/'+name,source=source,stream=index,sourceStreamSHA256=hashlib.sha256(raw).hexdigest(),outputSHA256=hashlib.sha256(target.read_bytes()).hexdigest(),assignment='Sunward cue adaptation; original waveform retained/transcoded, no generated audio'))
+    records.append(dict(cue=cue,resource='Okami/NativeAudio/'+name,source=source,stream=index,sourceStreamSHA256=hashlib.sha256(raw).hexdigest(),outputSHA256=hashlib.sha256(target.read_bytes()).hexdigest(),assignment='Original waveform; flagged ADX frame scales decrypted; attenuation/DC removal/edge fades only',decoding=decoding))
 
 def ses(bank,indices,cue):
     p=WORK/'source-native/data_pc/se'/bank;data=decrypt(p.read_bytes());clips=inspect_sound(data)['ADX']

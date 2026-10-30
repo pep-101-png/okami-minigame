@@ -44,3 +44,6 @@ tools/original-remake/previews/*.png -filter -diff -merge -text
 # Repair review images and bounded original audio ship directly with the update.
 tools/playtest-repair/previews/*.png -filter -diff -merge -text
 Sunward-Unity/Assets/OkamiRemaster/Original/**/*.ogg -filter -diff -merge -text
+
+# Follow-up source review images remain directly readable.
+tools/playtest-followup/previews/*.jpg -filter -diff -merge -text

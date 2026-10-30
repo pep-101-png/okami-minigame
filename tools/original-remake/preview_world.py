@@ -12,17 +12,21 @@ sys.path.insert(0,str(ROOT/'tools/repair'));from scene_data import World,ref,vec
 sys.path.insert(0,str(Path(__file__).parent));from export_assets import skin
 CONVERT=Matrix(((1,0,0,0),(0,0,-1,0),(0,1,0,0),(0,0,0,1)))
 MATERIALS={}
-def texture_material(path):
-    key=str(path)
+def texture_material(path,two_sided=False):
+    key=str(path)+str(two_sided)
     if key in MATERIALS:return MATERIALS[key]
     m=bpy.data.materials.new(path.stem);m.use_nodes=True;n=m.node_tree.nodes;l=m.node_tree.links;bs=n.new('ShaderNodeEmission')
     # Native paint is intrinsically lit (minimum 82% in the Unity port). A PBR
     # shader makes inverted ink shells occlude every light ray and invents black
     # houses/people. Use flat paint for these explicitly non-Unity diagnostics.
-    tex=n.new('ShaderNodeTexImage');tex.image=bpy.data.images.load(str(path),check_existing=True);vertex=n.new('ShaderNodeVertexColor');vertex.layer_name='Original pigment';mul=n.new('ShaderNodeMixRGB');mul.blend_type='MULTIPLY';mul.inputs[0].default_value=1;l.new(tex.outputs['Color'],mul.inputs[1]);l.new(vertex.outputs['Color'],mul.inputs[2]);l.new(mul.outputs[0],bs.inputs['Color']);trans=n.new('ShaderNodeBsdfTransparent');geo=n.new('ShaderNodeNewGeometry');alpha=n.new('ShaderNodeMath');alpha.operation='LESS_THAN';alpha.inputs[1].default_value=.3;l.new(tex.outputs['Alpha'],alpha.inputs[0]);hide=n.new('ShaderNodeMath');hide.operation='MAXIMUM';l.new(alpha.outputs[0],hide.inputs[0]);l.new(geo.outputs['Backfacing'],hide.inputs[1]);mix=n.new('ShaderNodeMixShader');l.new(hide.outputs[0],mix.inputs[0]);l.new(bs.outputs[0],mix.inputs[1]);l.new(trans.outputs[0],mix.inputs[2]);l.new(mix.outputs[0],n.get('Material Output').inputs['Surface']);MATERIALS[key]=m;return m
+    tex=n.new('ShaderNodeTexImage');tex.image=bpy.data.images.load(str(path),check_existing=True);vertex=n.new('ShaderNodeVertexColor');vertex.layer_name='Original pigment';mul=n.new('ShaderNodeMixRGB');mul.blend_type='MULTIPLY';mul.inputs[0].default_value=1;l.new(tex.outputs['Color'],mul.inputs[1]);l.new(vertex.outputs['Color'],mul.inputs[2]);l.new(mul.outputs[0],bs.inputs['Color']);trans=n.new('ShaderNodeBsdfTransparent');geo=n.new('ShaderNodeNewGeometry');alpha=n.new('ShaderNodeMath');alpha.operation='LESS_THAN';alpha.inputs[1].default_value=.3;l.new(tex.outputs['Alpha'],alpha.inputs[0]);hide=n.new('ShaderNodeMath');hide.operation='MAXIMUM';l.new(alpha.outputs[0],hide.inputs[0]);
+    if not two_sided:l.new(geo.outputs['Backfacing'],hide.inputs[1])
+    mix=n.new('ShaderNodeMixShader');l.new(hide.outputs[0],mix.inputs[0]);l.new(bs.outputs[0],mix.inputs[1]);l.new(trans.outputs[0],mix.inputs[2]);l.new(mix.outputs[0],n.get('Material Output').inputs['Surface']);MATERIALS[key]=m;return m
 def material(g,w):
     path=w.assets.get(g);raw=path.read_text() if path else '';tex=re.search(r'- (?:_MainTex|_FlowMap|_OriginalPaint):\n        m_Texture:.*guid: (\w+)',raw)
-    if tex and tex[1] in w.assets:return texture_material(w.assets[tex[1]])
+    if tex and tex[1] in w.assets:
+        shader=w.assets.get(ref(raw,'m_Shader')[1]);two_sided=shader and 'Cull Off' in shader.read_text()
+        return texture_material(w.assets[tex[1]],bool(two_sided))
     m=bpy.data.materials.new('Native vertex colour');m.use_nodes=True;n=m.node_tree.nodes;l=m.node_tree.links;v=n.new('ShaderNodeVertexColor');v.layer_name='Original pigment';em=n.new('ShaderNodeEmission');l.new(v.outputs['Color'],em.inputs['Color']);trans=n.new('ShaderNodeBsdfTransparent');geo=n.new('ShaderNodeNewGeometry');mix=n.new('ShaderNodeMixShader');l.new(geo.outputs['Backfacing'],mix.inputs[0]);l.new(em.outputs[0],mix.inputs[1]);l.new(trans.outputs[0],mix.inputs[2]);l.new(mix.outputs[0],n.get('Material Output').inputs['Surface']);return m
 def mesh(name,v,faces,uv,mat,matrix=np.eye(4),colors=None):
     m=bpy.data.meshes.new(name);m.from_pydata(np.asarray(v).tolist(),[],np.asarray(faces).tolist());m.update();layer=m.uv_layers.new()
@@ -43,14 +47,14 @@ def ground_material():
     for axis,src,scale,offset in [(0,0,1/130,60/130),(1,1,-1/96,48/96)]:
         node=n.new('ShaderNodeMath');node.operation='MULTIPLY_ADD';l.new(sep.outputs[src],node.inputs[0]);node.inputs[1].default_value=scale;node.inputs[2].default_value=offset;l.new(node.outputs[0],comb.inputs[axis])
     l.new(comb.outputs[0],texnode.inputs['Vector']);return m
-def read_pose(path,name,end=False):
+def read_pose(path,name,end=False,phase=0):
     data=path.read_bytes();magic,version,bones,count=struct.unpack_from('<4sIII',data);off=16;assert magic==b'OPB1'
     for _ in range(count):
         n=struct.unpack_from('<I',data,off)[0];off+=4;label=data[off:off+n].decode();off+=n;samples,duration,loop=struct.unpack_from('<IfI',data,off);off+=12;values=np.frombuffer(data,'<f4',samples*bones*10,off).reshape(samples,bones,10);off+=values.nbytes
-        if label==name:return values[-1] if end else values[0]
+        if label==name:return values[-1] if end else values[round(phase*(samples-1))]
     raise ValueError(name)
 def actor(record,matrix=None):
-    resource=record['resource'];folder=next(p/resource for p in A.rglob('Resources') if (p/resource/'Model.json').exists());model=json.loads((folder/'Model.json').read_text());pose=read_pose(folder/'Poses.bytes',record['bindings']['idle'],record.get('holdIdlePose',False));verts=skin(model,pose);local=np.eye(4);local[:3,:3]*=record['modelScale'];local[:3,3]=record['modelOffset'];root=(np.asarray(record['matrix']) if matrix is None else matrix)@local
+    resource=record['resource'];folder=next(p/resource for p in A.rglob('Resources') if (p/resource/'Model.json').exists());model=json.loads((folder/'Model.json').read_text());pose=read_pose(folder/'Poses.bytes',record['bindings']['idle'],record.get('holdIdlePose',False),record.get('posePhase',0));verts=skin(model,pose);local=np.eye(4);local[:3,:3]*=record['modelScale'];local[:3,3]=record['modelOffset'];root=(np.asarray(record['matrix']) if matrix is None else matrix)@local
     for part,v in zip(model['parts'],verts):
         if model.get('visibleGroups') and int(part['name'].split('-')[1]) not in model['visibleGroups']:continue
         t=next(t for t in model['textures'] if t['index']==part['texture'])
@@ -90,7 +94,14 @@ for r in w.renderers():
 report=json.loads(Path(__file__).with_name('world-install.json').read_text())
 def saved_actor(source,id,instance=0):
     raw=source.blocks[id];resource=re.search(r'^  resource: (.+)',raw,re.M)[1];idle=re.search(r'^  idle: (.+)',raw,re.M)[1];go=source.owner(id)
-    return dict(resource=resource,bindings=dict(idle=idle),modelScale=float(re.search(r'^  modelScale: (.+)',raw,re.M)[1]),modelOffset=vec(raw,'modelOffset').tolist(),matrix=w.matrix(instance,source.transform(go)).tolist(),holdIdlePose='  holdIdlePose: 1\n' in raw)
+    activity=next((source.blocks[c] for c in source.refs(go) if 'Assembly-CSharp::Sunward.Remaster.NativeVenueActor\n' in source.blocks[c]),None)
+    phase=0
+    if activity:
+        role=re.search(r'^  role: (.+)',activity,re.M)[1]
+        idle=re.search(r'^  motion: (.+)',activity,re.M)[1] if role=='training' else 'venue_hands'
+        phase=.55
+    return dict(resource=resource,bindings=dict(idle=idle),modelScale=float(re.search(r'^  modelScale: (.+)',raw,re.M)[1]),modelOffset=vec(raw,'modelOffset').tolist(),matrix=w.matrix(instance,source.transform(go)).tolist(),holdIdlePose='  holdIdlePose: 1\n' in raw,posePhase=phase)
+
 for instance,source in [(0,w.scene),*w.prefabs.items()]:
     for id,raw in source.blocks.items():
         if 'Assembly-CSharp::Sunward.Remaster.OriginalActor\n' in raw and '  m_Enabled: 0\n' not in raw:actor(saved_actor(source,id,instance))
@@ -106,6 +117,9 @@ s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=8;s.cycles.use_den
 bpy.ops.object.camera_add();camera=bpy.context.object;camera.data.type='ORTHO';s.camera=camera
 shots=[('village',(-24,30,-28),(-4,0,1),73),('market',(-4,7,-15),(0,1,0),22),('houses',(-19,10,-23),(-8,2,-12),24),('arena',(31,22,24),(35,0,0),43),('farm',(-37,10,28),(-42,0,18),24),('home',(-43,10,-26),(-34,1,-16),22)]
 if (ROOT/'tools/playtest-repair/scene-repairs.json').exists():shots += [('dojo',(0,13,13),(0,1,25),23),('food-house',(18,10,-7),(10,1,-15),16)]
+if (ROOT/'tools/playtest-followup/scene-changes.json').exists():shots += [('pond',(-27,9,-28),(-15,2,-22),20),('dojo-entry',(0,7,8),(0,3,21),25),('food-entry',(-4,8,-12),(10,2,-15),23)]
+if os.environ.get("SUNWARD_PREVIEW_SHOTS"):
+    wanted=set(os.environ["SUNWARD_PREVIEW_SHOTS"].split(","));shots=[shot for shot in shots if shot[0] in wanted]
 receipts=[]
 for name,position,target,width in shots:
     for ob in renderer_objects.values():ob.hide_render=False

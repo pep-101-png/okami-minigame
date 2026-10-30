@@ -1,5 +1,7 @@
 # Windflower playtest repair candidate — 30 October 2026
 
+Latest follow-up: [31 October audio/entrance/activity repairs](../playtest-followup/README.md). The report below describes the previous candidate; the follow-up corrects its encrypted-audio decoding and other playtest issues.
+
 This modifies the existing playable Windflower scene, not a separate demo. Source candidate only: Unity compilation, playback, purchase tests and audible cue approval have NOT been verified for this revision. Blender images are diagnostics, not game screenshots. Do not describe this candidate as a completed remaster.
 
 Rollback source: `72336e1aa558d1344c1b52b93bac882b3dd31eb4`. Working branch: `repair/playtest-issues-20261030`. Integration baseline: `00fd8695363df01de80b012d68feb20c9961e8a9`.

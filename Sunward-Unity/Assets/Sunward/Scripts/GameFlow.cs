@@ -226,7 +226,7 @@ namespace Sunward
                         if (action.StartsWith("npc:"))
                         {
                             int i = int.Parse(action.Substring(4));
-                            Audio.Npc(i);
+                            Audio.Npc(i,npcObjects[i].transform.position);
                             Dialogue = npcData[i].name + "\n\n" + string.Join("\n\n", npcData[i].lines);
                             SetPanel("dialogue");
                         }
@@ -239,7 +239,12 @@ namespace Sunward
         string Nearest()
         {
             Vector3 p = Player.transform.position;
-            float best = 2.5f;
+            // Interior exits remain reachable throughout the room. The old
+            // outside-only radius stranded the player after the entry teleport.
+            if (Sunward.Remaster.VillageServices.InDojo(p)) return "venue:dojo";
+            if (Sunward.Remaster.VillageServices.InFoodHouse(p))
+                return Vector3.Distance(p,Sunward.Remaster.VillageServices.Mat)<1.6f ? "venue:mat" : "venue:food";
+            float best = 3.5f;
             string result = "";
             void Consider(string id, Vector3 q, float r = 2.5f)
             {

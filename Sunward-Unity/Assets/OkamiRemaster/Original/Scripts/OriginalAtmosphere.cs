@@ -7,7 +7,9 @@ namespace Sunward.Remaster
     public sealed class OriginalAtmosphere : MonoBehaviour
     {
         public GameFlow game;
-        ParticleSystem trail, leaves, shiranui, shiranuiFire;
+        ParticleSystem trail, leaves, spirit, spiritGlow;
+        SkinnedMeshRenderer spiritSurface;
+        float nextWake;
         public static ParticleSystem Create(string sprite, Transform parent, Vector3 position,
             float rate, float size, float life, float speed, float radius = 0)
         {
@@ -58,10 +60,44 @@ namespace Sunward.Remaster
             var emission = trail.emission;
             emission.rateOverTime = !game.Blocked && game.Player.Grounded && game.Player.Speed > WolfMotor.JogSpeed + .4f ? 16 : 0;
             var native = game.Player.GetComponent<NativeAmaterasu>();
-            if (native && native.Shiranui && !shiranui) shiranui = Create("Cloud", game.Player.transform, new Vector3(0, .5f, -.4f), 5, .65f, 1.5f, .06f);
-            if (native && native.Shiranui && !shiranuiFire) shiranuiFire = Create("Flame", game.Player.transform, new Vector3(0,.5f,-.25f), 5, .45f, .8f, .05f);
-            if (shiranui) { var e = shiranui.emission; e.rateOverTime = native && native.Shiranui && !game.Blocked ? 5 : 0; }
-            if (shiranuiFire) { var e=shiranuiFire.emission;e.rateOverTime=native && native.Shiranui && !game.Blocked?5:0; }
+            if(native && native.Shiranui && !spirit)
+            {
+                spirit=Create("Spirit",game.Player.transform,Vector3.zero,0,.10f,.7f,.03f);
+                spiritGlow=Create("SpiritGlow",game.Player.transform,Vector3.zero,0,.18f,.6f,.015f);
+            }
+            if(spirit && native)
+            {
+                var body=native.BodySurface;
+                if(body && body!=spiritSurface)
+                {
+                    spiritSurface=body;
+                    foreach(var p in new[]{spirit,spiritGlow})if(p)
+                    {
+                        var shape=p.shape;shape.enabled=true;shape.shapeType=ParticleSystemShapeType.SkinnedMeshRenderer;
+                        shape.skinnedMeshRenderer=body;shape.meshShapeType=ParticleSystemMeshShapeType.Triangle;
+                        var main=p.main;main.simulationSpace=ParticleSystemSimulationSpace.Local;
+                        main.startSize=new ParticleSystem.MinMaxCurve(p==spirit?.06f:.12f,p==spirit?.13f:.22f);
+                        main.startColor=new Color(1,.94f,.78f,.7f);
+                        var velocity=p.velocityOverLifetime;velocity.y=new ParticleSystem.MinMaxCurve(.03f,.10f);
+                    }
+                }
+                bool active=native.Shiranui && !game.Blocked && body;
+                var e=spirit.emission;e.rateOverTime=active?24:0;
+                if(spiritGlow){var g=spiritGlow.emission;g.rateOverTime=active?12:0;}
+                if(!active){spirit.Clear();if(spiritGlow)spiritGlow.Clear();}
+            }
+            if(game.Player.Swimming && game.Player.Speed>.15f && !game.Blocked && Time.time>=nextWake)
+            {
+                nextWake=Time.time+.3f;
+                var p=Create("Spark",null,new Vector3(game.Player.transform.position.x,-.30f,game.Player.transform.position.z),0,.65f,.55f,.015f);
+                if(p)
+                {
+                    var sheet=p.textureSheetAnimation;sheet.enabled=true;sheet.numTilesX=5;sheet.numTilesY=1;sheet.frameOverTime=1;
+                    var velocity=p.velocityOverLifetime;velocity.enabled=false;
+                    var renderer=p.GetComponent<ParticleSystemRenderer>();renderer.renderMode=ParticleSystemRenderMode.HorizontalBillboard;
+                    p.Emit(1);Destroy(p.gameObject,1);
+                }
+            }
         }
         public static void Jump(Vector3 point)
         {

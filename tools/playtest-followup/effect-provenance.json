@@ -1,0 +1,12 @@
+[
+  {
+    "role": "Spirit",
+    "sourceName": "starglow2",
+    "sourceSHA256": "fa8d21ead13721487351b81bb9e757a49b1edc00bd4daca3d4c284d49dcc392e"
+  },
+  {
+    "role": "SpiritGlow",
+    "sourceName": "circleLight",
+    "sourceSHA256": "dd94eace60713d3ee66c6121ef2e45d0c0ec15d1d36e8e75d2df6ef9eb881f02"
+  }
+]

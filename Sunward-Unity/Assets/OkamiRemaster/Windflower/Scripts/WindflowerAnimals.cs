@@ -145,7 +145,7 @@ namespace Sunward.Remaster
                 Debug.LogWarning("Skipped blocked animal spawn: " + p.name + ". The complete painted body needs a clear footprint.", this);
                 return;
             }
-            Actor a=new Actor{asset=asset,placement=p,time=p.seed*2.3f,walkTime=p.seed,wait=2+p.seed%3,voiceWait=6+Mathf.Repeat(p.seed*7,14)};
+            Actor a=new Actor{asset=asset,placement=p,time=p.seed*2.3f,walkTime=p.seed,wait=2+p.seed%3,voiceWait=15+Mathf.Repeat(p.seed*7,35)};
             GameObject root=new GameObject(p.name);root.transform.SetParent(transform,false);root.transform.localPosition=p.position;root.transform.localRotation=Quaternion.Euler(0,p.yaw,0);a.root=root.transform;
             GameObject model=new GameObject("Original rig and painted skin");model.transform.SetParent(root.transform,false);model.transform.localPosition=asset.offset+Vector3.up*asset.idle.lift;a.model=model.transform;
             a.bones=new Transform[asset.parents.Length];
@@ -214,8 +214,8 @@ namespace Sunward.Remaster
                 a.voiceWait-=dt;
                 if(a.voiceWait<=0)
                 {
-                    if(game.Audio && Vector3.Distance(game.Player.transform.position,a.root.position)<12)game.Audio.Cue(a.asset.name);
-                    a.voiceWait=16+Mathf.Repeat(a.placement.seed*5+a.time,11);
+                    if(game.Audio && Vector3.Distance(game.Player.transform.position,a.root.position)<12)game.Audio.Animal(a.asset.name,a.root.position);
+                    a.voiceWait=(a.asset.name=="rooster"?75:40)+Mathf.Repeat(a.placement.seed*5+a.time,30);
                 }
                 a.time+=dt;float desired=0,remaining=0;Vector2[] path=a.placement.path;Vector3 direction=Vector3.zero;
                 bool held=false;

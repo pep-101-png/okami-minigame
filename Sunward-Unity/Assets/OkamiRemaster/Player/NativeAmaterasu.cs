@@ -17,6 +17,20 @@ namespace Sunward.Remaster
         public bool Ready { get; private set; }
         public bool Visible { get; private set; }
         public bool Shiranui { get; private set; }
+        NativePaintedRig surfaceRig;
+        SkinnedMeshRenderer surfaceRenderer;
+        public SkinnedMeshRenderer BodySurface
+        {
+            get
+            {
+                if(!Ready || rig==null)return null;
+                if(surfaceRig==rig)return surfaceRenderer;
+                SkinnedMeshRenderer largest=null;
+                foreach(var r in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>())
+                    if(r.sharedMesh && (!largest || r.sharedMesh.vertexCount>largest.sharedMesh.vertexCount))largest=r;
+                surfaceRig=rig;surfaceRenderer=largest;return largest;
+            }
+        }
         public Transform Head => Ready ? rig.Bones[8] : null;  // Original MD bone 7, skull/ear parent.
         public Transform Back => Ready ? rig.Bones[31] : null; // Original MD bone 30, dorsal attachment.
         public Transform[] PowerBones => Ready ? new[] { rig.Bones[9], rig.Bones[14], rig.Bones[13], rig.Bones[18], rig.Bones[21], rig.Bones[25] } : null;
@@ -147,6 +161,13 @@ namespace Sunward.Remaster
             // the model, rather than the old FBX's unrelated stride speeds.
             float target = binding != null && binding.referenceSpeed > 0 ? metresPerSecond / binding.referenceSpeed : 1;
             rate = Mathf.Lerp(rate, Mathf.Clamp(target, 0, 3), 1 - Mathf.Exp(-Time.deltaTime * 12));
+        }
+        public void SwimSpeed(float speed)
+        {
+            if(binding==null || !binding.state.StartsWith("Swim_"))return;
+            // Preserve original paddle curves while avoiding a rapid land-gait
+            // cadence. This changes the motion clock, not the skeletal poses.
+            rate=Mathf.Lerp(rate,binding.state=="Swim_Idle"?.55f:Mathf.Lerp(.55f,.85f,Mathf.Clamp01(speed/2)),1-Mathf.Exp(-Time.deltaTime*8));
         }
         void Show(bool show)
         {

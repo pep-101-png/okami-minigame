@@ -1,0 +1,962 @@
+[
+  {
+    "cue": "bark",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/bark-0.wav",
+    "sourceSHA256": "26c2454a3b7cc9ce5e03b359fcd22566225d4d672673da4b9a1f464d2dd9923f",
+    "outputSHA256": "ece47929a56772df9fd98dff4a85966e6bb9ac00c5bf421813b1e39a525c19fd",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 406,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -12.651,
+      "peak": 0.935852,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.28436,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -10.349,
+    "seconds": 0.928,
+    "clearADX_SHA256": "9612158cf3f6484f41ec6b5c4c7e49956b234833dbb0ea3432781aa26ab61594"
+  },
+  {
+    "cue": "bark",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/bark-1.wav",
+    "sourceSHA256": "d706e220e0ea8e9c4b6d74028aa0559b4ee69504c1c9ca4ca018a08e0713f76e",
+    "outputSHA256": "76437abf87dacf3c1757339c6c39221d5173b176263364149f1b499202a7e5cc",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 481,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -11.795,
+      "peak": 1.0,
+      "clippedFraction": 0.00022739
+    },
+    "output": {
+      "rmsDBFS": -23.014,
+      "peak": 0.276022,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -11.205,
+    "seconds": 1.0994,
+    "clearADX_SHA256": "46e6bd66a3f47f7841e8c7e9ff07ad4013f3d4196fa1d7d51f2df9eb69f763d5"
+  },
+  {
+    "cue": "growl",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/growl-2.wav",
+    "sourceSHA256": "2df74a63b39bfe20f603877202ba6128f104f85d2a4237320fcb5c4cafdcba38",
+    "outputSHA256": "c82e550db3855c8e3aca38677fb7a048377a2c34d79d1fb84f82b6a7c8cc834d",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 804,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -13.021,
+      "peak": 0.944427,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -23.001,
+      "peak": 0.299268,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -9.979,
+    "seconds": 1.8377,
+    "clearADX_SHA256": "e0dcd8551fadd564ea04603bc50e60acf50c9d1dfc922d08afdf2f652741103d"
+  },
+  {
+    "cue": "hurt",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/hurt-3.wav",
+    "sourceSHA256": "2f29aa3db6a1d06744d9eb9f7376e983debef393fb5e17fcab1c6c7ac84e37cd",
+    "outputSHA256": "04d4bc3c15686dd54b8cccd2194794abc5e714470a453c1bf935db49b3510017",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 252,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -12.415,
+      "peak": 1.0,
+      "clippedFraction": 0.00021362
+    },
+    "output": {
+      "rmsDBFS": -23.007,
+      "peak": 0.295883,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -10.585,
+    "seconds": 0.7314,
+    "clearADX_SHA256": "a23dda0b0109746256b60b38bb9ba29d9e2f62f12de2399ddd054814c54050fa"
+  },
+  {
+    "cue": "jump",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/jump-8.wav",
+    "sourceSHA256": "096932dd16d90328cf1e00ffd4b3ea8ed1c3678b9b90b64297c23f584686035a",
+    "outputSHA256": "b14f8e93771a49d107b43b4add53b638ed6cabb44acc8f3076b38475894c9308",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 183,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -12.231,
+      "peak": 0.999969,
+      "clippedFraction": 0.00017077
+    },
+    "output": {
+      "rmsDBFS": -23.005,
+      "peak": 0.289284,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -10.769,
+    "seconds": 0.366,
+    "clearADX_SHA256": "7d0acd3e6bab9dc7dec38e220ad620ede7def087b4c8c800075675d3f2eb0b0a"
+  },
+  {
+    "cue": "land",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/land-10.wav",
+    "sourceSHA256": "7cbf5813202e4bb44a462d0d30a52fe39a59adb28938268d4990a25b16296c3b",
+    "outputSHA256": "fca2b08f9b9627173aa429bdb72ed5f12be5c06791e8798adfdc7e1c1b2c4bef",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 63,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -7.134,
+      "peak": 0.887604,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -23.017,
+      "peak": 0.143985,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -15.865,
+    "seconds": 0.144,
+    "clearADX_SHA256": "c0e6c5e93d24283f1c0e2ade7c9b6afbc3711de138038aa8ecb03e706af5d251"
+  },
+  {
+    "cue": "dash",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/dash-12.wav",
+    "sourceSHA256": "2155102e9f9cd872f7bfb3ee7951cea4b5d855a39eee82a830a787ea2fa77dfb",
+    "outputSHA256": "a30f85b96d285b22c53171df6b08bcb5f16526021e906fedd024fac3646a360c",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 114,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -8.264,
+      "peak": 0.952087,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -23.1,
+      "peak": 0.174668,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -14.736,
+    "seconds": 0.3309,
+    "clearADX_SHA256": "df5295d3cb0876aaa68f842a4cd75c1e19262ce375031a7280578ac6329b2546"
+  },
+  {
+    "cue": "step",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/step-0.wav",
+    "sourceSHA256": "fd7fc470be9a5e0b079c58d650795db4aff8d0cd86e21a8d6b5bbd3b4cfe68ba",
+    "outputSHA256": "0d1eaaca9c573648ea9676c3ce5fc63aa7d1ed2747b58a13dc8c563b40b00f74",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 100,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -21.941,
+      "peak": 0.720215,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -29.056,
+      "peak": 0.319646,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -7.059,
+    "seconds": 0.4,
+    "clearADX_SHA256": "996f75d3bcaeea914f1011baf1d762af140a6ddac1f95be69ee09194fbcbd8e4"
+  },
+  {
+    "cue": "step",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/step-1.wav",
+    "sourceSHA256": "7daa88ee2f2df1de2a664f68821d0923fb57487dbe37b84a3811d3085fe47dde",
+    "outputSHA256": "b3938be1eaaaf5dd9743f89b95f1ecff35fbeffd03ed2ef3558cecebf31d13f0",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 114,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -19.562,
+      "peak": 0.792542,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -29.062,
+      "peak": 0.267588,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -9.438,
+    "seconds": 0.3309,
+    "clearADX_SHA256": "6b10949c937085f2ebf793f6a70f3d8fd01e92b6f04884d07f858c707c668e7a"
+  },
+  {
+    "cue": "step",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/step-2.wav",
+    "sourceSHA256": "eba6ee7d0f560a003e3beaae39bb3ba711c94106c00c0c0a71900a469e5ae73c",
+    "outputSHA256": "836bf0067c052a402ffaa86ef6cef66efd042ac904e41d7941e5337c63783d8a",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 289,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -18.634,
+      "peak": 0.815216,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -29.0,
+      "peak": 0.246608,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -10.365,
+    "seconds": 0.578,
+    "clearADX_SHA256": "06f86a158504ba2cf2779efb80e6f4b3a5f9ccfb067e0b6103314654af822d38"
+  },
+  {
+    "cue": "step",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/step-3.wav",
+    "sourceSHA256": "a2b557eead0eaf9ff9363771d76b76b7196e2f0705ed9b8df3689d377ce07f1c",
+    "outputSHA256": "a7b748c1b14e919fdba627575bc74e214178db285390aeca9da1b95e00387d82",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 49,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -14.378,
+      "peak": 0.863037,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -29.044,
+      "peak": 0.160989,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -14.621,
+    "seconds": 0.1422,
+    "clearADX_SHA256": "2edb1f44a658f5fd412aec0e88e2194eea9c732350d67df02333219a4886d01d"
+  },
+  {
+    "cue": "flame",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/flame-0.wav",
+    "sourceSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 795,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -16.395,
+      "peak": 0.962982,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -23.005,
+      "peak": 0.45,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -6.611,
+    "seconds": 1.1538,
+    "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+  },
+  {
+    "cue": "cow",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/cow-0.wav",
+    "sourceSHA256": "f042cb39fb8f2de807f477e820179230af990fff0689d144876bdb50f9ce410b",
+    "outputSHA256": "620b83d0e79f6ef6bb7e50c04f3c85ebe1684402ed19fafdc506393d4dfa60bc",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 167,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -15.201,
+      "peak": 1.0,
+      "clippedFraction": 0.00038682
+    },
+    "output": {
+      "rmsDBFS": -27.001,
+      "peak": 0.257087,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -11.799,
+    "seconds": 0.4847,
+    "clearADX_SHA256": "3a425e70e6d989f572174c935a073a5c493b30afb11378b3360b0eedb9edc845"
+  },
+  {
+    "cue": "pig",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/pig-0.wav",
+    "sourceSHA256": "64b5f6351031714e3f9503d07e012d334a281cf71655ba3913df3428b567f038",
+    "outputSHA256": "ba108d44c07e4404ee7652e63a1a93f271f2e7bbfd55c87c2d729975c711de22",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 65,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -14.76,
+      "peak": 0.969147,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -27.185,
+      "peak": 0.237303,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -12.239,
+    "seconds": 0.1887,
+    "clearADX_SHA256": "683896852718c9e11a10b7ca48cf2a64361976456c160d7ba3d830f8f31564b0"
+  },
+  {
+    "cue": "rooster",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/rooster-0.wav",
+    "sourceSHA256": "2bbcaaf4933dc69350faebf6ba2afb46d4772f25ed5c8986f88bdd224cb3afa6",
+    "outputSHA256": "80296fee4174c41ae74e4919cdce98a96b0c7458ea3b059275d6a1ee69b9ac21",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 46,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -16.177,
+      "peak": 0.951904,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -27.03,
+      "peak": 0.273639,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -10.823,
+    "seconds": 0.1335,
+    "clearADX_SHA256": "38ecf7dd26cd13582f9ac389330e0c22ca51cb9e501faaf6aca7e06c5d46917c"
+  },
+  {
+    "cue": "attack",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/attack-0.wav",
+    "sourceSHA256": "41eb21500c79089ce2d12d19ad928550578099c9a167262142846e4b9c416b3a",
+    "outputSHA256": "994266bd129d2fe3163e14c706830748bed1973605402a83309d5526defa186e",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 301,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -10.045,
+      "peak": 1.0,
+      "clippedFraction": 0.00046719
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.225164,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -12.955,
+    "seconds": 0.602,
+    "clearADX_SHA256": "88dfd5bfb4c77f4a66d76aa83a8d10aa407fe0959ad514ad386cc5c6bef4072d"
+  },
+  {
+    "cue": "attack",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/attack-1.wav",
+    "sourceSHA256": "3b4affd3f6ce64c5f8802b4e6f04680d021f3ab2e61d2dc7877e15a6d0fbf49a",
+    "outputSHA256": "012580af545a441bfb997354d24df771ed99dff5770f62e2ccbc791cef115080",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 985,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -8.985,
+      "peak": 1.0,
+      "clippedFraction": 0.00058296
+    },
+    "output": {
+      "rmsDBFS": -23.001,
+      "peak": 0.199795,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -14.014,
+    "seconds": 2.2514,
+    "clearADX_SHA256": "291c42d39710bea4a0796809d4f38cd1272350f2d55d5fb0b149d3bc4fb49592"
+  },
+  {
+    "cue": "heavy",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/heavy-2.wav",
+    "sourceSHA256": "11f8613f67b217dbee1e44500e9ebfc17edba97fe644594dda41c6116cea43f9",
+    "outputSHA256": "5723992877a49b37d43ff15a0eeeae4d974f494ce63715cf95cceb93034716bb",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 192,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -12.212,
+      "peak": 1.0,
+      "clippedFraction": 7.12e-05
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.287389,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -10.786,
+    "seconds": 0.4389,
+    "clearADX_SHA256": "d47ad1170381466096b022b2a7f6e96b6626c6b5498f66058185a7e613d3e3d1"
+  },
+  {
+    "cue": "impact",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/impact-20.wav",
+    "sourceSHA256": "c25a13ee3c9d67a1183088c5e23f331dbfba4e6db02316f747164a4c84472e07",
+    "outputSHA256": "fd6fca01da7546e682dfb7f33ee80e26ac7f082486b33d78a18d2e9a52117aaa",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 569,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -9.206,
+      "peak": 1.0,
+      "clippedFraction": 0.00205952
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.204493,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -13.793,
+    "seconds": 1.5173,
+    "clearADX_SHA256": "e30cabf24e2a36373b13faf54c4ab11cc5f3750e591cfc93bfdb05b13b540443"
+  },
+  {
+    "cue": "heavy-impact",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/heavy-impact-21.wav",
+    "sourceSHA256": "80db9f316014e922c3ca7d312b65071483d7c21ad7d2370ab249796de13dc199",
+    "outputSHA256": "aee68109aac223200ac1d08c986e0167bbad6ffd62a3527217e9e1ab9ece15a1",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 76,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -19.474,
+      "peak": 1.0,
+      "clippedFraction": 0.00030836
+    },
+    "output": {
+      "rmsDBFS": -26.464,
+      "peak": 0.45,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -6.938,
+    "seconds": 0.2027,
+    "clearADX_SHA256": "aa1c9935a897c324801f2660160771830850f92cc78b4683d8b3f16c2d5ee389"
+  },
+  {
+    "cue": "collect",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/collect-2.wav",
+    "sourceSHA256": "cab9efb91394d95916ea5050e4fe6a4515b84fd1fbe8da093e0232de49e58839",
+    "outputSHA256": "32a57e516f9d8aecc87079c2bd1d6840f712160427813ff72053170d9c22cf56",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 486,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -10.603,
+      "peak": 1.0,
+      "clippedFraction": 0.00139853
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.240116,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -12.397,
+    "seconds": 1.296,
+    "clearADX_SHA256": "d503dde843cf625fa54054b01df455035af1ee814b61f139ac4a01e2857419d0"
+  },
+  {
+    "cue": "bell",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/bell-15.wav",
+    "sourceSHA256": "8ed0051c6b47981f018e1065c5c8afdd8e5eee961b157decc80600abab044bb6",
+    "outputSHA256": "a501bcdf799923264be8eee98c118dbbb01ca4d2e4c4b88d319d1720ddd9eb84",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 71,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -16.06,
+      "peak": 0.924438,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -24.067,
+      "peak": 0.290131,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -6.94,
+    "seconds": 0.1893,
+    "clearADX_SHA256": "970dd2839348331c1d545dafedcfacee9e656cba5ddcbdf7d5c4ac3e19586fc5"
+  },
+  {
+    "cue": "menu",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/menu-0.wav",
+    "sourceSHA256": "5250841a699ff65c9f814e287feb7b0c5c17139ddc76e1202295b78e8eb86a10",
+    "outputSHA256": "00486b5fb03a82ae0cbdc60e94d184245d8e61791b5214d761a8aa6a8b28675e",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 2864,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -14.961,
+      "peak": 1.0,
+      "clippedFraction": 4.092e-05
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.404881,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -7.999,
+    "seconds": 3.8187,
+    "clearADX_SHA256": "60026abd9da3012b496c6ef8e701af15b1f2c9c27291e903b073be2d70f56b72"
+  },
+  {
+    "cue": "water",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/water-8.wav",
+    "sourceSHA256": "54fd982c2f597f6ebe4d366e3a73e61881d00bff0b74845c01cddf128785ce0a",
+    "outputSHA256": "83b12d51905f6f28f8ef37a8e0be67cdba25b8a7ae0578557fc5119f74a44833",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 1903,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -13.409,
+      "peak": 1.0,
+      "clippedFraction": 5.748e-05
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.331496,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -9.591,
+    "seconds": 3.806,
+    "clearADX_SHA256": "13632cd6fafddd8f262794f82e0cdd3f0f7e93cf6763e34fe07689345eec5420"
+  },
+  {
+    "cue": "npc0",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/npc0-0.wav",
+    "sourceSHA256": "e7349e82a946ece914d5fe41a9e64e8115d57b8980d0928a27ac1b442ff38fb7",
+    "outputSHA256": "28f54d040c5be96b908fb46707c404a9494d1e4d4783033e4ea60bc86857d4df",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 400,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -17.122,
+      "peak": 0.999969,
+      "clippedFraction": 5.859e-05
+    },
+    "output": {
+      "rmsDBFS": -25.082,
+      "peak": 0.404003,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -7.878,
+    "seconds": 1.0667,
+    "clearADX_SHA256": "0f0aeca7b8646216b73d3fc618312020b9f08720cc24a8e159fe0e6f8933ef03"
+  },
+  {
+    "cue": "npc1",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/npc1-1.wav",
+    "sourceSHA256": "be3b74c13ab9839d616e18e2a8d0904b998f022739453ea1a3e037f88d6b058e",
+    "outputSHA256": "6c85127d398cbea29c4d39b71c51c7e4963a97bb30502f96213c9ad70b7b7f35",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 130,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -15.071,
+      "peak": 0.540314,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -25.0,
+      "peak": 0.174679,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -9.922,
+    "seconds": 0.3467,
+    "clearADX_SHA256": "483d23759928a23d00c664e9d1277c455f8b285540e7447a82ce793eb5559fb4"
+  },
+  {
+    "cue": "npc2",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/npc2-2.wav",
+    "sourceSHA256": "7ac1bd4b0e4f05fd83914331687fa614e46dc93716b450c72681d82212bf2791",
+    "outputSHA256": "36751d0314c668f34ef3dce48c6379d4e33950f6b5b03d38d6774c37ca0c149d",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 196,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -8.407,
+      "peak": 0.999969,
+      "clippedFraction": 5.979e-05
+    },
+    "output": {
+      "rmsDBFS": -25.0,
+      "peak": 0.148048,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -16.593,
+    "seconds": 0.5227,
+    "clearADX_SHA256": "b9f2a18dc20c17a343545ff4f2d4dbab5ccb88d328c98400324f2be712039d53"
+  },
+  {
+    "cue": "npc3",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/npc3-3.wav",
+    "sourceSHA256": "6ba3999fd97c5478e5ea9788272c89994572f0fdea725575421a5118cd17232d",
+    "outputSHA256": "934d5e34f77b9f424c1be2a160857e77688fea4bffd4aec66282ef30de180c4d",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 946,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -16.522,
+      "peak": 0.996582,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -25.0,
+      "peak": 0.375623,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -8.478,
+    "seconds": 2.5227,
+    "clearADX_SHA256": "084aff6eaa46ed92cf99a31f222a9dc8602695a52cadf075a7cc39a3fe657ecb"
+  },
+  {
+    "cue": "npc4",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/npc4-4.wav",
+    "sourceSHA256": "acbe1f1d85181b852dfb84af1398ee9871f233607afa0ef1e2a65bab0e504129",
+    "outputSHA256": "4a0ee83ecc806cb33b4e9dc19a88983e7d7479c80360493b3b5bd7aa6084d4ab",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 139,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -12.095,
+      "peak": 0.921204,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -25.0,
+      "peak": 0.209765,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -12.903,
+    "seconds": 0.3707,
+    "clearADX_SHA256": "61e412a9b31f666c833dba45d6788150bf9a70220282ecf5fa0fbce81e1e865d"
+  },
+  {
+    "cue": "npc5",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/npc5-5.wav",
+    "sourceSHA256": "764b8f8d4d763551525a1b511c934f51f2fcaca647c70844ef9f98ef1381c184",
+    "outputSHA256": "d4530cd1ea6ecb07af8c7c24a0766ad382d8ea92c21ee5320987b8ea8b58816e",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 76,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -15.692,
+      "peak": 1.0,
+      "clippedFraction": 0.00030836
+    },
+    "output": {
+      "rmsDBFS": -25.029,
+      "peak": 0.342146,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -9.308,
+    "seconds": 0.2027,
+    "clearADX_SHA256": "3b75c73867970d60855e9c69ebbeadaa2d11c203d2d460d6f229e13e0a69df05"
+  },
+  {
+    "cue": "npc6",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/npc6-6.wav",
+    "sourceSHA256": "aeb5690f3f036d36bea581500374f001671ee1cc4796308981f2a0e0b8c44242",
+    "outputSHA256": "56c23384a126604dfff197456f94954c9bf0097438026d4ffca622a7974b8827",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 133,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -15.187,
+      "peak": 1.0,
+      "clippedFraction": 0.00026432
+    },
+    "output": {
+      "rmsDBFS": -25.0,
+      "peak": 0.323066,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -9.813,
+    "seconds": 0.3547,
+    "clearADX_SHA256": "41f96c7c2d3971c9a80b442689948f3208624319db5a45d491979dfb97a5aff3"
+  },
+  {
+    "cue": "enemy0",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/enemy0-0.wav",
+    "sourceSHA256": "d9d827bcbb779623f8f57e912ecc0793ddd832d23d48338d49fcdf9cbde2e0d0",
+    "outputSHA256": "0de4d8db0cf03df06b41096a2e2f3800b20adcea521918f88ca6bde73c77254d",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 435,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -14.011,
+      "peak": 1.0,
+      "clippedFraction": 0.000297
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.356267,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -8.988,
+    "seconds": 0.6313,
+    "clearADX_SHA256": "e0f28c732d7f71cb5087a61790922c6c8aab5380b34474fc26cd786a798cb091"
+  },
+  {
+    "cue": "enemy1",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/enemy1-1.wav",
+    "sourceSHA256": "cc741c0a43345514674aa36f3ba9bbc32d678e63ec941becfdc88e2ca737604f",
+    "outputSHA256": "5e480d2759c87bf2608634732dce3bfe739e62d9205339da65a3e7be0b1aa2d8",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 487,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -15.021,
+      "peak": 0.975128,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.388706,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -7.979,
+    "seconds": 0.974,
+    "clearADX_SHA256": "d229076911114a40acb9afd7d4e4b75659317065e3b78ad0b524e592cc1bd555"
+  },
+  {
+    "cue": "enemy2",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/enemy2-2.wav",
+    "sourceSHA256": "0512c06cbfb7bd0418a6c722c7a1783cbcde1c8d7cce2abd6597b63952d99ab3",
+    "outputSHA256": "8c1319f0a8c4e1923acc702381542297388b5148cdc2c5aedbe726c165b6125e",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 383,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -17.512,
+      "peak": 1.0,
+      "clippedFraction": 0.00016319
+    },
+    "output": {
+      "rmsDBFS": -24.448,
+      "peak": 0.45,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -6.936,
+    "seconds": 0.766,
+    "clearADX_SHA256": "b2f3ca5cdf2e88e17e499a1b8b9a00aebf6bdbabda3b00cebe8c6c4a8bea92f9"
+  },
+  {
+    "cue": "enemy3",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/enemy3-3.wav",
+    "sourceSHA256": "0b871ba8965294f50bf9100a7c92a29e09bfb55ab726ff2f69d89326c4fb4188",
+    "outputSHA256": "e6ceb8a29436937d78465298ae091e863c3e27786cdcf92a05fb41b7f9927e1b",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 400,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -10.544,
+      "peak": 1.0,
+      "clippedFraction": 0.00035156
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.238342,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -12.456,
+    "seconds": 0.8,
+    "clearADX_SHA256": "5ec98832a599204d2ce194610af5a46ab833d3130e3a9ddb334a6ad6d13f10a2"
+  },
+  {
+    "cue": "enemy4",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/enemy4-4.wav",
+    "sourceSHA256": "5489c087a9743c21a6ed8bd561922ba51c2da3b17cd3f74a4b3a967d6b6e3d50",
+    "outputSHA256": "b7866dcf39b7331d26d203fc1f934e3930d5e75fd371fa363b476c3690a9fecb",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 566,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -14.541,
+      "peak": 0.999969,
+      "clippedFraction": 3.804e-05
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.379625,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -8.456,
+    "seconds": 0.8214,
+    "clearADX_SHA256": "ff9dfd6700e3decd772127b76c07de81a7b087d085ebed4917e8ae1fd2f917f7"
+  },
+  {
+    "cue": "enemy5",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/enemy5-5.wav",
+    "sourceSHA256": "9b9c8ed2a58cf388fae3f432fd40b4598fba09ee9c32edce0c214c49b5665884",
+    "outputSHA256": "cecdf6e397a21265c96f096f7ff0f68f02633e0d87c21c56eaee34d27fd17ea6",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 525,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -10.723,
+      "peak": 1.0,
+      "clippedFraction": 0.0003869
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.243452,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -12.277,
+    "seconds": 1.05,
+    "clearADX_SHA256": "c5dd738bcd819e596822f742d4f397311120c3940df4f634b96000ca23a61689"
+  },
+  {
+    "cue": "town",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/town-1.ogg",
+    "sourceSHA256": "c9e9137013a306bb0fd2b0b73e659eed143c2594abde004871106391bf4bc8ab",
+    "outputSHA256": "af63db3ff9c8368f41ece58e4db8ea418160274afd8f284abbc7941f951b14c9",
+    "sourceVersion": "0x400",
+    "frameScalesDecrypted": false,
+    "decoded": {
+      "rmsDBFS": -12.294,
+      "peak": 1.0,
+      "clippedFraction": 1.608e-05
+    },
+    "output": {
+      "rmsDBFS": -24.0,
+      "peak": 0.25984,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -11.706,
+    "seconds": 123.428,
+    "clearADX_SHA256": "c9e9137013a306bb0fd2b0b73e659eed143c2594abde004871106391bf4bc8ab"
+  },
+  {
+    "cue": "battle",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/battle-10.ogg",
+    "sourceSHA256": "6281113b1ab73ddfc5eb24ae2602b7d63d49659a4fefdde6e154eec3783d9fe5",
+    "outputSHA256": "d512533058f6c2a1f06da17210ffd88c430849134e6413cafd1e9e744535c6bf",
+    "sourceVersion": "0x400",
+    "frameScalesDecrypted": false,
+    "decoded": {
+      "rmsDBFS": -16.553,
+      "peak": 0.999969,
+      "clippedFraction": 2.04e-06
+    },
+    "output": {
+      "rmsDBFS": -24.0,
+      "peak": 0.424271,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -7.447,
+    "seconds": 7.651,
+    "clearADX_SHA256": "6281113b1ab73ddfc5eb24ae2602b7d63d49659a4fefdde6e154eec3783d9fe5"
+  },
+  {
+    "cue": "housemusic",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/housemusic-5.ogg",
+    "sourceSHA256": "fbe58af89f30fcf2c9c2b851fd86f71b6bd4b166efecfd2b20bad4e3dd807c2d",
+    "outputSHA256": "e85ecc11e7dae1f1ee66f4269620897a5aa2db5f175eb1166c78f393b008b720",
+    "sourceVersion": "0x400",
+    "frameScalesDecrypted": false,
+    "decoded": {
+      "rmsDBFS": -13.962,
+      "peak": 1.0,
+      "clippedFraction": 2.46e-06
+    },
+    "output": {
+      "rmsDBFS": -24.0,
+      "peak": 0.314858,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -10.038,
+    "seconds": 19.056,
+    "clearADX_SHA256": "fbe58af89f30fcf2c9c2b851fd86f71b6bd4b166efecfd2b20bad4e3dd807c2d"
+  },
+  {
+    "cue": "wind",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/wind-0.ogg",
+    "sourceSHA256": "5c7dcebb04ef8ed8d8dd6dc28c2b34cb76bf81144bcf703658a1a730ecfe525b",
+    "outputSHA256": "78c313edd18a0b70e8754601d40022cb7ce3b2530509cd2080eda3efc37de3f6",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 4496,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -15.708,
+      "peak": 0.983459,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -24.0,
+      "peak": 0.37861,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -8.292,
+    "seconds": 2.9973,
+    "clearADX_SHA256": "a759dea90828b84a71fee15e583b83bbc0e71c985a7f9ea791b7ee35dbc33507"
+  },
+  {
+    "cue": "river",
+    "file": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/river-2.ogg",
+    "sourceSHA256": "0280f85c17b9ecc7297b762f2c746896a1366245b2eccf129fd6e22646be9dab",
+    "outputSHA256": "f1012146d148af8f4d3620b9bc635c63ff626835446877a3af4c60266c97b3af",
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 9370,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -20.393,
+      "peak": 0.995697,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -27.293,
+      "peak": 0.45,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -6.9,
+    "seconds": 6.2467,
+    "clearADX_SHA256": "f3040c885acf8ea6f6619fad5a0274dc162acd2cf7cf97f8b1dc8e2f047fbff6"
+  }
+]

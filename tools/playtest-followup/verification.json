@@ -1,0 +1,20 @@
+{
+  "unchangedColliderBlocksSincePreviousCandidate": 343,
+  "replacedPubWallBoxes": 5,
+  "originalCuesAudited": 42,
+  "encryptedADXStreamsCorrected": 39,
+  "maxDerivativePeak": 0.45,
+  "outputClippedSamples": 0,
+  "nativeActivityActors": 7,
+  "distinctDiners": 3,
+  "dummyPartnersWithinReach": true,
+  "treePlacementsWithoutBuildingMeshes": 2,
+  "entryExitContainmentChecksPassed": true,
+  "animalNpcSoundSpatialAndRangeLimited": true,
+  "shiranuiEmitterUsesBodySurface": true,
+  "UnityCompilationVerified": false,
+  "UnityGameplayVerified": false,
+  "audibleMixApproved": false,
+  "exactNativeKotoPlayingMotionIdentified": false,
+  "swimmingNativeClipsReidentified": false
+}

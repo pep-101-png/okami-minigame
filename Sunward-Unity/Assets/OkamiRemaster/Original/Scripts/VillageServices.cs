@@ -7,7 +7,7 @@ namespace Sunward.Remaster
     {
         public GameFlow game;
         public bool Resting { get; private set; }
-        public static readonly Vector3 DojoDoor=new Vector3(0,.5f,15.1f), FoodDoor=new Vector3(15.5f,.65f,-15), Mat=new Vector3(8,.65f,-13.4f), Farmer=new Vector3(-48,0,22);
+        public static readonly Vector3 DojoDoor=new Vector3(0,.5f,15.1f), FoodDoor=new Vector3(4.8f,.65f,-15), Mat=new Vector3(8,.65f,-13.4f), Farmer=new Vector3(-48,0,22);
         public static bool InDojo(Vector3 p)=>Mathf.Abs(p.x)<6.5f && p.z>16.2f && p.z<33.6f && p.y<6;
         public static bool InFoodHouse(Vector3 p)=>Mathf.Abs(p.x-10)<4.4f && Mathf.Abs(p.z+15)<3.6f && p.y<6;
         public static bool Floor(Vector3 p,out float height)
@@ -23,10 +23,14 @@ namespace Sunward.Remaster
         public void Interact(string action)
         {
             if(Resting || !game)return;
-            if(action=="venue:dojo")game.Player.Teleport(InDojo(game.Player.transform.position)?new Vector3(0,.05f,13.8f):new Vector3(0,.52f,18.2f));
-            else if(action=="venue:food")game.Player.Teleport(InFoodHouse(game.Player.transform.position)?new Vector3(16.8f,.05f,-15):new Vector3(13.2f,.67f,-15));
+            if(action=="venue:dojo")game.Player.Teleport(InDojo(game.Player.transform.position)?new Vector3(0,.05f,13.3f):new Vector3(0,.52f,18.3f));
+            else if(action=="venue:food")game.Player.Teleport(InFoodHouse(game.Player.transform.position)?new Vector3(2.8f,.05f,-15):new Vector3(6.8f,.67f,-15));
             else if(action=="venue:mat")StartCoroutine(Sit());
-            else if(action=="venue:farmer") {game.Audio.Npc(3);game.Notify("The farmer tends the cattle, pigs and chickens. The pens have feed, water and shelter.");}
+            else if(action=="venue:farmer") {game.Audio.Npc(3,Farmer);game.Notify("The farmer tends the cattle, pigs and chickens. The pens have feed, water and shelter.");}
+            if(action=="venue:dojo" || action=="venue:food")
+            {
+                var camera=FindFirstObjectByType<OrbitCamera>();if(camera)camera.SnapFocus();
+            }
             game.Combat.Equip();
         }
         IEnumerator Sit()

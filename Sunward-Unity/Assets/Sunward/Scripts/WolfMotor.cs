@@ -205,14 +205,17 @@ namespace Sunward
             Vector3 forward = view.forward; forward.y = 0; forward.Normalize();
             Vector3 right = view.right; right.y = 0; right.Normalize();
             Vector3 direction = Vector3.ClampMagnitude(forward * m.y + right * m.x, 1);
-            horizontal = Vector3.MoveTowards(horizontal, direction * (input.Sprint.IsPressed() ? 3.6f : 2.4f), dt * 5);
-            float surface = -.34f - .36f;
+            horizontal = Vector3.MoveTowards(horizontal, direction * (input.Sprint.IsPressed() ? 2.0f : 1.35f), dt * 5);
+            // Put the torso at the waterline so the leg stroke is submerged.
+            float surface = Mathf.Max(valley.Height(transform.position)+.03f, -.34f - .68f);
             Vertical = 0;
             Vector3 before = transform.position;
             Push(horizontal * dt + Vector3.up * Mathf.Clamp(surface - before.y, -dt * 3, dt * 3));
             Velocity = (transform.position - before) / Mathf.Max(.001f, dt); Speed = new Vector2(Velocity.x, Velocity.z).magnitude;
             if (direction.sqrMagnitude > .01f) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), dt * 160);
-            animationView.Play(Speed > .15f ? "Swim_Move" : "Swim_Idle", .15f);
+            animationView.Play(Speed > .15f ? "Swim_Move" : "Swim_Idle", .22f);
+            var native = GetComponent<Sunward.Remaster.NativeAmaterasu>();
+            if(native)native.SwimSpeed(Speed);
             game.Stamina = Mathf.Min(game.MaxStamina, game.Stamina + dt * 5);
             game.Energy = Mathf.Min(game.MaxEnergy, game.Energy + dt * 8);
             if (input.Jump.WasPressedThisFrame())

@@ -1,0 +1,69 @@
+[
+  {
+    "package": "hm08",
+    "group": "HM",
+    "sourceSHA256": "202e2b64264487cdae86d8c67ed5a14cc18eccfdc8099ddf606190e78b3147e6",
+    "visibleGroups": [
+      0,
+      2
+    ],
+    "boundsMin": [
+      -1.1708112803822284,
+      -0.0226668049604751,
+      -0.539078334743816
+    ],
+    "boundsMax": [
+      0.8090738264721502,
+      2.2781063069873317,
+      0.3597057886701271
+    ],
+    "meshes": [
+      {
+        "mesh": "67593abe52c080b826e4284d31d3dde4",
+        "material": "ce51338d3acb0ecccddee3e4255df4bd"
+      },
+      {
+        "mesh": "26e19f847d370063473d6963e877e424",
+        "material": "541a32c788e3c5aba0f815a440905570"
+      },
+      {
+        "mesh": "f037604032efce34143bc144a767d872",
+        "material": "ce51338d3acb0ecccddee3e4255df4bd"
+      },
+      {
+        "mesh": "96364dbb3adf6a7985339a057a6e2953",
+        "material": "570787b0c84f3a9ce3d16be803f6d193"
+      },
+      {
+        "mesh": "ba420cee531e82e52acbdc2ce7b81681",
+        "material": "ce51338d3acb0ecccddee3e4255df4bd"
+      }
+    ],
+    "motions": [
+      {
+        "name": "hm08_000",
+        "sha256": "80a6889c6127636ded36cab943c9d30f4b463f71bb5ad3a7742b41852ca2d71b"
+      },
+      {
+        "name": "hm08_010",
+        "sha256": "b0d06e1a4e8034869074168a0f79e184be139756de42d5322982e5474d7ad27f"
+      },
+      {
+        "name": "hm08_020",
+        "sha256": "f1a08d8b24521dbf56720b7e776770705ee4ca10cbb27ecae080a2cc66caadc6"
+      },
+      {
+        "name": "hm08_088",
+        "sha256": "04f2db0d7364ddf36bb06b3d64b53e74840f196c10b9525998933ff8f0515629"
+      },
+      {
+        "name": "hm08_0a6",
+        "sha256": "83d49ca7d0a74cb42c651cce694180ea5d1cb6a6cf0acf4242386c1758ed5db8"
+      },
+      {
+        "name": "hm08_0a8",
+        "sha256": "1056e6c38ada63a8088171a3dc1a954b33e89010cabd099ce395bcebbcaa2cbd"
+      }
+    ]
+  }
+]

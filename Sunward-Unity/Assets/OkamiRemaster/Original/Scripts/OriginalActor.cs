@@ -23,7 +23,20 @@ namespace Sunward.Remaster
         Vector3 previous;
         Vector3[] fromPosition, fromScale;
         Quaternion[] fromRotation;
-        float time, blendTime;
+        float time, blendTime, filteredSpeed;
+        bool moving, running;
+        string activity;
+        float activityRate=1;
+        bool activityLoop;
+        public float ActivityLength(string name) => bank!=null && bank.Find(name)!=null?bank.Find(name).Duration:0;
+        public void PlayActivity(string name,bool loop,float rate=1,float phase=0)
+        {
+            if(!Ready || bank.Find(name)==null)return;
+            activity=name;activityLoop=loop;activityRate=rate;Change(name);
+            time=Mathf.Clamp01(phase)*current.Duration;
+        }
+        public void EndActivity(){activity=null;Change(idle);}
+
         string lastState;
 
         void Awake()
@@ -83,8 +96,11 @@ namespace Sunward.Remaster
             delta.y = 0; previous = transform.position;
             float dt = Time.deltaTime;
             float speed = delta.magnitude < 1 ? delta.magnitude / Mathf.Max(dt, .0001f) : 0;
+            filteredSpeed=Mathf.Lerp(filteredSpeed,speed,1-Mathf.Exp(-dt*10));
+            moving=filteredSpeed>(moving?.08f:.15f);
+            running=filteredSpeed>(running?2.8f:3.4f);
             string state = enemy ? enemy.State : "village";
-            string selected = speed > .03f ? walk : idle;
+            string selected = moving ? walk : idle;
             bool loop = true;
             if (holdIdlePose && selected == idle) loop = false;
             float duration = 0;
@@ -95,12 +111,20 @@ namespace Sunward.Remaster
                 else if (state == "strike") { selected = strike; duration = enemy.VisualStateDuration; loop = false; }
                 else if (state == "recover") { selected = recover; duration = enemy.VisualStateDuration; loop = false; }
                 else if (state == "dead") { selected = death; duration = 1.1f; loop = false; }
-                else if (speed > 3 && !string.IsNullOrEmpty(run)) selected = run;
+                else if (running && !string.IsNullOrEmpty(run)) selected = run;
             }
+            if(!enemy && !string.IsNullOrEmpty(activity)){selected=activity;loop=activityLoop;}
+            bool gaitChange=enemy && state=="approach" && lastState==state && selected!=CurrentSourceMotion && current!=null;
+            float phase=gaitChange?Mathf.Repeat(time,current.Duration)/current.Duration:0;
             Change(selected);
+            if(gaitChange)time=phase*current.Duration;
             if (state != lastState) { time = 0; lastState = state; }
             blendTime += dt;
-            if (!game || !game.Blocked) time += dt * (duration > .001f ? current.Duration / duration : 1);
+            if ((!game || !game.Blocked) && (!enemy || !enemy.VisualStunned))
+            {
+                float pace=duration>.001f?current.Duration/duration:enemy && moving?Mathf.Clamp(filteredSpeed/(running?4.5f:2),.4f,1.5f):!string.IsNullOrEmpty(activity)?activityRate:1;
+                time+=dt*pace;
+            }
             float sampleTime = time;
             if (enemy && splitAttackClip && (state == "windup" || state == "strike" || state == "recover"))
             {
