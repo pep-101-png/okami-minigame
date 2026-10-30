@@ -1,0 +1,234 @@
+[
+  {
+    "package": "pl00",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 9,
+    "storedVertices": 2969,
+    "triangles": 2183,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl01",
+    "nativeBones": 16,
+    "meshObjects": 1,
+    "materialDivisions": 4,
+    "storedVertices": 655,
+    "triangles": 467,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl02",
+    "nativeBones": 19,
+    "meshObjects": 1,
+    "materialDivisions": 1,
+    "storedVertices": 693,
+    "triangles": 479,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ]
+  },
+  {
+    "package": "pl03",
+    "nativeBones": 27,
+    "meshObjects": 4,
+    "materialDivisions": 6,
+    "storedVertices": 2600,
+    "triangles": 1722,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "package": "pl04",
+    "nativeBones": 29,
+    "meshObjects": 3,
+    "materialDivisions": 4,
+    "storedVertices": 2155,
+    "triangles": 1299,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl05",
+    "nativeBones": 29,
+    "meshObjects": 3,
+    "materialDivisions": 5,
+    "storedVertices": 3377,
+    "triangles": 2175,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "package": "pl06",
+    "nativeBones": 19,
+    "meshObjects": 2,
+    "materialDivisions": 2,
+    "storedVertices": 1631,
+    "triangles": 1103,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0
+    ]
+  },
+  {
+    "package": "pl07",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 7,
+    "storedVertices": 2837,
+    "triangles": 2073,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl08",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 9,
+    "storedVertices": 2961,
+    "triangles": 2131,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl09",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 9,
+    "storedVertices": 2829,
+    "triangles": 2049,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl0a",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 8,
+    "storedVertices": 2931,
+    "triangles": 2061,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl0b",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 7,
+    "storedVertices": 2843,
+    "triangles": 2073,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl0c",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 5,
+    "storedVertices": 2605,
+    "triangles": 1879,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl0d",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 9,
+    "storedVertices": 2961,
+    "triangles": 2131,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl0e",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 7,
+    "storedVertices": 2347,
+    "triangles": 1729,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "pl0f",
+    "nativeBones": 38,
+    "meshObjects": 4,
+    "materialDivisions": 9,
+    "storedVertices": 2969,
+    "triangles": 2183,
+    "skinWeightsPresent": true,
+    "texturesUsed": [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+]

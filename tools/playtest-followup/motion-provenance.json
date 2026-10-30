@@ -1,0 +1,73 @@
+[
+  {
+    "target": "hm00",
+    "motion": "venue_seated",
+    "source": "hm09_081",
+    "sourceSHA256": "be2dffe781542d1520389828afd2cf50df5074e92d8d01542670a4e06c0621c7",
+    "sharedNativeJoints": 20,
+    "adaptation": "Original seated/hand curves retargeted; dedicated instrument-playing action not identified"
+  },
+  {
+    "target": "hm00",
+    "motion": "venue_hands",
+    "source": "hm09_0a8",
+    "sourceSHA256": "83cd757663e3cb60c3e1ac930bf1c9a63d3b5597947d1f7d7b9949b9c334b18e",
+    "sharedNativeJoints": 20,
+    "adaptation": "Original seated/hand curves retargeted; dedicated instrument-playing action not identified"
+  },
+  {
+    "target": "hm01",
+    "motion": "venue_seated",
+    "source": "hm09_081",
+    "sourceSHA256": "be2dffe781542d1520389828afd2cf50df5074e92d8d01542670a4e06c0621c7",
+    "sharedNativeJoints": 20,
+    "adaptation": "Original seated/hand curves retargeted; dedicated instrument-playing action not identified"
+  },
+  {
+    "target": "hm01",
+    "motion": "venue_hands",
+    "source": "hm09_0a8",
+    "sourceSHA256": "83cd757663e3cb60c3e1ac930bf1c9a63d3b5597947d1f7d7b9949b9c334b18e",
+    "sharedNativeJoints": 20,
+    "adaptation": "Original seated/hand curves retargeted; dedicated instrument-playing action not identified"
+  },
+  {
+    "target": "hm05",
+    "motion": "venue_seated",
+    "source": "hm09_081",
+    "sourceSHA256": "be2dffe781542d1520389828afd2cf50df5074e92d8d01542670a4e06c0621c7",
+    "sharedNativeJoints": 20,
+    "adaptation": "Original seated/hand curves retargeted; dedicated instrument-playing action not identified"
+  },
+  {
+    "target": "hm05",
+    "motion": "venue_hands",
+    "source": "hm09_0a8",
+    "sourceSHA256": "83cd757663e3cb60c3e1ac930bf1c9a63d3b5597947d1f7d7b9949b9c334b18e",
+    "sharedNativeJoints": 20,
+    "adaptation": "Original seated/hand curves retargeted; dedicated instrument-playing action not identified"
+  },
+  {
+    "target": "hm09",
+    "motion": "venue_seated",
+    "source": "hm09_081",
+    "sourceSHA256": "be2dffe781542d1520389828afd2cf50df5074e92d8d01542670a4e06c0621c7",
+    "sharedNativeJoints": 20,
+    "adaptation": "Original seated/hand curves retargeted; dedicated instrument-playing action not identified"
+  },
+  {
+    "target": "hm09",
+    "motion": "venue_hands",
+    "source": "hm09_0a8",
+    "sourceSHA256": "83cd757663e3cb60c3e1ac930bf1c9a63d3b5597947d1f7d7b9949b9c334b18e",
+    "sharedNativeJoints": 20,
+    "adaptation": "Original seated/hand curves retargeted; dedicated instrument-playing action not identified"
+  },
+  {
+    "package": "hm44",
+    "name": "hm44_080",
+    "sourceSHA256": "387d7a308d71ed2e1b497e862fba7d237c8fe0eb200806f46e51b768dd7763b5",
+    "frames": 233,
+    "sourceLoop": false
+  }
+]

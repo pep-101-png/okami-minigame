@@ -12,11 +12,13 @@ namespace Sunward
         public CharacterController controller;
         public WolfInput input;
         public const float WalkSpeed = LocomotionTuning.WalkSpeed, JogSpeed = LocomotionTuning.JogSpeed, SprintSpeed = LocomotionTuning.SprintSpeed;
+        public const float Gravity = 21f;
         public float Speed { get; private set; }
         public float Vertical { get; private set; }
 
         public float Invulnerable;
         public bool Grounded { get; private set; }
+        public bool Swimming { get; private set; }
 
         public bool Locked;
         public Vector3 Velocity { get; private set; }
@@ -25,6 +27,7 @@ namespace Sunward
         WolfBodyCollision bodyCollision;
         float dodgeTimer, coyote, jumpBuffer, landing;
         bool doubleUsed;
+        float waterLeap;
         public bool Dodging => dodgeTimer > 0;
 
         void Awake()
@@ -44,6 +47,7 @@ namespace Sunward
             horizontal = Vector3.zero;
             Vertical = 0;
             Speed = 0;
+            Swimming = false;
         }
 
         public void Recover(Vector3 point)
@@ -62,7 +66,9 @@ namespace Sunward
                 return;
             Vector3 old = transform.position;
             controller.Move(bodyCollision ? bodyCollision.Sweep(delta) : delta);
-            var guarded = valley.GuardRiver(old, transform.position);
+            // The player can now enter the river. NPC navigation keeps its
+            // existing dry-land routes; swimming owns the player's buoyancy.
+            var guarded = transform.position;
             if (game.InTrial)
             {
                 var d = guarded - new Vector3(35, guarded.y, 0);
@@ -82,6 +88,8 @@ namespace Sunward
             if (game == null || valley == null || game.Blocked || Locked)
                 return;
             float dt = Time.deltaTime;
+            waterLeap = Mathf.Max(0, waterLeap - dt);
+            if (UpdateSwimming(dt)) return;
             Invulnerable = Mathf.Max(0, Invulnerable - dt);
             float h = valley.Height(transform.position);
             Grounded = (controller.isGrounded || transform.position.y <= h + .075f) && Vertical <= 0;
@@ -133,13 +141,13 @@ namespace Sunward
                 jumpBuffer = 0;
                 coyote = 0;
                 animationView.Play(second ? "Jump_Double" : Speed > 4 ? "Jump_Sprint" : Speed > 1 ? "Jump_Jog" : "Jump_Standing", .07f);
-                game.Fx.Ring(transform.position, new Color(.7f, .85f, .7f), 1.3f);
+                game.Fx.JumpLeaves(transform.position);
                 game.Audio.Cue("jump");
                 Grounded = false;
             }
 
             float previousY = Vertical;
-            Vertical -= 21 * dt;
+            Vertical -= Gravity * dt;
             if (game.Combat.Attacking && animationView.Current == "AirStrike" && !Grounded)
                 Vertical = Mathf.Min(Vertical, -12);
             Vector3 movement = (Dodging ? dodgeDirection * 9 : horizontal) * dt + Vector3.up * Vertical * dt;
@@ -182,6 +190,40 @@ namespace Sunward
                 animationView.Locomotion(Speed, turn, !Grounded, Vertical);
             game.Stamina = Mathf.Clamp(game.Stamina + dt * (Speed > 5 ? -7 : 19 + game.Profile.upgrades.stamina), 0, game.MaxStamina);
             game.Energy = Mathf.Min(game.MaxEnergy, game.Energy + dt * (game.InTrial ? 5 : 12));
+        }
+        bool UpdateSwimming(float dt)
+        {
+            bool deep = !game.InTrial && Valley.Depth(transform.position) > .42f;
+            if (!deep || waterLeap > 0 || transform.position.y > .02f)
+            {
+                if (Swimming) animationView.Play("Land_Soft", .1f, .2f, true);
+                Swimming = false; return false;
+            }
+            Swimming = true; Grounded = false; doubleUsed = false; dodgeTimer = 0;
+            game.Combat.Cancel();
+            Vector2 m = input.Move.ReadValue<Vector2>();
+            Vector3 forward = view.forward; forward.y = 0; forward.Normalize();
+            Vector3 right = view.right; right.y = 0; right.Normalize();
+            Vector3 direction = Vector3.ClampMagnitude(forward * m.y + right * m.x, 1);
+            horizontal = Vector3.MoveTowards(horizontal, direction * (input.Sprint.IsPressed() ? 2.0f : 1.35f), dt * 5);
+            // Put the torso at the waterline so the leg stroke is submerged.
+            float surface = Mathf.Max(valley.Height(transform.position)+.03f, -.34f - .68f);
+            Vertical = 0;
+            Vector3 before = transform.position;
+            Push(horizontal * dt + Vector3.up * Mathf.Clamp(surface - before.y, -dt * 3, dt * 3));
+            Velocity = (transform.position - before) / Mathf.Max(.001f, dt); Speed = new Vector2(Velocity.x, Velocity.z).magnitude;
+            if (direction.sqrMagnitude > .01f) transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction), dt * 160);
+            animationView.Play(Speed > .15f ? "Swim_Move" : "Swim_Idle", .22f);
+            var native = GetComponent<Sunward.Remaster.NativeAmaterasu>();
+            if(native)native.SwimSpeed(Speed);
+            game.Stamina = Mathf.Min(game.MaxStamina, game.Stamina + dt * 5);
+            game.Energy = Mathf.Min(game.MaxEnergy, game.Energy + dt * 8);
+            if (input.Jump.WasPressedThisFrame())
+            {
+                Swimming = false; waterLeap = .65f; Vertical = 6.4f;
+                animationView.Play("Jump_Standing", .08f, .35f, true); game.Audio.Cue("water");
+            }
+            return true;
         }
     }
 }

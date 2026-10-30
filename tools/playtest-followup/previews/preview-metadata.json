@@ -1,0 +1,42 @@
+[
+  {
+    "image": "dojo.jpg",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "6d3708d9dad61d53f39165d33a8d1e23d344b6aa3caf8526277ac65774409a5e",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup.",
+    "labelled": true
+  },
+  {
+    "image": "food-house.jpg",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "6d3708d9dad61d53f39165d33a8d1e23d344b6aa3caf8526277ac65774409a5e",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup.",
+    "labelled": true
+  },
+  {
+    "image": "pond.jpg",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "6d3708d9dad61d53f39165d33a8d1e23d344b6aa3caf8526277ac65774409a5e",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup.",
+    "labelled": true
+  },
+  {
+    "image": "dojo-entry.jpg",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "6d3708d9dad61d53f39165d33a8d1e23d344b6aa3caf8526277ac65774409a5e",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup.",
+    "labelled": true
+  },
+  {
+    "image": "food-entry.jpg",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "6d3708d9dad61d53f39165d33a8d1e23d344b6aa3caf8526277ac65774409a5e",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup.",
+    "labelled": true
+  }
+]

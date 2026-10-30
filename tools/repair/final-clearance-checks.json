@@ -1,0 +1,36 @@
+{
+  "nativeRockProportionsRestored": 122,
+  "approachesProtected": 8,
+  "canopiesChecked": 21,
+  "cosmeticPlantsRemovedFromRoadsAndArena": 27,
+  "changes": [
+    {
+      "kind": "tree-full-canopy-clearance",
+      "number": 6,
+      "delta": [
+        3.1564059350686335,
+        -0.009871560761139125,
+        9.224944529538567
+      ]
+    },
+    {
+      "kind": "tree-full-canopy-clearance",
+      "number": 12,
+      "delta": [
+        1.8824936910316339,
+        0.12019592363122875,
+        12.61026238835759
+      ]
+    },
+    {
+      "kind": "tree-full-canopy-clearance",
+      "number": 20,
+      "delta": [
+        -13.45307142519717,
+        0.09266934790984799,
+        1.1246640514142143
+      ]
+    }
+  ],
+  "UnityVerified": false
+}

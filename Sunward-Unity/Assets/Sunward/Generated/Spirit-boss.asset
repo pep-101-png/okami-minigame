@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spirit-boss
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.EnemyDefinition
   id: boss
-  title: "KUROGANE \xB7 THE HOLLOW BELL"
+  title: Crimson Helm
   visual: {fileID: 7652329259476934107, guid: b621e80ab6f62404fbfbe6c4c1dc4f22, type: 3}
   hp: 145
   damage: 28

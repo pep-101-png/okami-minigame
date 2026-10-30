@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spirit-heavy
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.EnemyDefinition
   id: heavy
-  title: Stonejaw
+  title: Blue Imp
   visual: {fileID: 4544599440953741393, guid: 3018abfbb40edf744bcab2ece8676e2a, type: 3}
   hp: 27
   damage: 23

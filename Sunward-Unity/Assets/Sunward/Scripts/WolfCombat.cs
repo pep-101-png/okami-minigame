@@ -13,7 +13,14 @@ namespace Sunward
         public bool Attacking => strike != null;
 
         WeaponDefinition weapon;
+        Sunward.Remaster.OriginalWeaponCatalog.Entry originalWeapon;
+        Sunward.Remaster.OriginalWeaponView originalView;
+        public string EquippedTitle => originalWeapon != null ? originalWeapon.title : "Tsumugari";
+        bool Glaive => originalWeapon == null || originalWeapon.family == "glaive";
         GameObject spearView, discView;
+        Sunward.Remaster.NativeAmaterasu nativeBody;
+        Sunward.Remaster.NativeSolarFlare nativeDisc;
+        Sunward.Remaster.OriginalActor nativeGlaive;
         Strike strike;
         float elapsed, hold, grace;
         int chain;
@@ -22,14 +29,34 @@ namespace Sunward
         Quaternion spearRotation, discRotation;
         readonly AttackSequence sequence = new AttackSequence();
         readonly HashSet<EnemyBrain> hit = new HashSet<EnemyBrain>();
+        readonly HashSet<Sunward.Remaster.TrainingDummy> dummyHits = new HashSet<Sunward.Remaster.TrainingDummy>();
         readonly Collider[] contacts = new Collider[48];
         float barkCooldown, voice;
         void Start()
         {
+            nativeBody = GetComponent<Sunward.Remaster.NativeAmaterasu>();
+            if (nativeBody && nativeBody.Ready)
+            {
+                headSocket = nativeBody.AttachSocket(headSocket, nativeBody.Head, "Native head weapon socket");
+                backSocket = nativeBody.CreateBackSocket();
+            }
             spearView = Instantiate(spear.visual, headSocket);
+            nativeGlaive = spearView.GetComponent<Sunward.Remaster.OriginalActor>();
+            if (nativeGlaive && nativeGlaive.Ready && nativeBody && nativeBody.Ready)
+            {
+                spearView.transform.SetParent(backSocket, false);
+                spearView.transform.localPosition = Vector3.zero;
+                spearView.transform.localRotation = Quaternion.identity;
+                spearView.transform.localScale = Vector3.one;
+            }
             discView = Instantiate(sundial.visual, headSocket);
-            discView.transform.localScale = Vector3.one * .9f;
-            discView.transform.localPosition = new Vector3(-.12f, .12f, 0);
+            nativeDisc = discView.GetComponent<Sunward.Remaster.NativeSolarFlare>();
+            if (nativeDisc && nativeDisc.Ready && nativeBody && nativeBody.Ready)
+                discView.transform.SetParent(backSocket, false);
+            bool originalDisc = nativeDisc && nativeDisc.Ready && nativeBody && nativeBody.Ready;
+            discView.transform.localScale = originalDisc ? Vector3.one : Vector3.one * .9f;
+            discView.transform.localPosition = originalDisc ? Vector3.zero : new Vector3(-.12f, .12f, 0);
+            if (originalDisc) discView.transform.localRotation = Quaternion.identity;
             spearRest = spearView.transform.localPosition;
             discRest = discView.transform.localPosition;
             spearRotation = spearView.transform.localRotation;
@@ -39,12 +66,25 @@ namespace Sunward
 
         public void Equip()
         {
-            weapon = game.Profile.equipped == "sundial" ? sundial : spear;
+            Cancel();
+            originalWeapon = Sunward.Remaster.OriginalWeaponCatalog.Find(game.Profile.equipped);
+            if (originalWeapon == null) { game.Profile.equipped = "spear"; originalWeapon = Sunward.Remaster.OriginalWeaponCatalog.Find("spear"); }
+            if (weapon && weapon != spear && weapon != sundial) Destroy(weapon);
+            weapon = Sunward.Remaster.OriginalWeaponCatalog.Definition(originalWeapon, spear, sundial);
+            if (originalView) { originalView.gameObject.SetActive(false); Destroy(originalView.gameObject); originalView = null; }
+            if (originalWeapon.id != "spear" && originalWeapon.id != "sundial" && backSocket)
+            {
+                var obj = new GameObject(originalWeapon.title + " · original weapon");
+                obj.transform.SetParent(backSocket, false);
+                originalView = obj.AddComponent<Sunward.Remaster.OriginalWeaponView>();
+                originalView.Load(originalWeapon.resource);
+            }
             if (spearView)
             {
                 spearView.SetActive(game.InTrial && !motor.Locked && weapon == spear);
                 discView.SetActive(game.InTrial && !motor.Locked && weapon == sundial);
             }
+            if (originalView) originalView.gameObject.SetActive(game.InTrial && !motor.Locked);
         }
 
         public void Rest(bool rest)
@@ -53,6 +93,7 @@ namespace Sunward
                 spearView.SetActive(!rest && game.InTrial && game.Profile.equipped == "spear");
             if (discView)
                 discView.SetActive(!rest && game.InTrial && game.Profile.equipped == "sundial");
+            if (originalView) originalView.gameObject.SetActive(!rest && game.InTrial);
         }
 
         public void Cancel()
@@ -72,8 +113,10 @@ namespace Sunward
             strike = next;
             elapsed = 0;
             hit.Clear();
+            dummyHits.Clear();
             charging = false;
             motor.animationView.Play(next.clip, .06f, next.duration, true);
+            if (originalView) originalView.Attack(chain, heavy);
             game.Audio.Cue(heavy ? "heavy" : weapon == sundial ? "flame" : "attack");
             if (weapon == sundial)
                 game.Fx.SundialOrbit(transform.position, heavy);
@@ -81,7 +124,7 @@ namespace Sunward
 
         void Update()
         {
-            if (!game || !game.InTrial || game.Blocked || motor.Locked)
+            if (!game || (!game.InTrial && !Sunward.Remaster.VillageServices.InDojo(transform.position)) || game.Blocked || motor.Locked || motor.Swimming)
                 return;
             float dt = Time.deltaTime;
             barkCooldown = Mathf.Max(0, barkCooldown - dt);
@@ -91,13 +134,7 @@ namespace Sunward
                 return;
             if (motor.input.Switch.WasPressedThisFrame() && !Busy)
             {
-                if (System.Array.IndexOf(game.Profile.owned, "sundial") < 0)
-                {
-                    game.Notify("Unlock Sundial Flame at Taro for 110 sun coins. Both weapons are displayed at home.");
-                    return;
-                }
-
-                game.Profile.equipped = game.Profile.equipped == "spear" ? "sundial" : "spear";
+                game.Profile.equipped = Sunward.Remaster.OriginalWeaponCatalog.Next(game.Profile);
                 game.Save.Save();
                 Equip();
             }
@@ -191,15 +228,34 @@ namespace Sunward
         {
             if (!spearView || !discView)
                 return;
-            bool show = game.InTrial && !motor.Locked && game.Panel != "result";
+            bool show = (game.InTrial || Sunward.Remaster.VillageServices.InDojo(transform.position)) && !motor.Locked && game.Panel != "result";
             spearView.SetActive(show && weapon == spear);
             discView.SetActive(show && weapon == sundial);
+            if (originalView) originalView.gameObject.SetActive(show);
             float p = strike != null ? Mathf.Clamp01(elapsed / strike.duration) : 0;
             float accent = Mathf.Sin(p * Mathf.PI);
-            spearView.transform.localPosition = spearRest + Vector3.back * (strike != null ? accent * (heavy ? .18f : .38f) : 0);
-            spearView.transform.localRotation = spearRotation * Quaternion.Euler(heavy ? -22 * accent : 0, strike != null && strike.clip == "Sweep" ? Mathf.Sin(p * Mathf.PI * 2) * 35 : 0, 0);
-            discView.transform.localPosition = discRest + new Vector3(Mathf.Sin(p * Mathf.PI * 2) * .35f, accent * .22f, -accent * .4f);
-            discView.transform.localRotation = discRotation * Quaternion.Euler(0, accent * 24, (strike != null ? p * 720 : Time.time * 14));
+            if (nativeGlaive && nativeGlaive.Ready)
+            {
+                spearView.transform.localPosition = spearRest;
+                spearView.transform.localRotation = spearRotation;
+            }
+            else
+            {
+                spearView.transform.localPosition = spearRest + Vector3.back * (strike != null ? accent * (heavy ? .18f : .38f) : 0);
+                spearView.transform.localRotation = spearRotation * Quaternion.Euler(heavy ? -22 * accent : 0, strike != null && strike.clip == "Sweep" ? Mathf.Sin(p * Mathf.PI * 2) * 35 : 0, 0);
+            }
+            if (nativeDisc && nativeDisc.Ready)
+            {
+                // Native body bone 30 and wp24's own rig supply the pose.
+                // Do not add the old mouth-disc orbit or perpetual 14 deg/s spin.
+                discView.transform.localPosition = discRest;
+                discView.transform.localRotation = discRotation;
+            }
+            else
+            {
+                discView.transform.localPosition = discRest + new Vector3(Mathf.Sin(p * Mathf.PI * 2) * .35f, accent * .22f, -accent * .4f);
+                discView.transform.localRotation = discRotation * Quaternion.Euler(0, accent * 24, (strike != null ? p * 720 : Time.time * 14));
+            }
         }
 
         void Hit()
@@ -207,6 +263,14 @@ namespace Sunward
             int n = Physics.OverlapSphereNonAlloc(transform.position + Vector3.up * .6f, strike.range, contacts, 1 << 8, QueryTriggerInteraction.Collide);
             for (int i = 0; i < n; i++)
             {
+                var dummy = contacts[i].GetComponentInParent<Sunward.Remaster.TrainingDummy>();
+                if (dummy && !dummyHits.Contains(dummy))
+                {
+                    Vector3 toward = dummy.transform.position - transform.position; toward.y = 0;
+                    if (toward.sqrMagnitude < .01f || Vector3.Dot(transform.forward,toward.normalized) >= strike.arc)
+                    { dummyHits.Add(dummy); dummy.Strike(); }
+                    continue;
+                }
                 var e = contacts[i].GetComponentInParent<EnemyBrain>();
                 if (!e || e.Dead || hit.Contains(e))
                     continue;
@@ -218,7 +282,7 @@ namespace Sunward
                     continue;
                 hit.Add(e);
                 float mul = 1 + (ProgressionRules.Level(game.Profile) - 1) * .045f + game.Profile.upgrades.strength * .18f;
-                mul *= 1 + (weapon == spear ? game.Profile.upgrades.spear * .12f : game.Profile.upgrades.sundial * .14f);
+                mul *= 1 + (Glaive ? game.Profile.upgrades.spear * .12f : game.Profile.upgrades.sundial * .14f);
                 e.Damage(strike.damage * mul, d.normalized, strike.stagger);
                 game.Fx.Impact(e.transform.position + Vector3.up * .8f, weapon == spear ? new Color(.9f, .75f, .48f) : new Color(1, .38f, .13f));
                 game.Audio.Cue(heavy ? "heavy-impact" : weapon == sundial ? "flame-impact" : "impact");

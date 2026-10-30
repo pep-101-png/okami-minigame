@@ -1,0 +1,350 @@
+{
+  "actors": [
+    {
+      "asset": "cow",
+      "name": "Cattle paddock cow",
+      "position": {
+        "x": -34.5,
+        "y": 0.015,
+        "z": 5.8
+      },
+      "path": [
+        {
+          "x": -34.5,
+          "y": 5.8
+        },
+        {
+          "x": -32.2,
+          "y": 6.0
+        },
+        {
+          "x": -32.4,
+          "y": 8.0
+        },
+        {
+          "x": -34.5,
+          "y": 7.3
+        }
+      ],
+      "yaw": 0,
+      "seed": 0.0
+    },
+    {
+      "asset": "cow",
+      "name": "Sheltered stable cow",
+      "position": {
+        "x": -33.4,
+        "y": 0.226,
+        "z": 15.3
+      },
+      "path": [],
+      "yaw": 180,
+      "seed": 0.713
+    },
+    {
+      "asset": "pig",
+      "name": "Pig by wallow",
+      "position": {
+        "x": -24.6,
+        "y": 0.015,
+        "z": 6.5
+      },
+      "path": [
+        {
+          "x": -24.6,
+          "y": 6.5
+        },
+        {
+          "x": -24.6,
+          "y": 8.2
+        },
+        {
+          "x": -22.4,
+          "y": 8.2
+        },
+        {
+          "x": -22.4,
+          "y": 5.3
+        }
+      ],
+      "yaw": 0,
+      "seed": 1.426
+    },
+    {
+      "asset": "pig",
+      "name": "Pig by shelter",
+      "position": {
+        "x": -25.3,
+        "y": 0.015,
+        "z": 5.0
+      },
+      "path": [],
+      "yaw": 95,
+      "seed": 2.139
+    },
+    {
+      "asset": "rooster",
+      "name": "Rooster near grain",
+      "position": {
+        "x": -23.8,
+        "y": 0.015,
+        "z": -2.8
+      },
+      "path": [
+        {
+          "x": -23.8,
+          "y": -2.8
+        },
+        {
+          "x": -22.5,
+          "y": -3.1
+        },
+        {
+          "x": -22.6,
+          "y": -4.5
+        },
+        {
+          "x": -24.2,
+          "y": -4.0
+        }
+      ],
+      "yaw": 0,
+      "seed": 2.852
+    },
+    {
+      "asset": "rooster",
+      "name": "Rooster near coop",
+      "position": {
+        "x": -24.9,
+        "y": 0.185,
+        "z": -4.25
+      },
+      "path": [],
+      "yaw": 20,
+      "seed": 3.565
+    },
+    {
+      "asset": "rabbit",
+      "name": "White rabbit",
+      "position": {
+        "x": -34.6,
+        "y": 0.015,
+        "z": -3.4
+      },
+      "path": [
+        {
+          "x": -34.6,
+          "y": -3.4
+        },
+        {
+          "x": -33.6,
+          "y": -3.6
+        },
+        {
+          "x": -33.8,
+          "y": -4.4
+        },
+        {
+          "x": -35.0,
+          "y": -4.2
+        }
+      ],
+      "yaw": 0,
+      "seed": 4.278
+    },
+    {
+      "asset": "rabbit",
+      "name": "White rabbit by hutch",
+      "position": {
+        "x": -36.1,
+        "y": 0.015,
+        "z": -4.7
+      },
+      "path": [],
+      "yaw": 70,
+      "seed": 4.991
+    },
+    {
+      "asset": "panda-rabbit",
+      "name": "Panda rabbit",
+      "position": {
+        "x": -32.6,
+        "y": 0.015,
+        "z": -3.5
+      },
+      "path": [],
+      "yaw": 240,
+      "seed": 5.704
+    },
+    {
+      "asset": "dog",
+      "name": "Farm dog",
+      "position": {
+        "x": -21.7,
+        "y": 0.015,
+        "z": 0.4
+      },
+      "path": [
+        {
+          "x": -21.7,
+          "y": 0.4
+        },
+        {
+          "x": -24.8,
+          "y": 0.6
+        },
+        {
+          "x": -25.2,
+          "y": 1.8
+        },
+        {
+          "x": -21.8,
+          "y": 1.8
+        }
+      ],
+      "yaw": 0,
+      "seed": 6.417
+    },
+    {
+      "asset": "cat",
+      "name": "Barn cat",
+      "position": {
+        "x": -29.3,
+        "y": 0.226,
+        "z": 16.8
+      },
+      "path": [],
+      "yaw": 135,
+      "seed": 7.13
+    },
+    {
+      "asset": "boar",
+      "name": "Woodland boar",
+      "position": {
+        "x": -37.05,
+        "y": 0.015,
+        "z": 16.0
+      },
+      "path": [],
+      "yaw": 0,
+      "seed": 7.843
+    },
+    {
+      "asset": "piglet",
+      "name": "Striped boar piglet",
+      "position": {
+        "x": -36.8,
+        "y": 0.015,
+        "z": 13.9
+      },
+      "path": [],
+      "yaw": 30,
+      "seed": 8.556
+    }
+  ],
+  "farmArrival": {
+    "x": -16.4,
+    "y": 0.08,
+    "z": 0.0
+  },
+  "farmOverview": {
+    "x": -28.0,
+    "y": 5.8,
+    "z": 2.7
+  },
+  "barnCenter": {
+    "x": -29.7,
+    "y": 0.19,
+    "z": 14.8
+  },
+  "animalCount": 13,
+  "pens": [
+    {
+      "name": "Cattle paddock",
+      "bounds": [
+        -37.8,
+        -30.6,
+        2.6,
+        9.6
+      ]
+    },
+    {
+      "name": "Pig paddock",
+      "bounds": [
+        -26.8,
+        -19.8,
+        3.8,
+        9.8
+      ]
+    },
+    {
+      "name": "Chicken run",
+      "bounds": [
+        -26.8,
+        -20.0,
+        -6.4,
+        -0.7
+      ]
+    },
+    {
+      "name": "Rabbit garden",
+      "bounds": [
+        -37.8,
+        -31.0,
+        -6.7,
+        -1.25
+      ]
+    },
+    {
+      "name": "Boar woodland enclosure",
+      "bounds": [
+        -38.5,
+        -35.8,
+        12.0,
+        20.7
+      ]
+    },
+    {
+      "name": "Cattle watering trough",
+      "position": [
+        -36.3,
+        8.5
+      ]
+    },
+    {
+      "name": "Pig watering trough",
+      "position": [
+        -20.9,
+        8.8
+      ]
+    },
+    {
+      "name": "Chicken shallow drinking tray",
+      "position": [
+        -21.2,
+        -1.7
+      ]
+    },
+    {
+      "name": "Rabbit low watering dish",
+      "position": [
+        -32.0,
+        -2.2
+      ]
+    },
+    {
+      "name": "Stable stone watering trough",
+      "position": [
+        -33.45,
+        17.1
+      ]
+    },
+    {
+      "name": "Boar woodland water",
+      "position": [
+        -37.1,
+        19.7
+      ]
+    }
+  ]
+}

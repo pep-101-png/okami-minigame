@@ -1,0 +1,21 @@
+{
+  "sourceBaseline": "be9f4a045125750e187b6b58e49c65d3ba92cb80",
+  "sceneSHA256": "1dded28b9a34fa1911dd19b8f737d537d0df20a8831142a2d384acb7bd56026f",
+  "existingSceneObjectsPreserved": 17690,
+  "originalGameplayComponentsUnchanged": 194,
+  "activeCSharpSyntaxFiles": 82,
+  "protectedGameplayScriptFiles": 12,
+  "combatMechanicsBytePreserved": true,
+  "motorGravityNumericallyUnchanged": true,
+  "nativeMotionBankBytesUnchanged": true,
+  "controllerStatesCovered": 47,
+  "nativeBoulderConvexColliders": 122,
+  "nativeBoulderWorldProportionsPreserved": true,
+  "fullCanopiesClearOfBuildingsAndApproaches": 21,
+  "protectedHomeAndNPCApproaches": 8,
+  "fullFootprintAnimalRoutesPassed": 13,
+  "groundMaterialActuallyBound": "OkamiRemaster/Windflower/Materials/Continuous-Ground.mat",
+  "UnityLaunched": false,
+  "UnityCompiled": false,
+  "UnityGameplayVerified": false
+}

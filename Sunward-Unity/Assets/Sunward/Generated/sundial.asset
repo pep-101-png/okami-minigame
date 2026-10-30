@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: sundial
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.WeaponDefinition
   id: sundial
-  title: Sundial Flame
+  title: Solar Flare
   visual: {fileID: 1316439225924063651, guid: 75178d4522318f442adc136db12f6205, type: 3}
   light:
   - clip: Disc1
