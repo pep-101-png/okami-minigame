@@ -1,0 +1,331 @@
+[
+  {
+    "package": "dungeon-floor",
+    "sourcePackage": "r10d",
+    "sourceName": "RM__LY80__Boss_Room",
+    "sourceSHA256": "4a272a131a1e733b304a1b4096507f4fccc993a5d78c73f956df1e4f4c94ec92",
+    "sourceCentre": [
+      337.5,
+      15,
+      -97.5
+    ],
+    "boundsMin": [
+      -75.0,
+      -1.125,
+      -78.15
+    ],
+    "boundsMax": [
+      92.25,
+      0.75,
+      77.775
+    ],
+    "meshes": [
+      {
+        "mesh": "61b403c7b9b8ab7169e8e7f947b80726",
+        "material": "3fa647c85e4cbb93743349ad2bbb0d5e",
+        "part": 1,
+        "textureSHA256": "d9e58e6061e4b7307fe1d9d6955a06d1448c49275db6b001ecb9af12e7946d4d"
+      },
+      {
+        "mesh": "6bdd4453cb0994f4470ed1b1c8a5e125",
+        "material": "8000bfff33651ebc928fed4deec09fe9",
+        "part": 2,
+        "textureSHA256": "723162344b4aa50ec5b7b9592e05e7e19ade86fbc5059af3dd114f5a12efac7f"
+      },
+      {
+        "mesh": "b1ef2d64ec958e5917d0f89046f355d8",
+        "material": "4db54982865fbb62a16bf7f6e7dd7335",
+        "part": 3,
+        "textureSHA256": "d9e58e6061e4b7307fe1d9d6955a06d1448c49275db6b001ecb9af12e7946d4d"
+      },
+      {
+        "mesh": "2a49fbd7ea69a1ff1e1b0c8bc2475f4d",
+        "material": "00cd0735aee07d11a2dcc4106ce72d78",
+        "part": 4,
+        "textureSHA256": "c99ff2a22ce638e3bf8caf2841f523814eee4cafea609183e2e32a34811f5250"
+      },
+      {
+        "mesh": "78e00181ce9ddff75cdfa1371d2f2aa9",
+        "material": "005cf9de4433d023745494046f6ba260",
+        "part": 5,
+        "textureSHA256": "cd017d74e7081092189198a9c9f4c62c68e9c765827ad530b296197552a247db"
+      },
+      {
+        "mesh": "f8cd350c2517c66a6fdaf31a6b66ed3e",
+        "material": "84cbb5246d24af2a1320ef83f831b7a0",
+        "part": 6,
+        "textureSHA256": "40641dc9a2e15ff82d3e07743d8dd970833258a69534b5d330d967aa2ebe240e"
+      }
+    ]
+  },
+  {
+    "package": "dungeon-altar",
+    "sourcePackage": "r10d",
+    "sourceName": "__LY82__Boss_Saidan",
+    "sourceSHA256": "e36451f3aa9edd3a3f5d7ee5d75819e3d35513212f537b0e56574f64189916d8",
+    "sourceCentre": [
+      337.5,
+      15,
+      -97.5
+    ],
+    "boundsMin": [
+      42.89999999999998,
+      -3.75,
+      -25.049999999999997
+    ],
+    "boundsMax": [
+      77.39999999999998,
+      33.225,
+      25.125
+    ],
+    "meshes": [
+      {
+        "mesh": "ee5ea7dde4b4dcb124e1fa435b187bfa",
+        "material": "6f20ebb3b5fa173f38a1b68c534c1cc1",
+        "part": 0,
+        "textureSHA256": "bfeb6faa3b984075ea7aff4f525245ffc061eb387cc6473d23923a037972101d"
+      },
+      {
+        "mesh": "ceed3a21d939339b4a9cbad9c92a2c55",
+        "material": "2170c96580e346651450534d7a9d15c6",
+        "part": 1,
+        "textureSHA256": "d5628741d4915730696d6186a5fc3fba76749d54a8c23a44139b874fb262cfeb"
+      },
+      {
+        "mesh": "ac09153214a573535f594a526f521e65",
+        "material": "e4c5e50d91768dbd83e443145fe69ea9",
+        "part": 2,
+        "textureSHA256": "d9e58e6061e4b7307fe1d9d6955a06d1448c49275db6b001ecb9af12e7946d4d"
+      },
+      {
+        "mesh": "013a9c65a7771423dd240f2da8082438",
+        "material": "acf0b474efefa24268af18898989ca5b",
+        "part": 3,
+        "textureSHA256": "057c9b6030882d33d3cf120a98a734d06fd3349c1a1aca25a8bd51e43fc4a206"
+      },
+      {
+        "mesh": "aa7a5ae9f99cc9708650fda19422e273",
+        "material": "9ff4f819a90bb165c0001c4d3b90f173",
+        "part": 4,
+        "textureSHA256": "723162344b4aa50ec5b7b9592e05e7e19ade86fbc5059af3dd114f5a12efac7f"
+      },
+      {
+        "mesh": "8c46a93017b321188ae0f24e35f610be",
+        "material": "40bd4ffff17787d8990a8e94ad469840",
+        "part": 5,
+        "textureSHA256": "a7f1cce3a72cc9226a0b3deeca3963e8bdb6583dce6fad1d81de3db9018d693e"
+      },
+      {
+        "mesh": "356370c22c919d60e6894cd6d4048a69",
+        "material": "fc59066d011e1c1dfdac7b163d20e96c",
+        "part": 6,
+        "textureSHA256": "98d1f1250daaa2869dbab8cc76cde4eeb5477b29628db51448c93e5d80f2635a"
+      },
+      {
+        "mesh": "10652ef3a0b4b9f10e78c82c96b7ab0f",
+        "material": "f4f52efe7edb471efb88eea7f56f36c9",
+        "part": 7,
+        "textureSHA256": "f07393aabe4951300825da63888cf89ca8ee56191864e3cb554c6579acf4fed3"
+      },
+      {
+        "mesh": "f1a3e3d4ae4ee80502f7a2f6aed1fb89",
+        "material": "da30a691d48c8ee75530fb328d95dc85",
+        "part": 8,
+        "textureSHA256": "844ccd205765e4fa60e76317cc64aea33819ea05e72b5c6eec6c4f090d0778db"
+      }
+    ]
+  },
+  {
+    "package": "dungeon-west",
+    "sourcePackage": "r10d",
+    "sourceName": "M__LY83__Boss_kabeA",
+    "sourceSHA256": "927c004c9da16c12c57528493fd6166afa247b67593c722f3f22ad955ca0fb08",
+    "sourceCentre": [
+      337.5,
+      15,
+      -97.5
+    ],
+    "boundsMin": [
+      -12.150000000000034,
+      -1.125,
+      -80.25
+    ],
+    "boundsMax": [
+      94.94999999999999,
+      71.02499999999999,
+      -0.22499999999999432
+    ],
+    "meshes": [
+      {
+        "mesh": "ae754c125838894762dde8b06cf120c3",
+        "material": "2163265a3824b759249863183bffdb27",
+        "part": 0,
+        "textureSHA256": "40641dc9a2e15ff82d3e07743d8dd970833258a69534b5d330d967aa2ebe240e"
+      }
+    ]
+  },
+  {
+    "package": "dungeon-north",
+    "sourcePackage": "r10d",
+    "sourceName": "M__LY84__Boss_kabeB",
+    "sourceSHA256": "2c0fcbb1446c15b538e2104e281f78ff71b255a4e07031be8659f56d54400380",
+    "sourceCentre": [
+      337.5,
+      15,
+      -97.5
+    ],
+    "boundsMin": [
+      -75.375,
+      -1.125,
+      -78.6
+    ],
+    "boundsMax": [
+      -1.8000000000000114,
+      74.325,
+      14.174999999999997
+    ],
+    "meshes": [
+      {
+        "mesh": "6b73fc19926b45828260b44dad6fd0ce",
+        "material": "265bf1b7c049d97c74074d0f56bc2717",
+        "part": 0,
+        "textureSHA256": "40641dc9a2e15ff82d3e07743d8dd970833258a69534b5d330d967aa2ebe240e"
+      }
+    ]
+  },
+  {
+    "package": "dungeon-east",
+    "sourcePackage": "r10d",
+    "sourceName": "M__LY85__Boss_kabeC",
+    "sourceSHA256": "4c6c5c53e3e96deb4efa68cce07470aac35644adf97cc9697b5cb74175702b4e",
+    "sourceCentre": [
+      337.5,
+      15,
+      -97.5
+    ],
+    "boundsMin": [
+      -80.17500000000001,
+      -1.125,
+      0.0
+    ],
+    "boundsMax": [
+      -15.449999999999989,
+      69.825,
+      78.45
+    ],
+    "meshes": [
+      {
+        "mesh": "7972dd2d29a9c2e72a5ca7b7dfbc8fdd",
+        "material": "f1a4cf7f34af2fcc1133426deeb048a4",
+        "part": 0,
+        "textureSHA256": "40641dc9a2e15ff82d3e07743d8dd970833258a69534b5d330d967aa2ebe240e"
+      }
+    ]
+  },
+  {
+    "package": "dungeon-south",
+    "sourcePackage": "r10d",
+    "sourceName": "M__LY86__Boss_kabeD",
+    "sourceSHA256": "b9bd681586c4f92bad9df4c200e4eba9995b347984e70e1bc91b5758b1622606",
+    "sourceCentre": [
+      337.5,
+      15,
+      -97.5
+    ],
+    "boundsMin": [
+      -23.475000000000023,
+      -1.125,
+      -14.174999999999997
+    ],
+    "boundsMax": [
+      92.92500000000001,
+      74.325,
+      79.95
+    ],
+    "meshes": [
+      {
+        "mesh": "521bca69586e9996d8cb1f0966c63fe6",
+        "material": "daeda88282f94dfada25ee3456c367ef",
+        "part": 0,
+        "textureSHA256": "40641dc9a2e15ff82d3e07743d8dd970833258a69534b5d330d967aa2ebe240e"
+      }
+    ]
+  },
+  {
+    "package": "dungeon-seal",
+    "sourcePackage": "r10d",
+    "sourceName": "SO__LY8f__Sort_Boss",
+    "sourceSHA256": "2dfc763d8bf3885163446f673dc2ef3570e46e17329a9a5259d41c85c2a80ae0",
+    "sourceCentre": [
+      337.5,
+      15,
+      -97.5
+    ],
+    "boundsMin": [
+      -18.75,
+      0.07499999999999929,
+      -18.75
+    ],
+    "boundsMax": [
+      18.75,
+      0.07499999999999929,
+      18.75
+    ],
+    "meshes": [
+      {
+        "mesh": "23ccf34f54a76cb2d41c4747faa9e187",
+        "material": "5353e4cdcddae763e4f7bc3a8e7603ac",
+        "part": 0,
+        "textureSHA256": "8a21906a7cdd122a71e06f20600246346522509a68e2e80ce7a7b26913845a7f"
+      }
+    ]
+  },
+  {
+    "package": "hm2e",
+    "group": "HM",
+    "sourceSHA256": "11ececdc55886523a6b84af4eff4b0e8f12d5029a5e6521968a59b48e90ce8fb",
+    "visibleGroups": null,
+    "boundsMin": [
+      -0.8395860053627533,
+      -0.18980495929718016,
+      -1.3497237539384515
+    ],
+    "boundsMax": [
+      0.8549120504510823,
+      2.5246843504431347,
+      1.428553977003321
+    ],
+    "meshes": [
+      {
+        "mesh": "d47e9cd15fe332e3dafed074f10b6e31",
+        "material": "0ca1bc7717791d50702f403c95a0600e"
+      },
+      {
+        "mesh": "c2c20bf4df4a9e5afcf22983e59cea5c",
+        "material": "2f88d96823e5907565bfe79f671615fa"
+      },
+      {
+        "mesh": "88a80386b91a9dbdc708dfafbb23da05",
+        "material": "2f88d96823e5907565bfe79f671615fa"
+      },
+      {
+        "mesh": "14556b501a361788a0a20c21d0a65b55",
+        "material": "2f88d96823e5907565bfe79f671615fa"
+      },
+      {
+        "mesh": "235fb91576793ba0e0a8d94f95a11c8d",
+        "material": "0ca1bc7717791d50702f403c95a0600e"
+      }
+    ],
+    "motions": [
+      {
+        "name": "hm00_000",
+        "sha256": "f58f1730409dc5b4e19773801842ed6dbb30e6e9c8eee2d7fae8e0358c9d9c3e"
+      },
+      {
+        "name": "hm2e_080",
+        "sha256": "a0bd3b997b938b6349c12aa2e9bf09c6faa5f466926168da49697cdfccf70aae"
+      }
+    ]
+  }
+]

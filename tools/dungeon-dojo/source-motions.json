@@ -1,0 +1,93 @@
+[
+  {
+    "package": "hm08",
+    "motion": "hm08_081",
+    "sourceSHA256": "dc58bac1f6a3a2d41c894e62510c0c41dfa6a7a6df6686931edf94e5c74be20b",
+    "frames": 61,
+    "loop": true
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_082",
+    "sourceSHA256": "f02e6dcb6bae14e0d92ea1bf621c93f78767280ff8e211e2ad8de38e41f3ef10",
+    "frames": 14,
+    "loop": true
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_086",
+    "sourceSHA256": "a0bada95cf0c9625e76187359d5156e27a1a318e6953853c0543bde1613a3ac6",
+    "frames": 194,
+    "loop": false
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_089",
+    "sourceSHA256": "282cd33d0f6a540e6a401496fa23fad23dd1e18c92fc9050af64de3eb03fbde7",
+    "frames": 28,
+    "loop": false
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_09a",
+    "sourceSHA256": "ea868d597c2283b87db78b6949b4fbc4696dff96ff8ce10ebbc5f62330a263f9",
+    "frames": 141,
+    "loop": true
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_09b",
+    "sourceSHA256": "0d3dc6d17e5a6fee6a4ad3eeb7c79c34b58054df2f5e93df661e8c99a95e95f4",
+    "frames": 51,
+    "loop": true
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_09c",
+    "sourceSHA256": "3715a2c5acb07d71493373894cee0499dc571efa6718087315af784d80585ffe",
+    "frames": 51,
+    "loop": false
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_09d",
+    "sourceSHA256": "dddf9bd280dfa03cdc422c1f588fe7f3d9a1fa8025f3c2ea2c065edd54b990e3",
+    "frames": 61,
+    "loop": false
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_09f",
+    "sourceSHA256": "ab7709df1bbb155deb341161b9197566eda017fa894730cb662d886592341e4c",
+    "frames": 81,
+    "loop": true
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_0a1",
+    "sourceSHA256": "2bd646618ec4850a2bf2124d26deaa95244a0f2df89a2335702dc60bdd9b3ea1",
+    "frames": 41,
+    "loop": true
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_0a2",
+    "sourceSHA256": "6975986348e38e83897aa58a73d7cb7dc05e9d9653d5767c6487011232a7b30f",
+    "frames": 41,
+    "loop": false
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_0a5",
+    "sourceSHA256": "ca26c66d79372a082bf09af3e1657e717b575e956868f4c75102f2e5b7003861",
+    "frames": 181,
+    "loop": true
+  },
+  {
+    "package": "hm08",
+    "motion": "hm08_0a7",
+    "sourceSHA256": "5ed4c49ea4067e0bb8e75a7f7880154e3295f9d56dbe3c1974e7744d83829cdf",
+    "frames": 46,
+    "loop": true
+  }
+]

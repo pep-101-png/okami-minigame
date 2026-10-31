@@ -11,6 +11,7 @@ namespace Sunward.Remaster
         public string role, motion;
         public string seatedMotion, handMotion;
         public float seed;
+        public bool contactEnabled=true;
         GameFlow game;
         bool ready, performing, contacted;
         float timer, elapsed, length;
@@ -42,7 +43,7 @@ namespace Sunward.Remaster
                 if(performing)
                 {
                     elapsed+=Time.deltaTime;
-                    if(!contacted && elapsed>=length*.58f && direction.magnitude<3.2f)
+                    if(contactEnabled && !contacted && elapsed>=length*.58f && direction.magnitude<3.2f)
                     {contacted=true;dummy.PracticeContact();}
                 }
                 if(timer>0)return;
