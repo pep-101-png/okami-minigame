@@ -48,9 +48,9 @@ namespace Sunward
         void Loop(AudioSource source,string cue)
         {
             source.Stop();source.clip=null;
-            // Only the long battle track has been identified by the playtester.
+            // The battle track is identified; the food-house stream is provisional.
             // Short cleansing/save cues must never become looping background music.
-            if(cue!="battle")return;
+            if(cue!="battle" && cue!="housemusic")return;
             var clip=Clip(cue);if(!clip || clip.length<45)return;source.clip=clip;source.Play();
         }
         void Start()
@@ -86,7 +86,7 @@ namespace Sunward
             if(desired!=musicCue){musicCue=desired;Loop(music,desired);}
             river.volume=.25f*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15);
             wind.volume=Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f;
-            music.volume=game.Panel=="dialogue"?.22f:.45f;
+            music.volume=Mathf.MoveTowards(music.volume,game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.3f);
             Vector3 delta=p-lastPosition;delta.y=0;lastPosition=p;
             if(game.Blocked || game.Player.Locked || delta.magnitude>2)return;
             if(game.Player.Grounded && game.Player.Speed>.2f)
@@ -131,10 +131,11 @@ namespace Sunward
             worldLevels[source]=new Vector2(range,volume);
             source.volume=volume*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/range));source.Play();return true;
         }
-        public void Animal(string species,Vector3 position)
+        public bool Animal(string species,Vector3 position)
         {
-            if(Time.unscaledTime<nextAnimal)return;
-            if(World(species,position,species=="rooster"?3:7,species=="rooster"?.04f:.18f))nextAnimal=Time.unscaledTime+12;
+            if(Time.unscaledTime<nextAnimal)return false;
+            if(!World(species,position,species=="rooster"?7:10,species=="rooster"?.14f:.28f))return false;
+            nextAnimal=Time.unscaledTime+3;return true;
         }
         public void Npc(int index) { Npc(index,game && game.Player?game.Player.transform.position:transform.position); }
         public void Npc(int index,Vector3 position)

@@ -18,7 +18,7 @@ namespace Sunward.Remaster
         public const float FloorY=-110, Radius=31;
         public static readonly Vector3 Centre=new Vector3(35,FloorY,0);
         public bool Unlocked { get; private set; }
-        bool open;
+        bool open, encounterStarted;
         float collapse=-1;
         Vector3[] fragmentPositions;
         Quaternion[] fragmentRotations;
@@ -45,9 +45,9 @@ namespace Sunward.Remaster
 
             }
             Unlocked=game && game.Profile.wins>0;
-            ApplyOpen(Unlocked && !game.InTrial,false);
+            ApplyOpen(false,false);
         }
-        public static bool Inside(Vector3 p)=>instance && instance.open && p.y<-3 && new Vector2(p.x-35,p.z).magnitude<Radius+2;
+        public static bool Inside(Vector3 p)=>instance && instance.open && !NativeHomeRoom.At(p) && p.y<-3 && new Vector2(p.x-35,p.z).magnitude<Radius+2;
         public static bool Shaft(Vector3 p)
         {
             if(!instance || !instance.open)return false;
@@ -99,7 +99,12 @@ namespace Sunward.Remaster
         {
             if(!game || !game.Player)return;
             bool savedUnlock=game.Profile.wins>0;
-            if(savedUnlock!=Unlocked && !game.InTrial){Unlocked=savedUnlock;ApplyOpen(Unlocked,false);}
+            if(savedUnlock!=Unlocked && !game.InTrial)Unlocked=savedUnlock;
+            // A previous save unlocks access, but only entering/completing the upper arena reveals the shaft.
+            bool inUpper=new Vector2(game.Player.transform.position.x-35,game.Player.transform.position.z).magnitude<18;
+            if(!game.InTrial && !Inside(game.Player.transform.position) && !Shaft(game.Player.transform.position))
+            {if(!inUpper && open)ApplyOpen(false,false);else if(inUpper && Unlocked && !open)ApplyOpen(true,false);}
+            if(game.Player.transform.position.y>-3)encounterStarted=false;
             var p=game.Player.transform.position;
             bool visible=true;
             if(upperGround && groundVisible!=visible){upperGround.enabled=visible;groundVisible=visible;}
@@ -115,8 +120,9 @@ namespace Sunward.Remaster
             }
             if(!Inside(p)||game.Blocked)return;
             if(p.y<FloorY-12){game.Player.Recover(Centre+Vector3.up*1.2f);return;}
+            if(!encounterStarted && p.y<FloorY+2 && !game.InTrial){encounterStarted=true;game.StartBossTrial();}
             bool near=mirror && Vector3.Distance(p,mirror.position)<3.2f;
-            game.WorldPrompt(near?"E · Return home through the memory mirror":"The chamber beneath the seal · no bosses yet");
+            game.WorldPrompt(near?"E · Return home through the memory mirror":"Crimson Helm’s chamber · E at the mirror returns home");
             if(near && game.Player.input.Interact.WasPressedThisFrame())game.ReturnHome();
         }
         void OnDestroy(){if(instance==this)instance=null;if(upperGround)upperGround.enabled=true;}

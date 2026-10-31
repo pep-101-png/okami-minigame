@@ -1048,7 +1048,7 @@ MonoBehaviour:
   resource: Okami/em02
   idle: em00_000
   walk: em00_010
-  run: em00_012
+  run: em00_010
   windup: em00_152
   strike: em00_152
   recover: em00_152

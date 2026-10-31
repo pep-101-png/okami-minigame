@@ -11,6 +11,7 @@ namespace Sunward
         public Transform headSocket, backSocket;
         public bool Busy => strike != null || charging || voice > 0;
         public bool Attacking => strike != null;
+        public float FormMultiplier => nativeBody && nativeBody.Shiranui?2:1;
 
         WeaponDefinition weapon;
         Sunward.Remaster.OriginalWeaponCatalog.Entry originalWeapon;
@@ -72,12 +73,12 @@ namespace Sunward
         {
             float length=nativeBody && nativeBody.Ready?nativeBody.ClipLength(next.clip):next.duration;
             if(originalView)length=Mathf.Max(length,originalView.AttackLength(next.clip));
-            strike=new Strike {clip=next.clip,duration=Mathf.Max(.2f,length),damage=next.damage,range=next.range,arc=next.arc,start=next.start,end=next.end,lunge=next.lunge,stagger=next.stagger};
+            strike=new Strike {clip=next.clip,duration=Mathf.Max(.1f,length/FormMultiplier),damage=next.damage,range=next.range,arc=next.arc,start=next.start,end=next.end,lunge=next.lunge,stagger=next.stagger};
             elapsed = 0;
             hit.Clear();
             dummyHits.Clear();
             charging = false;
-            motor.animationView.Play(strike.clip,.06f,strike.duration,true);
+            motor.animationView.Play(strike.clip,Mathf.Min(.12f,strike.duration*.2f),strike.duration,true);
             if(originalView)originalView.BeginAttack(strike.clip);
             game.Audio.Cue("weapon-"+originalWeapon.resource+(heavy?"-heavy":""));
             if (originalWeapon.resource=="wp24")
@@ -224,8 +225,10 @@ namespace Sunward
                 hit.Add(e);
                 float mul = 1 + (ProgressionRules.Level(game.Profile) - 1) * .045f + game.Profile.upgrades.strength * .18f;
                 mul *= 1 + (Glaive ? game.Profile.upgrades.spear * .12f : game.Profile.upgrades.sundial * .14f);
-                e.Damage(strike.damage * mul, d.normalized, strike.stagger);
+                e.Damage(strike.damage * mul*FormMultiplier, d.normalized, strike.stagger);
                 game.Fx.Impact(e.transform.position + Vector3.up * .8f, Glaive ? new Color(.9f, .75f, .48f) : new Color(1, .38f, .13f));
+                Sunward.Remaster.CelestialBrush.Burst("Spark",e.transform.position+Vector3.up*.8f,heavy?18:9,heavy?.7f:.4f);
+                if(originalWeapon.family=="reflector")Sunward.Remaster.CelestialBrush.Burst(originalWeapon.resource=="wp24"?"Flame":"SpiritGlow",e.transform.position+Vector3.up,8,.45f);
                 game.Audio.Cue(heavy ? "heavy-impact" : originalWeapon.family=="reflector" ? "flame-impact" : "impact");
                 game.HitPause(heavy ? .065f : .04f);
             }

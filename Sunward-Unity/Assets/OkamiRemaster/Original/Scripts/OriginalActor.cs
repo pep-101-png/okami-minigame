@@ -17,6 +17,7 @@ namespace Sunward.Remaster
         public bool holdIdlePose;
         public GameFlow game;
         public bool Ready { get; private set; }
+        public void SetVenueVisible(bool visible){if(rig!=null)foreach(var r in rig.Root.GetComponentsInChildren<Renderer>())r.enabled=visible;}
         public string CurrentSourceMotion { get; private set; }
         NativePaintedRig rig;
         NativePoseBank bank;
@@ -31,6 +32,7 @@ namespace Sunward.Remaster
         float activityRate=1;
         bool activityLoop;
         public string seatedArmMotion;
+        public float seatedArmWeight=.7f;
         public float ActivityLength(string name) => bank!=null && bank.Find(name)!=null?bank.Find(name).Duration:0;
         public void PlayActivity(string name,bool loop,float rate=1,float phase=0)
         {
@@ -127,7 +129,7 @@ namespace Sunward.Remaster
             blendTime += dt;
             if ((!game || !game.Blocked) && (!enemy || !enemy.VisualStunned))
             {
-                float pace=duration>.001f?current.Duration/duration:enemy && moving?Mathf.Clamp(filteredSpeed/(running?4.5f:2),.4f,1.5f):!string.IsNullOrEmpty(activity)?activityRate:1;
+                float pace=duration>.001f?current.Duration/duration:enemy && moving?Mathf.Clamp(filteredSpeed/(running && run!=walk?4.5f:2),.4f,1.5f):!string.IsNullOrEmpty(activity)?activityRate:1;
                 time+=dt*pace;
             }
             float sampleTime = time;
@@ -139,7 +141,7 @@ namespace Sunward.Remaster
             }
             bank.Sample(current, sampleTime, rig.Bones, fromPosition, fromRotation, fromScale, Mathf.Clamp01(blendTime / .12f), loop);
             if(!string.IsNullOrEmpty(seatedArmMotion) && activity!=null)
-                bank.SampleArmRotations(bank.Find(seatedArmMotion),time,rig.Bones,.7f);
+                bank.SampleArmRotations(bank.Find(seatedArmMotion),time,rig.Bones,seatedArmWeight);
         }
 
         void OnDestroy() { if (rig != null) rig.Dispose(); }

@@ -72,10 +72,12 @@ namespace Sunward
             if (game.InTrial)
             {
                 var d = guarded - new Vector3(35, guarded.y, 0);
-                if (d.magnitude > 17.0f)
-                    guarded = new Vector3(35, guarded.y, 0) + d.normalized * 17;
+                float radius=game.BossTrial?29:17;
+                if (d.magnitude > radius)
+                    guarded = new Vector3(35, guarded.y, 0) + d.normalized * radius;
             }
 
+            guarded=Sunward.Remaster.NativeHomeRoom.Guard(old,guarded);
             guarded=Sunward.Remaster.LowerArena.Guard(guarded);
             var b = valley.Data.bounds;
             guarded.x = Mathf.Clamp(guarded.x, b.minX + .5f, b.maxX - .5f);
@@ -116,7 +118,7 @@ namespace Sunward
             right.Normalize();
             Vector3 direction = Vector3.ClampMagnitude(forward * m.y + right * m.x, 1);
             float target = input.Walk.IsPressed() ? WalkSpeed : input.Sprint.IsPressed() && game.Stamina > 5 ? SprintSpeed : JogSpeed;
-            target *= 1 + game.Profile.upgrades.movement * .03f;
+            target *= (1 + game.Profile.upgrades.movement * .03f)*game.Combat.FormMultiplier;
             if (game.Combat.Busy)
                 target *= .17f;
             horizontal = Vector3.MoveTowards(horizontal, direction * target, dt * (direction.sqrMagnitude > .01f ? 13 : 17));
@@ -151,7 +153,7 @@ namespace Sunward
             Vertical -= Gravity * dt;
             if (game.Combat.Attacking && animationView.Current == "AirStrike" && !Grounded)
                 Vertical = Mathf.Min(Vertical, -12);
-            Vector3 movement = (Dodging ? dodgeDirection * 9 : horizontal) * dt + Vector3.up * Vertical * dt;
+            Vector3 movement = (Dodging ? dodgeDirection * (9*game.Combat.FormMultiplier) : horizontal) * dt + Vector3.up * Vertical * dt;
             bool wasAir = !Grounded;
             if(wasAir)airborneTime+=dt;
             Vector3 beforeMove = transform.position;
@@ -191,12 +193,12 @@ namespace Sunward
 
             if (!Dodging && !game.Combat.Busy && landing <= 0)
                 animationView.Locomotion(Speed, turn, !Grounded, Vertical);
-            game.Stamina = Mathf.Clamp(game.Stamina + dt * (Speed > 5 ? -7 : 19 + game.Profile.upgrades.stamina), 0, game.MaxStamina);
+            game.Stamina = Mathf.Clamp(game.Stamina + dt * (Speed/game.Combat.FormMultiplier > 5 ? -7 : 19 + game.Profile.upgrades.stamina), 0, game.MaxStamina);
             game.Energy = Mathf.Min(game.MaxEnergy, game.Energy + dt * (game.InTrial ? 5 : 12));
         }
         bool UpdateSwimming(float dt)
         {
-            bool deep = !game.InTrial && Valley.Depth(transform.position) > .42f;
+            bool deep = !game.InTrial && !Sunward.Remaster.NativeHomeRoom.At(transform.position) && !Sunward.Remaster.LowerArena.Inside(transform.position) && !Sunward.Remaster.LowerArena.Shaft(transform.position) && Valley.Depth(transform.position) > .42f;
             if (!deep || waterLeap > 0 || transform.position.y > .02f)
             {
                 if (Swimming) animationView.Play("Land_Soft", .1f, .2f, true);
@@ -208,9 +210,9 @@ namespace Sunward
             Vector3 forward = view.forward; forward.y = 0; forward.Normalize();
             Vector3 right = view.right; right.y = 0; right.Normalize();
             Vector3 direction = Vector3.ClampMagnitude(forward * m.y + right * m.x, 1);
-            horizontal = Vector3.MoveTowards(horizontal, direction * (input.Sprint.IsPressed() ? 2.0f : 1.35f), dt * 5);
+            horizontal = Vector3.MoveTowards(horizontal, direction * (input.Sprint.IsPressed() ? 2.0f : 1.35f)*game.Combat.FormMultiplier, dt * 5);
             // Put the torso at the waterline so the leg stroke is submerged.
-            float surface = Mathf.Max(valley.Height(transform.position)+.03f, -.34f - .68f);
+            float surface = Mathf.Max(valley.Height(transform.position)+.03f, -.34f - .38f);
             Vertical = 0;
             Vector3 before = transform.position;
             Push(horizontal * dt + Vector3.up * Mathf.Clamp(surface - before.y, -dt * 3, dt * 3));
