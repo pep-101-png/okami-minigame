@@ -68,7 +68,7 @@ namespace Sunward.Remaster
                 if (bank.Find(idle) == null) throw new InvalidOperationException("Original idle is missing: " + idle);
                 Change(idle);
                 bank.Sample(current, 0, rig.Bones, fromPosition, fromRotation, fromScale, 1, true);
-                if(enemy)foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>())
+                if(enemy)foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
                 {renderer.localBounds=new Bounds(Vector3.zero,new Vector3(32,24,32));renderer.updateWhenOffscreen=true;}
                 rig.Root.SetActive(true);
                 Ready = true;

@@ -25,7 +25,7 @@ namespace Sunward.Remaster
             if(idle==null)throw new InvalidOperationException("Original weapon idle is missing: "+source);
             // Rosary bones can extend beyond the shared actor's 8 m bounds.
             // Keep the original whip visible throughout its authored reach.
-            foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>())
+            foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
             {renderer.localBounds=new Bounds(Vector3.zero,new Vector3(64,32,64));renderer.updateWhenOffscreen=true;}
             rig.Root.SetActive(true);Sample(idle,0,true);
         }
