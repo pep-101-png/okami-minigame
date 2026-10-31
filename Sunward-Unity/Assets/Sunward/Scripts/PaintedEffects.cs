@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,87 +7,59 @@ namespace Sunward
     public sealed class PaintedEffects : MonoBehaviour
     {
         public Material ink;
+        [Serializable] sealed class Appearance { public string resource; public Vector3 offset, scale; }
+        [Serializable] sealed class OriginalFeedback { public Appearance ring, warning, projectile; }
+        OriginalFeedback originals;
+        void Load()
+        {
+            if (originals != null) return;
+            var data = Resources.Load<TextAsset>("Okami/Feedback");
+            if (!data) throw new InvalidOperationException("Original Okami feedback assets are missing.");
+            originals = JsonUtility.FromJson<OriginalFeedback>(data.text);
+        }
         public LineRenderer Ring(Vector3 center, Color color, float radius, float life = .65f)
         {
-            if (!MeshSafety.Finite(center) || !float.IsFinite(radius))
-                throw new System.InvalidOperationException("Invalid painted-ring input: " + center + ", radius " + radius);
-            var go = new GameObject("Painted impact ring");
+            if (!MeshSafety.Finite(center) || !float.IsFinite(radius) || radius <= 0)
+                throw new InvalidOperationException("Invalid original feedback placement.");
+            Load();
+            var source = color.r > color.g * 1.2f ? originals.warning : originals.ring;
+            var go = new GameObject("Original Okami feedback · " + source.resource);
             go.transform.position = center + Vector3.up * .035f;
-            var line = go.AddComponent<LineRenderer>();
-            line.sharedMaterial = ink;
-            line.useWorldSpace = false;
-            line.positionCount = 49;
-            line.loop = false;
-            line.widthCurve = new AnimationCurve(new Keyframe(0, .7f), new Keyframe(.5f, 1), new Keyframe(1, .2f));
-            line.widthMultiplier = .05f;
-            line.startColor = line.endColor = color;
-            for (int i = 0; i < 49; i++)
-            {
-                float a = i / 48f * Mathf.PI * 2;
-                line.SetPosition(i, new Vector3(Mathf.Sin(a), 0, Mathf.Cos(a)) * radius * (1 + Mathf.Sin(a * 7) * .015f));
-            }
-
-            StartCoroutine(Fade(line, life));
-            return line;
+            go.transform.localScale = new Vector3(radius, 1, radius);
+            go.AddComponent<Sunward.Remaster.OriginalVisual>().Load(source.resource, source.offset, source.scale);
+            // Existing combat owns a LineRenderer handle. Keep that lifetime
+            // handle without drawing invented line or ring geometry.
+            var handle = go.AddComponent<LineRenderer>();
+            handle.enabled = false; handle.positionCount = 0;
+            StartCoroutine(Lifetime(handle, life));
+            return handle;
         }
-
-        IEnumerator Fade(LineRenderer line, float life)
+        IEnumerator Lifetime(LineRenderer handle, float life)
         {
-            float t = 0;
-            var c = line.startColor;
-            while (line && t < life)
+            float elapsed = 0;
+            var renderers = handle.GetComponentsInChildren<Renderer>();
+            while (handle && elapsed < life)
             {
-                t += Time.deltaTime;
-                c.a = 1 - t / life;
-                line.startColor = line.endColor = c;
+                elapsed += Time.deltaTime;
+                float alpha = float.IsPositiveInfinity(life) ? 1 : Mathf.Clamp01(1 - elapsed / life);
+                foreach (var renderer in renderers)
+                    if (renderer && renderer != handle && renderer.sharedMaterial && renderer.sharedMaterial.HasProperty("_Color"))
+                        renderer.sharedMaterial.SetColor("_Color", new Color(1, 1, 1, alpha));
                 yield return null;
             }
-
-            if (line)
-                Destroy(line.gameObject);
+            if (handle) Destroy(handle.gameObject);
         }
-
-        // Curved, tapered orbital strokes ported from the original Sundial effect.
+        public GameObject Boundary(Vector3 center, float radius) => Ring(center, Color.red, radius, float.PositiveInfinity).gameObject;
+        public void AttachProjectile(GameObject owner)
+        {
+            Load();
+            owner.AddComponent<Sunward.Remaster.OriginalVisual>().Load(originals.projectile.resource, originals.projectile.offset, originals.projectile.scale);
+        }
         public void SundialOrbit(Vector3 center, bool heavy)
         {
-            for (int layer = 0; layer < 3; layer++)
-            {
-                var go = new GameObject("Sundial · painted flame orbit");
-                go.transform.position = center;
-                var line = go.AddComponent<LineRenderer>();
-                line.sharedMaterial = ink;
-                line.useWorldSpace = false;
-                line.positionCount = 28;
-                line.widthMultiplier = heavy ? .16f : .10f;
-                line.widthCurve = new AnimationCurve(new Keyframe(0, 0), new Keyframe(.25f, 1), new Keyframe(1, 0));
-                line.startColor = line.endColor = layer == 1 ? new Color(1, .80f, .38f) : new Color(.88f, .34f, .16f);
-                for (int i = 0; i < 28; i++)
-                {
-                    float angle = i / 27f * Mathf.PI * 1.8f + layer * .9f;
-                    float radius = heavy ? 2 : 1.6f;
-                    line.SetPosition(i, new Vector3(Mathf.Sin(angle) * radius, .6f + Mathf.Sin(angle * 2) * .25f, Mathf.Cos(angle) * radius));
-                }
-
-                StartCoroutine(Fade(line, heavy ? .42f : .32f));
-            }
+            // wp24's native skeletal appearance remains active. The original
+            // EST/SEQ dispatcher is unfinished; do not substitute a custom orbit.
         }
-
-        public void Impact(Vector3 point, Color color)
-        {
-            Ring(point, color, .7f, .22f);
-            for (int i = 0; i < 5; i++)
-            {
-                var g = new GameObject("Dry brush impact");
-                var l = g.AddComponent<LineRenderer>();
-                l.sharedMaterial = ink;
-                l.positionCount = 3;
-                l.startWidth = .065f;
-                l.endWidth = 0;
-                Vector3 d = Quaternion.Euler(i * 51, i * 71, i * 31) * Vector3.up;
-                l.SetPositions(new[] { point, point + d * .25f, point + d * .6f });
-                l.startColor = l.endColor = color;
-                StartCoroutine(Fade(l, .20f));
-            }
-        }
+        public void Impact(Vector3 point, Color color) { Ring(point, color, .7f, .22f); }
     }
 }
