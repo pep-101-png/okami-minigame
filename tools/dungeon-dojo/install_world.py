@@ -62,7 +62,7 @@ for section in range(len(profiles)-1):
  p=OUT/'Meshes'/('Dungeon-earth-shaft-'+str(section)+'.asset');m.write(p);mat=OUT/'Materials'/('Dungeon-earth-shaft-'+str(section)+'.mat');template=(OUT/'Materials/vta0-0.mat').read_text().replace(guid(RES/'vta0/Texture-0.png'),guid(texdir/('Soil.png' if section<2 else 'Rock.png')))
  if section>=2:template=template.replace(guid(OUT/'Shaders/OriginalPaint.shader'),guid(OUT/'Shaders/OriginalDepthsPaint.shader'))
  mat.write_text(template);go=s.add('Original textured earth shaft '+str(section),guid(p),guid(mat),parent=parent);collider(go,guid(p));shaft.append(go)
-lower=next(i for i,b in s.blocks.items() if 'Assembly-CSharp::Sunward.Remaster.LowerArena\n' in b);s.set(lower,'chamber',f'{{fileID: {chamber}}}');s.set(chamber,'m_IsActive',0)
+lower=next(i for i,b in s.blocks.items() if 'Assembly-CSharp::Sunward.Remaster.LowerArena\n' in b);s.set(lower,'chamber',f'{{fileID: {chamber}}}');s.blocks[lower]+='  shaftRim:\n'+''.join('  - {x: %.7g, y: %.7g}\n'%(p[0],p[2]) for p in rim);s.set(chamber,'m_IsActive',0)
 # Keep all other village roots intact; adjust only the three practice pairs.
 floors=[]
 for r in w.renderers():

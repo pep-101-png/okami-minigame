@@ -13,6 +13,7 @@ namespace Sunward.Remaster
         public Collider[] lidColliders;
         public Renderer upperGround;
         public Transform mirror;
+        public Vector2[] shaftRim;
         static LowerArena instance;
         public const float FloorY=-110, Radius=31;
         public static readonly Vector3 Centre=new Vector3(35,FloorY,0);
@@ -47,7 +48,19 @@ namespace Sunward.Remaster
             ApplyOpen(Unlocked && !game.InTrial,false);
         }
         public static bool Inside(Vector3 p)=>instance && instance.open && p.y<-3 && new Vector2(p.x-35,p.z).magnitude<Radius+2;
-        public static bool Shaft(Vector3 p)=>instance && instance.open && new Vector2(p.x-35,p.z).magnitude<3.8f;
+        public static bool Shaft(Vector3 p)
+        {
+            if(!instance || !instance.open)return false;
+            var rim=instance.shaftRim;
+            if(rim==null || rim.Length<3)return new Vector2(p.x-35,p.z).magnitude<3.8f;
+            bool inside=false;
+            for(int i=0,j=rim.Length-1;i<rim.Length;j=i++)
+            {
+                var a=rim[i];var b=rim[j];
+                if((a.y>p.z)!=(b.y>p.z) && p.x<(b.x-a.x)*(p.z-a.y)/(b.y-a.y)+a.x)inside=!inside;
+            }
+            return inside;
+        }
         public static bool Height(Vector3 p,out float y)
         {
             y=FloorY;
