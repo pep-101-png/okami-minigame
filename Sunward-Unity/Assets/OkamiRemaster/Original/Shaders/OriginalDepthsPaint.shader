@@ -20,7 +20,7 @@ Shader "Sunward/Original Okami Depths Paint" {
 #if defined(_ADDITIONAL_LIGHTS)
    uint count=GetAdditionalLightsCount();for(uint k=0;k<min(count,8u);k++){Light glow=GetAdditionalLight(k,i.world);localGlow+=glow.color*glow.distanceAttenuation*(.25+.75*saturate(dot(normalize(i.normal),glow.direction)));}
 #endif
-   c.rgb*=i.color.rgb*(.62+.18*shade*light.shadowAttenuation+min(localGlow*.3,.8));c.a=1;return c; }
+   c.rgb*=i.color.rgb*(.23+.08*shade*light.shadowAttenuation+min(localGlow*.45,1.2));float distanceFog=saturate((distance(i.world,_WorldSpaceCameraPos)-30)/120)*.7;c.rgb=lerp(c.rgb,float3(.045,.015,.025),distanceFog);c.a=1;return c; }
   ENDHLSL
   Pass {
    Name "PaintedForward"

@@ -1,0 +1,63 @@
+{
+  "nativeArchitectureBounds": [
+    [
+      -53.1925033569336,
+      -114.125,
+      -88.275
+    ],
+    [
+      139.44499664306642,
+      -28.242503356933582,
+      87.94499664306642
+    ]
+  ],
+  "highestArchitectureBelowVillage": 28.242503356933582,
+  "floorSamples": 298,
+  "floorHeightRange": [
+    -110.0,
+    -109.33999997377396
+  ],
+  "shaftSections": 6,
+  "shaftBoundary": 68,
+  "shaftOpenBottom": -34,
+  "training": [
+    {
+      "package": "hm08",
+      "frames": 262,
+      "footErrorBelow1e6": true,
+      "maxWidth": 1.9646040968496448,
+      "maxDepth": 2.5759690346725628,
+      "mask": [
+        0,
+        2
+      ]
+    },
+    {
+      "package": "hm2d",
+      "frames": 312,
+      "footErrorBelow1e6": true,
+      "maxWidth": 2.6382422726263206,
+      "maxDepth": 2.139437783321874,
+      "mask": [
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      "package": "hm2e",
+      "frames": 346,
+      "footErrorBelow1e6": true,
+      "maxWidth": 1.4403251798799732,
+      "maxDepth": 1.3645522940853323,
+      "mask": [
+        0,
+        2
+      ]
+    }
+  ],
+  "csharpSyntaxFiles": 96,
+  "unityCompilation": "UNVERIFIED: no Unity editor",
+  "unityPlayback": "UNVERIFIED",
+  "lightingParticles": "UNVERIFIED in Unity"
+}

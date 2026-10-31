@@ -14,7 +14,7 @@ namespace Sunward.Remaster
         public Renderer upperGround;
         public Transform mirror;
         static LowerArena instance;
-        public const float FloorY=-20, Radius=31;
+        public const float FloorY=-110, Radius=31;
         public static readonly Vector3 Centre=new Vector3(35,FloorY,0);
         public bool Unlocked { get; private set; }
         bool open;
@@ -31,15 +31,17 @@ namespace Sunward.Remaster
             if(chamber)
             {
                 chamber.SetActive(true);
-                for(int i=0;i<8;i++)
+                for(int i=0;i<6;i++)
                 {
-                    float a=i*Mathf.PI*.25f;var anchor=new GameObject("Original lantern light "+i);anchor.transform.SetParent(chamber.transform,false);
-                    anchor.transform.position=Centre+new Vector3(Mathf.Cos(a)*26,5,Mathf.Sin(a)*26);
-                    var light=anchor.AddComponent<Light>();light.type=LightType.Point;light.range=23;light.intensity=30f;light.shadows=LightShadows.None;
-                    light.color=i%2==0?new Color(.34f,.65f,1):new Color(1,.64f,.30f);
-                    OriginalAtmosphere.Create("SpiritGlow",chamber.transform,anchor.transform.position+Vector3.down*2,1,.35f,4,.08f,1.2f);
+                    float a=i*Mathf.PI/3;var anchor=new GameObject("Boss cavern ember light "+i);anchor.transform.SetParent(chamber.transform,false);
+                    anchor.transform.position=Centre+new Vector3(Mathf.Cos(a)*27,4,Mathf.Sin(a)*27);
+                    var light=anchor.AddComponent<Light>();light.type=LightType.Point;light.range=38;light.intensity=45;light.shadows=LightShadows.None;
+                    light.color=i%2==0?new Color(1,.33f,.12f):new Color(.70f,.12f,.08f);
+                    OriginalAtmosphere.Create("Flame",chamber.transform,anchor.transform.position+Vector3.down*3,5,1.4f,2.8f,.35f,.6f);
                 }
-                OriginalAtmosphere.Create("Spirit",chamber.transform,Centre+Vector3.up*3,3,.16f,8,.05f,23);
+                var mist=OriginalAtmosphere.Create("Steam",chamber.transform,Centre+Vector3.up*.8f,9,4,9,.06f,26);
+                if(mist){var main=mist.main;main.startColor=new Color(.34f,.19f,.22f,.32f);}
+
             }
             Unlocked=game && game.Profile.wins>0;
             ApplyOpen(Unlocked && !game.InTrial,false);
@@ -47,7 +49,17 @@ namespace Sunward.Remaster
         public static bool Inside(Vector3 p)=>instance && instance.open && p.y<-3 && new Vector2(p.x-35,p.z).magnitude<Radius+2;
         public static bool Shaft(Vector3 p)=>instance && instance.open && new Vector2(p.x-35,p.z).magnitude<3.8f;
         public static bool Height(Vector3 p,out float y)
-        {y=FloorY;return Inside(p)||Shaft(p);}
+        {
+            y=FloorY;
+            if(!Inside(p)&&!Shaft(p))return false;
+            // Ray only the native dais: ceiling, shaft and altar cannot become floor.
+            int n=Physics.RaycastNonAlloc(new Vector3(p.x,Mathf.Max(p.y+.5f,FloorY+3),p.z),Vector3.down,floorHits,220,1<<6,QueryTriggerInteraction.Ignore);
+            float top=float.NegativeInfinity;
+            for(int i=0;i<n;i++)if(floorHits[i].collider.name.StartsWith("Original boss floor"))top=Mathf.Max(top,floorHits[i].point.y);
+            if(!float.IsNegativeInfinity(top))y=top;
+            return true;
+        }
+        static readonly RaycastHit[] floorHits=new RaycastHit[48];
         public static Vector3 Guard(Vector3 p)
         {
             if(!Inside(p))return p;
@@ -89,7 +101,7 @@ namespace Sunward.Remaster
                 if(collapse>1.6f){collapse=-1;cover.SetActive(false);}
             }
             if(!Inside(p)||game.Blocked)return;
-            if(p.y<FloorY-3){game.Player.Recover(Centre+Vector3.up*.08f);return;}
+            if(p.y<FloorY-12){game.Player.Recover(Centre+Vector3.up*1.2f);return;}
             bool near=mirror && Vector3.Distance(p,mirror.position)<3.2f;
             game.WorldPrompt(near?"E · Return home through the memory mirror":"The chamber beneath the seal · no bosses yet");
             if(near && game.Player.input.Interact.WasPressedThisFrame())game.ReturnHome();
