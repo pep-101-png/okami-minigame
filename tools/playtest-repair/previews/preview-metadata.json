@@ -1,0 +1,58 @@
+[
+  {
+    "image": "village.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "ebabef70079f9e4da1b0e7877435ec0ba7783bc6d85e99be279de0b7409c24ad",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "market.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "ebabef70079f9e4da1b0e7877435ec0ba7783bc6d85e99be279de0b7409c24ad",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "houses.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "ebabef70079f9e4da1b0e7877435ec0ba7783bc6d85e99be279de0b7409c24ad",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "arena.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "ebabef70079f9e4da1b0e7877435ec0ba7783bc6d85e99be279de0b7409c24ad",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "farm.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "ebabef70079f9e4da1b0e7877435ec0ba7783bc6d85e99be279de0b7409c24ad",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "home.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "ebabef70079f9e4da1b0e7877435ec0ba7783bc6d85e99be279de0b7409c24ad",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "dojo.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "ebabef70079f9e4da1b0e7877435ec0ba7783bc6d85e99be279de0b7409c24ad",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "food-house.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "ebabef70079f9e4da1b0e7877435ec0ba7783bc6d85e99be279de0b7409c24ad",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  }
+]

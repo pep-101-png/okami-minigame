@@ -1,0 +1,30 @@
+[
+  {
+    "image": "home-interior.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "3a478b1a2d5a1c009090a01f5ef0f25166bfe744c8b9dfb3253f636450ed19bc",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "depths.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "3a478b1a2d5a1c009090a01f5ef0f25166bfe744c8b9dfb3253f636450ed19bc",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "market.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "3a478b1a2d5a1c009090a01f5ef0f25166bfe744c8b9dfb3253f636450ed19bc",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "dojo.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "3a478b1a2d5a1c009090a01f5ef0f25166bfe744c8b9dfb3253f636450ed19bc",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  }
+]

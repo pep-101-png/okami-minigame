@@ -1,0 +1,77 @@
+{
+  "sourceCommit": "aefd595771e933a3313ecb4170251764c94ab1e3",
+  "validation": "passed",
+  "clips": [
+    {
+      "name": "walk-side",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "walk-front",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "walk-rear-quarter",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "jog-side",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "jog-front",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "jog-rear-quarter",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "sprint-side",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "sprint-front",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "sprint-rear-quarter",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "jump-air-land-side",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "gait-stop-turn-side",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "dodge-directions-rear-quarter",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "combat-light-heavy-charge-side",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "windflower-gameplay-route",
+      "capture": "frames_captured_coverage_incomplete",
+      "encoding": "encoded_verified_unreviewed"
+    }
+  ],
+  "matchesCurrentCandidate": false
+}

@@ -1,0 +1,177 @@
+[
+  {
+    "package": "wp20",
+    "sourceSHA256": "8dac8b57f1b5735a38152866cff0be2aebf396678adf112c908299261ab9fab9",
+    "previous": [
+      0
+    ],
+    "visibleGroups": [
+      0
+    ]
+  },
+  {
+    "package": "wp21",
+    "sourceSHA256": "0d377c718cf30be54df8e6d27a6db76ae25a35a3f8bb897862441a79d8da063f",
+    "previous": [
+      0
+    ],
+    "visibleGroups": [
+      0,
+      1
+    ]
+  },
+  {
+    "package": "wp22",
+    "sourceSHA256": "7accf4fe6d7da8ccfdef7d5e6293e106c8f5775180ec5471be5f6fa431ae6325",
+    "previous": [
+      0
+    ],
+    "visibleGroups": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "wp23",
+    "sourceSHA256": "89e535b20edecc1b6d737827ed2da68a2e1ecd213a5b928a2efd38311b679228",
+    "previous": [
+      0
+    ],
+    "visibleGroups": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  {
+    "package": "wp24",
+    "sourceSHA256": "7850904c48ed5fd7e94f2abdf66eaae6461a3018a3ef7d094efa1078bbafc19c",
+    "previous": [
+      0,
+      1
+    ],
+    "visibleGroups": [
+      0,
+      1
+    ]
+  },
+  {
+    "package": "wp25",
+    "sourceSHA256": "0e267a173b1b067464f222e66f86d850281ca8d1acc5cbebe2aa0b13fd3c9703",
+    "previous": [
+      3
+    ],
+    "visibleGroups": [
+      3
+    ]
+  },
+  {
+    "package": "wp26",
+    "sourceSHA256": "b2beff56c9f4238b6a1a7e2f2bab803dc968aa5f6039e00fc4a8a086a98224ea",
+    "previous": [
+      3
+    ],
+    "visibleGroups": [
+      1
+    ]
+  },
+  {
+    "package": "wp27",
+    "sourceSHA256": "1a25e2a792eb9040b1782da3d6b6d4948c5ed11d20791646699223dc0d460c5b",
+    "previous": [
+      3
+    ],
+    "visibleGroups": [
+      1
+    ]
+  },
+  {
+    "package": "wp28",
+    "sourceSHA256": "36c42f0bdee030486d4ad9a368bd10eff25da065ccad95fb722f9d3925abadc2",
+    "previous": [
+      3
+    ],
+    "visibleGroups": [
+      1,
+      2
+    ]
+  },
+  {
+    "package": "wp29",
+    "sourceSHA256": "7966f9447ad67add50eee729225afe72f3ea83fff09ff8ef1080b11b1d586d84",
+    "previous": [
+      3
+    ],
+    "visibleGroups": [
+      1
+    ]
+  },
+  {
+    "package": "wp2a",
+    "sourceSHA256": "85051d23fb9883b612276134184609159e6be608d3f3cd9d7cc0d54c1b1aa0cb",
+    "previous": [
+      0
+    ],
+    "visibleGroups": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "package": "wp2b",
+    "sourceSHA256": "9266eb6deda2404f275087ea43fb09812ad9b0346ad5434cea5147c54dffd463",
+    "previous": [
+      0
+    ],
+    "visibleGroups": [
+      0,
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "package": "wp2c",
+    "sourceSHA256": "d6cf656cc3740842eed9a2ab9293edebf0ea4ca0f03beb593c557a6a909e9d3a",
+    "previous": [
+      0
+    ],
+    "visibleGroups": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "package": "wp2d",
+    "sourceSHA256": "2fc937257d8443b4c9f8d4afb8b3d7a3150c861d239f7e36e4c76c1052518f91",
+    "previous": [
+      0
+    ],
+    "visibleGroups": [
+      0
+    ]
+  },
+  {
+    "package": "wp2e",
+    "sourceSHA256": "64599535213f3bbeee6543d0cc7282c3f1bf1e2f1bed257b79acdcbfa3b12cce",
+    "previous": [
+      0
+    ],
+    "visibleGroups": [
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+]

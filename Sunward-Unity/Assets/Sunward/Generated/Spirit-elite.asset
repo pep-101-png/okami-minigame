@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spirit-elite
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.EnemyDefinition
   id: elite
-  title: Crimson oathkeeper
+  title: Black Imp
   visual: {fileID: 3653945641635979712, guid: 8aa07e264e6f20843b7a8a7f11e83757, type: 3}
   hp: 32
   damage: 21

@@ -12,6 +12,7 @@ namespace Sunward
         float yaw = 37, pitch = 25, distance = 15;
         Vector3 focus;
         bool initialized;
+        public void SnapFocus(){initialized=false;}
         void LateUpdate()
         {
             if (!target)

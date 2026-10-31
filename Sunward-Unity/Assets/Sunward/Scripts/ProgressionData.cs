@@ -136,6 +136,7 @@ namespace Sunward
 
         public static bool Buy(ProfileData p, string id)
         {
+            if (id.StartsWith("weapon:")) return Sunward.Remaster.OriginalWeaponCatalog.Buy(p, id.Substring(7));
             if (id == "unlock-sundial")
             {
                 if (Array.IndexOf(p.owned, "sundial") >= 0 || p.coins < 110)

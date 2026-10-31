@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Sunward
@@ -5,84 +7,149 @@ namespace Sunward
     public sealed class ValleyAudio : MonoBehaviour
     {
         public AudioClip bark, growl, hit, howl;
-        AudioSource effects, ambience;
-        AudioClip jump, land, attack, impact, dash, collect, wind, heavy, heavyImpact, flame, flameImpact, bell;
+        [Serializable] sealed class CueEntry { public string cue, resource; }
+        [Serializable] sealed class CueBank { public CueEntry[] cues; }
+        readonly Dictionary<string,List<AudioClip>> bank = new Dictionary<string,List<AudioClip>>();
+        readonly Dictionary<string,int> next = new Dictionary<string,int>();
+        AudioSource effects, music, wind, river;
+        readonly List<AudioSource> worldSources = new List<AudioSource>();
+        readonly Dictionary<AudioSource,Vector2> worldLevels = new Dictionary<AudioSource,Vector2>();
+        Transform ears;
+        readonly Dictionary<string,float> cooldowns = new Dictionary<string,float>();
+        float nextAnimal, nextVoice;
+        GameFlow game;
+        string musicCue;
+        float steps, water;
+        Vector3 lastPosition;
         void Awake()
         {
-            effects = gameObject.AddComponent<AudioSource>();
-            effects.volume = .40f;
-            effects.spatialBlend = 0;
-            ambience = gameObject.AddComponent<AudioSource>();
-            ambience.volume = .018f;
-            ambience.loop = true;
-            jump = Tone(520, .18f, .4f);
-            land = Tone(90, .16f, 2);
-            attack = Tone(240, .15f, 1.5f);
-            impact = Tone(120, .18f, 3);
-            heavy = Tone(135, .30f, 1.6f);
-            heavyImpact = Tone(65, .30f, 3.2f);
-            flame = Tone(360, .25f, 1.8f);
-            flameImpact = Tone(190, .25f, 2.8f);
-            dash = Tone(600, .14f, 1);
-            collect = Tone(880, .26f, .2f);
-            bell = Tone(392, 1.2f, .04f);
-            wind = SoftAir();
-            ambience.clip = wind;
-            ambience.Play();
+            effects = Source(.60f, false); music = Source(.45f, true);
+            wind = Source(.22f, true); river = Source(.25f, true);
+            var data = Resources.Load<TextAsset>("Okami/NativeAudio");
+            if (!data) { Debug.LogError("Original sound bank bindings are missing.", this); return; }
+            foreach (var entry in JsonUtility.FromJson<CueBank>(data.text).cues)
+            {
+                var clip = Resources.Load<AudioClip>(entry.resource);
+                if (!clip) { Debug.LogError("Original sound missing: " + entry.resource,this); continue; }
+                if (!bank.ContainsKey(entry.cue)) bank.Add(entry.cue,new List<AudioClip>());
+                bank[entry.cue].Add(clip);
+            }
         }
-
-        // A quiet, filtered air bed. The previous loop contained a continuous
-        // 160 Hz sine oscillator, heard as a hum everywhere in the village.
-        static AudioClip SoftAir()
+        AudioSource Source(float volume,bool loop)
         {
-            const int rate = 22050, count = rate * 12;
-            var samples = new float[count];
-            uint seed = 731;
-            float low = 0;
-            for (int i = 0; i < count; i++)
-            {
-                seed = 1664525 * seed + 1013904223;
-                float noise = (seed >> 8) / 16777216f * 2 - 1;
-                low += (noise - low) * .035f;
-                samples[i] = low * .25f;
-            }
-            // Overlap the tail into the beginning so the repeating seam is quiet.
-            const int fade = rate;
-            for (int i = 0; i < fade; i++)
-            {
-                float u = i / (float)(fade - 1);
-                samples[i] = Mathf.Lerp(samples[count - fade + i], samples[i], u);
-            }
-            var clip = AudioClip.Create("Quiet air · no tonal oscillator", count - fade, 1, rate, false);
-            var loop = new float[count - fade];
-            System.Array.Copy(samples, loop, loop.Length);
-            clip.SetData(loop, 0);
-            return clip;
+            var s=gameObject.AddComponent<AudioSource>();s.volume=volume;s.loop=loop;
+            s.playOnAwake=false;s.spatialBlend=0;return s;
         }
-
-        static AudioClip Tone(float f, float duration, float noise)
+        AudioClip Clip(string cue)
         {
-            const int rate = 22050;
-            int n = (int)(duration * rate);
-            var samples = new float[n];
-            uint seed = 13;
-            for (int i = 0; i < n; i++)
-            {
-                seed = 1664525 * seed + 1013904223;
-                float t = i / (float)rate, envelope = Mathf.Sin(Mathf.PI * i / n);
-                samples[i] = (Mathf.Sin(2 * Mathf.PI * f * t) * .20f + ((seed >> 8) / 16777216f - .5f) * noise * .3f) * envelope;
-            }
-
-            var c = AudioClip.Create("Legal generated placeholder", n, 1, rate, false);
-            c.SetData(samples, 0);
-            return c;
+            if(!bank.TryGetValue(cue,out var list) || list.Count==0)return null;
+            int i=next.TryGetValue(cue,out var n)?n:0;next[cue]=(i+1)%list.Count;return list[i%list.Count];
         }
-
+        void Loop(AudioSource source,string cue)
+        {
+            source.Stop();source.clip=null;
+            // Only the long battle track has been identified by the playtester.
+            // Short cleansing/save cues must never become looping background music.
+            if(cue!="battle")return;
+            var clip=Clip(cue);if(!clip || clip.length<45)return;source.clip=clip;source.Play();
+        }
+        void Start()
+        {
+            game=FindFirstObjectByType<GameFlow>();
+            if(game && game.Player)lastPosition=game.Player.transform.position;
+            if(game && game.Player)
+            {
+                var head=new GameObject("Player perspective audio listener");ears=head.transform;
+                ears.SetParent(game.Player.transform,false);ears.localPosition=Vector3.up*.9f;
+                var listener=head.AddComponent<AudioListener>();
+                foreach(var old in FindObjectsByType<AudioListener>(FindObjectsSortMode.None))if(old!=listener)old.enabled=false;
+            }
+            // ST102 clips were assigned as ambience without identifying their
+            // contents. Do not loop an unidentified animal/event sample globally.
+            wind.Stop();river.Stop();
+        }
+        void LateUpdate()
+        {
+            if(ears && Camera.main)ears.rotation=Camera.main.transform.rotation;
+        }
+        void Update()
+        {
+            if(!game || !game.Player)return;
+            Vector3 p=game.Player.transform.position;
+            foreach(var source in worldSources)if(source && source.isPlaying && worldLevels.TryGetValue(source,out var level))
+            {
+                float distance=Vector3.Distance(p,source.transform.position);
+                if(distance>=level.x)source.Stop();
+                else source.volume=level.y*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/level.x));
+            }
+            string desired=game.InTrial?"battle":Sunward.Remaster.VillageServices.InFoodHouse(p)?"housemusic":"town";
+            if(desired!=musicCue){musicCue=desired;Loop(music,desired);}
+            river.volume=.25f*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15);
+            wind.volume=Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f;
+            music.volume=game.Panel=="dialogue"?.22f:.45f;
+            Vector3 delta=p-lastPosition;delta.y=0;lastPosition=p;
+            if(game.Blocked || game.Player.Locked || delta.magnitude>2)return;
+            if(game.Player.Grounded && game.Player.Speed>.2f)
+            {
+                steps+=delta.magnitude;
+                if(steps>(game.Player.Speed>5?1.5f:.85f)){steps=0;Cue("step");}
+            }
+            if(game.Player.Swimming && game.Player.Speed>.2f)
+            {
+                water+=Time.deltaTime;if(water>1.1f){water=0;Cue("water");}
+            }
+        }
+        bool Allow(string id,float interval)
+        {
+            if(cooldowns.TryGetValue(id,out var until) && Time.unscaledTime<until)return false;
+            cooldowns[id]=Time.unscaledTime+interval;return true;
+        }
         public void Cue(string id)
         {
-            AudioClip clip = id == "bell" ? bell : id == "heavy" ? heavy : id == "heavy-impact" ? heavyImpact : id == "flame" ? flame : id == "flame-impact" ? flameImpact : id == "bark" ? bark : id == "hurt" ? hit : id == "growl" ? growl : id == "jump" ? jump : id == "land" ? land : id == "attack" ? attack : id == "impact" ? impact : id == "dash" ? dash : collect;
-            if (clip)
-                effects.PlayOneShot(clip);
+            if(id=="flame-impact")id="impact";
+            // World actors must supply a position; never route them through 2D playback.
+            if(id=="cow" || id=="pig" || id=="rooster" || id.StartsWith("npc") || id.StartsWith("enemy"))return;
+            if(!Allow(id,id=="step"?.16f:id=="water"?.35f:.07f))return;
+            var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="step"?.0225f:id=="jump"?.175f:id=="water"?.035f:id=="land"?.12f:id=="dash"?.35f:.45f);
+        }
+        public bool World(string cue,Vector3 position,float range=10,float volume=.65f)
+        {
+            if(!game || !game.Player || game.Blocked)return false;
+            float distance=Vector3.Distance(position,game.Player.transform.position);
+            if(distance>=range || !Allow("world:"+cue,.5f))return false;
+            var clip=Clip(cue);if(!clip)return false;
+            AudioSource source=worldSources.Find(s=>!s.isPlaying);
+            if(!source)
+            {
+                if(worldSources.Count>=4)return false;
+                var go=new GameObject("Original positional sound");go.transform.SetParent(transform,false);
+                source=go.AddComponent<AudioSource>();source.playOnAwake=false;source.spatialBlend=1;
+                source.dopplerLevel=0;source.rolloffMode=AudioRolloffMode.Linear;
+                source.minDistance=1.5f;source.maxDistance=range;worldSources.Add(source);
+            }
+            source.transform.position=position;source.clip=clip;source.maxDistance=range;
+            worldLevels[source]=new Vector2(range,volume);
+            source.volume=volume*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/range));source.Play();return true;
+        }
+        public void Animal(string species,Vector3 position)
+        {
+            if(Time.unscaledTime<nextAnimal)return;
+            if(World(species,position,species=="rooster"?3:7,species=="rooster"?.04f:.18f))nextAnimal=Time.unscaledTime+12;
+        }
+        public void Npc(int index) { Npc(index,game && game.Player?game.Player.transform.position:transform.position); }
+        public void Npc(int index,Vector3 position)
+        {
+            if(Time.unscaledTime<nextVoice)return;
+            if(World("npc"+index,position,7,.7f))
+            {
+                float length=bank.TryGetValue("npc"+index,out var voices)?voices[0].length:1.35f;
+                nextVoice=Time.unscaledTime+Mathf.Max(1.5f,length+.15f);
+            }
+        }
+        public void Enemy(string role,Vector3 position)
+        {
+            int index=Array.IndexOf(new[]{"wisp","reed","ranged","heavy","elite","boss"},role);
+            if(index>=0)World("enemy"+index,position,12,.55f);
         }
     }
 }

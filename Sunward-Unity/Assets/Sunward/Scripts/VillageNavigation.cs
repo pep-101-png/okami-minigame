@@ -17,6 +17,9 @@ namespace Sunward
         {
             if (!float.IsFinite(p.x) || !float.IsFinite(p.z))
                 return false;
+            // Outdoor residents must not spawn or route through enterable rooms.
+            if(Mathf.Abs(p.x)<8.7f+radius && p.z>14.5f-radius && p.z<35.5f+radius ||
+                Mathf.Abs(p.x-10)<6.2f+radius && Mathf.Abs(p.z+15)<4.4f+radius)return false;
             var bounds = world.bounds;
             if (p.x < bounds.minX + radius || p.x > bounds.maxX - radius || p.z < -bounds.maxZ + radius || p.z > -bounds.minZ - radius || Valley.Depth(p) > .10f)
                 return false;

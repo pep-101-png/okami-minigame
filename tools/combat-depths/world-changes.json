@@ -1,0 +1,944 @@
+{
+  "base": "1a47fd212f238f7cfa54eea5cc82c63481ddcb9b",
+  "placements": [
+    {
+      "label": "home wooden weapon stand",
+      "package": "vt90",
+      "sourceSHA256": "f764a72247264aafb74e0a9c027f96681b67032e5b4042c48d71fbfffe0e71e8",
+      "position": [
+        -37.15,
+        0.11,
+        -18.15
+      ],
+      "objects": [
+        8000000000000011337
+      ]
+    },
+    {
+      "label": "home wooden glaive stand",
+      "package": "vt90",
+      "sourceSHA256": "f764a72247264aafb74e0a9c027f96681b67032e5b4042c48d71fbfffe0e71e8",
+      "position": [
+        -34.9,
+        0.11,
+        -18.15
+      ],
+      "objects": [
+        8000000000000011342
+      ]
+    },
+    {
+      "label": "home collection cabinet",
+      "package": "vt90",
+      "sourceSHA256": "f764a72247264aafb74e0a9c027f96681b67032e5b4042c48d71fbfffe0e71e8",
+      "position": [
+        -30.6,
+        0.11,
+        -17.2
+      ],
+      "objects": [
+        8000000000000011347
+      ]
+    },
+    {
+      "label": "home cup on low table",
+      "package": "vt65",
+      "sourceSHA256": "40b8bc9f870a6f2c634bc967ab2d2c35319982b9d5d1bb2d9817f6b459aea9b6",
+      "position": [
+        -33.7,
+        0.59,
+        -14.0
+      ],
+      "objects": [
+        8000000000000011352
+      ]
+    },
+    {
+      "label": "home low tea furniture",
+      "package": "vt9a",
+      "sourceSHA256": "12b352a2b68ac6f1dcbf886403f2a2a4561e80c788da372e494e47bf540ce204",
+      "position": [
+        -33.7,
+        0.11,
+        -14.0
+      ],
+      "objects": [
+        8000000000000011356,
+        8000000000000011361,
+        8000000000000011366
+      ]
+    },
+    {
+      "label": "home paper screen behind cabinets",
+      "package": "vt61",
+      "sourceSHA256": "9f269e14ba0a04ddfea45a0ace81f7401bc7b25e79abb90793c69cd52a572f00",
+      "position": [
+        -35.8,
+        0.11,
+        -18.65
+      ],
+      "objects": [
+        8000000000000011386
+      ]
+    },
+    {
+      "label": "home paper screen behind collection",
+      "package": "vt61",
+      "sourceSHA256": "9f269e14ba0a04ddfea45a0ace81f7401bc7b25e79abb90793c69cd52a572f00",
+      "position": [
+        -30.15,
+        0.11,
+        -17.1
+      ],
+      "objects": [
+        8000000000000011390
+      ]
+    },
+    {
+      "label": "depths ink cliff 0",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        68.0,
+        -20,
+        0.0
+      ],
+      "objects": [
+        8000000000000011477
+      ]
+    },
+    {
+      "label": "depths ink cliff 1",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        66.87555226753926,
+        -20,
+        8.541028488383184
+      ],
+      "objects": [
+        8000000000000011482
+      ]
+    },
+    {
+      "label": "depths ink cliff 2",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        63.578838324886476,
+        -20,
+        16.499999999999996
+      ],
+      "objects": [
+        8000000000000011487
+      ]
+    },
+    {
+      "label": "depths ink cliff 3",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        58.33452377915607,
+        -20,
+        23.334523779156065
+      ],
+      "objects": [
+        8000000000000011492
+      ]
+    },
+    {
+      "label": "depths ink cliff 4",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        51.5,
+        -20,
+        28.578838324886473
+      ],
+      "objects": [
+        8000000000000011497
+      ]
+    },
+    {
+      "label": "depths ink cliff 5",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        43.54102848838318,
+        -20,
+        31.875552267539256
+      ],
+      "objects": [
+        8000000000000011502
+      ]
+    },
+    {
+      "label": "depths ink cliff 6",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        35.0,
+        -20,
+        33.0
+      ],
+      "objects": [
+        8000000000000011507
+      ]
+    },
+    {
+      "label": "depths ink cliff 7",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        26.45897151161682,
+        -20,
+        31.875552267539256
+      ],
+      "objects": [
+        8000000000000011512
+      ]
+    },
+    {
+      "label": "depths ink cliff 8",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        18.500000000000007,
+        -20,
+        28.578838324886476
+      ],
+      "objects": [
+        8000000000000011517
+      ]
+    },
+    {
+      "label": "depths ink cliff 9",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        11.665476220843935,
+        -20,
+        23.33452377915607
+      ],
+      "objects": [
+        8000000000000011522
+      ]
+    },
+    {
+      "label": "depths ink cliff 10",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        6.421161675113524,
+        -20,
+        16.499999999999996
+      ],
+      "objects": [
+        8000000000000011527
+      ]
+    },
+    {
+      "label": "depths ink cliff 11",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        3.124447732460748,
+        -20,
+        8.541028488383194
+      ],
+      "objects": [
+        8000000000000011532
+      ]
+    },
+    {
+      "label": "depths ink cliff 12",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        2.0,
+        -20,
+        4.0413344371862654e-15
+      ],
+      "objects": [
+        8000000000000011537
+      ]
+    },
+    {
+      "label": "depths ink cliff 13",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        3.1244477324607445,
+        -20,
+        -8.541028488383187
+      ],
+      "objects": [
+        8000000000000011542
+      ]
+    },
+    {
+      "label": "depths ink cliff 14",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        6.42116167511352,
+        -20,
+        -16.49999999999999
+      ],
+      "objects": [
+        8000000000000011547
+      ]
+    },
+    {
+      "label": "depths ink cliff 15",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        11.66547622084392,
+        -20,
+        -23.334523779156054
+      ],
+      "objects": [
+        8000000000000011552
+      ]
+    },
+    {
+      "label": "depths ink cliff 16",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        18.499999999999986,
+        -20,
+        -28.578838324886465
+      ],
+      "objects": [
+        8000000000000011557
+      ]
+    },
+    {
+      "label": "depths ink cliff 17",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        26.45897151161682,
+        -20,
+        -31.875552267539256
+      ],
+      "objects": [
+        8000000000000011562
+      ]
+    },
+    {
+      "label": "depths ink cliff 18",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        34.99999999999999,
+        -20,
+        -33.0
+      ],
+      "objects": [
+        8000000000000011567
+      ]
+    },
+    {
+      "label": "depths ink cliff 19",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        43.54102848838317,
+        -20,
+        -31.87555226753926
+      ],
+      "objects": [
+        8000000000000011572
+      ]
+    },
+    {
+      "label": "depths ink cliff 20",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        51.5,
+        -20,
+        -28.578838324886473
+      ],
+      "objects": [
+        8000000000000011577
+      ]
+    },
+    {
+      "label": "depths ink cliff 21",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        58.33452377915606,
+        -20,
+        -23.334523779156072
+      ],
+      "objects": [
+        8000000000000011582
+      ]
+    },
+    {
+      "label": "depths ink cliff 22",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        63.57883832488646,
+        -20,
+        -16.500000000000014
+      ],
+      "objects": [
+        8000000000000011587
+      ]
+    },
+    {
+      "label": "depths ink cliff 23",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        66.87555226753925,
+        -20,
+        -8.541028488383212
+      ],
+      "objects": [
+        8000000000000011592
+      ]
+    },
+    {
+      "label": "depths lantern 0",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        62.8,
+        -20,
+        0.0
+      ],
+      "objects": [
+        8000000000000011597
+      ]
+    },
+    {
+      "label": "depths lantern 1",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        59.0755062252074,
+        -20,
+        13.899999999999999
+      ],
+      "objects": [
+        8000000000000011601
+      ]
+    },
+    {
+      "label": "depths lantern 2",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        48.900000000000006,
+        -20,
+        24.075506225207395
+      ],
+      "objects": [
+        8000000000000011605
+      ]
+    },
+    {
+      "label": "depths lantern 3",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        35.0,
+        -20,
+        27.8
+      ],
+      "objects": [
+        8000000000000011609
+      ]
+    },
+    {
+      "label": "depths lantern 4",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        21.100000000000005,
+        -20,
+        24.0755062252074
+      ],
+      "objects": [
+        8000000000000011613
+      ]
+    },
+    {
+      "label": "depths lantern 5",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        10.924493774792602,
+        -20,
+        13.899999999999999
+      ],
+      "objects": [
+        8000000000000011617
+      ]
+    },
+    {
+      "label": "depths lantern 6",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        7.199999999999999,
+        -20,
+        3.404518101629642e-15
+      ],
+      "objects": [
+        8000000000000011621
+      ]
+    },
+    {
+      "label": "depths lantern 7",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        10.924493774792602,
+        -20,
+        -13.899999999999993
+      ],
+      "objects": [
+        8000000000000011625
+      ]
+    },
+    {
+      "label": "depths lantern 8",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        21.099999999999987,
+        -20,
+        -24.075506225207388
+      ],
+      "objects": [
+        8000000000000011629
+      ]
+    },
+    {
+      "label": "depths lantern 9",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        34.99999999999999,
+        -20,
+        -27.8
+      ],
+      "objects": [
+        8000000000000011633
+      ]
+    },
+    {
+      "label": "depths lantern 10",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        48.900000000000006,
+        -20,
+        -24.075506225207395
+      ],
+      "objects": [
+        8000000000000011637
+      ]
+    },
+    {
+      "label": "depths lantern 11",
+      "package": "vt60",
+      "sourceSHA256": "3855358a4ff05fbd0fc8d54f50194ccb560eadc03e029f2f50fe8ce7d23c5478",
+      "position": [
+        59.07550622520739,
+        -20,
+        -13.900000000000013
+      ],
+      "objects": [
+        8000000000000011641
+      ]
+    },
+    {
+      "label": "depths carved corner 0",
+      "package": "vt35",
+      "sourceSHA256": "b4a7b56d9ed539102201bf41101d601af30243c3dcdb8e86d0c6564e8f652c0a",
+      "position": [
+        55.50609665440988,
+        -20,
+        20.506096654409877
+      ],
+      "objects": [
+        8000000000000011645
+      ]
+    },
+    {
+      "label": "depths carved corner 1",
+      "package": "vt35",
+      "sourceSHA256": "b4a7b56d9ed539102201bf41101d601af30243c3dcdb8e86d0c6564e8f652c0a",
+      "position": [
+        14.493903345590123,
+        -20,
+        20.50609665440988
+      ],
+      "objects": [
+        8000000000000011649
+      ]
+    },
+    {
+      "label": "depths carved corner 2",
+      "package": "vt35",
+      "sourceSHA256": "b4a7b56d9ed539102201bf41101d601af30243c3dcdb8e86d0c6564e8f652c0a",
+      "position": [
+        14.493903345590116,
+        -20,
+        -20.506096654409877
+      ],
+      "objects": [
+        8000000000000011653
+      ]
+    },
+    {
+      "label": "depths carved corner 3",
+      "package": "vt35",
+      "sourceSHA256": "b4a7b56d9ed539102201bf41101d601af30243c3dcdb8e86d0c6564e8f652c0a",
+      "position": [
+        55.50609665440987,
+        -20,
+        -20.506096654409884
+      ],
+      "objects": [
+        8000000000000011657
+      ]
+    },
+    {
+      "label": "depths original crystal cluster 0",
+      "package": "vt70",
+      "sourceSHA256": "1a5b0967aa9bb5c745e95ee1914b1dbecbf9f0547ad6978e4cb8d7c5272c7d00",
+      "position": [
+        51.97056274847714,
+        -20,
+        16.97056274847714
+      ],
+      "objects": [
+        8000000000000011661,
+        8000000000000011665,
+        8000000000000011669,
+        8000000000000011673,
+        8000000000000011677,
+        8000000000000011681,
+        8000000000000011685,
+        8000000000000011689
+      ]
+    },
+    {
+      "label": "depths original crystal cluster 1",
+      "package": "vt70",
+      "sourceSHA256": "1a5b0967aa9bb5c745e95ee1914b1dbecbf9f0547ad6978e4cb8d7c5272c7d00",
+      "position": [
+        18.02943725152286,
+        -20,
+        16.970562748477143
+      ],
+      "objects": [
+        8000000000000011693,
+        8000000000000011697,
+        8000000000000011701,
+        8000000000000011705,
+        8000000000000011709,
+        8000000000000011713,
+        8000000000000011717,
+        8000000000000011721
+      ]
+    },
+    {
+      "label": "depths original crystal cluster 2",
+      "package": "vt70",
+      "sourceSHA256": "1a5b0967aa9bb5c745e95ee1914b1dbecbf9f0547ad6978e4cb8d7c5272c7d00",
+      "position": [
+        18.029437251522857,
+        -20,
+        -16.97056274847714
+      ],
+      "objects": [
+        8000000000000011725,
+        8000000000000011729,
+        8000000000000011733,
+        8000000000000011737,
+        8000000000000011741,
+        8000000000000011745,
+        8000000000000011749,
+        8000000000000011753
+      ]
+    },
+    {
+      "label": "depths original crystal cluster 3",
+      "package": "vt70",
+      "sourceSHA256": "1a5b0967aa9bb5c745e95ee1914b1dbecbf9f0547ad6978e4cb8d7c5272c7d00",
+      "position": [
+        51.970562748477136,
+        -20,
+        -16.970562748477143
+      ],
+      "objects": [
+        8000000000000011757,
+        8000000000000011761,
+        8000000000000011765,
+        8000000000000011769,
+        8000000000000011773,
+        8000000000000011777,
+        8000000000000011781,
+        8000000000000011785
+      ]
+    },
+    {
+      "label": "depths native stone vault 0",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        57,
+        -7,
+        0
+      ],
+      "objects": [
+        8000000000000011789
+      ]
+    },
+    {
+      "label": "depths native stone vault 1",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        13,
+        -7,
+        0
+      ],
+      "objects": [
+        8000000000000011794
+      ]
+    },
+    {
+      "label": "depths native stone vault 2",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        35,
+        -7,
+        22
+      ],
+      "objects": [
+        8000000000000011799
+      ]
+    },
+    {
+      "label": "depths native stone vault 3",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        35,
+        -7,
+        -22
+      ],
+      "objects": [
+        8000000000000011804
+      ]
+    },
+    {
+      "label": "depths native stone vault 4",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        58,
+        -7,
+        23
+      ],
+      "objects": [
+        8000000000000011809
+      ]
+    },
+    {
+      "label": "depths native stone vault 5",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        12,
+        -7,
+        23
+      ],
+      "objects": [
+        8000000000000011814
+      ]
+    },
+    {
+      "label": "depths native stone vault 6",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        58,
+        -7,
+        -23
+      ],
+      "objects": [
+        8000000000000011819
+      ]
+    },
+    {
+      "label": "depths native stone vault 7",
+      "package": "vt28",
+      "sourceSHA256": "b9cf1eb988c13913941fb40249400c675804dcd8142befaa943abeaae671035f",
+      "position": [
+        12,
+        -7,
+        -23
+      ],
+      "objects": [
+        8000000000000011824
+      ]
+    },
+    {
+      "label": "depths return mirror",
+      "package": "et19",
+      "sourceSHA256": "3266223cffb67b4a75909aa9043328ee0fe7003301572c4093d21949a4f1201d",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "objects": [
+        8000000000000011833,
+        8000000000000011837,
+        8000000000000011841,
+        8000000000000011845,
+        8000000000000011849,
+        8000000000000011853
+      ]
+    }
+  ],
+  "removedShrineObjects": [
+    8000000000000010224,
+    8000000000000010228,
+    8000000000000010232,
+    8000000000000010236
+  ],
+  "rotatedDojo": true,
+  "trainingGrounding": [
+    {
+      "name": "Original training dummy 0",
+      "position": [
+        3.0,
+        0.5150000238418578,
+        28.0
+      ],
+      "floor": 0.5000000238418578
+    },
+    {
+      "name": "Original training dummy 1",
+      "position": [
+        -3.0,
+        0.5150000238418578,
+        28.0
+      ],
+      "floor": 0.5000000238418578
+    },
+    {
+      "name": "Original training dummy 2",
+      "position": [
+        0.0,
+        0.8150000059604644,
+        21.0
+      ],
+      "floor": 0.8000000059604644
+    },
+    {
+      "name": "Original native dummy partner hm08",
+      "position": [
+        3.0,
+        0.711774185795443,
+        26.4
+      ],
+      "floor": 0.696774185795443
+    },
+    {
+      "name": "Original native dummy partner hm2d",
+      "position": [
+        -3.0,
+        0.5762993155144605,
+        26.4
+      ],
+      "floor": 0.5612993155144604
+    },
+    {
+      "name": "Original native dummy partner hm44",
+      "position": [
+        0.0,
+        0.9757696846964873,
+        22.6
+      ],
+      "floor": 0.9607696846964873
+    }
+  ],
+  "homeDisplaySupports": [
+    {
+      "category": "home Solar Flare display",
+      "top": 0.86,
+      "originalMinimumY": 0.900000089972806,
+      "correction": [
+        4.704009107570073e-06,
+        -0.04000008997280602,
+        -8.556945445548081e-07
+      ],
+      "objects": [
+        8000000000000005459,
+        8000000000000005463,
+        8000000000000005467,
+        8000000000000005471,
+        8000000000000005475,
+        8000000000000005479
+      ]
+    },
+    {
+      "category": "home native glaive display",
+      "top": 0.71,
+      "originalMinimumY": 0.6999997630237818,
+      "correction": [
+        0.041861974790727174,
+        0.010000236976218213,
+        1.216957777216976e-06
+      ],
+      "objects": [
+        8000000000000005483,
+        8000000000000005487,
+        8000000000000005491,
+        8000000000000005495,
+        8000000000000005499
+      ]
+    }
+  ],
+  "cutOriginalGroundTriangles": 652,
+  "preservedGroundTriangles": 99188,
+  "coverFragments": [
+    8000000000000011404,
+    8000000000000011409,
+    8000000000000011414,
+    8000000000000011419,
+    8000000000000011424,
+    8000000000000011429
+  ],
+  "coverColliders": [
+    8000000000000011407,
+    8000000000000011412,
+    8000000000000011417,
+    8000000000000011422,
+    8000000000000011427,
+    8000000000000011432
+  ],
+  "chamber": 8000000000000011433,
+  "mirror": 8000000000000011829,
+  "lowerFloorY": -20,
+  "lowerRadius": 31,
+  "oldGroundSource": "1aa5e7ba7e3b6c64889eadc3b9e05f0b",
+  "newGround": "0cf2ac1db281daf5f813c20ddad76cd8"
+}

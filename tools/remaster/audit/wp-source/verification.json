@@ -1,0 +1,14 @@
+{
+  "zipCRCVerified": true,
+  "archives": 92,
+  "modelParseErrors": [],
+  "motionParseErrors": [],
+  "texturesDecoded": 154,
+  "distinctTextures": 107,
+  "nativeMotionFiles": 839,
+  "distinctMotions": 349,
+  "nativeEffectRecords": 691,
+  "audioSamplesFound": 0,
+  "originalGameExecuted": false,
+  "UnityExecuted": false
+}

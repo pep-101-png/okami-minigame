@@ -1,0 +1,140 @@
+{
+  "paintings": [
+    {
+      "group": "ST1",
+      "package": "r102",
+      "name": "neoK001",
+      "sourceSHA256": "d01a0a5e0e8f76455afed74ba3a32f277d7484e5797a8df51dfce7985107b48a",
+      "crop": null,
+      "output": "OkamiRemaster/Original/Textures/Kamiki-grass.png",
+      "outputSHA256": "da42de25fa3c268acda9280536b71e0c83064fb87ab3438a1375dc19aa64572f"
+    },
+    {
+      "group": "ST1",
+      "package": "r102",
+      "name": "neoK021",
+      "sourceSHA256": "9fdd26d09fc937eb198197fae2e03d2da7f9cad4a8c76aea4faed97687ead725",
+      "crop": null,
+      "output": "OkamiRemaster/Original/Textures/Kamiki-earth.png",
+      "outputSHA256": "1d8e3c32c9dfb9859250060771cfe09ac72d2662f3818c5e1138b8be3c55abed"
+    },
+    {
+      "group": "ST1",
+      "package": "r102",
+      "name": "ita_01",
+      "sourceSHA256": "d3e16cf91a8d44d3c247e03c3851f995b8b3e5fbf54310bf02c66e7533cc82e3",
+      "crop": null,
+      "output": "OkamiRemaster/Original/Textures/Kamiki-floorboards.png",
+      "outputSHA256": "21cc77cdd790bb66fb16c399fa9767f67eb5105e0fd03a76e9a1c481a857be7a"
+    },
+    {
+      "group": "ST1",
+      "package": "r102",
+      "name": "namitex",
+      "sourceSHA256": "3262d0017491b3bda3dfbe8b39eebae08ca45de71a8915812aca235dfa735277",
+      "crop": [
+        0,
+        64,
+        256,
+        256
+      ],
+      "output": "OkamiRemaster/Original/Textures/Kamiki-water.png",
+      "outputSHA256": "abc92289f113ba8fb20223e87c708b62393aa43ce4def00915d5bd07880c3aea"
+    },
+    {
+      "group": "ID",
+      "package": "EmFileRoll",
+      "name": "EmFileRoll-42",
+      "sourceSHA256": "e2d276323a56d39f08147be20ce026b2e33560eda81a28195010da4a4281fdd9",
+      "crop": [
+        204,
+        614,
+        819,
+        870
+      ],
+      "output": "OkamiRemaster/Original/Resources/Okami/UI/Paper.png",
+      "outputSHA256": "4072bb4e76da32cd3f751a2241db08f9d3bc1e084b258f4ab41925d7cf8df9cb"
+    },
+    {
+      "group": "WP",
+      "package": "wp24",
+      "name": "kagami500",
+      "sourceSHA256": "d720c13ad11e548f3f0f8426dc040f98dba9a0eed7c667752c200e59b55dd21b",
+      "crop": null,
+      "output": "OkamiRemaster/Original/Resources/Okami/UI/Ink.png",
+      "outputSHA256": "9b198677f044fac6047397faa546c9997bf44a8ea579ab6668d62a58ccf0b348"
+    }
+  ],
+  "audio": [
+    {
+      "group": "PL",
+      "package": "pl02",
+      "source": "pl02v",
+      "clip": 0,
+      "sha256": "efcc2c17d96a3ef24780c78a149e42a9108771dcd63ec0a377168129feb7b3a2",
+      "output": "OkamiRemaster/Original/Resources/Okami/Audio/Amaterasu-0.wav",
+      "seconds": 0.2345,
+      "cueAssignment": "Sunward adaptation; original event role unverified"
+    },
+    {
+      "group": "PL",
+      "package": "pl02",
+      "source": "pl02v",
+      "clip": 1,
+      "sha256": "97f7f2464129a2f2573a1020a275650bac4a81a53622aef2a3e090f80a09a908",
+      "output": "OkamiRemaster/Original/Resources/Okami/Audio/Amaterasu-1.wav",
+      "seconds": 0.168,
+      "cueAssignment": "Sunward adaptation; original event role unverified"
+    },
+    {
+      "group": "PL",
+      "package": "pl02",
+      "source": "pl02v",
+      "clip": 2,
+      "sha256": "c0ca74cfbe54fa9b8373617e3de07b5dccb6a64f2f53f270489758b7a337a1c8",
+      "output": "OkamiRemaster/Original/Resources/Okami/Audio/Amaterasu-2.wav",
+      "seconds": 0.2275,
+      "cueAssignment": "Sunward adaptation; original event role unverified"
+    }
+  ],
+  "surfaceBindings": [
+    {
+      "renderer": 2144288301,
+      "instance": 0,
+      "name": "Recessed garden pond \u00b7 water below earthen rim",
+      "material": "fc3458609f0bb9fe9ecf4e96a43add8d"
+    },
+    {
+      "renderer": 6218988083948886039,
+      "instance": 177161503,
+      "name": "TownV3-601",
+      "material": "f1782000e28e8fe4b2cf56ef18b4f3bd"
+    },
+    {
+      "renderer": 8568792977839443435,
+      "instance": 177161503,
+      "name": "TownV3-617",
+      "material": "f1782000e28e8fe4b2cf56ef18b4f3bd"
+    },
+    {
+      "renderer": 6752158174051553098,
+      "instance": 177161503,
+      "name": "TownV3-752",
+      "material": "fbef6a46053521e174afeda66c9fabcc"
+    },
+    {
+      "renderer": 3411311217777812162,
+      "instance": 177161503,
+      "name": "River-795",
+      "material": "1cb7e93dac5f89a707f74cf3f1be2a7e"
+    }
+  ],
+  "missingAuthenticAudio": [
+    "music",
+    "ambience",
+    "general combat/footstep/bell/collect banks"
+  ],
+  "feedback": "Original ET08/ET09/ET24 models and paintings adapted to existing Sunward cues/lifetimes; not a recovered original EST/SEQ dispatcher.",
+  "UIFonts": "Existing readable UI fonts retained; original font bank not supplied.",
+  "UnityVerified": false
+}

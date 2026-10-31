@@ -1,0 +1,200 @@
+[
+  {
+    "label": "idle",
+    "source": "pl00_000",
+    "preview": "native-idle.jpg",
+    "bounds": [
+      [
+        -1.3037217974433766,
+        -3.584454311511325,
+        -0.027133312944250004
+      ],
+      [
+        1.3298653898884902,
+        3.9413358452577505,
+        1.1482504427413556
+      ]
+    ],
+    "Unity": false,
+    "sha256": "4ab556570b0c4f340a58c87420214077b1fd94c194ac4b02e51c412004a54d4e",
+    "labelled": true,
+    "poseBankSHA256": "59612c93147985a0062dd68c0e0d82a97f99f5541444b197ba5efa8c2b0db262",
+    "modelSHA256": "61c2c5a40b07721f40486483e6fad65dbf49a9e1348556e1fedd8678cd0d17bf"
+  },
+  {
+    "label": "walk",
+    "source": "pl00_010",
+    "preview": "native-walk.jpg",
+    "bounds": [
+      [
+        -1.3552495366333797,
+        -3.6563646717280394,
+        -0.04586707923103253
+      ],
+      [
+        1.35674126251092,
+        4.334337753133106,
+        1.1463564514166589
+      ]
+    ],
+    "Unity": false,
+    "sha256": "e3cad6caefee57974a90f224b5b9a402524c02e160d8315278465e48244bcfe5",
+    "labelled": true,
+    "poseBankSHA256": "59612c93147985a0062dd68c0e0d82a97f99f5541444b197ba5efa8c2b0db262",
+    "modelSHA256": "61c2c5a40b07721f40486483e6fad65dbf49a9e1348556e1fedd8678cd0d17bf"
+  },
+  {
+    "label": "run",
+    "source": "pl00_011",
+    "preview": "native-run.jpg",
+    "bounds": [
+      [
+        -1.3450589283451206,
+        -3.7513047815240768,
+        -0.0621976036104373
+      ],
+      [
+        1.3275791738401317,
+        4.481853155751072,
+        1.1363107392645018
+      ]
+    ],
+    "Unity": false,
+    "sha256": "8d2bedc83d2b89a1ce4bc45a44d0df798ec9aa44e90a0aefeba08e0167b610e0",
+    "labelled": true,
+    "poseBankSHA256": "59612c93147985a0062dd68c0e0d82a97f99f5541444b197ba5efa8c2b0db262",
+    "modelSHA256": "61c2c5a40b07721f40486483e6fad65dbf49a9e1348556e1fedd8678cd0d17bf"
+  },
+  {
+    "label": "sprint",
+    "source": "pl00_012",
+    "preview": "native-sprint.jpg",
+    "bounds": [
+      [
+        -1.387065490585159,
+        -4.137633530988801,
+        -0.05081246653078661
+      ],
+      [
+        1.3632012376748504,
+        4.973542914012423,
+        0.8945283054479314
+      ]
+    ],
+    "Unity": false,
+    "sha256": "deaaab9e77961532235f536e82722a9350e78646b2b80826c65b9d8cf2cf7e28",
+    "labelled": true,
+    "poseBankSHA256": "59612c93147985a0062dd68c0e0d82a97f99f5541444b197ba5efa8c2b0db262",
+    "modelSHA256": "61c2c5a40b07721f40486483e6fad65dbf49a9e1348556e1fedd8678cd0d17bf"
+  },
+  {
+    "label": "jump",
+    "source": "pl00_021",
+    "preview": "native-jump.jpg",
+    "bounds": [
+      [
+        -1.370719817858682,
+        -2.895299820102104,
+        -1.0550969932360432
+      ],
+      [
+        1.3722835190814062,
+        3.481990455552764,
+        2.0993415161934297
+      ]
+    ],
+    "Unity": false,
+    "sha256": "e7a8ac579dd8843070e5097f574385f725a1d0a92d7d4a90018038ac3728bde1",
+    "labelled": true,
+    "poseBankSHA256": "59612c93147985a0062dd68c0e0d82a97f99f5541444b197ba5efa8c2b0db262",
+    "modelSHA256": "61c2c5a40b07721f40486483e6fad65dbf49a9e1348556e1fedd8678cd0d17bf"
+  },
+  {
+    "label": "landing",
+    "source": "pl00_02d",
+    "preview": "native-landing.jpg",
+    "bounds": [
+      [
+        -1.5145569515107284,
+        -3.6663788278055978,
+        -0.12293043701360717
+      ],
+      [
+        1.5496582791335536,
+        4.474006201467837,
+        0.7505978319912362
+      ]
+    ],
+    "Unity": false,
+    "sha256": "ebfeb943ca2f469c9e9a27292300c7f22fba1319bc576b1ad9611180cb23950f",
+    "labelled": true,
+    "poseBankSHA256": "59612c93147985a0062dd68c0e0d82a97f99f5541444b197ba5efa8c2b0db262",
+    "modelSHA256": "61c2c5a40b07721f40486483e6fad65dbf49a9e1348556e1fedd8678cd0d17bf"
+  },
+  {
+    "label": "dodge",
+    "source": "pl00_019",
+    "preview": "native-dodge.jpg",
+    "bounds": [
+      [
+        -2.2981962122178587,
+        -3.4421310738009323,
+        -0.17840691147013524
+      ],
+      [
+        1.5847849754001844,
+        4.1559045551278935,
+        0.9709925669378255
+      ]
+    ],
+    "Unity": false,
+    "sha256": "046ef046fe15e57ba2c947833ffd26c74611c6dacf4efe039189a22c1cfe391b",
+    "labelled": true,
+    "poseBankSHA256": "59612c93147985a0062dd68c0e0d82a97f99f5541444b197ba5efa8c2b0db262",
+    "modelSHA256": "61c2c5a40b07721f40486483e6fad65dbf49a9e1348556e1fedd8678cd0d17bf"
+  },
+  {
+    "label": "reflector-combat",
+    "source": "pl00_501",
+    "preview": "native-reflector-combat.jpg",
+    "bounds": [
+      [
+        -1.9231898912124323,
+        -3.526757906188497,
+        -0.10054967391989819
+      ],
+      [
+        1.5939032030648599,
+        4.270752376375424,
+        1.5644951961342028
+      ]
+    ],
+    "Unity": false,
+    "sha256": "ac0b3e24cdcc06a74535e51466f333d582f7b44ca1009821c69a10e5c020db2a",
+    "labelled": true,
+    "poseBankSHA256": "59612c93147985a0062dd68c0e0d82a97f99f5541444b197ba5efa8c2b0db262",
+    "modelSHA256": "61c2c5a40b07721f40486483e6fad65dbf49a9e1348556e1fedd8678cd0d17bf"
+  },
+  {
+    "label": "solar-native-flames",
+    "source": "wp24_000",
+    "preview": "native-solar-native-flames.jpg",
+    "bounds": [
+      [
+        -1.2579603504153138,
+        -3.0253558433831644,
+        -2.1083907773056296
+      ],
+      [
+        1.4121341728926173,
+        3.0007097824923297,
+        0.27806197651205133
+      ]
+    ],
+    "Unity": false,
+    "sha256": "e036fa3c5c1444898c8e34a29887e253750ce8e3d03ace2705e2871c7552f07f",
+    "labelled": true,
+    "poseBankSHA256": "3d6900d243a72139e1f58d948c99701d6c74644e1ecc0c1920dedcc3049f411b",
+    "modelSHA256": "2d3b2f1e772b2d8837d93f63d28d561a052487a8d39a8d7ebb157de047ce5e3b"
+  }
+]

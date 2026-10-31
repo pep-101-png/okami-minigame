@@ -1,0 +1,68 @@
+{
+  "base": "262519a7ac762e4e1f5af7f472139cedf87f8bd9",
+  "placements": [
+    {
+      "package": "pond-sakura",
+      "objects": [
+        8000000000000011217,
+        8000000000000011221
+      ],
+      "position": [
+        -18.8,
+        -0.15669460523873552,
+        -21
+      ],
+      "selectedSourceMeshes": null,
+      "label": "pond sakura \u00b7 native tree and blossoms without building"
+    },
+    {
+      "package": "pond-sakura",
+      "objects": [
+        8000000000000011225,
+        8000000000000011229
+      ],
+      "position": [
+        -11.6,
+        -0.14000000044703484,
+        -23
+      ],
+      "selectedSourceMeshes": null,
+      "label": "pond sakura \u00b7 native tree and blossoms without building"
+    },
+    {
+      "package": "vta0",
+      "objects": [
+        8000000000000011233,
+        8000000000000011237,
+        8000000000000011241
+      ],
+      "position": [
+        10,
+        0.05,
+        -15
+      ],
+      "selectedSourceMeshes": [
+        1,
+        2,
+        3
+      ],
+      "label": "food house intact original shell"
+    },
+    {
+      "package": "vt62",
+      "objects": [
+        8000000000000011245
+      ],
+      "position": [
+        0,
+        0.5,
+        15.0
+      ],
+      "selectedSourceMeshes": null,
+      "label": "training hall south door"
+    }
+  ],
+  "trainees": 3,
+  "diners": 3,
+  "entrancesFaceVillage": true
+}

@@ -28,3 +28,22 @@ Sunward-Unity/**/*.unitypackage filter=lfs diff=lfs merge=lfs -text
 Sunward-Unity/Assets/Sunward/Textures/Art/*.png -filter -diff -merge -text
 Sunward-Unity/Assets/Sunward/Textures/VillageFinish/*.png -filter -diff -merge -text
 Sunward-Unity/Assets/Sunward/Textures/InkWorld/*.png -filter -diff -merge -text
+
+# Bounded original native player/weapon paintings ship directly with the port.
+Sunward-Unity/Assets/OkamiRemaster/Player/**/*.png -filter -diff -merge -text
+# Bounded repair paintings/layout masks are ordinary Unity project assets.
+Sunward-Unity/Assets/OkamiRemaster/Windflower/Textures/*.png -filter -diff -merge -text
+
+# Bounded original paintings and short decoded PL voices for the source-only port.
+Sunward-Unity/Assets/OkamiRemaster/Original/**/*.png -filter -diff -merge -text
+Sunward-Unity/Assets/OkamiRemaster/Original/**/*.wav -filter -diff -merge -text
+
+# Keep review images directly downloadable with this source update.
+tools/original-remake/previews/*.png -filter -diff -merge -text
+
+# Repair review images and bounded original audio ship directly with the update.
+tools/playtest-repair/previews/*.png -filter -diff -merge -text
+Sunward-Unity/Assets/OkamiRemaster/Original/**/*.ogg -filter -diff -merge -text
+
+# Follow-up source review images remain directly readable.
+tools/playtest-followup/previews/*.jpg -filter -diff -merge -text

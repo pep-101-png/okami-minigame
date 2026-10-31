@@ -1,0 +1,23 @@
+[
+  {
+    "image": "market.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "1f23f752e3d4b5df544a80757740af53d72244f717928fa32b36a8cc73aa7597",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "food-house.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "1f23f752e3d4b5df544a80757740af53d72244f717928fa32b36a8cc73aa7597",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  },
+  {
+    "image": "dojo-entry.png",
+    "renderer": "Blender Cycles",
+    "Unity": false,
+    "sceneSHA256": "1f23f752e3d4b5df544a80757740af53d72244f717928fa32b36a8cc73aa7597",
+    "note": "Actual saved static scene plus offline source pose previews; arena enemies are a diagnostic lineup."
+  }
+]
