@@ -168,8 +168,9 @@ namespace Sunward.Editor.Automation
             clip.startPosition=game.Player.transform.position; previousPosition=clip.startPosition; previousGrounded=game.Player.Grounded;
             string[] names={"DEF_front_paw.L","DEF_front_paw.R","DEF_rear_paw.L","DEF_rear_paw.R"};
             var bones=game.Player.animationView.animator.GetComponentsInChildren<Transform>(true);
-            paws=names.Select(n=>bones.FirstOrDefault(t=>t.name==n)).ToArray();
-            if (paws.Any(p=>!p)) throw new Exception("Existing paw bones missing; no replacement rig is created.");
+            var native=game.Player.GetComponent<Sunward.Remaster.NativeAmaterasu>();
+            paws=native && native.Ready ? native.Feet : names.Select(n=>bones.FirstOrDefault(t=>t.name==n)).ToArray();
+            if (paws.Any(p=>!p)) throw new Exception("Active visual rig paw bones are missing.");
             telemetry=new StreamWriter(Path.Combine(output,clip.telemetryFile),false,new System.Text.UTF8Encoding(false));
             telemetry.WriteLine("frame,nominal_seconds,game_seconds,delta_time,time_scale,x,y,z,yaw,speed,grounded,animation,animator_speed,in_transition,state_normalized_time,transition_normalized_time,paw_fl_x,paw_fl_y,paw_fl_z,paw_fl_terrain_y,paw_fr_x,paw_fr_y,paw_fr_z,paw_fr_terrain_y,paw_rl_x,paw_rl_y,paw_rl_z,paw_rl_terrain_y,paw_rr_x,paw_rr_y,paw_rr_z,paw_rr_terrain_y,camera_x,camera_y,camera_z");
             recorder=new RecorderVideoBridge();
@@ -243,7 +244,12 @@ namespace Sunward.Editor.Automation
                 if (!game.Player.GetComponentsInChildren<Renderer>().Any(r=>r.enabled&&GeometryUtility.TestPlanesAABB(frustum,r.bounds))) clip.outOfViewFrames++;
                 var row=new List<string> { clip.frames.ToString(),F(clip.frames/(float)options.Fps),F(Time.timeSinceLevelLoad),F(Time.deltaTime),F(Time.timeScale),F(p.x),F(p.y),F(p.z),F(game.Player.transform.eulerAngles.y),F(game.Player.Speed),game.Player.Grounded?"1":"0",animation.Replace(","," ") };
                 var animator=game.Player.animationView.animator;
-                row.AddRange(new[] { F(animator.speed),animator.IsInTransition(0)?"1":"0",F(animator.GetCurrentAnimatorStateInfo(0).normalizedTime),F(animator.GetAnimatorTransitionInfo(0).normalizedTime) });
+                var native=game.Player.GetComponent<Sunward.Remaster.NativeAmaterasu>();
+                // Preserve the CSV schema while reporting the active visual
+                // clock and native feet instead of the disabled fallback FBX.
+                if(native && native.Ready && native.Visible)
+                    row.AddRange(new[] { F(native.PlaybackRate),native.BlendPhase<1?"1":"0",F(native.Phase),F(native.BlendPhase) });
+                else row.AddRange(new[] { F(animator.speed),animator.IsInTransition(0)?"1":"0",F(animator.GetCurrentAnimatorStateInfo(0).normalizedTime),F(animator.GetAnimatorTransitionInfo(0).normalizedTime) });
                 foreach (var paw in paws) { var point=paw.position; row.AddRange(new[] {F(point.x),F(point.y),F(point.z),F(game.valley.Height(point))}); }
                 var cp=camera.transform.position; row.AddRange(new[] {F(cp.x),F(cp.y),F(cp.z)}); telemetry.WriteLine(string.Join(",",row));
                 clip.frames++; clip.durationSeconds=clip.frames/(float)options.Fps; writtenFrame=Time.frameCount;

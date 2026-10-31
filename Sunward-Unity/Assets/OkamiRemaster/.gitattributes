@@ -1,0 +1,5 @@
+# Bounded recovered review textures and original byte bundles are portable Git assets.
+# The existing game's LFS policy and original assets remain unchanged.
+*.png -filter -diff -merge -text
+*.wav -filter -diff -merge -text
+*.bytes -filter -diff -merge -text

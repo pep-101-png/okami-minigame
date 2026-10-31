@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spirit-ranged
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.EnemyDefinition
   id: ranged
-  title: Paper kite
+  title: Yellow Imp
   visual: {fileID: 813931634924766766, guid: bb70860e6323a6d49b6b6c71b90ce6dc, type: 3}
   hp: 12
   damage: 12

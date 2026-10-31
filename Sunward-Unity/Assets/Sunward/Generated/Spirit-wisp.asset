@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spirit-wisp
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.EnemyDefinition
   id: wisp
-  title: Ashwing
+  title: Green Imp
   visual: {fileID: 8244752933840424166, guid: f88e643d5bf90c94bb89417c359a54c7, type: 3}
   hp: 7
   damage: 9

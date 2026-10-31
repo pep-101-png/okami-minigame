@@ -67,7 +67,12 @@ namespace Sunward.Editor
             foreach (var renderer in Resources.FindObjectsOfTypeAll<Renderer>().Where(r => r.gameObject.scene == home.gameObject.scene))
                 foreach (var material in renderer.sharedMaterials)
                 {
-                    if (material && material.shader.name == "Sunward/Brush River")
+                    if (material && AssetDatabase.GetAssetPath(material).StartsWith("Assets/OkamiRemaster/", System.StringComparison.Ordinal))
+                    {
+                        if (!material.shader || ShaderUtil.ShaderHasError(material.shader))
+                            throw new InvalidDataException("Recovered scene material shader failed: " + Hierarchy(renderer.transform));
+                    }
+                    if (material && material.shader && material.shader.name.StartsWith("Sunward/Brush River", System.StringComparison.Ordinal))
                     {
                         if (!(material.GetTexture("_FlowMap") is Texture2D) || !(material.GetTexture("_FlowNormal") is Texture2D))
                             throw new InvalidDataException("Live river is missing painted current maps: " + Hierarchy(renderer.transform));
@@ -103,6 +108,22 @@ namespace Sunward.Editor
                             case "Meadow": family = "meadow"; break;
                             case "Path": family = "path"; break;
                             default: throw new InvalidDataException("Unexpected ink-world painting: " + asset);
+                        }
+                    }
+                    else if (asset.StartsWith("Assets/OkamiRemaster/Windflower/Textures/", System.StringComparison.Ordinal))
+                    {
+                        string painting = Path.GetFileNameWithoutExtension(asset).Replace("Recovered-", "");
+                        switch (painting)
+                        {
+                            case "Timber":
+                            case "Bark": family = "wood"; break;
+                            case "Cliff": family = "stone"; break;
+                            case "Roof":
+                            case "RoofIndigo": family = "roof"; break;
+                            case "Plaster": family = "plaster"; break;
+                            case "Meadow": family = "meadow"; break;
+                            case "Path": family = "path"; break;
+                            default: throw new InvalidDataException("Unexpected recovered painting: " + asset);
                         }
                     }
                     else throw new InvalidDataException("Unexpected environment-art source: " + asset);

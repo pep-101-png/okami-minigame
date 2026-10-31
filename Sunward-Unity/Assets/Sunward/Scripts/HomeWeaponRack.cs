@@ -9,7 +9,7 @@ namespace Sunward
         void LateUpdate()
         {
             if (displays)
-                displays.SetActive(!game.InTrial);
+                displays.SetActive(!game.InTrial && HomeCutaway.Inside(game.Player.transform.position));
         }
     }
 }

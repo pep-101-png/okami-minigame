@@ -10,10 +10,13 @@ namespace Sunward
         Quaternion hipsRestRotation;
         float filteredSpeed;
         bool groundedGait;
+        Sunward.Remaster.NativeAmaterasu native;
         readonly System.Collections.Generic.HashSet<string> missingStates = new System.Collections.Generic.HashSet<string>();
         void Awake()
         {
+            native = GetComponent<Sunward.Remaster.NativeAmaterasu>();
             if (!animator) return;
+            if (native && native.Ready) animator.enabled = false;
             foreach (var t in animator.GetComponentsInChildren<Transform>())
             {
                 if (t.name == "CTRL_root") rootBone = t;
@@ -24,6 +27,7 @@ namespace Sunward
 
         void LateUpdate()
         {
+            if (native && native.Ready && native.Visible) return;
             if (rootBone)
                 rootBone.localPosition = Vector3.zero;
             // Calm only the grounded gait's pelvis motion, not jumps/attacks or
@@ -41,8 +45,18 @@ namespace Sunward
 
         public void Play(string state, float blend = .12f, float duration = 0, bool restart = false)
         {
-            if (!animator || (state == Current && !restart))
+            if (state == Current && !restart)
                 return;
+            groundedGait = state.StartsWith("Walk_") || state.StartsWith("Jog_") || state.StartsWith("Sprint_");
+            bool nativePhase = groundedGait && (Current.StartsWith("Walk_") || Current.StartsWith("Jog_") || Current.StartsWith("Sprint_"));
+            if (native && native.Ready && native.Play(state, blend, duration, restart, nativePhase))
+            {
+                Current = state;
+                if (animator) animator.enabled = false;
+                return;
+            }
+            if (!animator) return;
+            animator.enabled = true;
             if (!animator.HasState(0, Animator.StringToHash(state)))
             {
                 if (missingStates.Add(state))
@@ -60,6 +74,11 @@ namespace Sunward
 
         public float ClipLength(string state)
         {
+            if (native && native.Ready)
+            {
+                float originalLength = native.ClipLength(state);
+                if (originalLength > 0) return originalLength;
+            }
             foreach (var c in animator.runtimeAnimatorController.animationClips)
                 if (c.name == state)
                     return c.length;
@@ -80,7 +99,8 @@ namespace Sunward
             Play(gait, .18f);
             float reference = LocomotionTuning.ReferenceSpeed(gait);
             float rate = filteredSpeed > .15f ? Mathf.Clamp(filteredSpeed / reference, .65f, 1.95f) : 1;
-            animator.speed = Mathf.Lerp(animator.speed, rate, 1 - Mathf.Exp(-Time.deltaTime * 12));
+            if (native && native.Ready && native.Visible) native.GaitSpeed(filteredSpeed);
+            else if (animator) animator.speed = Mathf.Lerp(animator.speed, rate, 1 - Mathf.Exp(-Time.deltaTime * 12));
         }
     }
 }

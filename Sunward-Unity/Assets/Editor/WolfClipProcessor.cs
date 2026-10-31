@@ -172,7 +172,7 @@ namespace Sunward.Editor
             EditorUtility.SetDirty(controller);
             AssetDatabase.SaveAssets();
             ValidateScale();
-            foreach (var view in UnityEngine.Object.FindObjectsByType<WolfAnimation>())
+            foreach (var view in UnityEngine.Object.FindObjectsByType<WolfAnimation>(UnityEngine.FindObjectsSortMode.None))
             {
                 if (!view.animator || view.animator.runtimeAnimatorController != controller)
                     continue;

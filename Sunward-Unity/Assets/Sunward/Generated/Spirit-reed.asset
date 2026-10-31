@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spirit-reed
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.EnemyDefinition
   id: reed
-  title: Reed sentinel
+  title: Red Imp
   visual: {fileID: 6718543548399274062, guid: c76c36fe7f677694483bfdee459f76f8, type: 3}
   hp: 11
   damage: 13

@@ -24,8 +24,10 @@ namespace Sunward
 
         public readonly List<EnemyBrain> Enemies = new List<EnemyBrain>();
         public bool InTrial { get; private set; }
+        public bool BossTrial { get; private set; }
         public string Panel { get; private set; } = "welcome";
-        public bool Blocked => Panel != "";
+        public bool Blocked => Panel != "" || (Brush && Brush.Drawing);
+        public Sunward.Remaster.CelestialBrush Brush { get; private set; }
         public int Wave { get; private set; }
         public string Prompt { get; private set; } = "";
         public string Message { get; private set; } = "Welcome to Windflower Village.";
@@ -33,6 +35,7 @@ namespace Sunward
 
         public GameObject[] npcObjects;
         public NpcData[] npcData;
+        public Sunward.Remaster.VillageServices Services { get; private set; }
         float messageUntil = 9, breakTimer, hitUntil;
         GameObject barrier;
         bool waiting;
@@ -61,15 +64,16 @@ namespace Sunward
                 "wisp",
                 "reed",
                 "elite"
-            },
-            new[]
-            {
-                "boss"
             }
         };
         void Awake()
         {
             Save = new SaveStore();
+            Brush=GetComponent<Sunward.Remaster.CelestialBrush>();if(!Brush)Brush=gameObject.AddComponent<Sunward.Remaster.CelestialBrush>();Brush.game=this;
+            var life=GetComponent<Sunward.Remaster.VillageLife>();if(!life)life=gameObject.AddComponent<Sunward.Remaster.VillageLife>();life.game=this;
+            Services = GetComponent<Sunward.Remaster.VillageServices>();
+            if (!Services) Services = gameObject.AddComponent<Sunward.Remaster.VillageServices>();
+            Services.game = this;
             Health = MaxHealth;
             Stamina = MaxStamina;
             Energy = MaxEnergy;
@@ -84,7 +88,7 @@ namespace Sunward
 
         public void RefreshQuest()
         {
-            foreach (var r in FindObjectsByType<MeshRenderer>())
+            foreach (var r in FindObjectsByType<MeshRenderer>(FindObjectsSortMode.None))
                 foreach (string id in new[]
                 {
                     "garden",
@@ -93,9 +97,13 @@ namespace Sunward
                 }
 
                 )
-                    if (r.name.StartsWith("QuestFlower-" + id))
+                    if (r.name.StartsWith("OriginalQuestFlower-" + id))
                         r.enabled = !Profile.shrine && System.Array.IndexOf(Profile.windflowers, id) < 0;
+                    else if (r.name.StartsWith("QuestFlower-" + id))
+                        r.enabled = false;
         }
+
+        public void WorldPrompt(string text){Prompt=text;}
 
         public void Notify(string text)
         {
@@ -105,6 +113,7 @@ namespace Sunward
 
         public void SetPanel(string panel)
         {
+            if(Health<=0 && panel!="result")return;
             Panel = panel;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -112,7 +121,8 @@ namespace Sunward
 
         public void Close()
         {
-            Panel = "";
+            if(Health<=0){ReturnHome();return;}
+            Panel = "";Player.Locked=false;
         }
 
         public void HitPause(float t)
@@ -122,7 +132,7 @@ namespace Sunward
 
         void Update()
         {
-            Time.timeScale = Panel == "pause" ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
+            Time.timeScale = (Panel == "pause" || (Brush && Brush.Drawing)) ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
             if (Time.unscaledTime > messageUntil)
                 Message = "";
             if (Player.input.Pause.WasPressedThisFrame() && !Home.Active)
@@ -137,6 +147,7 @@ namespace Sunward
                 SetPanel(Panel == "" ? "shop" : "");
             if (Blocked)
                 return;
+            if (Services && Services.Resting) return;
             Enemies.RemoveAll(e => !e);
             if (InTrial)
             {
@@ -149,7 +160,7 @@ namespace Sunward
                 else if (Enemies.TrueForAll(e => e.Dead))
                 {
                     Wave++;
-                    if (Wave >= waves.Length)
+                    if (BossTrial || Wave >= waves.Length)
                         Finish(true);
                     else
                     {
@@ -160,12 +171,15 @@ namespace Sunward
                     }
                 }
 
-                Prompt = "Trial " + (Profile.wins + 1) + " · " + (Wave == 3 ? "KUROGANE" : ("Wave " + (Wave + 1) + " / 3"));
+                Prompt = BossTrial?"CRIMSON HELM · beneath the village":"Trial "+(Profile.wins+1)+" · Wave "+(Wave+1)+" / 3";
                 return;
             }
 
+            if(Sunward.Remaster.LowerArena.Inside(Player.transform.position))return;
             string action = Nearest();
-            Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "shop" ? "E · Taro · weapons & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
+            Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "weapons" ? "E · Weapons · fifteen divine instruments" : action == "shop" ? "E · Upgrades & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
+            if(action.StartsWith("home:"))Prompt="E · "+(action.EndsWith(":exit")?"Leave home":"Enter village home");
+            if (action.StartsWith("venue:")) Prompt = Sunward.Remaster.VillageServices.Label(action,Player.transform.position);
             if (Player.input.Interact.WasPressedThisFrame() && !Home.Active)
             {
                 switch (action)
@@ -180,23 +194,18 @@ namespace Sunward
                     case "shop":
                         SetPanel("shop");
                         break;
+                    case "weapons":
+                        SetPanel("weapons");
+                        break;
                     case "arena":
                         StartTrial();
                         break;
                     case "offering":
-                        if (Profile.windflowers.Length >= 3 && !Profile.shrine)
-                        {
-                            Profile.shrine = true;
-                            Health = MaxHealth;
-                            Save.Save();
-                            RefreshQuest();
-                            Fx.Ring(new Vector3(0, 0, 20), new Color(.7f, .85f, .65f), 4);
-                            Notify("Windflowers offered · permanent vitality +20");
-                        }
-                        else
-                            Notify(Profile.shrine ? "The shrine remembers your blessing." : "Find all three windflowers in the village.");
+                        OfferWindflowers();
                         break;
                     default:
+                        if(action.StartsWith("home:")){Sunward.Remaster.NativeHomeRoom.Interact(this,action);break;}
+                        if (action.StartsWith("venue:")) { Services.Interact(action); break; }
                         if (action.StartsWith("flower:"))
                         {
                             string id = action.Substring(7);
@@ -214,6 +223,7 @@ namespace Sunward
                         if (action.StartsWith("npc:"))
                         {
                             int i = int.Parse(action.Substring(4));
+                            Audio.Npc(i,npcObjects[i].transform.position);
                             Dialogue = npcData[i].name + "\n\n" + string.Join("\n\n", npcData[i].lines);
                             SetPanel("dialogue");
                         }
@@ -226,7 +236,12 @@ namespace Sunward
         string Nearest()
         {
             Vector3 p = Player.transform.position;
-            float best = 2.5f;
+            // Interior exits remain reachable throughout the room. The old
+            // outside-only radius stranded the player after the entry teleport.
+            if (Sunward.Remaster.VillageServices.InDojo(p)) return "venue:dojo";
+            if (Sunward.Remaster.VillageServices.InFoodHouse(p))
+                return Vector3.Distance(p,Sunward.Remaster.VillageServices.Mat)<1.6f ? "venue:mat" : "venue:food";
+            float best = 3.5f;
             string result = "";
             void Consider(string id, Vector3 q, float r = 2.5f)
             {
@@ -238,10 +253,19 @@ namespace Sunward
                 }
             }
 
+            if(Sunward.Remaster.NativeHomeRoom.At(p))
+                for(int i=0;i<npcObjects.Length;i++)if(npcObjects[i] && Vector3.Distance(p,npcObjects[i].transform.position)<2.1f)return "npc:"+i;
+            if(Sunward.Remaster.NativeHomeRoom.NearestAction(p,out var homeAction))return homeAction;
             Consider("bed", HomeLayout.Bed, 1.9f);
             Consider("mirror", HomeLayout.Mirror, 2.1f);
-            Consider("shop", npcObjects != null && npcObjects.Length > 1 && npcObjects[1] ? npcObjects[1].transform.position : new Vector3(3, 0, 0));
+            Consider("weapons", new Vector3(-6, 0, -27.5f), 3);
+            Consider("shop", new Vector3(5, 0, -27.5f), 3);
             Consider("arena", new Vector3(12.8f, 0, 0));
+            Consider("venue:dojo", Sunward.Remaster.VillageServices.DojoDoor, 3.5f);
+            Consider("venue:food", Sunward.Remaster.VillageServices.FoodDoor, 3.5f);
+            if (Sunward.Remaster.VillageServices.InFoodHouse(p)) Consider("venue:mat", Sunward.Remaster.VillageServices.Mat, 1.6f);
+            Consider("venue:pond",new Vector3(GardenPond.X+3.7f,.04f,GardenPond.Z),2);
+            Consider("venue:farmer", Sunward.Remaster.VillageServices.Farmer, 2.4f);
             if (!Profile.shrine)
             {
                 string[] ids =
@@ -261,7 +285,6 @@ namespace Sunward
                         Consider("flower:" + ids[j], points[j], 1.8f);
             }
 
-            Consider("offering", new Vector3(0, 0, 20), 2);
             if (result == "")
                 for (int i = 0; i < npcData.Length; i++)
                     Consider("npc:" + i, npcObjects[i].transform.position, 2.4f);
@@ -283,12 +306,28 @@ namespace Sunward
             return true;
         }
 
+        public void OfferWindflowers()
+        {
+                        if (Profile.windflowers.Length >= 3 && !Profile.shrine)
+                        {
+                            Profile.shrine = true;
+                            Health = MaxHealth;
+                            Save.Save();
+                            RefreshQuest();
+                            Fx.Ring(HomeLayout.Mirror, new Color(.7f, .85f, .65f), 4);
+                            Notify("Windflowers offered · permanent vitality +20");
+                        }
+                        else
+                            Notify(Profile.shrine ? "The shrine remembers your blessing." : "Find all three windflowers in the village.");
+        }
+
         public void StartTrial()
         {
             Audio.Cue("bell");
             Close();
             ClearEnemies();
-            InTrial = true;
+            Sunward.Remaster.LowerArena.TrialStarted();
+            InTrial = true;BossTrial=false;Player.Locked=false;
             Combat.Equip();
             Wave = 0;
             waiting = true;
@@ -300,43 +339,21 @@ namespace Sunward
             Combat.Cancel();
             Player.Teleport(new Vector3(22, 0, 0));
             Player.transform.rotation = Quaternion.Euler(0, 90, 0);
-            barrier = new GameObject("Hollow Bell · calligraphic seal");
-            var mesh = new Mesh
-            {
-                name = "Hollow Bell arena barrier"
-            };
-            const int N = 160, K = 6;
-            var v = new Vector3[(N + 1) * (K + 1)];
-            var uv = new Vector2[v.Length];
-            var index = new int[N * K * 6];
-            int n = 0;
-            for (int i = 0; i <= N; i++)
-                for (int j = 0; j <= K; j++)
-                {
-                    float a = i / (float)N * Mathf.PI * 2;
-                    int k = i * (K + 1) + j;
-                    float radius = 17.8f + Mathf.Sin(a * 13 + j * .4f) * .10f;
-                    v[k] = new Vector3(35 + Mathf.Sin(a) * radius, j * .64f, Mathf.Cos(a) * radius);
-                    uv[k] = new Vector2(i / (float)N * 20, j / (float)K);
-                    if (i < N && j < K)
-                    {
-                        index[n++] = k;
-                        index[n++] = k + 1;
-                        index[n++] = k + K + 1;
-                        index[n++] = k + 1;
-                        index[n++] = k + K + 2;
-                        index[n++] = k + K + 1;
-                    }
-                }
+            barrier = Fx.Boundary(new Vector3(35, 0, 0), 17.8f);
+            Notify("Three normal enemy waves. Victory opens the depths where Crimson Helm waits.");
+        }
 
-            MeshSafety.Validate("Hollow Bell arena barrier", v, index);
-            mesh.vertices = v;
-            mesh.uv = uv;
-            mesh.triangles = index;
-            mesh.RecalculateNormals();
-            barrier.AddComponent<MeshFilter>().sharedMesh = mesh;
-            barrier.AddComponent<MeshRenderer>().sharedMaterial = barrierMaterial;
-            Notify("Three waves, then Kurogane. Every earned reward is permanent.");
+        public void StartBossTrial()
+        {
+            if(InTrial || Health<=0 || !Sunward.Remaster.LowerArena.Inside(Player.transform.position))return;
+            var spec=System.Array.Find(spirits,e=>e.id=="boss");
+            if(!spec){Notify("Crimson Helm definition unavailable");return;}
+            ClearEnemies();BossTrial=InTrial=true;waiting=false;Wave=0;runCoins=runXp=0;
+            Health=MaxHealth;Stamina=MaxStamina;Energy=MaxEnergy;Combat.Cancel();Combat.Equip();
+            var obj=new GameObject(spec.title);Vector3 p=Sunward.Remaster.LowerArena.Centre+new Vector3(16,1,8);
+            if(Sunward.Remaster.LowerArena.Height(p,out var y))p.y=y;
+            obj.transform.position=p;var brain=obj.AddComponent<EnemyBrain>();brain.Init(this,spec);Enemies.Add(brain);
+            Notify("Crimson Helm · dodge the charge, jump the slam, slash the ink bolts");
         }
 
         void SpawnWave()
@@ -361,7 +378,7 @@ namespace Sunward
             }
 
             waiting = false;
-            Notify(Wave == 3 ? "Kurogane awakens · jump the slam, dodge the charge and ink fan." : "Wave " + (Wave + 1) + " · break the seal");
+            Notify("Wave " + (Wave + 1) + " · break the seal");
         }
 
         void ClearEnemies()
@@ -370,7 +387,7 @@ namespace Sunward
                 if (e)
                     Destroy(e.gameObject);
             Enemies.Clear();
-            foreach (var b in FindObjectsByType<InkProjectile>())
+            foreach (var b in FindObjectsByType<InkProjectile>(FindObjectsSortMode.None))
                 Destroy(b.gameObject);
         }
 
@@ -403,7 +420,8 @@ namespace Sunward
         {
             if (!InTrial)
                 return;
-            InTrial = false;
+            bool bossEncounter=BossTrial;InTrial=false;BossTrial=false;waiting=false;
+            Player.Locked=Health<=0;
             Combat.Equip();
             if (barrier)
             {
@@ -413,8 +431,8 @@ namespace Sunward
 
             if (win)
             {
-                Profile.wins++;
-                Profile.coins += 65 + Profile.wins * 10;
+                if(bossEncounter)Profile.bossWins++;else Profile.wins++;
+                Profile.coins += bossEncounter?150:65 + Profile.wins * 10;
                 Profile.xp += 100;
                 Profile.milestones.hollowBell = true;
             }
@@ -422,15 +440,19 @@ namespace Sunward
                 Profile.defeats++;
             Save.Save();
             Combat.Cancel();
-            Dialogue = win ? "Light returns.\n\nKurogane’s seal dissolves." : "Your spirit endures.\n\nEarned currency and permanent growth are safe.";
+            Dialogue = win ? (bossEncounter?"Crimson Helm falls.\n\nThe depths are quiet.":"The upper trial is complete.\n\nThe seal below has opened.") : "Your spirit endures.\n\nEarned currency and permanent growth are safe.";
             Dialogue += "\n\n" + runCoins + " combat coins · " + runXp + " combat XP";
+            if(!bossEncounter)Sunward.Remaster.LowerArena.TrialFinished(win);
+            if(!win)ClearEnemies();
+            if(win && !bossEncounter)Dialogue+="\n\nThe centre floor breaks open. Crimson Helm waits below, or you can return home.";
             SetPanel("result");
         }
 
         public void ReturnHome()
         {
             ClearEnemies();
-            InTrial = false;
+            InTrial = false;BossTrial=false;waiting=false;Player.Locked=false;
+            if(barrier){Destroy(barrier.GetComponent<MeshFilter>().sharedMesh);Destroy(barrier);}
             Combat.Cancel();
             Combat.Equip();
             Player.Teleport(new Vector3(-34, valley.Height(new Vector3(-34, 0, -22)), -22));
@@ -446,13 +468,7 @@ namespace Sunward
         {
             var obj = new GameObject("Painted ink bolt");
             obj.transform.position = position;
-            var line = obj.AddComponent<LineRenderer>();
-            line.sharedMaterial = projectileMaterial;
-            line.useWorldSpace = false;
-            line.positionCount = 3;
-            line.SetPositions(new[] { -direction * .4f, Vector3.zero, direction * .35f });
-            line.startWidth = .12f;
-            line.endWidth = 0;
+            Fx.AttachProjectile(obj);
             var bolt = obj.AddComponent<InkProjectile>();
             bolt.game = this;
             bolt.direction = direction;

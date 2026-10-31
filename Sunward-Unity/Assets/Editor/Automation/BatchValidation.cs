@@ -68,12 +68,12 @@ namespace Sunward.Editor.Automation
                         }
                 });
                 CheckOne(report, "material shaders", () => {
-                    foreach (string guid in AssetDatabase.FindAssets("t:Material", new[] { "Assets/Sunward" })) {
+                    foreach (string guid in AssetDatabase.FindAssets("t:Material", new[] { "Assets/Sunward", "Assets/OkamiRemaster/Original", "Assets/OkamiRemaster/Player" })) {
                         var material = AssetDatabase.LoadAssetAtPath<Material>(AssetDatabase.GUIDToAssetPath(guid));
                         if (!material || !material.shader || material.shader.name == "Hidden/InternalErrorShader" || ShaderUtil.ShaderHasError(material.shader))
                             throw new Exception("Missing/broken shader: " + AssetDatabase.GUIDToAssetPath(guid));
                     }
-                    foreach (string guid in AssetDatabase.FindAssets("t:Shader", new[] { "Assets/Sunward" })) {
+                    foreach (string guid in AssetDatabase.FindAssets("t:Shader", new[] { "Assets/Sunward", "Assets/OkamiRemaster/Original", "Assets/OkamiRemaster/Player" })) {
                         var shader = AssetDatabase.LoadAssetAtPath<Shader>(AssetDatabase.GUIDToAssetPath(guid));
                         if (!shader || ShaderUtil.ShaderHasError(shader)) throw new Exception("Shader import errors: " + AssetDatabase.GUIDToAssetPath(guid));
                     }

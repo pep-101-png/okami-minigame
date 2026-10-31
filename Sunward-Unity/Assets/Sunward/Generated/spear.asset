@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: spear
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.WeaponDefinition
   id: spear
-  title: Reed spear
+  title: Original Okami Glaive
   visual: {fileID: 5878536848524024932, guid: 5e0bcf1545340384fa1127977a9ac76c, type: 3}
   light:
   - clip: Thrust

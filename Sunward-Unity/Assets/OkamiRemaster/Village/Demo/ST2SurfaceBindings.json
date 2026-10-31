@@ -1,0 +1,228 @@
+{
+  "nativeAssets": [
+    {
+      "asset": "stone-bridge",
+      "name": "ST2 timber river bridge",
+      "position": [
+        13.3,
+        5.6,
+        -0.015
+      ],
+      "angleDegrees": 0,
+      "dimensions": [
+        6.6,
+        2.7933609958506223,
+        1.287136929460581
+      ],
+      "surfaceBindings": [
+        {
+          "division": 0,
+          "textureIndex": 47,
+          "surface": "timber rail",
+          "texture": "e8e443fc6190cf25",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 1,
+          "textureIndex": 10,
+          "surface": "painted timber support",
+          "texture": "c308f24f15a9e598",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 2,
+          "textureIndex": 31,
+          "surface": "painted timber deck",
+          "texture": "76f9df4a9c7b96c0",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 3,
+          "textureIndex": 30,
+          "surface": "gold decorative finials",
+          "texture": "d76ab23151add083",
+          "originalUVPreserved": true
+        }
+      ],
+      "originalModel": "r200.dat/3.SCR",
+      "note": "One coherent bridge variant selected to avoid overlapping source variants; tower uses one complete source tower rather than all stage instances."
+    },
+    {
+      "asset": "torii-gate",
+      "name": "ST2 welcoming torii",
+      "position": [
+        -1.6,
+        -10.7,
+        -0.025
+      ],
+      "angleDegrees": 0,
+      "dimensions": [
+        5.6,
+        0.7450643776824034,
+        4.169957081545064
+      ],
+      "surfaceBindings": [
+        {
+          "division": 0,
+          "textureIndex": 15,
+          "surface": "stone footing",
+          "texture": "68d3c5b67a41e91b",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 1,
+          "textureIndex": 47,
+          "surface": "timber columns",
+          "texture": "e8e443fc6190cf25",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 2,
+          "textureIndex": 10,
+          "surface": "painted timber cap",
+          "texture": "c308f24f15a9e598",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 3,
+          "textureIndex": 41,
+          "surface": "ornamental plaque",
+          "texture": "cef118302c4166b8",
+          "originalUVPreserved": true
+        }
+      ],
+      "originalModel": "r200.dat/35.SCR",
+      "note": "One coherent bridge variant selected to avoid overlapping source variants; tower uses one complete source tower rather than all stage instances."
+    },
+    {
+      "asset": "temple-tower",
+      "name": "ST2 shrine garden tower",
+      "position": [
+        -11.1,
+        16.0,
+        -0.025
+      ],
+      "angleDegrees": 0,
+      "dimensions": [
+        2.3669141039236483,
+        3.206786850477201,
+        9.0
+      ],
+      "surfaceBindings": [
+        {
+          "division": 0,
+          "textureIndex": 29,
+          "surface": "ritual painted panel",
+          "texture": "f67d8d1628f6de09",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 1,
+          "textureIndex": 10,
+          "surface": "blue-green roof",
+          "texture": "c308f24f15a9e598",
+          "originalUVPreserved": true
+        }
+      ],
+      "originalModel": "r200.dat/9.SCR",
+      "note": "One coherent bridge variant selected to avoid overlapping source variants; tower uses one complete source tower rather than all stage instances."
+    },
+    {
+      "asset": "small-pavilion",
+      "name": "ST2 riverside pavilion",
+      "position": [
+        16.5,
+        10.8,
+        -0.025
+      ],
+      "angleDegrees": -90,
+      "dimensions": [
+        4.4,
+        3.006666666666667,
+        2.42
+      ],
+      "surfaceBindings": [
+        {
+          "division": 0,
+          "textureIndex": 12,
+          "surface": "blue-green roof",
+          "texture": "dfb8432916198f2f",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 1,
+          "textureIndex": 37,
+          "surface": "painted timber",
+          "texture": "96c9ad77d01502a1",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 2,
+          "textureIndex": 42,
+          "surface": "original facade atlas with timber and stone regions",
+          "texture": "e4df5cf0f307f078",
+          "originalUVPreserved": true
+        }
+      ],
+      "originalModel": "r201.dat/13.SCR",
+      "note": "One coherent bridge variant selected to avoid overlapping source variants; tower uses one complete source tower rather than all stage instances."
+    },
+    {
+      "asset": "garden-rocks",
+      "name": "ST2 garden rock pool",
+      "position": [
+        -12,
+        21.5,
+        -0.02
+      ],
+      "angleDegrees": 20,
+      "dimensions": [
+        3.314066496163683,
+        3.8,
+        0.7191815856777494
+      ],
+      "surfaceBindings": [
+        {
+          "division": 0,
+          "textureIndex": 13,
+          "surface": "water and foam",
+          "texture": "28cde082b301b31a",
+          "originalUVPreserved": true
+        },
+        {
+          "division": 2,
+          "textureIndex": 45,
+          "surface": "weathered rock",
+          "texture": "0484b1898ee7c324",
+          "originalUVPreserved": true
+        }
+      ],
+      "originalModel": "r200.dat/6.SCR",
+      "note": "One coherent bridge variant selected to avoid overlapping source variants; tower uses one complete source tower rather than all stage instances.",
+      "excludedUnreconstructedOverlay": "Source DDP 10 large rectangular overlay excluded after render inspection; native shaped shoreline and stone retained.",
+      "excludedExpandedRockVariant": 3
+    }
+  ],
+  "matchingRule": "Explicit material families and original division UV/texture bindings; no random texture substitution.",
+  "retainedPlasterUVs": 64,
+  "newBridgeBoards": 26,
+  "pondWater": {
+    "boundaryLoops": 2,
+    "fillVertices": 20,
+    "fillTriangles": 18,
+    "waterLevelBelowFoamMeters": 0.004,
+    "source": {
+      "sourceId": "25bafb1b9462bf31",
+      "sourcePNG": "/workspace/st2-inspection/decoded/textures/25bafb1b9462bf31.png",
+      "cropPixels": [
+        20,
+        25,
+        235,
+        92
+      ],
+      "output": "/workspace/sunward-village-st2-update/work/native-assets/textures/pond-water-brush-crop.png"
+    },
+    "duplicateExpandedRockVariantRemoved": true
+  },
+  "UnityRendered": false
+}
