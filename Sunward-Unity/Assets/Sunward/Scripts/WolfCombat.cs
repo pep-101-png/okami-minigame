@@ -11,16 +11,20 @@ namespace Sunward
         public Transform headSocket, backSocket;
         public bool Busy => strike != null || charging || voice > 0;
         public bool Attacking => strike != null;
+        public bool TundraAir => Tundra && strike!=null && strike.clip=="Tundra_54f";
         public float FormMultiplier => nativeBody && nativeBody.Shiranui?2:1;
 
         WeaponDefinition weapon;
         Sunward.Remaster.OriginalWeaponCatalog.Entry originalWeapon;
         Sunward.Remaster.OriginalWeaponView originalView;
         public string EquippedTitle => originalWeapon != null ? originalWeapon.title : "Tsumugari";
+        bool Tundra=>originalWeapon!=null && originalWeapon.resource=="wp2e";
         bool Glaive => originalWeapon == null || originalWeapon.family == "glaive";
         Sunward.Remaster.NativeAmaterasu nativeBody;
         Strike strike;
-        float elapsed, hold, grace;
+        float elapsed, hold, grace, sourceAttackDuration;
+        readonly Vector3[] previousBeads=new Vector3[12];
+        bool havePreviousBeads,tundraSoundPending;float previousBeadPhase;
         int chain;
         bool heavy, queued, queuedHeavy, charging;
         readonly AttackSequence sequence = new AttackSequence();
@@ -58,7 +62,8 @@ namespace Sunward
 
         public void Cancel()
         {
-            strike = null;
+            strike = null;havePreviousBeads=false;tundraSoundPending=false;
+            if(nativeBody)nativeBody.EndTundraAction();
             if(originalView)originalView.EndAttack();
             charging = false;
             queued = false;
@@ -74,20 +79,26 @@ namespace Sunward
             float length=nativeBody && nativeBody.Ready?nativeBody.ClipLength(next.clip):next.duration;
             if(originalView)length=Mathf.Max(length,originalView.AttackLength(next.clip));
             strike=new Strike {clip=next.clip,duration=Mathf.Max(.1f,length/FormMultiplier),damage=next.damage,range=next.range,arc=next.arc,start=next.start,end=next.end,lunge=next.lunge,stagger=next.stagger};
-            elapsed = 0;
+            elapsed = 0;sourceAttackDuration=length;havePreviousBeads=false;previousBeadPhase=0;
             hit.Clear();
             dummyHits.Clear();
             charging = false;
             motor.animationView.Play(strike.clip,Mathf.Min(.12f,strike.duration*.2f),strike.duration,true);
+            if(Tundra && nativeBody)nativeBody.SetTundraPhase(0,sourceAttackDuration);
             if(originalView)originalView.BeginAttack(strike.clip);
-            game.Audio.Cue("weapon-"+originalWeapon.resource+(heavy?"-heavy":""));
+            if(Tundra)tundraSoundPending=true;
+            else game.Audio.Cue("weapon-"+originalWeapon.resource+(heavy?"-heavy":""));
             if (originalWeapon.resource=="wp24")
                 game.Fx.SundialOrbit(transform.position, heavy);
         }
 
         void Update()
         {
-            if (!game || !CombatArea || game.Blocked || motor.Locked || motor.Swimming)
+            if(!game)return;
+            // An interrupted arena/dojo action must release the shared pose
+            // clock rather than leave Amaterasu held in the last attack frame.
+            if(Tundra && (!CombatArea || motor.Locked || motor.Swimming) && (strike!=null || charging))Cancel();
+            if (!CombatArea || game.Blocked || motor.Locked || motor.Swimming)
                 return;
             float dt = Time.deltaTime;
             barkCooldown = Mathf.Max(0, barkCooldown - dt);
@@ -120,18 +131,21 @@ namespace Sunward
                 float previousPhase=elapsed/strike.duration;
                 elapsed += dt;
                 float p = elapsed / strike.duration;
-                if (p > .25f && (motor.input.Light.WasPressedThisFrame() || motor.input.Heavy.WasPressedThisFrame()))
+                if(Tundra && nativeBody)nativeBody.SetTundraPhase(p,sourceAttackDuration);
+                if(Tundra && tundraSoundPending && p>=.1f){tundraSoundPending=false;game.Audio.Cue("weapon-wp2e"+(heavy?"-heavy":""));}
+                if (p > (Tundra?.06f:.25f) && (!Tundra || !queued) && (motor.input.Light.WasPressedThisFrame() || motor.input.Heavy.WasPressedThisFrame()))
                 {
                     queued = true;
                     queuedHeavy = motor.input.Heavy.WasPressedThisFrame();
                 }
 
                 motor.Push(transform.forward * (strike.lunge * Mathf.Sin(Mathf.Clamp01(p) * Mathf.PI) * dt));
-                if (p >= strike.start && previousPhase <= strike.end)
+                if (!Tundra && p >= strike.start && previousPhase <= strike.end)
                     Hit();
                 if (p >= 1)
                 {
-                    strike = null;
+                    strike = null;havePreviousBeads=false;
+                    if(Tundra && nativeBody)nativeBody.EndTundraAction();
                     if(originalView)originalView.EndAttack();
                     grace = .52f;
                     if (queued)
@@ -172,7 +186,7 @@ namespace Sunward
                 bool pressed = heavy ? motor.input.Heavy.IsPressed() : motor.input.Light.IsPressed();
                 if (hold > .28f)
                 {
-                    motor.animationView.Play("NativeCharge_"+originalWeapon.family);
+                    motor.animationView.Play(Tundra?Sunward.Remaster.TundraAttackRules.Charge:"NativeCharge_"+originalWeapon.family);
                     if(nativeBody)nativeBody.HoldChargePose();
                 }
                 if (!pressed)
@@ -222,16 +236,56 @@ namespace Sunward
                     continue;
                 if (Physics.Linecast(transform.position + Vector3.up * .7f, e.transform.position + Vector3.up * .7f, 1 << 6, QueryTriggerInteraction.Ignore))
                     continue;
+                DamageEnemy(e,d);
+
+            }
+        }
+        void DamageEnemy(EnemyBrain e,Vector3 d)
+        {
                 hit.Add(e);
                 float mul = 1 + (ProgressionRules.Level(game.Profile) - 1) * .045f + game.Profile.upgrades.strength * .18f;
                 mul *= 1 + (Glaive ? game.Profile.upgrades.spear * .12f : game.Profile.upgrades.sundial * .14f);
                 e.Damage(strike.damage * mul*FormMultiplier, d.normalized, strike.stagger);
-                game.Fx.Impact(e.transform.position + Vector3.up * .8f, Glaive ? new Color(.9f, .75f, .48f) : new Color(1, .38f, .13f));
+                game.Fx.Impact(e.transform.position + Vector3.up * .8f, Tundra?new Color(.55f,.85f,1):Glaive ? new Color(.9f, .75f, .48f) : new Color(1, .38f, .13f));
                 Sunward.Remaster.CelestialBrush.Burst("Spark",e.transform.position+Vector3.up*.8f,heavy?18:9,heavy?.7f:.4f);
+                if(Tundra)
+                {
+                    var frost=Sunward.Remaster.OriginalAtmosphere.Create("SpiritGlow",null,e.transform.position+Vector3.up*.8f,0,.28f,.5f,.12f,.25f);
+                    if(frost){var main=frost.main;main.startColor=new Color(.5f,.8f,1,.65f);frost.Emit(5);Destroy(frost.gameObject,1);}
+                }
                 if(originalWeapon.family=="reflector")Sunward.Remaster.CelestialBrush.Burst(originalWeapon.resource=="wp24"?"Flame":"SpiritGlow",e.transform.position+Vector3.up,8,.45f);
                 game.Audio.Cue(heavy ? "heavy-impact" : originalWeapon.family=="reflector" ? "flame-impact" : "impact");
                 game.HitPause(heavy ? .065f : .04f);
-            }
         }
+        // Called after native body sockets and bead skinning have sampled the
+        // same attack phase. Damage follows swept beads, not a radial pulse.
+        public void TundraBeadContacts(Vector3[] points,int count)
+        {
+            if(!Tundra || strike==null || game.Blocked || motor.Locked)return;
+            float phase=elapsed/strike.duration;
+            bool active=phase>=strike.start && previousBeadPhase<=strike.end;
+            for(int k=0;k<count;k++)
+            {
+                Vector3 start=havePreviousBeads?previousBeads[k]:points[k];
+                if(active)
+                {
+                    int n=Physics.OverlapCapsuleNonAlloc(start,points[k],Sunward.Remaster.TundraAttackRules.ContactRadius,contacts,1<<8,QueryTriggerInteraction.Collide);
+                    for(int i=0;i<n;i++)
+                    {
+                        var dummy=contacts[i].GetComponentInParent<Sunward.Remaster.TrainingDummy>();
+                        if(dummy){if(dummyHits.Add(dummy))dummy.Strike();continue;}
+                        var enemy=contacts[i].GetComponentInParent<EnemyBrain>();
+                        if(!enemy || enemy.Dead || hit.Contains(enemy))continue;
+                        Vector3 d=enemy.transform.position-transform.position;
+                        if(d.sqrMagnitude>strike.range*strike.range)continue;
+                        if(Physics.Linecast(transform.position+Vector3.up*.7f,enemy.transform.position+Vector3.up*.7f,1<<6,QueryTriggerInteraction.Ignore))continue;
+                        DamageEnemy(enemy,d.normalized);
+                    }
+                }
+                previousBeads[k]=points[k];
+            }
+            previousBeadPhase=phase;havePreviousBeads=true;
+        }
+
     }
 }

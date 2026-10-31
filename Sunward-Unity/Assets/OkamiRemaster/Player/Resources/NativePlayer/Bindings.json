@@ -767,6 +767,83 @@
       "clip": "pl00_095",
       "loop": false,
       "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_544",
+      "clip": "pl00_544",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_545",
+      "clip": "pl00_545",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_546",
+      "clip": "pl00_546",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_547",
+      "clip": "pl00_547",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_548",
+      "clip": "pl00_548",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_549",
+      "clip": "pl00_549",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_54a",
+      "clip": "pl00_54a",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_54b",
+      "clip": "pl00_54b",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_Cast",
+      "clip": "pl00_542",
+      "loop": true,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Tundra_54f",
+      "clip": "pl00_54f",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "NativeCharge_tundra",
+      "clip": "pl00_540",
+      "loop": true,
+      "mirror": false,
+      "referenceSpeed": 0
     }
   ]
 }

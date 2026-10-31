@@ -36,7 +36,7 @@ namespace Sunward.Remaster
         public Transform[] PowerBones => Ready ? new[] { rig.Bones[9], rig.Bones[14], rig.Bones[13], rig.Bones[18], rig.Bones[21], rig.Bones[25] } : null;
         public Transform[] Feet => Ready ? new[] { rig.Bones[18], rig.Bones[13], rig.Bones[26], rig.Bones[22] } : null;
         public float PlaybackRate => rate;
-        public float Phase => clip == null ? 0 : time / Mathf.Max(.001f, clip.Duration + (intro != null ? intro.Duration : 0));
+        public float Phase => tundraClock?tundraPhase:clip == null ? 0 : time / Mathf.Max(.001f, clip.Duration + (intro != null ? intro.Duration : 0));
         public float BlendPhase => blendDuration > 0 ? Mathf.Clamp01(blendTime / blendDuration) : 1;
         NativePaintedRig rig;
         NativePaintedRig amaterasuRig, shiranuiRig;
@@ -50,6 +50,15 @@ namespace Sunward.Remaster
         NativePoseBank.Clip clip, intro;
         float time, rate = 1, blendTime, blendDuration;
         string jumpState;
+        bool tundraClock,tundraRecovering;
+        float tundraPhase,tundraDuration;
+        public void SetTundraPhase(float phase,float sourceDuration)
+        {if(binding==null || !TundraAttackRules.Owns(binding.state))return;tundraClock=true;tundraPhase=Mathf.Clamp01(phase);tundraDuration=sourceDuration;}
+        public void EndTundraAction()
+        {
+            if(binding==null || !TundraAttackRules.Owns(binding.state))return;
+            tundraClock=false;Play("Idle_Natural",TundraAttackRules.ReturnBlend,0,true,false);
+        }
         WolfMotor motor;
         sealed class Socket { public Transform bone, socket; public Vector3 offset; public Quaternion rotation; }
         readonly List<Socket> sockets = new List<Socket>();
@@ -132,6 +141,7 @@ namespace Sunward.Remaster
                 fromRotation[i] = rig.Bones[i].localRotation;
                 fromScale[i] = rig.Bones[i].localScale;
             }
+            tundraClock=false;tundraRecovering=false;
             binding = next; clip = bank.Find(next.clip); intro = string.IsNullOrEmpty(next.intro) ? null : bank.Find(next.intro);
             time = phase * clip.Duration; blendTime = 0; blendDuration = Mathf.Max(0, blend);
             float length = clip.Duration + (intro != null ? intro.Duration : 0);
@@ -183,7 +193,8 @@ namespace Sunward.Remaster
             if (motor && motor.game && motor.game.Blocked) return;
             if (UnityEngine.InputSystem.Keyboard.current != null && UnityEngine.InputSystem.Keyboard.current.pKey.wasPressedThisFrame)
                 ToggleShiranui();
-            time += Time.deltaTime * rate; blendTime += Time.deltaTime;
+            if(!tundraClock)time += Time.deltaTime * rate;
+            blendTime += Time.deltaTime;
             Apply();
         }
         void ToggleShiranui()
@@ -217,6 +228,23 @@ namespace Sunward.Remaster
             {
                 if (t < intro.Duration) { selected = intro; loop = false; }
                 else t -= intro.Duration;
+            }
+            if(tundraClock)
+            {
+                if(binding.state==TundraAttackRules.Cast)
+                {
+                    var recovery=bank.Find("pl00_543");
+                    if(recovery==null)throw new InvalidOperationException("Original Tundra cast recovery pl00_543 is missing");
+                    t=TundraAttackRules.CastTime(tundraPhase,tundraDuration,recovery.Duration,clip.Duration,out bool ending);
+                    if(ending && !tundraRecovering)
+                    {
+                        for(int i=0;i<bank.BoneCount;i++)
+                        {fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}
+                        tundraRecovering=true;blendTime=0;blendDuration=.04f;
+                    }
+                    selected=ending?recovery:clip;loop=!ending;
+                }
+                else {t=tundraPhase*clip.Duration;loop=false;}
             }
             bank.Sample(selected, t, rig.Bones, fromPosition, fromRotation, fromScale, blendDuration > 0 ? Mathf.SmoothStep(0, 1, blendTime / blendDuration) : 1, loop, binding.mirror);
             // Follow the bone pose without inheriting its squash/stretch scale

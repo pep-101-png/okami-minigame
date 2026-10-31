@@ -59,12 +59,21 @@ namespace Sunward.Remaster
             string charged=entry.family=="reflector"?"504":entry.family=="glaive"?"524":"54c";
             result.charged=Native(charged,entry.family=="reflector"?5f:entry.family=="rosary"?4.2f:4.5f,5.2f,.1f);result.chargedHeavy=Native(charged,entry.family=="rosary"?4.6f:6f,5.2f,-.3f);
             result.air=Native(entry.family=="reflector"?"505":entry.family=="glaive"?"525":"54f",entry.family=="rosary"?3f:4.5f,4.5f,-1);
+            if(entry.resource=="wp2e")
+            {
+                float[] tundraDamage={1f,1.4f,1.7f,2.1f,2.4f,2.9f,3.4f,3.8f};
+                result.light=new Strike[8];for(int i=0;i<8;i++)result.light[i]=Tundra(TundraAttackRules.Primary(i),tundraDamage[i]);
+                result.heavy=new[]{Tundra(TundraAttackRules.Primary(7),4f)};
+                result.charged=Tundra(TundraAttackRules.Cast,4.2f);result.chargedHeavy=Tundra(TundraAttackRules.Cast,4.6f);
+                result.air=Tundra("Tundra_54f",3f);
+            }
             float power=entry.id=="spear" || entry.id=="sundial"?1:1+Mathf.Clamp01((entry.cost-70)/380f)*.35f;
             foreach(var strike in result.light)strike.damage*=power;
             foreach(var strike in result.heavy)strike.damage*=power;
             result.charged.damage*=power;result.chargedHeavy.damage*=power;result.air.damage*=power;
             return result;
         }
+        static Strike Tundra(string state,float damage)=>new Strike {clip=state,duration=.9666667f,damage=damage,range=15,arc=-1,start=.12f,end=.85f,lunge=.15f,stagger=.3f};
         static Strike Native(string clip,float damage,float range,float arc)=>new Strike {
             clip="NativeAttack_"+clip,duration=.6f,damage=damage,range=range,arc=arc,start=.22f,end=.68f,lunge=.45f,stagger=.3f };
     }
