@@ -24,8 +24,10 @@ namespace Sunward
 
         public readonly List<EnemyBrain> Enemies = new List<EnemyBrain>();
         public bool InTrial { get; private set; }
+        public bool BossTrial { get; private set; }
         public string Panel { get; private set; } = "welcome";
-        public bool Blocked => Panel != "";
+        public bool Blocked => Panel != "" || (Brush && Brush.Drawing);
+        public Sunward.Remaster.CelestialBrush Brush { get; private set; }
         public int Wave { get; private set; }
         public string Prompt { get; private set; } = "";
         public string Message { get; private set; } = "Welcome to Windflower Village.";
@@ -62,15 +64,13 @@ namespace Sunward
                 "wisp",
                 "reed",
                 "elite"
-            },
-            new[]
-            {
-                "boss"
             }
         };
         void Awake()
         {
             Save = new SaveStore();
+            Brush=GetComponent<Sunward.Remaster.CelestialBrush>();if(!Brush)Brush=gameObject.AddComponent<Sunward.Remaster.CelestialBrush>();Brush.game=this;
+            var life=GetComponent<Sunward.Remaster.VillageLife>();if(!life)life=gameObject.AddComponent<Sunward.Remaster.VillageLife>();life.game=this;
             Services = GetComponent<Sunward.Remaster.VillageServices>();
             if (!Services) Services = gameObject.AddComponent<Sunward.Remaster.VillageServices>();
             Services.game = this;
@@ -88,7 +88,7 @@ namespace Sunward
 
         public void RefreshQuest()
         {
-            foreach (var r in FindObjectsByType<MeshRenderer>())
+            foreach (var r in FindObjectsByType<MeshRenderer>(FindObjectsSortMode.None))
                 foreach (string id in new[]
                 {
                     "garden",
@@ -113,6 +113,7 @@ namespace Sunward
 
         public void SetPanel(string panel)
         {
+            if(Health<=0 && panel!="result")return;
             Panel = panel;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -120,7 +121,8 @@ namespace Sunward
 
         public void Close()
         {
-            Panel = "";
+            if(Health<=0){ReturnHome();return;}
+            Panel = "";Player.Locked=false;
         }
 
         public void HitPause(float t)
@@ -130,7 +132,7 @@ namespace Sunward
 
         void Update()
         {
-            Time.timeScale = Panel == "pause" ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
+            Time.timeScale = (Panel == "pause" || (Brush && Brush.Drawing)) ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
             if (Time.unscaledTime > messageUntil)
                 Message = "";
             if (Player.input.Pause.WasPressedThisFrame() && !Home.Active)
@@ -158,7 +160,7 @@ namespace Sunward
                 else if (Enemies.TrueForAll(e => e.Dead))
                 {
                     Wave++;
-                    if (Wave >= waves.Length)
+                    if (BossTrial || Wave >= waves.Length)
                         Finish(true);
                     else
                     {
@@ -169,13 +171,14 @@ namespace Sunward
                     }
                 }
 
-                Prompt = "Trial " + (Profile.wins + 1) + " · " + (Wave == 3 ? "CRIMSON HELM" : ("Wave " + (Wave + 1) + " / 3"));
+                Prompt = BossTrial?"CRIMSON HELM · beneath the village":"Trial "+(Profile.wins+1)+" · Wave "+(Wave+1)+" / 3";
                 return;
             }
 
             if(Sunward.Remaster.LowerArena.Inside(Player.transform.position))return;
             string action = Nearest();
             Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "weapons" ? "E · Weapons · fifteen divine instruments" : action == "shop" ? "E · Upgrades & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
+            if(action.StartsWith("home:"))Prompt="E · "+(action.EndsWith(":exit")?"Leave home":"Enter village home");
             if (action.StartsWith("venue:")) Prompt = Sunward.Remaster.VillageServices.Label(action,Player.transform.position);
             if (Player.input.Interact.WasPressedThisFrame() && !Home.Active)
             {
@@ -201,6 +204,7 @@ namespace Sunward
                         OfferWindflowers();
                         break;
                     default:
+                        if(action.StartsWith("home:")){Sunward.Remaster.NativeHomeRoom.Interact(this,action);break;}
                         if (action.StartsWith("venue:")) { Services.Interact(action); break; }
                         if (action.StartsWith("flower:"))
                         {
@@ -249,14 +253,18 @@ namespace Sunward
                 }
             }
 
+            if(Sunward.Remaster.NativeHomeRoom.At(p))
+                for(int i=0;i<npcObjects.Length;i++)if(npcObjects[i] && Vector3.Distance(p,npcObjects[i].transform.position)<2.1f)return "npc:"+i;
+            if(Sunward.Remaster.NativeHomeRoom.NearestAction(p,out var homeAction))return homeAction;
             Consider("bed", HomeLayout.Bed, 1.9f);
             Consider("mirror", HomeLayout.Mirror, 2.1f);
-            Consider("weapons", new Vector3(4.4f, 0, 0), 3);
-            Consider("shop", new Vector3(-4.4f, 0, 0), 3);
+            Consider("weapons", new Vector3(-6, 0, -27.5f), 3);
+            Consider("shop", new Vector3(5, 0, -27.5f), 3);
             Consider("arena", new Vector3(12.8f, 0, 0));
             Consider("venue:dojo", Sunward.Remaster.VillageServices.DojoDoor, 3.5f);
             Consider("venue:food", Sunward.Remaster.VillageServices.FoodDoor, 3.5f);
             if (Sunward.Remaster.VillageServices.InFoodHouse(p)) Consider("venue:mat", Sunward.Remaster.VillageServices.Mat, 1.6f);
+            Consider("venue:pond",new Vector3(GardenPond.X+3.7f,.04f,GardenPond.Z),2);
             Consider("venue:farmer", Sunward.Remaster.VillageServices.Farmer, 2.4f);
             if (!Profile.shrine)
             {
@@ -319,7 +327,7 @@ namespace Sunward
             Close();
             ClearEnemies();
             Sunward.Remaster.LowerArena.TrialStarted();
-            InTrial = true;
+            InTrial = true;BossTrial=false;Player.Locked=false;
             Combat.Equip();
             Wave = 0;
             waiting = true;
@@ -332,7 +340,20 @@ namespace Sunward
             Player.Teleport(new Vector3(22, 0, 0));
             Player.transform.rotation = Quaternion.Euler(0, 90, 0);
             barrier = Fx.Boundary(new Vector3(35, 0, 0), 17.8f);
-            Notify("Three waves, then Crimson Helm. Every earned reward is permanent.");
+            Notify("Three normal enemy waves. Victory opens the depths where Crimson Helm waits.");
+        }
+
+        public void StartBossTrial()
+        {
+            if(InTrial || Health<=0 || !Sunward.Remaster.LowerArena.Inside(Player.transform.position))return;
+            var spec=System.Array.Find(spirits,e=>e.id=="boss");
+            if(!spec){Notify("Crimson Helm definition unavailable");return;}
+            ClearEnemies();BossTrial=InTrial=true;waiting=false;Wave=0;runCoins=runXp=0;
+            Health=MaxHealth;Stamina=MaxStamina;Energy=MaxEnergy;Combat.Cancel();Combat.Equip();
+            var obj=new GameObject(spec.title);Vector3 p=Sunward.Remaster.LowerArena.Centre+new Vector3(16,1,8);
+            if(Sunward.Remaster.LowerArena.Height(p,out var y))p.y=y;
+            obj.transform.position=p;var brain=obj.AddComponent<EnemyBrain>();brain.Init(this,spec);Enemies.Add(brain);
+            Notify("Crimson Helm · dodge the charge, jump the slam, slash the ink bolts");
         }
 
         void SpawnWave()
@@ -357,7 +378,7 @@ namespace Sunward
             }
 
             waiting = false;
-            Notify(Wave == 3 ? "Crimson Helm awakens · jump the slam, dodge the charge and ink fan." : "Wave " + (Wave + 1) + " · break the seal");
+            Notify("Wave " + (Wave + 1) + " · break the seal");
         }
 
         void ClearEnemies()
@@ -366,7 +387,7 @@ namespace Sunward
                 if (e)
                     Destroy(e.gameObject);
             Enemies.Clear();
-            foreach (var b in FindObjectsByType<InkProjectile>())
+            foreach (var b in FindObjectsByType<InkProjectile>(FindObjectsSortMode.None))
                 Destroy(b.gameObject);
         }
 
@@ -399,7 +420,8 @@ namespace Sunward
         {
             if (!InTrial)
                 return;
-            InTrial = false;
+            bool bossEncounter=BossTrial;InTrial=false;BossTrial=false;waiting=false;
+            Player.Locked=Health<=0;
             Combat.Equip();
             if (barrier)
             {
@@ -409,8 +431,8 @@ namespace Sunward
 
             if (win)
             {
-                Profile.wins++;
-                Profile.coins += 65 + Profile.wins * 10;
+                if(bossEncounter)Profile.bossWins++;else Profile.wins++;
+                Profile.coins += bossEncounter?150:65 + Profile.wins * 10;
                 Profile.xp += 100;
                 Profile.milestones.hollowBell = true;
             }
@@ -418,17 +440,19 @@ namespace Sunward
                 Profile.defeats++;
             Save.Save();
             Combat.Cancel();
-            Dialogue = win ? "Light returns.\n\nCrimson Helm’s seal dissolves." : "Your spirit endures.\n\nEarned currency and permanent growth are safe.";
+            Dialogue = win ? (bossEncounter?"Crimson Helm falls.\n\nThe depths are quiet.":"The upper trial is complete.\n\nThe seal below has opened.") : "Your spirit endures.\n\nEarned currency and permanent growth are safe.";
             Dialogue += "\n\n" + runCoins + " combat coins · " + runXp + " combat XP";
-            Sunward.Remaster.LowerArena.TrialFinished(win);
-            if(win)Dialogue+="\n\nThe centre floor breaks open. Explore the empty lower arena, or return home.";
+            if(!bossEncounter)Sunward.Remaster.LowerArena.TrialFinished(win);
+            if(!win)ClearEnemies();
+            if(win && !bossEncounter)Dialogue+="\n\nThe centre floor breaks open. Crimson Helm waits below, or you can return home.";
             SetPanel("result");
         }
 
         public void ReturnHome()
         {
             ClearEnemies();
-            InTrial = false;
+            InTrial = false;BossTrial=false;waiting=false;Player.Locked=false;
+            if(barrier){Destroy(barrier.GetComponent<MeshFilter>().sharedMesh);Destroy(barrier);}
             Combat.Cancel();
             Combat.Equip();
             Player.Teleport(new Vector3(-34, valley.Height(new Vector3(-34, 0, -22)), -22));

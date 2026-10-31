@@ -1603,6 +1603,6 @@ MonoBehaviour:
   modelScale: 0.21145218884494302
   game: {fileID: 0}
   splitAttackClip: 1
-  chargeAttack: em65_022
+  chargeAttack: em65_020
   slamAttack: em65_021
   rangedAttack: em65_023

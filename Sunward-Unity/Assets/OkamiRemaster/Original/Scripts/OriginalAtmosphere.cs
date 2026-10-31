@@ -40,6 +40,7 @@ namespace Sunward.Remaster
                 var rotation = system.rotationOverLifetime; rotation.enabled = true; rotation.z = new ParticleSystem.MinMaxCurve(-1, 1);
             }
             else if (sprite == "Steam") { var sheet = system.textureSheetAnimation; sheet.enabled = true; sheet.numTilesX = 1; sheet.numTilesY = 2; sheet.startFrame = new ParticleSystem.MinMaxCurve(0, 1); sheet.frameOverTime = 0; }
+            else if (sprite == "Spark") { var sheet=system.textureSheetAnimation;sheet.enabled=true;sheet.numTilesX=4;sheet.numTilesY=1;sheet.frameOverTime=1; }
             else if (sprite == "Flame") { var sheet=system.textureSheetAnimation;sheet.enabled=true;sheet.numTilesX=2;sheet.numTilesY=2;sheet.startFrame=new ParticleSystem.MinMaxCurve(0,1);sheet.frameOverTime=1; }
             var renderer = system.GetComponent<ParticleSystemRenderer>();
             renderer.sharedMaterial = new Material(surface) { mainTexture = texture };
@@ -92,7 +93,7 @@ namespace Sunward.Remaster
                 var p=Create("Spark",null,new Vector3(game.Player.transform.position.x,-.30f,game.Player.transform.position.z),0,.65f,.55f,.015f);
                 if(p)
                 {
-                    var sheet=p.textureSheetAnimation;sheet.enabled=true;sheet.numTilesX=5;sheet.numTilesY=1;sheet.frameOverTime=1;
+                    var sheet=p.textureSheetAnimation;sheet.enabled=true;sheet.numTilesX=4;sheet.numTilesY=1;sheet.frameOverTime=1;
                     var velocity=p.velocityOverLifetime;velocity.enabled=false;
                     var renderer=p.GetComponent<ParticleSystemRenderer>();renderer.renderMode=ParticleSystemRenderMode.HorizontalBillboard;
                     p.Emit(1);Destroy(p.gameObject,1);

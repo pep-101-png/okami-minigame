@@ -1,0 +1,22 @@
+{
+  "source": "data_pc/bgm/bgm00.afs2",
+  "stream": 0,
+  "sourceStreamSHA256": "1c3c7104d6071fcdc25366f72b46a3965845a9bdb04df668f847d2ad3aad8184",
+  "outputSHA256": "1db14f9cb5579925b78c942bfda84dd44194ab5fa75adec310b3d302952d225c",
+  "assignment": "Provisional original background stream; musical title/instrument identity unverified. Excludes known battle stream 1 and short cleansing stream 5.",
+  "sourceVersion": "0x400",
+  "frameScalesDecrypted": false,
+  "decoded": {
+    "rmsDBFS": -17.471,
+    "peak": 0.731567,
+    "clippedFraction": 0.0
+  },
+  "output": {
+    "rmsDBFS": -24.0,
+    "peak": 0.346003,
+    "clippedFraction": 0.0
+  },
+  "gainDB": -6.528,
+  "seconds": 62.1831,
+  "clearADX_SHA256": "1c3c7104d6071fcdc25366f72b46a3965845a9bdb04df668f847d2ad3aad8184"
+}

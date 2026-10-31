@@ -133,7 +133,7 @@ namespace Sunward
 
             DrawPaper(new Rect(20, h - 93, w - 40, 72));
             GUI.Label(new Rect(34, h - 88, w - 68, 28), game.Message != "" ? game.Message : game.Prompt, body);
-            GUI.Label(new Rect(34, h - 57, w - 68, 28), game.InTrial ? "LMB / J light · RMB / L heavy · hold to charge · Q switch weapon · B bark · K dodge · Space jump · Esc pause" : "WASD move · Shift sprint · Ctrl walk · Space jump · E interact · Tab forge · Weapons stay on the home wall outside trials · Middle drag orbit", small);
+            GUI.Label(new Rect(34, h - 57, w - 68, 28), game.InTrial ? "LMB/J light · RMB/L heavy · hold to charge · R brush · Q weapon · B bark · K dodge · Space jump · Esc pause" : "WASD move · Shift sprint · Ctrl walk · Space jump · E interact · R brush · F dig · G stow · H eat · Tab upgrades", small);
             if (game.InTrial && GUI.Button(new Rect(w - 160, h - 140, 140, 34), "RETREAT", button))
                 game.Finish(false);
             if (!game.Blocked)
@@ -216,6 +216,15 @@ namespace Sunward
                         Quality(false);
                     if (Button("MUTE / UNMUTE", button))
                         AudioListener.volume = AudioListener.volume > 0 ? 0 : 1;
+                    break;
+                case "farm":
+                    GUILayout.Label("FARM SHOP · "+game.Profile.vegetables+" vegetables · "+game.Profile.praise+" Praise",body);
+                    var farm=game.GetComponent<Sunward.Remaster.VillageLife>();
+                    if(Button("SELL PRODUCE · 5 coins each",button))farm.Sell();
+                    if(Button("EAT VEGETABLE · +1 health",button))farm.Eat();
+                    if(Button("FARM MEAL · 5 coins · +10 health",button))farm.BuyMeal();
+                    if(Button("VITALITY · "+(25+game.Profile.farmVitality*10)+" coins · permanent +1 max health",button))farm.BuyVitality();
+                    if(Button("VILLAGE RESTORATION REQUEST",button))farm.Request();
                     break;
                 case "result":
                     GUILayout.Label(game.Dialogue, title);

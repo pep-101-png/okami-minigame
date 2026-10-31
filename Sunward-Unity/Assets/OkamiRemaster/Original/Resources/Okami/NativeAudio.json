@@ -149,16 +149,8 @@
       "resource": "Okami/NativeAudio/enemy5-5"
     },
     {
-      "cue": "town",
-      "resource": "Okami/NativeAudio/town-1"
-    },
-    {
       "cue": "battle",
       "resource": "Okami/NativeAudio/town-1"
-    },
-    {
-      "cue": "housemusic",
-      "resource": "Okami/NativeAudio/housemusic-5"
     },
     {
       "cue": "wind",
@@ -287,6 +279,10 @@
     {
       "cue": "weapon-wp2e-heavy",
       "resource": "Okami/NativeAudio/weapon-wp2e-heavy-1"
+    },
+    {
+      "cue": "housemusic",
+      "resource": "Okami/NativeAudio/foodhouse-background-0"
     }
   ]
 }

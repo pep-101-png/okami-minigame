@@ -1,0 +1,16 @@
+[
+  {
+    "package": "hm05",
+    "motion": "hm05_003",
+    "sourceSHA256": "1ef44fe70a35d7819a62dab65071ba5619bdcfb7485b11b29372d3ad9498e8d9",
+    "frames": 3,
+    "loop": true
+  },
+  {
+    "package": "hm05",
+    "motion": "hm05_028",
+    "sourceSHA256": "4ec9e58fa662a724f046a0fca395aceadb1b1295132e1fe6b181b3025b831845",
+    "frames": 71,
+    "loop": false
+  }
+]

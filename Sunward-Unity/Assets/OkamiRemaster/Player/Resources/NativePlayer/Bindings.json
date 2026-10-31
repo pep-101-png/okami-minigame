@@ -755,6 +755,18 @@
       "mirror": false,
       "referenceSpeed": 0,
       "evidence": "Hold the first original family pose while the existing controller accumulates charge. Native source pose, no invented rig motion."
+    },
+    {
+      "state": "Dig",
+      "clip": "pl00_092",
+      "loop": true,
+      "referenceSpeed": 0
+    },
+    {
+      "state": "Eat",
+      "clip": "pl00_095",
+      "loop": false,
+      "referenceSpeed": 0
     }
   ]
 }

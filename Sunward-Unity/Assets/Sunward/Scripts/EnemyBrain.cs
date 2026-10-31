@@ -83,8 +83,9 @@ namespace Sunward
             motor.Move(delta);
             var p = transform.position;
             var d = p - new Vector3(35, p.y, 0);
-            if (d.magnitude > 16.8f)
-                motor.Move(new Vector3(35, p.y, 0) + d.normalized * 16.8f - p);
+            float radius=game.BossTrial?29:16.8f;
+            if (d.magnitude > radius)
+                motor.Move(new Vector3(35, p.y, 0) + d.normalized * radius - p);
         }
 
         void Update()
@@ -107,7 +108,7 @@ namespace Sunward
             diff.y = 0;
             float distance = diff.magnitude;
             bool boss = definition.id == "boss", ranged = definition.id == "ranged";
-            if (diff.sqrMagnitude > .01f)
+            if ((State=="approach" || State=="recover") && diff.sqrMagnitude > .01f)
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(diff), dt * 7);
             if (!originalVisual)
             {
@@ -137,7 +138,7 @@ namespace Sunward
                         "charge",
                         "slam",
                         "fan"
-                    }[attacks % 3] : ranged ? "shot" : definition.id == "heavy" ? "slam" : "charge";
+                    }[attacks % 3] : ranged ? "shot" : "melee";
                     if(nativeActor && nativeActor.Ready && nativeActor.splitAttackClip)nativeAttackLength=nativeActor.ActivityLength(nativeActor.AttackMotion(move));
                     State = "windup";
                     timer = Mathf.Max(definition.windup * (Phase2 ? .8f : 1),nativeAttackLength*.25f);
@@ -165,13 +166,21 @@ namespace Sunward
                 {
                     game.Fx.Ring(transform.position, new Color(.7f, .36f, .22f), boss ? 5 : 3);
                     game.Audio.World("heavy-impact",transform.position,16,.22f);
-                    if (distance < (boss ? 5 : 3) && game.Player.transform.position.y < .9f)
+                    if (distance < (boss ? 5 : 3) && game.Player.transform.position.y < transform.position.y+.9f)
                         game.Hurt(definition.damage, direction);
                     struck = true;
                 }
             }
             else if (State == "strike")
             {
+                // Normal imps swing in place; controller lunges previously slid
+                // their stationary native weapon actions through the player.
+                if(move=="melee" && !struck && VisualStateProgress>=.55f)
+                {
+                    struck=true;float reach=definition.id=="heavy"?3.2f:2.6f;
+                    if(distance<reach && Mathf.Abs(game.Player.transform.position.y-transform.position.y)<1.25f)
+                    {game.Hurt(definition.damage,direction);game.Audio.World(definition.id=="heavy"?"heavy-impact":"impact",transform.position,12,.18f);}
+                }
                 if (move == "charge" && chargeRemaining>0)
                 {
                     Vector3 before = transform.position;

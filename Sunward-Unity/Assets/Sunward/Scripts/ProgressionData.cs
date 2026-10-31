@@ -73,6 +73,7 @@ namespace Sunward
     public class ProfileData
     {
         public int version = 2, revision, coins = 35, xp, wins, defeats, kills;
+        public int bossWins, vegetables, cropsSold, praise, restorationStage, farmVitality;
         public string equipped = "spear";
         public string[] owned =
         {
@@ -127,7 +128,7 @@ namespace Sunward
             return (Level(p) - 1) * 2 + total * 1.6f + p.wins * 2;
         }
 
-        public static int MaxHp(ProfileData p) => 100 + (Level(p) - 1) * 4 + p.upgrades.vitality * 12 + (p.shrine ? 20 : 0);
+        public static int MaxHp(ProfileData p) => 100 + (Level(p) - 1) * 4 + p.upgrades.vitality * 12 + (p.shrine ? 20 : 0)+Math.Max(0,Math.Min(10,p.farmVitality));
         public static int Cost(ProfileData p, string id)
         {
             int i = Array.IndexOf(Upgrades, id);
@@ -166,6 +167,7 @@ namespace Sunward
             p.collectibles = p.collectibles ?? Array.Empty<string>();
             p.windflowers = p.windflowers ?? Array.Empty<string>();
             p.milestones = p.milestones ?? new Milestones();
+            if(p.bossWins<0 || p.vegetables<0 || p.cropsSold<0 || p.praise<0 || p.restorationStage<0 || p.restorationStage>3 || p.farmVitality<0 || p.farmVitality>10)return false;
             p.version = 2;
             return true;
         }

@@ -1,0 +1,2134 @@
+{
+  "base": "472f7be2fbaa29ed7d1827eca563ee4033e65c35",
+  "placements": [
+    {
+      "label": "slender pond flowering sapling 0",
+      "package": "vt59",
+      "objects": [
+        8000000000000011985,
+        8000000000000011989,
+        8000000000000011993
+      ],
+      "position": [
+        -18,
+        0.019999999552965164,
+        -21
+      ]
+    },
+    {
+      "label": "slender pond flowering sapling 1",
+      "package": "vt59",
+      "objects": [
+        8000000000000011997,
+        8000000000000012001,
+        8000000000000012005
+      ],
+      "position": [
+        -13,
+        -0.1856953501701355,
+        -25
+      ]
+    },
+    {
+      "label": "slender pond flowering sapling 2",
+      "package": "vt59",
+      "objects": [
+        8000000000000012009,
+        8000000000000012013,
+        8000000000000012017
+      ],
+      "position": [
+        -16,
+        -0.39723193645477295,
+        -18
+      ]
+    },
+    {
+      "label": "crop it25",
+      "package": "it25",
+      "objects": [
+        8000000000000012025
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it26",
+      "package": "it26",
+      "objects": [
+        8000000000000012034
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it27",
+      "package": "it27",
+      "objects": [
+        8000000000000012043
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it25",
+      "package": "it25",
+      "objects": [
+        8000000000000012052
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it26",
+      "package": "it26",
+      "objects": [
+        8000000000000012061
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it27",
+      "package": "it27",
+      "objects": [
+        8000000000000012070
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it25",
+      "package": "it25",
+      "objects": [
+        8000000000000012079
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it26",
+      "package": "it26",
+      "objects": [
+        8000000000000012088
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it27",
+      "package": "it27",
+      "objects": [
+        8000000000000012097
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it25",
+      "package": "it25",
+      "objects": [
+        8000000000000012106
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it26",
+      "package": "it26",
+      "objects": [
+        8000000000000012115
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it27",
+      "package": "it27",
+      "objects": [
+        8000000000000012124
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it25",
+      "package": "it25",
+      "objects": [
+        8000000000000012133
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it26",
+      "package": "it26",
+      "objects": [
+        8000000000000012142
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it27",
+      "package": "it27",
+      "objects": [
+        8000000000000012151
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it25",
+      "package": "it25",
+      "objects": [
+        8000000000000012160
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it26",
+      "package": "it26",
+      "objects": [
+        8000000000000012169
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "crop it27",
+      "package": "it27",
+      "objects": [
+        8000000000000012178
+      ],
+      "position": [
+        0,
+        -0.08,
+        0
+      ]
+    },
+    {
+      "label": "farm shop counter",
+      "package": "vt90",
+      "objects": [
+        8000000000000012213
+      ],
+      "position": [
+        -50.8,
+        -0.11251963526010514,
+        20
+      ]
+    },
+    {
+      "label": "farm shop produce",
+      "package": "it24",
+      "objects": [
+        8000000000000012217
+      ],
+      "position": [
+        -51.6,
+        0.6974803647398949,
+        20
+      ]
+    },
+    {
+      "label": "farm shop produce",
+      "package": "it25",
+      "objects": [
+        8000000000000012221
+      ],
+      "position": [
+        -51.1,
+        0.6974803647398949,
+        20
+      ]
+    },
+    {
+      "label": "farm shop produce",
+      "package": "it26",
+      "objects": [
+        8000000000000012225
+      ],
+      "position": [
+        -50.6,
+        0.6974803647398949,
+        20
+      ]
+    },
+    {
+      "label": "farm shop produce",
+      "package": "it27",
+      "objects": [
+        8000000000000012229
+      ],
+      "position": [
+        -50.1,
+        0.6974803647398949,
+        20
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012242,
+        8000000000000012246
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012250,
+        8000000000000012254
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012258
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012262
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012266,
+        8000000000000012270
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012274
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012278
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012282
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012286
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012290
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012304,
+        8000000000000012308
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012312,
+        8000000000000012316
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012320
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012324
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012328,
+        8000000000000012332
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012336
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012340
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012344
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012348
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012352
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012366,
+        8000000000000012370
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012374,
+        8000000000000012378
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012382
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012386
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012390,
+        8000000000000012394
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012398
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012402
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012406
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012410
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012414
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012428,
+        8000000000000012432
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012436,
+        8000000000000012440
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012444
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012448
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012452,
+        8000000000000012456
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012460
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012464
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012468
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012472
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012476
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012490,
+        8000000000000012494
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012498,
+        8000000000000012502
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012506
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012510
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012514,
+        8000000000000012518
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012522
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012526
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012530
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012534
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012538
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012552,
+        8000000000000012556
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012560,
+        8000000000000012564
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012568
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012572
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012576,
+        8000000000000012580
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012584
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012588
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012592
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012596
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012600
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012614,
+        8000000000000012618
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012622,
+        8000000000000012626
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012630
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012634
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012638,
+        8000000000000012642
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012646
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012650
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012654
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012658
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012662
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012676,
+        8000000000000012680
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012684,
+        8000000000000012688
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012692
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012696
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012700,
+        8000000000000012704
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012708
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012712
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012716
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012720
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012724
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012738,
+        8000000000000012742
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012746,
+        8000000000000012750
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012754
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012758
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012762,
+        8000000000000012766
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012770
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012774
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012778
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012782
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012786
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012800,
+        8000000000000012804
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012808,
+        8000000000000012812
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012816
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012820
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012824,
+        8000000000000012828
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012832
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012836
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012840
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012844
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012848
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012862,
+        8000000000000012866
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012870,
+        8000000000000012874
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012878
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012882
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012886,
+        8000000000000012890
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012894
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012898
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012902
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012906
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012910
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home futon",
+      "package": "vt64",
+      "objects": [
+        8000000000000012924,
+        8000000000000012928
+      ],
+      "position": [
+        -2.3,
+        0.02,
+        1.2
+      ]
+    },
+    {
+      "label": "home stone hearth",
+      "package": "vt0b",
+      "objects": [
+        8000000000000012932,
+        8000000000000012936
+      ],
+      "position": [
+        2.2,
+        0.02,
+        1.3
+      ]
+    },
+    {
+      "label": "home storage cabinet",
+      "package": "vt90",
+      "objects": [
+        8000000000000012940
+      ],
+      "position": [
+        2.9,
+        0.02,
+        -1
+      ]
+    },
+    {
+      "label": "home tea tray",
+      "package": "vt65",
+      "objects": [
+        8000000000000012944
+      ],
+      "position": [
+        -0.5,
+        0.02,
+        -0.2
+      ]
+    },
+    {
+      "label": "home food storage",
+      "package": "vt13",
+      "objects": [
+        8000000000000012948,
+        8000000000000012952
+      ],
+      "position": [
+        2.8,
+        0.02,
+        2.2
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012956
+      ],
+      "position": [
+        0,
+        0,
+        2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012960
+      ],
+      "position": [
+        -3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012964
+      ],
+      "position": [
+        3.95,
+        0,
+        0
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012968
+      ],
+      "position": [
+        -2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "home painted paper wall",
+      "package": "vt61",
+      "objects": [
+        8000000000000012972
+      ],
+      "position": [
+        2.5,
+        0,
+        -2.95
+      ]
+    },
+    {
+      "label": "request restored flowers",
+      "package": "vt46",
+      "objects": [
+        8000000000000012982
+      ],
+      "position": [
+        -5,
+        -0.04265134409070015,
+        -25
+      ]
+    },
+    {
+      "label": "request restored flowers",
+      "package": "vt46",
+      "objects": [
+        8000000000000012990
+      ],
+      "position": [
+        3,
+        0.18590018153190613,
+        -24
+      ]
+    },
+    {
+      "label": "request restored flowers",
+      "package": "vt46",
+      "objects": [
+        8000000000000012998
+      ],
+      "position": [
+        -49,
+        -0.06789464503526688,
+        18
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "number": 0,
+      "root": 8000000000000012233,
+      "door": [
+        -8.0,
+        -0.019913762035579277,
+        -19.650000962676266
+      ],
+      "entrance": [
+        -8.0,
+        -54.97,
+        -17.2
+      ]
+    },
+    {
+      "number": 2,
+      "root": 8000000000000012295,
+      "door": [
+        -9.0,
+        0.036302844545281016,
+        -9.633131223647789
+      ],
+      "entrance": [
+        -9.0,
+        -54.97,
+        -8.2
+      ]
+    },
+    {
+      "number": 3,
+      "root": 8000000000000012357,
+      "door": [
+        11.0,
+        0.1829089331086258,
+        -11.650003639449567
+      ],
+      "entrance": [
+        11.0,
+        -54.97,
+        -9.2
+      ]
+    },
+    {
+      "number": 4,
+      "root": 8000000000000012419,
+      "door": [
+        -11.0,
+        -0.025606006178817538,
+        1.7188671656698842
+      ],
+      "entrance": [
+        -11.0,
+        -54.97,
+        4.8
+      ]
+    },
+    {
+      "number": 5,
+      "root": 8000000000000012481,
+      "door": [
+        9.0,
+        0.06070609310090601,
+        4.34999534332766
+      ],
+      "entrance": [
+        9.0,
+        -54.97,
+        6.8
+      ]
+    },
+    {
+      "number": 6,
+      "root": 8000000000000012543,
+      "door": [
+        -13.4,
+        -0.3153760834179988,
+        17.459897844661388
+      ],
+      "entrance": [
+        -13.4,
+        -54.97,
+        15.8
+      ]
+    },
+    {
+      "number": 7,
+      "root": 8000000000000012605,
+      "door": [
+        14.0,
+        0.26929819590011106,
+        23.474997935700223
+      ],
+      "entrance": [
+        14.0,
+        -54.97,
+        26.8
+      ]
+    },
+    {
+      "number": 9,
+      "root": 8000000000000012667,
+      "door": [
+        -41.0,
+        0.38036459942383105,
+        6.474996241152029
+      ],
+      "entrance": [
+        -41.0,
+        -54.97,
+        9.8
+      ]
+    },
+    {
+      "number": 10,
+      "root": 8000000000000012729,
+      "door": [
+        -32.0,
+        0.019202138570784684,
+        18.47499681266071
+      ],
+      "entrance": [
+        -32.0,
+        -54.97,
+        21.8
+      ]
+    },
+    {
+      "number": 11,
+      "root": 8000000000000012791,
+      "door": [
+        -43.0,
+        0.0001755205234156689,
+        -3.1904545964723487
+      ],
+      "entrance": [
+        -43.0,
+        -54.97,
+        -2.2
+      ]
+    },
+    {
+      "number": 12,
+      "root": 8000000000000012853,
+      "door": [
+        -41.0,
+        0.19578727159049011,
+        -32.525001936891776
+      ],
+      "entrance": [
+        -41.0,
+        -54.97,
+        -29.2
+      ]
+    },
+    {
+      "number": 13,
+      "root": 8000000000000012915,
+      "door": [
+        -27.0,
+        0.0,
+        6.944574894467922
+      ],
+      "entrance": [
+        -27.0,
+        -54.97,
+        5.8
+      ]
+    }
+  ],
+  "crops": [
+    8000000000000012021,
+    8000000000000012030,
+    8000000000000012039,
+    8000000000000012048,
+    8000000000000012057,
+    8000000000000012066,
+    8000000000000012075,
+    8000000000000012084,
+    8000000000000012093,
+    8000000000000012102,
+    8000000000000012111,
+    8000000000000012120,
+    8000000000000012129,
+    8000000000000012138,
+    8000000000000012147,
+    8000000000000012156,
+    8000000000000012165,
+    8000000000000012174
+  ],
+  "clippedDojoFloors": [
+    8000000000000010337,
+    8000000000000010352,
+    8000000000000010357
+  ],
+  "retiredCherryParts": [
+    8100000000000001759,
+    8100000000000001763,
+    8100000000000001767,
+    8100000000000001771,
+    8100000000000001775,
+    8100000000000001779,
+    8100000000000001783,
+    8100000000000001787,
+    8100000000000001791,
+    8100000000000001795,
+    8100000000000001799,
+    8100000000000001803,
+    8100000000000001807,
+    8100000000000001811,
+    8100000000000001815,
+    8100000000000001819,
+    8100000000000001823,
+    8100000000000001827,
+    8100000000000001831,
+    8100000000000001835,
+    8100000000000001839,
+    8100000000000001843,
+    8100000000000001847,
+    8100000000000001851,
+    8100000000000001855,
+    8100000000000001859,
+    8100000000000001863,
+    8100000000000001867,
+    8100000000000001871,
+    8100000000000001875,
+    8100000000000001879,
+    8100000000000001883,
+    8100000000000001887,
+    8100000000000001891,
+    8100000000000001895,
+    8100000000000001899,
+    8100000000000001903,
+    8100000000000001907,
+    8100000000000001911,
+    8100000000000001915,
+    8100000000000001919,
+    8100000000000001923,
+    8100000000000001927,
+    8100000000000001931,
+    8100000000000001935,
+    8100000000000001939,
+    8100000000000001943,
+    8100000000000001947,
+    8100000000000001951,
+    8100000000000001955,
+    8100000000000001959,
+    8100000000000001963,
+    8100000000000001967,
+    8100000000000001971,
+    8100000000000001975,
+    8100000000000001979,
+    8100000000000001983,
+    8100000000000001987,
+    8100000000000001991,
+    8100000000000001995,
+    8100000000000001999,
+    8100000000000002003,
+    8100000000000002007,
+    8100000000000002011,
+    8100000000000002015,
+    8100000000000002019,
+    8000000000000010751,
+    8000000000000010755,
+    8000000000000010759,
+    8000000000000010763,
+    8000000000000010767,
+    8000000000000010771,
+    8000000000000010775,
+    8000000000000010779,
+    8000000000000010783,
+    8000000000000010787,
+    8000000000000010791,
+    8000000000000010795
+  ],
+  "marketParts": [
+    8000000000000011281,
+    8000000000000011285,
+    8000000000000011289,
+    8000000000000011293,
+    8000000000000011297,
+    8000000000000011301,
+    8000000000000011305,
+    8000000000000011309,
+    8000000000000011313,
+    8000000000000011317,
+    8000000000000011321,
+    8000000000000011325,
+    8000000000000011329,
+    8000000000000011333
+  ],
+  "shaft": [
+    8000000000000011952,
+    8000000000000011957,
+    8000000000000011962,
+    8000000000000011967,
+    8000000000000011972,
+    8000000000000011977
+  ]
+}

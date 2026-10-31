@@ -1,0 +1,32 @@
+{
+  "csharpSyntaxFiles": 102,
+  "unityCompilation": "UNVERIFIED: no editor/compiler",
+  "unityPlayback": "UNVERIFIED: no PC access",
+  "newSceneGUIDs": 69,
+  "homes": 12,
+  "crops": 18,
+  "dojoContainedFloors": 8,
+  "shaftSections": 6,
+  "shaftTriangles": 13056,
+  "shaftSeamsWelded": true,
+  "unchangedCoverTriangles": 652,
+  "originalActorsValidated": 29,
+  "playerBindings": 86,
+  "checks": [
+    "three normal waves upstairs; boss start restricted to depths",
+    "death cannot close to zero-health free roam; defeated enemies cleared",
+    "boss/player boundary agree downstairs",
+    "form damage, speed and attack cadence double",
+    "original Dig/Eat/Swim/Sit bindings resolve",
+    "home rooms separated from surface venue checks",
+    "original positional animal retries and food-house music binding",
+    "backwards-compatible save fields with bounded farm vitality"
+  ],
+  "limits": [
+    "Dedicated original koto finger-playing action unidentified; seated own-bank arm motion is provisional",
+    "Food-house BGM stream 0 is provisional, musical title/instrument unverified",
+    "No original bathing action positively identified; compatible NPCs use native seated actions",
+    "Full EST/SEQ event dispatch remains incomplete",
+    "Unity compilation, gameplay, audio balance, paths and VFX need actual playtesting"
+  ]
+}
