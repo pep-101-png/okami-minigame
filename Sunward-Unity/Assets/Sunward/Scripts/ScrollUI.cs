@@ -159,6 +159,7 @@ namespace Sunward
                     break;
                 case "mirror":
                     GUILayout.Label("The Memory Mirror", title);
+                    if(!game.Profile.shrine && Button("OFFER THREE WINDFLOWERS · VITALITY BLESSING",button))game.OfferWindflowers();
                     GUILayout.Label("Currency, experience, weapons, upgrades, milestones and collectibles share one backed-up Unity save.\n" + game.Save.Path, small);
                     if (Button("INSCRIBE MEMORY · SAVE", button))
                     {
@@ -218,6 +219,7 @@ namespace Sunward
                     break;
                 case "result":
                     GUILayout.Label(game.Dialogue, title);
+                    if(game.Health>0 && game.Profile.wins>0 && Button("EXPLORE THE LOWER ARENA →",button)){game.Close();game.Notify("Jump through the broken centre floor · the mirror below returns you home.");}
                     if (Button("RETURN HOME →", button))
                         game.ReturnHome();
                     break;

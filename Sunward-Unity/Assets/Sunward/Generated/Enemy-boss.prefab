@@ -1595,11 +1595,14 @@ MonoBehaviour:
   idle: em65_000
   walk: em65_010
   run: em65_012
-  windup: em65_021
-  strike: em65_021
-  recover: em65_021
+  windup: em65_022
+  strike: em65_022
+  recover: em65_022
   death: em65_030
   modelOffset: {x: -0.01578551, y: 0.00157306, z: 0.06323435}
   modelScale: 0.21145218884494302
   game: {fileID: 0}
   splitAttackClip: 1
+  chargeAttack: em65_022
+  slamAttack: em65_021
+  rangedAttack: em65_023

@@ -149,6 +149,8 @@ namespace Sunward.Remaster
             rate = duration > 0 ? length / duration : 1;
             Show(true); Apply(); return true;
         }
+        public void HoldChargePose(){if(Ready && binding!=null && binding.state.StartsWith("NativeCharge_"))rate=0;}
+
         public float ClipLength(string state)
         {
             var b = Find(state);
@@ -165,9 +167,9 @@ namespace Sunward.Remaster
         public void SwimSpeed(float speed)
         {
             if(binding==null || !binding.state.StartsWith("Swim_"))return;
-            // Preserve original paddle curves while avoiding a rapid land-gait
-            // cadence. This changes the motion clock, not the skeletal poses.
-            rate=Mathf.Lerp(rate,binding.state=="Swim_Idle"?.55f:Mathf.Lerp(.55f,.85f,Mathf.Clamp01(speed/2)),1-Mathf.Exp(-Time.deltaTime*8));
+            // Native water-family treading and forward loops retain their source
+            // poses; forward cadence follows swimming speed.
+            rate=Mathf.Lerp(rate,binding.state=="Swim_Idle"?1f:Mathf.Lerp(.8f,1.15f,Mathf.Clamp01(speed/2)),1-Mathf.Exp(-Time.deltaTime*8));
         }
         void Show(bool show)
         {

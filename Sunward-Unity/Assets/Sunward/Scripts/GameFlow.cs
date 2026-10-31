@@ -103,6 +103,8 @@ namespace Sunward
                         r.enabled = false;
         }
 
+        public void WorldPrompt(string text){Prompt=text;}
+
         public void Notify(string text)
         {
             Message = text;
@@ -171,6 +173,7 @@ namespace Sunward
                 return;
             }
 
+            if(Sunward.Remaster.LowerArena.Inside(Player.transform.position))return;
             string action = Nearest();
             Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "weapons" ? "E · Weapons · fifteen divine instruments" : action == "shop" ? "E · Upgrades & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
             if (action.StartsWith("venue:")) Prompt = Sunward.Remaster.VillageServices.Label(action,Player.transform.position);
@@ -195,17 +198,7 @@ namespace Sunward
                         StartTrial();
                         break;
                     case "offering":
-                        if (Profile.windflowers.Length >= 3 && !Profile.shrine)
-                        {
-                            Profile.shrine = true;
-                            Health = MaxHealth;
-                            Save.Save();
-                            RefreshQuest();
-                            Fx.Ring(new Vector3(0, 0, 20), new Color(.7f, .85f, .65f), 4);
-                            Notify("Windflowers offered · permanent vitality +20");
-                        }
-                        else
-                            Notify(Profile.shrine ? "The shrine remembers your blessing." : "Find all three windflowers in the village.");
+                        OfferWindflowers();
                         break;
                     default:
                         if (action.StartsWith("venue:")) { Services.Interact(action); break; }
@@ -258,8 +251,8 @@ namespace Sunward
 
             Consider("bed", HomeLayout.Bed, 1.9f);
             Consider("mirror", HomeLayout.Mirror, 2.1f);
-            Consider("weapons", new Vector3(7, 0, -3.2f), 3);
-            Consider("shop", new Vector3(-7, 0, -3.2f), 3);
+            Consider("weapons", new Vector3(4.4f, 0, 0), 3);
+            Consider("shop", new Vector3(-4.4f, 0, 0), 3);
             Consider("arena", new Vector3(12.8f, 0, 0));
             Consider("venue:dojo", Sunward.Remaster.VillageServices.DojoDoor, 3.5f);
             Consider("venue:food", Sunward.Remaster.VillageServices.FoodDoor, 3.5f);
@@ -284,7 +277,6 @@ namespace Sunward
                         Consider("flower:" + ids[j], points[j], 1.8f);
             }
 
-            Consider("offering", new Vector3(0, 0, 10), 2);
             if (result == "")
                 for (int i = 0; i < npcData.Length; i++)
                     Consider("npc:" + i, npcObjects[i].transform.position, 2.4f);
@@ -306,11 +298,27 @@ namespace Sunward
             return true;
         }
 
+        public void OfferWindflowers()
+        {
+                        if (Profile.windflowers.Length >= 3 && !Profile.shrine)
+                        {
+                            Profile.shrine = true;
+                            Health = MaxHealth;
+                            Save.Save();
+                            RefreshQuest();
+                            Fx.Ring(HomeLayout.Mirror, new Color(.7f, .85f, .65f), 4);
+                            Notify("Windflowers offered · permanent vitality +20");
+                        }
+                        else
+                            Notify(Profile.shrine ? "The shrine remembers your blessing." : "Find all three windflowers in the village.");
+        }
+
         public void StartTrial()
         {
             Audio.Cue("bell");
             Close();
             ClearEnemies();
+            Sunward.Remaster.LowerArena.TrialStarted();
             InTrial = true;
             Combat.Equip();
             Wave = 0;
@@ -412,6 +420,8 @@ namespace Sunward
             Combat.Cancel();
             Dialogue = win ? "Light returns.\n\nCrimson Helm’s seal dissolves." : "Your spirit endures.\n\nEarned currency and permanent growth are safe.";
             Dialogue += "\n\n" + runCoins + " combat coins · " + runXp + " combat XP";
+            Sunward.Remaster.LowerArena.TrialFinished(win);
+            if(win)Dialogue+="\n\nThe centre floor breaks open. Explore the empty lower arena, or return home.";
             SetPanel("result");
         }
 

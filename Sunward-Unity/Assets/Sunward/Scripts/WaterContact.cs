@@ -14,6 +14,7 @@ namespace Sunward
                 return;
             var player = game.Player;
             var p = player.transform.position;
+            if(Sunward.Remaster.LowerArena.Inside(p)||Sunward.Remaster.LowerArena.Shaft(p))return;
             timer -= Time.deltaTime;
             float depth = Valley.Depth(p);
             if (player.Swimming && MeshSafety.Finite(p)) { submerged = 0; return; }

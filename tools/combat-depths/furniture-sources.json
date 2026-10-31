@@ -1,0 +1,146 @@
+[
+  {
+    "package": "vt90",
+    "group": "VT",
+    "sourceSHA256": "f764a72247264aafb74e0a9c027f96681b67032e5b4042c48d71fbfffe0e71e8",
+    "visibleGroups": null,
+    "boundsMin": [
+      -1.464602279663086,
+      -0.0036284998990595337,
+      -0.8480873107910156
+    ],
+    "boundsMax": [
+      1.4751025199890135,
+      2.983307123184204,
+      0.8106880187988281
+    ],
+    "meshes": [
+      {
+        "mesh": "d5fecb638524ee6703b010ec4668d9fb",
+        "material": "c420993ccd5cccc69a4efc6f6a0736d4"
+      }
+    ],
+    "motions": [
+      {
+        "name": "vt90_000",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt90_010",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt90_020",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      }
+    ]
+  },
+  {
+    "package": "vt9a",
+    "group": "VT",
+    "sourceSHA256": "12b352a2b68ac6f1dcbf886403f2a2a4561e80c788da372e494e47bf540ce204",
+    "visibleGroups": null,
+    "boundsMin": [
+      -0.5713424921035767,
+      -0.05294429808855056,
+      -0.5641578912734985
+    ],
+    "boundsMax": [
+      0.5699589014053345,
+      0.908695948123932,
+      0.5640125155448913
+    ],
+    "meshes": [
+      {
+        "mesh": "585f9ba450903c0e85db9d7d589fb77a",
+        "material": "9e9b92f27c204b07ca63e158481f5ca0"
+      },
+      {
+        "mesh": "94aef7b8c9f8e91184f0b19057f5964e",
+        "material": "0b24e2122bcb613f97fd835703035841"
+      },
+      {
+        "mesh": "b47f2b1f4d8fc58e1fc505eb76afd79d",
+        "material": "f0bd3697f1802850d8ce7722cdbb6ad5"
+      }
+    ],
+    "motions": [
+      {
+        "name": "vt9a_000",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt9a_010",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt9a_020",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      }
+    ]
+  },
+  {
+    "package": "vt70",
+    "group": "VT",
+    "sourceSHA256": "1a5b0967aa9bb5c745e95ee1914b1dbecbf9f0547ad6978e4cb8d7c5272c7d00",
+    "visibleGroups": null,
+    "boundsMin": [
+      -2.7647206306457517,
+      -0.15412357449531555,
+      -3.345615291595459
+    ],
+    "boundsMax": [
+      2.696219730377197,
+      4.240346741676331,
+      2.595017623901367
+    ],
+    "meshes": [
+      {
+        "mesh": "b75a321a0c264efe0b4d924293dd3389",
+        "material": "1388f8eebccd6327e1a7886bef116d49"
+      },
+      {
+        "mesh": "f6fd924777db97d820a14b890ec4aa3a",
+        "material": "d981fb7dc63e3df9b4a971164d16685a"
+      },
+      {
+        "mesh": "03653933ba8c120ac20c1d52aa90bcb7",
+        "material": "d981fb7dc63e3df9b4a971164d16685a"
+      },
+      {
+        "mesh": "acfbda1ed24b7bdebede88642608f629",
+        "material": "1388f8eebccd6327e1a7886bef116d49"
+      },
+      {
+        "mesh": "e221216af152af9981e87325f978498a",
+        "material": "1388f8eebccd6327e1a7886bef116d49"
+      },
+      {
+        "mesh": "2555aa39bb03bdfd505152daf0a66a63",
+        "material": "1388f8eebccd6327e1a7886bef116d49"
+      },
+      {
+        "mesh": "820e5940863dff0477061768a76a79d5",
+        "material": "ae32565cd52402e2954e74c5fd09e660"
+      },
+      {
+        "mesh": "b339d5d852863702c8c5611d9797b235",
+        "material": "1388f8eebccd6327e1a7886bef116d49"
+      }
+    ],
+    "motions": [
+      {
+        "name": "vt70_000",
+        "sha256": "fd7e1ae2b39f4001dba13e22f2298aac3835d95c37936c540288322d73589402"
+      },
+      {
+        "name": "vt70_010",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      },
+      {
+        "name": "vt70_020",
+        "sha256": "9f96637be70c5394d69b8996f2f5c991ed3d3186f0370c23823ca826c3e39962"
+      }
+    ]
+  }
+]

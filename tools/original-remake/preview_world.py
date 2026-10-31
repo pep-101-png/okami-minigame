@@ -78,7 +78,10 @@ def animals():
                 ix=part['bones'][:,k];posed+=part['weights'][:,k,None]*(np.einsum('nij,nj->ni',matrices[ix,:3,:3],v-bind[ix])+matrices[ix,:3,3])
             posed+=a['offset']+np.array([0,clip['ground'][0],0]);mesh(p['name'],posed,part['faces'],part['uv'],texture_material(A/'OkamiRemaster/Village/Resources/FarmTextures'/(part['texture']+'.png')),root)
 
-bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False);w=World();ground=ground_material();count=0;renderer_objects={}
+bpy.ops.object.select_all(action='SELECT');bpy.ops.object.delete(use_global=False);w=World();
+if os.environ.get("SUNWARD_PREVIEW_DEPTHS"):
+    chamber=__import__("json").loads((ROOT/"tools/combat-depths/world-changes.json").read_text())["chamber"];w.scene.set(chamber,"m_IsActive",1)
+ground=ground_material();count=0;renderer_objects={}
 billboards={w.scene.transform(w.scene.owner(i)) for i,b in w.scene.blocks.items() if 'Assembly-CSharp::Sunward.Remaster.OriginalBillboard\n' in b};billboard_objects=[]
 for r in w.renderers():
     if r['kind']!=23:continue
@@ -118,7 +121,7 @@ for i,e in enumerate(report['enemyVisuals']):
 bpy.ops.object.light_add(type='SUN');sun=bpy.context.object;sun.rotation_euler=(.4,-.4,-.5);sun.data.energy=1.8;sun.data.angle=.18
 s=bpy.context.scene;s.render.engine='CYCLES';s.cycles.samples=8;s.cycles.use_denoising=False;s.cycles.max_bounces=4;s.cycles.transparent_max_bounces=12;s.world.use_nodes=True;s.world.node_tree.nodes['Background'].inputs['Color'].default_value=(.68,.67,.60,1);s.world.node_tree.nodes['Background'].inputs['Strength'].default_value=.7;s.view_settings.view_transform='Standard';s.view_settings.look='None';s.view_settings.exposure=-.3
 bpy.ops.object.camera_add();camera=bpy.context.object;camera.data.type='ORTHO';s.camera=camera
-shots=[('village',(-24,30,-28),(-4,0,1),73),('market',(-4,7,-15),(0,1,0),22),('houses',(-19,10,-23),(-8,2,-12),24),('arena',(31,22,24),(35,0,0),43),('farm',(-37,10,28),(-42,0,18),24),('home',(-43,10,-26),(-34,1,-16),22)]
+shots=[('home-interior',(-39,7,-21),(-34,.5,-16),14),('depths',(48,-13,16),(30,-19,-7),45),('village',(-24,30,-28),(-4,0,1),73),('market',(-4,7,-15),(0,1,0),22),('houses',(-19,10,-23),(-8,2,-12),24),('arena',(31,22,24),(35,0,0),43),('farm',(-37,10,28),(-42,0,18),24),('home',(-43,10,-26),(-34,1,-16),22)]
 if (ROOT/'tools/playtest-repair/scene-repairs.json').exists():shots += [('dojo',(0,13,13),(0,1,25),23),('food-house',(18,10,-7),(10,1,-15),16)]
 if (ROOT/'tools/playtest-followup/scene-changes.json').exists():shots += [('pond',(-27,9,-28),(-15,2,-22),20),('dojo-entry',(0,7,8),(0,3,21),25),('food-entry',(-4,8,-12),(10,2,-15),23)]
 if os.environ.get("SUNWARD_PREVIEW_SHOTS"):
@@ -126,6 +129,12 @@ if os.environ.get("SUNWARD_PREVIEW_SHOTS"):
 receipts=[]
 for name,position,target,width in shots:
     for ob in renderer_objects.values():ob.hide_render=False
+    if name=="home-interior":
+        for raw in w.scene.blocks.values():
+            if "Assembly-CSharp::Sunward.HomeCutaway\n" in raw:
+                roof=raw.split("  roof:\n")[1].split("  interior:")[0]
+                for rid in re.findall(r"fileID: (\d+)",roof):
+                    if (0,int(rid)) in renderer_objects:renderer_objects[0,int(rid)].hide_render=True
     for raw in w.scene.blocks.values():
         if 'Assembly-CSharp::Sunward.Remaster.VenueVisibility\n' not in raw:continue
         venue=re.search(r'^  venue: (.+)',raw,re.M)[1]

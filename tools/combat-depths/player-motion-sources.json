@@ -1,0 +1,364 @@
+[
+  {
+    "state": "Swim_Idle",
+    "motion": "pl00_130",
+    "sourceHashes": [
+      "99c298f158ebc4a27ecf41b0fe0e17d0ab3c277760bb46a2641f377e0e1cfa30"
+    ],
+    "sourcePackages": [
+      "pl00"
+    ]
+  },
+  {
+    "state": "Swim_Move",
+    "motion": "pl00_131",
+    "sourceHashes": [
+      "a53bd1fe03793084e2c190a553032c6e250ca1fdecb38198c72b4323f263bd06"
+    ],
+    "sourcePackages": [
+      "pl00"
+    ]
+  },
+  {
+    "state": "NativeAttack_500",
+    "motion": "pl00_500",
+    "sourceHashes": [
+      "143a048257e11eba22d0747ee4c793e32c58c0a6ccb0146f52b2176478ebdca2"
+    ],
+    "sourcePackages": [
+      "wp20",
+      "wp21",
+      "wp22",
+      "wp23",
+      "wp24"
+    ]
+  },
+  {
+    "state": "NativeAttack_501",
+    "motion": "pl00_501",
+    "sourceHashes": [
+      "0d1a158ddb6c13f8bedd44eb43d994764128d275bb5f8270c32dcb41809d722d"
+    ],
+    "sourcePackages": [
+      "wp20",
+      "wp21",
+      "wp22",
+      "wp23",
+      "wp24"
+    ]
+  },
+  {
+    "state": "NativeAttack_502",
+    "motion": "pl00_502",
+    "sourceHashes": [
+      "a8f408923273d2857ebd5f0bd3e6a86cb320e6a18b3e5518e7bd3cf501b58cfb"
+    ],
+    "sourcePackages": [
+      "wp20",
+      "wp21",
+      "wp22",
+      "wp23",
+      "wp24"
+    ]
+  },
+  {
+    "state": "NativeAttack_503",
+    "motion": "pl00_503",
+    "sourceHashes": [
+      "d90d7bf60cda74b1f3cf07e3a08eb76ea581cbeb91745f5073db850fd0d0b3fd"
+    ],
+    "sourcePackages": [
+      "wp20",
+      "wp21",
+      "wp22",
+      "wp23",
+      "wp24"
+    ]
+  },
+  {
+    "state": "NativeAttack_504",
+    "motion": "pl00_504",
+    "sourceHashes": [
+      "430667f0ef0dfdad42ec7bf059141d66334e76dab4b687bf5cbdccab32687263"
+    ],
+    "sourcePackages": [
+      "wp20",
+      "wp21",
+      "wp22",
+      "wp23",
+      "wp24"
+    ]
+  },
+  {
+    "state": "NativeAttack_505",
+    "motion": "pl00_505",
+    "sourceHashes": [
+      "289ddbd7f97e53a4358c3eb3a8e03455d184fb9555ce36cccababc8763ce96d9"
+    ],
+    "sourcePackages": [
+      "wp20",
+      "wp21",
+      "wp22",
+      "wp23",
+      "wp24"
+    ]
+  },
+  {
+    "state": "NativeAttack_520",
+    "motion": "pl00_520",
+    "sourceHashes": [
+      "c4e26033ec79be1435e7fb379a99f06b5f58cc67cf04743cfc267544fb94eb91"
+    ],
+    "sourcePackages": [
+      "wp25",
+      "wp26",
+      "wp27",
+      "wp28",
+      "wp29"
+    ]
+  },
+  {
+    "state": "NativeAttack_521",
+    "motion": "pl00_521",
+    "sourceHashes": [
+      "4def9a8294632ea6946c1be54eb571136d40290569ba5f6c7b1556bb026b3c9d"
+    ],
+    "sourcePackages": [
+      "wp25",
+      "wp26",
+      "wp27",
+      "wp28",
+      "wp29"
+    ]
+  },
+  {
+    "state": "NativeAttack_522",
+    "motion": "pl00_522",
+    "sourceHashes": [
+      "23326aa10470d4811af26b9f33a32545e68174fb0616329371800a27fad6ccab"
+    ],
+    "sourcePackages": [
+      "wp25",
+      "wp26",
+      "wp27",
+      "wp28",
+      "wp29"
+    ]
+  },
+  {
+    "state": "NativeAttack_523",
+    "motion": "pl00_523",
+    "sourceHashes": [
+      "73edbc2ecf58f33a6002d257e7e7ae0b223115ff4bd0898b4074259debc0fa27"
+    ],
+    "sourcePackages": [
+      "wp25",
+      "wp26",
+      "wp27",
+      "wp28",
+      "wp29"
+    ]
+  },
+  {
+    "state": "NativeAttack_524",
+    "motion": "pl00_524",
+    "sourceHashes": [
+      "d5d77bc2ab3cc3743050aa045c282b83b549f04d50481d7dddaef7fd6036f489"
+    ],
+    "sourcePackages": [
+      "wp25",
+      "wp26",
+      "wp27",
+      "wp28",
+      "wp29"
+    ]
+  },
+  {
+    "state": "NativeAttack_525",
+    "motion": "pl00_525",
+    "sourceHashes": [
+      "3439921262cf8b9775c273dd5e239ee73d60c0b8365e3ab62aab38fe95f36ca3"
+    ],
+    "sourcePackages": [
+      "wp25",
+      "wp26",
+      "wp27",
+      "wp28",
+      "wp29"
+    ]
+  },
+  {
+    "state": "NativeAttack_540",
+    "motion": "pl00_540",
+    "sourceHashes": [
+      "62533c3b127be38cc5690483dff2dc6acb217fc6adc1d12770d202cbb92f2712"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  },
+  {
+    "state": "NativeAttack_542",
+    "motion": "pl00_542",
+    "sourceHashes": [
+      "d21b559bfc6b8dd910ed2c2c85bee5cb9ddc74a03afbbedb0d9e679287892b6c"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  },
+  {
+    "state": "NativeAttack_544",
+    "motion": "pl00_544",
+    "sourceHashes": [
+      "fc908afcb503f6326481da8b3cf4330148e0357e418ecc03e65e3bf29a0f0906"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  },
+  {
+    "state": "NativeAttack_546",
+    "motion": "pl00_546",
+    "sourceHashes": [
+      "5743666c2cd8cd0c9c5246374e936f964e6cc7ce3b570d0024a8714eb31b4a59"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  },
+  {
+    "state": "NativeAttack_548",
+    "motion": "pl00_548",
+    "sourceHashes": [
+      "e2381e45d1e75b494bbcd52afe2ccc700b69ecde07d8e8a036e5c1ad0a3a6d16"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  },
+  {
+    "state": "NativeAttack_54a",
+    "motion": "pl00_54a",
+    "sourceHashes": [
+      "4bcbb1ffe97bc8b1e039cadb8802e236b778b171bcb1f384328d1a96fb6daa31"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  },
+  {
+    "state": "NativeAttack_54b",
+    "motion": "pl00_54b",
+    "sourceHashes": [
+      "91cdaf7033e59ac49a1cc13fe275548bc0f56843685cd500d8032a22d1ab8cc9"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  },
+  {
+    "state": "NativeAttack_54c",
+    "motion": "pl00_54c",
+    "sourceHashes": [
+      "d0e9d59d3e473d10876abe381e5811df0aa160f0317e9f1f3b77c63ff64593fd"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  },
+  {
+    "state": "NativeAttack_54f",
+    "motion": "pl00_54f",
+    "sourceHashes": [
+      "b14a644b37d8d48b0f1345beb02d55900511fa0b80cd6acc760baa77db1bc494"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  },
+  {
+    "state": "NativeCharge_reflector",
+    "motion": "pl00_511",
+    "sourceHashes": [
+      "e4cb44c2bd687e91563fd4616d27fe62eb266caf74e8c85d65811b4be94c2f82"
+    ],
+    "sourcePackages": [
+      "wp20",
+      "wp21",
+      "wp22",
+      "wp23",
+      "wp24",
+      "wp30",
+      "wp31",
+      "wp32",
+      "wp33",
+      "wp34",
+      "wp3f"
+    ]
+  },
+  {
+    "state": "NativeCharge_glaive",
+    "motion": "pl00_523",
+    "sourceHashes": [
+      "73edbc2ecf58f33a6002d257e7e7ae0b223115ff4bd0898b4074259debc0fa27"
+    ],
+    "sourcePackages": [
+      "wp25",
+      "wp26",
+      "wp27",
+      "wp28",
+      "wp29"
+    ]
+  },
+  {
+    "state": "NativeCharge_rosary",
+    "motion": "pl00_54c",
+    "sourceHashes": [
+      "d0e9d59d3e473d10876abe381e5811df0aa160f0317e9f1f3b77c63ff64593fd"
+    ],
+    "sourcePackages": [
+      "wp2a",
+      "wp2b",
+      "wp2c",
+      "wp2d",
+      "wp2e"
+    ]
+  }
+]

@@ -10,8 +10,23 @@ namespace Sunward.Remaster
         public static readonly Vector3 DojoDoor=new Vector3(0,.5f,15.1f), FoodDoor=new Vector3(4.8f,.4f,-15), Mat=new Vector3(8,.4f,-13.4f), Farmer=new Vector3(-48,0,22);
         public static bool InDojo(Vector3 p)=>Mathf.Abs(p.x)<6.5f && p.z>16.2f && p.z<33.6f && p.y<6;
         public static bool InFoodHouse(Vector3 p)=>Mathf.Abs(p.x-10)<4.4f && Mathf.Abs(p.z+15)<3.6f && p.y<6;
+        static readonly RaycastHit[] floorHits=new RaycastHit[32];
         public static bool Floor(Vector3 p,out float height)
-        { height=InDojo(p)?Mathf.Abs(p.x)<2.72f && p.z>24.05f && p.z<29.43f?1.25f:.50f:.40f;return InDojo(p)||InFoodHouse(p); }
+        {
+            bool dojo=InDojo(p);height=dojo?.50f:.40f;
+            if(!dojo && !InFoodHouse(p))return false;
+            // The original dojo has bevels/slopes, not a flat two-level floor.
+            // Use its real mesh collision for the existing player controller.
+            int n=Physics.RaycastNonAlloc(new Ray(new Vector3(p.x,5.5f,p.z),Vector3.down),floorHits,9,1<<6,QueryTriggerInteraction.Ignore);
+            bool found=false;
+            for(int i=0;i<n;i++)
+            {
+                var hit=floorHits[i];string name=hit.collider.name;
+                if(dojo?!name.Contains("dojo-floor"):!name.Contains("food house floor"))continue;
+                if(!found || hit.point.y>height){height=hit.point.y;found=true;}
+            }
+            return true;
+        }
         public static string Label(string action,Vector3 p)
         {
             if(action=="venue:dojo")return InDojo(p)?"E · Leave the training hall":"E · Enter the samurai training hall";
@@ -23,7 +38,7 @@ namespace Sunward.Remaster
         public void Interact(string action)
         {
             if(Resting || !game)return;
-            if(action=="venue:dojo")game.Player.Teleport(InDojo(game.Player.transform.position)?new Vector3(0,.05f,13.3f):new Vector3(0,.52f,18.3f));
+            if(action=="venue:dojo")game.Player.Teleport(InDojo(game.Player.transform.position)?new Vector3(0,.05f,13.3f):new Vector3(0,.82f,18.3f));
             else if(action=="venue:food")game.Player.Teleport(InFoodHouse(game.Player.transform.position)?new Vector3(2.8f,.05f,-15):new Vector3(6.8f,.42f,-15));
             else if(action=="venue:mat")StartCoroutine(Sit());
             else if(action=="venue:farmer") {game.Audio.Npc(3,Farmer);game.Notify("The farmer tends the cattle, pigs and chickens. The pens have feed, water and shelter.");}

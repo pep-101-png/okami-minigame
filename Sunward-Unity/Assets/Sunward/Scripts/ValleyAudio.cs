@@ -96,7 +96,7 @@ namespace Sunward
             }
             if(game.Player.Swimming && game.Player.Speed>.2f)
             {
-                water+=Time.deltaTime;if(water>.7f){water=0;Cue("water");}
+                water+=Time.deltaTime;if(water>1.1f){water=0;Cue("water");}
             }
         }
         bool Allow(string id,float interval)
@@ -110,7 +110,7 @@ namespace Sunward
             // World actors must supply a position; never route them through 2D playback.
             if(id=="cow" || id=="pig" || id=="rooster" || id.StartsWith("npc") || id.StartsWith("enemy"))return;
             if(!Allow(id,id=="step"?.16f:id=="water"?.35f:.07f))return;
-            var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="step"?.045f:id=="jump" || id=="land" || id=="dash"?.35f:.75f);
+            var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="step"?.0225f:id=="jump"?.175f:id=="water"?.035f:id=="land"?.12f:id=="dash"?.35f:.45f);
         }
         public bool World(string cue,Vector3 position,float range=10,float volume=.65f)
         {

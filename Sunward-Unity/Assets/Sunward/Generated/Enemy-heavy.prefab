@@ -1231,9 +1231,9 @@ MonoBehaviour:
   idle: em00_000
   walk: em00_010
   run: em00_012
-  windup: em00_130
-  strike: em00_130
-  recover: em00_130
+  windup: em00_052
+  strike: em00_052
+  recover: em00_052
   death: em00_040
   modelOffset: {x: 0.1329559, y: 0.05460309, z: -0.308204}
   modelScale: 0.6523764948162111

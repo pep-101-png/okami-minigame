@@ -12,6 +12,8 @@ namespace Sunward.Remaster
         public Vector3 modelOffset;
         public float modelScale = 1;
         public bool splitAttackClip;
+        public string chargeAttack,slamAttack,rangedAttack;
+        public string AttackMotion(string move)=>move=="charge" && !string.IsNullOrEmpty(chargeAttack)?chargeAttack:move=="slam" && !string.IsNullOrEmpty(slamAttack)?slamAttack:(move=="shot" || move=="fan") && !string.IsNullOrEmpty(rangedAttack)?rangedAttack:strike;
         public bool holdIdlePose;
         public GameFlow game;
         public bool Ready { get; private set; }
@@ -66,6 +68,8 @@ namespace Sunward.Remaster
                 if (bank.Find(idle) == null) throw new InvalidOperationException("Original idle is missing: " + idle);
                 Change(idle);
                 bank.Sample(current, 0, rig.Bones, fromPosition, fromRotation, fromScale, 1, true);
+                if(enemy)foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>())
+                {renderer.localBounds=new Bounds(Vector3.zero,new Vector3(32,24,32));renderer.updateWhenOffscreen=true;}
                 rig.Root.SetActive(true);
                 Ready = true;
             }
@@ -108,9 +112,9 @@ namespace Sunward.Remaster
             if (enemy)
             {
                 if (!game) game = enemy.game;
-                if (state == "windup") { selected = windup; duration = enemy.VisualStateDuration; loop = false; }
-                else if (state == "strike") { selected = strike; duration = enemy.VisualStateDuration; loop = false; }
-                else if (state == "recover") { selected = recover; duration = enemy.VisualStateDuration; loop = false; }
+                if (state == "windup") { selected = splitAttackClip?AttackMotion(enemy.ActiveMove):windup; duration = enemy.VisualStateDuration; loop = false; }
+                else if (state == "strike") { selected = AttackMotion(enemy.ActiveMove); duration = enemy.VisualStateDuration; loop = false; }
+                else if (state == "recover") { selected = splitAttackClip?AttackMotion(enemy.ActiveMove):recover; duration = enemy.VisualStateDuration; loop = false; }
                 else if (state == "dead") { selected = death; duration = 1.1f; loop = false; }
                 else if (running && !string.IsNullOrEmpty(run)) selected = run;
             }

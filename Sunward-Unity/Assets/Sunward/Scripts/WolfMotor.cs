@@ -27,7 +27,7 @@ namespace Sunward
         WolfBodyCollision bodyCollision;
         float dodgeTimer, coyote, jumpBuffer, landing;
         bool doubleUsed;
-        float waterLeap;
+        float waterLeap, airborneTime;
         public bool Dodging => dodgeTimer > 0;
 
         void Awake()
@@ -76,6 +76,7 @@ namespace Sunward
                     guarded = new Vector3(35, guarded.y, 0) + d.normalized * 17;
             }
 
+            guarded=Sunward.Remaster.LowerArena.Guard(guarded);
             var b = valley.Data.bounds;
             guarded.x = Mathf.Clamp(guarded.x, b.minX + .5f, b.maxX - .5f);
             guarded.z = Mathf.Clamp(guarded.z, -b.maxZ + .5f, -b.minZ - .5f);
@@ -152,6 +153,7 @@ namespace Sunward
                 Vertical = Mathf.Min(Vertical, -12);
             Vector3 movement = (Dodging ? dodgeDirection * 9 : horizontal) * dt + Vector3.up * Vertical * dt;
             bool wasAir = !Grounded;
+            if(wasAir)airborneTime+=dt;
             Vector3 beforeMove = transform.position;
             Push(movement);
             h = valley.Height(transform.position);
@@ -163,13 +165,14 @@ namespace Sunward
                 Vertical = -2;
             }
 
-            if (wasAir && Grounded)
+            if (wasAir && Grounded && airborneTime>.12f && previousY < -3)
             {
                 landing = previousY < -9 ? .38f : .20f;
                 animationView.Play(previousY < -9 ? "Land_Heavy" : "Land_Soft", .05f, landing);
                 game.Audio.Cue("land");
             }
 
+            if(Grounded)airborneTime=0;
             landing = Mathf.Max(0, landing - dt);
             dodgeTimer = Mathf.Max(0, dodgeTimer - dt);
             Vector3 actual = (transform.position - beforeMove) / Mathf.Max(dt, .00001f);

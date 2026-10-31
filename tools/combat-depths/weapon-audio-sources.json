@@ -1,0 +1,872 @@
+[
+  {
+    "cue": "weapon-wp20",
+    "resource": "Okami/NativeAudio/weapon-wp20-0",
+    "source": "data_pc/se/wp/wp20.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "f4495a81b248296bf6f2eb9b9791940e2cd4c0c7d35b8093c1391c7fd84b625c"
+  },
+  {
+    "cue": "weapon-wp20-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp20-heavy-0",
+    "source": "data_pc/se/wp/wp20.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "f4495a81b248296bf6f2eb9b9791940e2cd4c0c7d35b8093c1391c7fd84b625c"
+  },
+  {
+    "cue": "weapon-wp21",
+    "resource": "Okami/NativeAudio/weapon-wp21-0",
+    "source": "data_pc/se/wp/wp21.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "156843f0f8ad88417b27d7ccf33986081aae6ac693e9c3f17e41272ea9d8a18a"
+  },
+  {
+    "cue": "weapon-wp21-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp21-heavy-0",
+    "source": "data_pc/se/wp/wp21.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "156843f0f8ad88417b27d7ccf33986081aae6ac693e9c3f17e41272ea9d8a18a"
+  },
+  {
+    "cue": "weapon-wp22",
+    "resource": "Okami/NativeAudio/weapon-wp22-0",
+    "source": "data_pc/se/wp/wp22.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "7317ef54cae96b0624153edd2c9bd621ae22900644adca18f02dfd1db90e6999"
+  },
+  {
+    "cue": "weapon-wp22-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp22-heavy-0",
+    "source": "data_pc/se/wp/wp22.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "7317ef54cae96b0624153edd2c9bd621ae22900644adca18f02dfd1db90e6999"
+  },
+  {
+    "cue": "weapon-wp23",
+    "resource": "Okami/NativeAudio/weapon-wp23-0",
+    "source": "data_pc/se/wp/wp23.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "a81ca9cd56a5758dd2f8a0209ce57882d00b60f5f144f46e63169b1b8479cc86"
+  },
+  {
+    "cue": "weapon-wp23-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp23-heavy-0",
+    "source": "data_pc/se/wp/wp23.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "a81ca9cd56a5758dd2f8a0209ce57882d00b60f5f144f46e63169b1b8479cc86"
+  },
+  {
+    "cue": "weapon-wp24",
+    "resource": "Okami/NativeAudio/weapon-wp24-0",
+    "source": "data_pc/se/wp/wp24.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "4370f1d952ce1c46388b2255e9ec9e06427a09e14ac11271073198d78a8d1e84"
+  },
+  {
+    "cue": "weapon-wp24-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp24-heavy-0",
+    "source": "data_pc/se/wp/wp24.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "cc68a5b880a38eaa3ef9e53271901be5803466abe11326c39207aa5374cc126f",
+    "outputSHA256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 795,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -16.395,
+        "peak": 0.962982,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.005,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.611,
+      "seconds": 1.1538,
+      "clearADX_SHA256": "54f52424a3ca1c23d21612afd5224989df14415eb196b063e18b7097c0911b7f"
+    },
+    "sourceBankSHA256": "4370f1d952ce1c46388b2255e9ec9e06427a09e14ac11271073198d78a8d1e84"
+  },
+  {
+    "cue": "weapon-wp25",
+    "resource": "Okami/NativeAudio/weapon-wp25-0",
+    "source": "data_pc/se/wp/wp25.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "41eb21500c79089ce2d12d19ad928550578099c9a167262142846e4b9c416b3a",
+    "outputSHA256": "994266bd129d2fe3163e14c706830748bed1973605402a83309d5526defa186e",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 301,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.045,
+        "peak": 1.0,
+        "clippedFraction": 0.00046719
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.225164,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -12.955,
+      "seconds": 0.602,
+      "clearADX_SHA256": "88dfd5bfb4c77f4a66d76aa83a8d10aa407fe0959ad514ad386cc5c6bef4072d"
+    },
+    "sourceBankSHA256": "c90e548cf83539383f57fdb486ea86add7b6dc509fc26ec14734c2e1e6f7b5d2"
+  },
+  {
+    "cue": "weapon-wp25-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp25-heavy-2",
+    "source": "data_pc/se/wp/wp25.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "11f8613f67b217dbee1e44500e9ebfc17edba97fe644594dda41c6116cea43f9",
+    "outputSHA256": "5723992877a49b37d43ff15a0eeeae4d974f494ce63715cf95cceb93034716bb",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 192,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -12.212,
+        "peak": 1.0,
+        "clippedFraction": 7.12e-05
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.287389,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.786,
+      "seconds": 0.4389,
+      "clearADX_SHA256": "d47ad1170381466096b022b2a7f6e96b6626c6b5498f66058185a7e613d3e3d1"
+    },
+    "sourceBankSHA256": "c90e548cf83539383f57fdb486ea86add7b6dc509fc26ec14734c2e1e6f7b5d2"
+  },
+  {
+    "cue": "weapon-wp26",
+    "resource": "Okami/NativeAudio/weapon-wp26-0",
+    "source": "data_pc/se/wp/wp26.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "41eb21500c79089ce2d12d19ad928550578099c9a167262142846e4b9c416b3a",
+    "outputSHA256": "994266bd129d2fe3163e14c706830748bed1973605402a83309d5526defa186e",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 301,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.045,
+        "peak": 1.0,
+        "clippedFraction": 0.00046719
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.225164,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -12.955,
+      "seconds": 0.602,
+      "clearADX_SHA256": "88dfd5bfb4c77f4a66d76aa83a8d10aa407fe0959ad514ad386cc5c6bef4072d"
+    },
+    "sourceBankSHA256": "85fc9f7cb4bb3e1b9acba84b52568995ba99d713da1e693288568395ee785b59"
+  },
+  {
+    "cue": "weapon-wp26-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp26-heavy-2",
+    "source": "data_pc/se/wp/wp26.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "11f8613f67b217dbee1e44500e9ebfc17edba97fe644594dda41c6116cea43f9",
+    "outputSHA256": "5723992877a49b37d43ff15a0eeeae4d974f494ce63715cf95cceb93034716bb",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 192,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -12.212,
+        "peak": 1.0,
+        "clippedFraction": 7.12e-05
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.287389,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.786,
+      "seconds": 0.4389,
+      "clearADX_SHA256": "d47ad1170381466096b022b2a7f6e96b6626c6b5498f66058185a7e613d3e3d1"
+    },
+    "sourceBankSHA256": "85fc9f7cb4bb3e1b9acba84b52568995ba99d713da1e693288568395ee785b59"
+  },
+  {
+    "cue": "weapon-wp27",
+    "resource": "Okami/NativeAudio/weapon-wp27-0",
+    "source": "data_pc/se/wp/wp27.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "41eb21500c79089ce2d12d19ad928550578099c9a167262142846e4b9c416b3a",
+    "outputSHA256": "994266bd129d2fe3163e14c706830748bed1973605402a83309d5526defa186e",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 301,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.045,
+        "peak": 1.0,
+        "clippedFraction": 0.00046719
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.225164,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -12.955,
+      "seconds": 0.602,
+      "clearADX_SHA256": "88dfd5bfb4c77f4a66d76aa83a8d10aa407fe0959ad514ad386cc5c6bef4072d"
+    },
+    "sourceBankSHA256": "4cfe762690ac84cdcd694713e4c14874e23f00b8cf4f11f55fdda368e8d84bd0"
+  },
+  {
+    "cue": "weapon-wp27-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp27-heavy-2",
+    "source": "data_pc/se/wp/wp27.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "11f8613f67b217dbee1e44500e9ebfc17edba97fe644594dda41c6116cea43f9",
+    "outputSHA256": "5723992877a49b37d43ff15a0eeeae4d974f494ce63715cf95cceb93034716bb",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 192,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -12.212,
+        "peak": 1.0,
+        "clippedFraction": 7.12e-05
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.287389,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.786,
+      "seconds": 0.4389,
+      "clearADX_SHA256": "d47ad1170381466096b022b2a7f6e96b6626c6b5498f66058185a7e613d3e3d1"
+    },
+    "sourceBankSHA256": "4cfe762690ac84cdcd694713e4c14874e23f00b8cf4f11f55fdda368e8d84bd0"
+  },
+  {
+    "cue": "weapon-wp28",
+    "resource": "Okami/NativeAudio/weapon-wp28-0",
+    "source": "data_pc/se/wp/wp28.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "41eb21500c79089ce2d12d19ad928550578099c9a167262142846e4b9c416b3a",
+    "outputSHA256": "994266bd129d2fe3163e14c706830748bed1973605402a83309d5526defa186e",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 301,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.045,
+        "peak": 1.0,
+        "clippedFraction": 0.00046719
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.225164,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -12.955,
+      "seconds": 0.602,
+      "clearADX_SHA256": "88dfd5bfb4c77f4a66d76aa83a8d10aa407fe0959ad514ad386cc5c6bef4072d"
+    },
+    "sourceBankSHA256": "1134a63bbce3a3f1925d62b1e49a1e8ece1fe329f947ce499b729011813e8ecf"
+  },
+  {
+    "cue": "weapon-wp28-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp28-heavy-2",
+    "source": "data_pc/se/wp/wp28.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "11f8613f67b217dbee1e44500e9ebfc17edba97fe644594dda41c6116cea43f9",
+    "outputSHA256": "5723992877a49b37d43ff15a0eeeae4d974f494ce63715cf95cceb93034716bb",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 192,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -12.212,
+        "peak": 1.0,
+        "clippedFraction": 7.12e-05
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.287389,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.786,
+      "seconds": 0.4389,
+      "clearADX_SHA256": "d47ad1170381466096b022b2a7f6e96b6626c6b5498f66058185a7e613d3e3d1"
+    },
+    "sourceBankSHA256": "1134a63bbce3a3f1925d62b1e49a1e8ece1fe329f947ce499b729011813e8ecf"
+  },
+  {
+    "cue": "weapon-wp29",
+    "resource": "Okami/NativeAudio/weapon-wp29-0",
+    "source": "data_pc/se/wp/wp29.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "41eb21500c79089ce2d12d19ad928550578099c9a167262142846e4b9c416b3a",
+    "outputSHA256": "994266bd129d2fe3163e14c706830748bed1973605402a83309d5526defa186e",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 301,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.045,
+        "peak": 1.0,
+        "clippedFraction": 0.00046719
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.225164,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -12.955,
+      "seconds": 0.602,
+      "clearADX_SHA256": "88dfd5bfb4c77f4a66d76aa83a8d10aa407fe0959ad514ad386cc5c6bef4072d"
+    },
+    "sourceBankSHA256": "51ee529c7c95f0cb81d571743af4d82d3eea70a947ca9391d48a40f0a325a33a"
+  },
+  {
+    "cue": "weapon-wp29-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp29-heavy-2",
+    "source": "data_pc/se/wp/wp29.ses",
+    "stream": 2,
+    "sourceStreamSHA256": "11f8613f67b217dbee1e44500e9ebfc17edba97fe644594dda41c6116cea43f9",
+    "outputSHA256": "5723992877a49b37d43ff15a0eeeae4d974f494ce63715cf95cceb93034716bb",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 192,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -12.212,
+        "peak": 1.0,
+        "clippedFraction": 7.12e-05
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.287389,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.786,
+      "seconds": 0.4389,
+      "clearADX_SHA256": "d47ad1170381466096b022b2a7f6e96b6626c6b5498f66058185a7e613d3e3d1"
+    },
+    "sourceBankSHA256": "51ee529c7c95f0cb81d571743af4d82d3eea70a947ca9391d48a40f0a325a33a"
+  },
+  {
+    "cue": "weapon-wp2a",
+    "resource": "Okami/NativeAudio/weapon-wp2a-0",
+    "source": "data_pc/se/wp/wp2a.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "2134d2b0c477f731e2f8f7a2c0aa75313b74748636bc09d703aa059b0a4404e7",
+    "outputSHA256": "d174e01b413aee2e6a4373c4ea8f9b885eda439400283147cc61beef349a3499",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 220,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.292,
+        "peak": 1.0,
+        "clippedFraction": 0.00028409
+      },
+      "output": {
+        "rmsDBFS": -23.126,
+        "peak": 0.367281,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -8.708,
+      "seconds": 0.44,
+      "clearADX_SHA256": "d51e0a4aea2bbc917921dbdfb5c8b502bfb925ad831bfaea55d86bbcdc58e775"
+    },
+    "sourceBankSHA256": "25604712d59a7365953e546de5f08fdd37f0c41b92aea6e3ce2a8d2111618f86"
+  },
+  {
+    "cue": "weapon-wp2a-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp2a-heavy-1",
+    "source": "data_pc/se/wp/wp2a.ses",
+    "stream": 1,
+    "sourceStreamSHA256": "2551fb34349177b8a12c4a62e8652ac3b22992b14f8069e5ca0d8c68cc4ee869",
+    "outputSHA256": "76e31c8baf13bc0800e135bc5616bef8c3cb51738ff2ba051e4d6035aa0338db",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 447,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -15.171,
+        "peak": 0.843536,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.342124,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -7.829,
+      "seconds": 0.894,
+      "clearADX_SHA256": "7002471d19cd6336d995f95577039ae75ca6305dc5cbfc877fc4fb1dd4149afe"
+    },
+    "sourceBankSHA256": "25604712d59a7365953e546de5f08fdd37f0c41b92aea6e3ce2a8d2111618f86"
+  },
+  {
+    "cue": "weapon-wp2b",
+    "resource": "Okami/NativeAudio/weapon-wp2b-0",
+    "source": "data_pc/se/wp/wp2b.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "2134d2b0c477f731e2f8f7a2c0aa75313b74748636bc09d703aa059b0a4404e7",
+    "outputSHA256": "d174e01b413aee2e6a4373c4ea8f9b885eda439400283147cc61beef349a3499",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 220,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.292,
+        "peak": 1.0,
+        "clippedFraction": 0.00028409
+      },
+      "output": {
+        "rmsDBFS": -23.126,
+        "peak": 0.367281,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -8.708,
+      "seconds": 0.44,
+      "clearADX_SHA256": "d51e0a4aea2bbc917921dbdfb5c8b502bfb925ad831bfaea55d86bbcdc58e775"
+    },
+    "sourceBankSHA256": "0a06dedda31950efe9f6c38cef743f26c3bf82394b9c5f41a93058acf09a7db3"
+  },
+  {
+    "cue": "weapon-wp2b-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp2b-heavy-1",
+    "source": "data_pc/se/wp/wp2b.ses",
+    "stream": 1,
+    "sourceStreamSHA256": "2551fb34349177b8a12c4a62e8652ac3b22992b14f8069e5ca0d8c68cc4ee869",
+    "outputSHA256": "76e31c8baf13bc0800e135bc5616bef8c3cb51738ff2ba051e4d6035aa0338db",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 447,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -15.171,
+        "peak": 0.843536,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.342124,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -7.829,
+      "seconds": 0.894,
+      "clearADX_SHA256": "7002471d19cd6336d995f95577039ae75ca6305dc5cbfc877fc4fb1dd4149afe"
+    },
+    "sourceBankSHA256": "0a06dedda31950efe9f6c38cef743f26c3bf82394b9c5f41a93058acf09a7db3"
+  },
+  {
+    "cue": "weapon-wp2c",
+    "resource": "Okami/NativeAudio/weapon-wp2c-0",
+    "source": "data_pc/se/wp/wp2c.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "2134d2b0c477f731e2f8f7a2c0aa75313b74748636bc09d703aa059b0a4404e7",
+    "outputSHA256": "d174e01b413aee2e6a4373c4ea8f9b885eda439400283147cc61beef349a3499",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 220,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.292,
+        "peak": 1.0,
+        "clippedFraction": 0.00028409
+      },
+      "output": {
+        "rmsDBFS": -23.126,
+        "peak": 0.367281,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -8.708,
+      "seconds": 0.44,
+      "clearADX_SHA256": "d51e0a4aea2bbc917921dbdfb5c8b502bfb925ad831bfaea55d86bbcdc58e775"
+    },
+    "sourceBankSHA256": "3947cc601515b1ed1585b58080b951d157006330182f264f0e01750ec7fb2568"
+  },
+  {
+    "cue": "weapon-wp2c-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp2c-heavy-1",
+    "source": "data_pc/se/wp/wp2c.ses",
+    "stream": 1,
+    "sourceStreamSHA256": "2551fb34349177b8a12c4a62e8652ac3b22992b14f8069e5ca0d8c68cc4ee869",
+    "outputSHA256": "76e31c8baf13bc0800e135bc5616bef8c3cb51738ff2ba051e4d6035aa0338db",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 447,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -15.171,
+        "peak": 0.843536,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.342124,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -7.829,
+      "seconds": 0.894,
+      "clearADX_SHA256": "7002471d19cd6336d995f95577039ae75ca6305dc5cbfc877fc4fb1dd4149afe"
+    },
+    "sourceBankSHA256": "3947cc601515b1ed1585b58080b951d157006330182f264f0e01750ec7fb2568"
+  },
+  {
+    "cue": "weapon-wp2d",
+    "resource": "Okami/NativeAudio/weapon-wp2d-0",
+    "source": "data_pc/se/wp/wp2d.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "2134d2b0c477f731e2f8f7a2c0aa75313b74748636bc09d703aa059b0a4404e7",
+    "outputSHA256": "d174e01b413aee2e6a4373c4ea8f9b885eda439400283147cc61beef349a3499",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 220,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.292,
+        "peak": 1.0,
+        "clippedFraction": 0.00028409
+      },
+      "output": {
+        "rmsDBFS": -23.126,
+        "peak": 0.367281,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -8.708,
+      "seconds": 0.44,
+      "clearADX_SHA256": "d51e0a4aea2bbc917921dbdfb5c8b502bfb925ad831bfaea55d86bbcdc58e775"
+    },
+    "sourceBankSHA256": "1f7e7e18bef0c6f4e7bdb2c5843ce24b4a435e92d42c120f276a8f39dca1d1ca"
+  },
+  {
+    "cue": "weapon-wp2d-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp2d-heavy-1",
+    "source": "data_pc/se/wp/wp2d.ses",
+    "stream": 1,
+    "sourceStreamSHA256": "2551fb34349177b8a12c4a62e8652ac3b22992b14f8069e5ca0d8c68cc4ee869",
+    "outputSHA256": "76e31c8baf13bc0800e135bc5616bef8c3cb51738ff2ba051e4d6035aa0338db",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 447,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -15.171,
+        "peak": 0.843536,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.342124,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -7.829,
+      "seconds": 0.894,
+      "clearADX_SHA256": "7002471d19cd6336d995f95577039ae75ca6305dc5cbfc877fc4fb1dd4149afe"
+    },
+    "sourceBankSHA256": "1f7e7e18bef0c6f4e7bdb2c5843ce24b4a435e92d42c120f276a8f39dca1d1ca"
+  },
+  {
+    "cue": "weapon-wp2e",
+    "resource": "Okami/NativeAudio/weapon-wp2e-0",
+    "source": "data_pc/se/wp/wp2e.ses",
+    "stream": 0,
+    "sourceStreamSHA256": "2134d2b0c477f731e2f8f7a2c0aa75313b74748636bc09d703aa059b0a4404e7",
+    "outputSHA256": "d174e01b413aee2e6a4373c4ea8f9b885eda439400283147cc61beef349a3499",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 220,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.292,
+        "peak": 1.0,
+        "clippedFraction": 0.00028409
+      },
+      "output": {
+        "rmsDBFS": -23.126,
+        "peak": 0.367281,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -8.708,
+      "seconds": 0.44,
+      "clearADX_SHA256": "d51e0a4aea2bbc917921dbdfb5c8b502bfb925ad831bfaea55d86bbcdc58e775"
+    },
+    "sourceBankSHA256": "b82c09dce1cf980b3acebd9a5af0953563b25808c7c9af68d752439047ffff48"
+  },
+  {
+    "cue": "weapon-wp2e-heavy",
+    "resource": "Okami/NativeAudio/weapon-wp2e-heavy-1",
+    "source": "data_pc/se/wp/wp2e.ses",
+    "stream": 1,
+    "sourceStreamSHA256": "2551fb34349177b8a12c4a62e8652ac3b22992b14f8069e5ca0d8c68cc4ee869",
+    "outputSHA256": "76e31c8baf13bc0800e135bc5616bef8c3cb51738ff2ba051e4d6035aa0338db",
+    "assignment": "Own original instrument SES bank. Source waveform, decrypted/attenuated only. Exact original attack-event index dispatch is not reconstructed; audible acceptance pending.",
+    "decoding": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 447,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -15.171,
+        "peak": 0.843536,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.342124,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -7.829,
+      "seconds": 0.894,
+      "clearADX_SHA256": "7002471d19cd6336d995f95577039ae75ca6305dc5cbfc877fc4fb1dd4149afe"
+    },
+    "sourceBankSHA256": "b82c09dce1cf980b3acebd9a5af0953563b25808c7c9af68d752439047ffff48"
+  }
+]

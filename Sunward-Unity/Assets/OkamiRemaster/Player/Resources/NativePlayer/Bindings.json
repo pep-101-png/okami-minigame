@@ -461,21 +461,21 @@
     },
     {
       "state": "Swim_Idle",
-      "clip": "pl00_013",
+      "clip": "pl00_130",
       "intro": "",
       "loop": true,
       "mirror": false,
       "referenceSpeed": 0,
-      "evidence": "Native horizontal paddle cycle selected after comparing full gait cycles; replaces carrying/crouched land gait 01d/01e. Runtime review pending."
+      "evidence": "Original looping head-raised water-family actions, compared against land gaits over complete source cycles. Source action labels unavailable; Unity acceptance pending."
     },
     {
       "state": "Swim_Move",
-      "clip": "pl00_013",
+      "clip": "pl00_131",
       "intro": "",
       "loop": true,
       "mirror": false,
       "referenceSpeed": 0,
-      "evidence": "Native horizontal paddle cycle selected after comparing full gait cycles; replaces carrying/crouched land gait 01d/01e. Runtime review pending."
+      "evidence": "Original looping head-raised water-family actions, compared against land gaits over complete source cycles. Source action labels unavailable; Unity acceptance pending."
     },
     {
       "state": "Beads1",
@@ -539,6 +539,222 @@
       "mirror": false,
       "referenceSpeed": 0,
       "evidence": "Original native seated loop, pose visually inspected"
+    },
+    {
+      "state": "NativeAttack_500",
+      "clip": "pl00_500",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original reflector primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_501",
+      "clip": "pl00_501",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original reflector primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_502",
+      "clip": "pl00_502",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original reflector primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_503",
+      "clip": "pl00_503",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original reflector primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_504",
+      "clip": "pl00_504",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original reflector primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_505",
+      "clip": "pl00_505",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original reflector primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_520",
+      "clip": "pl00_520",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original glaive primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_521",
+      "clip": "pl00_521",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original glaive primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_522",
+      "clip": "pl00_522",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original glaive primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_523",
+      "clip": "pl00_523",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original glaive primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_524",
+      "clip": "pl00_524",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original glaive primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_525",
+      "clip": "pl00_525",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original glaive primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_540",
+      "clip": "pl00_540",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original rosary primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_542",
+      "clip": "pl00_542",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original rosary primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_544",
+      "clip": "pl00_544",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original rosary primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_546",
+      "clip": "pl00_546",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original rosary primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_548",
+      "clip": "pl00_548",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original rosary primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_54a",
+      "clip": "pl00_54a",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original rosary primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_54b",
+      "clip": "pl00_54b",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original rosary primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_54c",
+      "clip": "pl00_54c",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original rosary primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeAttack_54f",
+      "clip": "pl00_54f",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Original rosary primary combat MOT from original weapon archive; whole native body action, shared combat clock."
+    },
+    {
+      "state": "NativeCharge_reflector",
+      "clip": "pl00_511",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Hold the first original family pose while the existing controller accumulates charge. Native source pose, no invented rig motion."
+    },
+    {
+      "state": "NativeCharge_glaive",
+      "clip": "pl00_523",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Hold the first original family pose while the existing controller accumulates charge. Native source pose, no invented rig motion."
+    },
+    {
+      "state": "NativeCharge_rosary",
+      "clip": "pl00_54c",
+      "intro": "",
+      "loop": false,
+      "mirror": false,
+      "referenceSpeed": 0,
+      "evidence": "Hold the first original family pose while the existing controller accumulates charge. Native source pose, no invented rig motion."
     }
   ]
 }

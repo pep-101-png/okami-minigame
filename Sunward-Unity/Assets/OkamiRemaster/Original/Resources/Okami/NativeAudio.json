@@ -167,6 +167,126 @@
     {
       "cue": "river",
       "resource": "Okami/NativeAudio/river-2"
+    },
+    {
+      "cue": "weapon-wp20",
+      "resource": "Okami/NativeAudio/weapon-wp20-0"
+    },
+    {
+      "cue": "weapon-wp20-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp20-heavy-0"
+    },
+    {
+      "cue": "weapon-wp21",
+      "resource": "Okami/NativeAudio/weapon-wp21-0"
+    },
+    {
+      "cue": "weapon-wp21-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp21-heavy-0"
+    },
+    {
+      "cue": "weapon-wp22",
+      "resource": "Okami/NativeAudio/weapon-wp22-0"
+    },
+    {
+      "cue": "weapon-wp22-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp22-heavy-0"
+    },
+    {
+      "cue": "weapon-wp23",
+      "resource": "Okami/NativeAudio/weapon-wp23-0"
+    },
+    {
+      "cue": "weapon-wp23-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp23-heavy-0"
+    },
+    {
+      "cue": "weapon-wp24",
+      "resource": "Okami/NativeAudio/weapon-wp24-0"
+    },
+    {
+      "cue": "weapon-wp24-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp24-heavy-0"
+    },
+    {
+      "cue": "weapon-wp25",
+      "resource": "Okami/NativeAudio/weapon-wp25-0"
+    },
+    {
+      "cue": "weapon-wp25-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp25-heavy-2"
+    },
+    {
+      "cue": "weapon-wp26",
+      "resource": "Okami/NativeAudio/weapon-wp26-0"
+    },
+    {
+      "cue": "weapon-wp26-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp26-heavy-2"
+    },
+    {
+      "cue": "weapon-wp27",
+      "resource": "Okami/NativeAudio/weapon-wp27-0"
+    },
+    {
+      "cue": "weapon-wp27-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp27-heavy-2"
+    },
+    {
+      "cue": "weapon-wp28",
+      "resource": "Okami/NativeAudio/weapon-wp28-0"
+    },
+    {
+      "cue": "weapon-wp28-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp28-heavy-2"
+    },
+    {
+      "cue": "weapon-wp29",
+      "resource": "Okami/NativeAudio/weapon-wp29-0"
+    },
+    {
+      "cue": "weapon-wp29-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp29-heavy-2"
+    },
+    {
+      "cue": "weapon-wp2a",
+      "resource": "Okami/NativeAudio/weapon-wp2a-0"
+    },
+    {
+      "cue": "weapon-wp2a-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp2a-heavy-1"
+    },
+    {
+      "cue": "weapon-wp2b",
+      "resource": "Okami/NativeAudio/weapon-wp2b-0"
+    },
+    {
+      "cue": "weapon-wp2b-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp2b-heavy-1"
+    },
+    {
+      "cue": "weapon-wp2c",
+      "resource": "Okami/NativeAudio/weapon-wp2c-0"
+    },
+    {
+      "cue": "weapon-wp2c-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp2c-heavy-1"
+    },
+    {
+      "cue": "weapon-wp2d",
+      "resource": "Okami/NativeAudio/weapon-wp2d-0"
+    },
+    {
+      "cue": "weapon-wp2d-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp2d-heavy-1"
+    },
+    {
+      "cue": "weapon-wp2e",
+      "resource": "Okami/NativeAudio/weapon-wp2e-0"
+    },
+    {
+      "cue": "weapon-wp2e-heavy",
+      "resource": "Okami/NativeAudio/weapon-wp2e-heavy-1"
     }
   ]
 }

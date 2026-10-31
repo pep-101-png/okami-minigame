@@ -24,6 +24,8 @@ namespace Sunward
         float timer = .9f, stun, clock;
         int attacks;
         string move;
+        public string ActiveMove=>move;
+        Sunward.Remaster.OriginalActor nativeActor;
         bool struck;
         LineRenderer tell;
         Vector3 visualBase;
@@ -44,6 +46,7 @@ namespace Sunward
             visual.localScale = Vector3.one * spec.scale;
             visualBase = visual.localPosition;
             var native = visual.GetComponentInChildren<Sunward.Remaster.OriginalActor>(true);
+            nativeActor=native;
             originalVisual = native != null;
             if(native && native.Ready && native.splitAttackClip)nativeAttackLength=native.ActivityLength(native.strike);
         }
@@ -135,6 +138,7 @@ namespace Sunward
                         "slam",
                         "fan"
                     }[attacks % 3] : ranged ? "shot" : definition.id == "heavy" ? "slam" : "charge";
+                    if(nativeActor && nativeActor.Ready && nativeActor.splitAttackClip)nativeAttackLength=nativeActor.ActivityLength(nativeActor.AttackMotion(move));
                     State = "windup";
                     timer = Mathf.Max(definition.windup * (Phase2 ? .8f : 1),nativeAttackLength*.25f);
                     visualDuration=timer;
@@ -145,6 +149,7 @@ namespace Sunward
             else if (State == "windup" && timer <= 0)
             {
                 State = "strike";
+                game.Audio.World("attack",transform.position,12,.18f);
                 chargeRemaining = move == "charge" ? (boss ? .65f : .32f) : 0;
                 timer = Mathf.Max(move == "charge" ? chargeRemaining : .18f,nativeAttackLength*.37f);
                 visualDuration=timer;
@@ -159,7 +164,7 @@ namespace Sunward
                 if (move == "slam")
                 {
                     game.Fx.Ring(transform.position, new Color(.7f, .36f, .22f), boss ? 5 : 3);
-                    game.Audio.Cue("land");
+                    game.Audio.World("heavy-impact",transform.position,16,.22f);
                     if (distance < (boss ? 5 : 3) && game.Player.transform.position.y < .9f)
                         game.Hurt(definition.damage, direction);
                     struck = true;

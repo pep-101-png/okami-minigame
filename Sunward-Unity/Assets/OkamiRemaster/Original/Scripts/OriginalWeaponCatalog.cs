@@ -48,24 +48,24 @@ namespace Sunward.Remaster
         }
         public static WeaponDefinition Definition(Entry entry, WeaponDefinition spear, WeaponDefinition solar)
         {
-            if(entry.id=="spear")return spear;
-            if(entry.id=="sundial")return solar;
             var result=UnityEngine.Object.Instantiate(entry.family=="reflector"?solar:spear);
             result.id=entry.id;result.title=entry.title;
-            if(entry.family=="rosary")
-            {
-                result.light=new[]{Bead("Beads1",.30f,1,4.2f),Bead("Beads2",.34f,1.7f,4.6f),Bead("Beads3",.5f,2.4f,5)};
-                result.heavy=new[]{Bead("BeadsHeavy",.7f,2.8f,5.2f)};
-                result.charged=Bead("BeadsCharged",.9f,4.2f,5.7f);result.chargedHeavy=Bead("BeadsCharged",.9f,4.6f,5.7f);
-                result.air=Bead("BeadsAir",.6f,3,4.8f);
-            }
-            float power=1+Mathf.Clamp01((entry.cost-70)/380f)*.35f;
+            string[] clips=entry.family=="reflector"?new[]{"500","501","502"}:entry.family=="glaive"?new[]{"520","521","522"}:new[]{"540","542","544","546","548","54a"};
+            float[] damage=entry.family=="reflector"?new[]{1.4f,2.1f,3.8f}:entry.family=="glaive"?new[]{1f,2f,3f}:new[]{1f,1.7f,2.4f,2.9f,3.4f,3.8f};
+            result.light=new Strike[clips.Length];
+            for(int i=0;i<clips.Length;i++)result.light[i]=Native(clips[i],damage[i],entry.family=="rosary"?5.5f:entry.family=="glaive"?3.8f:3.3f,entry.family=="glaive"?.20f:-.25f);
+            string heavy=entry.family=="reflector"?"503":entry.family=="glaive"?"523":"54b";
+            result.heavy=new[]{Native(heavy,entry.family=="reflector"?4f:entry.family=="rosary"?2.8f:3.3f,4.2f,-.4f)};
+            string charged=entry.family=="reflector"?"504":entry.family=="glaive"?"524":"54c";
+            result.charged=Native(charged,entry.family=="reflector"?5f:entry.family=="rosary"?4.2f:4.5f,5.2f,.1f);result.chargedHeavy=Native(charged,entry.family=="rosary"?4.6f:6f,5.2f,-.3f);
+            result.air=Native(entry.family=="reflector"?"505":entry.family=="glaive"?"525":"54f",entry.family=="rosary"?3f:4.5f,4.5f,-1);
+            float power=entry.id=="spear" || entry.id=="sundial"?1:1+Mathf.Clamp01((entry.cost-70)/380f)*.35f;
             foreach(var strike in result.light)strike.damage*=power;
             foreach(var strike in result.heavy)strike.damage*=power;
             result.charged.damage*=power;result.chargedHeavy.damage*=power;result.air.damage*=power;
             return result;
         }
-        static Strike Bead(string clip,float duration,float damage,float range) => new Strike {
-            clip=clip,duration=duration,damage=damage,range=range,arc=.35f,start=.25f,end=.65f,lunge=.3f,stagger=.3f };
+        static Strike Native(string clip,float damage,float range,float arc)=>new Strike {
+            clip="NativeAttack_"+clip,duration=.6f,damage=damage,range=range,arc=arc,start=.22f,end=.68f,lunge=.45f,stagger=.3f };
     }
 }
