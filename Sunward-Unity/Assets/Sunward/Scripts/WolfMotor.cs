@@ -167,6 +167,7 @@ namespace Sunward
                 Vertical = -2;
             }
 
+            if(wasAir && Grounded && game.Combat.TundraAir)game.Combat.Cancel();
             if (wasAir && Grounded && airborneTime>.12f && previousY < -3)
             {
                 landing = previousY < -9 ? .38f : .20f;

@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>disable</ImplicitUsings><EnableDefaultCompileItems>false</EnableDefaultCompileItems><Nullable>disable</Nullable></PropertyGroup>
+<ItemGroup>
+<Compile Include="Program.cs"/><Compile Include="ViewDoubles.cs"/><Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalWeaponView.cs"/><Compile Include="UnityMath.cs"/><Compile Include="$(BaselineCatalog)"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/TundraAttackRules.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalWeaponCatalog.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Player/NativePoseBank.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/AttackSequence.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/WeaponDefinition.cs"/>
+</ItemGroup>
+</Project>

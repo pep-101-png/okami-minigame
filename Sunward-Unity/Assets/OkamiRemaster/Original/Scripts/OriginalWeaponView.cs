@@ -9,10 +9,15 @@ namespace Sunward.Remaster
         NativePaintedRig rig;
         NativePoseBank bank;
         NativePoseBank.Clip idle, action;
-        string package, family;
-        float idleTime;
+        string package, family, actionState;
+        float idleTime, actionPhase, blendTime, blendLength;
+        bool returning, extrasHidden;
         Vector3[] position,scale;
         Quaternion[] rotation;
+        SkinnedMeshRenderer[] renderers;
+        WolfCombat combat;
+        readonly Vector3[] points=new Vector3[12];
+        bool Tundra=>package=="wp2e";
         public void Load(string source,string kind="reflector")
         {
             if(rig!=null)rig.Dispose();
@@ -23,16 +28,21 @@ namespace Sunward.Remaster
             for(int i=0;i<position.Length;i++){position[i]=rig.Bones[i].localPosition;scale[i]=Vector3.one;rotation[i]=Quaternion.identity;}
             idle=bank.Find(package+(family=="glaive"?"_001":"_000"));
             if(idle==null)throw new InvalidOperationException("Original weapon idle is missing: "+source);
-            // Rosary bones can extend beyond the shared actor's 8 m bounds.
-            // Keep the original whip visible throughout its authored reach.
-            foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
+            renderers=rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true);
+            foreach(var renderer in renderers)
             {renderer.localBounds=new Bounds(Vector3.zero,new Vector3(64,32,64));renderer.updateWhenOffscreen=true;}
-            rig.Root.SetActive(true);Sample(idle,0,true);
+            if(Tundra)
+            {
+                combat=GetComponentInParent<WolfCombat>();
+                foreach(int i in new[]{1,2,3,4,5,6,7,8,12,15})
+                    if(bank.Find(package+"_"+i.ToString("x3"))==null)throw new InvalidOperationException("Original Tundra action missing: "+i);
+            }
+            rig.Root.SetActive(true);Sample(idle,0,true,1);
         }
         string Action(string state)
         {
-            // Reflector/glaive placement is driven by their original PL dorsal
-            // bone. Their 002..00f WP clips are static placeholders, not attacks.
+            if(Tundra)
+            {int clip=TundraAttackRules.WeaponClip(state);return clip<0?null:package+"_"+clip.ToString("x3");}
             if(family!="rosary")return null;
             string suffix=state.Substring(state.LastIndexOf('_')+1);
             int index=suffix=="540"?1:suffix=="542"?2:suffix=="544"?3:suffix=="546"?4:suffix=="548"?5:suffix=="54a"?6:suffix=="54b"?8:suffix=="54f"?15:12;
@@ -40,17 +50,70 @@ namespace Sunward.Remaster
         }
         public float AttackLength(string state)
         {var name=Action(state);var clip=name==null?null:bank.Find(name);return clip==null?0:clip.Duration;}
+        void Capture()
+        {
+            for(int i=0;i<position.Length;i++)
+            {position[i]=rig.Bones[i].localPosition;rotation[i]=rig.Bones[i].localRotation;scale[i]=rig.Bones[i].localScale;}
+        }
+        void ExtraBeads(bool visible)
+        {
+            extrasHidden=!visible;
+            foreach(var renderer in renderers)
+            {
+                var name=renderer.sharedMesh.name.Split('-');
+                if(name.Length>1 && int.TryParse(name[1],out int group) && group>=3)renderer.enabled=visible;
+            }
+        }
         public void BeginAttack(string state)
-        {var name=Action(state);action=name==null?null:bank.Find(name);}
+        {
+            var name=Action(state);action=name==null?null:bank.Find(name);actionState=state;
+            if(!Tundra)return;
+            if(action==null)throw new InvalidOperationException("Unmapped Tundra attack: "+state);
+            // Casts author only bones 1..6. The other six must not pile up at
+            // the unanimated origin. Restore hidden bones at rest before a whip.
+            if(extrasHidden && state!=TundraAttackRules.Cast)
+            {
+                var p=new Vector3[position.Length];var r=new Quaternion[position.Length];var s=new Vector3[position.Length];
+                for(int i=0;i<p.Length;i++){p[i]=rig.Bones[i].localPosition;r[i]=rig.Bones[i].localRotation;s[i]=rig.Bones[i].localScale;}
+                Sample(idle,idleTime,true,1);
+                for(int i=0;i<rig.Bones.Length;i++)if(i<8 || i>13){rig.Bones[i].localPosition=p[i];rig.Bones[i].localRotation=r[i];rig.Bones[i].localScale=s[i];}
+            }
+            Capture();blendTime=0;blendLength=TundraAttackRules.EnterBlend;returning=false;actionPhase=0;
+            ExtraBeads(state!=TundraAttackRules.Cast);
+        }
         public void AttackPhase(float phase)
-        {if(action!=null)Sample(action,Mathf.Clamp01(phase)*action.Duration,false);}
-        public void EndAttack(){action=null;}
+        {
+            if(Tundra){actionPhase=Mathf.Clamp01(phase);return;}
+            if(action!=null)Sample(action,Mathf.Clamp01(phase)*action.Duration,false,1);
+        }
+        public void EndAttack()
+        {
+            if(Tundra && rig!=null && action!=null)
+            {Capture();blendTime=0;blendLength=TundraAttackRules.ReturnBlend;returning=true;}
+            action=null;
+        }
         void LateUpdate()
         {
-            if(rig==null || idle==null || action!=null)return;
-            idleTime+=Time.deltaTime;Sample(idle,idleTime,true);
+            if(rig==null || idle==null)return;
+            if(!Tundra)
+            {if(action!=null)return;idleTime+=Time.deltaTime;Sample(idle,idleTime,true,1);return;}
+            if(combat && combat.game && combat.game.Blocked)return;
+            blendTime+=Time.deltaTime;
+            float blend=blendLength>0?Mathf.SmoothStep(0,1,blendTime/blendLength):1;
+            if(action!=null)
+            {
+                Sample(action,actionPhase*action.Duration,false,blend);
+                int count=TundraAttackRules.VisibleBeads(actionState);
+                for(int i=0;i<count;i++)points[i]=rig.Bones[i+2].TransformPoint(new Vector3(0,0,-.055f));
+                if(combat)combat.TundraBeadContacts(points,count);
+            }
+            else
+            {
+                idleTime+=Time.deltaTime;Sample(idle,idleTime,true,returning?blend:1);
+                if(returning && blend>=1){returning=false;ExtraBeads(true);}
+            }
         }
-        void Sample(NativePoseBank.Clip clip,float time,bool loop)=>bank.Sample(clip,time,rig.Bones,position,rotation,scale,1,loop);
+        void Sample(NativePoseBank.Clip clip,float time,bool loop,float blend)=>bank.Sample(clip,time,rig.Bones,position,rotation,scale,blend,loop);
         void OnDestroy(){if(rig!=null)rig.Dispose();}
     }
 }
