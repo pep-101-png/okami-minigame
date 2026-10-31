@@ -47,3 +47,5 @@ Sunward-Unity/Assets/OkamiRemaster/Original/**/*.ogg -filter -diff -merge -text
 
 # Follow-up source review images remain directly readable.
 tools/playtest-followup/previews/*.jpg -filter -diff -merge -text
+
+Downloads/*.zip -filter -diff -merge -text
