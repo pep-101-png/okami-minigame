@@ -1,12 +1,12 @@
 // Only stand-ins for semantic compilation, never a claim of Unity API/build verification.
 namespace UnityEngine
 {
- public enum FindObjectsSortMode{None}public enum QueryTriggerInteraction{Ignore}public enum AudioRolloffMode{Linear}public enum LightType{Point}
+ public enum FindObjectsSortMode{None}public enum QueryTriggerInteraction{Ignore}public enum AudioRolloffMode{Linear}public enum LightShadows{None}public enum LightType{Point,Spot}
  public struct RaycastHit{public float distance;}
  public struct Color{public float r,g,b,a;public Color(float x,float y,float z,float w=1){r=x;g=y;b=z;a=w;}public static Color white=>new Color(1,1,1);}
  public class Texture2D:Object{}
  public class AudioListener:Object{public bool enabled;public static float volume;}
- public class Light:Object{public LightType type;public float range,intensity;public Color color;}
+ public class Light:Object{public bool enabled;public LightShadows shadows;public float spotAngle;public LightType type;public float range,intensity;public Color color;}
  public class ParticleSystem:Object
  {
   public GameObject gameObject=new GameObject();public Transform transform=>gameObject.transform;

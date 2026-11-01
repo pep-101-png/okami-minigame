@@ -12,6 +12,8 @@ namespace Sunward.Remaster
         public string seatedMotion, handMotion;
         public float seed;
         public bool contactEnabled=true;
+        public bool archer;
+        public float releasePhase=.2f;
         GameFlow game;
         bool ready, performing, contacted;
         float timer, elapsed, length;
@@ -38,13 +40,18 @@ namespace Sunward.Remaster
             if(role=="training")
             {
                 if(!dummy)return;
+                if(!dummy.game)dummy.game=game;
                 Vector3 direction=dummy.transform.position-transform.position;direction.y=0;
                 if(direction.sqrMagnitude>.001f)transform.rotation=Quaternion.LookRotation(direction);
                 if(performing)
                 {
                     elapsed+=Time.deltaTime;
-                    if(contactEnabled && !contacted && elapsed>=length*.58f && direction.magnitude<3.2f)
-                    {contacted=true;dummy.PracticeContact();}
+                    if(contactEnabled && !contacted && elapsed>=length*(archer?releasePhase:.42f))
+                    {
+                        contacted=true;
+                        if(archer){PracticeArrow.Fire(transform.position+Vector3.up*1.3f+direction.normalized*.65f,dummy);game.Audio.World("attack",transform.position,8,.12f);}
+                        else if(direction.magnitude<3.2f){dummy.PracticeContact();BrushStrokeFlash.Slash(transform.position+Vector3.up*1.2f,dummy.transform.position+Vector3.up);CelestialBrush.Burst("Spark",dummy.transform.position+Vector3.up,5,.2f);}
+                    }
                 }
                 if(timer>0)return;
                 performing=!performing;
@@ -53,7 +60,7 @@ namespace Sunward.Remaster
                     length=Mathf.Max(.6f,actor.ActivityLength(motion));elapsed=0;contacted=false;
                     actor.PlayActivity(motion,false);timer=length;
                 }
-                else{actor.EndActivity();timer=1.3f+Mathf.Repeat(seed,1.7f);}
+                else{actor.EndActivity();timer=archer?1.4f+Mathf.Repeat(seed,1):.55f+Mathf.Repeat(seed,.65f);}
             }
             // Seated actors keep their own native seated clip. Their own arm
             // clip is layered without copying pelvis/leg translations from a

@@ -4,8 +4,8 @@ namespace UnityEngine
  public enum ParticleSystemShapeType{SkinnedMeshRenderer}public enum ParticleSystemMeshShapeType{Triangle}
  public class Material:Object{public Material(Material source){}public Texture2D mainTexture;}
  public class AnimationCurve{public static AnimationCurve Linear(float a,float b,float c,float d)=>new AnimationCurve();}
- public class LineRenderer:Renderer{public GameObject gameObject=new GameObject();}
- public class TrailRenderer:LineRenderer{public Transform transform=>gameObject.transform;public Material sharedMaterial;public float time,minVertexDistance,widthMultiplier;public AnimationCurve widthCurve;public Color startColor,endColor;public bool emitting;public void Clear(){}}
+ public class LineRenderer:Renderer{public GameObject gameObject=new GameObject();public bool useWorldSpace;public int positionCount;public float startWidth,endWidth;public Color startColor,endColor;public void SetPosition(int i,Vector3 p){}}
+ public class TrailRenderer:LineRenderer{public Transform transform=>gameObject.transform;public float time,minVertexDistance,widthMultiplier;public AnimationCurve widthCurve;public bool emitting;public void Clear(){}}
 }
 namespace Sunward
 {

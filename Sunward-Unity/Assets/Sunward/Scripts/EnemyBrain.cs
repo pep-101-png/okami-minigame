@@ -8,7 +8,9 @@ namespace Sunward
         public EnemyDefinition definition;
         public float Hp, MaxHp;
         readonly Sunward.Remaster.CrimsonPhaseState crimson=new Sunward.Remaster.CrimsonPhaseState();
-        public bool BossRising=>definition && definition.id=="boss" && crimson.Stage==Sunward.Remaster.CrimsonStage.Rising;
+        public bool BossRising=>definition && definition.id=="boss" && crimson.Transitioning;
+        public int BossPhase=>definition && definition.id=="boss"?crimson.Phase:0;
+        public float BossScale=>crimson.ScaleMultiplier;
         public bool FlamePhase=>definition && definition.id=="boss" && crimson.Stage==Sunward.Remaster.CrimsonStage.Flame;
         public float AttackDamage=>definition.damage*crimson.DamageMultiplier;
         public bool Dead => Hp <= 0;
@@ -35,7 +37,7 @@ namespace Sunward
         Vector3 visualBase;
         bool originalVisual;
         float nativeAttackLength, chargeRemaining;
-        float nextVoice;
+        float nextVoice,nextStagger;
         public void Init(GameFlow flow, EnemyDefinition spec)
         {
             game = flow;
@@ -53,11 +55,19 @@ namespace Sunward
             nativeActor=native;
             originalVisual = native != null;
             if(native && native.Ready && native.splitAttackClip)nativeAttackLength=native.ActivityLength(native.strike);
+            if(spec.id=="boss")gameObject.AddComponent<Sunward.Remaster.CrimsonHelmAscension>().Initialise(this,nativeActor);
         }
 
         public void Stun(float time)
         {
-            stun = Mathf.Max(stun, definition.id == "boss" ? Mathf.Min(.30f, time) : time);
+            if(definition.id=="boss")
+            {
+                // Damage remains valid, but ordinary bead contacts cannot restart
+                // every windup or extend one flinch into a permanent stun lock.
+                if(BossRising || State=="windup" || State=="strike" || Time.time<nextStagger || time<=0)return;
+                nextStagger=Time.time+2.5f;time=Mathf.Min(.12f,time);
+            }
+            stun=Mathf.Max(stun,time);
         }
 
         public void Damage(float damage, Vector3 away, float stagger)
@@ -75,7 +85,7 @@ namespace Sunward
             }
             if (game.Audio && (Dead || Time.time >= nextVoice)) { game.Audio.Enemy(definition.id,transform.position); nextVoice = Time.time + .9f; }
             Stun(stagger);
-            if (motor.enabled)
+            if (motor.enabled && definition.id!="boss")
                 motor.Move(away * .15f);
             if (Dead)
             {
@@ -98,7 +108,7 @@ namespace Sunward
         }
         public void CompleteRebirth()
         {
-            crimson.Ignite();SetRebirthScale(2);State="approach";timer=.8f;visualDuration=.8f;
+            crimson.Ignite();SetRebirthScale(crimson.ScaleMultiplier);State="approach";timer=.8f;visualDuration=.8f;
             stun=chargeRemaining=0;struck=false;
         }
 
@@ -107,7 +117,7 @@ namespace Sunward
             motor.Move(delta);
             var p = transform.position;
             var d = p - new Vector3(35, p.y, 0);
-            float radius=game.BossTrial?29:16.8f;
+            float radius=game.BossTrial?Mathf.Min(29,31-motor.radius-.6f):16.8f;
             if (d.magnitude > radius)
                 motor.Move(new Vector3(35, p.y, 0) + d.normalized * radius - p);
         }
@@ -148,7 +158,7 @@ namespace Sunward
             timer -= dt;
             if (State == "approach")
             {
-                float reach = ranged ? 9 : boss ? (FlamePhase?8:4) : definition.id == "heavy" ? 2.8f : 2;
+                float reach = ranged ? 9 : boss ? 4*BossScale : definition.id == "heavy" ? 2.8f : 2;
                 if (distance > reach)
                     Move(diff.normalized * definition.speed * (Phase2 ? 1.2f : 1) * dt);
                 else if (ranged && distance < 5)
@@ -168,7 +178,7 @@ namespace Sunward
                     timer = Mathf.Max(definition.windup * (Phase2 ? .8f : 1),nativeAttackLength*.25f);
                     visualDuration=timer;
                     struck = false;
-                    tell = game.Fx.Ring(move == "slam" ? transform.position : game.Player.transform.position, new Color(.75f, .24f, .17f), move == "slam" ? (boss ? (FlamePhase?10:5) : 3) : .7f, timer + .1f);
+                    tell = game.Fx.Ring(move == "slam" ? transform.position : game.Player.transform.position, new Color(.75f, .24f, .17f), move == "slam" ? (boss ? 5*BossScale : 3) : .7f, timer + .1f);
                 }
             }
             else if (State == "windup" && timer <= 0)
@@ -181,18 +191,18 @@ namespace Sunward
                 if (move == "fan" || move == "shot")
                 {
                     int count = move == "fan" ? (Phase2 ? 7 : 5) : 1;
-                    Vector3 origin=transform.position+Vector3.up*(FlamePhase?3:1);
-                    Vector3 aim=FlamePhase?(game.Player.transform.position+Vector3.up*.7f-origin).normalized:direction;
+                    Vector3 origin=transform.position+Vector3.up*(1.5f*BossScale);
+                    Vector3 aim=boss?(game.Player.transform.position+Vector3.up*.7f-origin).normalized:direction;
                     for (int i = 0; i < count; i++)
-                        game.Projectile(origin,Quaternion.Euler(0,(i-(count-1)*.5f)*14,0)*aim,AttackDamage,FlamePhase);
+                        game.Projectile(origin,Quaternion.Euler(0,(i-(count-1)*.5f)*14,0)*aim,AttackDamage,BossPhase!=2 && boss);
                     struck = true;
                 }
 
                 if (move == "slam")
                 {
-                    game.Fx.Ring(transform.position, new Color(.7f, .36f, .22f), boss ? (FlamePhase?10:5) : 3);
+                    game.Fx.Ring(transform.position, new Color(.7f, .36f, .22f), boss ? 5*BossScale : 3);
                     game.Audio.World("heavy-impact",transform.position,16,.22f);
-                    if (distance < (boss ? (FlamePhase?10:5) : 3) && game.Player.transform.position.y < transform.position.y+.9f)
+                    if (distance < (boss ? 5*BossScale : 3) && game.Player.transform.position.y < transform.position.y+.9f)
                         game.Hurt(AttackDamage, direction);
                     struck = true;
                 }
@@ -214,7 +224,7 @@ namespace Sunward
                     Move(direction * chargeStep * (boss ? 10 : 7));
                     Vector3 a = game.Player.transform.position - before, travel = transform.position - before;
                     float t = travel.sqrMagnitude < .0001f ? 0 : Mathf.Clamp01(Vector3.Dot(a, travel) / travel.sqrMagnitude);
-                    if (!struck && Vector3.Distance(before + travel * t, game.Player.transform.position) < (boss ? (FlamePhase?4:2) : 1.1f))
+                    if (!struck && Vector3.Distance(before + travel * t, game.Player.transform.position) < (boss ? 2*BossScale : 1.1f))
                     {
                         game.Hurt(AttackDamage, direction);
                         struck = true;

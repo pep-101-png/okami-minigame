@@ -15,7 +15,9 @@ static class Program
  static float Delta(Vector3 a,Vector3 b)=>(a-b).magnitude;
  static void Main(string[] args)
  {
-  var crimsonPhase=new CrimsonPhaseState();Check(crimsonPhase.Stage==CrimsonStage.Armoured,"Boss starts in wrong phase");Check(crimsonPhase.TryRise()&&!crimsonPhase.TryRise(),"Rebirth repeats");crimsonPhase.Ignite();Check(crimsonPhase.Stage==CrimsonStage.Flame&&crimsonPhase.DamageMultiplier==2&&!crimsonPhase.TryRise(),"Flame state/damage incorrect");crimsonPhase.Defeat();Check(crimsonPhase.Stage==CrimsonStage.Defeated&&!crimsonPhase.TryRise(),"Final death starts another rebirth");
+  var crimsonPhase=new CrimsonPhaseState();Check(crimsonPhase.Stage==CrimsonStage.ArmouredFlame,"Wrong first form");
+  Check(crimsonPhase.TryRise()&&!crimsonPhase.TryRise(),"First transition re-enters");crimsonPhase.Ignite();Check(crimsonPhase.Phase==2&&crimsonPhase.ScaleMultiplier==2,"Second form scale incorrect");
+  Check(crimsonPhase.TryRise()&&!crimsonPhase.TryRise(),"Second transition re-enters");crimsonPhase.Ignite();Check(crimsonPhase.Phase==3&&crimsonPhase.DamageMultiplier==4&&!crimsonPhase.TryRise(),"Final form incorrect");crimsonPhase.Defeat();Check(crimsonPhase.Stage==CrimsonStage.Defeated&&!crimsonPhase.TryRise(),"Final death restarts fight");
   Resources.Root=args[0];var bank=new NativePoseBank("NativePlayer/pl00/Poses");
   using var json=JsonDocument.Parse(File.ReadAllText(Path.Combine(args[0],"OkamiRemaster/Player/Resources/NativePlayer/Bindings.json")));
   var bindings=json.RootElement.GetProperty("bindings").EnumerateArray().Select(x=>new NativeAmaterasu.Binding{state=x.GetProperty("state").GetString(),clip=x.GetProperty("clip").GetString(),loop=x.TryGetProperty("loop",out var loop)&&loop.GetBoolean(),intro=x.TryGetProperty("intro",out var intro)?intro.GetString():null}).ToArray();
@@ -25,6 +27,12 @@ static class Program
    Time.deltaTime=Time.unscaledDeltaTime=1f/fps;var body=new NativeAmaterasu();var rig=new NativePaintedRig("NativePlayer/pl00",body.transform);var motor=new WolfMotor();var game=new GameFlow{Player=motor};motor.game=game;
    Set(body,"bank",bank);Set(body,"rig",rig);Set(body,"amaterasuRig",rig);Set(body,"motor",motor);Set(body,"bindings",bindings);Set(body,"fromPosition",new Vector3[bank.BoneCount]);Set(body,"fromScale",new Vector3[bank.BoneCount]);Set(body,"fromRotation",Enumerable.Repeat(Quaternion.identity,bank.BoneCount).ToArray());Set(body,"<Ready>k__BackingField",true);
    body.Play("Idle_Natural",0,0,true,false);
+   foreach(var charge in bindings.Where(b=>b.state.StartsWith("NativeCharge_")))
+   {
+    Check(charge.loop,"Held charge binding is not looping");body.Play(charge.state,.08f,0,true,false);var first=rig.Bones.Select(b=>b.localPosition).ToArray();float motion=0;
+    for(int frame=0;frame<fps*3;frame++){body.HoldChargePose();Tick(body);motion=Math.Max(motion,rig.Bones.Select((b,i)=>Delta(b.localPosition,first[i])).Max());}
+    Check(body.PlaybackRate>0&&motion>.1f,"A held weapon-family charge remains frozen");
+   }
    foreach(bool heavy in new[]{false,true})
    {
     body.Play(TundraAttackRules.Charge,.08f,0,true,false);var start=rig.Bones.Select(b=>b.localPosition).ToArray();float moved=0;
@@ -77,7 +85,7 @@ static class Program
   {
    var player=new WolfMotor();var game=new GameFlow{Player=player,InTrial=true,BossTrial=boss,Health=win?45:0,Panel="",barrier=new GameObject()};player.game=game;var resultBoundary=game.barrier;game.Finish(win);
    Check(game.barrier==null&&resultBoundary.wasDestroyed,"Victory/defeat cleanup cannot handle a meshless boundary");
-   Check(!game.InTrial&&!game.BossTrial&&game.Panel==(win?"":"result"),"Victory modal must close automatically; defeat must retain recovery menu");
+   Check(!game.InTrial&&!game.BossTrial&&game.Panel==(win?(boss?"bossVictory":""):"result"),"Victory modal must close automatically; defeat must retain recovery menu");
    Check(game.Save.saves==1&&player.Locked==!win,"Result did not save or release/lock control correctly");
    Check(win?game.Profile.coins==(boss?150:75)&&game.Profile.xp==100&&game.Profile.bossWins==(boss?1:0)&&game.Profile.wins==(boss?0:1):game.Profile.defeats==1,"Result changed earned rewards");
    Check(game.projectiles>0&&game.Dialogue.Contains("10 combat coins"),"End of trial keeps stray projectiles or loses result text");

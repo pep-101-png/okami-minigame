@@ -731,30 +731,30 @@
     },
     {
       "state": "NativeCharge_reflector",
-      "clip": "pl00_511",
+      "clip": "pl00_54b",
       "intro": "",
-      "loop": false,
+      "loop": true,
       "mirror": false,
       "referenceSpeed": 0,
-      "evidence": "Hold the first original family pose while the existing controller accumulates charge. Native source pose, no invented rig motion."
+      "evidence": "Inspected moving native 54b preparation cycle shared for held charging; Sunward family adaptation, never a frozen pose."
     },
     {
       "state": "NativeCharge_glaive",
-      "clip": "pl00_523",
+      "clip": "pl00_54b",
       "intro": "",
-      "loop": false,
+      "loop": true,
       "mirror": false,
       "referenceSpeed": 0,
-      "evidence": "Hold the first original family pose while the existing controller accumulates charge. Native source pose, no invented rig motion."
+      "evidence": "Inspected moving native 54b preparation cycle shared for held charging; Sunward family adaptation, never a frozen pose."
     },
     {
       "state": "NativeCharge_rosary",
-      "clip": "pl00_54c",
+      "clip": "pl00_54b",
       "intro": "",
-      "loop": false,
+      "loop": true,
       "mirror": false,
       "referenceSpeed": 0,
-      "evidence": "Hold the first original family pose while the existing controller accumulates charge. Native source pose, no invented rig motion."
+      "evidence": "Inspected moving native 54b preparation cycle shared for held charging; Sunward family adaptation, never a frozen pose."
     },
     {
       "state": "Dig",
@@ -840,10 +840,12 @@
     },
     {
       "state": "NativeCharge_tundra",
-      "clip": "pl00_542",
+      "clip": "pl00_54b",
       "loop": true,
       "mirror": false,
-      "referenceSpeed": 0
+      "referenceSpeed": 0,
+      "intro": "",
+      "evidence": "Inspected moving native 54b preparation cycle shared for held charging; Sunward family adaptation, never a frozen pose."
     }
   ]
 }

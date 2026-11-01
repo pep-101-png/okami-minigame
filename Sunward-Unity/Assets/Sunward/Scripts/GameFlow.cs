@@ -130,6 +130,7 @@ namespace Sunward
         public void Close()
         {
             if(Health<=0){ReturnHome();return;}
+            if(Panel=="bossVictory")Player.animationView.Play("Idle_Natural",.15f,0,true);
             Panel = "";Player.Locked=false;
         }
 
@@ -276,8 +277,8 @@ namespace Sunward
             if(Sunward.Remaster.NativeHomeRoom.NearestAction(p,out var homeAction))return homeAction;
             Consider("bed", HomeLayout.Bed, 1.9f);
             Consider("mirror", HomeLayout.Mirror, 2.1f);
-            Consider("weapons", new Vector3(-6, 0, -27.5f), 3);
-            Consider("shop", new Vector3(5, 0, -27.5f), 3);
+            Consider("weapons", new Vector3(-6, 0, -33f), 3);
+            Consider("shop", new Vector3(5, 0, -33f), 3);
             Consider("arena", new Vector3(12.8f, 0, 0));
             Consider("venue:dojo", Sunward.Remaster.VillageServices.DojoDoor, 3.5f);
             Consider("venue:food", Sunward.Remaster.VillageServices.FoodDoor, 3.5f);
@@ -474,12 +475,18 @@ namespace Sunward
             Dialogue += "\n\n" + runCoins + " combat coins · " + runXp + " combat XP";
             if(!bossEncounter)Sunward.Remaster.LowerArena.TrialFinished(win);
             if(!win)ClearEnemies();
-            if(win){Close();Notify(bossEncounter?"Crimson Helm defeated · rewards saved":"Trial complete · rewards saved");}
+            if(win && bossEncounter)
+            {
+                Sunward.Remaster.LowerArena.BossDefeated();
+                SetPanel("bossVictory");Player.StopMotion();Player.animationView.Play("Bark",.12f,1.93f,true);Audio.VictoryHowl();
+            }
+            else if(win){Close();Notify("Trial complete · rewards saved");}
             else SetPanel("result");
         }
 
         public void ReturnHome()
         {
+            var digging=GetComponent<Sunward.Remaster.VillageLife>();if(digging)digging.CancelDig();
             InTrial=false;BossTrial=false;
             if(BossTransformation)BossTransformation.Cancel();
             if(Transformation)Transformation.Cancel();
