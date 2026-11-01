@@ -10,6 +10,7 @@ namespace Sunward
         public WeaponDefinition spear, sundial;
         public Transform headSocket, backSocket;
         public bool Busy => strike != null || charging || voice > 0;
+        public bool HoldingCharge=>charging && hold>.28f;
         public bool Attacking => strike != null;
         public bool TundraAir => Tundra && strike!=null && strike.clip=="Tundra_54f";
         public float FormMultiplier => nativeBody && nativeBody.Shiranui?2:1;

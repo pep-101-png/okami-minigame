@@ -46,7 +46,7 @@ static class VillageTests
     foreach(var root in GameObject.created.ToArray())
     {var arrow=root.GetComponent<PracticeArrow>();if(arrow && !root.wasDestroyed){if(Get<TrainingDummy>(arrow,"target")==dummy){Call(arrow,"Update");spawned++;}}}
    }
-   Check(sampledAttack,"Dojo actor never samples its assigned native attack");Check(dummy.contacts>=2,"Training actions never reach their dummy");Check(!archer||spawned>0,"Ranged trainees never launch arrows");
+   Check(archer?actor.CurrentSourceMotion==idle:sampledAttack,"Dojo actor does not use its correct native body action");Check(dummy.contacts>=2,"Training actions never reach their dummy");Check(!archer||spawned>0,"Ranged trainees never launch arrows");
   }
   return checks;
  }

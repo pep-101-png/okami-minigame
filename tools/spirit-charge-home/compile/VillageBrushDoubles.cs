@@ -3,7 +3,7 @@ namespace UnityEngine
  public class Collider:Object{public string name;public bool enabled;}
  public struct Ray{public Vector3 GetPoint(float distance)=>Vector3.zero;}
  public struct Plane{public Plane(Vector3 n,Vector3 p){}public bool Raycast(Ray r,out float d){d=0;return true;}}
- public struct Matrix4x4{public static Matrix4x4 identity=>new Matrix4x4();}
+ public struct Matrix4x4{public Vector3 MultiplyPoint3x4(Vector3 p)=>p;public static Matrix4x4 operator *(Matrix4x4 a,Matrix4x4 b)=>a;public static Matrix4x4 identity=>new Matrix4x4();}
  public class ScriptableObject:Object{public static T CreateInstance<T>()where T:new()=>new T();}
 }
 namespace UnityEngine.Rendering

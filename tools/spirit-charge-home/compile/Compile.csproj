@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable><OrbitSource Condition="'$(OrbitSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs</OrbitSource></PropertyGroup>
 <ItemGroup>
-<Compile Include="$(SemanticDoubles)"/><Compile Include="RebirthTests.cs"/><Compile Include="VillageTests.cs"/>
+<Compile Include="$(SemanticDoubles)"/><Compile Include="RebirthTests.cs"/><Compile Include="VillageTests.cs"/><Compile Include="FestivalTests.cs"/>
 <Compile Include="$(OrbitSource)"/>
 <Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/ValleyAudio.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/ShiranuiTransformation.cs"/>
@@ -22,5 +22,12 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageLife.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/FarmCrop.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/LowerArena.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeArcheryPose.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeHeldInstrument.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageFestival.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativePracticeAnchor.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalWeaponView.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/HomeRest.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/ProgressionData.cs"/>
 </ItemGroup>
 </Project>

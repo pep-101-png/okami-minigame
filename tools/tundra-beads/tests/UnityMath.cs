@@ -6,7 +6,7 @@ namespace UnityEngine
 {
     public class Object {public static implicit operator bool(Object o)=>o!=null;public static T Instantiate<T>(T o)where T:Object=>(T)o.MemberwiseClone();}
     public class ScriptableObject:Object{}
-    public class GameObject:Object{public SkinnedMeshRenderer[] renderers;public void SetActive(bool b){}public T[] GetComponentsInChildren<T>(bool b)=>Array.ConvertAll(renderers,r=>(T)(object)r);}
+    public class GameObject:Object{public Transform transform=new Transform();public SkinnedMeshRenderer[] renderers;public void SetActive(bool b){}public T[] GetComponentsInChildren<T>(bool b)=>Array.ConvertAll(renderers,r=>(T)(object)r);}
     [AttributeUsage(AttributeTargets.Class)]public sealed class CreateAssetMenuAttribute:Attribute {public string menuName;}
     public sealed class TextAsset:Object {public byte[] bytes;}
     public static class Resources
@@ -22,7 +22,7 @@ namespace UnityEngine
     public struct Vector3
     {
         public float x,y,z;public Vector3(float a,float b,float c){x=a;y=b;z=c;}
-        public static Vector3 zero=>new Vector3(0,0,0);public static Vector3 one=>new Vector3(1,1,1);
+        public static Vector3 up=>new Vector3(0,1,0);public static Vector3 operator +(Vector3 a,Vector3 b)=>new Vector3(a.x+b.x,a.y+b.y,a.z+b.z);public static Vector3 operator *(Vector3 a,float k)=>new Vector3(a.x*k,a.y*k,a.z*k);public static Vector3 zero=>new Vector3(0,0,0);public static Vector3 one=>new Vector3(1,1,1);
         public static Vector3 Lerp(Vector3 a,Vector3 b,float t)=>new Vector3(a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t,a.z+(b.z-a.z)*t);
     }
     public struct Quaternion
@@ -32,9 +32,9 @@ namespace UnityEngine
         public static Quaternion Slerp(Quaternion a,Quaternion b,float t)
         {var q=N.Quaternion.Slerp(new N.Quaternion(a.x,a.y,a.z,a.w),new N.Quaternion(b.x,b.y,b.z,b.w),t);return new Quaternion(q.X,q.Y,q.Z,q.W);}
     }
-    public sealed class Transform {public Vector3 localPosition,localScale;public Quaternion localRotation;public Vector3 TransformPoint(Vector3 p){var v=N.Vector3.Transform(new N.Vector3(p.x*localScale.x,p.y*localScale.y,p.z*localScale.z),new N.Quaternion(localRotation.x,localRotation.y,localRotation.z,localRotation.w));return new Vector3(localPosition.x+v.X,localPosition.y+v.Y,localPosition.z+v.Z);}}
+    public sealed class Transform {public Vector3 position{get=>localPosition;set=>localPosition=value;}public Vector3 localPosition,localScale;public Quaternion localRotation;public Vector3 TransformPoint(Vector3 p){var v=N.Vector3.Transform(new N.Vector3(p.x*localScale.x,p.y*localScale.y,p.z*localScale.z),new N.Quaternion(localRotation.x,localRotation.y,localRotation.z,localRotation.w));return new Vector3(localPosition.x+v.X,localPosition.y+v.Y,localPosition.z+v.Z);}}
     public static class Mathf
     {public static float SmoothStep(float a,float b,float t){t=Clamp01(t);return a+(b-a)*t*t*(3-2*t);}
-    public static int Max(int a,int b)=>Math.Max(a,b);public static float Clamp01(float x)=>Math.Max(0,Math.Min(1,x));public static float Repeat(float t,float n)=>t-MathF.Floor(t/n)*n;public static int FloorToInt(float x)=>(int)MathF.Floor(x);public static int Min(int a,int b)=>Math.Min(a,b);}
+    public static float Min(float a,float b)=>MathF.Min(a,b);public static float Max(float a,float b)=>MathF.Max(a,b);public static float MoveTowards(float a,float b,float step)=>MathF.Abs(a-b)<=step?b:a+MathF.Sign(b-a)*step;public static int Max(int a,int b)=>Math.Max(a,b);public static float Clamp01(float x)=>Math.Max(0,Math.Min(1,x));public static float Repeat(float t,float n)=>t-MathF.Floor(t/n)*n;public static int FloorToInt(float x)=>(int)MathF.Floor(x);public static int Min(int a,int b)=>Math.Min(a,b);}
 }
 namespace Sunward {public sealed class ProfileData {public string[] owned;public string equipped;public int coins;}}

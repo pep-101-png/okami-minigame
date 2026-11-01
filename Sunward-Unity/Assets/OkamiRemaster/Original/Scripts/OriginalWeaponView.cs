@@ -10,7 +10,8 @@ namespace Sunward.Remaster
         NativePoseBank bank;
         NativePoseBank.Clip idle, action;
         string package, family, actionState;
-        float idleTime, actionPhase, blendTime, blendLength;
+        float idleTime, actionPhase, blendTime, blendLength,chargeLift;
+        public float ChargeLift=>chargeLift;
         bool returning, extrasHidden;
         Vector3[] position,scale;
         Quaternion[] rotation;
@@ -103,15 +104,30 @@ namespace Sunward.Remaster
             if(action!=null)
             {
                 Sample(action,actionPhase*action.Duration,false,blend);
-                int count=TundraAttackRules.VisibleBeads(actionState);
-                for(int i=0;i<count;i++)points[i]=rig.Bones[i+2].TransformPoint(new Vector3(0,0,-.055f));
-                if(combat)combat.TundraBeadContacts(points,count);
+
             }
             else
             {
                 idleTime+=Time.deltaTime;Sample(idle,idleTime,true,returning?blend:1);
                 if(returning && blend>=1){returning=false;ExtraBeads(true);}
             }
+            ChargeClearance();
+            if(action!=null)
+            {
+                int count=TundraAttackRules.VisibleBeads(actionState);for(int i=0;i<count;i++)points[i]=rig.Bones[i+2].TransformPoint(new Vector3(0,0,-.055f));
+                if(combat)combat.TundraBeadContacts(points,count);
+            }
+        }
+        void ChargeClearance()
+        {
+            rig.Root.transform.localPosition=Vector3.zero;
+            if(combat && combat.HoldingCharge)
+            {
+                float low=float.PositiveInfinity;for(int i=2;i<14 && i<rig.Bones.Length;i++)low=Mathf.Min(low,rig.Bones[i].position.y);
+                chargeLift=Mathf.Max(0,combat.transform.position.y+.7f-low);
+            }
+            else chargeLift=Mathf.MoveTowards(chargeLift,0,Time.deltaTime*8);
+            rig.Root.transform.position+=Vector3.up*chargeLift;
         }
         void Sample(NativePoseBank.Clip clip,float time,bool loop,float blend)=>bank.Sample(clip,time,rig.Bones,position,rotation,scale,blend,loop);
         void OnDestroy(){if(rig!=null)rig.Dispose();}

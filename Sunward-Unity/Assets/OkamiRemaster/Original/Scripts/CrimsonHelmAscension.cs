@@ -73,7 +73,7 @@ namespace Sunward.Remaster
         void ApplyForm(int phase,bool unscaled)
         {
             if(!actor || !actor.SetCrimsonPhase(phase))
-                Debug.LogError("Crimson Helm's original phase body is unavailable. Reimport the EM11 and EM65 assets.",this);
+                Debug.LogError("Crimson Helm's original phase body is unavailable. Reimport the EM11 body and original WP19 armour assets.",this);
             if(flames){Destroy(flames.gameObject);flames=null;}
             if(lightRoot){Destroy(lightRoot);lightRoot=null;glow=null;}
             if(phase==2)return;

@@ -23,7 +23,7 @@ static class RebirthTests
    var rig=new NativePaintedRig(actor.resource,actor.transform);var bank=new NativePoseBank(actor.resource+"/Poses");Set(actor,"rig",rig);Set(actor,"bank",bank);Set(actor,"fromPosition",new Vector3[bank.BoneCount]);Set(actor,"fromScale",new Vector3[bank.BoneCount]);Set(actor,"fromRotation",Enumerable.Repeat(Quaternion.identity,bank.BoneCount).ToArray());
    typeof(OriginalActor).GetMethod("Change",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(actor,new object[]{actor.idle});Set(actor,"<Ready>k__BackingField",true);
    var boss=new EnemyBrain();Set(actor,"enemy",boss);boss.Init(game,new EnemyDefinition{id="boss",hp=145,damage=28,scale=2.75f,visual=prefab});boss.transform.position=new Vector3(35,-110,0);player.transform.position=boss.transform.position+Vector3.back*10;
-   Check(boss.BossPhase==1&&boss.AttackDamage==28&&Get<NativePaintedRig>(actor,"crimsonArmour").Root.activeSelf&&!rig.Root.activeSelf,"First phase is not the full original armour");
+   Check(boss.BossPhase==1&&boss.AttackDamage==28&&Get<NativePaintedRig>(actor,"crimsonArmour").Root.activeSelf&&rig.Root.activeSelf,"First phase is missing the real body/armour assembly");
    var director=boss.gameObject.GetComponent<CrimsonHelmAscension>();Check(Get<ParticleSystem>(director,"flames")!=null,"Full armour has no fire");
    // Repeated contacts must never turn one short flinch into a permanent stun.
    Time.time=0;int stunned=0;
@@ -62,7 +62,7 @@ static class RebirthTests
    player.input.Interact.pressedThisFrame=true;Call(lower,"Update");Check(game.homeReturns==1,"Centre mirror interaction cannot call home return");
    LowerArena.Leave();Check(!lower.mirror.gameObject.activeSelf&&beacon.wasDestroyed,"Home exit leaves victory effects/return mirror active");Call(lower,"OnDestroy");
   }
-  checks+=VillageTests.Run();
+  checks+=VillageTests.Run()+FestivalTests.Run();
   Console.WriteLine("PASS "+checks+" actual three-phase boss/native director checks, stun resistance, first/middle/final deaths, 1x/2x/4x scaling, fire/armour visibility, skip/cancel and paused motion at 15/30/60/120fps. Engine doubles, NOT Unity.");
  }
 }

@@ -71,6 +71,18 @@ static class Program
             Check(rig.Bones.Skip(8).Take(6).All(b=>Distance(b.localPosition,Vector3.zero)>.1f),"Hidden beads reappear collapsed at origin");
             view.EndAttack();
         }
+        // Exercise actual charge clearance at different player elevations; this
+        // test checks the offset driver, not Unity's hierarchy/skinned rendering.
+        var clearance=typeof(OriginalWeaponView).GetMethod("ChargeClearance",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
+        foreach(float playerY in new[]{0f,3f,-110f})
+        {
+            controller.transform.position=new Vector3(0,playerY,0);controller.HoldingCharge=true;
+            foreach(var bone in rig.Bones)bone.position=new Vector3(0,playerY-.4f,0);
+            clearance.Invoke(view,null);Check(Math.Abs(view.ChargeLift-1.1f)<.0001f,"Held beads remain below safe body height");
+            float lift=rig.Root.transform.position.y;clearance.Invoke(view,null);Check(Math.Abs(rig.Root.transform.position.y-lift)<.0001f,"Charge height accumulates every frame");
+            controller.HoldingCharge=false;clearance.Invoke(view,null);Check(view.ChargeLift>0&&view.ChargeLift<1.1f,"Charge release snaps its clearance");
+            for(int i=0;i<120;i++)clearance.Invoke(view,null);Check(view.ChargeLift==0&&rig.Root.transform.position.y==0,"Charge lift persists after release");
+        }
         var legacy=new OriginalWeaponView();legacy.Load("wp2d","rosary");legacy.BeginAttack("NativeAttack_540");legacy.AttackPhase(.5f);var legacyRig=NativePaintedRig.Last;
         Check(legacyRig.Bones.Any(b=>Distance(b.localPosition,Vector3.zero)>1),"Legacy rosary path was changed");
         foreach(var e in OriginalWeaponCatalog.All.Where(e=>e.id!="wp2e"))

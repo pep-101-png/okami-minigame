@@ -80,7 +80,7 @@ namespace Sunward
             "spear"
         };
         public UpgradeLevels upgrades = new UpgradeLevels();
-        public bool shrine;
+        public bool shrine, night;
         public string[] collectibles = Array.Empty<string>(), windflowers = Array.Empty<string>();
         public Milestones milestones = new Milestones();
     }
@@ -129,6 +129,22 @@ namespace Sunward
         }
 
         public static int MaxHp(ProfileData p) => 100 + (Level(p) - 1) * 4 + p.upgrades.vitality * 12 + (p.shrine ? 20 : 0)+Math.Max(0,Math.Min(10,p.farmVitality));
+        public static int Cap(string id){int i=Array.IndexOf(Upgrades,id);return i<0?0:Caps[i];}
+        public static string Explain(string id)
+        {
+            switch(id)
+            {
+                case "vitality":return "+12 maximum health per rank. More health lets you survive more damage.";
+                case "strength":return "+18% of base weapon damage per rank, for every weapon family.";
+                case "movement":return "+3% movement speed per rank. Rank 2 unlocks double jump.";
+                case "stamina":return "+15 maximum stamina and +1 stamina recovered per second per rank. Stamina fuels sprinting and dodging.";
+                case "energy":return "+15 maximum Ink per rank. Ink powers the brush and bark; it replenishes naturally.";
+                case "ability":return "Bark cooldown is 0.45 seconds shorter per rank. Bark costs 15 Ink and interrupts nearby normal enemies; bosses resist it.";
+                case "spear":return "+12% glaive damage per rank. Applies to Tsumugari and every other glaive.";
+                case "sundial":return "+14% reflector and rosary damage per rank. Requires Solar Flare ownership to unlock this mastery.";
+                default:return "";
+            }
+        }
         public static int Cost(ProfileData p, string id)
         {
             int i = Array.IndexOf(Upgrades, id);

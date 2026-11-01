@@ -218,6 +218,12 @@ namespace Sunward
                     if (Button("MUTE / UNMUTE", button))
                         AudioListener.volume = AudioListener.volume > 0 ? 0 : 1;
                     break;
+                case "requests":
+                    GUILayout.Label("VILLAGE REQUEST BOARD",title);
+                    var requests=game.GetComponent<Sunward.Remaster.VillageLife>();
+                    GUILayout.Label(requests.RequestDetails(),body);
+                    GUILayout.Label("Turn in completed requests at the farmer's stall, west of the animal pens. These are optional village goals, separate from weapon purchases and arena entry.",small);
+                    break;
                 case "farm":
                     GUILayout.Label("FARM SHOP · "+game.Profile.vegetables+" vegetables · "+game.Profile.praise+" Praise",body);
                     var farm=game.GetComponent<Sunward.Remaster.VillageLife>();
@@ -225,7 +231,8 @@ namespace Sunward
                     if(Button("EAT VEGETABLE · +1 health",button))farm.Eat();
                     if(Button("FARM MEAL · 5 coins · +10 health",button))farm.BuyMeal();
                     if(Button("VITALITY · "+(25+game.Profile.farmVitality*10)+" coins · permanent +1 max health",button))farm.BuyVitality();
-                    if(Button("VILLAGE RESTORATION REQUEST",button))farm.Request();
+                    GUILayout.Label(farm.RequestDetails(),body);
+                    if(game.Profile.restorationStage<3 && Button("TURN IN THIS REQUEST",button))farm.Request();
                     break;
                 case "bossVictory":
                     GUILayout.Label("CRIMSON HELM DEFEATED",title);
@@ -255,17 +262,22 @@ namespace Sunward
             GUILayout.Label("Hana · upgrades & blessings", title);
             GUILayout.Label(game.Profile.coins + " coins · permanent upgrades survive defeat.", body);
             if (Button("TARO'S WEAPON CATALOGUE →", button)) game.SetPanel("weapons");
+            if(Button("VILLAGE REQUEST BOARD · goals & rewards",button))game.SetPanel("requests");
             foreach (string id in ProgressionRules.Upgrades)
             {
-                string label=id=="spear"?"GLAIVE MASTERY":id=="sundial"?"MIRROR & ROSARY MASTERY":id.ToUpperInvariant();
-                if (Button(label + " · level " + game.Profile.upgrades.Get(id) + " · " + ProgressionRules.Cost(game.Profile, id) + " coins", button))
-                    game.Buy(id);
+                string label=id=="spear"?"GLAIVE MASTERY":id=="sundial"?"MIRROR & ROSARY MASTERY":id=="energy"?"INK CAPACITY":id=="ability"?"BARK TECHNIQUE":id.ToUpperInvariant();
+                int rank=game.Profile.upgrades.Get(id),cap=ProgressionRules.Cap(id);
+                if(rank>=cap)GUILayout.Label(label+" · "+rank+" / "+cap+" · MAXIMUM",body);
+                else if(Button(label+" · rank "+rank+" / "+cap+" · "+ProgressionRules.Cost(game.Profile,id)+" coins",button))game.Buy(id);
+                GUILayout.Label(ProgressionRules.Explain(id),small);
             }
         }
         void Weapons()
         {
             GUILayout.Label("Taro · divine instruments", title);
             GUILayout.Label(game.Profile.coins + " coins · purchased weapons stay in your save. Q cycles owned weapons in the arena.", body);
+            if(Button("VILLAGE REQUEST BOARD · goals & rewards",button))game.SetPanel("requests");
+            GUILayout.Label("Glaives: sword strikes. Reflectors: broad close-range attacks. Rosaries: bead whips with reach. Hold either attack button to charge; release to strike.",small);
             foreach (var entry in Sunward.Remaster.OriginalWeaponCatalog.All)
             {
                 bool owned = Sunward.Remaster.OriginalWeaponCatalog.Owns(game.Profile, entry.id);

@@ -21,7 +21,7 @@ namespace Sunward
     public sealed class GameFlow:UnityEngine.Object {public bool Blocked;}
     public sealed class WolfCombat:UnityEngine.Object
     {
-        public GameFlow game=new GameFlow();public int callbacks,lastCount;
+        public bool HoldingCharge;public Transform transform=new Transform();public GameFlow game=new GameFlow();public int callbacks,lastCount;
         public void TundraBeadContacts(Vector3[] points,int count){callbacks++;lastCount=count;}
     }
 }
