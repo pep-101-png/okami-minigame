@@ -30,3 +30,4 @@ Sunward-Unity/Assets/Sunward/Textures/VillageFinish/*.png -filter -diff -merge -
 Sunward-Unity/Assets/Sunward/Textures/InkWorld/*.png -filter -diff -merge -text
 
 Downloads/*.zip -filter -diff -merge -text
+Downloads/*.mp4 -filter -diff -merge -text
