@@ -17,6 +17,8 @@ namespace Sunward.Remaster
         GameFlow game;
         bool ready, performing, contacted;
         float timer, elapsed, length;
+        public bool Performing=>performing;
+        public float ActivityPhase=>performing?Mathf.Clamp01(elapsed/Mathf.Max(.01f,length)):0;
         void OnEnable(){ready=false;}
         void Update()
         {
@@ -58,7 +60,7 @@ namespace Sunward.Remaster
                 if(performing)
                 {
                     length=Mathf.Max(.6f,actor.ActivityLength(motion));elapsed=0;contacted=false;
-                    actor.PlayActivity(motion,false);timer=length;
+                    actor.PlayActivity(archer?actor.idle:motion,archer);timer=length;
                 }
                 else{actor.EndActivity();timer=archer?1.4f+Mathf.Repeat(seed,1):.55f+Mathf.Repeat(seed,.65f);}
             }

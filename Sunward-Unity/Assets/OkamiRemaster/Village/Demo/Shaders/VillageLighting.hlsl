@@ -11,6 +11,24 @@ Light VillageMainLight(float3 world)
 #endif
     return GetMainLight(coord);
 }
+// Original paint keeps its daylight look; sleep-driven night adds cool
+// moonlight and warm pools at the original festival/indoor lanterns.
+float _SunwardNight;
+float4 _SunwardFestivalLights[24];
+float3 VillageNightPaint(float3 world,float3 daylight)
+{
+    float night=_SunwardNight*step(-5,world.y);
+    if(night<.001)return daylight;
+    float3 warm=0;
+    [loop] for(int i=0;i<24;i++)
+    {
+        float4 lamp=_SunwardFestivalLights[i];
+        float radius=max(.001,lamp.w);
+        float falloff=saturate(1-distance(world,lamp.xyz)/radius)*step(.01,lamp.w);
+        warm+=float3(1,.49,.16)*falloff*falloff*.75;
+    }
+    return lerp(daylight,float3(.13,.18,.31)+warm,night);
+}
 float3 _LightDirection;
 float3 _LightPosition;
 float4 VillageShadowPosition(float3 positionOS, float3 normalOS)

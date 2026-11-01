@@ -86,6 +86,13 @@ namespace Sunward.Remaster
         {if(game.Profile.coins<5){game.Notify("A farm meal costs 5 coins");return;}if(game.Health>=game.MaxHealth){game.Notify("Health is already full");return;}game.Profile.coins-=5;game.Health=Mathf.Min(game.MaxHealth,game.Health+10);game.Save.Save();game.Notify("Fresh farm meal · +10 health");}
         public void BuyVitality()
         {int cost=25+game.Profile.farmVitality*10;if(game.Profile.farmVitality>=10 || game.Profile.coins<cost){game.Notify("Farm vitality complete or not enough coins");return;}game.Profile.coins-=cost;game.Profile.farmVitality++;game.Health=Mathf.Min(game.MaxHealth,game.Health+1);game.Save.Save();game.Notify("Farmer’s blessing · permanent maximum health +1");}
+        public string RequestDetails()
+        {
+            int stage=game.Profile.restorationStage;
+            if(stage>=3)return "Village restoration complete. All three flower beds have been restored. Thank you, Amaterasu.";
+            string goal=stage==0?"Harvest and deliver 3 vegetables.\nCarry produce in your pouch; digging ordinary ground does not create vegetables.\nProgress: "+game.Profile.vegetables+" / 3 in your pouch":stage==1?"Defeat 10 arena enemies. Previous victories count.\nProgress: "+game.Profile.kills+" / 10 enemies": "Defeat Crimson Helm in the lower arena.\nWin the upper three-wave trial first to open the shaft.\nProgress: "+(game.Profile.bossWins>0?"Complete":"Not yet defeated");
+            return "REQUEST "+(stage+1)+" / 3 · "+(stage==0?"FRESH PRODUCE":stage==1?"SAFE ROADS":"QUIET DEPTHS")+"\n"+goal+"\nTurn-in reward: 30 sun coins, 25 Praise and a restored flower bed.\nPraise records your restoration progress; it is not shop currency.";
+        }
         public void Request()
         {
             int stage=game.Profile.restorationStage;

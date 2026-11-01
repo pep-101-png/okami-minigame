@@ -25,7 +25,7 @@ Shader "Sunward/Recovered Continuous Ground"
    #pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
    #pragma multi_compile_fog
    #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-   #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
+   #include "../../Village/Demo/Shaders/VillageLighting.hlsl"
    TEXTURE2D(_GrassTex); SAMPLER(sampler_GrassTex);
    TEXTURE2D(_EarthTex); SAMPLER(sampler_EarthTex);
    TEXTURE2D(_LayoutMask); SAMPLER(sampler_LayoutMask);
@@ -64,7 +64,7 @@ Shader "Sunward/Recovered Continuous Ground"
     Light light=GetMainLight(i.shadow);
     half shade=saturate(dot(normal,light.direction));
     half3 illumination=SampleSH(normal)*.60+light.color*(.32+.48*shade)*lerp(.65,1,light.shadowAttenuation);
-    return half4(MixFog(paint*illumination,i.fog),1);
+    return half4(MixFog(paint*VillageNightPaint(i.world,illumination),i.fog),1);
    }
    ENDHLSL
   }

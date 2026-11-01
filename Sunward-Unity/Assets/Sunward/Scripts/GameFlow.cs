@@ -82,6 +82,7 @@ namespace Sunward
             Transformation=GetComponent<Sunward.Remaster.ShiranuiTransformation>();
             if(!Transformation)Transformation=gameObject.AddComponent<Sunward.Remaster.ShiranuiTransformation>();
             Transformation.game=this;
+            var festival=GetComponent<Sunward.Remaster.VillageFestival>();if(!festival)festival=gameObject.AddComponent<Sunward.Remaster.VillageFestival>();festival.game=this;
             Health = MaxHealth;
             Stamina = MaxStamina;
             Energy = MaxEnergy;
@@ -196,7 +197,7 @@ namespace Sunward
 
             if(Sunward.Remaster.LowerArena.Inside(Player.transform.position))return;
             string action = Nearest();
-            Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? "E · Lie down and sleep" : action == "mirror" ? "E · Memory mirror · save / load" : action == "weapons" ? "E · Weapons · fifteen divine instruments" : action == "shop" ? "E · Upgrades & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
+            Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? (Profile.night?"E · Sleep until morning":"E · Sleep until festival night") : action == "mirror" ? "E · Memory mirror · save / load" : action == "weapons" ? "E · Weapons · fifteen divine instruments" : action == "shop" ? "E · Upgrades & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
             if(action.StartsWith("home:"))Prompt="E · "+(action.EndsWith(":exit")?"Leave home":"Enter village home");
             if (action.StartsWith("venue:")) Prompt = Sunward.Remaster.VillageServices.Label(action,Player.transform.position);
             if (Player.input.Interact.WasPressedThisFrame() && !Home.Active)
@@ -244,7 +245,7 @@ namespace Sunward
                             int i = int.Parse(action.Substring(4));
                             Audio.Npc(i,npcObjects[i].transform.position);
                             Dialogue = npcData[i].name + "\n\n" + string.Join("\n\n", npcData[i].lines);
-                            SetPanel("dialogue");
+                            SetPanel(i==0?"weapons":i==1?"shop":"dialogue");
                         }
 
                         break;

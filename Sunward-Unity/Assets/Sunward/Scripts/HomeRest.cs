@@ -44,13 +44,14 @@ namespace Sunward
             p.animationView.Play("Sleep_Down", .1f);
             yield return new WaitForSeconds(p.animationView.ClipLength("Sleep_Down"));
             Sleeping = true;
+            var festival=game.GetComponent<Sunward.Remaster.VillageFestival>();if(festival)festival.SleepToNextTime();
             p.animationView.Play("Sleep_Loop", .1f);
             game.Health = game.MaxHealth;
             game.Stamina = game.MaxStamina;
             game.Energy = game.MaxEnergy;
             game.Profile.milestones.sleptAtHome = true;
             game.Save.Save();
-            game.Notify("A quiet dream · E or movement to wake");
+            game.Notify(game.Profile.night?"Festival night · E or movement to wake":"A new morning · E or movement to wake");
             while (!p.input.Interact.WasPressedThisFrame() && !p.input.Pause.WasPressedThisFrame() && !p.input.Jump.WasPressedThisFrame() && p.input.Move.ReadValue<Vector2>().sqrMagnitude < .1f)
                 yield return null;
             Sleeping = false;

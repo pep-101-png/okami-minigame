@@ -20,7 +20,9 @@ namespace Sunward.Remaster
         public void SetVenueVisible(bool visible){if(rig!=null)foreach(var r in rig.Root.GetComponentsInChildren<Renderer>())r.enabled=visible;}
         public string CurrentSourceMotion { get; private set; }
         NativePaintedRig rig,crimsonBody,crimsonArmour;
-        NativePoseBank crimsonBodyBank,crimsonArmourBank;
+        NativePoseBank crimsonArmourBank;
+        Vector3[] armourPosition,armourScale;Quaternion[] armourRotation;float armourTime;bool showArmour;
+        public Transform NativeBone(int index)=>Ready && rig!=null && index>=0 && index+1<rig.Bones.Length?rig.Bones[index+1]:null;
         NativePoseBank bank;
         NativePoseBank.Clip current;
         EnemyBrain enemy;
@@ -39,31 +41,35 @@ namespace Sunward.Remaster
         public bool SetCrimsonPhase(int phase)
         {
             if(rig==null || resource!="Okami/em11")return false;
-            if(crimsonBody==null){crimsonBody=rig;crimsonBodyBank=bank;}
+            crimsonBody=rig;
             if(phase==1 && crimsonArmour==null)
             {
-                crimsonArmour=new NativePaintedRig("Okami/em65",transform);
-                crimsonArmourBank=new NativePoseBank("Okami/em65/Poses");
-                if(crimsonArmour.Bones.Length!=crimsonBody.Bones.Length || crimsonArmourBank.BoneCount!=crimsonBodyBank.BoneCount)throw new InvalidOperationException("Crimson armour skeleton mismatch");
-                crimsonArmour.Root.transform.localPosition=modelOffset;
-                crimsonArmour.Root.transform.localScale=Vector3.one*modelScale;
+                // WP19 is Crimson Helm's separate armour, not EM65's beast body.
+                // Its first 32 bind bones match EM11; four extra bones animate cloth.
+                crimsonArmour=new NativePaintedRig("Okami/crimson-armour",transform);
+                crimsonArmourBank=new NativePoseBank("Okami/crimson-armour/Poses");
+                armourPosition=new Vector3[crimsonArmourBank.BoneCount];armourScale=new Vector3[crimsonArmourBank.BoneCount];armourRotation=new Quaternion[crimsonArmourBank.BoneCount];
+                for(int i=0;i<armourPosition.Length;i++){armourPosition[i]=crimsonArmour.Bones[i].localPosition;armourScale[i]=Vector3.one;armourRotation[i]=Quaternion.identity;}
+                foreach(var r in crimsonArmour.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true)){r.localBounds=new Bounds(Vector3.zero,new Vector3(32,24,32));r.updateWhenOffscreen=true;}
+                crimsonArmour.Root.transform.localPosition=modelOffset;crimsonArmour.Root.transform.localScale=Vector3.one*modelScale;
             }
-            var next=phase==1?crimsonArmour:crimsonBody;
-            if(next!=rig)
-            {
-                for(int i=0;i<rig.Bones.Length;i++){next.Bones[i].localPosition=rig.Bones[i].localPosition;next.Bones[i].localRotation=rig.Bones[i].localRotation;next.Bones[i].localScale=rig.Bones[i].localScale;}
-                rig.Root.SetActive(false);rig=next;bank=phase==1?crimsonArmourBank:crimsonBodyBank;Change(idle);
-            }
+            showArmour=phase==1;if(crimsonArmour!=null)crimsonArmour.Root.SetActive(showArmour);
             CrimsonSurface=null;
             foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
             {
-                var parts=renderer.sharedMesh.name.Split('-');
-                if(parts.Length<2 || !int.TryParse(parts[1],out int group))continue;
-                renderer.enabled=phase==1?group==0:phase==3?group==1:group==0 || group==2;
+                var parts=renderer.sharedMesh.name.Split('-');if(parts.Length<2 || !int.TryParse(parts[1],out int group))continue;
+                renderer.enabled=phase==3?group==1:group==0 || group==2;
                 renderer.localBounds=new Bounds(Vector3.zero,new Vector3(32,24,32));renderer.updateWhenOffscreen=true;
                 if(renderer.enabled && (!CrimsonSurface || renderer.sharedMesh.vertexCount>CrimsonSurface.sharedMesh.vertexCount))CrimsonSurface=renderer;
             }
-            rig.Root.SetActive(true);return CrimsonSurface;
+            rig.Root.SetActive(true);if(showArmour)SampleArmour(0);return CrimsonSurface;
+        }
+        void SampleArmour(float dt)
+        {
+            if(!showArmour || crimsonArmour==null)return;
+            armourTime+=dt;crimsonArmourBank.Sample(crimsonArmourBank.Find("wp19_000"),armourTime,crimsonArmour.Bones,armourPosition,armourRotation,armourScale,1,true);
+            for(int i=0;i<=32;i++)
+            {crimsonArmour.Bones[i].localPosition=rig.Bones[i].localPosition;crimsonArmour.Bones[i].localRotation=rig.Bones[i].localRotation;crimsonArmour.Bones[i].localScale=rig.Bones[i].localScale;}
         }
         public string seatedArmMotion;
         public float seatedArmWeight=.7f;
@@ -177,6 +183,7 @@ namespace Sunward.Remaster
                 sampleTime = current.Duration * Mathf.Lerp(start, end, enemy.VisualStateProgress);
             }
             bank.Sample(current, sampleTime, rig.Bones, fromPosition, fromRotation, fromScale, Mathf.Clamp01(blendTime / .12f), loop);
+            SampleArmour(dt);
             if(!string.IsNullOrEmpty(seatedArmMotion) && activity!=null)
                 bank.SampleArmRotations(bank.Find(seatedArmMotion),time,rig.Bones,seatedArmWeight);
         }

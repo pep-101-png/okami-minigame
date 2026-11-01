@@ -42,7 +42,8 @@ namespace Sunward.Remaster
             }
             if(count==0)return;
             centre/=count;
-            root.localPosition=Vector3.Scale(new Vector3(-centre.x,-low,-centre.z),root.localScale);
+            var groundedOffset=root.localPosition;groundedOffset.x=actor.modelOffset.x;groundedOffset.z=actor.modelOffset.z;
+            groundedOffset.y=Mathf.Lerp(groundedOffset.y,-low*root.localScale.y,1-Mathf.Exp(-Time.deltaTime*20));root.localPosition=groundedOffset;
         }
         void OnDestroy(){if(baked)Destroy(baked);}
     }

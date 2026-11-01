@@ -16,7 +16,7 @@ Shader "VillageDemo/Original Farm Animals" {
   appdata deform(appdata v) {  return v; }
   v2f vert(appdata v) { v=deform(v);v2f o;o.pos=TransformObjectToHClip(v.vertex.xyz);o.world=TransformObjectToWorld(v.vertex.xyz);o.normal=TransformObjectToWorldNormal(v.normal);o.uv=v.uv;o.color=v.color;return o; }
   half4 frag(v2f i):SV_Target { half4 c=tex2D(_MainTex,i.uv)*_Color;clip(c.a-_Cutoff);Light light=VillageMainLight(i.world);
-   float shade=saturate(dot(normalize(i.normal),light.direction));c.rgb*=i.color.rgb*(.82+.18*shade*light.shadowAttenuation);c.a=1;return c; }
+   float shade=saturate(dot(normalize(i.normal),light.direction));c.rgb*=i.color.rgb*VillageNightPaint(i.world,(.82+.18*shade*light.shadowAttenuation).xxx);c.a=1;return c; }
   ENDHLSL
   Pass {
    Name "PaintedForward"
