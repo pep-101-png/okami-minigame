@@ -50,10 +50,10 @@ namespace Sunward
                 return;
             if(cinematic)
             {
-                Vector3 offset=Quaternion.Euler(cinematicPitch,cinematicYaw,0)*Vector3.back*cinematicDistance;
-                if(Physics.SphereCast(cinematicFocus,.18f,offset.normalized,out var obstruction,cinematicDistance,1<<6,QueryTriggerInteraction.Ignore))
-                    offset=offset.normalized*Mathf.Max(.4f,obstruction.distance-.2f);
-                virtualCamera.transform.SetPositionAndRotation(cinematicFocus+offset,Quaternion.LookRotation(-offset));
+                Vector3 cinematicOffset=Quaternion.Euler(cinematicPitch,cinematicYaw,0)*Vector3.back*cinematicDistance;
+                if(Physics.SphereCast(cinematicFocus,.18f,cinematicOffset.normalized,out var obstruction,cinematicDistance,1<<6,QueryTriggerInteraction.Ignore))
+                    cinematicOffset=cinematicOffset.normalized*Mathf.Max(.4f,obstruction.distance-.2f);
+                virtualCamera.transform.SetPositionAndRotation(cinematicFocus+cinematicOffset,Quaternion.LookRotation(-cinematicOffset));
                 return;
             }
             var input = target.input;
