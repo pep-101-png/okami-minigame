@@ -92,7 +92,7 @@ namespace Sunward
  {public int snaps;public bool cinematic,savedIgnoreTimeScale;public Unity.Cinemachine.CinemachineBrain brain;public Unity.Cinemachine.CinemachineCamera virtualCamera=new Unity.Cinemachine.CinemachineCamera();public float savedFov,cinematicYaw,cinematicPitch,cinematicDistance,yaw=37,pitch=25,distance=15;public Vector3 cinematicFocus;public WolfMotor target;public void SnapFocus(){snaps++;}}
  public sealed partial class GameFlow:MonoBehaviour
  {
-  public bool Blocked,CinematicActive,InTrial,BossTrial,waiting;public ProfileData Profile=new ProfileData();public Remaster.ShiranuiTransformation Transformation=new Remaster.ShiranuiTransformation();
+  public Remaster.CrimsonHelmAscension BossTransformation;public bool Blocked,CinematicActive,InTrial,BossTrial,waiting;public ProfileData Profile=new ProfileData();public Remaster.ShiranuiTransformation Transformation=new Remaster.ShiranuiTransformation();
   public WolfMotor Player;public WolfCombat Combat=new WolfCombat();public Valley valley=new Valley();public HomeRest Home=new HomeRest();public Remaster.VillageServices Services=new Remaster.VillageServices();
   public float Health,Stamina,Energy,hitUntil;public int MaxHealth=>120;public float MaxStamina=>100;public float MaxEnergy=>80;public string Panel="result",Dialogue;public GameObject barrier;public int clears,projectiles,runCoins=10,runXp=20;public SaveStore Save=new SaveStore();
   public void ClearProjectiles(){projectiles++;}public void SetPanel(string panel){Panel=panel;}public void ClearEnemies(){clears++;}public void Close(){Panel="";Player.Locked=false;}public void Notify(string s){}
@@ -101,6 +101,7 @@ namespace Sunward
 namespace Sunward.Remaster
 {
  using UnityEngine;
+ public class CrimsonHelmAscension:Object{public int cancels;public void Cancel(){cancels++;}}
  public class ShiranuiTransformation:Object{public int cancels;public void Begin(NativeAmaterasu player){}public void Cancel(){cancels++;}}
  public class VillageServices:Object{public int cancels;public void CancelRest(){cancels++;}}
  public static partial class LowerArena{public static int leaves;public static void Leave(){leaves++;}public static void TrialFinished(bool win){}}

@@ -27,7 +27,10 @@ namespace Sunward
         public bool BossTrial { get; private set; }
         public string Panel { get; private set; } = "welcome";
         public Sunward.Remaster.ShiranuiTransformation Transformation { get; private set; }
-        public bool CinematicActive => Transformation && Transformation.Playing;
+        public Sunward.Remaster.CrimsonHelmAscension BossTransformation { get; private set; }
+        public void TrackBossTransformation(Sunward.Remaster.CrimsonHelmAscension sequence){BossTransformation=sequence;}
+        public void ReleaseBossTransformation(Sunward.Remaster.CrimsonHelmAscension sequence){if(BossTransformation==sequence)BossTransformation=null;}
+        public bool CinematicActive => (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing);
         public bool Blocked => CinematicActive || Panel != "" || (Brush && Brush.Drawing);
         public Sunward.Remaster.CelestialBrush Brush { get; private set; }
         public int Wave { get; private set; }
@@ -140,7 +143,7 @@ namespace Sunward
             Time.timeScale = (CinematicActive || Panel == "pause" || (Brush && Brush.Drawing)) ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
             if(CinematicActive)
             {
-                if(Player.input.Pause.WasPressedThisFrame())Transformation.Skip();
+                if(Player.input.Pause.WasPressedThisFrame()){if(BossTransformation && BossTransformation.Playing)BossTransformation.Skip();else if(Transformation)Transformation.Skip();}
                 return;
             }
             if (Time.unscaledTime > messageUntil)
@@ -450,6 +453,7 @@ namespace Sunward
             if (!InTrial)
                 return;
             bool bossEncounter=BossTrial;InTrial=false;BossTrial=false;waiting=false;
+            if(BossTransformation)BossTransformation.Cancel();
             Player.Locked=Health<=0;
             Combat.Cancel();
             Combat.Rest(false);
@@ -470,12 +474,14 @@ namespace Sunward
             Dialogue += "\n\n" + runCoins + " combat coins · " + runXp + " combat XP";
             if(!bossEncounter)Sunward.Remaster.LowerArena.TrialFinished(win);
             if(!win)ClearEnemies();
-            if(win && !bossEncounter)Dialogue+="\n\nThe centre floor breaks open. Crimson Helm waits below, or you can return home.";
-            SetPanel("result");
+            if(win){Close();Notify(bossEncounter?"Crimson Helm defeated · rewards saved":"Trial complete · rewards saved");}
+            else SetPanel("result");
         }
 
         public void ReturnHome()
         {
+            InTrial=false;BossTrial=false;
+            if(BossTransformation)BossTransformation.Cancel();
             if(Transformation)Transformation.Cancel();
             if(Home)Home.CancelRest();
             if(Services)Services.CancelRest();
@@ -502,11 +508,12 @@ namespace Sunward
             Notify("Welcome home · the next trial grows stronger.");
         }
 
-        public void Projectile(Vector3 position, Vector3 direction, float damage)
+        public void Projectile(Vector3 position, Vector3 direction, float damage,bool flame=false)
         {
             var obj = new GameObject("Painted ink bolt");
             obj.transform.position = position;
             Fx.AttachProjectile(obj);
+            if(flame)Sunward.Remaster.OriginalAtmosphere.Create("Flame",obj.transform,Vector3.zero,12,.55f,.4f,.05f,.08f);
             var bolt = obj.AddComponent<InkProjectile>();
             bolt.game = this;
             bolt.direction = direction;

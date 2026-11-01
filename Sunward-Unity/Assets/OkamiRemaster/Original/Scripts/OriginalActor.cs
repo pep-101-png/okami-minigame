@@ -30,7 +30,23 @@ namespace Sunward.Remaster
         bool moving, running;
         string activity;
         float activityRate=1;
-        bool activityLoop;
+        bool activityLoop,cinematicActivity;
+        public void BeginBossCinematic(){cinematicActivity=true;activity="em65_032";activityLoop=false;Change(activity);time=0;}
+        public void EndBossCinematic(){cinematicActivity=false;if(Ready)EndActivity();}
+        public SkinnedMeshRenderer CrimsonSurface { get; private set; }
+        public bool SetCrimsonFlame(bool flame)
+        {
+            if(rig==null || resource!="Okami/em11")return false;
+            CrimsonSurface=null;
+            foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
+            {
+                var parts=renderer.sharedMesh.name.Split('-');
+                if(parts.Length<2 || !int.TryParse(parts[1],out int group))continue;
+                renderer.enabled=flame?group==1:group==0 || group==2;
+                if(group==1)CrimsonSurface=renderer;
+            }
+            return CrimsonSurface;
+        }
         public string seatedArmMotion;
         public float seatedArmWeight=.7f;
         public float ActivityLength(string name) => bank!=null && bank.Find(name)!=null?bank.Find(name).Duration:0;
@@ -72,6 +88,7 @@ namespace Sunward.Remaster
                 bank.Sample(current, 0, rig.Bones, fromPosition, fromRotation, fromScale, 1, true);
                 if(enemy)foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
                 {renderer.localBounds=new Bounds(Vector3.zero,new Vector3(32,24,32));renderer.updateWhenOffscreen=true;}
+                if(resource=="Okami/em11")SetCrimsonFlame(false);
                 rig.Root.SetActive(true);
                 Ready = true;
             }
@@ -101,7 +118,8 @@ namespace Sunward.Remaster
             if (!Ready) return;
             Vector3 delta = transform.position - previous;
             delta.y = 0; previous = transform.position;
-            float dt = Time.deltaTime;
+            bool bossCinematic=cinematicActivity && game && game.BossTransformation && game.BossTransformation.Playing;
+            float dt = bossCinematic?Time.unscaledDeltaTime:Time.deltaTime;
             float speed = delta.magnitude < 1 ? delta.magnitude / Mathf.Max(dt, .0001f) : 0;
             filteredSpeed=Mathf.Lerp(filteredSpeed,speed,1-Mathf.Exp(-dt*10));
             moving=filteredSpeed>(moving?.08f:.15f);
@@ -121,15 +139,16 @@ namespace Sunward.Remaster
                 else if (running && !string.IsNullOrEmpty(run)) selected = run;
             }
             if(!enemy && !string.IsNullOrEmpty(activity)){selected=activity;loop=activityLoop;}
+            if(cinematicActivity && activity!=null){selected=activity;loop=false;duration=0;}
             bool gaitChange=enemy && state=="approach" && lastState==state && selected!=CurrentSourceMotion && current!=null;
             float phase=gaitChange?Mathf.Repeat(time,current.Duration)/current.Duration:0;
             Change(selected);
             if(gaitChange)time=phase*current.Duration;
             if (state != lastState) { time = 0; lastState = state; }
             blendTime += dt;
-            if ((!game || !game.Blocked) && (!enemy || !enemy.VisualStunned))
+            if ((bossCinematic || !game || !game.Blocked) && (!enemy || !enemy.VisualStunned))
             {
-                float pace=duration>.001f?current.Duration/duration:enemy && moving?Mathf.Clamp(filteredSpeed/(running && run!=walk?4.5f:2),.4f,1.5f):!string.IsNullOrEmpty(activity)?activityRate:1;
+                float pace=bossCinematic?1:duration>.001f?current.Duration/duration:enemy && moving?Mathf.Clamp(filteredSpeed/(running && run!=walk?4.5f:2),.4f,1.5f):!string.IsNullOrEmpty(activity)?activityRate:1;
                 time+=dt*pace;
             }
             float sampleTime = time;

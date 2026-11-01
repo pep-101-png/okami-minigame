@@ -10,7 +10,7 @@ namespace UnityEngine
  public class ParticleSystem:Object
  {
   public GameObject gameObject=new GameObject();public Transform transform=>gameObject.transform;
-  public struct MainModule{public bool useUnscaledTime;public Color startColor;}
+  public struct MainModule{public bool useUnscaledTime;public Color startColor;public MinMaxCurve startSize;}public struct MinMaxCurve{public MinMaxCurve(float a,float b){}}public struct ShapeModule{public bool enabled;public ParticleSystemShapeType shapeType;public SkinnedMeshRenderer skinnedMeshRenderer;public ParticleSystemMeshShapeType meshShapeType;}public ShapeModule shape=>new ShapeModule();
   public struct EmissionModule{public float rateOverTime;}
   public MainModule main=>new MainModule();public EmissionModule emission=>new EmissionModule();public void Emit(int count){}
  }

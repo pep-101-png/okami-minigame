@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-<PropertyGroup><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable><OrbitSource Condition="'$(OrbitSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs</OrbitSource></PropertyGroup>
+<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable><OrbitSource Condition="'$(OrbitSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs</OrbitSource></PropertyGroup>
 <ItemGroup>
-<Compile Include="$(SemanticDoubles)"/>
+<Compile Include="$(SemanticDoubles)"/><Compile Include="RebirthTests.cs"/>
 <Compile Include="$(OrbitSource)"/>
 <Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/ValleyAudio.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/ShiranuiTransformation.cs"/>
@@ -9,5 +9,10 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/TundraAttackRules.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Player/NativeAmaterasu.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Player/NativePoseBank.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/EnemyBrain.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalActor.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/CrimsonHelmAscension.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/CrimsonPhaseState.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/SpectralTendrils.cs"/>
 </ItemGroup>
 </Project>
