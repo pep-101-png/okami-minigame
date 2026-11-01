@@ -7,6 +7,12 @@ namespace Sunward.Remaster
     {
         public GameFlow game;
         public bool Resting { get; private set; }
+        public void CancelRest()
+        {
+            if(!Resting)return;
+            StopAllCoroutines();Resting=false;
+            if(game && game.Player)game.Player.Locked=false;
+        }
         public static readonly Vector3 DojoDoor=new Vector3(0,.5f,15.1f), FoodDoor=new Vector3(4.8f,.4f,-15), Mat=new Vector3(8,.4f,-13.4f), Farmer=new Vector3(-51,0,20);
         public static bool InDojo(Vector3 p)=>Mathf.Abs(p.x)<6.5f && p.z>16.2f && p.z<33.6f && p.y>-2 && p.y<6;
         public static bool InFoodHouse(Vector3 p)=>Mathf.Abs(p.x-10)<4.4f && Mathf.Abs(p.z+15)<3.6f && p.y>-2 && p.y<6;

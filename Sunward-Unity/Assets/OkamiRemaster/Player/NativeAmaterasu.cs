@@ -159,7 +159,14 @@ namespace Sunward.Remaster
             rate = duration > 0 ? length / duration : 1;
             Show(true); Apply(); return true;
         }
-        public void HoldChargePose(){if(Ready && binding!=null && binding.state.StartsWith("NativeCharge_"))rate=0;}
+        public void HoldChargePose()
+        {
+            if(!Ready || binding==null)return;
+            // Tundra has an authored breathing/charging loop. Never stop its
+            // playback clock just because the player is holding an attack.
+            if(binding.state==TundraAttackRules.Charge){rate=1;return;}
+            if(binding.state.StartsWith("NativeCharge_"))rate=0;
+        }
 
         public float ClipLength(string state)
         {
@@ -190,19 +197,30 @@ namespace Sunward.Remaster
         void LateUpdate()
         {
             if (!Ready || !Visible || clip == null) return;
-            if (motor && motor.game && motor.game.Blocked) return;
+            bool cinematic=motor && motor.game && motor.game.CinematicActive;
+            if (motor && motor.game && motor.game.Blocked && !cinematic) return;
             if (UnityEngine.InputSystem.Keyboard.current != null && UnityEngine.InputSystem.Keyboard.current.pKey.wasPressedThisFrame)
-                ToggleShiranui();
-            if(!tundraClock)time += Time.deltaTime * rate;
-            blendTime += Time.deltaTime;
+                if(motor && motor.game && motor.game.Transformation)motor.game.Transformation.Begin(this);
+            float dt=cinematic?Time.unscaledDeltaTime:Time.deltaTime;
+            if(!tundraClock)time += dt * rate;
+            blendTime += dt;
             Apply();
         }
-        void ToggleShiranui()
+        public bool PrepareShiranui()
         {
             try
             {
-                if (shiranuiRig == null) shiranuiRig = new NativePaintedRig("Okami/pl0d", transform);
-                if (shiranuiRig.Bones.Length != bank.BoneCount) throw new InvalidOperationException("Shiranui skeleton does not match the native player motion bank");
+                if(shiranuiRig==null)shiranuiRig=new NativePaintedRig("Okami/pl0d",transform);
+                if(shiranuiRig.Bones.Length!=bank.BoneCount)throw new InvalidOperationException("Shiranui skeleton does not match the native player motion bank");
+                return true;
+            }
+            catch(Exception error){Debug.LogError("Original Shiranui appearance could not load: "+error.Message,this);return false;}
+        }
+        public bool ApplyShiranuiForm()
+        {
+            if(!PrepareShiranui())return false;
+            try
+            {
                 var previous = rig; Shiranui = !Shiranui; rig = Shiranui ? shiranuiRig : amaterasuRig;
                 for (int i = 0; i < rig.Bones.Length; i++)
                 {
@@ -216,9 +234,9 @@ namespace Sunward.Remaster
                     if (index >= 0) socket.bone = rig.Bones[index];
                 }
                 previous.Root.SetActive(false); rig.Root.SetActive(true);
-                if (motor && motor.game) motor.game.Notify(Shiranui ? "Shiranui · original karmic appearance · P to return" : "Amaterasu · P to test Shiranui");
+                return true;
             }
-            catch (Exception error) { Debug.LogError("Original Shiranui appearance could not load: " + error.Message, this); }
+            catch (Exception error) { Debug.LogError("Original Shiranui appearance could not load: " + error.Message, this);return false; }
         }
         void Apply()
         {

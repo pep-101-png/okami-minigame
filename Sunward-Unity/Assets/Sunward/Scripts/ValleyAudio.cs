@@ -12,6 +12,7 @@ namespace Sunward
         readonly Dictionary<string,List<AudioClip>> bank = new Dictionary<string,List<AudioClip>>();
         readonly Dictionary<string,int> next = new Dictionary<string,int>();
         AudioSource effects, music, wind, river;
+        AudioSource tundraSwing,tundraImpact,transformationVoice,transformationBurst;
         readonly List<AudioSource> worldSources = new List<AudioSource>();
         readonly Dictionary<AudioSource,Vector2> worldLevels = new Dictionary<AudioSource,Vector2>();
         Transform ears;
@@ -25,6 +26,8 @@ namespace Sunward
         {
             effects = Source(.60f, false); music = Source(.45f, true);
             wind = Source(.22f, true); river = Source(.25f, true);
+            tundraSwing=Source(1,false);tundraImpact=Source(1,false);
+            transformationVoice=Source(1,false);transformationBurst=Source(1,false);
             var data = Resources.Load<TextAsset>("Okami/NativeAudio");
             if (!data) { Debug.LogError("Original sound bank bindings are missing.", this); return; }
             foreach (var entry in JsonUtility.FromJson<CueBank>(data.text).cues)
@@ -80,13 +83,13 @@ namespace Sunward
             {
                 float distance=Vector3.Distance(p,source.transform.position);
                 if(distance>=level.x)source.Stop();
-                else source.volume=level.y*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/level.x));
+                else source.volume=game.CinematicActive?0:level.y*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/level.x));
             }
             string desired=game.InTrial?"battle":Sunward.Remaster.VillageServices.InFoodHouse(p)?"housemusic":"town";
             if(desired!=musicCue){musicCue=desired;Loop(music,desired);}
             river.volume=.25f*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15);
             wind.volume=Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f;
-            music.volume=Mathf.MoveTowards(music.volume,game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.3f);
+            music.volume=Mathf.MoveTowards(music.volume,game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f);
             Vector3 delta=p-lastPosition;delta.y=0;lastPosition=p;
             if(game.Blocked || game.Player.Locked || delta.magnitude>2)return;
             if(game.Player.Grounded && game.Player.Speed>.2f)
@@ -112,6 +115,33 @@ namespace Sunward
             if(!Allow(id,id=="step"?.16f:id=="water"?.35f:.07f))return;
             var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="step"?.0225f:id=="jump"?.175f:id=="water"?.035f:id=="land"?.12f:id=="dash"?.35f:.45f);
         }
+        public void TundraAttack(bool charged,bool heavy)
+        {
+            // One bounded voice per swing. Avoid stacking the generic impact
+            // and heavy fanfare over this instrument's own ice sounds.
+            tundraSwing.Stop();tundraSwing.clip=Clip(charged?"weapon-wp2e-heavy":"weapon-wp2e");
+            tundraSwing.volume=charged?.22f:heavy?.30f:.26f;
+            if(tundraSwing.clip)tundraSwing.Play();
+        }
+        public void TundraContact()
+        {
+            if(tundraImpact.isPlaying)return;
+            tundraImpact.clip=Clip("weapon-wp2e-heavy");tundraImpact.volume=.15f;
+            if(tundraImpact.clip)tundraImpact.Play();
+        }
+        public void StopTundra(){if(tundraSwing)tundraSwing.Stop();}
+        public void TransformationVoice()
+        {
+            transformationVoice.Stop();transformationVoice.clip=Clip("transformation-voice");transformationVoice.volume=.38f;
+            if(transformationVoice.clip)transformationVoice.Play();
+        }
+        public void TransformationBurst()
+        {
+            transformationBurst.Stop();transformationBurst.clip=Clip("weapon-wp2e-heavy");transformationBurst.volume=.28f;
+            if(transformationBurst.clip)transformationBurst.Play();
+        }
+        public void StopTransformation()
+        {if(transformationVoice)transformationVoice.Stop();if(transformationBurst)transformationBurst.Stop();}
         public bool World(string cue,Vector3 position,float range=10,float volume=.65f)
         {
             if(!game || !game.Player || game.Blocked)return false;
@@ -150,7 +180,7 @@ namespace Sunward
         public void Enemy(string role,Vector3 position)
         {
             int index=Array.IndexOf(new[]{"wisp","reed","ranged","heavy","elite","boss"},role);
-            if(index>=0)World("enemy"+index,position,12,.55f);
+            if(index>=0)World("enemy"+index,position,12,.32f);
         }
     }
 }

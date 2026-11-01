@@ -17,6 +17,7 @@ namespace Sunward
         string lastPanel = "";
         void Update()
         {
+            if(game && game.CinematicActive){activate=false;return;}
             if (!game || !game.Blocked)
                 return;
             if (lastPanel != game.Panel)
@@ -98,7 +99,7 @@ namespace Sunward
 
         void OnGUI()
         {
-            if (!game || game.Save == null)
+            if (!game || game.Save == null || game.CinematicActive)
                 return;
             Styles();
             GUI.color = Color.white;
@@ -228,7 +229,7 @@ namespace Sunward
                     break;
                 case "result":
                     GUILayout.Label(game.Dialogue, title);
-                    if(game.Health>0 && game.Profile.wins>0 && Button("EXPLORE THE LOWER ARENA →",button)){game.Close();game.Notify("Jump through the broken centre floor · the mirror below returns you home.");}
+                    if(game.Health>0 && game.Profile.wins>0 && Button(Sunward.Remaster.LowerArena.Inside(game.Player.transform.position)?"EXPLORE THE CHAMBER →":"EXPLORE THE LOWER ARENA →",button)){game.Close();game.Notify(Sunward.Remaster.LowerArena.Inside(game.Player.transform.position)?"E near the memory mirror returns you home.":"Jump through the broken centre floor · the mirror below returns you home.");}
                     if (Button("RETURN HOME →", button))
                         game.ReturnHome();
                     break;

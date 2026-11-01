@@ -80,6 +80,12 @@ namespace Sunward.Remaster
             return p;
         }
         public static void TrialStarted(){if(instance)instance.ApplyOpen(false,false);}
+        public static void Leave()
+        {
+            if(!instance)return;
+            instance.encounterStarted=false;
+            instance.ApplyOpen(false,false);
+        }
         public static void TrialFinished(bool won)
         {
             if(!instance)return;
@@ -121,7 +127,9 @@ namespace Sunward.Remaster
             if(!Inside(p)||game.Blocked)return;
             if(p.y<FloorY-12){game.Player.Recover(Centre+Vector3.up*1.2f);return;}
             if(!encounterStarted && p.y<FloorY+2 && !game.InTrial){encounterStarted=true;game.StartBossTrial();}
-            bool near=mirror && Vector3.Distance(p,mirror.position)<3.2f;
+            // Interact from the walkable floor, rather than requiring the
+            // player's feet to reach the decorative mirror's elevated pivot.
+            bool near=mirror && new Vector2(p.x-mirror.position.x,p.z-mirror.position.z).magnitude<3.8f && Mathf.Abs(p.y-mirror.position.y)<8;
             game.WorldPrompt(near?"E · Return home through the memory mirror":"Crimson Helm’s chamber · E at the mirror returns home");
             if(near && game.Player.input.Interact.WasPressedThisFrame())game.ReturnHome();
         }

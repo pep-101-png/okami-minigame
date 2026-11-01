@@ -1,0 +1,28 @@
+{
+  "source": "data_pc/se/pl/pl00.ses",
+  "sourceBankSHA256": "dc6b8e3ecb13e17e44ff6aabf90781126f8fd4a9b36ab6bf1ba427cf94abe9c4",
+  "stream": 13,
+  "sourceStreamSHA256": "c4df2fd464e5da65b89ac8584e85f06cede44858b6966ff72c306a69e4166632",
+  "output": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/transformation-voice-pl00-13.wav",
+  "outputSHA256": "bc7fb2603c89d69c20927f4bb08035c4876631af4f2321603f140fc545e2c674",
+  "assignment": "Original player-bank sound adapted to the transformation. Original named sound event / exact howl classification not independently confirmed; no Wesnoth/synthesized voice used.",
+  "conversion": {
+    "sourceVersion": "0x408",
+    "frameScalesDecrypted": true,
+    "frames": 1128,
+    "reference": "vgmstream Okami type-8 frame-scale decoder",
+    "decoded": {
+      "rmsDBFS": -12.666,
+      "peak": 1.0,
+      "clippedFraction": 0.00012467
+    },
+    "output": {
+      "rmsDBFS": -23.0,
+      "peak": 0.304337,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -10.334,
+    "seconds": 2.256,
+    "clearADX_SHA256": "c4d3004236bcff97f3b6ce6a295d7f64c68d67cc164251561ba960511e22b274"
+  }
+}

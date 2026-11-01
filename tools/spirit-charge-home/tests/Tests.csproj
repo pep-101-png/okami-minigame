@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable></PropertyGroup>
+<ItemGroup>
+<Compile Include="Program.cs"/><Compile Include="RuntimeDoubles.cs"/><Compile Include="$(MethodFixtures)"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Player/NativeAmaterasu.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Player/NativePoseBank.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/TundraAttackRules.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/TransformationTimeline.cs"/>
+</ItemGroup>
+</Project>
