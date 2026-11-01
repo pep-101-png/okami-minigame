@@ -18,7 +18,8 @@ namespace Sunward.Remaster
         public const float FloorY=-110, Radius=31;
         public static readonly Vector3 Centre=new Vector3(35,FloorY,0);
         public bool Unlocked { get; private set; }
-        bool open, encounterStarted;
+        bool open, encounterStarted,victory;
+        GameObject victoryBeacon;
         float collapse=-1;
         Vector3[] fragmentPositions;
         Quaternion[] fragmentRotations;
@@ -44,6 +45,7 @@ namespace Sunward.Remaster
                 if(mist){var main=mist.main;main.startColor=new Color(.34f,.19f,.22f,.32f);}
 
             }
+            if(mirror)mirror.gameObject.SetActive(false);
             Unlocked=game && game.Profile.wins>0;
             ApplyOpen(false,false);
         }
@@ -79,11 +81,36 @@ namespace Sunward.Remaster
             Vector2 d=new Vector2(p.x-35,p.z);if(d.magnitude>Radius-.8f){d=d.normalized*(Radius-.8f);p.x=35+d.x;p.z=d.y;}
             return p;
         }
+        public static void BossDefeated()
+        {
+            if(!instance || !instance.mirror || instance.victory)return;
+            instance.victory=true;
+            instance.mirror.position=Centre+Vector3.up*.3f;instance.mirror.gameObject.SetActive(true);
+            var root=new GameObject("Victory mirror · descending spirit beacon");root.transform.SetParent(instance.chamber.transform,false);instance.victoryBeacon=root;
+            root.transform.position=Centre+Vector3.up*14;
+            var light=root.AddComponent<Light>();light.type=LightType.Spot;light.range=22;light.spotAngle=34;light.intensity=160;light.color=new Color(.65f,.85f,1);root.transform.rotation=Quaternion.Euler(90,0,0);
+            var surface=Resources.Load<Material>("Okami/Effects/SpiritRadiance");var art=Resources.Load<Texture2D>("Okami/Effects/SpiritGlow");
+            if(surface && art)
+            {
+                var beam=root.AddComponent<LineRenderer>();beam.positionCount=2;beam.useWorldSpace=true;
+                beam.SetPosition(0,Centre+Vector3.up*16);beam.SetPosition(1,Centre+Vector3.up*.35f);beam.startWidth=.5f;beam.endWidth=3.2f;
+                beam.startColor=new Color(.7f,1.1f,1.7f,.2f);beam.endColor=new Color(1.2f,1.6f,2.2f,.45f);
+                beam.sharedMaterial=new Material(surface){mainTexture=art};root.AddComponent<OriginalParticleMaterial>();
+            }
+            OriginalAtmosphere.Create("SpiritGlow",instance.mirror,Vector3.up*1.2f,18,.45f,1.6f,.12f,1.3f);
+            var halo=new GameObject("Victory mirror warm light");halo.transform.SetParent(root.transform,false);halo.transform.position=Centre+Vector3.up*2;
+            var glow=halo.AddComponent<Light>();glow.type=LightType.Point;glow.range=10;glow.intensity=20;glow.color=new Color(.6f,.8f,1);
+        }
+        void ResetVictory()
+        {
+            victory=false;if(victoryBeacon)Destroy(victoryBeacon);victoryBeacon=null;
+            if(mirror){foreach(var particles in mirror.GetComponentsInChildren<ParticleSystem>())Destroy(particles.gameObject);mirror.gameObject.SetActive(false);}
+        }
         public static void TrialStarted(){if(instance)instance.ApplyOpen(false,false);}
         public static void Leave()
         {
             if(!instance)return;
-            instance.encounterStarted=false;
+            instance.encounterStarted=false;instance.ResetVictory();
             instance.ApplyOpen(false,false);
         }
         public static void TrialFinished(bool won)
@@ -129,8 +156,8 @@ namespace Sunward.Remaster
             if(!encounterStarted && p.y<FloorY+2 && !game.InTrial){encounterStarted=true;game.StartBossTrial();}
             // Interact from the walkable floor, rather than requiring the
             // player's feet to reach the decorative mirror's elevated pivot.
-            bool near=mirror && new Vector2(p.x-mirror.position.x,p.z-mirror.position.z).magnitude<3.8f && Mathf.Abs(p.y-mirror.position.y)<8;
-            game.WorldPrompt(near?"E · Return home through the memory mirror":"Crimson Helm’s chamber · E at the mirror returns home");
+            bool near=victory && mirror && new Vector2(p.x-mirror.position.x,p.z-mirror.position.z).magnitude<3.8f && Mathf.Abs(p.y-mirror.position.y)<8;
+            game.WorldPrompt(near?"E · Return home through the memory mirror":victory?"Crimson Helm defeated":"Crimson Helm · phase "+(game.BossTrial?"battle":"chamber"));
             if(near && game.Player.input.Interact.WasPressedThisFrame())game.ReturnHome();
         }
         void OnDestroy(){if(instance==this)instance=null;if(upperGround)upperGround.enabled=true;}

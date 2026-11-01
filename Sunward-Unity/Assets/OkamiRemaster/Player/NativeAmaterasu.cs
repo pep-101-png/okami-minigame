@@ -162,10 +162,9 @@ namespace Sunward.Remaster
         public void HoldChargePose()
         {
             if(!Ready || binding==null)return;
-            // Tundra has an authored breathing/charging loop. Never stop its
-            // playback clock just because the player is holding an attack.
-            if(binding.state==TundraAttackRules.Charge){rate=1;return;}
-            if(binding.state.StartsWith("NativeCharge_"))rate=0;
+            // Every family keeps the inspected native preparation motion moving;
+            // holding an attack must never stop its skeletal playback clock.
+            if(binding.state.StartsWith("NativeCharge_")){tundraClock=false;rate=1;}
         }
 
         public float ClipLength(string state)
@@ -197,7 +196,7 @@ namespace Sunward.Remaster
         void LateUpdate()
         {
             if (!Ready || !Visible || clip == null) return;
-            bool cinematic=motor && motor.game && motor.game.CinematicActive;
+            bool cinematic=motor && motor.game && (motor.game.CinematicActive || motor.game.Panel=="bossVictory");
             if (motor && motor.game && motor.game.Blocked && !cinematic) return;
             if (UnityEngine.InputSystem.Keyboard.current != null && UnityEngine.InputSystem.Keyboard.current.pKey.wasPressedThisFrame)
                 if(motor && motor.game && motor.game.Transformation)motor.game.Transformation.Begin(this);
@@ -246,6 +245,13 @@ namespace Sunward.Remaster
             {
                 if (t < intro.Duration) { selected = intro; loop = false; }
                 else t -= intro.Duration;
+            }
+            if(binding.state.StartsWith("NativeCharge_"))
+            {
+                // Ease back and forth inside the original moving preparation
+                // segment. No held frame and no hard wrap to its recovery pose.
+                float pulse=(1-Mathf.Cos(time*Mathf.PI/Mathf.Max(.1f,clip.Duration)))*.5f;
+                t=clip.Duration*Mathf.Lerp(.18f,.72f,pulse);loop=false;
             }
             if(tundraClock)
             {

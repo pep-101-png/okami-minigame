@@ -1,13 +1,17 @@
 namespace Sunward.Remaster
 {
-    public enum CrimsonStage { Armoured, Rising, Flame, Defeated }
+    public enum CrimsonStage { ArmouredFlame, SheddingArmour, Armoured, Rising, Flame, Defeated }
     public sealed class CrimsonPhaseState
     {
-        public CrimsonStage Stage { get; private set; }
+        public int Phase { get; private set; }=1;
+        public bool Transitioning { get; private set; }
+        bool defeated;
+        public CrimsonStage Stage=>defeated?CrimsonStage.Defeated:Transitioning?(Phase==1?CrimsonStage.SheddingArmour:CrimsonStage.Rising):Phase==1?CrimsonStage.ArmouredFlame:Phase==2?CrimsonStage.Armoured:CrimsonStage.Flame;
         public bool TryRise()
-        {if(Stage!=CrimsonStage.Armoured)return false;Stage=CrimsonStage.Rising;return true;}
-        public void Ignite(){if(Stage==CrimsonStage.Rising)Stage=CrimsonStage.Flame;}
-        public void Defeat(){if(Stage==CrimsonStage.Flame)Stage=CrimsonStage.Defeated;}
-        public float DamageMultiplier=>Stage==CrimsonStage.Flame?2:1;
+        {if(defeated || Transitioning || Phase>=3)return false;Transitioning=true;return true;}
+        public void Ignite(){if(Transitioning){Phase++;Transitioning=false;}}
+        public void Defeat(){if(Phase==3 && !Transitioning)defeated=true;}
+        public float ScaleMultiplier=>1<<(Phase-1);
+        public float DamageMultiplier=>ScaleMultiplier;
     }
 }

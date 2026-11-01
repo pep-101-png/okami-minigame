@@ -6,11 +6,13 @@ namespace Sunward.Remaster
     {
         public GameFlow game;
         public Transform[] restorationBeds;
-        public Vector3 weaponsShop=new Vector3(-6,0,-27.5f),upgradeShop=new Vector3(5,0,-27.5f);
+        public Vector3 weaponsShop=new Vector3(-6,0,-33f),upgradeShop=new Vector3(5,0,-33f);
         FarmCrop[] crops;
         FarmCrop carried;
         GameObject carriedVisual;
         bool digging;
+        Coroutine digRoutine;
+        public void CancelDig(){if(!digging)return;if(digRoutine!=null)StopCoroutine(digRoutine);digRoutine=null;digging=false;if(game && game.Player)game.Player.Locked=game.Health<=0;}
         int appliedStage=-1;
         void Start(){
             foreach(var obj in game.npcObjects)
@@ -42,7 +44,9 @@ namespace Sunward.Remaster
             FarmCrop nearest=null;float best=1.8f;
             if(!carried)foreach(var crop in crops)if(!crop.Harvested){float d=Vector3.Distance(crop.transform.position,p);if(d<best){best=d;nearest=crop;}}
             if(nearest)
-            {game.WorldPrompt("F · dig up vegetable · carry it to farmer or H to eat");if(game.Player.input.Dig.WasPressedThisFrame())StartCoroutine(Dig(nearest));}
+            {game.WorldPrompt("F · dig up vegetable · carry it to farmer or H to eat");if(game.Player.input.Dig.WasPressedThisFrame())digRoutine=StartCoroutine(Dig(nearest));}
+            else if(!carried && game.Player.input.Dig.WasPressedThisFrame() && !NativeHomeRoom.At(p) && !VillageServices.InDojo(p) && !VillageServices.InFoodHouse(p))
+            {digRoutine=StartCoroutine(Dig(null));}
             else if(carried)game.WorldPrompt(farmer<3?"E · farmer shop / sell carried vegetable":"Carrying produce · H eat (+1 health) · G stow in pouch");
             else if(Vector3.Distance(p,new Vector3(GardenPond.X+3.7f,.02f,GardenPond.Z))<2)
             {game.WorldPrompt("E · Rest beside the steaming pond");if(game.Player.input.Interact.WasPressedThisFrame())game.Services.RestAt(new Vector3(GardenPond.X+3.7f,.04f,GardenPond.Z),270);}
@@ -50,12 +54,14 @@ namespace Sunward.Remaster
         IEnumerator Dig(FarmCrop crop)
         {
             if(!game.Player.Grounded)yield break;
-            Vector3 direction=crop.transform.position-game.Player.transform.position;direction.y=0;if(direction.sqrMagnitude>.01f)game.Player.transform.rotation=Quaternion.LookRotation(direction);
+            Vector3 direction=crop?crop.transform.position-game.Player.transform.position:game.Player.transform.forward;direction.y=0;if(direction.sqrMagnitude>.01f)game.Player.transform.rotation=Quaternion.LookRotation(direction);
             digging=true;game.Player.Locked=true;game.Combat.Cancel();game.Player.animationView.Play("Dig",.15f,1.25f,true);
             yield return new WaitForSeconds(.65f);
+            var dust=OriginalAtmosphere.Create("Cloud",null,game.Player.transform.position+game.Player.transform.forward*.7f+Vector3.up*.08f,0,.28f,.65f,.3f,.2f);
+            if(dust){var main=dust.main;main.startColor=new Color(.45f,.32f,.18f,.6f);dust.Emit(9);Destroy(dust.gameObject,1.5f);}
             if(game.Health>0 && crop && !crop.Harvested)
             {crop.Harvest();carried=crop;game.Profile.vegetables++;game.Save.Save();CreateCarry();game.Audio.Cue("land");CelestialBrush.Burst("Leaf",crop.transform.position,8,.25f);}
-            yield return new WaitForSeconds(.6f);game.Player.Locked=false;digging=false;game.Player.animationView.Play("Idle_Natural",.15f,0,true);
+            yield return new WaitForSeconds(.6f);game.Player.Locked=game.Health<=0;digging=false;digRoutine=null;game.Player.animationView.Play("Idle_Natural",.15f,0,true);
         }
         void CreateCarry()
         {
@@ -89,6 +95,7 @@ namespace Sunward.Remaster
             if(stage==0){game.Profile.vegetables-=3;Drop();}
             game.Profile.restorationStage++;game.Profile.praise+=25;game.Profile.coins+=30;game.Save.Save();game.Notify("Request complete · +25 Praise, +30 coins · village flowers restored");
         }
+        void OnDisable(){CancelDig();}
         void OnDestroy(){if(carriedVisual)Destroy(carriedVisual);}
     }
 }

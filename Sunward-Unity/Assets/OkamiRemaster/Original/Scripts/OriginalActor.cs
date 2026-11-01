@@ -19,7 +19,8 @@ namespace Sunward.Remaster
         public bool Ready { get; private set; }
         public void SetVenueVisible(bool visible){if(rig!=null)foreach(var r in rig.Root.GetComponentsInChildren<Renderer>())r.enabled=visible;}
         public string CurrentSourceMotion { get; private set; }
-        NativePaintedRig rig;
+        NativePaintedRig rig,crimsonBody,crimsonArmour;
+        NativePoseBank crimsonBodyBank,crimsonArmourBank;
         NativePoseBank bank;
         NativePoseBank.Clip current;
         EnemyBrain enemy;
@@ -34,18 +35,35 @@ namespace Sunward.Remaster
         public void BeginBossCinematic(){cinematicActivity=true;activity="em65_032";activityLoop=false;Change(activity);time=0;}
         public void EndBossCinematic(){cinematicActivity=false;if(Ready)EndActivity();}
         public SkinnedMeshRenderer CrimsonSurface { get; private set; }
-        public bool SetCrimsonFlame(bool flame)
+        public bool SetCrimsonFlame(bool flame)=>SetCrimsonPhase(flame?3:2);
+        public bool SetCrimsonPhase(int phase)
         {
             if(rig==null || resource!="Okami/em11")return false;
+            if(crimsonBody==null){crimsonBody=rig;crimsonBodyBank=bank;}
+            if(phase==1 && crimsonArmour==null)
+            {
+                crimsonArmour=new NativePaintedRig("Okami/em65",transform);
+                crimsonArmourBank=new NativePoseBank("Okami/em65/Poses");
+                if(crimsonArmour.Bones.Length!=crimsonBody.Bones.Length || crimsonArmourBank.BoneCount!=crimsonBodyBank.BoneCount)throw new InvalidOperationException("Crimson armour skeleton mismatch");
+                crimsonArmour.Root.transform.localPosition=modelOffset;
+                crimsonArmour.Root.transform.localScale=Vector3.one*modelScale;
+            }
+            var next=phase==1?crimsonArmour:crimsonBody;
+            if(next!=rig)
+            {
+                for(int i=0;i<rig.Bones.Length;i++){next.Bones[i].localPosition=rig.Bones[i].localPosition;next.Bones[i].localRotation=rig.Bones[i].localRotation;next.Bones[i].localScale=rig.Bones[i].localScale;}
+                rig.Root.SetActive(false);rig=next;bank=phase==1?crimsonArmourBank:crimsonBodyBank;Change(idle);
+            }
             CrimsonSurface=null;
             foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
             {
                 var parts=renderer.sharedMesh.name.Split('-');
                 if(parts.Length<2 || !int.TryParse(parts[1],out int group))continue;
-                renderer.enabled=flame?group==1:group==0 || group==2;
-                if(group==1)CrimsonSurface=renderer;
+                renderer.enabled=phase==1?group==0:phase==3?group==1:group==0 || group==2;
+                renderer.localBounds=new Bounds(Vector3.zero,new Vector3(32,24,32));renderer.updateWhenOffscreen=true;
+                if(renderer.enabled && (!CrimsonSurface || renderer.sharedMesh.vertexCount>CrimsonSurface.sharedMesh.vertexCount))CrimsonSurface=renderer;
             }
-            return CrimsonSurface;
+            rig.Root.SetActive(true);return CrimsonSurface;
         }
         public string seatedArmMotion;
         public float seatedArmWeight=.7f;
@@ -88,7 +106,7 @@ namespace Sunward.Remaster
                 bank.Sample(current, 0, rig.Bones, fromPosition, fromRotation, fromScale, 1, true);
                 if(enemy)foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
                 {renderer.localBounds=new Bounds(Vector3.zero,new Vector3(32,24,32));renderer.updateWhenOffscreen=true;}
-                if(resource=="Okami/em11")SetCrimsonFlame(false);
+                if(resource=="Okami/em11")SetCrimsonPhase(enemy?enemy.BossPhase:2);
                 rig.Root.SetActive(true);
                 Ready = true;
             }
@@ -163,6 +181,6 @@ namespace Sunward.Remaster
                 bank.SampleArmRotations(bank.Find(seatedArmMotion),time,rig.Bones,seatedArmWeight);
         }
 
-        void OnDestroy() { if (rig != null) rig.Dispose(); }
+        void OnDestroy() { if(crimsonBody!=null){crimsonBody.Dispose();if(crimsonArmour!=null)crimsonArmour.Dispose();}else if(rig!=null)rig.Dispose(); }
     }
 }

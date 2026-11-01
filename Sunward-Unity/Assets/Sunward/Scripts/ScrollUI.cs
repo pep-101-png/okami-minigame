@@ -99,7 +99,7 @@ namespace Sunward
 
         void OnGUI()
         {
-            if (!game || game.Save == null || game.CinematicActive)
+            if (!game || game.Save == null || game.CinematicActive || (game.Brush && game.Brush.Drawing))
                 return;
             Styles();
             GUI.color = Color.white;
@@ -127,7 +127,7 @@ namespace Sunward
             {
                 DrawPaper(new Rect(w * .5f - 250, 20, 500, 64));
                 GUILayout.BeginArea(new Rect(w * .5f - 236, 26, 472, 58));
-                GUILayout.Label("CRIMSON HELM · THE HOLLOW BELL · " + (boss.BossRising ? "REBIRTH" : boss.FlamePhase ? "FLAME PHASE" : "ARMOURED"), body);
+                GUILayout.Label("CRIMSON HELM · THE HOLLOW BELL · " + ("PHASE "+boss.BossPhase+" / 3 · "+(boss.BossRising?"TRANSFORMING":boss.BossPhase==1?"BURNING ARMOUR":boss.FlamePhase?"SKELETAL INFERNO":"ARMOUR SHATTERED")), body);
                 Bar(470, boss.Hp / boss.MaxHp);
                 GUILayout.EndArea();
             }
@@ -137,7 +137,7 @@ namespace Sunward
             GUI.Label(new Rect(34, h - 57, w - 68, 28), game.InTrial ? "LMB/J light · RMB/L heavy · hold to charge · R brush · Q weapon · B bark · K dodge · Space jump · Esc pause" : "WASD move · Shift sprint · Ctrl walk · Space jump · E interact · R brush · F dig · G stow · H eat · Tab upgrades", small);
             if (game.InTrial && GUI.Button(new Rect(w - 160, h - 140, 140, 34), "RETREAT", button))
                 game.Finish(false);
-            if (!game.Blocked)
+            if (game.Panel=="")
                 return;
             float pw = Mathf.Min(700, w - 40);
             var panel = new Rect((w - pw) * .5f, 150, pw, h - 270);
@@ -226,6 +226,11 @@ namespace Sunward
                     if(Button("FARM MEAL · 5 coins · +10 health",button))farm.BuyMeal();
                     if(Button("VITALITY · "+(25+game.Profile.farmVitality*10)+" coins · permanent +1 max health",button))farm.BuyVitality();
                     if(Button("VILLAGE RESTORATION REQUEST",button))farm.Request();
+                    break;
+                case "bossVictory":
+                    GUILayout.Label("CRIMSON HELM DEFEATED",title);
+                    GUILayout.Label("Three forms overcome. The chamber is yours.\n\n"+game.Dialogue,body);
+                    if(Button("CONTINUE",button))game.Close();
                     break;
                 case "result":
                     GUILayout.Label(game.Dialogue, title);

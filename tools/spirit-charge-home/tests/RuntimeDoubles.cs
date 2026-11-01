@@ -46,7 +46,7 @@ namespace UnityEngine
  }
  public static class Mathf
  {
-  public const float PI=MathF.PI;public static float Clamp01(float x)=>Math.Clamp(x,0,1);public static float Clamp(float x,float a,float b)=>Math.Clamp(x,a,b);
+  public static float Cos(float x)=>MathF.Cos(x);public const float PI=MathF.PI;public static float Clamp01(float x)=>Math.Clamp(x,0,1);public static float Clamp(float x,float a,float b)=>Math.Clamp(x,a,b);
   public static float Repeat(float t,float n)=>t-MathF.Floor(t/n)*n;public static int FloorToInt(float x)=>(int)MathF.Floor(x);public static int Min(int a,int b)=>Math.Min(a,b);
   public static float Min(float a,float b)=>Math.Min(a,b);public static float Max(float a,float b)=>Math.Max(a,b);public static float Abs(float x)=>Math.Abs(x);
   public static float LerpAngle(float a,float b,float t)=>a+(Repeat(b-a+180,360)-180)*Clamp01(t);public static float Sqrt(float x)=>MathF.Sqrt(x);public static float Exp(float x)=>MathF.Exp(x);public static float Lerp(float a,float b,float t)=>a+(b-a)*t;public static float SmoothStep(float a,float b,float t){t=Clamp01(t);return Lerp(a,b,t*t*(3-2*t));}
@@ -85,14 +85,14 @@ namespace Sunward
  public sealed partial class ValleyAudio:Object
  {
   public AudioSource tundraSwing=new AudioSource(),tundraImpact=new AudioSource(),transformationVoice=new AudioSource(),transformationBurst=new AudioSource();
-  AudioClip Clip(string cue)=>new AudioClip{name=cue};
+  public void VictoryHowl(){}AudioClip Clip(string cue)=>new AudioClip{name=cue};
  }
  public class HomeRest:Object{public int cancels;public void CancelRest(){cancels++;}}
  public partial class OrbitCamera:Object
  {public int snaps;public bool cinematic,savedIgnoreTimeScale;public Unity.Cinemachine.CinemachineBrain brain;public Unity.Cinemachine.CinemachineCamera virtualCamera=new Unity.Cinemachine.CinemachineCamera();public float savedFov,cinematicYaw,cinematicPitch,cinematicDistance,yaw=37,pitch=25,distance=15;public Vector3 cinematicFocus;public WolfMotor target;public void SnapFocus(){snaps++;}}
  public sealed partial class GameFlow:MonoBehaviour
  {
-  public Remaster.CrimsonHelmAscension BossTransformation;public bool Blocked,CinematicActive,InTrial,BossTrial,waiting;public ProfileData Profile=new ProfileData();public Remaster.ShiranuiTransformation Transformation=new Remaster.ShiranuiTransformation();
+  public ValleyAudio Audio=new ValleyAudio();public Remaster.CrimsonHelmAscension BossTransformation;public bool Blocked,CinematicActive,InTrial,BossTrial,waiting;public ProfileData Profile=new ProfileData();public Remaster.ShiranuiTransformation Transformation=new Remaster.ShiranuiTransformation();
   public WolfMotor Player;public WolfCombat Combat=new WolfCombat();public Valley valley=new Valley();public HomeRest Home=new HomeRest();public Remaster.VillageServices Services=new Remaster.VillageServices();
   public float Health,Stamina,Energy,hitUntil;public int MaxHealth=>120;public float MaxStamina=>100;public float MaxEnergy=>80;public string Panel="result",Dialogue;public GameObject barrier;public int clears,projectiles,runCoins=10,runXp=20;public SaveStore Save=new SaveStore();
   public void ClearProjectiles(){projectiles++;}public void SetPanel(string panel){Panel=panel;}public void ClearEnemies(){clears++;}public void Close(){Panel="";Player.Locked=false;}public void Notify(string s){}
@@ -102,9 +102,10 @@ namespace Sunward.Remaster
 {
  using UnityEngine;
  public class CrimsonHelmAscension:Object{public int cancels;public void Cancel(){cancels++;}}
+ public class VillageLife:Object{public void CancelDig(){}}
  public class ShiranuiTransformation:Object{public int cancels;public void Begin(NativeAmaterasu player){}public void Cancel(){cancels++;}}
  public class VillageServices:Object{public int cancels;public void CancelRest(){cancels++;}}
- public static partial class LowerArena{public static int leaves;public static void Leave(){leaves++;}public static void TrialFinished(bool win){}}
+ public static partial class LowerArena{public static void BossDefeated(){}public static int leaves;public static void Leave(){leaves++;}public static void TrialFinished(bool win){}}
  public sealed class NativePaintedRig:IDisposable
  {
   public GameObject Root=new GameObject();public Transform[] Bones;
