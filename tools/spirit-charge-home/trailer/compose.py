@@ -8,14 +8,14 @@ cues=[('npc0-0.wav',4.6,.12),('weapon-wp2e-0.wav',7.38,.30),('weapon-wp2e-heavy-
 cmd=['ffmpeg','-hide_banner','-loglevel','warning','-y','-framerate','24','-start_number','0','-i',str(args.frames/'frame-%04d.png'),'-ss','8','-i',str(music)]
 for name,_,_ in cues:cmd+=['-i',str(audio/name)]
 font='/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf';sans='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
-video="[0:v]hqdn3d=1:1:2:2,drawbox=x=0:y=0:w=iw:h=38:color=black@.9:t=fill,drawbox=x=0:y=ih-38:w=iw:h=38:color=black@.9:t=fill"
+video="[0:v]split=3[early][walk][late];[early]trim=start=0:end=3.5,setpts=PTS-STARTPTS[lead];[walk]trim=start=3.5:end=5.6,setpts=(PTS-STARTPTS)*3.5/2.1,fps=24,trim=duration=3.5,setpts=PTS-STARTPTS[walkslow];[late]trim=start=7:end=15,setpts=PTS-STARTPTS[tail];[lead][walkslow][tail]concat=n=3:v=1:a=0[cut];[cut]hqdn3d=1:1:2:2,drawbox=x=0:y=0:w=iw:h=38:color=black@.9:t=fill,drawbox=x=0:y=ih-38:w=iw:h=38:color=black@.9:t=fill"
 def title(text,size,y,enable):
  return f",drawtext=fontfile={font}:text='{text}':fontcolor=white:fontsize={size}:x=(w-tw)/2:y={y}:shadowcolor=black@.65:shadowx=2:shadowy=2:enable='{enable}'"
 video+=title('WINDFLOWER VILLAGE',34,86,'between(t,0.5,2.8)')
 video+=title('TUNDRA BEADS',23,620,'between(t,7.25,10.7)')
 video+=title('SHIRANUI',29,610,'between(t,11.5,13.3)')
 video+=title('SUNWARD',66,280,'gte(t,13.5)')+title('Windflower Village',24,370,'gte(t,13.5)')
-video+=f",drawtext=fontfile={sans}:text='CINEMATIC PREVIEW · ŌKAMI FAN PROJECT':fontcolor=white@.8:fontsize=16:x=(w-tw)/2:y=h-29,fade=t=in:st=0:d=0.3,fade=t=out:st=14.6:d=0.4,format=yuv420p[v]"
+video+=f",drawtext=fontfile={sans}:text='CINEMATIC PREVIEW · ŌKAMI FAN PROJECT':fontcolor=white@.8:fontsize=16:x=(w-tw)/2:y=h-29,fade=t=in:st=0:d=0.3,fade=t=out:st=14.6:d=0.4,tpad=stop_mode=clone:stop_duration=0.1,trim=duration=15,format=yuv420p[v]"
 filters=[video,"[1:a]atrim=duration=15,asetpts=PTS-STARTPTS,volume='if(between(t,11,13.6),.32,.62)':eval=frame,afade=t=in:d=0.4[music]"]
 labels=['[music]']
 for i,(_,start,volume) in enumerate(cues,2):
