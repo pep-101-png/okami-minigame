@@ -435,6 +435,16 @@ namespace Sunward
                 Finish(false);
         }
 
+        void ClearBarrier()
+        {
+            // The original wind boundary is a particle system, not a mesh.
+            // Its emitter owns its material cleanup. Never dereference or
+            // destroy a shared mesh asset while ending a trial.
+            var previous=barrier;
+            barrier=null;
+            if(previous){previous.SetActive(false);Destroy(previous);}
+        }
+
         public void Finish(bool win)
         {
             if (!InTrial)
@@ -443,11 +453,7 @@ namespace Sunward
             Player.Locked=Health<=0;
             Combat.Cancel();
             Combat.Rest(false);
-            if (barrier)
-            {
-                Destroy(barrier.GetComponent<MeshFilter>().sharedMesh);
-                Destroy(barrier);
-            }
+            ClearBarrier();
 
             if (win)
             {
@@ -475,7 +481,7 @@ namespace Sunward
             if(Services)Services.CancelRest();
             ClearEnemies();
             InTrial = false;BossTrial=false;waiting=false;Player.Locked=false;
-            if(barrier){Destroy(barrier.GetComponent<MeshFilter>().sharedMesh);Destroy(barrier);}
+            ClearBarrier();
             Combat.Cancel();
             // Returning must not depend on reloading an optional weapon visual.
             // Resolve the surface directly; the underground arena no longer

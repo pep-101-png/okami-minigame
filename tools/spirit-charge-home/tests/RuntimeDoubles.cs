@@ -6,7 +6,7 @@ using N=System.Numerics;
 namespace UnityEngine
 {
  public class Object
- {public static implicit operator bool(Object x)=>x!=null;public static void Destroy(Object x){}public static T FindFirstObjectByType<T>()where T:class=>MonoBehaviour.CameraInstance as T;}
+ {public static implicit operator bool(Object x)=>x!=null;public bool wasDestroyed;public static int destroyedObjects;public static void Destroy(Object x){if(x!=null){x.wasDestroyed=true;destroyedObjects++;}}public static T FindFirstObjectByType<T>()where T:class=>MonoBehaviour.CameraInstance as T;}
  [AttributeUsage(AttributeTargets.Class)]public class DefaultExecutionOrder:Attribute{public DefaultExecutionOrder(int n){}}
  public class MonoBehaviour:Object
  {
@@ -17,7 +17,7 @@ namespace UnityEngine
  {
   public Transform transform;public bool activeSelf;public SkinnedMeshRenderer[] renderers=Array.Empty<SkinnedMeshRenderer>();
   public GameObject(string n=""){transform=new Transform();transform.gameObject=this;}
-  public void SetActive(bool b){activeSelf=b;}public T GetComponent<T>()where T:new()=>new T();
+  public void SetActive(bool b){activeSelf=b;}readonly System.Collections.Generic.Dictionary<Type,object> components=new System.Collections.Generic.Dictionary<Type,object>();public T AddComponent<T>()where T:new(){var c=new T();components[typeof(T)]=c;return c;}public T GetComponent<T>()where T:class=>components.TryGetValue(typeof(T),out var c)?c as T:null;
   public T[] GetComponentsInChildren<T>(bool b=false)=>renderers.Select(x=>(T)(object)x).ToArray();
  }
  public class Renderer:Object{public bool enabled;}
