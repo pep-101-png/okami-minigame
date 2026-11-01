@@ -24,7 +24,7 @@ namespace Sunward
         Strike strike;
         float elapsed, hold, grace, sourceAttackDuration;
         readonly Vector3[] previousBeads=new Vector3[12];
-        bool havePreviousBeads,tundraSoundPending;float previousBeadPhase;
+        bool havePreviousBeads,tundraSoundPending,tundraImpactPlayed;float previousBeadPhase;
         int chain;
         bool heavy, queued, queuedHeavy, charging;
         readonly AttackSequence sequence = new AttackSequence();
@@ -63,6 +63,7 @@ namespace Sunward
         public void Cancel()
         {
             strike = null;havePreviousBeads=false;tundraSoundPending=false;
+            if(Tundra && game && game.Audio)game.Audio.StopTundra();
             if(nativeBody)nativeBody.EndTundraAction();
             if(originalView)originalView.EndAttack();
             charging = false;
@@ -79,7 +80,7 @@ namespace Sunward
             float length=nativeBody && nativeBody.Ready?nativeBody.ClipLength(next.clip):next.duration;
             if(originalView)length=Mathf.Max(length,originalView.AttackLength(next.clip));
             strike=new Strike {clip=next.clip,duration=Mathf.Max(.1f,length/FormMultiplier),damage=next.damage,range=next.range,arc=next.arc,start=next.start,end=next.end,lunge=next.lunge,stagger=next.stagger};
-            elapsed = 0;sourceAttackDuration=length;havePreviousBeads=false;previousBeadPhase=0;
+            elapsed = 0;sourceAttackDuration=length;havePreviousBeads=false;previousBeadPhase=0;tundraImpactPlayed=false;
             hit.Clear();
             dummyHits.Clear();
             charging = false;
@@ -132,7 +133,7 @@ namespace Sunward
                 elapsed += dt;
                 float p = elapsed / strike.duration;
                 if(Tundra && nativeBody)nativeBody.SetTundraPhase(p,sourceAttackDuration);
-                if(Tundra && tundraSoundPending && p>=.1f){tundraSoundPending=false;game.Audio.Cue("weapon-wp2e"+(heavy?"-heavy":""));}
+                if(Tundra && tundraSoundPending && p>=.08f){tundraSoundPending=false;game.Audio.TundraAttack(strike.clip==Sunward.Remaster.TundraAttackRules.Cast,heavy);}
                 if (p > (Tundra?.06f:.25f) && (!Tundra || !queued) && (motor.input.Light.WasPressedThisFrame() || motor.input.Heavy.WasPressedThisFrame()))
                 {
                     queued = true;
@@ -254,7 +255,8 @@ namespace Sunward
                     if(frost){var main=frost.main;main.startColor=new Color(.5f,.8f,1,.65f);frost.Emit(5);Destroy(frost.gameObject,1);}
                 }
                 if(originalWeapon.family=="reflector")Sunward.Remaster.CelestialBrush.Burst(originalWeapon.resource=="wp24"?"Flame":"SpiritGlow",e.transform.position+Vector3.up,8,.45f);
-                game.Audio.Cue(heavy ? "heavy-impact" : originalWeapon.family=="reflector" ? "flame-impact" : "impact");
+                if(Tundra){if(!tundraImpactPlayed){tundraImpactPlayed=true;if(strike.clip!=Sunward.Remaster.TundraAttackRules.Cast)game.Audio.TundraContact();}}
+                else game.Audio.Cue(heavy ? "heavy-impact" : originalWeapon.family=="reflector" ? "flame-impact" : "impact");
                 game.HitPause(heavy ? .065f : .04f);
         }
         // Called after native body sockets and bead skinning have sampled the

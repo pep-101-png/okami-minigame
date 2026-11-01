@@ -26,7 +26,9 @@ namespace Sunward
         public bool InTrial { get; private set; }
         public bool BossTrial { get; private set; }
         public string Panel { get; private set; } = "welcome";
-        public bool Blocked => Panel != "" || (Brush && Brush.Drawing);
+        public Sunward.Remaster.ShiranuiTransformation Transformation { get; private set; }
+        public bool CinematicActive => Transformation && Transformation.Playing;
+        public bool Blocked => CinematicActive || Panel != "" || (Brush && Brush.Drawing);
         public Sunward.Remaster.CelestialBrush Brush { get; private set; }
         public int Wave { get; private set; }
         public string Prompt { get; private set; } = "";
@@ -74,6 +76,9 @@ namespace Sunward
             Services = GetComponent<Sunward.Remaster.VillageServices>();
             if (!Services) Services = gameObject.AddComponent<Sunward.Remaster.VillageServices>();
             Services.game = this;
+            Transformation=GetComponent<Sunward.Remaster.ShiranuiTransformation>();
+            if(!Transformation)Transformation=gameObject.AddComponent<Sunward.Remaster.ShiranuiTransformation>();
+            Transformation.game=this;
             Health = MaxHealth;
             Stamina = MaxStamina;
             Energy = MaxEnergy;
@@ -132,7 +137,12 @@ namespace Sunward
 
         void Update()
         {
-            Time.timeScale = (Panel == "pause" || (Brush && Brush.Drawing)) ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
+            Time.timeScale = (CinematicActive || Panel == "pause" || (Brush && Brush.Drawing)) ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
+            if(CinematicActive)
+            {
+                if(Player.input.Pause.WasPressedThisFrame())Transformation.Skip();
+                return;
+            }
             if (Time.unscaledTime > messageUntil)
                 Message = "";
             if (Player.input.Pause.WasPressedThisFrame() && !Home.Active)
@@ -147,6 +157,11 @@ namespace Sunward
                 SetPanel(Panel == "" ? "shop" : "");
             if (Blocked)
                 return;
+            if(Health<=0)
+            {
+                if(InTrial)Finish(false);else ReturnHome();
+                return;
+            }
             if (Services && Services.Resting) return;
             Enemies.RemoveAll(e => !e);
             if (InTrial)
@@ -387,6 +402,10 @@ namespace Sunward
                 if (e)
                     Destroy(e.gameObject);
             Enemies.Clear();
+            ClearProjectiles();
+        }
+        void ClearProjectiles()
+        {
             foreach (var b in FindObjectsByType<InkProjectile>(FindObjectsSortMode.None))
                 Destroy(b.gameObject);
         }
@@ -422,7 +441,8 @@ namespace Sunward
                 return;
             bool bossEncounter=BossTrial;InTrial=false;BossTrial=false;waiting=false;
             Player.Locked=Health<=0;
-            Combat.Equip();
+            Combat.Cancel();
+            Combat.Rest(false);
             if (barrier)
             {
                 Destroy(barrier.GetComponent<MeshFilter>().sharedMesh);
@@ -439,7 +459,7 @@ namespace Sunward
             else
                 Profile.defeats++;
             Save.Save();
-            Combat.Cancel();
+            ClearProjectiles();
             Dialogue = win ? (bossEncounter?"Crimson Helm falls.\n\nThe depths are quiet.":"The upper trial is complete.\n\nThe seal below has opened.") : "Your spirit endures.\n\nEarned currency and permanent growth are safe.";
             Dialogue += "\n\n" + runCoins + " combat coins · " + runXp + " combat XP";
             if(!bossEncounter)Sunward.Remaster.LowerArena.TrialFinished(win);
@@ -450,17 +470,29 @@ namespace Sunward
 
         public void ReturnHome()
         {
+            if(Transformation)Transformation.Cancel();
+            if(Home)Home.CancelRest();
+            if(Services)Services.CancelRest();
             ClearEnemies();
             InTrial = false;BossTrial=false;waiting=false;Player.Locked=false;
             if(barrier){Destroy(barrier.GetComponent<MeshFilter>().sharedMesh);Destroy(barrier);}
             Combat.Cancel();
-            Combat.Equip();
-            Player.Teleport(new Vector3(-34, valley.Height(new Vector3(-34, 0, -22)), -22));
+            // Returning must not depend on reloading an optional weapon visual.
+            // Resolve the surface directly; the underground arena no longer
+            // owns the player's floor, movement or camera after this transfer.
+            Vector3 home=new Vector3(-34,0,-24);
+            home.y=Valley.SurfaceHeight(valley.Data.terrain,home)+.12f;
+            Player.Teleport(home);
+            Sunward.Remaster.LowerArena.Leave();
             Player.transform.rotation = Quaternion.identity;
+            Player.animationView.Play("Idle_Natural",.12f,0,true);
+            Combat.Rest(false);
             Health = MaxHealth;
             Stamina = MaxStamina;
             Energy = MaxEnergy;
+            hitUntil=0;Time.timeScale=1;
             Close();
+            var camera=FindFirstObjectByType<OrbitCamera>();if(camera)camera.SnapFocus();
             Notify("Welcome home · the next trial grows stronger.");
         }
 

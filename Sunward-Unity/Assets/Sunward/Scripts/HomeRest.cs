@@ -8,6 +8,12 @@ namespace Sunward
         public GameFlow game;
         public bool Sleeping { get; private set; }
         public bool Active { get; private set; }
+        public void CancelRest()
+        {
+            if(!Active)return;
+            StopAllCoroutines();Active=Sleeping=false;
+            if(game && game.Player)game.Player.Locked=false;
+        }
 
         public void Begin()
         {

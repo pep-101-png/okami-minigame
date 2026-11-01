@@ -283,6 +283,10 @@
     {
       "cue": "housemusic",
       "resource": "Okami/NativeAudio/foodhouse-background-0"
+    },
+    {
+      "cue": "transformation-voice",
+      "resource": "Okami/NativeAudio/transformation-voice-pl00-13"
     }
   ]
 }

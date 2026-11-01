@@ -48,6 +48,9 @@ namespace Sunward
             Vertical = 0;
             Speed = 0;
             Swimming = false;
+            Velocity=Vector3.zero;dodgeTimer=landing=jumpBuffer=coyote=airborneTime=0;
+            doubleUsed=false;Grounded=false;
+            Physics.SyncTransforms();
         }
 
         public void Recover(Vector3 point)
@@ -58,6 +61,11 @@ namespace Sunward
             Grounded = true;
             Invulnerable = Mathf.Max(Invulnerable, .8f);
             animationView.Play("Land_Soft", .08f, .25f, true);
+        }
+        public void StopMotion()
+        {
+            horizontal=Velocity=Vector3.zero;Vertical=Speed=0;
+            dodgeTimer=landing=jumpBuffer=0;
         }
 
         public void Push(Vector3 delta)

@@ -840,7 +840,7 @@
     },
     {
       "state": "NativeCharge_tundra",
-      "clip": "pl00_540",
+      "clip": "pl00_542",
       "loop": true,
       "mirror": false,
       "referenceSpeed": 0
