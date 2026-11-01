@@ -15,12 +15,12 @@ video+=title('WINDFLOWER VILLAGE',34,86,'between(t,0.5,2.8)')
 video+=title('TUNDRA BEADS',23,620,'between(t,7.25,10.7)')
 video+=title('SHIRANUI',29,610,'between(t,11.5,13.3)')
 video+=title('SUNWARD',66,280,'gte(t,13.5)')+title('Windflower Village',24,370,'gte(t,13.5)')
-video+=f",drawtext=fontfile={sans}:text='CINEMATIC PREVIEW · ŌKAMI FAN PROJECT':fontcolor=white@.8:fontsize=16:x=(w-tw)/2:y=h-29,fade=t=in:st=0:d=.3,fade=t=out:st=14.6:d=.4,format=yuv420p[v]"
-filters=[video,"[1:a]atrim=duration=15,asetpts=PTS-STARTPTS,volume='if(between(t,11,13.6),.32,.62)':eval=frame,afade=t=in:d=.4[music]"]
+video+=f",drawtext=fontfile={sans}:text='CINEMATIC PREVIEW · ŌKAMI FAN PROJECT':fontcolor=white@.8:fontsize=16:x=(w-tw)/2:y=h-29,fade=t=in:st=0:d=0.3,fade=t=out:st=14.6:d=0.4,format=yuv420p[v]"
+filters=[video,"[1:a]atrim=duration=15,asetpts=PTS-STARTPTS,volume='if(between(t,11,13.6),.32,.62)':eval=frame,afade=t=in:d=0.4[music]"]
 labels=['[music]']
 for i,(_,start,volume) in enumerate(cues,2):
  label=f's{i}';delay=round(start*1000);filters.append(f'[{i}:a]aresample=48000,asetpts=PTS-STARTPTS,volume={volume},adelay={delay}:all=1[{label}]');labels.append('['+label+']')
-filters.append(''.join(labels)+f'amix=inputs={len(labels)}:duration=first:normalize=0,alimiter=limit=.9:level=false,afade=t=out:st=14.5:d=.5,atrim=duration=15[a]')
+filters.append(''.join(labels)+f'amix=inputs={len(labels)}:duration=first:normalize=0,alimiter=limit=.9:level=false,afade=t=out:st=14.5:d=0.5,atrim=duration=15[a]')
 cmd+=['-filter_complex',';'.join(filters),'-map','[v]','-map','[a]','-c:v','libx264','-preset','medium','-crf','19','-pix_fmt','yuv420p','-r','24','-c:a','aac','-b:a','192k','-ar','48000','-ac','2','-t','15','-movflags','+faststart','-metadata','title=Sunward — Windflower Village | Cinematic Preview','-metadata','comment=Offline cinematic rendered from the actual saved Sunward scene and original Okami assets/animations. Not recorded Unity gameplay.',str(args.output)]
 subprocess.run(cmd,check=True)
 probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-show_streams','-show_format','-of','json',str(args.output)]));v=next(s for s in probe['streams'] if s['codec_type']=='video');a=next(s for s in probe['streams'] if s['codec_type']=='audio');assert v['nb_frames']=='360' and abs(float(probe['format']['duration'])-15)<.05 and v['width']==1280 and v['height']==720 and a['channels']==2
