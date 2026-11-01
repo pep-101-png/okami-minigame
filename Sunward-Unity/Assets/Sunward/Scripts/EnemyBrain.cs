@@ -7,8 +7,12 @@ namespace Sunward
         public GameFlow game;
         public EnemyDefinition definition;
         public float Hp, MaxHp;
+        readonly Sunward.Remaster.CrimsonPhaseState crimson=new Sunward.Remaster.CrimsonPhaseState();
+        public bool BossRising=>definition && definition.id=="boss" && crimson.Stage==Sunward.Remaster.CrimsonStage.Rising;
+        public bool FlamePhase=>definition && definition.id=="boss" && crimson.Stage==Sunward.Remaster.CrimsonStage.Flame;
+        public float AttackDamage=>definition.damage*crimson.DamageMultiplier;
         public bool Dead => Hp <= 0;
-        public bool Phase2 => definition.id == "boss" && Hp < MaxHp * .5f;
+        public bool Phase2 => definition.id == "boss" && (FlamePhase || Hp < MaxHp * .5f);
         public string State { get; private set; } = "approach";
         // Snapshot durations when states begin. Phase-two health changes must
         // not move the visible attack backwards while its timer is running.
@@ -58,15 +62,24 @@ namespace Sunward
 
         public void Damage(float damage, Vector3 away, float stagger)
         {
-            if (Dead)
+            if (Dead || BossRising || game.CinematicActive)
                 return;
             Hp -= damage;
+            if(Hp<=0 && definition.id=="boss" && crimson.TryRise())
+            {
+                Hp=MaxHp;State="transform";stun=chargeRemaining=0;struck=true;
+                if(tell){Destroy(tell.gameObject);tell=null;}
+                var sequence=GetComponent<Sunward.Remaster.CrimsonHelmAscension>();
+                if(!sequence)sequence=gameObject.AddComponent<Sunward.Remaster.CrimsonHelmAscension>();
+                sequence.Begin(this,nativeActor);return;
+            }
             if (game.Audio && (Dead || Time.time >= nextVoice)) { game.Audio.Enemy(definition.id,transform.position); nextVoice = Time.time + .9f; }
             Stun(stagger);
             if (motor.enabled)
                 motor.Move(away * .15f);
             if (Dead)
             {
+                if(definition.id=="boss")crimson.Defeat();
                 State = "dead";
                 timer = clock;
                 if (tell)
@@ -76,6 +89,17 @@ namespace Sunward
                 game.Fx.Ring(transform.position, new Color(.6f, .8f, .65f), 2);
                 Destroy(gameObject, 1.1f);
             }
+        }
+
+        public void SetRebirthScale(float multiplier)
+        {
+            visual.localScale=Vector3.one*(definition.scale*multiplier);
+            motor.height=3.6f*multiplier;motor.radius=multiplier;motor.center=Vector3.up*(motor.height*.5f);
+        }
+        public void CompleteRebirth()
+        {
+            crimson.Ignite();SetRebirthScale(2);State="approach";timer=.8f;visualDuration=.8f;
+            stun=chargeRemaining=0;struck=false;
         }
 
         void Move(Vector3 delta)
@@ -124,7 +148,7 @@ namespace Sunward
             timer -= dt;
             if (State == "approach")
             {
-                float reach = ranged ? 9 : boss ? 4 : definition.id == "heavy" ? 2.8f : 2;
+                float reach = ranged ? 9 : boss ? (FlamePhase?8:4) : definition.id == "heavy" ? 2.8f : 2;
                 if (distance > reach)
                     Move(diff.normalized * definition.speed * (Phase2 ? 1.2f : 1) * dt);
                 else if (ranged && distance < 5)
@@ -144,7 +168,7 @@ namespace Sunward
                     timer = Mathf.Max(definition.windup * (Phase2 ? .8f : 1),nativeAttackLength*.25f);
                     visualDuration=timer;
                     struck = false;
-                    tell = game.Fx.Ring(move == "slam" ? transform.position : game.Player.transform.position, new Color(.75f, .24f, .17f), move == "slam" ? (boss ? 5 : 3) : .7f, timer + .1f);
+                    tell = game.Fx.Ring(move == "slam" ? transform.position : game.Player.transform.position, new Color(.75f, .24f, .17f), move == "slam" ? (boss ? (FlamePhase?10:5) : 3) : .7f, timer + .1f);
                 }
             }
             else if (State == "windup" && timer <= 0)
@@ -157,17 +181,19 @@ namespace Sunward
                 if (move == "fan" || move == "shot")
                 {
                     int count = move == "fan" ? (Phase2 ? 7 : 5) : 1;
+                    Vector3 origin=transform.position+Vector3.up*(FlamePhase?3:1);
+                    Vector3 aim=FlamePhase?(game.Player.transform.position+Vector3.up*.7f-origin).normalized:direction;
                     for (int i = 0; i < count; i++)
-                        game.Projectile(transform.position + Vector3.up, Quaternion.Euler(0, (i - (count - 1) * .5f) * 14, 0) * direction, definition.damage);
+                        game.Projectile(origin,Quaternion.Euler(0,(i-(count-1)*.5f)*14,0)*aim,AttackDamage,FlamePhase);
                     struck = true;
                 }
 
                 if (move == "slam")
                 {
-                    game.Fx.Ring(transform.position, new Color(.7f, .36f, .22f), boss ? 5 : 3);
+                    game.Fx.Ring(transform.position, new Color(.7f, .36f, .22f), boss ? (FlamePhase?10:5) : 3);
                     game.Audio.World("heavy-impact",transform.position,16,.22f);
-                    if (distance < (boss ? 5 : 3) && game.Player.transform.position.y < transform.position.y+.9f)
-                        game.Hurt(definition.damage, direction);
+                    if (distance < (boss ? (FlamePhase?10:5) : 3) && game.Player.transform.position.y < transform.position.y+.9f)
+                        game.Hurt(AttackDamage, direction);
                     struck = true;
                 }
             }
@@ -179,7 +205,7 @@ namespace Sunward
                 {
                     struck=true;float reach=definition.id=="heavy"?3.2f:2.6f;
                     if(distance<reach && Mathf.Abs(game.Player.transform.position.y-transform.position.y)<1.25f)
-                    {game.Hurt(definition.damage,direction);game.Audio.World(definition.id=="heavy"?"heavy-impact":"impact",transform.position,12,.18f);}
+                    {game.Hurt(AttackDamage,direction);game.Audio.World(definition.id=="heavy"?"heavy-impact":"impact",transform.position,12,.18f);}
                 }
                 if (move == "charge" && chargeRemaining>0)
                 {
@@ -188,9 +214,9 @@ namespace Sunward
                     Move(direction * chargeStep * (boss ? 10 : 7));
                     Vector3 a = game.Player.transform.position - before, travel = transform.position - before;
                     float t = travel.sqrMagnitude < .0001f ? 0 : Mathf.Clamp01(Vector3.Dot(a, travel) / travel.sqrMagnitude);
-                    if (!struck && Vector3.Distance(before + travel * t, game.Player.transform.position) < (boss ? 2 : 1.1f))
+                    if (!struck && Vector3.Distance(before + travel * t, game.Player.transform.position) < (boss ? (FlamePhase?4:2) : 1.1f))
                     {
-                        game.Hurt(definition.damage, direction);
+                        game.Hurt(AttackDamage, direction);
                         struck = true;
                     }
                 }

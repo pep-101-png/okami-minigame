@@ -127,7 +127,7 @@ namespace Sunward
             {
                 DrawPaper(new Rect(w * .5f - 250, 20, 500, 64));
                 GUILayout.BeginArea(new Rect(w * .5f - 236, 26, 472, 58));
-                GUILayout.Label("CRIMSON HELM · THE HOLLOW BELL · " + (boss.Phase2 ? "PHASE II" : "PHASE I"), body);
+                GUILayout.Label("CRIMSON HELM · THE HOLLOW BELL · " + (boss.BossRising ? "REBIRTH" : boss.FlamePhase ? "FLAME PHASE" : "ARMOURED"), body);
                 Bar(470, boss.Hp / boss.MaxHp);
                 GUILayout.EndArea();
             }
@@ -229,7 +229,6 @@ namespace Sunward
                     break;
                 case "result":
                     GUILayout.Label(game.Dialogue, title);
-                    if(game.Health>0 && game.Profile.wins>0 && Button(Sunward.Remaster.LowerArena.Inside(game.Player.transform.position)?"EXPLORE THE CHAMBER →":"EXPLORE THE LOWER ARENA →",button)){game.Close();game.Notify(Sunward.Remaster.LowerArena.Inside(game.Player.transform.position)?"E near the memory mirror returns you home.":"Jump through the broken centre floor · the mirror below returns you home.");}
                     if (Button("RETURN HOME →", button))
                         game.ReturnHome();
                     break;

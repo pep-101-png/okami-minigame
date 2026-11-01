@@ -135,6 +135,11 @@ namespace Sunward
             transformationVoice.Stop();transformationVoice.clip=Clip("transformation-voice");transformationVoice.volume=.38f;
             if(transformationVoice.clip)transformationVoice.Play();
         }
+        public void BossTransformationVoice()
+        {
+            transformationVoice.Stop();transformationVoice.clip=Clip("enemy5");transformationVoice.volume=.35f;
+            if(transformationVoice.clip)transformationVoice.Play();
+        }
         public void TransformationBurst()
         {
             transformationBurst.Stop();transformationBurst.clip=Clip("weapon-wp2e-heavy");transformationBurst.volume=.28f;
