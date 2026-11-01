@@ -59,8 +59,9 @@ static class Program
   foreach(string panel in new[]{"pause","result",""})foreach(float hp in new[]{0f,50f})
   {
    var player=new WolfMotor{Locked=true,Swimming=true,Vertical=-12,Speed=8,horizontal=Vector3.one,Velocity=Vector3.one,dodgeTimer=1,landing=1,jumpBuffer=1,coyote=1,airborneTime=9,doubleUsed=true};player.transform.position=new Vector3(35,-110,0);
-   var game=new GameFlow{Player=player,Panel=panel,InTrial=true,BossTrial=true,Health=hp,hitUntil=999,barrier=new GameObject()};player.game=game;Time.timeScale=0;int leaves=LowerArena.leaves,snaps=MonoBehaviour.CameraInstance.snaps,syncs=Physics.syncs;
+   var game=new GameFlow{Player=player,Panel=panel,InTrial=true,BossTrial=true,Health=hp,hitUntil=999,barrier=new GameObject()};player.game=game;var exitBoundary=game.barrier;Check(exitBoundary.GetComponent<MeshFilter>()==null,"Test incorrectly invents a mesh component on the particle boundary");exitBoundary.SetActive(true);Time.timeScale=0;int leaves=LowerArena.leaves,snaps=MonoBehaviour.CameraInstance.snaps,syncs=Physics.syncs;
    game.ReturnHome();
+   Check(game.barrier==null&&exitBoundary.wasDestroyed&&!exitBoundary.activeSelf,"Return does not safely destroy the meshless boundary");
    Check(Delta(player.transform.position,new Vector3(-34,.82f,-24))<1e-5,"Home transfer did not leave the chamber");
    Check(!game.InTrial&&!game.BossTrial&&!player.Locked&&!player.Swimming&&game.Panel=="","Return retains encounter/menu/lock state");
    Check(game.Health==120&&game.Stamina==100&&game.Energy==80&&Time.timeScale==1&&game.hitUntil==0,"Return does not restore playable state");
@@ -73,13 +74,18 @@ static class Program
   Check(stopped.Grounded&&stopped.controller.enabled,"Stopping for a cinematic changes floor/controller state");
   foreach(bool win in new[]{false,true})foreach(bool boss in new[]{false,true})
   {
-   var player=new WolfMotor();var game=new GameFlow{Player=player,InTrial=true,BossTrial=boss,Health=win?45:0,Panel=""};player.game=game;game.Finish(win);
+   var player=new WolfMotor();var game=new GameFlow{Player=player,InTrial=true,BossTrial=boss,Health=win?45:0,Panel="",barrier=new GameObject()};player.game=game;var resultBoundary=game.barrier;game.Finish(win);
+   Check(game.barrier==null&&resultBoundary.wasDestroyed,"Victory/defeat cleanup cannot handle a meshless boundary");
    Check(!game.InTrial&&!game.BossTrial&&game.Panel=="result","Victory/defeat did not show results without reloading the weapon");
    Check(game.Save.saves==1&&player.Locked==!win,"Result did not save or release/lock control correctly");
    Check(win?game.Profile.coins==(boss?150:75)&&game.Profile.xp==100&&game.Profile.bossWins==(boss?1:0)&&game.Profile.wins==(boss?0:1):game.Profile.defeats==1,"Result changed earned rewards");
    Check(game.projectiles>0&&game.Dialogue.Contains("10 combat coins"),"End of trial keeps stray projectiles or loses result text");
    game.Finish(win);Check(game.Save.saves==1,"Finishing twice duplicates progress");
   }
+  var sharedMesh=new Mesh();var meshBoundary=new GameObject();meshBoundary.AddComponent<MeshFilter>().sharedMesh=sharedMesh;
+  var exitPlayer=new WolfMotor();var completed=new GameFlow{Player=exitPlayer,InTrial=true,BossTrial=true,Health=45,barrier=meshBoundary};exitPlayer.game=completed;
+  completed.Finish(true);Check(!sharedMesh.wasDestroyed&&meshBoundary.wasDestroyed,"Boundary cleanup destroys a borrowed mesh asset");
+  completed.ReturnHome();completed.ReturnHome();Check(completed.barrier==null&&completed.Panel==""&&completed.Profile.bossWins==1,"Repeated home return after boss victory fails or duplicates rewards");
   foreach(bool originalIgnore in new[]{false,true})
   {
    var camera=new OrbitCamera{target=new WolfMotor()};UnityEngine.Camera.main.brain.IgnoreTimeScale=originalIgnore;camera.BeginCinematic();Check(UnityEngine.Camera.main.brain.IgnoreTimeScale,"Cinematic camera obeys paused world time");
