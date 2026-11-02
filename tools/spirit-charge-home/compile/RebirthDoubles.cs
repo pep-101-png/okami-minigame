@@ -1,6 +1,6 @@
 namespace UnityEngine
 {
- public struct Bounds{public Bounds(Vector3 a,Vector3 b){}}
+ public struct Bounds{public Vector3 center,size;public Bounds(Vector3 a,Vector3 b){center=a;size=b;}}
  public enum ParticleSystemShapeType{SkinnedMeshRenderer}public enum ParticleSystemMeshShapeType{Triangle}
  public class Material:Object{public Material(Material source){}public Texture2D mainTexture;}
  public class AnimationCurve{public static AnimationCurve Linear(float a,float b,float c,float d)=>new AnimationCurve();}

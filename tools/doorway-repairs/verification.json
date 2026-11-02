@@ -1,0 +1,28 @@
+{
+  "baseline": "d70906a28725bcd7fabc17103b87039b3fc44b91",
+  "changes": {
+    "doors": "Physical-threshold traversal at exterior/front and corresponding interior exits; no tea glow interaction",
+    "recovery": "WaterContact excludes all registered interiors before y<-6 recovery",
+    "visibility": "forceRenderingOff isolates interiors without changing collider physics layers; camera stays within room walls",
+    "crimsonSecondPhase": {
+      "source": "Original WP19 muzzle, excluding skull, crest, helmet fragments and cloth",
+      "sourceModelSHA256": "b9ed1eac4ac1a5da5884c02ad574c0e4a70917dcb088787ae21f6d8107a8acc4",
+      "triangles": 276,
+      "boneCompatibility": "First 32 bind bones match EM11 exactly; original indices/weights/UVs retained"
+    },
+    "tundra": "Dorsal rest attachment derived from native idle pose relative to torso while charging; authored cast attachment on release; no additive weapon lift",
+    "ceiling": "16 original dojo timber top triangles, compacted original vertices/streams; existing matching wood material"
+  },
+  "validation": {
+    "semanticAndRuntimeDoubles": 493,
+    "nativePlayerAndExtractedMethods": 310,
+    "tundraSamplerAndController": 4153,
+    "sceneResourcesMetadata": 2420,
+    "csharpSyntaxFiles": 118,
+    "negativeControl": "Previous WaterContact reproduces immediate river recovery after house entry",
+    "offlineGeometry": "Reviewed enclosed Amaterasu/music/tea rooms and native attachment renders",
+    "unityEditorCompile": "NOT RUN; Unity Editor unavailable",
+    "unityPlayMode": "NOT RUN; no fresh source-matched PC recordings",
+    "latestRemoteFeedbackSource": "aefd595771e933a3313ecb4170251764c94ab1e3; historical, all14coverage_incomplete"
+  }
+}

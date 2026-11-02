@@ -85,6 +85,7 @@ namespace Sunward
             var festival=GetComponent<Sunward.Remaster.VillageFestival>();if(!festival)festival=gameObject.AddComponent<Sunward.Remaster.VillageFestival>();festival.game=this;
             var tea=GetComponent<Sunward.Remaster.VillageTeaVisit>();if(!tea)tea=gameObject.AddComponent<Sunward.Remaster.VillageTeaVisit>();tea.game=this;
             var dressing=GetComponent<Sunward.Remaster.NativeInteriorDressing>();if(!dressing)dressing=gameObject.AddComponent<Sunward.Remaster.NativeInteriorDressing>();dressing.game=this;
+            var doorways=GetComponent<Sunward.Remaster.VillageDoorways>();if(!doorways)doorways=gameObject.AddComponent<Sunward.Remaster.VillageDoorways>();doorways.game=this;
             Health = MaxHealth;
             Stamina = MaxStamina;
             Energy = MaxEnergy;
@@ -206,6 +207,7 @@ namespace Sunward
             if(Sunward.Remaster.LowerArena.Inside(Player.transform.position))return;
             string action = Nearest();
             Prompt = Home.Active ? "E · Wake gently" : action == "bed" ? (Profile.night?"E · Sleep until morning":"E · Sleep until festival night") : action == "mirror" ? "E · Memory mirror · save / load" : action == "weapons" ? "E · Weapons · fifteen divine instruments" : action == "shop" ? "E · Upgrades & blessings" : action == "arena" ? "E · Ring the Hollow Bell · enter the trial" : action.StartsWith("flower:") ? "E · Collect windflower" : action == "offering" ? "E · Windflower offering" : action.StartsWith("npc:") ? "E · Speak to " + npcData[int.Parse(action.Substring(4))].name : "Explore · follow the bridge to the market";
+            if(Sunward.Remaster.VillageInteriors.AnyRoom(Player.transform.position) && action=="")Prompt="Walk through the entrance to return to the village";
             if(action.StartsWith("interior:"))Prompt=Sunward.Remaster.VillageInteriors.Inside(Player.transform.position)?"E · Leave the building":"E · Enter Amaterasu’s house";
             if(action.StartsWith("home:"))Prompt="E · "+(action.EndsWith(":exit")?"Leave home":"Enter village home");
             if (action.StartsWith("venue:")) Prompt = Sunward.Remaster.VillageServices.Label(action,Player.transform.position);
@@ -268,11 +270,12 @@ namespace Sunward
         {
             Vector3 p = Player.transform.position;
             var interiorAction=Sunward.Remaster.VillageInteriors.Action(p);if(interiorAction!=null)return interiorAction;
-            // Interior exits remain reachable throughout the room. The old
-            // outside-only radius stranded the player after the entry teleport.
-            if (Sunward.Remaster.VillageServices.InDojo(p)) return "venue:dojo";
-            if (Sunward.Remaster.VillageServices.InFoodHouse(p))
-                return Vector3.Distance(p,Sunward.Remaster.VillageServices.Mat)<1.6f ? "venue:mat" : "venue:food";
+            // Doorways handle traversal. E inside remains available for people, beds and mats.
+            if(Sunward.Remaster.VillageInteriors.Inside(p))
+            {
+                for(int i=0;i<npcObjects.Length;i++)if(npcObjects[i] && Vector3.Distance(p,npcObjects[i].transform.position)<2.1f)return "npc:"+i;
+                return "";
+            }
             float best = 3.5f;
             string result = "";
             void Consider(string id, Vector3 q, float r = 2.5f)
@@ -287,14 +290,12 @@ namespace Sunward
 
             if(Sunward.Remaster.NativeHomeRoom.At(p))
                 for(int i=0;i<npcObjects.Length;i++)if(npcObjects[i] && Vector3.Distance(p,npcObjects[i].transform.position)<2.1f)return "npc:"+i;
-            if(Sunward.Remaster.NativeHomeRoom.NearestAction(p,out var homeAction))return homeAction;
+            if(Sunward.Remaster.NativeHomeRoom.At(p))return "";
             Consider("bed", HomeLayout.Bed, 1.9f);
             Consider("mirror", HomeLayout.Mirror, 2.1f);
             Consider("weapons", new Vector3(-6, 0, -27.6f), 3);
             Consider("shop", new Vector3(5, 0, -27.6f), 3);
             Consider("arena", new Vector3(12.8f, 0, 0));
-            Consider("venue:dojo", Sunward.Remaster.VillageServices.DojoDoor, 3.5f);
-            Consider("venue:food", Sunward.Remaster.VillageServices.FoodDoor, 3.5f);
             if (Sunward.Remaster.VillageServices.InFoodHouse(p)) Consider("venue:mat", Sunward.Remaster.VillageServices.Mat, 1.6f);
             Consider("venue:pond",new Vector3(GardenPond.X+3.7f,.04f,GardenPond.Z),2);
             Consider("venue:farmer", Sunward.Remaster.VillageServices.FarmerPosition, 2.8f);

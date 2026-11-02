@@ -22,11 +22,22 @@ static class Program
   using var json=JsonDocument.Parse(File.ReadAllText(Path.Combine(args[0],"OkamiRemaster/Player/Resources/NativePlayer/Bindings.json")));
   var bindings=json.RootElement.GetProperty("bindings").EnumerateArray().Select(x=>new NativeAmaterasu.Binding{state=x.GetProperty("state").GetString(),clip=x.GetProperty("clip").GetString(),loop=x.TryGetProperty("loop",out var loop)&&loop.GetBoolean(),intro=x.TryGetProperty("intro",out var intro)?intro.GetString():null}).ToArray();
   Check(bindings.Single(x=>x.state==TundraAttackRules.Charge).clip!="pl00_540","Charge still uses the static pose");
+  var initializedBody=new NativeAmaterasu();typeof(NativeAmaterasu).GetMethod("Awake",BindingFlags.Instance|BindingFlags.NonPublic).Invoke(initializedBody,null);Check(initializedBody.Ready,"Native player initialization fails while preparing dorsal attachment");
   foreach(int fps in new[]{30,60,120})foreach(float speed in new[]{1f,2f})
   {
    Time.deltaTime=Time.unscaledDeltaTime=1f/fps;var body=new NativeAmaterasu();var rig=new NativePaintedRig("NativePlayer/pl00",body.transform);var motor=new WolfMotor();var game=new GameFlow{Player=motor};motor.game=game;
    Set(body,"bank",bank);Set(body,"rig",rig);Set(body,"amaterasuRig",rig);Set(body,"motor",motor);Set(body,"bindings",bindings);Set(body,"fromPosition",new Vector3[bank.BoneCount]);Set(body,"fromScale",new Vector3[bank.BoneCount]);Set(body,"fromRotation",Enumerable.Repeat(Quaternion.identity,bank.BoneCount).ToArray());Set(body,"<Ready>k__BackingField",true);
    body.Play("Idle_Natural",0,0,true,false);
+   var dorsal=body.CreateBackSocket();Set(body,"dorsalBindOffset",new Vector3(0,.2242f,-.0507f));
+   foreach(float elevation in new[]{0f,3f,-110f})
+   {
+    rig.Bones[1].position=new Vector3(2,elevation+1.2f,3);rig.Bones[31].position=new Vector3(0,elevation-20,0);
+    game.Combat.HoldingCharge=true;body.Play(TundraAttackRules.Charge,0,0,true,false);Tick(body);
+    Check(Math.Abs(dorsal.position.y-elevation-1.4242f)<.001f&&Math.Abs(dorsal.position.x-2)<.001f,"Held beads follow the ground-level action control instead of moving torso");
+    game.Combat.HoldingCharge=false;body.Play(TundraAttackRules.Cast,0,1,true,false);Tick(body);
+    Check(Math.Abs(dorsal.position.y-elevation+20)<.001f,"Release adds held height to already authored cast coordinates");
+   }
+
    foreach(var charge in bindings.Where(b=>b.state.StartsWith("NativeCharge_")))
    {
     Check(charge.loop,"Held charge binding is not looping");body.Play(charge.state,.08f,0,true,false);var first=rig.Bones.Select(b=>b.localPosition).ToArray();float motion=0;

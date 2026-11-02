@@ -1,7 +1,7 @@
 """Compile whole camera, cinematic, audio and native drivers with explicit engine doubles."""
 from pathlib import Path
 import tempfile,subprocess,os,re,argparse
-root=Path(__file__).resolve().parents[3];p=argparse.ArgumentParser();p.add_argument('--dotnet',default='dotnet');p.add_argument('--negative-control',action='store_true');args=p.parse_args()
+root=Path(__file__).resolve().parents[3];p=argparse.ArgumentParser();p.add_argument('--dotnet',default='dotnet');p.add_argument('--negative-control',action='store_true');p.add_argument('--river-negative-control',action='store_true');args=p.parse_args()
 s=(root/'tools/spirit-charge-home/tests/RuntimeDoubles.cs').read_text()
 s=re.sub(r' public partial class OrbitCamera:Object\n \{[^\n]*\}\n','',s)
 s=re.sub(r' public class ShiranuiTransformation:Object\{[^\n]*\}\n','',s)
@@ -84,10 +84,10 @@ s=s.replace('public GameObject(string n=""){', 'public static System.Collections
 s=re.sub(r' public class HomeRest:Object[^\n]*\n','',s)
 s=s.replace('public int bossWins,wins,defeats,coins,xp;', 'public bool night;public int bossWins,wins,defeats,coins,xp;')
 s=s.replace('public bool hollowBell;', 'public bool hollowBell,sleptAtHome;')
-s=s.replace('public int cancels,rests;', 'public bool HoldingCharge;public Transform transform=new Transform();public void TundraBeadContacts(Vector3[] p,int count){}public int cancels,rests;')
+s=s.replace('public int cancels,rests;', 'public Transform transform=new Transform();public void TundraBeadContacts(Vector3[] p,int count){}public int cancels,rests;')
 s=s.replace('public void StopCoroutine(Coroutine routine){}', 'public void StopAllCoroutines(){}public void StopCoroutine(Coroutine routine){}')
 s=s.replace('public Vector3 forward=Vector3.up;', 'public Vector3 right=new Vector3(1,0,0),forward=new Vector3(0,0,1);public Transform parent;public Matrix4x4 worldToLocalMatrix=>Matrix4x4.identity;public Matrix4x4 localToWorldMatrix=>Matrix4x4.identity;')
-s=s.replace('public class Mesh:Object{public string name;public int vertexCount;}', 'public class Mesh:Object{public string name;public int vertexCount;public void GetVertices(System.Collections.Generic.List<Vector3> v){}}')
+s=s.replace('public class Mesh:Object{public string name;public int vertexCount;}', 'public class Mesh:Object{public string name;public int vertexCount;public Bounds bounds;public void GetVertices(System.Collections.Generic.List<Vector3> v){}}')
 s=s.replace('public class Renderer:Object{', 'public class Renderer:Object{public Transform transform=new Transform();public string name;')
 s=s.replace('public class SkinnedMeshRenderer:Renderer{', 'public class SkinnedMeshRenderer:Renderer{public void BakeMesh(Mesh mesh){}')
 s=s.replace('public static Vector3 Lerp(Vector3 a', 'public static Vector3 Scale(Vector3 a,Vector3 b)=>new Vector3(a.x*b.x,a.y*b.y,a.z*b.z);public static Vector3 Min(Vector3 a,Vector3 b)=>new Vector3(MathF.Min(a.x,b.x),MathF.Min(a.y,b.y),MathF.Min(a.z,b.z));public static Vector3 Max(Vector3 a,Vector3 b)=>new Vector3(MathF.Max(a.x,b.x),MathF.Max(a.y,b.y),MathF.Max(a.z,b.z));public static Vector3 ProjectOnPlane(Vector3 a,Vector3 normal)=>a-normal*Dot(a,normal);public static Vector3 Lerp(Vector3 a')
@@ -119,13 +119,28 @@ while depth:
  elif flow[end]=='}':depth-=1
  end+=1
 s+='\nnamespace Sunward {public sealed partial class GameFlow {'+flow[start:end]+'}}\n'
+s=s.replace('public class Camera:Object\n {','public enum CameraClearFlags{Skybox,SolidColor}public class Camera:Object\n {public int cullingMask=-1;public CameraClearFlags clearFlags;public Color backgroundColor;')
+s=s.replace('public static class ObjectUnused', 'public static class ObjectUnused')
+s=s.replace('public enum FindObjectsSortMode{None}', 'public enum FindObjectsInactive{Include,Exclude}public enum FindObjectsSortMode{None}')
+s=s.replace('public static T[] FindObjectsByType<T>(FindObjectsSortMode mode)', 'public static T[] FindObjectsByType<T>(FindObjectsInactive inactive,FindObjectsSortMode mode)=>System.Array.Empty<T>();public static T[] FindObjectsByType<T>(FindObjectsSortMode mode)')
+s=s.replace('public static Vector3 zero=>','public static Vector3 forward=>new Vector3(0,0,1);public static Vector3 left=>new Vector3(-1,0,0);public static Vector3 zero=>')
+s=s.replace('public class Renderer:Object{','public class Renderer:Object{public bool forceRenderingOff;public GameObject gameObject=new GameObject();')
+s=s.replace('public static void LogError(string s,Object context)', 'public static void LogError(string s,Object context=null)')
+s=s.replace('public class Valley:UnityEngine.Object{', 'public class Valley:UnityEngine.Object{public static float Depth(Vector3 p)=>0;')
+s=s.replace('float radius,float distance){goal=p;', 'float radius=.5f,float distance=16){goal=p;')
+s+='\nnamespace Sunward{public static class MeshSafety{public static bool Finite(UnityEngine.Vector3 p)=>float.IsFinite(p.x)&&float.IsFinite(p.y)&&float.IsFinite(p.z);}}'
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:
   old=Path(temp)/'OrbitCameraBefore.cs';old.write_bytes(subprocess.check_output(['git','show','57ba25ea4d29e73ad80ec562add526909e17da17:Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs'],cwd=root));cmd+=['-p:OrbitSource='+str(old)]
+ if args.river_negative_control:
+  old=Path(temp)/'WaterContactBefore.cs';old.write_bytes(subprocess.check_output(['git','show','d70906a28725bcd7fabc17103b87039b3fc44b91:Sunward-Unity/Assets/Sunward/Scripts/WaterContact.cs'],cwd=root));cmd+=['-p:WaterSource='+str(old)]
  r=subprocess.run(cmd,cwd=root,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'),capture_output=True,text=True);print(r.stdout);print(r.stderr)
  if args.negative_control:
   assert r.returncode!=0 and 'CS0136' in r.stdout,'Compiler failed to catch original scope regression';print('Negative control caught original CS0136 camera regression')
  else:
   assert r.returncode==0,'Whole-script semantic compilation failed (engine doubles, not Unity)'
-  subprocess.run([args.dotnet,str(Path(__file__).with_name('bin')/'Debug/net8.0/Compile.dll'),str(root/'Sunward-Unity/Assets')],check=True,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'))
+  command=[args.dotnet,str(Path(__file__).with_name('bin')/'Debug/net8.0/Compile.dll'),str(root/'Sunward-Unity/Assets')]
+  if args.river_negative_control:
+   result=subprocess.run(command,capture_output=True,text=True,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'));assert result.returncode!=0 and 'River recovery ejects player' in result.stderr,result.stdout+result.stderr;print('PASS negative control: previous river code ejects player immediately after walking into a house')
+  else:subprocess.run(command,check=True,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'))

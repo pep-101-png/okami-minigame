@@ -12,6 +12,7 @@ namespace Sunward.Remaster
         public bool Contains(Vector3 p)=>Mathf.Abs(p.x-transform.position.x)<4.1f && Mathf.Abs(p.z-transform.position.z)<3.1f && Mathf.Abs(p.y-transform.position.y)<5;
         void OnEnable(){rooms.Add(this);}
         void OnDisable(){rooms.Remove(this);}
+        public static NativeHomeRoom[] All=>rooms.ToArray();
         public static NativeHomeRoom At(Vector3 p)=>rooms.Find(r=>r && r.Contains(p));
         public static Vector3 Guard(Vector3 previous,Vector3 next)
         {
@@ -25,7 +26,7 @@ namespace Sunward.Remaster
         public static bool Height(Vector3 p,out float y){var room=At(p);y=room?room.transform.position.y:0;return room;}
         public static bool NearestAction(Vector3 p,out string action)
         {
-            var current=At(p);if(current){action="home:"+current.number+":exit";return true;}
+            var current=At(p);if(current && Vector3.Distance(p,current.entrance)<1){action="home:"+current.number+":exit";return true;}
             foreach(var room in rooms)if(Vector3.Distance(p,room.door)<2){action="home:"+room.number+":enter";return true;}
             action="";return false;
         }
@@ -33,9 +34,11 @@ namespace Sunward.Remaster
         {
             string[] parts=action.Split(':');if(parts.Length!=3 || !int.TryParse(parts[1],out int number))return;
             var room=rooms.Find(r=>r.number==number);if(!room)return;
-            game.Combat.Cancel();game.Player.Teleport(parts[2]=="exit"?room.exitPoint:room.entrance);
+            bool leaving=parts[2]=="exit";game.Combat.Cancel();game.Services.CancelRest();
+            game.Player.Teleport(leaving?room.exitPoint-Vector3.forward*.8f:room.entrance+Vector3.forward*1.1f);
+            game.Player.transform.rotation=Quaternion.Euler(0,leaving?180:0,0);
             var camera=FindFirstObjectByType<OrbitCamera>();if(camera)camera.SnapFocus();
-            game.Notify(parts[2]=="exit"?"Back in the village":"Village home · bed, hearth and a place for tea · E to leave");
+            game.Notify(parts[2]=="exit"?"Back in the village":"Village home · walk back through the door to leave");
         }
         ParticleSystem fire;
         Light glow;

@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable><OrbitSource Condition="'$(OrbitSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs</OrbitSource></PropertyGroup>
+<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable><OrbitSource Condition="'$(OrbitSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs</OrbitSource><WaterSource Condition="'$(WaterSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/WaterContact.cs</WaterSource></PropertyGroup>
 <ItemGroup>
 <Compile Include="$(SemanticDoubles)"/><Compile Include="RebirthTests.cs"/><Compile Include="VillageTests.cs"/><Compile Include="FestivalTests.cs"/>
 <Compile Include="$(OrbitSource)"/>
@@ -34,6 +34,8 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeIndoorRoutine.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeSwordPractice.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeInteriorDressing.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageDoorways.cs"/>
+<Compile Include="$(WaterSource)"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeDailyRoutine.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeHomeRoom.cs"/>
 </ItemGroup>
