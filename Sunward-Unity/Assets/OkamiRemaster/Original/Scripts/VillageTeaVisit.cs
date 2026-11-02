@@ -8,7 +8,7 @@ namespace Sunward.Remaster
         int story;
         NativeDailyRoutine elder;
         NativeHomeRoom home;
-        public string Directions=>"My house is west of the main street, near the first bridge. Walk through its bamboo-painted front door. Come in for tea; I have a few old stories to share.";
+        public string Directions=>"My house is west of the main street, near the first bridge. Its raised timber entrance faces the main street. Walk into that doorway. Come in for tea; I have a few old stories to share.";
         public bool AtHome=>Invited && home && NativeHomeRoom.At(game.Player.transform.position)==home;
         static readonly string[] stories={
             "Long ago, the eight-headed Orochi demanded a maiden from Kamiki Village each year. A white wolf called Shiranui helped the swordsman Nagi defeat the serpent and save Nami. The village remembered that courage for a hundred years.",

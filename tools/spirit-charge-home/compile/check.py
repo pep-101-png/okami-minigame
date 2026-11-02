@@ -129,6 +129,7 @@ s=s.replace('public static void LogError(string s,Object context)', 'public stat
 s=s.replace('public class Valley:UnityEngine.Object{', 'public class Valley:UnityEngine.Object{public static float Depth(Vector3 p)=>0;')
 s=s.replace('float radius,float distance){goal=p;', 'float radius=.5f,float distance=16){goal=p;')
 s+='\nnamespace Sunward{public static class MeshSafety{public static bool Finite(UnityEngine.Vector3 p)=>float.IsFinite(p.x)&&float.IsFinite(p.y)&&float.IsFinite(p.z);}}'
+s=s.replace('public const float PI=', 'public const float Rad2Deg=57.2957795f;public static float Atan2(float y,float x)=>MathF.Atan2(y,x);public const float PI=')
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:

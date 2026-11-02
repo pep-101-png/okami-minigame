@@ -43,6 +43,7 @@ namespace Sunward
             cinematicDistance=Mathf.Lerp(cinematicDistance,distance,blend);
             if(virtualCamera){var lens=virtualCamera.Lens;lens.FieldOfView=Mathf.Lerp(lens.FieldOfView,savedFov,blend);virtualCamera.Lens=lens;}
         }
+        public void RotateHeading(float degrees){yaw+=degrees;SnapFocus();}
         public void SnapFocus(){initialized=false;}
         void LateUpdate()
         {

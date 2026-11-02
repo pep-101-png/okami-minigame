@@ -7,6 +7,11 @@ namespace Sunward.Remaster
         static readonly List<NativeHomeRoom> rooms=new List<NativeHomeRoom>();
         public int number;
         public Vector3 door,entrance,exitPoint,bed,hearth;
+        public Vector3 doorInward=Vector3.forward;
+        public float doorHalfWidth=.8f;
+        public string wallResource="Okami/vt62";
+        public int roomStyle;
+        public Vector3 Approach=>door-doorInward*2.1f;
         public GameObject[] contents;
         public GameFlow game;
         public bool Contains(Vector3 p)=>Mathf.Abs(p.x-transform.position.x)<4.1f && Mathf.Abs(p.z-transform.position.z)<3.1f && Mathf.Abs(p.y-transform.position.y)<5;
@@ -35,9 +40,10 @@ namespace Sunward.Remaster
             string[] parts=action.Split(':');if(parts.Length!=3 || !int.TryParse(parts[1],out int number))return;
             var room=rooms.Find(r=>r.number==number);if(!room)return;
             bool leaving=parts[2]=="exit";game.Combat.Cancel();game.Services.CancelRest();
-            game.Player.Teleport(leaving?room.exitPoint-Vector3.forward*.8f:room.entrance+Vector3.forward*1.1f);
-            game.Player.transform.rotation=Quaternion.Euler(0,leaving?180:0,0);
-            var camera=FindFirstObjectByType<OrbitCamera>();if(camera)camera.SnapFocus();
+            var target=leaving?room.exitPoint:room.entrance+Vector3.forward*1.1f;if(leaving)target.y=game.valley.Height(target)+.04f;game.Player.Teleport(target);
+            float heading=Mathf.Atan2(room.doorInward.x,room.doorInward.z)*Mathf.Rad2Deg;
+            game.Player.transform.rotation=Quaternion.Euler(0,leaving?heading+180:0,0);
+            var camera=FindFirstObjectByType<OrbitCamera>();if(camera)camera.RotateHeading(leaving?heading:-heading);
             game.Notify(parts[2]=="exit"?"Back in the village":"Village home · walk back through the door to leave");
         }
         ParticleSystem fire;

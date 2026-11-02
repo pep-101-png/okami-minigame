@@ -43,8 +43,9 @@ static class FestivalTests
   {
    player.transform.position=Vector3.zero;
    var doorways=new VillageDoorways{game=game};
-   Vector3 from=room=="home"?new Vector3(-34,.1f,-23):room=="food"?new Vector3(1,.4f,-15):new Vector3(0,.5f,12.5f);
-   Vector3 to=room=="home"?new Vector3(-34,.1f,-21.6f):room=="food"?new Vector3(2.4f,.4f,-15):new Vector3(0,.5f,14);
+   Vector3 threshold=room=="home"?VillageInteriors.HomeDoor:room=="food"?VillageInteriors.FoodDoor:VillageInteriors.DojoDoor;
+   Vector3 inward=room=="food"?Vector3.right:Vector3.forward;
+   Vector3 from=threshold-inward*3.4f,to=threshold-inward*1.4f;
    player.transform.position=from;Call(doorways,"Update");player.transform.position=to;Call(doorways,"Update");
    var arrival=player.transform.position;Check(VillageInteriors.Inside(arrival),"Walking into "+room+" does not enter");
    int cancels=game.Combat.cancels;
@@ -53,18 +54,27 @@ static class FestivalTests
    var camera=VillageInteriors.CameraPosition(arrival,arrival+new Vector3(100,30,-100));
    Check(VillageInteriors.Inside(camera) && camera.y<arrival.y+6,"Room camera exposes a floating floor from outside");
    var outside=arrival+new Vector3(80,0,0);Check(!VillageInteriors.AnyRoom(outside),"Interior bounds include unrelated world");
-   Time.deltaTime=.7f;Call(doorways,"Update");
+   Time.deltaTime=1f/60;Call(doorways,"Update");
    player.transform.position=room=="home"?new Vector3(-34,-249.865f,-19.4f):room=="food"?new Vector3(4.3f,-249.57f,-15):new Vector3(0,-249.47f,14.2f);
-   Call(doorways,"Update");Check(player.transform.position.y>-1,"Walking back through "+room+" doorway cannot exit");
+   Call(doorways,"Update");Check(player.transform.position.y>-1,"Immediate walk-back exit is blocked by a portal timer");
   }
   Check(!VillageDoorways.Crossed(new Vector3(-38,.1f,-23),new Vector3(-38,.1f,-20),VillageInteriors.HomeDoor,Vector3.forward),"Walking beside house triggers its portal");
   Check(!VillageDoorways.Crossed(new Vector3(-34,.1f,-21),new Vector3(-34,.1f,-23),VillageInteriors.HomeDoor,Vector3.forward),"Walking away from doorway enters house");
   Check(!VillageDoorways.Crossed(new Vector3(-34,8,-23),new Vector3(-34,8,-20),VillageInteriors.HomeDoor,Vector3.forward),"Jumping above door enters house");
-  var home=new NativeHomeRoom{number=2,game=game,door=new Vector3(-9,0,-9.633f),exitPoint=new Vector3(-9,0,-9.633f),entrance=new Vector3(-9,-54.97f,-8.2f)};home.transform.position=new Vector3(-9,-55,-6);Call(home,"OnEnable");
-  var teaDoors=new VillageDoorways{game=game};player.transform.position=new Vector3(-9,0,-13);Call(teaDoors,"Update");player.transform.position=new Vector3(-9,0,-11);Call(teaDoors,"Update");
+  var home=new NativeHomeRoom{number=2,game=game,door=new Vector3(-5.56f,0,-6.06f),doorInward=Vector3.left,doorHalfWidth=.83f,exitPoint=new Vector3(-2.96f,0,-6.06f),entrance=new Vector3(-9,-54.97f,-8.2f)};home.transform.position=new Vector3(-9,-55,-6);Call(home,"OnEnable");
+  var teaDoors=new VillageDoorways{game=game};player.transform.position=new Vector3(-2,0,-6.06f);Call(teaDoors,"Update");player.transform.position=new Vector3(-4,0,-6.06f);Call(teaDoors,"Update");
   Check(home.Contains(player.transform.position),"Tea home still requires a glow/E hotspot");
   int teaCancels=game.Combat.cancels;for(int i=0;i<30;i++)Call(waterContact,"Update");Check(game.Combat.cancels==teaCancels,"Tea room is treated as river");
   Time.deltaTime=.7f;Call(teaDoors,"Update");player.transform.position=new Vector3(-9,-54.97f,-7.8f);Call(teaDoors,"Update");Check(player.transform.position.y>-1,"Tea home exit cannot walk back to village");Call(home,"OnDisable");
+  foreach(var inward in new[]{Vector3.forward,Vector3.back,Vector3.right,Vector3.left})
+  {
+   var threshold=new Vector3(5,0,7);
+   Check(VillageDoorways.Crossed(threshold-inward*1.4f,threshold-inward*1.2f,threshold,inward),"Player already in approach zone cannot enter");
+   Check(VillageDoorways.Crossed(threshold-inward*3,threshold-inward*.4f,threshold,inward),"Low-frame step skips doorway");
+   Check(!VillageDoorways.Crossed(threshold-inward*1.2f,threshold-inward*1.4f,threshold,inward),"Walking away activates portal");
+  }
+  for(int i=0;i<=200;i++)foreach(bool forward in new[]{true,false})
+  {var p=VillageStreetPlay.BallPosition(i/200f,forward);Check(p.x>=-1.81f&&p.x<=1.81f&&p.z>=-5.21f&&p.z<=-1.29f&&p.y>=.17f&&p.y<=.25f,"Street ball leaves its safe play area");}
   var audio=new ValleyAudio();var audioType=typeof(ValleyAudio);var flags=BindingFlags.Instance|BindingFlags.NonPublic;
   foreach(string field in new[]{"music","wind","river","houseMusic"})audioType.GetField(field,flags).SetValue(audio,new AudioSource());
   audioType.GetField("game",flags).SetValue(audio,game);

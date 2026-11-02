@@ -51,7 +51,7 @@ namespace Sunward.Remaster
                     if(contactEnabled && !contacted && elapsed>=length*(archer?releasePhase:.42f))
                     {
                         contacted=true;
-                        if(archer){PracticeArrow.Fire(transform.position+Vector3.up*1.3f+direction.normalized*.65f,dummy);game.Audio.World("attack",transform.position,8,.12f);}
+                        if(archer){var grip=actor.NativeBone(7);PracticeArrow.Fire((grip?grip.position:transform.position+Vector3.up*1.3f)+direction.normalized*.1f,dummy);game.Audio.World("attack",transform.position,8,.12f);}
                         else if(direction.magnitude<3.2f){dummy.PracticeContact();BrushStrokeFlash.Slash(transform.position+Vector3.up*1.2f,dummy.transform.position+Vector3.up);CelestialBrush.Burst("Spark",dummy.transform.position+Vector3.up,5,.2f);}
                     }
                 }
@@ -60,7 +60,7 @@ namespace Sunward.Remaster
                 if(performing)
                 {
                     length=Mathf.Max(.6f,actor.ActivityLength(motion));elapsed=0;contacted=false;
-                    actor.PlayActivity(archer?actor.idle:motion,archer);timer=length;
+                    actor.PlayActivity(motion,false);timer=length;
                 }
                 else{actor.EndActivity();timer=archer?1.4f+Mathf.Repeat(seed,1):.55f+Mathf.Repeat(seed,.65f);}
             }
