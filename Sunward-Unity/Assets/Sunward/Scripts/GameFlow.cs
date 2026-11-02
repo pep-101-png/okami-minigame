@@ -284,8 +284,8 @@ namespace Sunward
             if(Sunward.Remaster.NativeHomeRoom.NearestAction(p,out var homeAction))return homeAction;
             Consider("bed", HomeLayout.Bed, 1.9f);
             Consider("mirror", HomeLayout.Mirror, 2.1f);
-            Consider("weapons", new Vector3(-6, 0, -33f), 3);
-            Consider("shop", new Vector3(5, 0, -33f), 3);
+            Consider("weapons", new Vector3(-6, 0, -27.6f), 3);
+            Consider("shop", new Vector3(5, 0, -27.6f), 3);
             Consider("arena", new Vector3(12.8f, 0, 0));
             Consider("venue:dojo", Sunward.Remaster.VillageServices.DojoDoor, 3.5f);
             Consider("venue:food", Sunward.Remaster.VillageServices.FoodDoor, 3.5f);

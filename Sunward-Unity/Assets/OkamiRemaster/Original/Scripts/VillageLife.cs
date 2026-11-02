@@ -6,7 +6,7 @@ namespace Sunward.Remaster
     {
         public GameFlow game;
         public Transform[] restorationBeds;
-        public Vector3 weaponsShop=new Vector3(-6,0,-33f),upgradeShop=new Vector3(5,0,-33f);
+        public Vector3 weaponsShop=new Vector3(-6,0,-27.6f),upgradeShop=new Vector3(5,0,-27.6f);
         FarmCrop[] crops;
         FarmCrop carried;
         GameObject carriedVisual;

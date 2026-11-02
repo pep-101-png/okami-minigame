@@ -20,6 +20,7 @@ root=next(b for b in s.values() if b.startswith('--- !u!1660057539 '));roots=set
 for id,b in s.items():
  if b.startswith('--- !u!4 ') and 'm_LocalPosition:' in b and ref(b,'m_Father')==0:check(id in roots,'Detached object missing from SceneRoots')
 for id in [1439298638,2027807469]:check(abs(vec(s[id],'station')[2]+31)<.001,'Vendor runtime station still in front of merchandise')
+flow=(A/'Sunward/Scripts/GameFlow.cs').read_text();check('Consider("weapons", new Vector3(-6, 0, -27.6f)' in flow and 'Consider("shop", new Vector3(5, 0, -27.6f)' in flow,'Market interaction hotspots remain behind the moved vendors/rear wall')
 repeated=[b for b in s.values() if 'bridge approach stone' in b and b.startswith('--- !u!1 ')]
 check(len(repeated)>=10 and all('m_IsActive: 0' in b for b in repeated),'Actual repeating approach stones remain visible')
 for b in s.values():
