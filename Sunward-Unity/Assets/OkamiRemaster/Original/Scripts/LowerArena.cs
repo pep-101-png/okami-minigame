@@ -117,7 +117,7 @@ namespace Sunward.Remaster
         {
             if(!instance)return;
             instance.Unlocked=instance.Unlocked||won;
-            instance.ApplyOpen(instance.Unlocked,won);
+            instance.ApplyOpen(won,won);
         }
         void ApplyOpen(bool value,bool animate)
         {
@@ -136,7 +136,7 @@ namespace Sunward.Remaster
             // A previous save unlocks access, but only entering/completing the upper arena reveals the shaft.
             bool inUpper=new Vector2(game.Player.transform.position.x-35,game.Player.transform.position.z).magnitude<18;
             if(!game.InTrial && !Inside(game.Player.transform.position) && !Shaft(game.Player.transform.position))
-            {if(!inUpper && open)ApplyOpen(false,false);else if(inUpper && Unlocked && !open)ApplyOpen(true,false);}
+            {if(!inUpper && open)ApplyOpen(false,false);}
             if(game.Player.transform.position.y>-3)encounterStarted=false;
             var p=game.Player.transform.position;
             bool visible=true;

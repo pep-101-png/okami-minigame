@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable><OrbitSource Condition="'$(OrbitSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs</OrbitSource><WaterSource Condition="'$(WaterSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/WaterContact.cs</WaterSource><StreetSource Condition="'$(StreetSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageStreetPlay.cs</StreetSource></PropertyGroup>
 <ItemGroup>
-<Compile Include="$(SemanticDoubles)"/><Compile Include="RebirthTests.cs"/><Compile Include="VillageTests.cs"/><Compile Include="FestivalTests.cs"/><Compile Include="StreetActorLifecycle.cs"/><Compile Include="FestivalChallengeTests.cs"/>
+<Compile Include="$(SemanticDoubles)"/><Compile Include="RebirthTests.cs"/><Compile Include="VillageTests.cs"/><Compile Include="FestivalTests.cs"/><Compile Include="StreetActorLifecycle.cs"/><Compile Include="FestivalChallengeTests.cs"/><Compile Include="VillageRefinementTests.cs"/>
 <Compile Include="$(OrbitSource)"/>
 <Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/ValleyAudio.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/ShiranuiTransformation.cs"/>
@@ -27,6 +27,11 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageFestival.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/FestivalChallenges.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageFarm.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/InkText.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillagePresentation.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/SpaRest.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/CherryBomb.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/BrushPatterns.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativePracticeAnchor.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalWeaponView.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/HomeRest.cs"/>

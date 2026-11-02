@@ -11,7 +11,8 @@ namespace Sunward
         [Serializable] sealed class CueBank { public CueEntry[] cues; }
         readonly Dictionary<string,List<AudioClip>> bank = new Dictionary<string,List<AudioClip>>();
         readonly Dictionary<string,int> next = new Dictionary<string,int>();
-        AudioSource effects, music, wind, river,houseMusic;
+        AudioSource effects, music, wind, river,houseMusic,presentationMusic;
+        float presentationBlend;
         float houseBlend;
         AudioSource tundraSwing,tundraImpact,transformationVoice,transformationBurst;
         readonly List<AudioSource> worldSources = new List<AudioSource>();
@@ -19,13 +20,14 @@ namespace Sunward
         Transform ears;
         readonly Dictionary<string,float> cooldowns = new Dictionary<string,float>();
         float nextAnimal, nextVoice;
+        string speakingPackage;Vector3 speakingPosition;
         GameFlow game;
         string musicCue;
         float steps, water;
         Vector3 lastPosition;
         void Awake()
         {
-            effects = Source(.60f, false); music = Source(.45f, true);houseMusic=Source(0,true);
+            effects = Source(.60f, false); music = Source(.45f, true);houseMusic=Source(0,true);presentationMusic=Source(0,true);
             wind = Source(.22f, true); river = Source(.25f, true);
             tundraSwing=Source(1,false);tundraImpact=Source(1,false);
             transformationVoice=Source(1,false);transformationBurst=Source(1,false);
@@ -87,9 +89,14 @@ namespace Sunward
                 if(distance>=level.x)source.Stop();
                 else source.volume=game.CinematicActive?0:level.y*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/level.x));
             }
+            bool presentation=game.Presentation && (game.Presentation.Title || game.Presentation.Playing);
+            float presentationTarget=presentation?(game.Presentation.Title?.065f:.10f):0;
+            if(presentationTarget>0 && !presentationMusic.isPlaying)Loop(presentationMusic,"housemusic");
+            presentationBlend=Mathf.MoveTowards(presentationBlend,presentationTarget,Time.unscaledDeltaTime*(presentation && !game.Presentation.Title?.12f:.03f));presentationMusic.volume=presentationBlend;
+            if(!presentation && presentationBlend<=0 && presentationMusic.isPlaying)presentationMusic.Stop();
             bool inMusicHouse=Sunward.Remaster.VillageServices.InFoodHouse(p);
             string desired=game.InTrial?"battle":"town";
-            float houseTarget=inMusicHouse && !game.InTrial?.10f:0;
+            float houseTarget=inMusicHouse && !game.InTrial && !presentation?.10f:0;
             if(houseTarget>0 && !houseMusic.isPlaying){houseMusic.volume=0;Loop(houseMusic,"housemusic");}
             houseBlend=Mathf.MoveTowards(houseBlend,houseTarget,Time.unscaledDeltaTime*.035f);
             houseMusic.volume=houseBlend*(game.CinematicActive?.3f:1);
@@ -117,6 +124,7 @@ namespace Sunward
         }
         public void Cue(string id)
         {
+            if(id=="bark")return; // Rejected AN05 cue: await a positively identified original bark.
             if(id=="flame-impact")id="impact";
             // World actors must supply a position; never route them through 2D playback.
             if(id=="cow" || id=="pig" || id=="rooster" || id.StartsWith("npc") || id.StartsWith("enemy"))return;
@@ -161,9 +169,9 @@ namespace Sunward
         }
         public void StopTransformation()
         {if(transformationVoice)transformationVoice.Stop();if(transformationBurst)transformationBurst.Stop();}
-        public bool World(string cue,Vector3 position,float range=10,float volume=.65f)
+        public bool World(string cue,Vector3 position,float range=10,float volume=.65f,bool dialogue=false)
         {
-            if(!game || !game.Player || game.Blocked)return false;
+            if(!game || !game.Player || (game.Blocked && !dialogue) || game.CinematicActive)return false;
             float distance=Vector3.Distance(position,game.Player.transform.position);
             if(distance>=range || !Allow("world:"+cue,.5f))return false;
             var clip=Clip(cue);if(!clip)return false;
@@ -189,13 +197,18 @@ namespace Sunward
         public void Npc(int index) { Npc(index,game && game.Player?game.Player.transform.position:transform.position); }
         public void Npc(int index,Vector3 position)
         {
-            if(Time.unscaledTime<nextVoice)return;
-            if(World("npc"+index,position,7,.7f))
-            {
-                float length=bank.TryGetValue("npc"+index,out var voices)?voices[0].length:1.35f;
-                nextVoice=Time.unscaledTime+Mathf.Max(1.5f,length+.15f);
-            }
+            if(!game || game.npcObjects==null || index<0 || index>=game.npcObjects.Length || !game.npcObjects[index])return;
+            var actor=game.npcObjects[index].GetComponentInChildren<Sunward.Remaster.OriginalActor>(true);if(!actor)return;
+            string resource=actor.resource.Substring(actor.resource.LastIndexOf('/')+1).Replace("dojo-","");NpcVoice(resource,position);
         }
+        public void NpcVoice(string package,Vector3 position)
+        {
+            if(Time.unscaledTime<nextVoice)return;
+            speakingPackage=package;speakingPosition=position;
+            string cue="voice-"+package;
+            if(World(cue,position,7,.22f,true))nextVoice=Time.unscaledTime+.45f;
+        }
+        public void DialogueSyllable(){if(!string.IsNullOrEmpty(speakingPackage))NpcVoice(speakingPackage,speakingPosition);}
         public void Enemy(string role,Vector3 position)
         {
             int index=Array.IndexOf(new[]{"wisp","reed","ranged","heavy","elite","boss"},role);

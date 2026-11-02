@@ -11,7 +11,7 @@ namespace Sunward.Remaster
         {
             if(!Resting)return;
             StopAllCoroutines();Resting=false;
-            if(game && game.Player)game.Player.Locked=false;
+            if(game && game.Player)game.Player.Locked=game.Health<=0;
         }
         public static readonly Vector3 DojoDoor=new Vector3(0,.5f,15.1f), FoodDoor=new Vector3(4.8f,.4f,-15), Mat=new Vector3(8,.4f,-13.4f), Farmer=new Vector3(37,0,21.7f);
         public static Vector3 FarmerPosition {get{foreach(var r in Object.FindObjectsByType<NativeDailyRoutine>(FindObjectsSortMode.None))if(r.farmer)return r.transform.position;return Farmer;}}
@@ -39,7 +39,7 @@ namespace Sunward.Remaster
         {
             if(action=="venue:dojo")return InDojo(p)?"E · Leave the training hall":"E · Enter the samurai training hall";
             if(action=="venue:food")return InFoodHouse(p)?"E · Leave the food house":"E · Enter the food & music house";
-            if(action=="venue:pond")return "E · Rest beside the steaming pond";
+            if(action=="venue:pond")return "E · Bathe · temporary +25 vitality";
             if(action=="venue:mat")return "E · Sit on Amaterasu's mat";
             return "E · Speak with the farmer";
         }
@@ -50,8 +50,8 @@ namespace Sunward.Remaster
             if(action=="venue:dojo")VillageInteriors.Enter(game,"dojo");
             else if(action=="venue:food")VillageInteriors.Enter(game,"food");
             else if(action=="venue:mat")StartCoroutine(Sit());
-            else if(action=="venue:pond")RestAt(new Vector3(GardenPond.X+3.7f,.04f,GardenPond.Z),270);
-            else if(action=="venue:farmer") {game.Audio.Npc(3,FarmerPosition);game.SetPanel("farm");}
+            else if(action=="venue:pond")game.Spa.Bathe();
+            else if(action=="venue:farmer") {game.Audio.NpcVoice("hm00",FarmerPosition);game.SetPanel("farm");}
             if(action=="venue:dojo" || action=="venue:food")
             {
                 var camera=FindFirstObjectByType<OrbitCamera>();if(camera)camera.SnapFocus();

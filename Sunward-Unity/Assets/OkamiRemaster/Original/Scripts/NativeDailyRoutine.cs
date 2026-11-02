@@ -26,7 +26,7 @@ namespace Sunward.Remaster
             actor=GetComponent<OriginalActor>();resident=GetComponent<VillageResident>();body=GetComponent<Rigidbody>();
             if(resident)resident.enabled=false;
             if(body)body.isKinematic=true;
-            if(!home)home=NativeHomeRoom.For(seed);
+            if(!home && !farmer)home=NativeHomeRoom.For(seed);
             if(clear==null)
             {
                 clear=new bool[W,H];for(int x=0;x<W;x++)for(int z=0;z<H;z++)clear[x,z]=VillageNavigation.Clear(game.valley.Data,Point(x,z),.38f);
@@ -52,14 +52,14 @@ namespace Sunward.Remaster
         void Update()
         {
             if(!game || game.Blocked || !actor || !actor.Ready)return;
-            int phase=teaVisit?1:farmer?(int)((Time.time+seed*7)/16)%4:(int)((Time.time+seed*13)/40)%4;
+            int phase=farmer && game.Profile.night?4:teaVisit?1:farmer?(int)((Time.time+seed*7)/16)%4:(int)((Time.time+seed*13)/40)%4;
             if(wait>0){wait-=Time.deltaTime;return;}
             if(farmer && Vector3.Distance(transform.position,game.Player.transform.position)<3.2f){actor.EndActivity();return;}
             if(phase!=destination)
             {
                 destination=phase;resting=false;actor.EndActivity();
                 if(indoors && home){SetPosition(home.exitPoint);indoors=false;}
-                var target=farmer?workplace+(phase==0?Vector3.zero:phase==1?new Vector3(7,0,0):phase==2?new Vector3(10,0,1.5f):new Vector3(2,0,2.8f)):phase==1 && home?home.Approach:phase==2?new Vector3(GardenPond.X+Mathf.Cos((seed*47+20)*Mathf.Deg2Rad)*4.25f,0,GardenPond.Z+Mathf.Sin((seed*47+20)*Mathf.Deg2Rad)*2.9f):workplace;
+                var target=farmer && game.Profile.night?new Vector3(37.2f,0,18.2f):farmer?workplace+(phase==0?Vector3.zero:phase==1?new Vector3(7,0,0):phase==2?new Vector3(10,0,1.5f):new Vector3(2,0,2.8f)):phase==1 && home?home.Approach:phase==2?new Vector3(GardenPond.X+Mathf.Cos((seed*47+20)*Mathf.Deg2Rad)*4.25f,0,GardenPond.Z+Mathf.Sin((seed*47+20)*Mathf.Deg2Rad)*2.9f):workplace;
                 if(!Route(target)){wait=5;destination=-1;return;}
             }
             if(indoors)

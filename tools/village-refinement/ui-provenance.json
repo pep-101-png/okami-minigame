@@ -1,0 +1,64 @@
+[
+  {
+    "name": "SAVE_ICON_BG",
+    "sha256": "e973894cf11b918cf8d79bea719d3f857a18b1b4daf761e577963c9bdb0e6a78",
+    "output": "TitlePainting",
+    "crop": null,
+    "outputSHA256": "c6702602234e97a0c7b1d77a56dea364f135ef8de66bf9160a2eb9d84e12ada2"
+  },
+  {
+    "name": "gal_emtop",
+    "sha256": "6968a0f2776fd7802db260de7ec80fcbaee232cf07773145513dbcda919856a0",
+    "output": "TitleLogo",
+    "crop": [
+      1180,
+      105,
+      1710,
+      560
+    ],
+    "outputSHA256": "2b310cb8a9872a4066c11860c5700141465c6cdc307d70ed164de86dd0be9d1e",
+    "conversion": "Crop of original logo; paper background alpha separated; original logo RGB pixels retained"
+  },
+  {
+    "name": "fukidasi_11",
+    "sha256": "d3e4aa9f59a61eaaa5337933af2f83a97b349546a03afc2063f104e4e623e78e",
+    "output": "DialogueInk",
+    "crop": null,
+    "outputSHA256": "a23b4fdf4465dec42dcf73518a0b93d97268f9e5410f0fb26f3dc687cc2833bf"
+  },
+  {
+    "name": "fukidasi_12",
+    "sha256": "516d71e4861ae7df11ed412b3e7a1b35e07c9adec9cc20f08ce72b6a006e1ce9",
+    "output": "DialogueTail",
+    "crop": null,
+    "outputSHA256": "e139d7bd1175cb5becdb55916bdc027ce38062b6bbeb483bb3846466dc61b1ba"
+  },
+  {
+    "name": "fukidasi_13",
+    "sha256": "c4416c6dab8851e30eb7ddd7bb268a83b9633560a4ef0c0b15694f7b51d73e12",
+    "output": "HintInk",
+    "crop": null,
+    "outputSHA256": "ba2244b6041c90085e6aa99edff5653bcacfc9dbaed50e0f45d9494fef9144ec"
+  },
+  {
+    "name": "fukidasi_sys",
+    "sha256": "d45102aaac3c4b4924ba01753a77eb40720b7e3ddd6df6b2cb6f4f7885bc2f83",
+    "output": "SystemScroll",
+    "crop": null,
+    "outputSHA256": "8caf3e0407b9e30f43770cb008c52d0ee4a31afcb2b4095932a31a4cc7588f30"
+  },
+  {
+    "name": "wasigami",
+    "sha256": "abc2e4365d931d2f5450b5f40d15b91c610fcde2c036627d17ff98c624150cd9",
+    "output": "MenuPaper",
+    "crop": null,
+    "outputSHA256": "bff099984ec231dbc0c83d2bc7234320f50efddfff0c42e2a419ad02649ac3f6"
+  },
+  {
+    "name": "MessCore",
+    "sha256": "4746744e4c29a7126587525152312427f841c65b0f596d735c619d03895148ba",
+    "output": "MessageGlyphs",
+    "crop": null,
+    "outputSHA256": "17a2f4c4af63f16e357ef670787096d3ff990b899ecaa273be33e08597fc978a"
+  }
+]

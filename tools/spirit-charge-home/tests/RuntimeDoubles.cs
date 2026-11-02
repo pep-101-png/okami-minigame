@@ -91,7 +91,7 @@ namespace Sunward
  public partial class OrbitCamera:Object
  {public int snaps;public bool cinematic,savedIgnoreTimeScale;public Unity.Cinemachine.CinemachineBrain brain;public Unity.Cinemachine.CinemachineCamera virtualCamera=new Unity.Cinemachine.CinemachineCamera();public float savedFov,cinematicYaw,cinematicPitch,cinematicDistance,yaw=37,pitch=25,distance=15;public Vector3 cinematicFocus;public WolfMotor target;public void SnapFocus(){snaps++;}}
  public sealed partial class GameFlow:MonoBehaviour
- {
+ {public Remaster.VillagePresentation Presentation;
   public ValleyAudio Audio=new ValleyAudio();public Remaster.CrimsonHelmAscension BossTransformation;public bool Blocked,CinematicActive,InTrial,BossTrial,waiting;public ProfileData Profile=new ProfileData();public Remaster.ShiranuiTransformation Transformation=new Remaster.ShiranuiTransformation();
   public WolfMotor Player;public WolfCombat Combat=new WolfCombat();public Valley valley=new Valley();public HomeRest Home=new HomeRest();public Remaster.VillageServices Services=new Remaster.VillageServices();
   public float Health,Stamina,Energy,hitUntil;public int MaxHealth=>120;public float MaxStamina=>100;public float MaxEnergy=>80;public string Panel="result";public string Dialogue {get;private set;}public GameObject barrier;public int clears,projectiles,runCoins=10,runXp=20;public SaveStore Save=new SaveStore();
@@ -116,3 +116,5 @@ namespace Sunward.Remaster
 
 namespace Unity.Cinemachine
 {public struct LensSettings{public float FieldOfView;}public class CinemachineCamera:UnityEngine.Object{public LensSettings Lens=new LensSettings{FieldOfView=50};}public class CinemachineBrain:UnityEngine.Object{public bool IgnoreTimeScale;}}
+
+namespace Sunward.Remaster{public class VillagePresentation:UnityEngine.Object{public void Cancel(){}}}

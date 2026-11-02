@@ -61,15 +61,17 @@ namespace Sunward.Remaster
             for(int i=1;i<stroke.Count;i++){length+=Vector2.Distance(stroke[i-1],stroke[i]);lo=Vector2.Min(lo,stroke[i]);hi=Vector2.Max(hi,stroke[i]);}
             float span=(hi-lo).magnitude,end=Vector2.Distance(stroke[0],stroke[stroke.Count-1]);
             if(span<60)return;
-            bool bloom=end<span*.3f && length>span*1.8f;
+            bool bomb=BrushPatterns.CherryBomb(stroke);
+            bool bloom=!bomb && end<span*.3f && length>span*1.8f;
             bool slash=end>60 && length/end<1.3f;
-            if(!bloom && !slash){game.Notify("Draw a straight slash or a closed Bloom circle");return;}
-            float cost=bloom?15:20;
+            if(!bloom && !slash && !bomb){game.Notify("Draw a slash, Bloom circle, or a circle with a fuse for Cherry Bomb");return;}
+            float cost=bomb?25:bloom?15:20;
             if(game.Energy<cost){game.Notify("Not enough ink · let it replenish");return;}
             Vector3 centre=Vector3.zero;foreach(var p in world)centre+=p;centre/=world.Count;
             if(Vector3.Distance(centre,game.Player.transform.position)>24){game.Notify("Brush target is too far away");return;}
             game.Energy-=cost;
-            if(bloom)
+            if(bomb){CherryBomb.Spawn(game,centre);game.Notify("Cherry Bomb · stand clear");}
+            else if(bloom)
             {
                 var life=game.GetComponent<VillageLife>();int restored=life?life.Bloom(centre):0;
                 Burst("Blossom",centre,45,.65f);Burst("Leaf",centre,14,.35f);var breath=OriginalAtmosphere.Create("Wind",null,centre+Vector3.up*.3f,0,2.4f,.8f,.15f,2);if(breath){breath.Emit(3);Destroy(breath.gameObject,1.5f);}game.Audio.Cue("collect");game.Notify(restored>0?"Bloom · the land answers your brush":"Bloom · a shower of petals");
@@ -117,7 +119,8 @@ namespace Sunward.Remaster
             GUI.color=new Color(.05f,.025f,.015f,.95f);float tip=42*scale;
             GUI.DrawTexture(new Rect(cursor.x-tip*.26f,Screen.height-cursor.y-tip*.76f,tip,tip),ink);
             GUI.color=Color.white;
-            GUI.Label(new Rect(22,18,Screen.width-44,32),"CELESTIAL BRUSH · Ink "+Mathf.CeilToInt(game.Energy)+" · Slash / Bloom");
+            InkText.Draw("Celestial Brush · Ink "+Mathf.CeilToInt(game.Energy)+" · Slash / Bloom / Cherry Bomb",new Rect(22,18,Screen.width-44,48),32,new Color(.05f,.025f,.015f,.9f),false);
+            InkText.Draw("Cherry Bomb: circle, then a short straight fuse · 25 Ink",new Rect(22,57,Screen.width-44,40),26,new Color(.05f,.025f,.015f,.65f),false);
             GUI.color=old;GUI.matrix=previous;
         }
         void OnDestroy(){if(paperProfile)Destroy(paperProfile);}

@@ -42,9 +42,9 @@ namespace Sunward.Remaster
             pools[16]=new Vector4(-4,2,29,7);pools[17]=new Vector4(4,2,29,7);
             Shader.SetGlobalVectorArray("_SunwardFestivalLights",pools);Apply();
         }
-        public static void Place(Transform parent,string resource,Vector3 position,Vector3 size,Vector3 rotation)
+        public static GameObject Place(Transform parent,string resource,Vector3 position,Vector3 size,Vector3 rotation)
         {
-            var data=Resources.Load<TextAsset>(resource+"/Model");if(!data)return;
+            var data=Resources.Load<TextAsset>(resource+"/Model");if(!data)return null;
             var model=JsonUtility.FromJson<BoundsModel>(data.text);Vector3 lo=Vector3.one*float.PositiveInfinity,hi=Vector3.one*float.NegativeInfinity;
             foreach(var part in model.parts)
             {
@@ -52,8 +52,9 @@ namespace Sunward.Remaster
             for(int i=0;i<part.positions.Length;i+=3){var p=new Vector3(part.positions[i],part.positions[i+1],part.positions[i+2]);lo=Vector3.Min(lo,p);hi=Vector3.Max(hi,p);}
             }
             var extent=hi-lo;Vector3 scale=new Vector3(size.x/Mathf.Max(.001f,extent.x),size.y/Mathf.Max(.001f,extent.y),size.z/Mathf.Max(.001f,extent.z));
-            var root=new GameObject("Original cedar festival support");root.transform.SetParent(parent,false);root.transform.localPosition=position;root.transform.localRotation=Quaternion.Euler(rotation);
+            var root=new GameObject("Original native prop "+resource);root.transform.SetParent(parent,false);root.transform.localPosition=position;root.transform.localRotation=Quaternion.Euler(rotation);
             root.AddComponent<OriginalVisual>().Load(resource,-Vector3.Scale(new Vector3((lo.x+hi.x)*.5f,lo.y,(lo.z+hi.z)*.5f),scale),scale);
+            return root;
         }
         [System.Serializable]sealed class BoundsModel{public BoundsPart[] parts;public int[] visibleGroups;}
         [System.Serializable]sealed class BoundsPart{public string name;public float[] positions;}

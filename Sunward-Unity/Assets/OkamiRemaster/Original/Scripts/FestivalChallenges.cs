@@ -16,12 +16,15 @@ namespace Sunward.Remaster
         static readonly Vector3[] Route={new Vector3(0,0,-10),new Vector3(2,0,-2),new Vector3(0,0,10),new Vector3(11,0,20),new Vector3(19,0,24),new Vector3(35,0,24)};
         static readonly string[] RewardResources={"Okami/vt99","Okami/vt77","Okami/vt55"};
         public static string RewardName(int index)=>index==0?"Decorative fan":index==1?"Beckoning cat":"Flower vase";
-        public string Status=>mode==1?"LANTERN DASH · "+checkpoint+" / 6 · "+Mathf.CeilToInt(remaining)+"s":mode==2?"HARVEST RELAY · dug "+freshCrops.Count+" / 3 · delivered "+delivered+" / 3 · "+Mathf.CeilToInt(remaining)+"s":"Festival challenges · earn tokens at night";
+        public string Status=>mode==1?"SPIRIT RUN · "+checkpoint+" / 6 · "+Mathf.CeilToInt(remaining)+"s":mode==2?"HARVEST RELAY · dug "+freshCrops.Count+" / 3 · delivered "+delivered+" / 3 · "+Mathf.CeilToInt(remaining)+"s":"Festival challenges · earn tokens at night";
         void Start()
         {
             if(!game)game=GetComponent<GameFlow>();
             var board=new GameObject("Original festival noticeboard");board.transform.SetParent(transform,false);board.transform.position=Ground(Board);
-            VillageFestival.Place(board.transform,"Okami/vt11",Vector3.zero,new Vector3(.9f,1.8f,.15f),new Vector3(0,-90,0));
+            VillageFestival.Place(board.transform,"Okami/vt11",Vector3.zero,new Vector3(1.8f,2.7f,.25f),new Vector3(0,-90,0));
+            VillageFestival.Place(board.transform,"Okami/vt33",new Vector3(-.9f,2.4f,0),new Vector3(.45f,.65f,.45f),Vector3.zero);
+            var beacon=board.AddComponent<Light>();beacon.type=LightType.Point;beacon.range=5;beacon.color=new Color(1,.72f,.35f);beacon.intensity=2;beacon.shadows=LightShadows.None;
+            OriginalAtmosphere.Create("SpiritGlow",board.transform,Vector3.up*2.25f,3,.12f,1.2f,.1f,.45f);
         }
         Vector3 Ground(Vector3 p){p.y=game.valley.Height(p)+.025f;return p;}
         public void Begin(int kind)
@@ -33,12 +36,13 @@ namespace Sunward.Remaster
             if(kind==1)
                 for(int i=0;i<Route.Length;i++)
                 {
-                    var point=new GameObject("Festival route lantern "+(i+1));point.transform.SetParent(transform,false);point.transform.position=Ground(Route[i]);
-                    VillageFestival.Place(point.transform,"Okami/vt32",Vector3.zero,new Vector3(.38f,.65f,.38f),Vector3.zero);
+                    var point=new GameObject("Festival spirit light "+(i+1));point.transform.SetParent(transform,false);point.transform.position=Ground(Route[i]);
+                    OriginalAtmosphere.Create("SpiritGlow",point.transform,Vector3.up*1.1f,12,.38f,1.1f,.04f,.12f);
+                    OriginalAtmosphere.Create("Spirit",point.transform,Vector3.up*1.1f,2,.24f,1,.02f,.08f);
                     var light=point.AddComponent<Light>();light.type=LightType.Point;light.color=new Color(1,.7f,.3f);light.range=3;light.intensity=2;light.shadows=LightShadows.None;
                     checkpoints.Add(point);point.SetActive(i==0);
                 }
-            game.Close();game.Notify(kind==1?"Lantern dash · follow the glowing lanterns to the northeast farm":"Harvest relay · dig three different vegetables, then hand three to the farmer");
+            game.Close();if(game.Presentation)game.Presentation.Festival(false);game.Notify(kind==1?"Spirit run · follow the floating spirit lights to the northeast farm":"Harvest relay · dig three different vegetables, then hand three to the farmer");
         }
         public void Harvest(int crop){if(mode==2 && freshCrops.Count<3)freshCrops.Add(crop);}
         public void Deliver(int count)
@@ -51,7 +55,7 @@ namespace Sunward.Remaster
         void Clear(){mode=0;foreach(var p in checkpoints)if(p)Destroy(p);checkpoints.Clear();}
         void Win()
         {
-            Clear();game.Profile.festivalTokens=Mathf.Min(1000000,game.Profile.festivalTokens+3);game.Profile.festivalWins++;game.Save.Save();game.Notify("Festival challenge won · +3 tokens · visit the board for home decorations");
+            Clear();game.Profile.festivalTokens=Mathf.Min(1000000,game.Profile.festivalTokens+3);game.Profile.festivalWins++;game.Save.Save();if(game.Presentation)game.Presentation.Festival(true);game.Notify("Festival challenge won · +3 tokens · visit the board for home decorations");
         }
         public void Buy(int index)
         {
@@ -74,7 +78,7 @@ namespace Sunward.Remaster
             remaining-=Time.deltaTime;if(remaining<=0){Clear();game.Notify("Time’s up · try another festival challenge at the board");return;}
             if(mode==1 && Vector3.Distance(game.Player.transform.position,Ground(Route[checkpoint]))<1.35f)
             {
-                checkpoints[checkpoint].SetActive(false);checkpoint++;
+                CelestialBrush.Burst("SpiritGlow",Ground(Route[checkpoint])+Vector3.up,18,.35f);game.Audio.Cue("collect");checkpoints[checkpoint].SetActive(false);checkpoint++;
                 if(checkpoint==Route.Length)Win();else checkpoints[checkpoint].SetActive(true);
             }
         }

@@ -76,7 +76,7 @@ static class FestivalTests
   for(int i=0;i<=200;i++)foreach(bool forward in new[]{true,false})
   {var p=VillageStreetPlay.BallPosition(i/200f,forward);Check(p.x>=-1.81f&&p.x<=1.81f&&p.z>=-5.21f&&p.z<=-1.29f&&p.y>=.17f&&p.y<=.25f,"Street ball leaves its safe play area");}
   var audio=new ValleyAudio();var audioType=typeof(ValleyAudio);var flags=BindingFlags.Instance|BindingFlags.NonPublic;
-  foreach(string field in new[]{"music","wind","river","houseMusic"})audioType.GetField(field,flags).SetValue(audio,new AudioSource());
+  foreach(string field in new[]{"music","wind","river","houseMusic","presentationMusic"})audioType.GetField(field,flags).SetValue(audio,new AudioSource());
   audioType.GetField("game",flags).SetValue(audio,game);
   var sounds=(System.Collections.Generic.Dictionary<string,System.Collections.Generic.List<AudioClip>>)audioType.GetField("bank",flags).GetValue(audio);
   sounds["housemusic"]=new System.Collections.Generic.List<AudioClip>{new AudioClip{length=34.7f,name="original melody"}};
@@ -97,6 +97,7 @@ static class FestivalTests
    Check(street.Ready && children.Length==2 && puppies.Length==3,"Street actor population missing");
    foreach(var actor in children)Check(actor!=null && actor.Ready && actor.CurrentSourceMotion=="hm1c_000","Child failed Awake after runtime creation");
    foreach(var actor in puppies)Check(actor!=null && actor.Ready && actor.CurrentSourceMotion=="an18_000","Puppy failed Awake after runtime creation");
+   Check(System.Linq.Enumerable.Count(System.Linq.Enumerable.Distinct(System.Linq.Enumerable.Select(puppies,p=>p.resource)))==3,"Puppy variants share one appearance");
    Check(GameObject.created.Count>streetObjectStart,"Street did not instantiate its original actors");
   }
   finally{StreetActorLifecycle.Enabled=false;}
