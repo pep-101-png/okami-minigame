@@ -121,14 +121,9 @@ namespace Sunward.Remaster
         void ChargeClearance()
         {
             rig.Root.transform.localPosition=Vector3.zero;
-            if(combat && combat.HoldingCharge)
-            {
-                // The socket already follows Ammy's back. Keep a small bounded
-                // correction rather than moving every low bead over her torso.
-                chargeLift=Mathf.MoveTowards(chargeLift,.12f,Time.deltaTime*1.8f);
-            }
-            else chargeLift=Mathf.MoveTowards(chargeLift,0,Time.deltaTime*4);
-            rig.Root.transform.position+=Vector3.up*chargeLift;
+            // The native player owns its dorsal attachment. Applying a second
+            // world-space lift here double-corrects the cast and ignores its pose.
+            chargeLift=0;
         }
         void Sample(NativePoseBank.Clip clip,float time,bool loop,float blend)=>bank.Sample(clip,time,rig.Bones,position,rotation,scale,blend,loop);
         void OnDestroy(){if(rig!=null)rig.Dispose();}

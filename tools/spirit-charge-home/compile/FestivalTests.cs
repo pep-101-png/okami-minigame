@@ -6,6 +6,7 @@ using Sunward.Remaster;
 using UnityEngine;
 static class FestivalTests
 {
+ static object Call(object target,string method)=>target.GetType().GetMethod(method,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(target,null);
  static int checks;
  static void Check(bool yes,string why){checks++;if(!yes)throw new Exception(why);}
  public static int Run()
@@ -35,6 +36,35 @@ static class FestivalTests
    var guarded=VillageInteriors.Guard(inside,new Vector3(1000,inside.y,1000));Check(VillageInteriors.Inside(guarded),"Player can leave an isolated room's bounds");
    VillageInteriors.Enter(game,room);Check(!VillageInteriors.Inside(player.transform.position)&&player.transform.position.y>-.1f,"Room exit cannot return outdoors");
   }
+  // Walk real portal code, then run the actual river-recovery component.
+  // This catches the previous update's immediate y<-6 river recovery indoors.
+  var waterContact=new WaterContact{game=game};
+  foreach(string room in new[]{"home","food","dojo"})
+  {
+   player.transform.position=Vector3.zero;
+   var doorways=new VillageDoorways{game=game};
+   Vector3 from=room=="home"?new Vector3(-34,.1f,-23):room=="food"?new Vector3(1,.4f,-15):new Vector3(0,.5f,12.5f);
+   Vector3 to=room=="home"?new Vector3(-34,.1f,-21.6f):room=="food"?new Vector3(2.4f,.4f,-15):new Vector3(0,.5f,14);
+   player.transform.position=from;Call(doorways,"Update");player.transform.position=to;Call(doorways,"Update");
+   var arrival=player.transform.position;Check(VillageInteriors.Inside(arrival),"Walking into "+room+" does not enter");
+   int cancels=game.Combat.cancels;
+   for(int frame=0;frame<120;frame++)Call(waterContact,"Update");
+   Check(game.Combat.cancels==cancels && (player.transform.position-arrival).magnitude<.001f,"River recovery ejects player from "+room);
+   var camera=VillageInteriors.CameraPosition(arrival,arrival+new Vector3(100,30,-100));
+   Check(VillageInteriors.Inside(camera) && camera.y<arrival.y+6,"Room camera exposes a floating floor from outside");
+   var outside=arrival+new Vector3(80,0,0);Check(!VillageInteriors.AnyRoom(outside),"Interior bounds include unrelated world");
+   Time.deltaTime=.7f;Call(doorways,"Update");
+   player.transform.position=room=="home"?new Vector3(-34,-249.865f,-19.4f):room=="food"?new Vector3(4.3f,-249.57f,-15):new Vector3(0,-249.47f,14.2f);
+   Call(doorways,"Update");Check(player.transform.position.y>-1,"Walking back through "+room+" doorway cannot exit");
+  }
+  Check(!VillageDoorways.Crossed(new Vector3(-38,.1f,-23),new Vector3(-38,.1f,-20),VillageInteriors.HomeDoor,Vector3.forward),"Walking beside house triggers its portal");
+  Check(!VillageDoorways.Crossed(new Vector3(-34,.1f,-21),new Vector3(-34,.1f,-23),VillageInteriors.HomeDoor,Vector3.forward),"Walking away from doorway enters house");
+  Check(!VillageDoorways.Crossed(new Vector3(-34,8,-23),new Vector3(-34,8,-20),VillageInteriors.HomeDoor,Vector3.forward),"Jumping above door enters house");
+  var home=new NativeHomeRoom{number=2,game=game,door=new Vector3(-9,0,-9.633f),exitPoint=new Vector3(-9,0,-9.633f),entrance=new Vector3(-9,-54.97f,-8.2f)};home.transform.position=new Vector3(-9,-55,-6);Call(home,"OnEnable");
+  var teaDoors=new VillageDoorways{game=game};player.transform.position=new Vector3(-9,0,-13);Call(teaDoors,"Update");player.transform.position=new Vector3(-9,0,-11);Call(teaDoors,"Update");
+  Check(home.Contains(player.transform.position),"Tea home still requires a glow/E hotspot");
+  int teaCancels=game.Combat.cancels;for(int i=0;i<30;i++)Call(waterContact,"Update");Check(game.Combat.cancels==teaCancels,"Tea room is treated as river");
+  Time.deltaTime=.7f;Call(teaDoors,"Update");player.transform.position=new Vector3(-9,-54.97f,-7.8f);Call(teaDoors,"Update");Check(player.transform.position.y>-1,"Tea home exit cannot walk back to village");Call(home,"OnDisable");
   var audio=new ValleyAudio();var audioType=typeof(ValleyAudio);var flags=BindingFlags.Instance|BindingFlags.NonPublic;
   foreach(string field in new[]{"music","wind","river","houseMusic"})audioType.GetField(field,flags).SetValue(audio,new AudioSource());
   audioType.GetField("game",flags).SetValue(audio,game);

@@ -8,7 +8,7 @@ namespace Sunward.Remaster
         int story;
         NativeDailyRoutine elder;
         NativeHomeRoom home;
-        public string Directions=>"My house is west of the main street, near the first bridge. Look for the warm light beside the door. Come in for tea; I have a few old stories to share.";
+        public string Directions=>"My house is west of the main street, near the first bridge. Walk through its bamboo-painted front door. Come in for tea; I have a few old stories to share.";
         public bool AtHome=>Invited && home && NativeHomeRoom.At(game.Player.transform.position)==home;
         static readonly string[] stories={
             "Long ago, the eight-headed Orochi demanded a maiden from Kamiki Village each year. A white wolf called Shiranui helped the swordsman Nagi defeat the serpent and save Nami. The village remembered that courage for a hundred years.",
@@ -23,7 +23,7 @@ namespace Sunward.Remaster
         {
             if(!game)game=GetComponent<GameFlow>();home=NativeHomeRoom.ByNumber(2);
             if(game.npcObjects.Length>2 && game.npcObjects[2])elder=game.npcObjects[2].GetComponent<NativeDailyRoutine>();
-            if(home){var marker=new GameObject("Tea host's original lantern");marker.transform.SetParent(transform,false);marker.transform.position=home.door+new Vector3(1.2f,.05f,0);OriginalAtmosphere.Create("SpiritGlow",marker.transform,Vector3.up*.8f,2,.2f,1.2f,.01f);var light=marker.AddComponent<Light>();light.type=LightType.Point;light.range=4;light.intensity=2;light.color=new Color(1,.6f,.25f);}
+
         }
         public void Invite()
         {

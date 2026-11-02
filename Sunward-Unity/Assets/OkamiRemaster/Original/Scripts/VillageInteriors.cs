@@ -11,6 +11,17 @@ namespace Sunward.Remaster
         public static bool Food(Vector3 p)=>Mathf.Abs(p.y-FoodCentre.y)<8 && Mathf.Abs(p.x-10)<7.1f && Mathf.Abs(p.z+15)<5.8f;
         public static bool Dojo(Vector3 p)=>Mathf.Abs(p.y-DojoCentre.y)<10 && Mathf.Abs(p.x)<9.7f && Mathf.Abs(p.z-25)<13;
         public static bool Inside(Vector3 p)=>Home(p)||Food(p)||Dojo(p);
+        public static bool AnyRoom(Vector3 p)=>Inside(p)||NativeHomeRoom.At(p);
+        public static Vector3 CameraPosition(Vector3 player,Vector3 camera)
+        {
+            Vector3 c;float x,z,height=2.7f;
+            if(Home(player)){c=HomeCentre;x=6.2f;z=4.25f;}
+            else if(Food(player)){c=FoodCentre;x=6.65f;z=5.4f;}
+            else if(Dojo(player)){c=DojoCentre;x=8.7f;z=11.7f;height=5.8f;}
+            else {var home=NativeHomeRoom.At(player);if(!home)return camera;c=home.transform.position;x=3.6f;z=2.6f;}
+            camera.x=Mathf.Clamp(camera.x,c.x-x,c.x+x);camera.z=Mathf.Clamp(camera.z,c.z-z,c.z+z);
+            camera.y=Mathf.Clamp(camera.y,c.y+1.1f,c.y+height);return camera;
+        }
         public static bool Height(Vector3 p,out float y)
         {
             y=HomeCentre.y;if(Home(p))return true;
@@ -32,25 +43,23 @@ namespace Sunward.Remaster
             next.x=Mathf.Clamp(next.x,c.x-x,c.x+x);next.z=Mathf.Clamp(next.z,c.z-z,c.z+z);return next;
         }
         public static Vector3 Mat=>new Vector3(6.8f,-249.54f,-12.44f);
-        public static Vector3 HomeDoor=>new Vector3(-34,.1f,-20.2f);
+        public static Vector3 HomeDoor=>new Vector3(-34,.1f,-20.25f);
         public static string Action(Vector3 p)
         {
-            if(Home(p))return Vector3.Distance(p,HomeLayout.Bed)<1.9f?"bed":Vector3.Distance(p,HomeLayout.Mirror)<2?"mirror":"interior:home";
-            if(Food(p))return Vector3.Distance(p,Mat)<1.35f?"venue:mat":"interior:food";
-            if(Dojo(p))return "interior:dojo";
-            if(Vector3.Distance(p,HomeDoor)<2.3f)return "interior:home";
+            if(Home(p))return Vector3.Distance(p,HomeLayout.Bed)<1.9f?"bed":Vector3.Distance(p,HomeLayout.Mirror)<2?"mirror":null;
+            if(Food(p))return Vector3.Distance(p,Mat)<1.35f?"venue:mat":null;
             return null;
         }
         public static void Enter(GameFlow game,string room)
         {
             var p=game.Player.transform.position;Vector3 target;
-            if(room=="home")target=Home(p)?new Vector3(-34,.12f,-21.4f):new Vector3(-34,-249.865f,-19.5f);
-            else if(room=="food")target=Food(p)?new Vector3(2.8f,.05f,-15):new Vector3(4,-249.57f,-15);
-            else target=Dojo(p)?new Vector3(0,.05f,13.3f):new Vector3(0,-249.47f,14);
+            if(room=="home")target=Home(p)?new Vector3(-34,.12f,-22.5f):new Vector3(-34,-249.865f,-18.1f);
+            else if(room=="food")target=Food(p)?new Vector3(1.5f,.05f,-15):new Vector3(5.4f,-249.57f,-15);
+            else target=Dojo(p)?new Vector3(0,.05f,12.8f):new Vector3(0,-249.47f,15.7f);
             game.Combat.Cancel();game.Services.CancelRest();game.Player.Teleport(target);
-            game.Player.transform.rotation=Quaternion.Euler(0,room=="food"?90:0,0);
+            bool entering=Inside(target);game.Player.transform.rotation=Quaternion.Euler(0,(room=="food"?90:0)+(entering?0:180),0);
             var camera=Object.FindFirstObjectByType<OrbitCamera>();if(camera)camera.SnapFocus();
-            game.Notify(Inside(target)?"E · leave through the entrance · furnished village interior":"Back in the village");
+            game.Notify(Inside(target)?"Walk back through the doorway to leave":"Back in the village");
         }
     }
 }

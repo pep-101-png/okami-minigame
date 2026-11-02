@@ -81,7 +81,7 @@ namespace Sunward
  }
  public class WolfAnimation{public string current;public void Play(string state,float blend=0,float duration=0,bool restart=false){current=state;}}
  public class Valley:UnityEngine.Object{public class Terrain{}public class ValleyData{public Terrain terrain=new Terrain();}public ValleyData Data=new ValleyData();public float Height(Vector3 p)=>.7f;public static float SurfaceHeight(Terrain t,Vector3 p)=>.7f;}
- public class WolfCombat:Object{public int cancels,rests;public void Cancel(){cancels++;}public void Equip(){throw new Exception("Return home attempted a visual reload");}public void Rest(bool rest){rests++;}}
+ public class WolfCombat:Object{public bool HoldingCharge;public int cancels,rests;public void Cancel(){cancels++;}public void Equip(){throw new Exception("Return home attempted a visual reload");}public void Rest(bool rest){rests++;}}
  public sealed partial class ValleyAudio:Object
  {
   public AudioSource tundraSwing=new AudioSource(),tundraImpact=new AudioSource(),transformationVoice=new AudioSource(),transformationBurst=new AudioSource();

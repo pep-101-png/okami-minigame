@@ -62,6 +62,7 @@ namespace Sunward.Remaster
         WolfMotor motor;
         sealed class Socket { public Transform bone, socket; public Vector3 offset; public Quaternion rotation; }
         readonly List<Socket> sockets = new List<Socket>();
+        Vector3 dorsalBindOffset;Quaternion dorsalBindRotation=Quaternion.identity;
         public Transform AttachSocket(Transform original, Transform bone, string label)
         {
             var socket = new GameObject(label).transform;
@@ -102,6 +103,8 @@ namespace Sunward.Remaster
                 fromPosition = new Vector3[bank.BoneCount]; fromRotation = new Quaternion[bank.BoneCount]; fromScale = new Vector3[bank.BoneCount];
                 Ready = true;
                 Play("Idle_Natural", 0, 0, false, false);
+                var torso=rig.Bones[1];dorsalBindOffset=torso.InverseTransformPoint(Back.position);
+                dorsalBindRotation=Quaternion.Inverse(torso.rotation)*Back.rotation;
             }
             catch (Exception e)
             {
@@ -276,7 +279,16 @@ namespace Sunward.Remaster
             // Follow the bone pose without inheriting its squash/stretch scale
             // into a separately skinned weapon. Skin scales remain untouched.
             foreach (var socket in sockets)
-                if (socket.socket && socket.bone) socket.socket.SetPositionAndRotation(socket.bone.TransformPoint(socket.offset), socket.bone.rotation * socket.rotation);
+                if (socket.socket && socket.bone)
+                {
+                    // Charged MOTs intentionally place the dorsal control at the
+                    // action origin. The held idle rosary instead belongs at the
+                    // anatomical dorsal bind on the moving torso. Cast/strike
+                    // curves still use their authored action-origin attachment.
+                    bool held=socket.bone==Back && binding.state==TundraAttackRules.Charge && motor && motor.game && motor.game.Combat && motor.game.Combat.HoldingCharge;
+                    Vector3 point=held?rig.Bones[1].TransformPoint(dorsalBindOffset):socket.bone.TransformPoint(socket.offset);
+                    socket.socket.SetPositionAndRotation(point,(held?rig.Bones[1].rotation*dorsalBindRotation:socket.bone.rotation)*socket.rotation);
+                }
         }
         void OnDisable() { Show(false); }
         void OnEnable() { if (Ready) Show(true); }
