@@ -10,6 +10,7 @@ static class FestivalTests
  static void Check(bool yes,string why){checks++;if(!yes)throw new Exception(why);}
  public static int Run()
  {
+  var dialogue=new GameFlow();dialogue.ShowDialogue("Tea invitation","elder");Check(dialogue.Dialogue=="Tea invitation"&&dialogue.Panel=="elder","Public dialogue API loses invitation text/panel");
   var player=new WolfMotor();var game=new GameFlow{Player=player,Panel="",Health=1};player.game=game;
   var festival=game.gameObject.AddComponent<VillageFestival>();festival.game=game;var bed=new HomeRest{game=game};Time.deltaTime=.2f;
   for(int cycle=0;cycle<2;cycle++)

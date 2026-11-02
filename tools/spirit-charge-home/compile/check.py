@@ -112,6 +112,13 @@ s=re.sub(r' public class NativeHomeRoom:[^\n]*\n','',s)
 s=s.replace('public class VillageResident:UnityEngine.Object{','public class VillageResident:UnityEngine.Object{public bool enabled=true;')
 s=s.replace('public static float Sign(float x)', 'public const float Deg2Rad=MathF.PI/180;public static int Abs(int x)=>Math.Abs(x);public static int RoundToInt(float x)=>(int)MathF.Round(x);public static int Clamp(int x,int a,int b)=>Math.Max(a,Math.Min(b,x));public static float Sign(float x)')
 s=s.replace('public static bool InFoodHouse(Vector3 p)=>false;', 'public static bool InFoodHouse(Vector3 p)=>Sunward.Remaster.VillageInteriors.Food(p);')
+# Match the actual GameFlow access boundary instead of a writable fake field.
+flow=(root/'Sunward-Unity/Assets/Sunward/Scripts/GameFlow.cs').read_text();start=flow.index('public void ShowDialogue(');at=flow.index('{',start);depth=1;end=at+1
+while depth:
+ if flow[end]=='{':depth+=1
+ elif flow[end]=='}':depth-=1
+ end+=1
+s+='\nnamespace Sunward {public sealed partial class GameFlow {'+flow[start:end]+'}}\n'
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:

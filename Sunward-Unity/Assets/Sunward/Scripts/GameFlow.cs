@@ -122,6 +122,12 @@ namespace Sunward
             messageUntil = Time.unscaledTime + 5;
         }
 
+        public void ShowDialogue(string text,string panel="dialogue")
+        {
+            Dialogue=text;
+            SetPanel(panel);
+        }
+
         public void SetPanel(string panel)
         {
             if(Health<=0 && panel!="result")return;
