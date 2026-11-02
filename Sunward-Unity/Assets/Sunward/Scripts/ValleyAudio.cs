@@ -11,7 +11,8 @@ namespace Sunward
         [Serializable] sealed class CueBank { public CueEntry[] cues; }
         readonly Dictionary<string,List<AudioClip>> bank = new Dictionary<string,List<AudioClip>>();
         readonly Dictionary<string,int> next = new Dictionary<string,int>();
-        AudioSource effects, music, wind, river;
+        AudioSource effects, music, wind, river,houseMusic;
+        float houseBlend;
         AudioSource tundraSwing,tundraImpact,transformationVoice,transformationBurst;
         readonly List<AudioSource> worldSources = new List<AudioSource>();
         readonly Dictionary<AudioSource,Vector2> worldLevels = new Dictionary<AudioSource,Vector2>();
@@ -24,7 +25,7 @@ namespace Sunward
         Vector3 lastPosition;
         void Awake()
         {
-            effects = Source(.60f, false); music = Source(.45f, true);
+            effects = Source(.60f, false); music = Source(.45f, true);houseMusic=Source(0,true);
             wind = Source(.22f, true); river = Source(.25f, true);
             tundraSwing=Source(1,false);tundraImpact=Source(1,false);
             transformationVoice=Source(1,false);transformationBurst=Source(1,false);
@@ -51,10 +52,11 @@ namespace Sunward
         void Loop(AudioSource source,string cue)
         {
             source.Stop();source.clip=null;
-            // The battle track is identified; the food-house stream is provisional.
+            // Use an original quiet melodic passage for the musician; its track title
+            // is unlabelled in source metadata. Keep it separate from battle.
             // Short cleansing/save cues must never become looping background music.
             if(cue!="battle" && cue!="housemusic")return;
-            var clip=Clip(cue);if(!clip || clip.length<45)return;source.clip=clip;source.Play();
+            var clip=Clip(cue);if(!clip || clip.length<(cue=="housemusic"?8:45))return;source.clip=clip;source.Play();
         }
         void Start()
         {
@@ -85,14 +87,20 @@ namespace Sunward
                 if(distance>=level.x)source.Stop();
                 else source.volume=game.CinematicActive?0:level.y*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/level.x));
             }
-            string desired=game.InTrial?"battle":Sunward.Remaster.VillageServices.InFoodHouse(p)?"housemusic":"town";
+            bool inMusicHouse=Sunward.Remaster.VillageServices.InFoodHouse(p);
+            string desired=game.InTrial?"battle":"town";
+            float houseTarget=inMusicHouse && !game.InTrial?.10f:0;
+            if(houseTarget>0 && !houseMusic.isPlaying){houseMusic.volume=0;Loop(houseMusic,"housemusic");}
+            houseBlend=Mathf.MoveTowards(houseBlend,houseTarget,Time.unscaledDeltaTime*.035f);
+            houseMusic.volume=houseBlend*(game.CinematicActive?.3f:1);
+            if(houseTarget==0 && houseBlend<=.0001f && houseMusic.isPlaying)houseMusic.Stop();
             if(desired!=musicCue){musicCue=desired;Loop(music,desired);}
             river.volume=.25f*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15);
             wind.volume=Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f;
             music.volume=Mathf.MoveTowards(music.volume,game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f);
             Vector3 delta=p-lastPosition;delta.y=0;lastPosition=p;
             if(game.Blocked || game.Player.Locked || delta.magnitude>2)return;
-            if(game.Player.Grounded && game.Player.Speed>.2f)
+            if(!game.Player.Swimming && game.Player.Grounded && game.Player.Speed>.2f)
             {
                 steps+=delta.magnitude;
                 if(steps>(game.Player.Speed>5?1.5f:.85f)){steps=0;Cue("step");}
@@ -113,20 +121,21 @@ namespace Sunward
             // World actors must supply a position; never route them through 2D playback.
             if(id=="cow" || id=="pig" || id=="rooster" || id.StartsWith("npc") || id.StartsWith("enemy"))return;
             if(!Allow(id,id=="step"?.16f:id=="water"?.35f:.07f))return;
-            var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="step"?.0225f:id=="jump"?.175f:id=="water"?.035f:id=="land"?.12f:id=="dash"?.35f:.45f);
+            if(id=="water" && (!game || !game.Player || !game.Player.Swimming))return;
+            var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="step"?.01125f:id=="jump"?.0875f:(id=="water" || id=="swim-exit")?.018f:id=="land"?.06f:id=="dash"?.175f:.45f);
         }
         public void TundraAttack(bool charged,bool heavy)
         {
             // One bounded voice per swing. Avoid stacking the generic impact
             // and heavy fanfare over this instrument's own ice sounds.
             tundraSwing.Stop();tundraSwing.clip=Clip(charged?"weapon-wp2e-heavy":"weapon-wp2e");
-            tundraSwing.volume=charged?.22f:heavy?.30f:.26f;
+            tundraSwing.volume=charged?.10f:heavy?.14f:.12f;
             if(tundraSwing.clip)tundraSwing.Play();
         }
         public void TundraContact()
         {
             if(tundraImpact.isPlaying)return;
-            tundraImpact.clip=Clip("weapon-wp2e-heavy");tundraImpact.volume=.15f;
+            tundraImpact.clip=Clip("weapon-wp2e");tundraImpact.volume=.07f;
             if(tundraImpact.clip)tundraImpact.Play();
         }
         public void StopTundra(){if(tundraSwing)tundraSwing.Stop();}

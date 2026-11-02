@@ -99,6 +99,19 @@ s=s.replace('public class Light:Object{', 'public class Light:Object{public Tran
 s=s.replace('public UnityEngine.InputSystem.InputAction Brush=', 'public UnityEngine.InputSystem.InputAction Jump=new UnityEngine.InputSystem.InputAction(),Move=new UnityEngine.InputSystem.InputAction();public UnityEngine.InputSystem.InputAction Brush=')
 s=re.sub(r' public class ProfileData.*?(?=public class SaveStore)',' ',s,flags=re.S)
 s=re.sub(r' public static class ProgressionRules[^\n]*\n','',s)
+s=s.replace('public static Vector3 Farmer=>Vector3.zero;', 'public static Vector3 Farmer=>Vector3.zero;public static Vector3 FarmerPosition=>Farmer;')
+s=s.replace('public void BakeMesh(Mesh mesh){}', 'public void BakeMesh(Mesh mesh,bool scale=false){}')
+s=s.replace('public static Vector3 Lerp(Vector3 a', 'public static Vector3 MoveTowards(Vector3 a,Vector3 b,float step)=>(b-a).magnitude<=step?b:a+(b-a).normalized*step;public static Vector3 Lerp(Vector3 a')
+s=s.replace('public static Quaternion FromToRotation', 'public static Quaternion RotateTowards(Quaternion a,Quaternion b,float t)=>b;public static Quaternion FromToRotation')
+s=s.replace('public class MonoBehaviour:Object', 'public class MonoBehaviour:Object')
+s=s.replace('public bool isActiveAndEnabled=true;', 'public bool enabled=true;public bool isActiveAndEnabled=true;')
+s=s.replace('public static float Sin(float x)', 'public static float Sign(float x)=>MathF.Sign(x);public static float Sin(float x)')
+s=s.replace('public static Vector3 up=>', 'public static Vector3 right=>new Vector3(1,0,0);public static Vector3 up=>')
+s=re.sub(r' public class NativeDailyRoutine:[^\n]*\n','',s)
+s=re.sub(r' public class NativeHomeRoom:[^\n]*\n','',s)
+s=s.replace('public class VillageResident:UnityEngine.Object{','public class VillageResident:UnityEngine.Object{public bool enabled=true;')
+s=s.replace('public static float Sign(float x)', 'public const float Deg2Rad=MathF.PI/180;public static int Abs(int x)=>Math.Abs(x);public static int RoundToInt(float x)=>(int)MathF.Round(x);public static int Clamp(int x,int a,int b)=>Math.Max(a,Math.Min(b,x));public static float Sign(float x)')
+s=s.replace('public static bool InFoodHouse(Vector3 p)=>false;', 'public static bool InFoodHouse(Vector3 p)=>Sunward.Remaster.VillageInteriors.Food(p);')
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:

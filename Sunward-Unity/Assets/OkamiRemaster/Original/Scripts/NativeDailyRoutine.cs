@@ -14,7 +14,8 @@ namespace Sunward.Remaster
         Rigidbody body;
         int destination=-1;
         float wait;
-        bool indoors, resting;
+        bool indoors, resting,teaVisit;
+        public void InviteForTea(NativeHomeRoom room){home=room;teaVisit=true;destination=-1;wait=0;resting=false;if(actor)actor.EndActivity();}
         readonly List<Vector3> path=new List<Vector3>();
         int pathIndex;
         static bool[,] clear;
@@ -51,8 +52,9 @@ namespace Sunward.Remaster
         void Update()
         {
             if(!game || game.Blocked || !actor || !actor.Ready)return;
-            int phase=farmer?(int)((Time.time+seed*7)/16)%4:(int)((Time.time+seed*13)/40)%4;
+            int phase=teaVisit?1:farmer?(int)((Time.time+seed*7)/16)%4:(int)((Time.time+seed*13)/40)%4;
             if(wait>0){wait-=Time.deltaTime;return;}
+            if(farmer && Vector3.Distance(transform.position,game.Player.transform.position)<3.2f){actor.EndActivity();return;}
             if(phase!=destination)
             {
                 destination=phase;resting=false;actor.EndActivity();
@@ -74,7 +76,7 @@ namespace Sunward.Remaster
             else if(!resting)
             {
                 resting=true;
-                if(!farmer && phase==1 && home){SetPosition(home.bed+new Vector3(.8f,0,0));indoors=true;}
+                if(!farmer && phase==1 && home){SetPosition(teaVisit?home.transform.position+new Vector3(.7f,.02f,-.7f):home.bed+new Vector3(.8f,0,0));indoors=true;}
                 if(!farmer && phase==2){var d=new Vector3(GardenPond.X,transform.position.y,GardenPond.Z)-transform.position;if(d.sqrMagnitude>.01f)transform.rotation=Quaternion.LookRotation(d);}
                 // Own original seated action, only where present. No cross-rig pose copy.
                 string seat=(actor.resource.EndsWith("hm09") || actor.resource.EndsWith("hm05"))?"hm05_003":actor.resource.EndsWith("hm00")?"hm00_003":null;
@@ -82,7 +84,7 @@ namespace Sunward.Remaster
                 else if(farmer && actor.ActivityLength("hm00_003")>0)actor.PlayActivity("hm00_003",true,.7f);
             }
             var playerRoom=NativeHomeRoom.At(game.Player.transform.position);
-            bool visible=indoors?playerRoom==home:!playerRoom;
+            bool visible=indoors?playerRoom==home:!playerRoom && !VillageInteriors.Inside(game.Player.transform.position);
             actor.SetVenueVisible(visible);
         }
         void SetPosition(Vector3 p){transform.position=p;if(body)body.position=p;}

@@ -57,7 +57,7 @@ namespace Sunward
             Sleeping = false;
             p.animationView.Play("Sleep_Up", .1f);
             yield return new WaitForSeconds(p.animationView.ClipLength("Sleep_Up"));
-            p.Teleport(new Vector3(to.x, .105f, to.z));
+            p.Teleport(new Vector3(to.x, game.valley.Height(to)+.025f, to.z));
             p.Locked = false;
             game.Combat.Rest(false);
             Active = false;

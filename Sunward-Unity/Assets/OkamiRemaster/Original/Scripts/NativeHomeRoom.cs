@@ -20,6 +20,7 @@ namespace Sunward.Remaster
             next.z=Mathf.Clamp(next.z,room.transform.position.z-2.65f,room.transform.position.z+2.65f);
             return next;
         }
+        public static NativeHomeRoom ByNumber(int number)=>rooms.Find(r=>r.number==number);
         public static NativeHomeRoom For(int index)=>rooms.Count==0?null:rooms[Mathf.Abs(index)%rooms.Count];
         public static bool Height(Vector3 p,out float y){var room=At(p);y=room?room.transform.position.y:0;return room;}
         public static bool NearestAction(Vector3 p,out string action)

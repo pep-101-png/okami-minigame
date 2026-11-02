@@ -25,7 +25,7 @@ namespace Sunward
 namespace Sunward.Remaster
 {
  public class TrainingDummy:UnityEngine.MonoBehaviour{public Sunward.GameFlow game;public int contacts;public void PracticeContact(){contacts++;}}
- public class NativeDailyRoutine:UnityEngine.MonoBehaviour{public Sunward.GameFlow game;public int seed;public UnityEngine.Vector3 workplace;}
- public static class NativeHomeRoom{public static bool At(UnityEngine.Vector3 p)=>false;}
+ public class NativeDailyRoutine:UnityEngine.MonoBehaviour{public Sunward.GameFlow game;public bool farmer;public void InviteForTea(NativeHomeRoom r){}public int seed;public UnityEngine.Vector3 workplace;}
+ public class NativeHomeRoom:UnityEngine.MonoBehaviour{public UnityEngine.Vector3 door;public static NativeHomeRoom At(UnityEngine.Vector3 p)=>null;public static NativeHomeRoom ByNumber(int n)=>null;}
  public class OriginalVisual:UnityEngine.MonoBehaviour{public bool Load(string r,UnityEngine.Vector3 p,UnityEngine.Vector3 s)=>true;}
 }

@@ -42,6 +42,11 @@ static class Program
     int frames=(int)Math.Ceiling(1.3333333f/speed*fps);
     for(int f=0;f<=frames;f++){body.SetTundraPhase(Math.Min(1,f/(float)frames),1.3333333f);Tick(body);moved=Math.Max(moved,rig.Bones.Select((b,i)=>Delta(b.localPosition,start[i])).Max());}
     Check(moved>.1f,"Released cast freezes the actual native driver");
+    // Visible wolf bones must move, not just hidden weapon/control bones.
+    body.Play(TundraAttackRules.Cast,0,1.3333333f/speed,true,false);body.SetTundraPhase(.2f,1.3333333f);Tick(body);
+    var visible=rig.Bones.Take(20).Select(b=>b.localPosition).ToArray();float visibleMotion=0;
+    for(int k=0;k<20;k++){body.SetTundraPhase(.2f+k*.03f,1.3333333f);Tick(body);visibleMotion=Math.Max(visibleMotion,rig.Bones.Take(20).Select((b,i)=>Delta(b.localPosition,visible[i])).Max());}
+    Check(visibleMotion>.08f,"Charged release only moves hidden weapon bones; visible Ammy is frozen");
     body.EndTundraAction();for(int f=0;f<fps/2;f++)Tick(body);float phase=body.Phase;Tick(body);Check(body.Phase>phase,"Cast release retains an external stopped clock");
     game.Blocked=true;var frozen=rig.Bones.Select(b=>b.localPosition).ToArray();Tick(body);Check(rig.Bones.Select((b,i)=>Delta(b.localPosition,frozen[i])).All(x=>x<1e-7),"Menu pause changes body pose");game.Blocked=false;
    }
@@ -105,8 +110,8 @@ static class Program
   }
   var audio=new ValleyAudio();audio.TundraAttack(false,false);Check(audio.tundraSwing.clip.name=="weapon-wp2e"&&audio.tundraSwing.plays==1,"Primary attack selects wrong sound");
   audio.TundraAttack(false,true);Check(audio.tundraSwing.clip.name=="weapon-wp2e"&&audio.tundraSwing.volume<=.30f,"Heavy swing uses generic impact or unbounded volume");
-  audio.TundraAttack(true,true);Check(audio.tundraSwing.clip.name=="weapon-wp2e-heavy"&&audio.tundraSwing.volume==.22f,"Charged cast selects wrong original cue");
-  audio.TundraContact();audio.TundraContact();Check(audio.tundraImpact.plays==1&&audio.tundraImpact.volume==.15f,"Contact sound stacks repeatedly");
+  audio.TundraAttack(true,true);Check(audio.tundraSwing.clip.name=="weapon-wp2e-heavy"&&audio.tundraSwing.volume==.10f,"Charged cast selects wrong original cue");
+  audio.TundraContact();audio.TundraContact();Check(audio.tundraImpact.plays==1&&audio.tundraImpact.volume==.07f,"Contact sound stacks repeatedly");
   audio.StopTundra();Check(!audio.tundraSwing.isPlaying,"Cancelled swing continues playing");
   audio.TransformationVoice();audio.TransformationBurst();Check(audio.transformationVoice.clip.name=="transformation-voice"&&audio.transformationBurst.volume==.28f,"Transformation bypasses bounded source channels");
   audio.StopTransformation();Check(!audio.transformationVoice.isPlaying&&!audio.transformationBurst.isPlaying,"Skipped cinematic keeps its sounds playing");

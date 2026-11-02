@@ -12,7 +12,7 @@ namespace Sunward
         {
             var valley = UnityEngine.Object.FindFirstObjectByType<Valley>();
             var box = GetComponent<BoxCollider>();
-            if (!valley || !box.enabled)
+            if (!valley || !box.enabled || box.bounds.center.y<-20)
                 return;
             var b = box.bounds;
             valley.Data.boxes = valley.Data.boxes.Concat(new[] { new BoxData { x = b.center.x, z = -b.center.z, halfX = b.extents.x, halfZ = b.extents.z } }).ToArray();

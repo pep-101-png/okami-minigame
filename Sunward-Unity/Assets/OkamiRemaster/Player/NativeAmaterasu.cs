@@ -259,14 +259,16 @@ namespace Sunward.Remaster
                 {
                     var recovery=bank.Find("pl00_543");
                     if(recovery==null)throw new InvalidOperationException("Original Tundra cast recovery pl00_543 is missing");
-                    t=TundraAttackRules.CastTime(tundraPhase,tundraDuration,recovery.Duration,clip.Duration,out bool ending);
+                    float finish=Mathf.Min(recovery.Duration,tundraDuration*.2f),release=Mathf.Max(.01f,tundraDuration-finish);
+                    bool ending=tundraPhase*tundraDuration>=release;
+                    t=ending?(tundraPhase*tundraDuration-release)/finish*recovery.Duration:Mathf.Clamp01(tundraPhase*tundraDuration/release)*clip.Duration;
                     if(ending && !tundraRecovering)
                     {
                         for(int i=0;i<bank.BoneCount;i++)
                         {fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}
                         tundraRecovering=true;blendTime=0;blendDuration=.04f;
                     }
-                    selected=ending?recovery:clip;loop=!ending;
+                    selected=ending?recovery:clip;loop=false;
                 }
                 else {t=tundraPhase*clip.Duration;loop=false;}
             }

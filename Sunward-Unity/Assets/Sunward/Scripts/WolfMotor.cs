@@ -85,6 +85,8 @@ namespace Sunward
                     guarded = new Vector3(35, guarded.y, 0) + d.normalized * radius;
             }
 
+            if(Sunward.Remaster.VillageInteriors.Inside(old))
+            {guarded=Sunward.Remaster.VillageInteriors.Guard(old,guarded);if((guarded-transform.position).sqrMagnitude>.000001f)controller.Move(guarded-transform.position);return;}
             guarded=Sunward.Remaster.NativeHomeRoom.Guard(old,guarded);
             guarded=Sunward.Remaster.LowerArena.Guard(guarded);
             var b = valley.Data.bounds;
@@ -207,7 +209,7 @@ namespace Sunward
         }
         bool UpdateSwimming(float dt)
         {
-            bool deep = !game.InTrial && !Sunward.Remaster.NativeHomeRoom.At(transform.position) && !Sunward.Remaster.LowerArena.Inside(transform.position) && !Sunward.Remaster.LowerArena.Shaft(transform.position) && Valley.Depth(transform.position) > .42f;
+            bool deep = !Sunward.Remaster.VillageInteriors.Inside(transform.position) && !game.InTrial && !Sunward.Remaster.NativeHomeRoom.At(transform.position) && !Sunward.Remaster.LowerArena.Inside(transform.position) && !Sunward.Remaster.LowerArena.Shaft(transform.position) && Valley.Depth(transform.position) > .42f;
             if (!deep || waterLeap > 0 || transform.position.y > .02f)
             {
                 if (Swimming) animationView.Play("Land_Soft", .1f, .2f, true);
@@ -221,7 +223,7 @@ namespace Sunward
             Vector3 direction = Vector3.ClampMagnitude(forward * m.y + right * m.x, 1);
             horizontal = Vector3.MoveTowards(horizontal, direction * (input.Sprint.IsPressed() ? 2.0f : 1.35f)*game.Combat.FormMultiplier, dt * 5);
             // Put the torso at the waterline so the leg stroke is submerged.
-            float surface = Mathf.Max(valley.Height(transform.position)+.03f, -.34f - .38f);
+            float surface = Mathf.Max(valley.Height(transform.position)+.03f, -.34f - .12f);
             Vertical = 0;
             Vector3 before = transform.position;
             Push(horizontal * dt + Vector3.up * Mathf.Clamp(surface - before.y, -dt * 3, dt * 3));
@@ -235,7 +237,7 @@ namespace Sunward
             if (input.Jump.WasPressedThisFrame())
             {
                 Swimming = false; waterLeap = .65f; Vertical = 6.4f;
-                animationView.Play("Jump_Standing", .08f, .35f, true); game.Audio.Cue("water");
+                animationView.Play("Jump_Standing", .08f, .35f, true); game.Audio.Cue("swim-exit");
             }
             return true;
         }

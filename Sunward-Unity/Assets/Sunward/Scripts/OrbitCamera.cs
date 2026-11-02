@@ -77,7 +77,9 @@ namespace Sunward
             }
 
             focus = Vector3.Lerp(focus, desiredFocus, 1 - Mathf.Exp(-Time.deltaTime * 8));
-            Vector3 offset = Quaternion.Euler(pitch, yaw, 0) * Vector3.back * distance, position = focus + offset;
+            bool indoors=Sunward.Remaster.VillageInteriors.Inside(target.transform.position);
+            float viewDistance=indoors?Mathf.Clamp(distance,6,9):distance;
+            Vector3 offset = Quaternion.Euler(indoors?Mathf.Max(28,pitch):pitch, yaw, 0) * Vector3.back * viewDistance, position = focus + offset;
             if (Physics.SphereCast(focus, .25f, offset.normalized, out var hit, distance, 1 << 6, QueryTriggerInteraction.Ignore))
                 position = focus + offset.normalized * Mathf.Max(.35f, hit.distance - .28f);
             virtualCamera.transform.SetPositionAndRotation(position, Quaternion.LookRotation(focus - position));

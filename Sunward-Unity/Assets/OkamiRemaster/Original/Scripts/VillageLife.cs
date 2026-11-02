@@ -6,7 +6,7 @@ namespace Sunward.Remaster
     {
         public GameFlow game;
         public Transform[] restorationBeds;
-        public Vector3 weaponsShop=new Vector3(-6,0,-33f),upgradeShop=new Vector3(5,0,-33f);
+        public Vector3 weaponsShop=new Vector3(-6,0,-27.6f),upgradeShop=new Vector3(5,0,-27.6f);
         FarmCrop[] crops;
         FarmCrop carried;
         GameObject carriedVisual;
@@ -33,7 +33,7 @@ namespace Sunward.Remaster
             {appliedStage=game.Profile.restorationStage;for(int i=0;restorationBeds!=null && i<restorationBeds.Length;i++)if(restorationBeds[i])restorationBeds[i].gameObject.SetActive(i<appliedStage);}
             if(game.Health<=0 || game.Panel!="" || game.InTrial){if(carried && game.Health<=0)Drop();return;}
             if(game.Blocked || game.Player.Locked || game.Player.Swimming || digging)return;
-            Vector3 p=game.Player.transform.position;float farmer=Vector3.Distance(p,VillageServices.Farmer);
+            Vector3 p=game.Player.transform.position;float farmer=Vector3.Distance(p,VillageServices.FarmerPosition);
             if(carried && !carriedVisual)CreateCarry();
             if(game.Player.input.Eat.WasPressedThisFrame())Eat();
             if(game.Player.input.Carry.WasPressedThisFrame())
@@ -76,6 +76,11 @@ namespace Sunward.Remaster
             if(game.Profile.vegetables<=0){game.Notify("Dig up vegetables at the farm first");return;}
             if(game.Health>=game.MaxHealth){game.Notify("Health is full · save the produce for later");return;}
             game.Player.animationView.Play("Eat",.12f,.8f,true);game.Profile.vegetables--;game.Health=Mathf.Min(game.MaxHealth,game.Health+1);Drop();game.Save.Save();game.Audio.Cue("collect");game.Notify("Vegetable eaten · +1 health");
+        }
+        public void GiveProduce()
+        {
+            if(game.Profile.vegetables<=0){game.Notify("The farmer buys vegetables harvested from the farm");return;}
+            game.Profile.vegetables--;game.Profile.coins+=5;game.Profile.cropsSold++;Drop();game.Save.Save();game.Notify("Vegetable handed to the farmer · +5 coins");
         }
         public void Sell()
         {
