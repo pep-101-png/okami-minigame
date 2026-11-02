@@ -218,6 +218,16 @@ namespace Sunward
                     if (Button("MUTE / UNMUTE", button))
                         AudioListener.volume = AudioListener.volume > 0 ? 0 : 1;
                     break;
+                case "elder":
+                    GUILayout.Label(game.Dialogue,body);
+                    if(Button("YES · LET’S HAVE TEA",button))game.GetComponent<Sunward.Remaster.VillageTeaVisit>().Invite();
+                    break;
+                case "tea":
+                    var tea=game.GetComponent<Sunward.Remaster.VillageTeaVisit>();
+                    GUILayout.Label("TEA & STORIES OF NIPPON",title);GUILayout.Label(tea.Story,body);
+                    if(Button("TELL ME ANOTHER STORY",button))tea.NextStory();
+                    if(Button("SIT FOR TEA",button))tea.SitForTea();
+                    break;
                 case "requests":
                     GUILayout.Label("VILLAGE REQUEST BOARD",title);
                     var requests=game.GetComponent<Sunward.Remaster.VillageLife>();
@@ -227,6 +237,8 @@ namespace Sunward
                 case "farm":
                     GUILayout.Label("FARM SHOP · "+game.Profile.vegetables+" vegetables · "+game.Profile.praise+" Praise",body);
                     var farm=game.GetComponent<Sunward.Remaster.VillageLife>();
+                    GUILayout.Label("Bring harvested vegetables in your mouth or pouch. Hand over one, sell the pouch, or keep them for a village request.",small);
+                    if(Button("HAND OVER ONE VEGETABLE · +5 coins",button))farm.GiveProduce();
                     if(Button("SELL PRODUCE · 5 coins each",button))farm.Sell();
                     if(Button("EAT VEGETABLE · +1 health",button))farm.Eat();
                     if(Button("FARM MEAL · 5 coins · +10 health",button))farm.BuyMeal();

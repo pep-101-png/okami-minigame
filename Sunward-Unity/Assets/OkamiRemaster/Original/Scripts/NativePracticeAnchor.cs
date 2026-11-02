@@ -31,7 +31,7 @@ namespace Sunward.Remaster
             {
                 var renderer=Array.Find(renderers,r=>r.name==foot.part);
                 if(!renderer)continue;
-                renderer.BakeMesh(baked);vertices.Clear();baked.GetVertices(vertices);
+                renderer.BakeMesh(baked,false);vertices.Clear();baked.GetVertices(vertices);
                 Matrix4x4 matrix=root.worldToLocalMatrix*renderer.transform.localToWorldMatrix;
                 foreach(int index in foot.indices)
                 {

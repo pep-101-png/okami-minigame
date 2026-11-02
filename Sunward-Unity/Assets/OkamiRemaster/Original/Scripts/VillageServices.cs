@@ -14,8 +14,9 @@ namespace Sunward.Remaster
             if(game && game.Player)game.Player.Locked=false;
         }
         public static readonly Vector3 DojoDoor=new Vector3(0,.5f,15.1f), FoodDoor=new Vector3(4.8f,.4f,-15), Mat=new Vector3(8,.4f,-13.4f), Farmer=new Vector3(-51,0,20);
-        public static bool InDojo(Vector3 p)=>Mathf.Abs(p.x)<6.5f && p.z>16.2f && p.z<33.6f && p.y>-2 && p.y<6;
-        public static bool InFoodHouse(Vector3 p)=>Mathf.Abs(p.x-10)<4.4f && Mathf.Abs(p.z+15)<3.6f && p.y>-2 && p.y<6;
+        public static Vector3 FarmerPosition {get{foreach(var r in Object.FindObjectsByType<NativeDailyRoutine>(FindObjectsSortMode.None))if(r.farmer)return r.transform.position;return Farmer;}}
+        public static bool InDojo(Vector3 p)=>VillageInteriors.Dojo(p);
+        public static bool InFoodHouse(Vector3 p)=>VillageInteriors.Food(p);
         static readonly RaycastHit[] floorHits=new RaycastHit[32];
         public static bool Floor(Vector3 p,out float height)
         {
@@ -23,6 +24,7 @@ namespace Sunward.Remaster
             if(!dojo && !InFoodHouse(p))return false;
             // The original dojo has bevels/slopes, not a flat two-level floor.
             // Use its real mesh collision for the existing player controller.
+            if(VillageInteriors.Height(p,out var indoor)){height=indoor;return true;}
             int n=Physics.RaycastNonAlloc(new Ray(new Vector3(p.x,5.5f,p.z),Vector3.down),floorHits,9,1<<6,QueryTriggerInteraction.Ignore);
             bool found=false;
             for(int i=0;i<n;i++)
@@ -45,11 +47,11 @@ namespace Sunward.Remaster
         public void Interact(string action)
         {
             if(Resting || !game)return;
-            if(action=="venue:dojo")game.Player.Teleport(InDojo(game.Player.transform.position)?new Vector3(0,.05f,13.3f):new Vector3(0,.82f,18.3f));
-            else if(action=="venue:food")game.Player.Teleport(InFoodHouse(game.Player.transform.position)?new Vector3(2.8f,.05f,-15):new Vector3(6.8f,.42f,-15));
+            if(action=="venue:dojo")VillageInteriors.Enter(game,"dojo");
+            else if(action=="venue:food")VillageInteriors.Enter(game,"food");
             else if(action=="venue:mat")StartCoroutine(Sit());
             else if(action=="venue:pond")RestAt(new Vector3(GardenPond.X+3.7f,.04f,GardenPond.Z),270);
-            else if(action=="venue:farmer") {game.Audio.Npc(3,Farmer);game.SetPanel("farm");}
+            else if(action=="venue:farmer") {game.Audio.Npc(3,FarmerPosition);game.SetPanel("farm");}
             if(action=="venue:dojo" || action=="venue:food")
             {
                 var camera=FindFirstObjectByType<OrbitCamera>();if(camera)camera.SnapFocus();
@@ -57,7 +59,7 @@ namespace Sunward.Remaster
             game.Combat.Equip();
         }
         public void RestAt(Vector3 point,float yaw){if(!Resting)StartCoroutine(SitAt(point,yaw));}
-        IEnumerator Sit(){yield return SitAt(Mat,180);}
+        IEnumerator Sit(){yield return SitAt(VillageInteriors.Mat,90);}
         IEnumerator SitAt(Vector3 point,float yaw)
         {
             Resting=true;game.Player.Locked=true;game.Combat.Cancel();game.Combat.Rest(true);

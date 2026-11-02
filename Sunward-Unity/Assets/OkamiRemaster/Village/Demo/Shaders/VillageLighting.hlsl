@@ -17,6 +17,7 @@ float _SunwardNight;
 float4 _SunwardFestivalLights[24];
 float3 VillageNightPaint(float3 world,float3 daylight)
 {
+    if(world.y<-180)return float3(.88,.77,.62); // isolated furnished interiors
     float night=_SunwardNight*step(-5,world.y);
     if(night<.001)return daylight;
     float3 warm=0;

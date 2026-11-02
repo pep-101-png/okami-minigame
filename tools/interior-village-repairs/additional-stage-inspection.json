@@ -1,0 +1,37 @@
+{
+  "originalInputsVerified": [
+    {
+      "path": "data_pc/stc/rc00.dat",
+      "bytes": 32320,
+      "sha256": "70b117d030a0019d91164ca943aea7af6ddf637c83eb6303f01f7fefce4a1401"
+    },
+    {
+      "path": "data_pc/stf/rf11.dat",
+      "bytes": 8773824,
+      "sha256": "306e2a8c491e3d08f00682b5397df6cf7a87d13597f7b5da11c9d5c938f99a4e"
+    },
+    {
+      "path": "data_pc/stf/rf04.dat",
+      "bytes": 10708704,
+      "sha256": "c7c7e2221068b5047a662ad3ffab6d5cde98b6fab2de9f297d88f93b65740896"
+    },
+    {
+      "path": "data_pc/stf/rf01.dat",
+      "bytes": 8590336,
+      "sha256": "42c49dbb96b5afdf4ecaeffea19704af1974442b768fb73623c4e18a91e9e6df"
+    },
+    {
+      "path": "data_pc/stf/rf02.dat",
+      "bytes": 8643072,
+      "sha256": "93e66b483f78e5fa52ce956080a41a57236fe162aae4b34cf121bfa8ffbfe21c"
+    },
+    {
+      "path": "data_pc/std/rd00.dat",
+      "bytes": 10850976,
+      "sha256": "1cb9dbc46e4fe372901b785efb43f548e081a6fa0be732ecbb90b5bc9fc8f295"
+    }
+  ],
+  "identifiedAs": "Additional outdoor/cutscene stage variants; no complete furnished house interior package positively identified in these six archives.",
+  "archery": "HM2D and HM2E own original idle/004/005/080 clips inspected in full sampled contact sheets. No complete verified native shooting clip for both archers. Procedural alignment disabled as requested.",
+  "interiors": "Separate larger spaces assembled from original floor, dojo, shoji and furniture assets; not labelled as untouched native room prefabs."
+}

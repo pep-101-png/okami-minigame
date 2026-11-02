@@ -29,22 +29,6 @@
       "resource": "Okami/NativeAudio/dash-12"
     },
     {
-      "cue": "step",
-      "resource": "Okami/NativeAudio/step-0"
-    },
-    {
-      "cue": "step",
-      "resource": "Okami/NativeAudio/step-1"
-    },
-    {
-      "cue": "step",
-      "resource": "Okami/NativeAudio/step-2"
-    },
-    {
-      "cue": "step",
-      "resource": "Okami/NativeAudio/step-3"
-    },
-    {
       "cue": "flame",
       "resource": "Okami/NativeAudio/flame-0"
     },
@@ -91,10 +75,6 @@
     {
       "cue": "menu",
       "resource": "Okami/NativeAudio/menu-0"
-    },
-    {
-      "cue": "water",
-      "resource": "Okami/NativeAudio/water-8"
     },
     {
       "cue": "npc0",
@@ -281,12 +261,36 @@
       "resource": "Okami/NativeAudio/weapon-wp2e-heavy-1"
     },
     {
-      "cue": "housemusic",
-      "resource": "Okami/NativeAudio/foodhouse-background-0"
-    },
-    {
       "cue": "transformation-voice",
       "resource": "Okami/NativeAudio/transformation-voice-pl00-13"
+    },
+    {
+      "cue": "step",
+      "resource": "Okami/NativeAudio/dry-ground-3"
+    },
+    {
+      "cue": "step",
+      "resource": "Okami/NativeAudio/dry-ground-4"
+    },
+    {
+      "cue": "water",
+      "resource": "Okami/NativeAudio/swim-water-0"
+    },
+    {
+      "cue": "water",
+      "resource": "Okami/NativeAudio/swim-water-1"
+    },
+    {
+      "cue": "housemusic",
+      "resource": "Okami/NativeAudio/house-melody-67"
+    },
+    {
+      "cue": "swim-exit",
+      "resource": "Okami/NativeAudio/swim-water-0"
+    },
+    {
+      "cue": "swim-exit",
+      "resource": "Okami/NativeAudio/swim-water-1"
     }
   ]
 }

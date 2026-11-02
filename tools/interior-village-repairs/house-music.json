@@ -1,0 +1,24 @@
+{
+  "source": "data_pc/bgm/bgm00.afs2",
+  "stream": 67,
+  "sourceSHA256": "6b5abb617e58cd5a3824e9da916b23147f09457cf385930686cb38612c9c0dd3",
+  "outputSHA256": "a0c68d9e7dc36438446f867d43e7b37b66645ca8707bdf0c180bdcd18b58a52f",
+  "assignment": "Original solo melodic passage with wind-like high-register timbre; soundtrack title/instrument metadata not available. Attenuation only; listening review in-game still needed.",
+  "audio": {
+    "sourceVersion": "0x400",
+    "frameScalesDecrypted": false,
+    "decoded": {
+      "rmsDBFS": -15.09,
+      "peak": 1.0,
+      "clippedFraction": 4.5e-07
+    },
+    "output": {
+      "rmsDBFS": -24.0,
+      "peak": 0.358281,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -8.91,
+    "seconds": 34.651,
+    "clearADX_SHA256": "6b5abb617e58cd5a3824e9da916b23147f09457cf385930686cb38612c9c0dd3"
+  }
+}

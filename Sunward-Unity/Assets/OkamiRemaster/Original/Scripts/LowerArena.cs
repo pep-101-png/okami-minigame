@@ -49,10 +49,10 @@ namespace Sunward.Remaster
             Unlocked=game && game.Profile.wins>0;
             ApplyOpen(false,false);
         }
-        public static bool Inside(Vector3 p)=>instance && instance.open && !NativeHomeRoom.At(p) && p.y<-3 && new Vector2(p.x-35,p.z).magnitude<Radius+2;
+        public static bool Inside(Vector3 p)=>instance && instance.open && !VillageInteriors.Inside(p) && !NativeHomeRoom.At(p) && p.y<-3 && new Vector2(p.x-35,p.z).magnitude<Radius+2;
         public static bool Shaft(Vector3 p)
         {
-            if(!instance || !instance.open)return false;
+            if(!instance || !instance.open || VillageInteriors.Inside(p))return false;
             var rim=instance.shaftRim;
             if(rim==null || rim.Length<3)return new Vector2(p.x-35,p.z).magnitude<3.8f;
             bool inside=false;

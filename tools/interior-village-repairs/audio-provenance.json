@@ -1,0 +1,106 @@
+[
+  {
+    "bank": "fs/fs102.ses",
+    "index": 3,
+    "cue": "step",
+    "sourceSHA256": "a2b557eead0eaf9ff9363771d76b76b7196e2f0705ed9b8df3689d377ce07f1c",
+    "outputSHA256": "a7b748c1b14e919fdba627575bc74e214178db285390aeca9da1b95e00387d82",
+    "audio": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 49,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.378,
+        "peak": 0.863037,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -29.044,
+        "peak": 0.160989,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.621,
+      "seconds": 0.1422,
+      "clearADX_SHA256": "2edb1f44a658f5fd412aec0e88e2194eea9c732350d67df02333219a4886d01d"
+    }
+  },
+  {
+    "bank": "fs/fs102.ses",
+    "index": 4,
+    "cue": "step",
+    "sourceSHA256": "3142fbe9545f6a0fdd6aacdf4882f3d9b226ac3ba0f4ac1b911fdff0089a72b8",
+    "outputSHA256": "d13dc1f7a275795e434363628c39d8ad7bd54e0ca6b083793fc402ae6bd16ec8",
+    "audio": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 42,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -17.471,
+        "peak": 0.999969,
+        "clippedFraction": 0.00051269
+      },
+      "output": {
+        "rmsDBFS": -29.183,
+        "peak": 0.265775,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -11.528,
+      "seconds": 0.1219,
+      "clearADX_SHA256": "21d5ed473c407ba2702b152daa0b6459d10b9c9a9ed9f2dc672572d9c65ca59e"
+    }
+  },
+  {
+    "bank": "fs/fs102.ses",
+    "index": 0,
+    "cue": "water",
+    "sourceSHA256": "fd7fc470be9a5e0b079c58d650795db4aff8d0cd86e21a8d6b5bbd3b4cfe68ba",
+    "outputSHA256": "67e60628022884cd079473955a32565aff869bc6aa33148b4f6d61e513444314",
+    "audio": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 100,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -21.941,
+        "peak": 0.720215,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -26.085,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -4.088,
+      "seconds": 0.4,
+      "clearADX_SHA256": "996f75d3bcaeea914f1011baf1d762af140a6ddac1f95be69ee09194fbcbd8e4"
+    }
+  },
+  {
+    "bank": "fs/fs102.ses",
+    "index": 1,
+    "cue": "water",
+    "sourceSHA256": "7daa88ee2f2df1de2a664f68821d0923fb57487dbe37b84a3811d3085fe47dde",
+    "outputSHA256": "221e1d82223936a0e6d76052a75447d6618948a9cf0892db4fc30b42e45afd04",
+    "audio": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 114,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -19.562,
+        "peak": 0.792542,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -24.547,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -4.923,
+      "seconds": 0.3309,
+      "clearADX_SHA256": "6b10949c937085f2ebf793f6a70f3d8fd01e92b6f04884d07f858c707c668e7a"
+    }
+  }
+]

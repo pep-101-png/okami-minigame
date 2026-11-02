@@ -11,6 +11,7 @@ namespace Sunward.Remaster
         public string resource, idle, walk, run, windup, strike, recover, death;
         public Vector3 modelOffset;
         public float modelScale = 1;
+        public float walkMetresPerSecond=.75f;
         public bool splitAttackClip;
         public string chargeAttack,slamAttack,rangedAttack;
         public string AttackMotion(string move)=>move=="charge" && !string.IsNullOrEmpty(chargeAttack)?chargeAttack:move=="slam" && !string.IsNullOrEmpty(slamAttack)?slamAttack:(move=="shot" || move=="fan") && !string.IsNullOrEmpty(rangedAttack)?rangedAttack:strike;
@@ -58,7 +59,7 @@ namespace Sunward.Remaster
             foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
             {
                 var parts=renderer.sharedMesh.name.Split('-');if(parts.Length<2 || !int.TryParse(parts[1],out int group))continue;
-                renderer.enabled=phase==3?group==1:group==0 || group==2;
+                renderer.enabled=phase==3?group==1:group==0 || group==2 || (phase==2 && group==3);
                 renderer.localBounds=new Bounds(Vector3.zero,new Vector3(32,24,32));renderer.updateWhenOffscreen=true;
                 if(renderer.enabled && (!CrimsonSurface || renderer.sharedMesh.vertexCount>CrimsonSurface.sharedMesh.vertexCount))CrimsonSurface=renderer;
             }
@@ -148,7 +149,7 @@ namespace Sunward.Remaster
             filteredSpeed=Mathf.Lerp(filteredSpeed,speed,1-Mathf.Exp(-dt*10));
             moving=filteredSpeed>(moving?.08f:.15f);
             running=filteredSpeed>(running?2.8f:3.4f);
-            string state = enemy ? enemy.State : "village";
+            string state = enemy ? (enemy.VisualStunned?"hit":enemy.State) : "village";
             string selected = moving ? walk : idle;
             bool loop = true;
             if (holdIdlePose && selected == idle) loop = false;
@@ -156,7 +157,8 @@ namespace Sunward.Remaster
             if (enemy)
             {
                 if (!game) game = enemy.game;
-                if (state == "windup") { selected = splitAttackClip?AttackMotion(enemy.ActiveMove):windup; duration = enemy.VisualStateDuration; loop = false; }
+                if(state=="hit"){selected=bank.Find("em00_020")!=null?"em00_020":idle;duration=.22f;loop=false;}
+                else if (state == "windup") { selected = splitAttackClip?AttackMotion(enemy.ActiveMove):windup; duration = enemy.VisualStateDuration; loop = false; }
                 else if (state == "strike") { selected = AttackMotion(enemy.ActiveMove); duration = enemy.VisualStateDuration; loop = false; }
                 else if (state == "recover") { selected = splitAttackClip?AttackMotion(enemy.ActiveMove):recover; duration = enemy.VisualStateDuration; loop = false; }
                 else if (state == "dead") { selected = death; duration = 1.1f; loop = false; }
@@ -170,9 +172,9 @@ namespace Sunward.Remaster
             if(gaitChange)time=phase*current.Duration;
             if (state != lastState) { time = 0; lastState = state; }
             blendTime += dt;
-            if ((bossCinematic || !game || !game.Blocked) && (!enemy || !enemy.VisualStunned))
+            if ((bossCinematic || !game || !game.Blocked) && (!enemy || !enemy.VisualStunned || state=="hit"))
             {
-                float pace=bossCinematic?1:duration>.001f?current.Duration/duration:enemy && moving?Mathf.Clamp(filteredSpeed/(running && run!=walk?4.5f:2),.4f,1.5f):!string.IsNullOrEmpty(activity)?activityRate:1;
+                float pace=bossCinematic?1:duration>.001f?current.Duration/duration:enemy && moving?Mathf.Clamp(filteredSpeed/(running && run!=walk?4.5f:2),.4f,1.5f):!string.IsNullOrEmpty(activity)?activityRate:moving?Mathf.Clamp(filteredSpeed/Mathf.Max(.1f,walkMetresPerSecond),.3f,1.6f):1;
                 time+=dt*pace;
             }
             float sampleTime = time;

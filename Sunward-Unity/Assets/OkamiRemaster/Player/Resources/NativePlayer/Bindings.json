@@ -826,10 +826,11 @@
     },
     {
       "state": "Tundra_Cast",
-      "clip": "pl00_542",
-      "loop": true,
+      "clip": "pl00_54c",
+      "loop": false,
       "mirror": false,
-      "referenceSpeed": 0
+      "referenceSpeed": 0,
+      "evidence": "Original moving rosary release, replaces nearly static pl00_542 ready pose; Sunward action timing."
     },
     {
       "state": "Tundra_54f",

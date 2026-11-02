@@ -29,5 +29,12 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalWeaponView.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/HomeRest.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/ProgressionData.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageInteriors.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageTeaVisit.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeIndoorRoutine.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeSwordPractice.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeInteriorDressing.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeDailyRoutine.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeHomeRoom.cs"/>
 </ItemGroup>
 </Project>

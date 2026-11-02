@@ -67,6 +67,7 @@ namespace Sunward
                 if(BossRising || State=="windup" || State=="strike" || Time.time<nextStagger || time<=0)return;
                 nextStagger=Time.time+2.5f;time=Mathf.Min(.12f,time);
             }
+            if(definition.id!="boss"){if(Time.time<nextStagger)return;nextStagger=Time.time+.45f;time=Mathf.Min(.18f,time);}
             stun=Mathf.Max(stun,time);
         }
 

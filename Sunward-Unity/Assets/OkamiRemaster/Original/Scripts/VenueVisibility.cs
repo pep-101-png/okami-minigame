@@ -13,7 +13,7 @@ namespace Sunward.Remaster
         {
             if(!player)return;
             bool inside=venue=="dojo"?VillageServices.InDojo(player.transform.position):VillageServices.InFoodHouse(player.transform.position);
-            if(roof!=null)foreach(var r in roof)if(r)r.enabled=!inside;
+            if(roof!=null)foreach(var r in roof)if(r)r.enabled=true;
             if(interiorSurfaces!=null)foreach(var r in interiorSurfaces)if(r)r.enabled=inside;
             if(contents!=null)foreach(var obj in contents)if(obj && obj.activeSelf!=inside)obj.SetActive(inside);
         }
