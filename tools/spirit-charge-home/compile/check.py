@@ -1,7 +1,7 @@
 """Compile whole camera, cinematic, audio and native drivers with explicit engine doubles."""
 from pathlib import Path
 import tempfile,subprocess,os,re,argparse
-root=Path(__file__).resolve().parents[3];p=argparse.ArgumentParser();p.add_argument('--dotnet',default='dotnet');p.add_argument('--negative-control',action='store_true');p.add_argument('--river-negative-control',action='store_true');args=p.parse_args()
+root=Path(__file__).resolve().parents[3];p=argparse.ArgumentParser();p.add_argument('--dotnet',default='dotnet');p.add_argument('--negative-control',action='store_true');p.add_argument('--river-negative-control',action='store_true');p.add_argument('--street-spawn-negative-control',action='store_true');args=p.parse_args()
 s=(root/'tools/spirit-charge-home/tests/RuntimeDoubles.cs').read_text()
 s=re.sub(r' public partial class OrbitCamera:Object\n \{[^\n]*\}\n','',s)
 s=re.sub(r' public class ShiranuiTransformation:Object\{[^\n]*\}\n','',s)
@@ -130,18 +130,25 @@ s=s.replace('public class Valley:UnityEngine.Object{', 'public class Valley:Unit
 s=s.replace('float radius,float distance){goal=p;', 'float radius=.5f,float distance=16){goal=p;')
 s+='\nnamespace Sunward{public static class MeshSafety{public static bool Finite(UnityEngine.Vector3 p)=>float.IsFinite(p.x)&&float.IsFinite(p.y)&&float.IsFinite(p.z);}}'
 s=s.replace('public const float PI=', 'public const float Rad2Deg=57.2957795f;public static float Atan2(float y,float x)=>MathF.Atan2(y,x);public const float PI=')
+s=s.replace('components[typeof(T)]=c;return c;', 'components[typeof(T)]=c;StreetActorLifecycle.Added(c,activeSelf);return c;')
+s=s.replace('public void SetActive(bool b){activeSelf=b;}', 'public void SetActive(bool b){activeSelf=b;if(b)StreetActorLifecycle.Activated(this);}')
+s=s.replace('created.Add(this);', 'activeSelf=StreetActorLifecycle.Enabled;created.Add(this);')
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:
   old=Path(temp)/'OrbitCameraBefore.cs';old.write_bytes(subprocess.check_output(['git','show','57ba25ea4d29e73ad80ec562add526909e17da17:Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs'],cwd=root));cmd+=['-p:OrbitSource='+str(old)]
  if args.river_negative_control:
   old=Path(temp)/'WaterContactBefore.cs';old.write_bytes(subprocess.check_output(['git','show','d70906a28725bcd7fabc17103b87039b3fc44b91:Sunward-Unity/Assets/Sunward/Scripts/WaterContact.cs'],cwd=root));cmd+=['-p:WaterSource='+str(old)]
+ if args.street_spawn_negative_control:
+  old=Path(temp)/'StreetBefore.cs';old.write_bytes(subprocess.check_output(['git','show','66029d8a8411860d47d3cc760a90c98b9951f88b:Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageStreetPlay.cs'],cwd=root));cmd+=['-p:StreetSource='+str(old)]
  r=subprocess.run(cmd,cwd=root,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'),capture_output=True,text=True);print(r.stdout);print(r.stderr)
  if args.negative_control:
   assert r.returncode!=0 and 'CS0136' in r.stdout,'Compiler failed to catch original scope regression';print('Negative control caught original CS0136 camera regression')
  else:
   assert r.returncode==0,'Whole-script semantic compilation failed (engine doubles, not Unity)'
   command=[args.dotnet,str(Path(__file__).with_name('bin')/'Debug/net8.0/Compile.dll'),str(root/'Sunward-Unity/Assets')]
-  if args.river_negative_control:
+  if args.street_spawn_negative_control:
+   result=subprocess.run(command,capture_output=True,text=True,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'));assert result.returncode!=0 and 'Original Okami actor could not load' in result.stderr,result.stdout+result.stderr;print('PASS negative control: original active-add order runs Awake before actor resources are assigned')
+  elif args.river_negative_control:
    result=subprocess.run(command,capture_output=True,text=True,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'));assert result.returncode!=0 and 'River recovery ejects player' in result.stderr,result.stdout+result.stderr;print('PASS negative control: previous river code ejects player immediately after walking into a house')
   else:subprocess.run(command,check=True,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'))
