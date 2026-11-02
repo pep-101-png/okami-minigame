@@ -31,8 +31,10 @@ namespace Sunward.Remaster
         }
         OriginalActor Actor(string label,string model,string idle,string gait,float scale,float offset,Vector3 position)
         {
-            var obj=new GameObject(label);obj.transform.SetParent(transform,false);position.y=game.valley.Height(position)+.025f;obj.transform.position=position;
-            var actor=obj.AddComponent<OriginalActor>();actor.game=game;actor.resource="Okami/"+model;actor.idle=idle;actor.walk=actor.run=gait;actor.windup=actor.strike=actor.recover=actor.death=idle;actor.modelScale=scale;actor.modelOffset=Vector3.up*offset;actor.walkMetresPerSecond=model=="an05"?1.05f:1.25f;return actor;
+            // Unity invokes OriginalActor.Awake on activation. Configure its source
+            // while inactive so Awake never tries to load an empty resource path.
+            var obj=new GameObject(label);obj.SetActive(false);obj.transform.SetParent(transform,false);position.y=game.valley.Height(position)+.025f;obj.transform.position=position;
+            var actor=obj.AddComponent<OriginalActor>();actor.game=game;actor.resource="Okami/"+model;actor.idle=idle;actor.walk=actor.run=gait;actor.windup=actor.strike=actor.recover=actor.death=idle;actor.modelScale=scale;actor.modelOffset=Vector3.up*offset;actor.walkMetresPerSecond=model=="an05"?1.05f:1.25f;obj.SetActive(true);return actor;
         }
         Vector3 Floor(Vector3 p){float height=p.y;p.y=game.valley.Height(p)+height;return p;}
         void Move(OriginalActor actor,Vector3 target,float speed)

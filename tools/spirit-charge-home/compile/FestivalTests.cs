@@ -88,6 +88,18 @@ static class FestivalTests
   for(int i=0;i<35;i++)update.Invoke(audio,null);Check(!houseAudio.isPlaying&&houseAudio.volume==0,"House music leaks outside indefinitely");
   var life=new VillageLife{game=game};game.Profile.vegetables=2;int coins=game.Profile.coins;life.GiveProduce();Check(game.Profile.vegetables==1&&game.Profile.coins==coins+5,"Farmer cannot receive one carried/pouch vegetable");
   var tea=new VillageTeaVisit{game=game};string first=tea.Story;tea.NextStory();Check(tea.Story!=first&&first.Contains("Shiranui"),"Tea stories do not advance or lack original lore");
+  StreetActorLifecycle.Enabled=true;
+  try
+  {
+   int streetObjectStart=GameObject.created.Count;var street=new VillageStreetPlay{game=game};Call(street,"Start");
+   var children=(OriginalActor[])typeof(VillageStreetPlay).GetField("children",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(street);
+   var puppies=(OriginalActor[])typeof(VillageStreetPlay).GetField("puppies",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(street);
+   Check(street.Ready && children.Length==2 && puppies.Length==3,"Street actor population missing");
+   foreach(var actor in children)Check(actor!=null && actor.Ready && actor.CurrentSourceMotion=="hm1c_000","Child failed Awake after runtime creation");
+   foreach(var actor in puppies)Check(actor!=null && actor.Ready && actor.CurrentSourceMotion=="an18_000","Puppy failed Awake after runtime creation");
+   Check(GameObject.created.Count>streetObjectStart,"Street did not instantiate its original actors");
+  }
+  finally{StreetActorLifecycle.Enabled=false;}
   return checks;
  }
 }

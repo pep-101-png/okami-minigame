@@ -33,7 +33,7 @@ namespace Sunward.Remaster
                 {
                     float x=-2.6f+i*1.3f,top=4.612f;
                     Place(stringRoot.transform,"Okami/et03",new Vector3(x,top-.115f,0),new Vector3(.016f,.016f,.23f),new Vector3(-90,0,0));
-                    string resource=(row+i)%4==0?"Okami/vt33":(row+i)%4==1?"Okami/vt34":(row+i)%4==2?"Okami/vt32":"Okami/et07";
+                    string resource=(row+i)%3==0?"Okami/vt33":(row+i)%3==1?"Okami/vt34":"Okami/vt32";
                     float height=.56f;Place(stringRoot.transform,resource,new Vector3(x,top-.23f-height,0),new Vector3(.42f,height,.42f),Vector3.zero);
                 }
                 var glow=new GameObject("Warm light beneath lantern string");glow.transform.SetParent(stringRoot.transform,false);glow.transform.localPosition=new Vector3(0,3.7f,0);var light=glow.AddComponent<Light>();light.type=LightType.Point;light.range=8;light.color=new Color(1,.66f,.33f);light.intensity=0;light.shadows=LightShadows.None;lamps.Add(light);pools[row]=new Vector4(0,stringRoot.transform.position.y+2,z,8);
