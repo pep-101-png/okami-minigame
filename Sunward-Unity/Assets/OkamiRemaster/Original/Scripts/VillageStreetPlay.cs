@@ -23,7 +23,8 @@ namespace Sunward.Remaster
             if(!game)game=GetComponent<GameFlow>();if(!game)return;
             children[0]=Actor("Original red-clothed village child","hm1c","hm1c_000","hm1c_011",.9618765f,-.010982f,A-Vector3.right*.8f);
             children[1]=Actor("Original yellow-clothed village child","hm1d","hm1c_000","hm1c_011",.9143342f,.0086383f,B+Vector3.right*.8f);
-            for(int i=0;i<puppies.Length;i++)puppies[i]=Actor("Original village puppy "+(i+1),"an05","an18_000","an18_011",.48152315f*(.9f+i*.06f),.006065f,A+new Vector3(i*.65f-1,0,-1.1f));
+            string[] breeds={"an05","an22","an25"};float[] sizes={.5904676f,.6088453f,.6216591f},offsets={.0225041f,.0132069f,.0186965f};
+            for(int i=0;i<puppies.Length;i++)puppies[i]=Actor("Original village puppy "+(i+1),breeds[i],"an18_000","an18_011",sizes[i],offsets[i],A+new Vector3(i*.75f-1,0,-1.1f));
             ball=new GameObject("Original ET50 patterned play ball");ball.transform.SetParent(transform,false);
             // Original model, centred so rolling does not orbit its old origin.
             ball.AddComponent<OriginalVisual>().Load("Okami/et50",new Vector3(.00165f,-.02013f,-.00174f),Vector3.one*.13658f);

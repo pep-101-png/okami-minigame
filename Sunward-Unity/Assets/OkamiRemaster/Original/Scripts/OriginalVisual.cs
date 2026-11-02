@@ -15,6 +15,8 @@ namespace Sunward.Remaster
                 rig = new NativePaintedRig(resource, transform);
                 rig.Root.transform.localPosition = offset;
                 rig.Root.transform.localScale = scale;
+                foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>())
+                    renderer.localBounds=renderer.sharedMesh.bounds;
                 rig.Root.SetActive(true);
                 return true;
             }

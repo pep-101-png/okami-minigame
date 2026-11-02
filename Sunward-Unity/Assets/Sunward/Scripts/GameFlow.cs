@@ -18,30 +18,32 @@ namespace Sunward
         public ProfileData Profile => Save.Data;
 
         public float Health, Stamina, Energy;
-        public int MaxHealth => ProgressionRules.MaxHp(Profile);
+        public int MaxHealth => ProgressionRules.MaxHp(Profile)+(Spa?Spa.Bonus:0);
+        public Sunward.Remaster.VillagePresentation Presentation {get;private set;}
+        public Sunward.Remaster.SpaRest Spa {get;private set;}
         public float MaxStamina => 100 + Profile.upgrades.stamina * 15;
         public float MaxEnergy => 80 + Profile.upgrades.energy * 15;
 
         public readonly List<EnemyBrain> Enemies = new List<EnemyBrain>();
         public bool InTrial { get; private set; }
         public bool BossTrial { get; private set; }
-        public string Panel { get; private set; } = "welcome";
+        public string Panel { get; private set; } = "title";
         public Sunward.Remaster.ShiranuiTransformation Transformation { get; private set; }
         public Sunward.Remaster.CrimsonHelmAscension BossTransformation { get; private set; }
         public void TrackBossTransformation(Sunward.Remaster.CrimsonHelmAscension sequence){BossTransformation=sequence;}
         public void ReleaseBossTransformation(Sunward.Remaster.CrimsonHelmAscension sequence){if(BossTransformation==sequence)BossTransformation=null;}
-        public bool CinematicActive => (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing);
+        public bool CinematicActive => (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing) || (Presentation && Presentation.Playing);
         public bool Blocked => CinematicActive || Panel != "" || (Brush && Brush.Drawing);
         public Sunward.Remaster.CelestialBrush Brush { get; private set; }
         public int Wave { get; private set; }
         public string Prompt { get; private set; } = "";
-        public string Message { get; private set; } = "Welcome to Windflower Village.";
+        public string Message { get; private set; } = "";
         public string Dialogue { get; private set; } = "";
 
         public GameObject[] npcObjects;
         public NpcData[] npcData;
         public Sunward.Remaster.VillageServices Services { get; private set; }
-        float messageUntil = 9, breakTimer, hitUntil;
+        float messageUntil = 0, breakTimer, hitUntil;
         GameObject barrier;
         bool waiting;
         int runCoins, runXp;
@@ -74,6 +76,8 @@ namespace Sunward
         void Awake()
         {
             Save = new SaveStore();
+            Presentation=GetComponent<Sunward.Remaster.VillagePresentation>();if(!Presentation)Presentation=gameObject.AddComponent<Sunward.Remaster.VillagePresentation>();Presentation.game=this;
+            Spa=GetComponent<Sunward.Remaster.SpaRest>();if(!Spa)Spa=gameObject.AddComponent<Sunward.Remaster.SpaRest>();Spa.game=this;
             Brush=GetComponent<Sunward.Remaster.CelestialBrush>();if(!Brush)Brush=gameObject.AddComponent<Sunward.Remaster.CelestialBrush>();Brush.game=this;
             var life=GetComponent<Sunward.Remaster.VillageLife>();if(!life)life=gameObject.AddComponent<Sunward.Remaster.VillageLife>();life.game=this;
             Services = GetComponent<Sunward.Remaster.VillageServices>();
@@ -304,7 +308,7 @@ namespace Sunward
             Consider("shop", new Vector3(5, 0, -27.6f), 3);
             Consider("arena", new Vector3(12.8f, 0, 0));
             if (Sunward.Remaster.VillageServices.InFoodHouse(p)) Consider("venue:mat", Sunward.Remaster.VillageServices.Mat, 1.6f);
-            Consider("venue:pond",new Vector3(GardenPond.X+3.7f,.04f,GardenPond.Z),2);
+            if(Sunward.Remaster.SpaRest.Near(p))Consider("venue:pond",p,1);
             Consider("festival", Sunward.Remaster.FestivalChallenges.Board, 2.2f);
             Consider("venue:farmer", Sunward.Remaster.VillageServices.FarmerPosition, 2.8f);
             if (!Profile.shrine)
@@ -381,7 +385,7 @@ namespace Sunward
             Player.Teleport(new Vector3(22, 0, 0));
             Player.transform.rotation = Quaternion.Euler(0, 90, 0);
             barrier = Fx.Boundary(new Vector3(35, 0, 0), 17.8f);
-            Notify("Three normal enemy waves. Victory opens the depths where Crimson Helm waits.");
+            Notify("");
         }
 
         public void StartBossTrial()
@@ -394,7 +398,7 @@ namespace Sunward
             var obj=new GameObject(spec.title);Vector3 p=Sunward.Remaster.LowerArena.Centre+new Vector3(16,1,8);
             if(Sunward.Remaster.LowerArena.Height(p,out var y))p.y=y;
             obj.transform.position=p;var brain=obj.AddComponent<EnemyBrain>();brain.Init(this,spec);Enemies.Add(brain);
-            Notify("Crimson Helm · dodge the charge, jump the slam, slash the ink bolts");
+            Notify("");
         }
 
         void SpawnWave()
@@ -500,7 +504,7 @@ namespace Sunward
             if(win && bossEncounter)
             {
                 Sunward.Remaster.LowerArena.BossDefeated();
-                SetPanel("bossVictory");Player.StopMotion();Player.animationView.Play("Bark",.12f,1.93f,true);Audio.VictoryHowl();
+                Close();Player.StopMotion();Player.animationView.Play("Bark",.12f,1.93f,true);Audio.VictoryHowl();
             }
             else if(win){Close();Notify("Trial complete · rewards saved");}
             else SetPanel("result");
@@ -512,6 +516,7 @@ namespace Sunward
             InTrial=false;BossTrial=false;
             if(BossTransformation)BossTransformation.Cancel();
             if(Transformation)Transformation.Cancel();
+            if(Presentation)Presentation.Cancel();
             if(Home)Home.CancelRest();
             if(Services)Services.CancelRest();
             ClearEnemies();

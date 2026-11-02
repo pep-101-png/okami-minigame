@@ -48,8 +48,8 @@ namespace Sunward.Remaster
             else if(!carried && game.Player.input.Dig.WasPressedThisFrame() && !NativeHomeRoom.At(p) && !VillageServices.InDojo(p) && !VillageServices.InFoodHouse(p))
             {digRoutine=StartCoroutine(Dig(null));}
             else if(carried)game.WorldPrompt(farmer<3?"E · farmer shop / sell carried vegetable":"Carrying produce · H eat (+1 health) · G stow in pouch");
-            else if(Vector3.Distance(p,new Vector3(GardenPond.X+3.7f,.02f,GardenPond.Z))<2)
-            {game.WorldPrompt("E · Rest beside the steaming pond");if(game.Player.input.Interact.WasPressedThisFrame())game.Services.RestAt(new Vector3(GardenPond.X+3.7f,.04f,GardenPond.Z),270);}
+            else if(SpaRest.Near(p))
+            {game.WorldPrompt("E · Bathe · temporary +25 vitality");}
         }
         IEnumerator Dig(FarmCrop crop)
         {

@@ -101,7 +101,7 @@ static class Program
   {
    var player=new WolfMotor();var game=new GameFlow{Player=player,InTrial=true,BossTrial=boss,Health=win?45:0,Panel="",barrier=new GameObject()};player.game=game;var resultBoundary=game.barrier;game.Finish(win);
    Check(game.barrier==null&&resultBoundary.wasDestroyed,"Victory/defeat cleanup cannot handle a meshless boundary");
-   Check(!game.InTrial&&!game.BossTrial&&game.Panel==(win?(boss?"bossVictory":""):"result"),"Victory modal must close automatically; defeat must retain recovery menu");
+   Check(!game.InTrial&&!game.BossTrial&&game.Panel==(win?"":"result"),"Victory modal must close automatically; defeat must retain recovery menu");
    Check(game.Save.saves==1&&player.Locked==!win,"Result did not save or release/lock control correctly");
    Check(win?game.Profile.coins==(boss?150:75)&&game.Profile.xp==100&&game.Profile.bossWins==(boss?1:0)&&game.Profile.wins==(boss?0:1):game.Profile.defeats==1,"Result changed earned rewards");
    Check(game.projectiles>0&&game.Dialogue.Contains("10 combat coins"),"End of trial keeps stray projectiles or loses result text");

@@ -32,7 +32,7 @@ for actor in animals:
 # The native archery lane has a body-width margin from Susano.
 sus=d.vec(s.blocks[s.transform(8000000000000010614)],'m_LocalPosition');start=d.vec(s.blocks[s.transform(8000000000000010624)],'m_LocalPosition');dummy=s.owner(8000000000000010613);end=d.vec(s.blocks[s.transform(dummy)],'m_LocalPosition');v=end[[0,2]]-start[[0,2]];p=sus[[0,2]]-start[[0,2]];u=np.clip(np.dot(p,v)/np.dot(v,v),0,1);distance=np.linalg.norm(p-v*u);check(distance>1.25,'Susano still occupies archer lane')
 check('motion: hm08_087' in s.blocks[8000000000000011274],'Working Susano animation changed')
-audio=json.loads((res/'NativeAudio.json').read_text())['cues'];bark=[r for r in audio if r['cue']=='bark'];check(len(bark)==1 and bark[0]['resource'].endswith('dog-an05-bark'),'Bark still rotates unverified player lottery cues')
+audio=json.loads((res/'NativeAudio.json').read_text())['cues'];bark=[r for r in audio if r['cue']=='bark'];check(len(bark)==0,'An unverified bark is still assigned')
 for r in audio:check(any((p/Path(r['resource'])).with_suffix(suffix).exists() for p in A.rglob('Resources') for suffix in ['.wav','.ogg']),'Missing sound '+r['cue'])
 for package in range(0x20,0x2f):
  for suffix in ['', '-heavy']:check(any(r['cue']=='weapon-wp'+format(package,'02x')+suffix for r in audio),'Weapon attack sound mapping missing')

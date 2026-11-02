@@ -7,7 +7,7 @@ namespace Sunward
     {
         public GameFlow game;
         GUIStyle body, title, small, button;
-        Texture2D paper, red;
+        Texture2D paper, red,hintInk;
         Vector2 scroll;
         string importText = "";
         bool importOpen;
@@ -60,8 +60,8 @@ namespace Sunward
         {
             if (body != null)
                 return;
-            paper = Resources.Load<Texture2D>("Okami/UI/Paper");
-            red = Resources.Load<Texture2D>("Okami/UI/Ink");
+            paper = Resources.Load<Texture2D>("Okami/UI/MenuPaper");
+            red = Resources.Load<Texture2D>("Okami/UI/Ink");hintInk=Resources.Load<Texture2D>("Okami/UI/HintInk");
             body = new GUIStyle(GUI.skin.label)
             {
                 fontSize = 19,
@@ -101,6 +101,7 @@ namespace Sunward
         {
             if (!game || game.Save == null || game.CinematicActive || (game.Brush && game.Brush.Drawing))
                 return;
+            if(game.Presentation && (game.Presentation.Title || game.Presentation.Dialogue))return;
             Styles();
             GUI.color = Color.white;
             GUI.contentColor = Color.white;
@@ -132,9 +133,14 @@ namespace Sunward
                 GUILayout.EndArea();
             }
 
-            DrawPaper(new Rect(20, h - 93, w - 40, 72));
-            GUI.Label(new Rect(34, h - 88, w - 68, 28), game.Message != "" ? game.Message : game.Prompt, body);
-            GUI.Label(new Rect(34, h - 57, w - 68, 28), game.InTrial ? "LMB/J light · RMB/L heavy · hold to charge · R brush · Q weapon · B bark · K dodge · Space jump · Esc pause" : "WASD move · Shift sprint · Ctrl walk · Space jump · E interact · R brush · F dig · G stow · H eat · Tab upgrades", small);
+            string hint=game.Prompt.StartsWith("E ") || game.Prompt.StartsWith("E ·") || game.Prompt.StartsWith("F ")?game.Prompt:game.Message;
+            if(!string.IsNullOrEmpty(hint))
+            {
+                float hw=Mathf.Min(w*.76f,Mathf.Max(280,hint.Length*11));
+                if(hintInk){GUI.color=new Color(.04f,.025f,.015f,.42f);GUI.DrawTexture(new Rect((w-hw)*.5f-18,h-86,hw+36,61),hintInk);GUI.color=Color.white;}
+                Sunward.Remaster.InkText.Draw(hint,new Rect((w-hw)*.5f,h-76,hw,55),30,new Color(1,.95f,.82f,.78f));
+            }
+            if(game.Spa && game.Spa.Bonus>0)Sunward.Remaster.InkText.Draw("Spring blessing +25 · "+Mathf.CeilToInt(game.Spa.Remaining/60)+" min",new Rect(28,153,360,55),28,new Color(.55f,1,.65f,.8f));
             if (game.InTrial && GUI.Button(new Rect(w - 160, h - 140, 140, 34), "RETREAT", button))
                 game.Finish(false);
             var festivalChallenge=game.GetComponent<Sunward.Remaster.FestivalChallenges>();
@@ -152,12 +158,6 @@ namespace Sunward
             scroll = GUILayout.BeginScrollView(scroll);
             switch (game.Panel)
             {
-                case "welcome":
-                    GUILayout.Label("A light in the mist.", title);
-                    GUILayout.Label("Explore the painted valley, cross its bridges, visit Taro for weapons and Hana for permanent blessings, then challenge the Hollow Bell. Visit the training hall or rest at the food house. Rewards survive victory and defeat.\n\nController: left stick moves, right stick looks, A jumps, B dodges, X interacts, RB/RT attack, LB barks, D-pad right switches owned weapons.", body);
-                    if (Button("ENTER WINDFLOWER →", button))
-                        game.Close();
-                    break;
                 case "shop":
                     Shop();
                     break;
@@ -244,8 +244,8 @@ namespace Sunward
                     var festival=game.GetComponent<Sunward.Remaster.FestivalChallenges>();
                     GUILayout.Label("FESTIVAL NIGHT · "+game.Profile.festivalTokens+" tokens",title);
                     GUILayout.Label("Sleep in Ammy’s bed to reach night. Optional games award festival tokens; your arena progress is unchanged.",small);
-                    GUILayout.Label(festival.Active?festival.Status:"Lantern dash: pass six lantern checkpoints in order within 55 seconds. Harvest relay: dig up three different vegetables, then give three to the farmer within 90 seconds. Each win awards 3 tokens.",body);
-                    if(!festival.Active){if(Button("START LANTERN DASH · 55 seconds",button))festival.Begin(1);if(Button("START HARVEST RELAY · 90 seconds",button))festival.Begin(2);}
+                    GUILayout.Label(festival.Active?festival.Status:"Spirit run: collect six floating spirit lights in order within 55 seconds. Harvest relay: dig up three different vegetables, then give three to the farmer within 90 seconds. Each win awards 3 tokens.",body);
+                    if(!festival.Active){if(Button("START SPIRIT RUN · 55 seconds",button))festival.Begin(1);if(Button("START HARVEST RELAY · 90 seconds",button))festival.Begin(2);}
                     else if(Button("CANCEL CHALLENGE",button))festival.Cancel();
                     GUILayout.Label("Home decorations · permanent rewards placed inside Ammy’s house",body);
                     for(int reward=0;reward<3;reward++)
@@ -282,7 +282,7 @@ namespace Sunward
                     break;
             }
 
-            if (game.Panel != "result" && game.Panel != "welcome" && Button("RETURN →", button))
+            if (game.Panel != "result" && game.Panel != "title" && Button("RETURN →", button))
                 game.Close();
             GUILayout.EndScrollView();
             GUILayout.EndArea();

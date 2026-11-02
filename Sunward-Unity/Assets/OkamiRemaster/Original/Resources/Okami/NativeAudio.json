@@ -69,34 +69,6 @@
       "resource": "Okami/NativeAudio/menu-0"
     },
     {
-      "cue": "npc0",
-      "resource": "Okami/NativeAudio/npc0-0"
-    },
-    {
-      "cue": "npc1",
-      "resource": "Okami/NativeAudio/npc1-1"
-    },
-    {
-      "cue": "npc2",
-      "resource": "Okami/NativeAudio/npc2-2"
-    },
-    {
-      "cue": "npc3",
-      "resource": "Okami/NativeAudio/npc3-3"
-    },
-    {
-      "cue": "npc4",
-      "resource": "Okami/NativeAudio/npc4-4"
-    },
-    {
-      "cue": "npc5",
-      "resource": "Okami/NativeAudio/npc5-5"
-    },
-    {
-      "cue": "npc6",
-      "resource": "Okami/NativeAudio/npc6-6"
-    },
-    {
       "cue": "enemy0",
       "resource": "Okami/NativeAudio/enemy0-0"
     },
@@ -285,12 +257,232 @@
       "resource": "Okami/NativeAudio/swim-water-1"
     },
     {
-      "cue": "bark",
-      "resource": "Okami/NativeAudio/dog-an05-bark"
-    },
-    {
       "cue": "weapon-wp2e-impact",
       "resource": "Okami/NativeAudio/tundra-native-contact"
+    },
+    {
+      "cue": "voice-hm00",
+      "resource": "Okami/NativeAudio/hm00-voice-0"
+    },
+    {
+      "cue": "voice-hm00",
+      "resource": "Okami/NativeAudio/hm00-voice-1"
+    },
+    {
+      "cue": "voice-hm00",
+      "resource": "Okami/NativeAudio/hm00-voice-2"
+    },
+    {
+      "cue": "voice-hm00",
+      "resource": "Okami/NativeAudio/hm00-voice-3"
+    },
+    {
+      "cue": "voice-hm00",
+      "resource": "Okami/NativeAudio/hm00-voice-4"
+    },
+    {
+      "cue": "voice-hm00",
+      "resource": "Okami/NativeAudio/hm00-voice-5"
+    },
+    {
+      "cue": "voice-hm00",
+      "resource": "Okami/NativeAudio/hm00-voice-6"
+    },
+    {
+      "cue": "voice-hm01",
+      "resource": "Okami/NativeAudio/hm01-voice-0"
+    },
+    {
+      "cue": "voice-hm01",
+      "resource": "Okami/NativeAudio/hm01-voice-1"
+    },
+    {
+      "cue": "voice-hm01",
+      "resource": "Okami/NativeAudio/hm01-voice-2"
+    },
+    {
+      "cue": "voice-hm01",
+      "resource": "Okami/NativeAudio/hm01-voice-3"
+    },
+    {
+      "cue": "voice-hm01",
+      "resource": "Okami/NativeAudio/hm01-voice-4"
+    },
+    {
+      "cue": "voice-hm01",
+      "resource": "Okami/NativeAudio/hm01-voice-5"
+    },
+    {
+      "cue": "voice-hm01",
+      "resource": "Okami/NativeAudio/hm01-voice-6"
+    },
+    {
+      "cue": "voice-hm05",
+      "resource": "Okami/NativeAudio/hm05-voice-0"
+    },
+    {
+      "cue": "voice-hm05",
+      "resource": "Okami/NativeAudio/hm05-voice-1"
+    },
+    {
+      "cue": "voice-hm05",
+      "resource": "Okami/NativeAudio/hm05-voice-2"
+    },
+    {
+      "cue": "voice-hm05",
+      "resource": "Okami/NativeAudio/hm05-voice-3"
+    },
+    {
+      "cue": "voice-hm05",
+      "resource": "Okami/NativeAudio/hm05-voice-4"
+    },
+    {
+      "cue": "voice-hm05",
+      "resource": "Okami/NativeAudio/hm05-voice-5"
+    },
+    {
+      "cue": "voice-hm05",
+      "resource": "Okami/NativeAudio/hm05-voice-6"
+    },
+    {
+      "cue": "voice-hm09",
+      "resource": "Okami/NativeAudio/hm09-voice-0"
+    },
+    {
+      "cue": "voice-hm09",
+      "resource": "Okami/NativeAudio/hm09-voice-1"
+    },
+    {
+      "cue": "voice-hm09",
+      "resource": "Okami/NativeAudio/hm09-voice-2"
+    },
+    {
+      "cue": "voice-hm09",
+      "resource": "Okami/NativeAudio/hm09-voice-3"
+    },
+    {
+      "cue": "voice-hm09",
+      "resource": "Okami/NativeAudio/hm09-voice-4"
+    },
+    {
+      "cue": "voice-hm09",
+      "resource": "Okami/NativeAudio/hm09-voice-5"
+    },
+    {
+      "cue": "voice-hm09",
+      "resource": "Okami/NativeAudio/hm09-voice-6"
+    },
+    {
+      "cue": "voice-hm0f",
+      "resource": "Okami/NativeAudio/hm0f-voice-0"
+    },
+    {
+      "cue": "voice-hm0f",
+      "resource": "Okami/NativeAudio/hm0f-voice-1"
+    },
+    {
+      "cue": "voice-hm0f",
+      "resource": "Okami/NativeAudio/hm0f-voice-2"
+    },
+    {
+      "cue": "voice-hm0f",
+      "resource": "Okami/NativeAudio/hm0f-voice-3"
+    },
+    {
+      "cue": "voice-hm0f",
+      "resource": "Okami/NativeAudio/hm0f-voice-4"
+    },
+    {
+      "cue": "voice-hm0f",
+      "resource": "Okami/NativeAudio/hm0f-voice-5"
+    },
+    {
+      "cue": "voice-hm0f",
+      "resource": "Okami/NativeAudio/hm0f-voice-6"
+    },
+    {
+      "cue": "voice-hm29",
+      "resource": "Okami/NativeAudio/hm29-voice-0"
+    },
+    {
+      "cue": "voice-hm29",
+      "resource": "Okami/NativeAudio/hm29-voice-1"
+    },
+    {
+      "cue": "voice-hm29",
+      "resource": "Okami/NativeAudio/hm29-voice-2"
+    },
+    {
+      "cue": "voice-hm29",
+      "resource": "Okami/NativeAudio/hm29-voice-3"
+    },
+    {
+      "cue": "voice-hm29",
+      "resource": "Okami/NativeAudio/hm29-voice-4"
+    },
+    {
+      "cue": "voice-hm29",
+      "resource": "Okami/NativeAudio/hm29-voice-5"
+    },
+    {
+      "cue": "voice-hm29",
+      "resource": "Okami/NativeAudio/hm29-voice-6"
+    },
+    {
+      "cue": "voice-hm44",
+      "resource": "Okami/NativeAudio/hm44-voice-0"
+    },
+    {
+      "cue": "voice-hm44",
+      "resource": "Okami/NativeAudio/hm44-voice-1"
+    },
+    {
+      "cue": "voice-hm44",
+      "resource": "Okami/NativeAudio/hm44-voice-2"
+    },
+    {
+      "cue": "voice-hm44",
+      "resource": "Okami/NativeAudio/hm44-voice-3"
+    },
+    {
+      "cue": "voice-hm44",
+      "resource": "Okami/NativeAudio/hm44-voice-4"
+    },
+    {
+      "cue": "voice-hm44",
+      "resource": "Okami/NativeAudio/hm44-voice-5"
+    },
+    {
+      "cue": "voice-hm44",
+      "resource": "Okami/NativeAudio/hm44-voice-6"
+    },
+    {
+      "cue": "voice-hm68",
+      "resource": "Okami/NativeAudio/hm68-voice-0"
+    },
+    {
+      "cue": "voice-hm68",
+      "resource": "Okami/NativeAudio/hm68-voice-1"
+    },
+    {
+      "cue": "voice-hm68",
+      "resource": "Okami/NativeAudio/hm68-voice-2"
+    },
+    {
+      "cue": "voice-hm68",
+      "resource": "Okami/NativeAudio/hm68-voice-3"
+    },
+    {
+      "cue": "voice-hm68",
+      "resource": "Okami/NativeAudio/hm68-voice-4"
+    },
+    {
+      "cue": "voice-hm68",
+      "resource": "Okami/NativeAudio/hm68-voice-5"
+    },
+    {
+      "cue": "voice-hm68",
+      "resource": "Okami/NativeAudio/hm68-voice-6"
     }
   ]
 }

@@ -1,0 +1,1458 @@
+[
+  {
+    "character": "hm00",
+    "sourceBundle": "hm00v",
+    "sourceClip": 0,
+    "sourceSHA256": "45b31926b7e8e7c2ec8f77900fa49d14297af846e80cc42d36b6be9df1d3662b",
+    "outputSHA256": "a76c86e8d63158da2e9b9a33f648709ef8de2e62bd5d6f5c6e600945fa21b100",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 34,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -13.479,
+        "peak": 0.999969,
+        "clippedFraction": 0.0011489
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.265529,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -11.521,
+      "seconds": 0.136,
+      "clearADX_SHA256": "648b0cc30a39ed0bb43583ceed5a3ea8c842cdffb890b762d2de41cac920d6f2"
+    }
+  },
+  {
+    "character": "hm00",
+    "sourceBundle": "hm00v",
+    "sourceClip": 1,
+    "sourceSHA256": "de6c7079e21a29e0b32373fabcc3c451798e4f2c127c51ddf693ba53a50ad7ab",
+    "outputSHA256": "8c94db95bb533352f33c8351f32c651dd2c6b47433df0f93e889c3ac39f9c5d1",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 58,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.113,
+        "peak": 0.961761,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.274654,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.887,
+      "seconds": 0.232,
+      "clearADX_SHA256": "cf022871c35b439b8d92c7c68d9bd1637ad23fbcaaa386913e0bacee4c4266ec"
+    }
+  },
+  {
+    "character": "hm00",
+    "sourceBundle": "hm00v",
+    "sourceClip": 2,
+    "sourceSHA256": "7332613a1655be3d8c0a4a471ad093e19ef718f252b572867559f11357712d5c",
+    "outputSHA256": "d6f753b82e4c2be3cf6e71c6e936b17071d317d1ee1d70b952fca15a78a57707",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 63,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.022,
+        "peak": 0.981262,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.196269,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.978,
+      "seconds": 0.252,
+      "clearADX_SHA256": "2d67e2a990c0235322420cdf3078aaba6512afcf975c8e4c190f02689fa0477e"
+    }
+  },
+  {
+    "character": "hm00",
+    "sourceBundle": "hm00v",
+    "sourceClip": 3,
+    "sourceSHA256": "dd0effafdadce493f0a996fc18463c38129ca0d9f3f9b24a40c594415099213a",
+    "outputSHA256": "63fe4926c3516aba81d9a25dbd28eea0d71768ba21132c82653d2cdb8f8fbd9d",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 60,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -9.91,
+        "peak": 0.97818,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.172057,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -15.09,
+      "seconds": 0.24,
+      "clearADX_SHA256": "fa7d852c4cc1169620b7932174441d613b18a20fc9f10a563983bd65a8186981"
+    }
+  },
+  {
+    "character": "hm00",
+    "sourceBundle": "hm00v",
+    "sourceClip": 4,
+    "sourceSHA256": "6602f20185ea5a9b37f483a9d5b7f722fc9e26463ab80aafcda6bd844554a947",
+    "outputSHA256": "720c9bd5bcc1479e5db8586372cfb391e5a2d09375ec6505a02579fb4ff2b163",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 44,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.341,
+        "peak": 0.955597,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.280177,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.659,
+      "seconds": 0.176,
+      "clearADX_SHA256": "5204c2f62813ecf7628f0deb94dcd48f3f231e6982bd540465488998c4801697"
+    }
+  },
+  {
+    "character": "hm00",
+    "sourceBundle": "hm00v",
+    "sourceClip": 5,
+    "sourceSHA256": "f64064d3eddc8e6ba9cd0ff2bdcd904cceb34784ac6afdb959c394a3798d32db",
+    "outputSHA256": "a5004b52c914919a8bb45319be087649c1509dfc09f7b267852c337dd4b30e68",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 54,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.705,
+        "peak": 0.967316,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.295836,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.295,
+      "seconds": 0.216,
+      "clearADX_SHA256": "5e227c526843ac68d2fd4725ff32cfecfd4f2a7441ebfaa820c1d2c9052e7ca1"
+    }
+  },
+  {
+    "character": "hm00",
+    "sourceBundle": "hm00v",
+    "sourceClip": 6,
+    "sourceSHA256": "02809794f38555c247211e9d8e974f0f2afbeaeb4895b4621ddc149cfb3f832d",
+    "outputSHA256": "d6d4be718d3186baf9faf568102a02b461f8138055feac10a0256160f1a585f6",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 63,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.189,
+        "peak": 0.996552,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.287533,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.81,
+      "seconds": 0.252,
+      "clearADX_SHA256": "2b7e99e4e9e10b498995cd6c3876a0adc6dcaf0c610783368ce99f18a880b338"
+    }
+  },
+  {
+    "character": "hm01",
+    "sourceBundle": "hm01v",
+    "sourceClip": 0,
+    "sourceSHA256": "23350b2b60158b7f4d952340156d9773a3de18340d86d2aee6e401970c6fe9ac",
+    "outputSHA256": "2edaae5b39822810e33c15bd61b0b015bfb83791f1e2b814b33a96c97adf4705",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 45,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.613,
+        "peak": 1.0,
+        "clippedFraction": 0.00052083
+      },
+      "output": {
+        "rmsDBFS": -25.004,
+        "peak": 0.214221,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.387,
+      "seconds": 0.18,
+      "clearADX_SHA256": "f358213a8e85c05bd25424300b8b592342ba47c1bb5b38b9b477fb9a409c03e7"
+    }
+  },
+  {
+    "character": "hm01",
+    "sourceBundle": "hm01v",
+    "sourceClip": 1,
+    "sourceSHA256": "28f40b92621e87041169809c4a8a9bc5d0a8d133600fc7b6660f6b842d6759fa",
+    "outputSHA256": "8e2f60bcf4a61a60c717b2e8529dacd0876c66598e5c75b2921249aee6308e96",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 73,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.927,
+        "peak": 0.999969,
+        "clippedFraction": 0.00010702
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.198343,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.073,
+      "seconds": 0.292,
+      "clearADX_SHA256": "9eaeb6c8d142f29a63fb41583025cd6b3ee8ffd363becc2a85a9e7f7e4e74910"
+    }
+  },
+  {
+    "character": "hm01",
+    "sourceBundle": "hm01v",
+    "sourceClip": 2,
+    "sourceSHA256": "4795e03a7c7c122ccab02564af54817f2db479cc8248f8cb9fe4516c0d2bcd1b",
+    "outputSHA256": "eaeffb82dba46fc07de3126543de4f766f02cbb41f6e14ced4224be632daf4bf",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 70,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -9.024,
+        "peak": 0.999969,
+        "clippedFraction": 0.00033482
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.158804,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -15.976,
+      "seconds": 0.28,
+      "clearADX_SHA256": "dc7371add87943048c7a331750be99857ca3f73787ab9ac1eec29c9b3963f5ab"
+    }
+  },
+  {
+    "character": "hm01",
+    "sourceBundle": "hm01v",
+    "sourceClip": 3,
+    "sourceSHA256": "4fe9be9e3c875b1f38d4d421853e43d0b5872fe589850398570ae4813f8cb9bd",
+    "outputSHA256": "20b767f521cc82cf21583a48ae258ea554c77c6a09b5e82e86c22e995b88fd3e",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 75,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.832,
+        "peak": 0.999969,
+        "clippedFraction": 0.00020833
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.219646,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.168,
+      "seconds": 0.3,
+      "clearADX_SHA256": "c204d37a479a8216d355b3374a335c245222439858f3176d70568151cf909c24"
+    }
+  },
+  {
+    "character": "hm01",
+    "sourceBundle": "hm01v",
+    "sourceClip": 4,
+    "sourceSHA256": "e94cad46871ac667346975d31d7fc4f5cf8dadd87a46cac29bc8b5718294b5cd",
+    "outputSHA256": "ac088362c748dbb44d9d7a1d31693e42a16362d530b51d205fa4dca228f21dff",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 51,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -13.014,
+        "peak": 0.980865,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.246858,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -11.986,
+      "seconds": 0.204,
+      "clearADX_SHA256": "f70af418493254130eca24d55899bb19e104f1ad2d218f3f66b3324a6c6a003d"
+    }
+  },
+  {
+    "character": "hm01",
+    "sourceBundle": "hm01v",
+    "sourceClip": 5,
+    "sourceSHA256": "6c7134e8ad2c3b2bc28bd818aefd29297c0b48fc66642dfa4cd3cd3ec1b2a374",
+    "outputSHA256": "520ca7eaf07d82890071434f76d6c9ad5841073b392ef18f7af48ac0ffa7b378",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 47,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.952,
+        "peak": 0.960052,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.190544,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.048,
+      "seconds": 0.188,
+      "clearADX_SHA256": "b4e7ed57a80494d6ef6fff536a8ac557d63a37defe18ed5c77742f3a1b58e409"
+    }
+  },
+  {
+    "character": "hm01",
+    "sourceBundle": "hm01v",
+    "sourceClip": 6,
+    "sourceSHA256": "2850546a0b86261b4d8ea0fe4bf66aef474272bb5eafe09053cbd78082a0f2b4",
+    "outputSHA256": "73802c58cfcd51ded55a4ba54b53a3fb2242ee84fc05a3fbe0b7a135c8010971",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 42,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -9.931,
+        "peak": 1.0,
+        "clippedFraction": 0.00037202
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.176451,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -15.069,
+      "seconds": 0.168,
+      "clearADX_SHA256": "2d0a67c9db5777ca13a393fda0bbbdc67eddb879aaadb334e33f18811fb277da"
+    }
+  },
+  {
+    "character": "hm05",
+    "sourceBundle": "hm05v",
+    "sourceClip": 0,
+    "sourceSHA256": "933827bc86b13f11a31f181459039205e3466e69b138daa0c67a6948ab67781d",
+    "outputSHA256": "a0938f9bbede9f4ad441ae6d5d9960e92d593719ff69ca7f0776d1de53d10c07",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 49,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.129,
+        "peak": 1.0,
+        "clippedFraction": 0.00047832
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.202068,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.87,
+      "seconds": 0.196,
+      "clearADX_SHA256": "4073593565cf59c06dfc3ab33af725c7f33f54efc84f43ca1fc3a2d8465c245c"
+    }
+  },
+  {
+    "character": "hm05",
+    "sourceBundle": "hm05v",
+    "sourceClip": 1,
+    "sourceSHA256": "927061a0874812aafecd805f827c35afda19c88a43f66e3b16ec4054b76b499f",
+    "outputSHA256": "e232b40f52f13d485e90af3926c8762745b5f64f344d9686c0c8851a2cb29ef0",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 46,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.377,
+        "peak": 0.977448,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.180495,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.621,
+      "seconds": 0.184,
+      "clearADX_SHA256": "243cfe1f4974cdca846a373a7f170463744bc68bd090c27c77ce23f785653f41"
+    }
+  },
+  {
+    "character": "hm05",
+    "sourceBundle": "hm05v",
+    "sourceClip": 2,
+    "sourceSHA256": "5db9e473253ab4bde91c61eb6e73dd7b1d414482738b71da77afdad6f8a2af52",
+    "outputSHA256": "77edd49dbb724ff5cced77ea6b84ae0ba7dd53a56c6e090ce22e9ec1bcdec2a1",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 44,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.379,
+        "peak": 0.978638,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.181746,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.621,
+      "seconds": 0.176,
+      "clearADX_SHA256": "84180ce8ffd6c76e815aea46c3ef0dc9918380002a90e96f84d11d78a90455c8"
+    }
+  },
+  {
+    "character": "hm05",
+    "sourceBundle": "hm05v",
+    "sourceClip": 3,
+    "sourceSHA256": "e23009b4c3f8ffb481cea90e2e04c5766675806106452e41cd403db8e0e5d3bb",
+    "outputSHA256": "6dce2392ab4d2f6526a468ff990c73d95adff314224084c195a0119ac7056aea",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 43,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -9.421,
+        "peak": 0.943665,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.158392,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -15.576,
+      "seconds": 0.172,
+      "clearADX_SHA256": "a4e2b54ce5406d4f34802ca34a5be4a209d11d40675492085f41c04adebb9b3e"
+    }
+  },
+  {
+    "character": "hm05",
+    "sourceBundle": "hm05v",
+    "sourceClip": 4,
+    "sourceSHA256": "fab97f80e7d247ebe1cc031eadaacc217fc0ec8c1da3dc75b3cf1708132a1afb",
+    "outputSHA256": "57a37a0349c6890b25fafdf1aab756facb624e8a7ba5f227b4723fb78e442baf",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 43,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -8.501,
+        "peak": 0.999969,
+        "clippedFraction": 0.00018169
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.148815,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -16.498,
+      "seconds": 0.172,
+      "clearADX_SHA256": "f0012f7dca726816a7bd9076e33db71e7a96d7f5fe9f71a583575ab8552947a0"
+    }
+  },
+  {
+    "character": "hm05",
+    "sourceBundle": "hm05v",
+    "sourceClip": 5,
+    "sourceSHA256": "220bd7c83dd018fdb4d12e33fb721ab2dcaf3eeabe4718462e2477a89e9b2e95",
+    "outputSHA256": "9751cee5e7dc697b59ea29051991482530bc45763e65db6e63b7d8436158b10c",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 40,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.099,
+        "peak": 0.987915,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.199461,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.901,
+      "seconds": 0.16,
+      "clearADX_SHA256": "c4093846a7d5173ef3b577f0e9c2b3adce01d3e4d27301db1b31279664bf1796"
+    }
+  },
+  {
+    "character": "hm05",
+    "sourceBundle": "hm05v",
+    "sourceClip": 6,
+    "sourceSHA256": "38aa5533d42467a0a485e0c0d53d2defe43ee0192841a81028ec1c02989cdc78",
+    "outputSHA256": "825988b4ded64bf06bca3d7e756533bf8c075147f252ee4950b5da91a63d44b5",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 44,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -9.505,
+        "peak": 0.995789,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.167235,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -15.495,
+      "seconds": 0.176,
+      "clearADX_SHA256": "638ed76e0a807ae0bef7b3f983386d3d719dcdc1bf14802760a0940f83061df2"
+    }
+  },
+  {
+    "character": "hm09",
+    "sourceBundle": "hm09v",
+    "sourceClip": 0,
+    "sourceSHA256": "81b785310849bc521ae1d8172a60a33c784e87f82e12ef93dcc8e2cca12303ff",
+    "outputSHA256": "b69dbb670bb400e3045e305f58ef7008d8789a802ca8cfcd3fde374ec79bbebe",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 34,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.239,
+        "peak": 1.0,
+        "clippedFraction": 0.00022978
+      },
+      "output": {
+        "rmsDBFS": -25.007,
+        "peak": 0.17664,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.674,
+      "seconds": 0.136,
+      "clearADX_SHA256": "ff2e6a9494c7cdcf96dc15a4f002b71f06bc7e1ea4eb4ef9664c2791a0070ab8"
+    }
+  },
+  {
+    "character": "hm09",
+    "sourceBundle": "hm09v",
+    "sourceClip": 1,
+    "sourceSHA256": "b68ba50ac0b484d2b150c80943b413e6482aa8d3c05918b816ab8e1545209aed",
+    "outputSHA256": "7a17b4fa495d41bb188a27bc6c0e807388a57916b2f163de283a8d7bbae0061b",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 33,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.903,
+        "peak": 0.879822,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.173799,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.097,
+      "seconds": 0.132,
+      "clearADX_SHA256": "6c90b7b8a7af10355c53717ad30ef57cd0801065ccf61c6148c423b27ffe51e1"
+    }
+  },
+  {
+    "character": "hm09",
+    "sourceBundle": "hm09v",
+    "sourceClip": 2,
+    "sourceSHA256": "c10981860687c61927d24549d1367aefc9c3182f4cdd80806f2a24ffd31ce2d7",
+    "outputSHA256": "d5b5d81b0f77e84bda127bc92d733203372bb12069d63db9ac94a84d9b4d8c7a",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 26,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.125,
+        "peak": 0.929718,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.105,
+        "peak": 0.188782,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.874,
+      "seconds": 0.104,
+      "clearADX_SHA256": "d253173a1489fea6b21d58f4a59b2df31b80d476b549eeae42f7a17bd1817e7c"
+    }
+  },
+  {
+    "character": "hm09",
+    "sourceBundle": "hm09v",
+    "sourceClip": 3,
+    "sourceSHA256": "e59ecaf6c14306dc2f12caf2ce7476195e5734b415a6ab84fcd6fa4346c0dacf",
+    "outputSHA256": "2f29804af4a402efde5574980fa005175351ff6715dfaea483301fdccac3875a",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 33,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.433,
+        "peak": 1.0,
+        "clippedFraction": 0.00047348
+      },
+      "output": {
+        "rmsDBFS": -25.024,
+        "peak": 0.186878,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.567,
+      "seconds": 0.132,
+      "clearADX_SHA256": "9077ec8ff725a3c513b4b38e5526e3bc8eb914fd708cc57f6019e16902a3f6b0"
+    }
+  },
+  {
+    "character": "hm09",
+    "sourceBundle": "hm09v",
+    "sourceClip": 4,
+    "sourceSHA256": "513d3c1224d8652523264008d98381fddd16bf32a19aa269202ca4de2493a64b",
+    "outputSHA256": "38be8bf4bf07890e4f97715561a2b4b6ed3b98afd3ae57b8d85dba20f46e3609",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 43,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.401,
+        "peak": 0.909302,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.007,
+        "peak": 0.19013,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.599,
+      "seconds": 0.172,
+      "clearADX_SHA256": "2cd5f7c15d5a928a6ca10d0fb72e9e0aa489ad0308ad276bc7f9e57928d76add"
+    }
+  },
+  {
+    "character": "hm09",
+    "sourceBundle": "hm09v",
+    "sourceClip": 5,
+    "sourceSHA256": "a179485106b3826cac3ef31b3261e35bcb0ec6029ba5aa9e99d88af827890081",
+    "outputSHA256": "054e60b7d29e2075a72c817cdab2d85ab2224b283045d88fe8fbb4602062f34b",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 38,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.986,
+        "peak": 0.999969,
+        "clippedFraction": 0.00205592
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.223499,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.014,
+      "seconds": 0.152,
+      "clearADX_SHA256": "24ece8a041304f9f52aee069bcf7500df10f632fca3b04ef4420338ee00e083a"
+    }
+  },
+  {
+    "character": "hm09",
+    "sourceBundle": "hm09v",
+    "sourceClip": 6,
+    "sourceSHA256": "cdd752156b53bcce25cb4825898121e32423e8a845510c6ebfcd633b76e9ab1c",
+    "outputSHA256": "f5ba83592f76e1a7e215cb11aa01d68879470a10473773e7569bf507986bf85c",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 26,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -13.148,
+        "peak": 0.947693,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.004,
+        "peak": 0.242024,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -11.852,
+      "seconds": 0.104,
+      "clearADX_SHA256": "7f87857929e77513b1c9a1e0da66fad92fb10f12ea1b995851b5b0ddfba8cf36"
+    }
+  },
+  {
+    "character": "hm0f",
+    "sourceBundle": "hm0fv",
+    "sourceClip": 0,
+    "sourceSHA256": "1272ea22a1b72cab4cb9e90d6a3493ef52bcfe314bae686f30e8701a54cd3b7a",
+    "outputSHA256": "6fc05ab50dfd7e66964c9daa552853406aac23d6d615628fedd3535d87f7bbcc",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 50,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -9.578,
+        "peak": 0.999969,
+        "clippedFraction": 0.00078125
+      },
+      "output": {
+        "rmsDBFS": -25.002,
+        "peak": 0.169977,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -15.421,
+      "seconds": 0.2,
+      "clearADX_SHA256": "b1468970a4c60f94d6437157a4caa425190a9c1001d974bd0b3c9a2449be720f"
+    }
+  },
+  {
+    "character": "hm0f",
+    "sourceBundle": "hm0fv",
+    "sourceClip": 1,
+    "sourceSHA256": "265c19879981dc2dd0f8bb87c6a85f6d9bb0e66a18ad2c013fc210a438a824d6",
+    "outputSHA256": "17a46231b5bb0b0ee464be2e83d1be057c43b18bd4892026466c4c9efa734c3c",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 49,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.734,
+        "peak": 0.993713,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.215928,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.266,
+      "seconds": 0.196,
+      "clearADX_SHA256": "0c5487809dd34a54e34c6472ee39a78cef962da31508cd565f5e70c48bbc7461"
+    }
+  },
+  {
+    "character": "hm0f",
+    "sourceBundle": "hm0fv",
+    "sourceClip": 2,
+    "sourceSHA256": "8c4e603d8975a04c3582543cdef59e446547fcf8337676700fd4ad92f6a85ee7",
+    "outputSHA256": "8eb2ed48a981295713e27aaa7db10f29c47a922b77871b76b066efd63b33069a",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 55,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -8.826,
+        "peak": 0.941803,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.146493,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -16.174,
+      "seconds": 0.22,
+      "clearADX_SHA256": "614b6965deb4f4b8bd94c6dc2adf1f997a192c1dadaa22735649c267a13a6020"
+    }
+  },
+  {
+    "character": "hm0f",
+    "sourceBundle": "hm0fv",
+    "sourceClip": 3,
+    "sourceSHA256": "684e103c0b399c564831d4f4945c40e6c25c3474d2ad0227bdcecf4eca85c341",
+    "outputSHA256": "5572cac045e5764ff9fb6e9e201878ab32443397786c125c1e748ac40420253f",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 55,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -9.719,
+        "peak": 0.976074,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.168057,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -15.281,
+      "seconds": 0.22,
+      "clearADX_SHA256": "51e652bdd41e9e69adf6d33c276d35fde79345a180dbf27a73d3fda7a4d6bb33"
+    }
+  },
+  {
+    "character": "hm0f",
+    "sourceBundle": "hm0fv",
+    "sourceClip": 4,
+    "sourceSHA256": "09110c56c8e7ddb979dd0c0321c3d9c07f2190af11252ccadb0c432a2c4c51eb",
+    "outputSHA256": "bd0df145165100d0cd9d3f0ca2ba24bcfc210911d757dde922363516ad0e6e00",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 49,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -8.615,
+        "peak": 1.0,
+        "clippedFraction": 0.00047832
+      },
+      "output": {
+        "rmsDBFS": -25.002,
+        "peak": 0.151985,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -16.385,
+      "seconds": 0.196,
+      "clearADX_SHA256": "1dee9dda0bd3292d674032c7bfdf533b72343eb30ccfeda476c183496ee2d53d"
+    }
+  },
+  {
+    "character": "hm0f",
+    "sourceBundle": "hm0fv",
+    "sourceClip": 5,
+    "sourceSHA256": "aebc2373f86c5bc0517eaae2628ce8d52191f5d00b55e917add6457bce9bdcf5",
+    "outputSHA256": "0125bcd1ff2a1b90abce98c5da9f37d0713c772105ff0086d8616a9c4643797e",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 55,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -9.071,
+        "peak": 0.97699,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.156452,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -15.929,
+      "seconds": 0.22,
+      "clearADX_SHA256": "468b59ce7798b3867854c568d33b60cfc0bcf6af757f83bba186a4fe5eaadead"
+    }
+  },
+  {
+    "character": "hm0f",
+    "sourceBundle": "hm0fv",
+    "sourceClip": 6,
+    "sourceSHA256": "dc47745eed2fe2aade0b520fe9a045db86f287687cb450cc236337b4d40dcf32",
+    "outputSHA256": "f9e9c1c9992c700809dcc5c831ba92f3a2e482233279540303a5022c13850c8f",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 55,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -8.751,
+        "peak": 0.953644,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.002,
+        "peak": 0.146967,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -16.249,
+      "seconds": 0.22,
+      "clearADX_SHA256": "3f51edd64edb53a80b973081fbffccf49626464ee9226d8b3699b75940a9b419"
+    }
+  },
+  {
+    "character": "hm29",
+    "sourceBundle": "hm29v",
+    "sourceClip": 0,
+    "sourceSHA256": "98a3c3d4948629af11cbffc2049e41970414ff5e01910482cd7de4f917f1534e",
+    "outputSHA256": "48d71fe4eb448157c48cd3baa3944dcbc435a4ce9d303dcd3d14826fde1852c1",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 64,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.828,
+        "peak": 0.933136,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.182796,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.172,
+      "seconds": 0.256,
+      "clearADX_SHA256": "8f098b640a1f262a4bb2e2a2ee51d50d4a88c3f1fdec2167a74b748aa6716460"
+    }
+  },
+  {
+    "character": "hm29",
+    "sourceBundle": "hm29v",
+    "sourceClip": 1,
+    "sourceSHA256": "f7930e91bf670b90ba65e19f2a016f70a38ca50e8a89a185c82d5fd28a965e99",
+    "outputSHA256": "eab86aeb715e4b39880bfee3b44c2ec7c19fd310125ae67b66e23b8497a7be2b",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 47,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -12.354,
+        "peak": 0.999969,
+        "clippedFraction": 0.00033245
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.233234,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -12.646,
+      "seconds": 0.188,
+      "clearADX_SHA256": "2b0f45a0e1af66064adbe3caf0b0835088df2754ccd86d3061e0fd92877b22d8"
+    }
+  },
+  {
+    "character": "hm29",
+    "sourceBundle": "hm29v",
+    "sourceClip": 2,
+    "sourceSHA256": "a71a4e73d753aec10e6030af18c05195ac8333ff548204aa53c1029e10875776",
+    "outputSHA256": "c6880a8dc618765f854eba55af86f33cf72fdc2ba1613c7a851c4d4f1844f8d7",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 35,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -13.766,
+        "peak": 0.999969,
+        "clippedFraction": 0.00022321
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.27438,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -11.234,
+      "seconds": 0.14,
+      "clearADX_SHA256": "bf82ed6bbd936c4b9b132648d46d8b12edb6d90a5a61a5ea81e9231a3b1f47d0"
+    }
+  },
+  {
+    "character": "hm29",
+    "sourceBundle": "hm29v",
+    "sourceClip": 3,
+    "sourceSHA256": "2c264f737d89c172e6ba2b14a4e2289cb36f263082ed4526cb16685e06db6329",
+    "outputSHA256": "d6d3006499a1bc8cacd413ef556829d517953bc54d5e197da2ff1e9cbc624440",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 44,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -15.029,
+        "peak": 0.895447,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.288215,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -9.954,
+      "seconds": 0.176,
+      "clearADX_SHA256": "3772d8c0eb422cacadbd43b37f57a0bc76907ea6dc4cdd4f3d051f1a3f7889a8"
+    }
+  },
+  {
+    "character": "hm29",
+    "sourceBundle": "hm29v",
+    "sourceClip": 4,
+    "sourceSHA256": "962977cc9b4c275415ee6de5a122d99002120fb6879e58f0dfb235d7b7a04acb",
+    "outputSHA256": "c08e3683f908b1fdb12735a6c8b3291e8e460784ce5c34867bcb52ddd70aa16e",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 56,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.719,
+        "peak": 1.0,
+        "clippedFraction": 0.00027902
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.216569,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.28,
+      "seconds": 0.224,
+      "clearADX_SHA256": "64c1cbd6dce7826f302aa62714a8dd7ce31228a018657fa78d6a508f5bbed980"
+    }
+  },
+  {
+    "character": "hm29",
+    "sourceBundle": "hm29v",
+    "sourceClip": 5,
+    "sourceSHA256": "38e4fcd0ac29d3858b0e8585223a2f9d9ff3320caeba6d1649d43c5946900122",
+    "outputSHA256": "d1a595954d4ae055340626fa27fe1b0cbd9364036942d93c45e32d2c90d009cc",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 53,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -12.694,
+        "peak": 0.972717,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.23582,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -12.306,
+      "seconds": 0.212,
+      "clearADX_SHA256": "1b5898a082359b2d04aa97f23d3a255700df37ddba74071afbd71b188e897439"
+    }
+  },
+  {
+    "character": "hm29",
+    "sourceBundle": "hm29v",
+    "sourceClip": 6,
+    "sourceSHA256": "f93ec646c2c64bfa891d9ac051b1cbce8988fac8bcf31c79a8b33bedf59e7dd9",
+    "outputSHA256": "7d39ef989dd288b27c88d93946666a3d92f61b2686bab6a7d2c9799504c3dc51",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 49,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.564,
+        "peak": 1.0,
+        "clippedFraction": 0.00143495
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.189743,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.436,
+      "seconds": 0.196,
+      "clearADX_SHA256": "667ebca8ef1b110c44b3c2bb84de023095827911c431381ca96774c7aedbbc47"
+    }
+  },
+  {
+    "character": "hm44",
+    "sourceBundle": "hm44v",
+    "sourceClip": 0,
+    "sourceSHA256": "86c875d87f2661e081f2eeeeca6b3a03969edd38552f59f66061d95697f95470",
+    "outputSHA256": "f16eaf73bcec823e33664b39ea331bc9fa253ed50a99f8e91ca5ed6b3a63a6c2",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 53,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.935,
+        "peak": 0.999969,
+        "clippedFraction": 0.00029481
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.222101,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.065,
+      "seconds": 0.212,
+      "clearADX_SHA256": "1d58e70387ee31faa4c35542d535d9f5f835f5bab8cbe7fa9be33671a094b83e"
+    }
+  },
+  {
+    "character": "hm44",
+    "sourceBundle": "hm44v",
+    "sourceClip": 1,
+    "sourceSHA256": "0d2199be12a1853e3f78ae6a51e9daa062119e4031480980fec6f1a60189dfb4",
+    "outputSHA256": "fcf89ddadb614761ffd56dd075cff2f7ab48592d5540ab091e7fd4e6c651625e",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 55,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -12.664,
+        "peak": 0.999969,
+        "clippedFraction": 0.00028409
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.241721,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -12.336,
+      "seconds": 0.22,
+      "clearADX_SHA256": "38ed3f4ef13a7033ca7cb48adab0d2c79aa4bee331f541e0e5fb16ea8d5c7cf6"
+    }
+  },
+  {
+    "character": "hm44",
+    "sourceBundle": "hm44v",
+    "sourceClip": 2,
+    "sourceSHA256": "1a90fca842edcbb4e74eeb35e9c4be48ad54b88579c5c2817de0139b743717b3",
+    "outputSHA256": "2e5c8d5b87356debcf0f1433a81f2d6d50bd230e8ab918f045bb13746dc4d254",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 52,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.899,
+        "peak": 0.984955,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.194359,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.101,
+      "seconds": 0.208,
+      "clearADX_SHA256": "3035f808d6f71a720ccce2909ebbb5b5381d18b7dc3a7503d71d2b921dbf8c4f"
+    }
+  },
+  {
+    "character": "hm44",
+    "sourceBundle": "hm44v",
+    "sourceClip": 3,
+    "sourceSHA256": "cb9256af0e953e97fcb156fab7b5e1db2625463ccb41101cd7b611cba330d03f",
+    "outputSHA256": "d858d2b1fca12a5448bae68131426fe291d8a179b32ce701c683652f881e0d12",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 56,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.335,
+        "peak": 0.995331,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.184044,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.665,
+      "seconds": 0.224,
+      "clearADX_SHA256": "d1ca00e6e9378b7658ed84b8071a341cb34fd601aad78cbb00b3f2c526ae6d83"
+    }
+  },
+  {
+    "character": "hm44",
+    "sourceBundle": "hm44v",
+    "sourceClip": 4,
+    "sourceSHA256": "0bd63fa2dfd414590309107537f96bd1b7f4fdc1273a777e179c5fed498a5b9e",
+    "outputSHA256": "9bb52883a163810c0ee8f11f1b817bcef99f9f057e965208a94098cd91e7c6b3",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 58,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.66,
+        "peak": 0.97644,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.210257,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.34,
+      "seconds": 0.232,
+      "clearADX_SHA256": "0affb2e99b2e3a99d5b2f140949baee95ee3ce4219cc9abe8f8783df25ebac9a"
+    }
+  },
+  {
+    "character": "hm44",
+    "sourceBundle": "hm44v",
+    "sourceClip": 5,
+    "sourceSHA256": "c05f66785af65b764e0610b3fc255ac7e60a6fd2e93f52615f5a8202f2be0c02",
+    "outputSHA256": "10436b51708ee404e34aa178f4b9816ba8793ff6007dcea83ff141ef2401abca",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 54,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -9.187,
+        "peak": 0.999969,
+        "clippedFraction": 0.00014468
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.162026,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -15.813,
+      "seconds": 0.216,
+      "clearADX_SHA256": "846de44a767c9f63f6e16a200d8502e529aa250dd0a4dfcf0e5af06f9eb647d8"
+    }
+  },
+  {
+    "character": "hm44",
+    "sourceBundle": "hm44v",
+    "sourceClip": 6,
+    "sourceSHA256": "ca6e13d5d26a6c5bfcc571c8ed6999fbc0420374a3802da87a4dbca1f0eb7f99",
+    "outputSHA256": "d0a349fb94d59b8e85c5a721ec1e59d7226597814ec096a975a263fd0007f963",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 53,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -10.699,
+        "peak": 0.999969,
+        "clippedFraction": 0.00029481
+      },
+      "output": {
+        "rmsDBFS": -25.0,
+        "peak": 0.192784,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.301,
+      "seconds": 0.212,
+      "clearADX_SHA256": "6ed6c2b68f219114e0d63e3ea6aa78b533ddd1a5fa6af74e117d54d377eca8e5"
+    }
+  },
+  {
+    "character": "hm68",
+    "sourceBundle": "hm68v",
+    "sourceClip": 0,
+    "sourceSHA256": "c08e557c754cfd33f474ddd59f0271ef4ad53ec6f80faad5c0eb41e85efba235",
+    "outputSHA256": "a348e62ffd6a1f7f698c02575d3e64f3b24944ec3dd62f45dee9541a99d491a8",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 48,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -11.862,
+        "peak": 1.0,
+        "clippedFraction": 0.0008138
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.220551,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -13.138,
+      "seconds": 0.192,
+      "clearADX_SHA256": "1e034c22ca94d347952ae5b5def221aee3a6d947bf388edb0e7eb7328fd2a5f6"
+    }
+  },
+  {
+    "character": "hm68",
+    "sourceBundle": "hm68v",
+    "sourceClip": 1,
+    "sourceSHA256": "9f6c15639be106fd8d1fc1dd7fcdb27496dbf7fc8d725c8d7f94b2d852d11c8b",
+    "outputSHA256": "9a32e0f0684da77db8286096010348d6d6fb0b8e1c298d86e1f03a4c2c4ae6b9",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 35,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -12.881,
+        "peak": 0.894409,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.004,
+        "peak": 0.218427,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -12.1,
+      "seconds": 0.14,
+      "clearADX_SHA256": "0e182980b826320aaed2be624143657b9f8c6ef02f0f8205878eefe494464e1d"
+    }
+  },
+  {
+    "character": "hm68",
+    "sourceBundle": "hm68v",
+    "sourceClip": 2,
+    "sourceSHA256": "abd4a1f9bda702ba59befdea617683204a02fad12ce45aab44f95545868f124c",
+    "outputSHA256": "28d3e12f4cd4e85ccaf3782c75e11cef83a54c4daefb493ee5fcaa816327f9c4",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 54,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -13.726,
+        "peak": 0.968048,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.263615,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -11.273,
+      "seconds": 0.216,
+      "clearADX_SHA256": "30af764592bcef8f4a1fdb5ec454e65ccb955aeb85f0cc2aefe5f26865c82c1b"
+    }
+  },
+  {
+    "character": "hm68",
+    "sourceBundle": "hm68v",
+    "sourceClip": 3,
+    "sourceSHA256": "93dc994abc2cfab4ce0a1651ebe82aab51ecb99d66aa7754ff24a67f96f132f1",
+    "outputSHA256": "6e240895ccfdbbccd9f3c29c2db69b4e60a880d96b29eb9d79ff4bdc7519a69d",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 52,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -13.92,
+        "peak": 1.0,
+        "clippedFraction": 0.00045072
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.283535,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -11.062,
+      "seconds": 0.208,
+      "clearADX_SHA256": "7f518754e57d4ad1bea6b54b9669d5c3f997528c1f94ceae40e2be66c2e78d5d"
+    }
+  },
+  {
+    "character": "hm68",
+    "sourceBundle": "hm68v",
+    "sourceClip": 4,
+    "sourceSHA256": "daeb6e7b2758eb0d85ed4a4459d0c69fa9cf57232c8ce5ba8dc8c2a80aaa1da7",
+    "outputSHA256": "9639c35cb44396a08ce064743a9ecf9a85dece255f27bd4207d60af0c2530170",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 48,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.186,
+        "peak": 0.861694,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.246863,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.812,
+      "seconds": 0.192,
+      "clearADX_SHA256": "a3eed24fba917d4775d7cf851d005004e9f2d80571ce0a8d3ae5651cb1abf86c"
+    }
+  },
+  {
+    "character": "hm68",
+    "sourceBundle": "hm68v",
+    "sourceClip": 5,
+    "sourceSHA256": "bee994fa7fcff3003e48fa5ee629cc04c173449bb33dd06496abeb536fccb9ba",
+    "outputSHA256": "ecf2da2dbf10a4c0324fcf33e34a53abf45d3ed40bcac65a9983738e4c381a76",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 47,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.063,
+        "peak": 0.907654,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.001,
+        "peak": 0.25506,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.925,
+      "seconds": 0.188,
+      "clearADX_SHA256": "28ab0a108d350f1e1597d35ab6692393c816a1d860d3cad0c1163688cdd7b8a6"
+    }
+  },
+  {
+    "character": "hm68",
+    "sourceBundle": "hm68v",
+    "sourceClip": 6,
+    "sourceSHA256": "3251fe050013a933076b94c7d5509188cd1d55bdc1f15011587dfb3cd9426df2",
+    "outputSHA256": "76821ac15a2352d6203141ab83f537149a75a130707691aa6276d202a59cdb74",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 40,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -13.328,
+        "peak": 0.962341,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -25.002,
+        "peak": 0.250015,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -11.671,
+      "seconds": 0.16,
+      "clearADX_SHA256": "b9cc8c76dd184fc093e9a2264d789ff690e8fbd989f846fd4870347fd16baf73"
+    }
+  }
+]
