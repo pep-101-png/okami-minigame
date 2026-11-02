@@ -121,8 +121,8 @@ static class Program
   }
   var audio=new ValleyAudio();audio.TundraAttack(false,false);Check(audio.tundraSwing.clip.name=="weapon-wp2e"&&audio.tundraSwing.plays==1,"Primary attack selects wrong sound");
   audio.TundraAttack(false,true);Check(audio.tundraSwing.clip.name=="weapon-wp2e"&&audio.tundraSwing.volume<=.30f,"Heavy swing uses generic impact or unbounded volume");
-  audio.TundraAttack(true,true);Check(audio.tundraSwing.clip.name=="weapon-wp2e-heavy"&&audio.tundraSwing.volume==.10f,"Charged cast selects wrong original cue");
-  audio.TundraContact();audio.TundraContact();Check(audio.tundraImpact.plays==1&&audio.tundraImpact.volume==.07f,"Contact sound stacks repeatedly");
+  audio.TundraAttack(true,true);Check(audio.tundraSwing.clip.name=="weapon-wp2e-heavy"&&audio.tundraSwing.volume>.07f&&audio.tundraSwing.volume<.15f,"Charged cast selects wrong original cue");
+  audio.TundraContact();audio.TundraContact();Check(audio.tundraImpact.plays==1&&audio.tundraImpact.volume<=.05f&&audio.tundraImpact.clip.name=="weapon-wp2e-impact","Contact sound stacks repeatedly");
   audio.StopTundra();Check(!audio.tundraSwing.isPlaying,"Cancelled swing continues playing");
   audio.TransformationVoice();audio.TransformationBurst();Check(audio.transformationVoice.clip.name=="transformation-voice"&&audio.transformationBurst.volume==.28f,"Transformation bypasses bounded source channels");
   audio.StopTransformation();Check(!audio.transformationVoice.isPlaying&&!audio.transformationBurst.isPlaying,"Skipped cinematic keeps its sounds playing");

@@ -1,0 +1,60 @@
+[
+  {
+    "source": "an05.ses",
+    "bankSHA256": "2a1912d1cf291557a9676534ef060f62ead7295d351b88ea5129b0a767f72bd6",
+    "stream": 0,
+    "ADX_SHA256": "4a154c19c233128b8c390f8c3190ca35e6a4a9a303b3e91f138993764e0109cc",
+    "output": "dog-an05-bark.wav",
+    "outputSHA256": "efdf916cf251e1c9db2aef5de5b3375aa9c36100374781fbff046eaa6160fb50",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 272,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -22.341,
+        "peak": 0.941925,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -28.758,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.417,
+      "seconds": 0.7895,
+      "clearADX_SHA256": "953ac91050996a35cf3ac9247b07fd1ddad7e01d5413d1fea341b7963bf217ab"
+    },
+    "classification": "Original source bank verified; exact named event unavailable, final listening requires gameplay test. No pitch shift, synthesis or external sound.",
+    "originalPath": "data_pc/se/an/an05.ses"
+  },
+  {
+    "source": "wp2e.ses",
+    "bankSHA256": "b82c09dce1cf980b3acebd9a5af0953563b25808c7c9af68d752439047ffff48",
+    "stream": 1,
+    "ADX_SHA256": "2551fb34349177b8a12c4a62e8652ac3b22992b14f8069e5ca0d8c68cc4ee869",
+    "output": "tundra-native-contact.wav",
+    "outputSHA256": "76e31c8baf13bc0800e135bc5616bef8c3cb51738ff2ba051e4d6035aa0338db",
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 447,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -15.171,
+        "peak": 0.843536,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.342124,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -7.829,
+      "seconds": 0.894,
+      "clearADX_SHA256": "7002471d19cd6336d995f95577039ae75ca6305dc5cbfc877fc4fb1dd4149afe"
+    },
+    "classification": "Original source bank verified; exact named event unavailable, final listening requires gameplay test. No pitch shift, synthesis or external sound.",
+    "originalPath": "data_pc/se/wp/wp2e.ses"
+  }
+]

@@ -93,6 +93,9 @@ s=s.replace('public class SkinnedMeshRenderer:Renderer{', 'public class SkinnedM
 s=s.replace('public static Vector3 Lerp(Vector3 a', 'public static Vector3 Scale(Vector3 a,Vector3 b)=>new Vector3(a.x*b.x,a.y*b.y,a.z*b.z);public static Vector3 Min(Vector3 a,Vector3 b)=>new Vector3(MathF.Min(a.x,b.x),MathF.Min(a.y,b.y),MathF.Min(a.z,b.z));public static Vector3 Max(Vector3 a,Vector3 b)=>new Vector3(MathF.Max(a.x,b.x),MathF.Max(a.y,b.y),MathF.Max(a.z,b.z));public static Vector3 ProjectOnPlane(Vector3 a,Vector3 normal)=>a-normal*Dot(a,normal);public static Vector3 Lerp(Vector3 a')
 s=s.replace('public static Quaternion Euler(float a', 'public static Quaternion FromToRotation(Vector3 a,Vector3 b)=>identity;public static Quaternion Euler(Vector3 v)=>identity;public static Quaternion Euler(float a')
 s=s.replace('public string current;public void Play', 'public string current;public float ClipLength(string state)=>1;public void Play')
+s=s.replace('public Vector3 center,size;', 'public Vector3 center,size;public Vector3 min=>center-size*.5f;')
+s=s.replace('public static class GardenPond{', 'public static class GardenPond{public const float Water=-.23f;')
+s+='\nnamespace UnityEngine{public class BoxCollider:Object{public Vector3 center,size;}}'
 s+='\n'+Path(__file__).with_name('FestivalDoubles.cs').read_text()
 s=s.replace('public bool HoldingCharge;', 'public GameFlow game;public bool HoldingCharge;')
 s=s.replace('public class Light:Object{', 'public class Light:Object{public Transform transform=new Transform();')

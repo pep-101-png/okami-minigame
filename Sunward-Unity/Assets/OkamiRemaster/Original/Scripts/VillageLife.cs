@@ -60,7 +60,7 @@ namespace Sunward.Remaster
             var dust=OriginalAtmosphere.Create("Cloud",null,game.Player.transform.position+game.Player.transform.forward*.7f+Vector3.up*.08f,0,.28f,.65f,.3f,.2f);
             if(dust){var main=dust.main;main.startColor=new Color(.45f,.32f,.18f,.6f);dust.Emit(9);Destroy(dust.gameObject,1.5f);}
             if(game.Health>0 && crop && !crop.Harvested)
-            {crop.Harvest();carried=crop;game.Profile.vegetables++;game.Save.Save();CreateCarry();game.Audio.Cue("land");CelestialBrush.Burst("Leaf",crop.transform.position,8,.25f);}
+            {crop.Harvest();var challenge=game.GetComponent<FestivalChallenges>();if(challenge)challenge.Harvest(crop.index);carried=crop;game.Profile.vegetables++;game.Save.Save();CreateCarry();game.Audio.Cue("land");CelestialBrush.Burst("Leaf",crop.transform.position,8,.25f);}
             yield return new WaitForSeconds(.6f);game.Player.Locked=game.Health<=0;digging=false;digRoutine=null;game.Player.animationView.Play("Idle_Natural",.15f,0,true);
         }
         void CreateCarry()
@@ -80,12 +80,12 @@ namespace Sunward.Remaster
         public void GiveProduce()
         {
             if(game.Profile.vegetables<=0){game.Notify("The farmer buys vegetables harvested from the farm");return;}
-            game.Profile.vegetables--;game.Profile.coins+=5;game.Profile.cropsSold++;Drop();game.Save.Save();game.Notify("Vegetable handed to the farmer · +5 coins");
+            game.Profile.vegetables--;game.Profile.coins+=5;game.Profile.cropsSold++;var festival=game.GetComponent<FestivalChallenges>();if(festival)festival.Deliver(1);Drop();game.Save.Save();game.Notify("Vegetable handed to the farmer · +5 coins");
         }
         public void Sell()
         {
             if(game.Profile.vegetables<=0){game.Notify("Bring harvested produce to sell");return;}
-            int n=game.Profile.vegetables;game.Profile.coins+=n*5;game.Profile.cropsSold+=n;game.Profile.vegetables=0;Drop();game.Save.Save();game.Notify("Sold "+n+" vegetables · +"+(n*5)+" coins");
+            int n=game.Profile.vegetables;game.Profile.coins+=n*5;game.Profile.cropsSold+=n;var festival=game.GetComponent<FestivalChallenges>();if(festival)festival.Deliver(n);game.Profile.vegetables=0;Drop();game.Save.Save();game.Notify("Sold "+n+" vegetables · +"+(n*5)+" coins");
         }
         public void BuyMeal()
         {if(game.Profile.coins<5){game.Notify("A farm meal costs 5 coins");return;}if(game.Health>=game.MaxHealth){game.Notify("Health is already full");return;}game.Profile.coins-=5;game.Health=Mathf.Min(game.MaxHealth,game.Health+10);game.Save.Save();game.Notify("Fresh farm meal · +10 health");}

@@ -86,6 +86,8 @@ namespace Sunward
             var tea=GetComponent<Sunward.Remaster.VillageTeaVisit>();if(!tea)tea=gameObject.AddComponent<Sunward.Remaster.VillageTeaVisit>();tea.game=this;
             var dressing=GetComponent<Sunward.Remaster.NativeInteriorDressing>();if(!dressing)dressing=gameObject.AddComponent<Sunward.Remaster.NativeInteriorDressing>();dressing.game=this;
             var doorways=GetComponent<Sunward.Remaster.VillageDoorways>();if(!doorways)doorways=gameObject.AddComponent<Sunward.Remaster.VillageDoorways>();doorways.game=this;
+            var farmLayout=GetComponent<Sunward.Remaster.VillageFarm>();if(!farmLayout)farmLayout=gameObject.AddComponent<Sunward.Remaster.VillageFarm>();farmLayout.game=this;
+            var challenges=GetComponent<Sunward.Remaster.FestivalChallenges>();if(!challenges)challenges=gameObject.AddComponent<Sunward.Remaster.FestivalChallenges>();challenges.game=this;
             var streetPlay=GetComponent<Sunward.Remaster.VillageStreetPlay>();if(!streetPlay)streetPlay=gameObject.AddComponent<Sunward.Remaster.VillageStreetPlay>();streetPlay.game=this;
             Health = MaxHealth;
             Stamina = MaxStamina;
@@ -211,11 +213,15 @@ namespace Sunward
             if(Sunward.Remaster.VillageInteriors.AnyRoom(Player.transform.position) && action=="")Prompt="Walk through the entrance to return to the village";
             if(action.StartsWith("interior:"))Prompt=Sunward.Remaster.VillageInteriors.Inside(Player.transform.position)?"E · Leave the building":"E · Enter Amaterasu’s house";
             if(action.StartsWith("home:"))Prompt="E · "+(action.EndsWith(":exit")?"Leave home":"Enter village home");
+            if(action=="festival")Prompt="E · Festival challenges & decorations";
             if (action.StartsWith("venue:")) Prompt = Sunward.Remaster.VillageServices.Label(action,Player.transform.position);
             if (Player.input.Interact.WasPressedThisFrame() && !Home.Active)
             {
                 switch (action)
                 {
+                    case "festival":
+                        SetPanel("festival");
+                        break;
                     case "bed":
                         Home.Begin();
                         break;
@@ -299,6 +305,7 @@ namespace Sunward
             Consider("arena", new Vector3(12.8f, 0, 0));
             if (Sunward.Remaster.VillageServices.InFoodHouse(p)) Consider("venue:mat", Sunward.Remaster.VillageServices.Mat, 1.6f);
             Consider("venue:pond",new Vector3(GardenPond.X+3.7f,.04f,GardenPond.Z),2);
+            Consider("festival", Sunward.Remaster.FestivalChallenges.Board, 2.2f);
             Consider("venue:farmer", Sunward.Remaster.VillageServices.FarmerPosition, 2.8f);
             if (!Profile.shrine)
             {

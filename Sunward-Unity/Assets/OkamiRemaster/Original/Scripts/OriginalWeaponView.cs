@@ -10,7 +10,7 @@ namespace Sunward.Remaster
         NativePoseBank bank;
         NativePoseBank.Clip idle, action;
         string package, family, actionState;
-        float idleTime, actionPhase, blendTime, blendLength,chargeLift;
+        float idleTime, actionPhase, blendTime, blendLength,chargeLift,returnLift;
         public float ChargeLift=>chargeLift;
         bool returning, extrasHidden;
         Vector3[] position,scale;
@@ -90,7 +90,7 @@ namespace Sunward.Remaster
         public void EndAttack()
         {
             if(Tundra && rig!=null && action!=null)
-            {Capture();blendTime=0;blendLength=TundraAttackRules.ReturnBlend;returning=true;}
+            {Capture();returnLift=chargeLift;blendTime=0;blendLength=TundraAttackRules.ReturnBlend;returning=true;}
             action=null;
         }
         void LateUpdate()
@@ -121,9 +121,12 @@ namespace Sunward.Remaster
         void ChargeClearance()
         {
             rig.Root.transform.localPosition=Vector3.zero;
-            // The native player owns its dorsal attachment. Applying a second
-            // world-space lift here double-corrects the cast and ignores its pose.
-            chargeLift=0;
+            // Native PL00_54c + WP2e_00c: source spiral minimum is -0.564 m.
+            // Raise only the released cast, with the same enter/return blend as
+            // the beads. Held charge still uses the player's anatomical socket.
+            float blend=blendLength>0?Mathf.SmoothStep(0,1,blendTime/blendLength):1;
+            chargeLift=action!=null && actionState==TundraAttackRules.Cast?.72f*blend:returning?returnLift*(1-blend):0;
+            rig.Root.transform.position+=Vector3.up*chargeLift;
         }
         void Sample(NativePoseBank.Clip clip,float time,bool loop,float blend)=>bank.Sample(clip,time,rig.Bones,position,rotation,scale,blend,loop);
         void OnDestroy(){if(rig!=null)rig.Dispose();}
