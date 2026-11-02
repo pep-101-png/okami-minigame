@@ -29,12 +29,12 @@ namespace Sunward.Remaster
         {
             if(!elder && game.npcObjects.Length>2 && game.npcObjects[2])elder=game.npcObjects[2].GetComponent<NativeDailyRoutine>();
             if(!home || !elder){game.Notify("The elder is not ready for a visit yet");return;}
-            Invited=true;elder.InviteForTea(home);game.Dialogue=Directions;game.SetPanel("dialogue");
+            Invited=true;elder.InviteForTea(home);game.ShowDialogue(Directions);
         }
         public void Talk()
         {
             if(AtHome){game.SetPanel("tea");return;}
-            game.Dialogue="Village elder\n\n"+(Invited?Directions:"A traveller deserves a quiet cup of tea. Would you like to hear about Shiranui, Amaterasu and the stories of Nippon?");game.SetPanel("elder");
+            game.ShowDialogue("Village elder\n\n"+(Invited?Directions:"A traveller deserves a quiet cup of tea. Would you like to hear about Shiranui, Amaterasu and the stories of Nippon?"),"elder");
         }
         public void SitForTea()
         {

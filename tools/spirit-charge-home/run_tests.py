@@ -3,13 +3,13 @@ import argparse,os,re,subprocess,tempfile
 from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('--dotnet',default='dotnet');p.add_argument('--legacy-barrier-negative-control',action='store_true');args=p.parse_args();root=Path(__file__).resolve().parents[2];assets=root/'Sunward-Unity/Assets'
 def method(path,signature):
-    s=(subprocess.check_output(['git','show','8adf22c2d21126ee66f48246bb9308c83cea5368:Sunward-Unity/Assets/'+str(path)],cwd=root).decode() if args.legacy_barrier_negative_control and str(path)=='Sunward/Scripts/GameFlow.cs' and signature!='void ClearBarrier()' else (assets/path).read_text());start=s.index(signature);body=s.index('{',start);depth=1;i=body+1
+    s=(subprocess.check_output(['git','show','8adf22c2d21126ee66f48246bb9308c83cea5368:Sunward-Unity/Assets/'+str(path)],cwd=root).decode() if args.legacy_barrier_negative_control and str(path)=='Sunward/Scripts/GameFlow.cs' and signature not in ['void ClearBarrier()','public void ShowDialogue('] else (assets/path).read_text());start=s.index(signature);body=s.index('{',start);depth=1;i=body+1
     while depth:
         if s[i]=='{':depth+=1
         elif s[i]=='}':depth-=1
         i+=1
     return s[start:i]
-ret=method(Path('Sunward/Scripts/GameFlow.cs'),'public void ReturnHome()')+'\n'+method(Path('Sunward/Scripts/GameFlow.cs'),'public void Finish(bool win)')+'\n'+method(Path('Sunward/Scripts/GameFlow.cs'),'void ClearBarrier()');teleport=method(Path('Sunward/Scripts/WolfMotor.cs'),'public void Teleport(Vector3 point)')+'\n'+method(Path('Sunward/Scripts/WolfMotor.cs'),'public void StopMotion()')
+ret=method(Path('Sunward/Scripts/GameFlow.cs'),'public void ShowDialogue(')+'\n'+method(Path('Sunward/Scripts/GameFlow.cs'),'public void ReturnHome()')+'\n'+method(Path('Sunward/Scripts/GameFlow.cs'),'public void Finish(bool win)')+'\n'+method(Path('Sunward/Scripts/GameFlow.cs'),'void ClearBarrier()');teleport=method(Path('Sunward/Scripts/WolfMotor.cs'),'public void Teleport(Vector3 point)')+'\n'+method(Path('Sunward/Scripts/WolfMotor.cs'),'public void StopMotion()')
 audio='\n'.join(method(Path('Sunward/Scripts/ValleyAudio.cs'),sig) for sig in ['public void TundraAttack(bool charged,bool heavy)','public void TundraContact()','public void StopTundra()','public void TransformationVoice()','public void TransformationBurst()','public void StopTransformation()'])
 camera='\n'.join(method(Path('Sunward/Scripts/OrbitCamera.cs'),sig) for sig in ['public void BeginCinematic()','public void CinematicFrame(Vector3 point,float angle,float elevation,float range,float fov)','public void EndCinematic()','public void ReturnCinematic(float blend)'])
 near=re.search(r'bool near=([^;]+);',(assets/'OkamiRemaster/Original/Scripts/LowerArena.cs').read_text())[1]

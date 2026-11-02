@@ -94,7 +94,7 @@ namespace Sunward
  {
   public ValleyAudio Audio=new ValleyAudio();public Remaster.CrimsonHelmAscension BossTransformation;public bool Blocked,CinematicActive,InTrial,BossTrial,waiting;public ProfileData Profile=new ProfileData();public Remaster.ShiranuiTransformation Transformation=new Remaster.ShiranuiTransformation();
   public WolfMotor Player;public WolfCombat Combat=new WolfCombat();public Valley valley=new Valley();public HomeRest Home=new HomeRest();public Remaster.VillageServices Services=new Remaster.VillageServices();
-  public float Health,Stamina,Energy,hitUntil;public int MaxHealth=>120;public float MaxStamina=>100;public float MaxEnergy=>80;public string Panel="result",Dialogue;public GameObject barrier;public int clears,projectiles,runCoins=10,runXp=20;public SaveStore Save=new SaveStore();
+  public float Health,Stamina,Energy,hitUntil;public int MaxHealth=>120;public float MaxStamina=>100;public float MaxEnergy=>80;public string Panel="result";public string Dialogue {get;private set;}public GameObject barrier;public int clears,projectiles,runCoins=10,runXp=20;public SaveStore Save=new SaveStore();
   public void ClearProjectiles(){projectiles++;}public void SetPanel(string panel){Panel=panel;}public void ClearEnemies(){clears++;}public void Close(){Panel="";Player.Locked=false;}public void Notify(string s){}
  }
 }
