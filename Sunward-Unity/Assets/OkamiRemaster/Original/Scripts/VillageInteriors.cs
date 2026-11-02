@@ -43,7 +43,9 @@ namespace Sunward.Remaster
             next.x=Mathf.Clamp(next.x,c.x-x,c.x+x);next.z=Mathf.Clamp(next.z,c.z-z,c.z+z);return next;
         }
         public static Vector3 Mat=>new Vector3(6.8f,-249.54f,-12.44f);
-        public static Vector3 HomeDoor=>new Vector3(-34,.1f,-20.25f);
+        public static Vector3 HomeDoor=>new Vector3(-34.08749f,0.1f,-18.48738f);
+        public static Vector3 FoodDoor=>new Vector3(7.10211f,0.1f,-15.105f);
+        public static Vector3 DojoDoor=>new Vector3(0.025f,0.1f,17.05418f);
         public static string Action(Vector3 p)
         {
             if(Home(p))return Vector3.Distance(p,HomeLayout.Bed)<1.9f?"bed":Vector3.Distance(p,HomeLayout.Mirror)<2?"mirror":null;
@@ -53,9 +55,10 @@ namespace Sunward.Remaster
         public static void Enter(GameFlow game,string room)
         {
             var p=game.Player.transform.position;Vector3 target;
-            if(room=="home")target=Home(p)?new Vector3(-34,.12f,-22.5f):new Vector3(-34,-249.865f,-18.1f);
-            else if(room=="food")target=Food(p)?new Vector3(1.5f,.05f,-15):new Vector3(5.4f,-249.57f,-15);
-            else target=Dojo(p)?new Vector3(0,.05f,12.8f):new Vector3(0,-249.47f,15.7f);
+            if(room=="home")target=Home(p)?HomeDoor-Vector3.forward*2.6f:new Vector3(-34,-249.865f,-18.1f);
+            else if(room=="food")target=Food(p)?FoodDoor-Vector3.right*2.6f:new Vector3(5.4f,-249.57f,-15);
+            else target=Dojo(p)?DojoDoor-Vector3.forward*2.6f:new Vector3(0,-249.47f,15.7f);
+            if(!Inside(target))target.y=game.valley.Height(target)+.04f;
             game.Combat.Cancel();game.Services.CancelRest();game.Player.Teleport(target);
             bool entering=Inside(target);game.Player.transform.rotation=Quaternion.Euler(0,(room=="food"?90:0)+(entering?0:180),0);
             var camera=Object.FindFirstObjectByType<OrbitCamera>();if(camera)camera.SnapFocus();

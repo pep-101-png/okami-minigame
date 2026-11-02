@@ -1,0 +1,80 @@
+[
+  {
+    "door": "ammy",
+    "collider": 1660025783,
+    "name": "Building / rail collider",
+    "pieces": 1
+  },
+  {
+    "door": "house0",
+    "collider": 1050876104,
+    "name": "Building / rail collider",
+    "pieces": 3
+  },
+  {
+    "door": "house2",
+    "collider": 1354273566,
+    "name": "Building / rail collider",
+    "pieces": 3
+  },
+  {
+    "door": "house3",
+    "collider": 813483846,
+    "name": "Building / rail collider",
+    "pieces": 2
+  },
+  {
+    "door": "house4",
+    "collider": 872207302,
+    "name": "Building / rail collider",
+    "pieces": 3
+  },
+  {
+    "door": "house5",
+    "collider": 54991380,
+    "name": "Building / rail collider",
+    "pieces": 2
+  },
+  {
+    "door": "house7",
+    "collider": 1611424240,
+    "name": "Building / rail collider",
+    "pieces": 3
+  },
+  {
+    "door": "house9",
+    "collider": 1622298403,
+    "name": "Building / rail collider",
+    "pieces": 3
+  },
+  {
+    "door": "house10",
+    "collider": 1842244689,
+    "name": "Building / rail collider",
+    "pieces": 3
+  },
+  {
+    "door": "house11",
+    "collider": 113432111,
+    "name": "Building / rail collider",
+    "pieces": 3
+  },
+  {
+    "door": "house12",
+    "collider": 291164075,
+    "name": "Building / rail collider",
+    "pieces": 3
+  },
+  {
+    "door": "house6",
+    "collider": 1808887475,
+    "name": "Building / rail collider",
+    "pieces": 3
+  },
+  {
+    "door": "house13",
+    "collider": 1166610202,
+    "name": "Building / rail collider",
+    "pieces": 3
+  }
+]

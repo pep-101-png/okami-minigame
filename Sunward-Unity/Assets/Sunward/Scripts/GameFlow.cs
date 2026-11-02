@@ -86,6 +86,7 @@ namespace Sunward
             var tea=GetComponent<Sunward.Remaster.VillageTeaVisit>();if(!tea)tea=gameObject.AddComponent<Sunward.Remaster.VillageTeaVisit>();tea.game=this;
             var dressing=GetComponent<Sunward.Remaster.NativeInteriorDressing>();if(!dressing)dressing=gameObject.AddComponent<Sunward.Remaster.NativeInteriorDressing>();dressing.game=this;
             var doorways=GetComponent<Sunward.Remaster.VillageDoorways>();if(!doorways)doorways=gameObject.AddComponent<Sunward.Remaster.VillageDoorways>();doorways.game=this;
+            var streetPlay=GetComponent<Sunward.Remaster.VillageStreetPlay>();if(!streetPlay)streetPlay=gameObject.AddComponent<Sunward.Remaster.VillageStreetPlay>();streetPlay.game=this;
             Health = MaxHealth;
             Stamina = MaxStamina;
             Energy = MaxEnergy;

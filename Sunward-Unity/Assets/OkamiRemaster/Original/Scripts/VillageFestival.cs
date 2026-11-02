@@ -22,24 +22,27 @@ namespace Sunward.Remaster
             if(sun){sunIntensity=sun.intensity;sunColor=sun.color;sunRotation=sun.transform.rotation;}
             fog=RenderSettings.fogColor;ambient=RenderSettings.ambientLight;blend=Night?1:0;
             festival=new GameObject("Original village festival lanterns");festival.transform.SetParent(transform,false);
-            for(int row=0;row<6;row++)for(int side=0;side<2;side++)
+            for(int row=0;row<6;row++)
             {
-                float x=side==0?-3.6f:3.6f,z=-11+row*4.2f,y=game.valley.Height(new Vector3(x,0,z));
-                var station=new GameObject("Festival lantern stand "+lamps.Count);station.transform.SetParent(festival.transform,false);station.transform.position=new Vector3(x,y,z);
-                // Original cedar log geometry makes a grounded post and crossarm.
-                Place(station.transform,"Okami/vt00",new Vector3(0,0,0),new Vector3(.18f,3.5f,.18f),Vector3.zero);
-                Place(station.transform,"Okami/vt00",new Vector3(0,3.35f,0),new Vector3(.14f,1.05f,.14f),new Vector3(0,0,side==0?-90:90));
-                var lamp=new GameObject("Original hanging paper lantern");lamp.transform.SetParent(station.transform,false);lamp.transform.localPosition=new Vector3(side==0?.65f:-.65f,2.8f,0);
-                Place(lamp.transform,"Okami/vt32",new Vector3(0,-.25f,0),new Vector3(.65f,.8f,.65f),Vector3.zero);
-                var light=lamp.AddComponent<Light>();light.type=LightType.Point;light.range=7;light.color=new Color(1,.53f,.19f);light.intensity=0;light.shadows=LightShadows.None;lamps.Add(light);
-                pools[lamps.Count-1]=new Vector4(x,y+1.4f,z,6.5f);
-                OriginalAtmosphere.Create("SpiritGlow",lamp.transform,Vector3.zero,2,.27f,1.2f,.01f);
+                float z=-11+row*4.2f;
+                var stringRoot=new GameObject("Original colourful lantern string "+row);stringRoot.transform.SetParent(festival.transform,false);stringRoot.transform.position=new Vector3(0,game.valley.Height(new Vector3(0,0,z)),z);
+                for(int side=0;side<2;side++)Place(stringRoot.transform,"Okami/vt00",new Vector3(side==0?-3.8f:3.8f,0,0),new Vector3(.16f,4.8f,.16f),Vector3.zero);
+                // Native ET03 cord runs along local Z; rotate it across the road.
+                Place(stringRoot.transform,"Okami/et03",new Vector3(0,4.6f,0),new Vector3(.025f,.025f,7.6f),new Vector3(0,90,0));
+                for(int i=0;i<5;i++)
+                {
+                    float x=-2.6f+i*1.3f,top=4.612f;
+                    Place(stringRoot.transform,"Okami/et03",new Vector3(x,top-.115f,0),new Vector3(.016f,.016f,.23f),new Vector3(-90,0,0));
+                    string resource=(row+i)%4==0?"Okami/vt33":(row+i)%4==1?"Okami/vt34":(row+i)%4==2?"Okami/vt32":"Okami/et07";
+                    float height=.56f;Place(stringRoot.transform,resource,new Vector3(x,top-.23f-height,0),new Vector3(.42f,height,.42f),Vector3.zero);
+                }
+                var glow=new GameObject("Warm light beneath lantern string");glow.transform.SetParent(stringRoot.transform,false);glow.transform.localPosition=new Vector3(0,3.7f,0);var light=glow.AddComponent<Light>();light.type=LightType.Point;light.range=8;light.color=new Color(1,.66f,.33f);light.intensity=0;light.shadows=LightShadows.None;lamps.Add(light);pools[row]=new Vector4(0,stringRoot.transform.position.y+2,z,8);
             }
             pools[12]=new Vector4(-5.1f,1.6f,18.8f,6);pools[13]=new Vector4(5.1f,1.6f,18.8f,6);pools[14]=new Vector4(10,2,-15,7);pools[15]=new Vector4(-34,2,-16,6);
             pools[16]=new Vector4(-4,2,29,7);pools[17]=new Vector4(4,2,29,7);
             Shader.SetGlobalVectorArray("_SunwardFestivalLights",pools);Apply();
         }
-        void Place(Transform parent,string resource,Vector3 position,Vector3 size,Vector3 rotation)
+        public static void Place(Transform parent,string resource,Vector3 position,Vector3 size,Vector3 rotation)
         {
             var data=Resources.Load<TextAsset>(resource+"/Model");if(!data)return;
             var model=JsonUtility.FromJson<BoundsModel>(data.text);Vector3 lo=Vector3.one*float.PositiveInfinity,hi=Vector3.one*float.NegativeInfinity;
@@ -65,7 +68,7 @@ namespace Sunward.Remaster
             Shader.SetGlobalFloat("_SunwardNight",blend);
             if(sun){sun.intensity=Mathf.Lerp(sunIntensity,.12f,blend);sun.color=Color.Lerp(sunColor,new Color(.45f,.58f,1),blend);sun.transform.rotation=Quaternion.Slerp(sunRotation,Quaternion.Euler(32,-30,0),blend);}
             RenderSettings.fogColor=Color.Lerp(fog,new Color(.035f,.055f,.11f),blend);RenderSettings.ambientLight=Color.Lerp(ambient,new Color(.10f,.14f,.24f),blend);
-            if(festival)festival.SetActive(blend>.02f);foreach(var lamp in lamps)if(lamp)lamp.intensity=18*blend;
+            if(festival)festival.SetActive(true);foreach(var lamp in lamps)if(lamp)lamp.intensity=18*blend;
         }
         void OnDestroy()
         {

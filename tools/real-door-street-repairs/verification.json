@@ -1,0 +1,66 @@
+{
+  "baseline": "62a8bb273964c495ccfa3f5ae155684980ee9d5c",
+  "originalAssets": [
+    {
+      "resource": "hm1c",
+      "sourceModelSHA256": "890b149e56b09395776c0988042a0f2d9290310bb8425a26f59676abf82505ba"
+    },
+    {
+      "resource": "hm1d",
+      "sourceModelSHA256": "4116adcc20415449427b35af46f8e7d96b6f6b5407b7c8ed8a1991a64dd1bf63"
+    },
+    {
+      "resource": "an05",
+      "sourceModelSHA256": "58a83b10ce604f95054223cae108a52288fda25cdaa09e16e3d54b7c6199b468"
+    },
+    {
+      "resource": "et50",
+      "sourceModelSHA256": "da6b22931e0753cf89ce721cd59e9c9ca6898a4a241d1c3b33a03f45b26125d4"
+    },
+    {
+      "resource": "et03",
+      "sourceModelSHA256": "16673243a07556922b7e0e029daa2947a44043095e12b1614d46ce7ecffc5dca"
+    },
+    {
+      "resource": "et07",
+      "sourceModelSHA256": "9409caee5217d448bf63e548c6b253b352af9fedcb5208fa038970b1017884f6"
+    },
+    {
+      "resource": "vt62",
+      "sourceModelSHA256": "3bb13d01b5a87ba3ad7a1a084d67cad18eb26311484a6c8ca2841a88cb785f02"
+    },
+    {
+      "resource": "dr0c",
+      "sourceModelSHA256": "bde6137f269ad6917a2974bb3bf01f178d5c696a2170476bd37b8cb366b59642"
+    },
+    {
+      "resource": "dr0e",
+      "sourceModelSHA256": "4a46723008e409993e4028bac182f0bee64156b370b13bf88b8e9c08b4e6463c"
+    },
+    {
+      "resource": "vt9b",
+      "sourceModelSHA256": "b447d900c1a251e14a5289b0e3e40961c9ec1f373ef9f2afd82633a1511c5e5f"
+    },
+    {
+      "resource": "vt8e",
+      "sourceModelSHA256": "1290c653700a338ea859c24bd9960ba680d2efc16ed53520c593e7412036c617"
+    },
+    {
+      "resource": "vt91",
+      "sourceModelSHA256": "c9e0290911f2811863a617665fd61735f9776e8438c2b90034498d96e2012e61"
+    }
+  ],
+  "archers": "Both trainees use the original HM2D guard model and its recovered hm2d_080 draw/release clip. No procedural archery pose or HM2D-to-HM2E adaptation is enabled. The second trainee support samples were changed to match that rig.",
+  "interiors": "Twelve NPC-home layouts vary original floor surfaces, wall resources, furniture positions and belongings. Original complete floors remain underneath decorative timber/tatami pieces. Music hall uses plain timber instead of Amaterasu\u2019s framed tatami layout. No new exterior door panels are created.",
+  "street": "Thirty original lanterns on six native cord strings, two original children, an ET50 patterned ball, three original dog rigs scaled as puppies. Sunward schedules routes and ball movement; original banks own skeletal animation.",
+  "checks": {
+    "semanticAndRuntimeDoubles": 907,
+    "nativePlayerAndExtractedMethods": 310,
+    "weaponSamplerAndController": 4153,
+    "sceneResourcesMetadata": 2494,
+    "doorwayRoomSourceContracts": 121,
+    "CSharpSyntaxFiles": 119,
+    "savedBoxApproachCollisions": 0
+  },
+  "limits": "No Unity Editor import/compilation or Play Mode executed. Available GitHub feedback is historical and does not validate this source. Offline geometry renders are not Unity gameplay screenshots."
+}
