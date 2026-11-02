@@ -1,14 +1,6 @@
 {
   "cues": [
     {
-      "cue": "bark",
-      "resource": "Okami/NativeAudio/bark-0"
-    },
-    {
-      "cue": "bark",
-      "resource": "Okami/NativeAudio/bark-1"
-    },
-    {
       "cue": "growl",
       "resource": "Okami/NativeAudio/growl-2"
     },
@@ -291,6 +283,14 @@
     {
       "cue": "swim-exit",
       "resource": "Okami/NativeAudio/swim-water-1"
+    },
+    {
+      "cue": "bark",
+      "resource": "Okami/NativeAudio/dog-an05-bark"
+    },
+    {
+      "cue": "weapon-wp2e-impact",
+      "resource": "Okami/NativeAudio/tundra-native-contact"
     }
   ]
 }

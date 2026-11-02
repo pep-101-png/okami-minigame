@@ -10,7 +10,7 @@ def check(ok,why):
  global checks;checks+=1
  assert ok,why
 oldtext=subprocess.check_output(['git','show','62a8bb273964c495ccfa3f5ae155684980ee9d5c:Sunward-Unity/Assets/Sunward/Scenes/Windflower.unity'],cwd=R).decode();old={int(re.search(r'&(-?\d+)',b)[1]):b for b in re.split(r'(?=--- !u!)',oldtext) if b.startswith('--- !u!')}
-for i in [8000000000000010614,8000000000000010615,8000000000000010618,8000000000000011274,8000000000000011982]:check(s.blocks[i]==old[i],'Working Susano setup changed')
+for i in [8000000000000010614,8000000000000010618,8000000000000011274,8000000000000011982]:check(s.blocks[i]==old[i],'Working Susano setup changed')
 for go in [8000000000000010362,8000000000000010367,8000000000000010372,8000000000000010377,8000000000000010382]:check('m_IsActive: 0' in s.blocks[go],'Dojo interior walls still duplicated outdoors')
 for i in [8000000000000011275,8000000000000011276]:check('motion: hm2d_080' in s.blocks[i] and 'contactEnabled: 1' in s.blocks[i] and 'releasePhase: 0.225' in s.blocks[i],'Native archer draw/release/contact not connected')
 check(s.blocks[8000000000000011983].split('  feet:\n')[1]==s.blocks[8000000000000011984].split('  feet:\n')[1],'Archer support indices do not match its recovered guard rig')

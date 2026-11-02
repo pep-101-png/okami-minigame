@@ -26,7 +26,7 @@ check(len(repeated)>=10 and all('m_IsActive: 0' in b for b in repeated),'Actual 
 for b in s.values():
  if 'Assembly-CSharp::Sunward.Remaster.NativeArcheryPose\n' in b:check('m_Enabled: 0' in b,'User-rejected procedural archer alignment remains enabled')
 for id in [8000000000000011275,8000000000000011276]:check('contactEnabled: 1' in s[id] and 'motion: hm2d_080' in s[id],'Archer lacks the recovered native draw/release clip')
-susano=vec(s[8000000000000010615],'m_LocalPosition');check(susano[0]<-5 and abs(susano[1]+249.5)<.05,'Susano is still under the raised central platform')
+susano=vec(s[8000000000000010615],'m_LocalPosition');check(abs(susano[0])<1 and abs(susano[1]+248.75)<.05 and 26<susano[2]<30,'Susano is not supported by the raised practice platform')
 check('motion: hm08_087' in s[8000000000000011274],'Missing original continuous sword-practice motion')
 check('walk: hm00_010' in s[8000000000000011215],'Farmer still walks in an idle pose')
 res=A/'OkamiRemaster/Original/Resources/Okami'

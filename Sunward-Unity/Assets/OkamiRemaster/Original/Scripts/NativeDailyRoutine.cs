@@ -59,7 +59,7 @@ namespace Sunward.Remaster
             {
                 destination=phase;resting=false;actor.EndActivity();
                 if(indoors && home){SetPosition(home.exitPoint);indoors=false;}
-                var target=farmer?workplace+new Vector3(phase%2==0?-2:2,0,phase<2?4:8):phase==1 && home?home.Approach:phase==2?new Vector3(GardenPond.X+Mathf.Cos((seed*47+20)*Mathf.Deg2Rad)*4.25f,0,GardenPond.Z+Mathf.Sin((seed*47+20)*Mathf.Deg2Rad)*2.9f):workplace;
+                var target=farmer?workplace+(phase==0?Vector3.zero:phase==1?new Vector3(7,0,0):phase==2?new Vector3(10,0,1.5f):new Vector3(2,0,2.8f)):phase==1 && home?home.Approach:phase==2?new Vector3(GardenPond.X+Mathf.Cos((seed*47+20)*Mathf.Deg2Rad)*4.25f,0,GardenPond.Z+Mathf.Sin((seed*47+20)*Mathf.Deg2Rad)*2.9f):workplace;
                 if(!Route(target)){wait=5;destination=-1;return;}
             }
             if(indoors)

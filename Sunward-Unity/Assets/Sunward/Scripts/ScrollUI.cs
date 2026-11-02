@@ -137,6 +137,12 @@ namespace Sunward
             GUI.Label(new Rect(34, h - 57, w - 68, 28), game.InTrial ? "LMB/J light · RMB/L heavy · hold to charge · R brush · Q weapon · B bark · K dodge · Space jump · Esc pause" : "WASD move · Shift sprint · Ctrl walk · Space jump · E interact · R brush · F dig · G stow · H eat · Tab upgrades", small);
             if (game.InTrial && GUI.Button(new Rect(w - 160, h - 140, 140, 34), "RETREAT", button))
                 game.Finish(false);
+            var festivalChallenge=game.GetComponent<Sunward.Remaster.FestivalChallenges>();
+            if(festivalChallenge && festivalChallenge.Active)
+            {
+                DrawPaper(new Rect(w*.5f-220,92,440,60));
+                GUI.Label(new Rect(w*.5f-206,100,412,46),festivalChallenge.Status,body);
+            }
             if (game.Panel=="")
                 return;
             float pw = Mathf.Min(700, w - 40);
@@ -232,7 +238,22 @@ namespace Sunward
                     GUILayout.Label("VILLAGE REQUEST BOARD",title);
                     var requests=game.GetComponent<Sunward.Remaster.VillageLife>();
                     GUILayout.Label(requests.RequestDetails(),body);
-                    GUILayout.Label("Turn in completed requests at the farmer's stall, west of the animal pens. These are optional village goals, separate from weapon purchases and arena entry.",small);
+                    GUILayout.Label("Turn in completed requests at the farmer’s stall in the northeast farm. These are optional village goals, separate from weapon purchases and arena entry.",small);
+                    break;
+                case "festival":
+                    var festival=game.GetComponent<Sunward.Remaster.FestivalChallenges>();
+                    GUILayout.Label("FESTIVAL NIGHT · "+game.Profile.festivalTokens+" tokens",title);
+                    GUILayout.Label("Sleep in Ammy’s bed to reach night. Optional games award festival tokens; your arena progress is unchanged.",small);
+                    GUILayout.Label(festival.Active?festival.Status:"Lantern dash: pass six lantern checkpoints in order within 55 seconds. Harvest relay: dig up three different vegetables, then give three to the farmer within 90 seconds. Each win awards 3 tokens.",body);
+                    if(!festival.Active){if(Button("START LANTERN DASH · 55 seconds",button))festival.Begin(1);if(Button("START HARVEST RELAY · 90 seconds",button))festival.Begin(2);}
+                    else if(Button("CANCEL CHALLENGE",button))festival.Cancel();
+                    GUILayout.Label("Home decorations · permanent rewards placed inside Ammy’s house",body);
+                    for(int reward=0;reward<3;reward++)
+                    {
+                        int choice=reward;string label=Sunward.Remaster.FestivalChallenges.RewardName(choice);
+                        if((game.Profile.festivalRewards&(1<<choice))!=0)GUILayout.Label(label+" · owned",small);
+                        else if(Button(label+" · 3 tokens",button))festival.Buy(choice);
+                    }
                     break;
                 case "farm":
                     GUILayout.Label("FARM SHOP · "+game.Profile.vegetables+" vegetables · "+game.Profile.praise+" Praise",body);

@@ -74,6 +74,7 @@ namespace Sunward
     {
         public int version = 2, revision, coins = 35, xp, wins, defeats, kills;
         public int bossWins, vegetables, cropsSold, praise, restorationStage, farmVitality;
+        public int festivalTokens, festivalRewards, festivalWins;
         public string equipped = "spear";
         public string[] owned =
         {
@@ -184,6 +185,7 @@ namespace Sunward
             p.windflowers = p.windflowers ?? Array.Empty<string>();
             p.milestones = p.milestones ?? new Milestones();
             if(p.bossWins<0 || p.vegetables<0 || p.cropsSold<0 || p.praise<0 || p.restorationStage<0 || p.restorationStage>3 || p.farmVitality<0 || p.farmVitality>10)return false;
+            if(p.festivalTokens<0 || p.festivalTokens>1000000 || p.festivalRewards<0 || p.festivalRewards>7 || p.festivalWins<0)return false;
             p.version = 2;
             return true;
         }

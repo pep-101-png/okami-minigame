@@ -71,6 +71,7 @@ static class Program
             Check(rig.Bones.Skip(8).Take(6).All(b=>Distance(b.localPosition,Vector3.zero)>.1f),"Hidden beads reappear collapsed at origin");
             view.EndAttack();
         }
+        for(int settle=0;settle<60;settle++)tick.Invoke(view,null);
         // Native attachment belongs to the body; the weapon must not apply
         // a second height correction to authored cast coordinates.
         var clearance=typeof(OriginalWeaponView).GetMethod("ChargeClearance",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic);
@@ -78,8 +79,13 @@ static class Program
         {
             controller.transform.position=new Vector3(0,playerY,0);
             foreach(bool held in new[]{true,false})
-            {controller.HoldingCharge=held;for(int f=0;f<60;f++)clearance.Invoke(view,null);Check(view.ChargeLift==0 && rig.Root.transform.localPosition.y==0,"Weapon adds a second correction to native attachment");}
+            {controller.HoldingCharge=held;for(int f=0;f<60;f++)clearance.Invoke(view,null);Check(view.ChargeLift==0 && rig.Root.transform.localPosition.y==0,"Held/idle weapon adds a second correction to native attachment");}
         }
+        view.BeginAttack(TundraAttackRules.Cast);view.AttackPhase(.5f);
+        for(int k=0;k<20;k++)tick.Invoke(view,null);
+        Check(view.ChargeLift>.70f && view.ChargeLift<.74f,"Released spiral remains below its measured floor clearance");
+        view.EndAttack();for(int k=0;k<30;k++)tick.Invoke(view,null);
+        Check(view.ChargeLift==0,"Released spiral lift persists after recovery");
         var legacy=new OriginalWeaponView();legacy.Load("wp2d","rosary");legacy.BeginAttack("NativeAttack_540");legacy.AttackPhase(.5f);var legacyRig=NativePaintedRig.Last;
         Check(legacyRig.Bones.Any(b=>Distance(b.localPosition,Vector3.zero)>1),"Legacy rosary path was changed");
         foreach(var e in OriginalWeaponCatalog.All.Where(e=>e.id!="wp2e"))

@@ -13,7 +13,7 @@ namespace Sunward.Remaster
             StopAllCoroutines();Resting=false;
             if(game && game.Player)game.Player.Locked=false;
         }
-        public static readonly Vector3 DojoDoor=new Vector3(0,.5f,15.1f), FoodDoor=new Vector3(4.8f,.4f,-15), Mat=new Vector3(8,.4f,-13.4f), Farmer=new Vector3(-51,0,20);
+        public static readonly Vector3 DojoDoor=new Vector3(0,.5f,15.1f), FoodDoor=new Vector3(4.8f,.4f,-15), Mat=new Vector3(8,.4f,-13.4f), Farmer=new Vector3(37,0,21.7f);
         public static Vector3 FarmerPosition {get{foreach(var r in Object.FindObjectsByType<NativeDailyRoutine>(FindObjectsSortMode.None))if(r.farmer)return r.transform.position;return Farmer;}}
         public static bool InDojo(Vector3 p)=>VillageInteriors.Dojo(p);
         public static bool InFoodHouse(Vector3 p)=>VillageInteriors.Food(p);
