@@ -172,6 +172,7 @@ s=s.replace('public Material(Material source){}', 'public Material(Material sour
 s+='\nnamespace UnityEngine{public class MeshCollider:Collider{public Mesh sharedMesh;}}'
 s=s.replace('public class ValleyData{', 'public class ValleyData{public BoxData[] boxes=System.Array.Empty<BoxData>();')
 s+='\nnamespace Sunward{public class BoxData{public float x,z,halfX,halfZ;}}'
+s=s.replace('public class Material:Object{','public class Material:Object{public void SetFloat(string n,float v){}')
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:

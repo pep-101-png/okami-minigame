@@ -135,14 +135,14 @@ namespace Sunward
         {
             switch(id)
             {
-                case "vitality":return "+12 maximum health per rank. More health lets you survive more damage.";
-                case "strength":return "+18% of base weapon damage per rank, for every weapon family.";
-                case "movement":return "+3% movement speed per rank. Rank 2 unlocks double jump.";
-                case "stamina":return "+15 maximum stamina and +1 stamina recovered per second per rank. Stamina fuels sprinting and dodging.";
-                case "energy":return "+15 maximum Ink per rank. Ink powers the brush and bark; it replenishes naturally.";
-                case "ability":return "Bark cooldown is 0.45 seconds shorter per rank. Bark costs 15 Ink and interrupts nearby normal enemies; bosses resist it.";
-                case "spear":return "+12% glaive damage per rank. Applies to Tsumugari and every other glaive.";
-                case "sundial":return "+14% reflector and rosary damage per rank. Requires Solar Flare ownership to unlock this mastery.";
+                case "vitality":return "+12 max health per rank.";
+                case "strength":return "+18% weapon damage per rank.";
+                case "movement":return "+3% speed per rank. Rank 2: double jump.";
+                case "stamina":return "+15 stamina and faster recovery per rank.";
+                case "energy":return "+15 Ink per rank for brush and bark.";
+                case "ability":return "Bark cooldown: -0.45 seconds per rank.";
+                case "spear":return "+12% glaive damage per rank.";
+                case "sundial":return "+14% reflector and rosary damage per rank.";
                 default:return "";
             }
         }

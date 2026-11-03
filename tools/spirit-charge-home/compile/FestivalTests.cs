@@ -26,7 +26,7 @@ static class FestivalTests
   }
   var profile=new ProfileData{coins=1000000};Check(ProgressionRules.Explain("vitality").Contains("12")&&ProgressionRules.Explain("strength").Contains("18%")&&ProgressionRules.Explain("movement").Contains("Rank 2"),"Upgrade explanations lack actual effects");
   int hp=ProgressionRules.MaxHp(profile);Check(ProgressionRules.Buy(profile,"vitality")&&ProgressionRules.MaxHp(profile)==hp+12,"Vitality explanation differs from gameplay");
-  foreach(string id in ProgressionRules.Upgrades)Check(ProgressionRules.Explain(id).Length>25&&ProgressionRules.Cap(id)>0,"Missing shop effect or cap");
+  foreach(string id in ProgressionRules.Upgrades)Check(ProgressionRules.Explain(id).Length>8&&ProgressionRules.Explain(id).Length<75&&ProgressionRules.Cap(id)>0,"Missing shop effect or cap");
   foreach(string room in new[]{"home","food","dojo"})
   {
    player.transform.position=Vector3.zero;VillageInteriors.Enter(game,room);var inside=player.transform.position;

@@ -20,7 +20,7 @@ namespace Sunward.Remaster
         public bool Unlocked { get; private set; }
         bool open, encounterStarted,victory;
         GameObject victoryBeacon;
-        float collapse=-1;
+        float collapse=-1,collapseDelay=-1;
         Vector3[] fragmentPositions;
         Quaternion[] fragmentRotations;
         bool groundVisible=true;
@@ -106,18 +106,18 @@ namespace Sunward.Remaster
             victory=false;if(victoryBeacon)Destroy(victoryBeacon);victoryBeacon=null;
             if(mirror){foreach(var particles in mirror.GetComponentsInChildren<ParticleSystem>())Destroy(particles.gameObject);mirror.gameObject.SetActive(false);}
         }
-        public static void TrialStarted(){if(instance)instance.ApplyOpen(false,false);}
+        public static void TrialStarted(){if(instance){instance.collapseDelay=-1;instance.ApplyOpen(false,false);}}
         public static void Leave()
         {
             if(!instance)return;
-            instance.encounterStarted=false;instance.ResetVictory();
+            instance.collapseDelay=-1;instance.encounterStarted=false;instance.ResetVictory();
             instance.ApplyOpen(false,false);
         }
         public static void TrialFinished(bool won)
         {
             if(!instance)return;
             instance.Unlocked=instance.Unlocked||won;
-            if(won && instance.game && instance.game.Presentation)instance.game.Presentation.ShaftCollapse();else instance.ApplyOpen(won,won);
+            instance.ApplyOpen(false,false);instance.collapseDelay=won?3f:-1;
         }
         public static void RevealShaft(){if(instance)instance.ApplyOpen(true,true);}
         void ApplyOpen(bool value,bool animate)
@@ -138,6 +138,11 @@ namespace Sunward.Remaster
             bool inUpper=new Vector2(game.Player.transform.position.x-35,game.Player.transform.position.z).magnitude<18;
             if(!game.InTrial && !Inside(game.Player.transform.position) && !Shaft(game.Player.transform.position))
             {if(!inUpper && open)ApplyOpen(false,false);}
+            if(collapseDelay>=0)
+            {
+                if(!inUpper || game.InTrial || game.Health<=0)collapseDelay=-1;
+                else if(!game.Blocked){collapseDelay-=Time.deltaTime;if(collapseDelay<=0){collapseDelay=-1;if(game.Presentation)game.Presentation.ShaftCollapse();else ApplyOpen(true,true);}}
+            }
             if(game.Player.transform.position.y>-3)encounterStarted=false;
             var p=game.Player.transform.position;
             bool visible=true;
