@@ -24,7 +24,10 @@ def height(x,z):
 for item in layout:
  if item['kind']!='ground':continue
  m=models[item['resource'].split('/')[-1]];vv=np.concatenate([np.array(p['positions']).reshape(-1,3) for p in m['parts']]);lo=vv.min(0);hi=vv.max(0);sc=np.array(list(item['size'].values()))/np.maximum(.001,hi-lo);off=-np.array([(lo[0]+hi[0])/2,lo[1],(lo[2]+hi[2])/2])*sc;p=np.array(list(item['position'].values()),dtype=float)
- if item['resource'] not in ['Okami/celestial-meadow','Okami/celestial-terrace']:p[1]+=height(p[0],p[2]) or 0
+ if item['resource'] not in ['Okami/celestial-meadow','Okami/celestial-terrace']:
+  base=height(p[0],p[2]) or 0
+  if item['resource']=='Okami/vt0a' and item['size']['y']>.5:base=min([base]+[height(p[0]+x,p[2]+z) or 0 for x,z in [(-4,-4),(4,-4),(-4,4),(4,4)]])
+  p[1]+=base
  a=math.radians(item['yaw']);rot=np.array([[math.cos(a),0,math.sin(a)],[0,1,0],[-math.sin(a),0,math.cos(a)]])
  for part in m['parts']:
   v=(np.array(part['positions']).reshape(-1,3)*sc+off)@rot.T+p;surfaces.append(v[np.array(part['indices']).reshape(-1,3)])

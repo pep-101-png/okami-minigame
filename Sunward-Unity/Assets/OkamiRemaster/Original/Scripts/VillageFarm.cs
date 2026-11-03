@@ -13,6 +13,9 @@ namespace Sunward.Remaster
             if(!game)game=GetComponent<GameFlow>();if(!game || !game.valley)return;
             NativeDailyRoutine.InvalidateNavigation();
             root=new GameObject("Northeast farm · clear central lane and animal yards");root.transform.SetParent(transform,false);
+            Pen("Boar paddock",15.5f,23,27.8f,36.5f,2.1f);
+            Place("Okami/vt49",new Vector3(17,0,31),new Vector3(.8f,.4f,.8f));
+            Place("Okami/vt5e",new Vector3(17.5f,0,34),new Vector3(1.1f,.4f,.9f));
             Pen("Cattle paddock",24,35,27.8f,40,2.4f);Pen("Pig yard",37,43,28,40,1.5f);
             Pen("Chicken yard",45,50,29,40,1.5f);Pen("Rabbit garden",51,57,28.5f,34,1.2f);
             Shelter("Open cattle stable",new Vector3(29.5f,0,36),7.4f,7.3f,3.15f);

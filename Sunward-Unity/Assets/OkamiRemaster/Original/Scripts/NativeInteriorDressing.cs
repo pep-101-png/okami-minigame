@@ -100,6 +100,7 @@ namespace Sunward.Remaster
         {
             if(!game || !game.Player)return;
             var player=game.Player.transform.position;bool inside=VillageInteriors.AnyRoom(player);
+            bool heaven=game.Heaven && game.Heaven.isActiveAndEnabled && HeavenlyGarden.Inside(player);
             foreach(var enclosure in homes)if(enclosure.root)enclosure.root.SetActive(enclosure.house.Contains(player));
             if(home)home.SetActive(VillageInteriors.Home(player));if(food)food.SetActive(VillageInteriors.Food(player));
             // Camera stays inside the room; do not remove walls and expose a
@@ -116,7 +117,10 @@ namespace Sunward.Remaster
             {
                 float y=renderer.transform.position.y;bool interior=y<-235 || (y>-65 && y<-45);
                 if(!priorVisibility.ContainsKey(renderer))priorVisibility.Add(renderer,renderer.forceRenderingOff);
-                renderer.forceRenderingOff=priorVisibility[renderer] || (inside?!interior:interior);
+                // One visibility owner handles both detached interiors and heaven.
+                // Bounds also retain unparented, world-space player effects in the realm.
+                bool hidden=heaven?!game.Heaven.OwnsRenderer(renderer):inside?!interior:interior;
+                renderer.forceRenderingOff=priorVisibility[renderer] || hidden;
             }
             if(!view)return;
             wasInside=inside;

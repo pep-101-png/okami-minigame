@@ -167,6 +167,7 @@ namespace Sunward.Remaster
             Vector2 lo,hi;
             switch(placement.asset)
             {
+                case "boar":case "piglet":lo=new Vector2(15.5f,27.8f);hi=new Vector2(23,36.5f);break;
                 case "rooster":lo=new Vector2(45,29);hi=new Vector2(50,35.5f);break;
                 case "cow":lo=new Vector2(24,28);hi=new Vector2(35,35);break;
                 case "pig":lo=new Vector2(37,28);hi=new Vector2(43,35);break;
