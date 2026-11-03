@@ -53,37 +53,73 @@ namespace Sunward.Remaster
             OriginalAtmosphere.Create("SpiritGlow",river.transform,new Vector3(x,-5.5f,40.5f),12,.6f,2,.15f,2.6f);
             var lamp=new GameObject("Waterfall portal light");lamp.transform.SetParent(river.transform,false);lamp.transform.localPosition=new Vector3(x,-3.8f,40.5f);var light=lamp.AddComponent<Light>();light.type=LightType.Point;light.range=13;light.intensity=6;light.color=new Color(.4f,.85f,1);light.shadows=LightShadows.None;
         }
+        [System.Serializable]sealed class GardenLayout{public int version;public GardenItem[] items;}
+        [System.Serializable]sealed class GardenItem{public string resource,kind;public Vector3 position,size;public float yaw;}
         void BuildGarden()
         {
-            garden=new GameObject("Heavenly garden · original painted sanctuary");garden.transform.SetParent(transform,false);garden.transform.position=Centre;
-            var ground=Put(garden.transform,"Okami/heaven-island",Vector3.down*.7f,new Vector3(94,2.5f,88));
-            foreach(var renderer in ground.GetComponentsInChildren<SkinnedMeshRenderer>())
-            {renderer.gameObject.layer=6;renderer.gameObject.name="Heaven garden ground · original mesh";var collider=renderer.gameObject.AddComponent<MeshCollider>();collider.sharedMesh=renderer.sharedMesh;}
-            Physics.SyncTransforms();
-            Put(garden.transform,"Okami/heaven-cloud",new Vector3(0,-10,0),new Vector3(155,36,150),0);
-            Put(garden.transform,"Okami/garden-gate",new Vector3(0,1,-28),new Vector3(10,8,2));
-            Put(garden.transform,"Okami/garden-altar",new Vector3(0,1,22),new Vector3(9,.7f,8));
-            Put(garden.transform,"Okami/vt31",new Vector3(0,1,24),new Vector3(3,3.7f,2.2f));
-            OriginalAtmosphere.Create("SpiritGlow",garden.transform,new Vector3(0,3.2f,22),9,.4f,2.5f,.15f,1.7f);
-            foreach(var p in new[]{new Vector3(-19,1,-8),new Vector3(21,1,8),new Vector3(-17,1,23)})
+            garden=new GameObject("Celestial garden · original stone walks, flower gardens and cloud sea");garden.transform.SetParent(transform,false);garden.transform.position=Centre;
+            var source=Resources.Load<TextAsset>("Okami/CelestialGarden");
+            if(!source){Debug.LogError("Celestial garden layout is missing");return;}
+            var layout=JsonUtility.FromJson<GardenLayout>(source.text);
+            // Ground first, so every flower, lamp and visitor sits on its actual painted surface.
+            foreach(var item in layout.items)if(item.kind=="ground")
             {
-                Put(garden.transform,"Okami/heaven-pond",p,new Vector3(11,.1f,8));
-                OriginalAtmosphere.Create("Steam",garden.transform,p+Vector3.up*.3f,4,2.4f,4,.04f,3.2f);
-                OriginalAtmosphere.Create("SpiritGlow",garden.transform,p+Vector3.up*.7f,3,.18f,3,.04f,3.6f);
+                var at=item.position;
+                if(item.resource!="Okami/celestial-meadow" && item.resource!="Okami/celestial-terrace" && Height(Centre+at,out var baseY))at.y+=baseY-Centre.y;
+                var ground=VillageFestival.Place(garden.transform,item.resource,at,item.size,new Vector3(0,item.yaw,0));
+                if(!ground)continue;
+                foreach(var renderer in ground.GetComponentsInChildren<SkinnedMeshRenderer>())
+                {var material=new Material(renderer.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/CelestialGround").shader;renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
+                renderer.gameObject.layer=6;renderer.gameObject.name="Heaven garden ground · original mesh";var collider=renderer.gameObject.AddComponent<MeshCollider>();collider.sharedMesh=renderer.sharedMesh;}
+                Physics.SyncTransforms();
             }
-            for(int i=0;i<12;i++)
+            Shader.SetGlobalTexture("_SunwardHeavenClouds",Resources.Load<Texture2D>("Okami/Effects/Cloud"));
+            Physics.SyncTransforms();
+            foreach(var item in layout.items)if(item.kind!="ground")
             {
-                float a=i*Mathf.PI*2/12;Vector3 p=new Vector3(Mathf.Cos(a)*31,1,Mathf.Sin(a)*29);
-                Put(garden.transform,i%3==0?"Okami/vt19":"Okami/vt17",p,i%3==0?new Vector3(3,5,3):new Vector3(2,5.5f,2),i*41);
-                Put(garden.transform,"Okami/vt48",p+new Vector3(1,0,1.8f),new Vector3(2.4f,1.1f,2.1f));
-                OriginalAtmosphere.Create("Blossom",garden.transform,p+Vector3.up*4,1,.2f,8,.08f,3);
+                var p=item.position;if(item.kind!="cloud" && Height(Centre+p,out var h))p.y=h-Centre.y+.025f;
+                var prop=VillageFestival.Place(garden.transform,item.resource,p,item.size,new Vector3(0,item.yaw,0));
+                if(!prop)continue;
+                if(item.kind=="tree")prop.AddComponent<OriginalBillboard>();
+                if(item.kind=="cloud")foreach(var renderer in prop.GetComponentsInChildren<SkinnedMeshRenderer>())
+                {
+                    var material=new Material(renderer.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/HeavenCloud").shader;renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
+                }
+                if(item.kind=="pond")
+                {
+                    foreach(var renderer in prop.GetComponentsInChildren<SkinnedMeshRenderer>())if(renderer.sharedMesh.name=="Native-1-0")
+                    {
+                        var material=new Material(renderer.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/CelestialWater").shader;
+                        material.SetFloat("_CentreX",Centre.x+p.x);material.SetFloat("_CentreZ",Centre.z+p.z);material.SetFloat("_RadiusX",item.size.x*.32f);material.SetFloat("_RadiusZ",item.size.z*.32f);
+                        renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
+                    }
+                    OriginalAtmosphere.Create("Steam",garden.transform,p+Vector3.up*.5f,2,2.5f,5,.025f,3.5f);
+                    OriginalAtmosphere.Create("SpiritGlow",garden.transform,p+Vector3.up*.8f,2,.16f,5,.02f,3.7f);
+                }
+            }
+            foreach(var p in new[]{new Vector3(-20,3,-8),new Vector3(21,3,9),new Vector3(-18,3,22),new Vector3(0,3,22),new Vector3(0,2,-25)})
+            {
+                OriginalAtmosphere.Create("SpiritGlow",garden.transform,p,9,.30f,7,.10f,6);
+                OriginalAtmosphere.Create("Blossom",garden.transform,p+Vector3.up*3,2,.23f,9,.10f,5);
+            }
+            for(int i=0;i<3;i++)
+            {
+                var p=new Vector3(i==0?0:i==1?-20:21,3,i==0?22:i==1?-8:9);
+                var sun=new GameObject("Soft celestial garden radiance");sun.transform.SetParent(garden.transform,false);sun.transform.localPosition=p+Vector3.up*5;var lamp=sun.AddComponent<Light>();lamp.type=LightType.Point;lamp.range=24;lamp.intensity=4;lamp.color=new Color(1,.91f,.73f);lamp.shadows=LightShadows.None;
+                OriginalAtmosphere.Create("Wind",garden.transform,p,1.1f,3.5f,7,.25f,2);
+            }
+            // Original spirit artwork drawn as soft shafts over the altar and ponds.
+            foreach(var p in new[]{new Vector3(0,1,23),new Vector3(-20,1,-8),new Vector3(21,1,9)})
+            {
+                var ray=new GameObject("Celestial shaft · original spirit paint");ray.transform.SetParent(garden.transform,false);ray.transform.localPosition=p;
+                var beam=ray.AddComponent<LineRenderer>();beam.positionCount=2;beam.useWorldSpace=false;
+                beam.SetPosition(0,Vector3.up*20);beam.SetPosition(1,Vector3.zero);beam.startWidth=.65f;beam.endWidth=3.5f;
+                beam.startColor=new Color(1.5f,1.3f,1.7f,.12f);beam.endColor=new Color(1.5f,1.6f,2,.34f);
+                beam.sharedMaterial=new Material(Resources.Load<Material>("Okami/Effects/SpiritRadiance")){mainTexture=Resources.Load<Texture2D>("Okami/Effects/SpiritGlow")};ray.AddComponent<OriginalParticleMaterial>();
             }
             SpawnVisitor("garden-hm50","hm05_000",new Vector3(0,1,17),180);
             SpawnVisitor("garden-hm40","hm95_000",new Vector3(18,1,-12),240);
             SpawnVisitor("garden-hm06","hm05_000",new Vector3(-23,1,7),90);
-            Put(garden.transform,"Okami/river-spirit-portal",new Vector3(0,1,-25),new Vector3(5,.12f,5));
-            OriginalAtmosphere.Create("SpiritGlow",garden.transform,new Vector3(0,2,-25),12,.4f,2,.06f,1.8f);
-            var sun=new GameObject("Garden altar radiance");sun.transform.SetParent(garden.transform,false);sun.transform.localPosition=new Vector3(0,8,18);var lamp=sun.AddComponent<Light>();lamp.type=LightType.Point;lamp.range=80;lamp.intensity=9;lamp.color=new Color(1,.92f,.74f);lamp.shadows=LightShadows.None;
         }
         void SpawnVisitor(string resource,string idle,Vector3 p,float yaw)
         {

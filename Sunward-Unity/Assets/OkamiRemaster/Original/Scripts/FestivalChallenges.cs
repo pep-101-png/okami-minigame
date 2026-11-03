@@ -33,7 +33,7 @@ namespace Sunward.Remaster
             if(kind!=1 && kind!=2)return;
             if(!game.Profile.night){game.Notify("Festival games begin at night · sleep in Ammy’s bed first");return;}
             if(game.InTrial || game.Health<=0 || VillageInteriors.AnyRoom(game.Player.transform.position))return;
-            Clear();mode=kind;remaining=kind==1?55:90;checkpoint=delivered=0;freshCrops.Clear();
+            Clear();mode=kind;remaining=kind==1?50:90;checkpoint=delivered=0;freshCrops.Clear();
             if(kind==1)
                 for(int i=0;i<Route.Length;i++)
                 {

@@ -1,0 +1,107 @@
+[
+  {
+    "resource": "wp20",
+    "source": "data_pc/id/weapon/ama_01.dds",
+    "sha256": "196629801f0e598c3e661681d778f5110eb7fa4516332753f94a9cc18289dd35",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "cfad8678f0b515133b106e16642d263c022a0d021ae25e338e1b8d06effb4eb4"
+  },
+  {
+    "resource": "wp21",
+    "source": "data_pc/id/weapon/ama_02.dds",
+    "sha256": "5ca4b7948aa73cf5f5fd09f9bfcec579edb914259b2cdd1c9c4e1ac18d27610b",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "b0f6bdce7bcd64dccddb4e68e57b7dc4a9ac964cf1ba5310ce10e7e44e1e98a1"
+  },
+  {
+    "resource": "wp22",
+    "source": "data_pc/id/weapon/ama_03.dds",
+    "sha256": "54e92707ff6a06493c8ff76b308a346816a8be80224d8a89729299c927b0f715",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "1fa27b35332996fb52fe6f0a8caa173d847b44eadbdea3c72b8518fd8c689c18"
+  },
+  {
+    "resource": "wp23",
+    "source": "data_pc/id/weapon/ama_04.dds",
+    "sha256": "6b3c1a6c6b562ea7c1ee959b596ef745df51d9afbd7fb7d4e28a67bc66fb9272",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "41090e21cba38bb2cf3338b97d11478e1b99410da3d045bc1e1c1da0478dd2fb"
+  },
+  {
+    "resource": "wp24",
+    "source": "data_pc/id/weapon/ama_05.dds",
+    "sha256": "b6230733c8d94bf1fe5d43435fa420e4be6cd035766f74ce827c993f4f223a89",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "b05336e255d6600cbeb8ebfacf0dc787516388e18a4dea434da7e523944512f7"
+  },
+  {
+    "resource": "wp25",
+    "source": "data_pc/id/weapon/ama_06.dds",
+    "sha256": "9c8423ea783b2c7d32cf2d603a86bfdf777300e4bf5566317ccdb4477be06582",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "27eeb8f9b20cd38958329ec558074a1f6216b8802e89c13323094be098cf46e1"
+  },
+  {
+    "resource": "wp26",
+    "source": "data_pc/id/weapon/ama_07.dds",
+    "sha256": "2b9b9987ef3beeb7ec8f42cced9c56acdb9bc2480157a30a0a4700a4ab51d9c5",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "af9d4efe762452aeb70de314c53154e8eaee2b68050379d3d0885b4add4c6ac3"
+  },
+  {
+    "resource": "wp27",
+    "source": "data_pc/id/weapon/ama_08.dds",
+    "sha256": "c317a7d885291d5aadd7bda6beeea862a8ca77eb0b041d838945662ccbb5761e",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "c3c0def83c75a8382f184623b2bfec7c6099ef5ef1caab0a9ed670a9ac935c14"
+  },
+  {
+    "resource": "wp28",
+    "source": "data_pc/id/weapon/ama_09.dds",
+    "sha256": "a33c5b976b7a0a37217a56dae0cc23fc3ce3c4ce9a28395c2e1222be397dfb31",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "c2e90b4a3a1796fcb1293616d87f47bd86ee24d72c7920fe5189e9f3350dd24c"
+  },
+  {
+    "resource": "wp29",
+    "source": "data_pc/id/weapon/ama_10.dds",
+    "sha256": "c468383aeeea1b2b0d5704eeb355d42b77673bbc31037759d0bfe2af5ddb583b",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "bba916088ab8a5581fee1cefa78daf434257c07259444cf69ba971e84946973c"
+  },
+  {
+    "resource": "wp2a",
+    "source": "data_pc/id/weapon/ama_11.dds",
+    "sha256": "5923d9d7af732d878f61aa51295f557afcd8cf488f8bceb0fc61848df6b6a379",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "fb98cc5e4a992383cdb5b1eafa06c596f83b12619b62145b75f135c601f83b0a"
+  },
+  {
+    "resource": "wp2b",
+    "source": "data_pc/id/weapon/ama_12.dds",
+    "sha256": "ee00128fd7baee41b40a0bdd2f1dc65644109694f0d5515ccc34fea6ed5379c1",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "74878068aa1b0e07197f88811a78bb96784820c94fc9248f2a758c2062eee372"
+  },
+  {
+    "resource": "wp2c",
+    "source": "data_pc/id/weapon/ama_13.dds",
+    "sha256": "90c13a459f1fe5ba901db328a04f8b983ba186a8096ffc8d5fcd31a3ca0fd5e2",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "30494b0467458f8284aef3a66f5d3b96d7f5749d6bb0488c604af5a5e7bea14b"
+  },
+  {
+    "resource": "wp2d",
+    "source": "data_pc/id/weapon/ama_14.dds",
+    "sha256": "9d2a96f1701b4216f0cb115a684d000e440804595faecabc458f0c7c2f28ce25",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "c8f408cb72ed65a30312ab2fed43356e20f35e359cc0f341741c4dc996449161"
+  },
+  {
+    "resource": "wp2e",
+    "source": "data_pc/id/weapon/ama_15.dds",
+    "sha256": "dfef2cf1bf97e5ef17661595faa1e510e8c7b51008bce9b88247ee4d190c3b68",
+    "derivation": "Original 1024x1024 RGBA equipment illustration; no recolouring or invented art",
+    "outputSHA256": "2c9e4bcae32af777675708de9879898c1f12a61513d88cfcbecff4fef4172870"
+  }
+]

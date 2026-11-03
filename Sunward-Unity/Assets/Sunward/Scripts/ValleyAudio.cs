@@ -96,15 +96,16 @@ namespace Sunward
             if(!presentation && presentationBlend<=0 && presentationMusic.isPlaying)presentationMusic.Stop();
             bool inMusicHouse=Sunward.Remaster.VillageServices.InFoodHouse(p);
             string desired=game.InTrial?"battle":"town";
-            float houseTarget=inMusicHouse && !game.InTrial && !presentation?.10f:0;
+            bool heaven=Sunward.Remaster.HeavenlyGarden.Inside(p);
+            float houseTarget=(inMusicHouse || heaven) && !game.InTrial && !presentation?.10f:0;
             if(houseTarget>0 && !houseMusic.isPlaying){houseMusic.volume=0;Loop(houseMusic,"housemusic");}
             houseBlend=Mathf.MoveTowards(houseBlend,houseTarget,Time.unscaledDeltaTime*.035f);
             houseMusic.volume=houseBlend*(game.CinematicActive?.3f:1);
             if(houseTarget==0 && houseBlend<=.0001f && houseMusic.isPlaying)houseMusic.Stop();
             if(desired!=musicCue){musicCue=desired;Loop(music,desired);}
-            river.volume=.25f*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15);
-            wind.volume=Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f;
-            music.volume=Mathf.MoveTowards(music.volume,game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f);
+            river.volume=(heaven?0:.25f)*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15);
+            wind.volume=heaven?.025f:Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f;
+            music.volume=Mathf.MoveTowards(music.volume,heaven?0:game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f);
             Vector3 delta=p-lastPosition;delta.y=0;lastPosition=p;
             if(game.Blocked || game.Player.Locked || delta.magnitude>2)return;
             if(!game.Player.Swimming && game.Player.Grounded && game.Player.Speed>.2f)

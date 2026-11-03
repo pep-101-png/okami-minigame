@@ -1,0 +1,91 @@
+[
+  {
+    "resource": "celestial-bridge",
+    "sourceSHA256": "c67c29d6c290c586570192d4a012b1e902ba431101a88ec4da1b1accb1f5b0fd",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "celestial-gate",
+    "sourceSHA256": "2dedf294db8ac1fb332ca4192fc77a0fb1217d10ad8ab8b6be02739888efcd2e",
+    "sourceName": "r006/torii",
+    "sourceParts": null,
+    "alignment": "Original vertex geometry rigidly rotated to align the gate opening along local X"
+  },
+  {
+    "resource": "celestial-meadow",
+    "sourceSHA256": "40b1f258e8c2ae94afb22316d2d8457a077aa395215559c008e72669c4dfdf28",
+    "sourceName": "r108/_LY04__Sibati_after",
+    "sourceParts": null
+  },
+  {
+    "resource": "celestial-pond",
+    "sourceSHA256": "bd57d821a646bea5ab989f2b001aabb55fc3c389752e710f33b00498bcca3167",
+    "sourceName": "r200/KaguyaIke_LYb3",
+    "sourceParts": null
+  },
+  {
+    "resource": "celestial-terrace",
+    "sourceSHA256": "ee1c979127f8f07a852dfb1aa49b77e6653d36f5be72993e3eca4e039027d088",
+    "sourceName": "r102/jimen00_ly04",
+    "sourceParts": [
+      2
+    ]
+  },
+  {
+    "resource": "heaven-cloud",
+    "sourceSHA256": "511829d25e657b3c8eaa77f5ee4ccaec04b70c8ca0cc9050a24778c45f593271",
+    "sourceName": "r301/__LY30_cloud",
+    "sourceParts": null
+  },
+  {
+    "resource": "river-spirit-portal",
+    "sourceSHA256": "ae139e6bbedb7791483f8dd778cbfb649ad074fc4a52b28facea48d48825af58",
+    "sourceName": "r203/sukyouwarp_IDcc",
+    "sourceParts": null
+  },
+  {
+    "resource": "vt0a",
+    "sourceSHA256": "ac3c450b6ee45f96c9727a348e4fb87e9aa7c9e199da7ecc1d0a59371c8dc93e",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vt29",
+    "sourceSHA256": "76b7a91535af8448bbe57d0396729b2c1a879b7c4b9407f2e83f4d3eff812e33",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vt35",
+    "sourceSHA256": "b4a7b56d9ed539102201bf41101d601af30243c3dcdb8e86d0c6564e8f652c0a",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vt40",
+    "sourceSHA256": "83245a0c1eb6962160de88ed468ef26e10837d0ec2ee4d5d3849bbe4c87e480a",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vt46",
+    "sourceSHA256": "e30d5e1b960aa2d05f49c0c396e128aec09ca9746cfa8900edab00e4782791a9",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vt47",
+    "sourceSHA256": "d45d6e91d865f2cc2fc3462a537bd8d33ca2340ef76bd1a03c7fb27decd5ee89",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vt48",
+    "sourceSHA256": "677569f13a1b6041e942291f2d15e6ec2513ef493054223a3975650dff61f9a4",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vtaa",
+    "sourceSHA256": "c89b9e902871505771250d5568c6d85f5eebdb0d9bf07eb257f99f059c10985a",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vtba",
+    "sourceSHA256": "caff160858946173d9ecda1ce94cd4998ed5ccbebd386703f582bf2e88c16e79",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  }
+]
