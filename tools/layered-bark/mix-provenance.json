@@ -1,0 +1,29 @@
+{
+  "userInstruction": "Mix Player Archive A with Shiranui 16 and turn Shiranui up",
+  "sources": [
+    {
+      "name": "Player Archive A",
+      "filename": "pl00-afs2-0.wav",
+      "sha256": "a762897177d72d1631ba028080195a0426a558c2c6fa794309116111467853d2",
+      "gain": 1.0,
+      "gainDB": 0.0,
+      "startSeconds": 0
+    },
+    {
+      "name": "Shiranui 16",
+      "filename": "pl0d-16.wav",
+      "sha256": "5685a4f7af511f36e047c96fe526a8e9d4908303ed84c473f9112b7a7887cab2",
+      "gain": 2.0,
+      "gainDB": 6.0206,
+      "startSeconds": 0
+    }
+  ],
+  "sampleRate": 32000,
+  "channels": 1,
+  "seconds": 2.944,
+  "commonHeadroomGain": 1,
+  "peak": 0.766998291015625,
+  "clippedSamples": 0,
+  "outputSHA256": "4f40393bcdfa0a28396405953df9c5520b51feaaca3afdfb70fe5e57740ed9d0",
+  "derivation": "Aligned at time zero; full clips; linear gain and summing only; no pitch shift, time stretch, reverb or synthesized audio"
+}

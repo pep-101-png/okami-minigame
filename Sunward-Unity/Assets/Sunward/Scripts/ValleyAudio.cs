@@ -125,7 +125,7 @@ namespace Sunward
         }
         public void Cue(string id)
         {
-            // PL00-41: selected by the user after listening to the original player bank.
+            // User-requested Player Archive A + louder Shiranui 16 mix; see NativeAudio bark binding.
             if(id=="flame-impact")id="impact";
             // World actors must supply a position; never route them through 2D playback.
             if(id=="cow" || id=="pig" || id=="rooster" || id.StartsWith("npc") || id.StartsWith("enemy"))return;
