@@ -83,7 +83,7 @@ namespace Sunward.Editor.Automation
         void Update()
         {
             if(restored || !game)return;
-            if(Keyboard.current!=null && Keyboard.current.escapeKey.wasPressedThisFrame()){Restore();Destroy(gameObject);return;}
+            if(Keyboard.current!=null && Keyboard.current.escapeKey.wasPressedThisFrame){Restore();Destroy(gameObject);return;}
             t=frame/(float)Fps;int next=t<4?0:t<7?1:t<11?2:t<14?3:t<17?4:t<21?5:t<27?6:7;
             if(next!=shot){shot=next;EnterShot(shot);}
             Vector3 destination=game.Player.transform.position;bool move=false,attack=false,dig=false;
