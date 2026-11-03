@@ -1,0 +1,116 @@
+[
+  {
+    "resource": "spa-hm16",
+    "removedProps": [
+      {
+        "part": "Native-0-0",
+        "component": 648,
+        "vertices": 20
+      },
+      {
+        "part": "Native-0-0",
+        "component": 672,
+        "vertices": 28
+      },
+      {
+        "part": "Native-0-0",
+        "component": 688,
+        "vertices": 20
+      },
+      {
+        "part": "Native-0-0",
+        "component": 715,
+        "vertices": 28
+      },
+      {
+        "part": "Native-2-0",
+        "component": 553,
+        "vertices": 20
+      },
+      {
+        "part": "Native-2-0",
+        "component": 580,
+        "vertices": 28
+      },
+      {
+        "part": "Native-2-0",
+        "component": 593,
+        "vertices": 20
+      },
+      {
+        "part": "Native-2-0",
+        "component": 617,
+        "vertices": 28
+      }
+    ],
+    "motions": [
+      {
+        "name": "hm05_000",
+        "sha256": "218af5e8b02016e0ef7713fd4aa178a4645e293e9e0df7998326344f2f1d4dd1"
+      },
+      {
+        "name": "hm05_001",
+        "sha256": "d55cd1aa058a7acd34b4f064c95137ea82da01fcd98eba34292686b2b1332908"
+      },
+      {
+        "name": "hm05_003",
+        "sha256": "1ef44fe70a35d7819a62dab65071ba5619bdcfb7485b11b29372d3ad9498e8d9"
+      },
+      {
+        "name": "hm05_027",
+        "sha256": "26401a604c6b3504643afa2e992abfdce2960c8e7430fc71e4e9cd73af5205f8"
+      }
+    ]
+  },
+  {
+    "resource": "farm-pitched-roof",
+    "source": "r107/__LY32__3F_Yane",
+    "sourceSHA256": "83e625e8c3af49acddedb4177897ee2082a641a8645092cb517e603ab0c214e9",
+    "parts": [
+      1
+    ]
+  },
+  {
+    "portrait": "wp20",
+    "visibleGroups": [
+      0
+    ],
+    "motion": "wp20_000"
+  },
+  {
+    "portrait": "wp21",
+    "visibleGroups": [
+      0,
+      1
+    ],
+    "motion": "wp21_000"
+  },
+  {
+    "portrait": "wp22",
+    "visibleGroups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "motion": "wp22_000"
+  },
+  {
+    "portrait": "wp23",
+    "visibleGroups": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "motion": "wp23_000"
+  },
+  {
+    "portrait": "wp24",
+    "visibleGroups": [
+      0,
+      1
+    ],
+    "motion": "wp24_000"
+  }
+]

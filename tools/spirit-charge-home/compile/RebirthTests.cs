@@ -55,14 +55,14 @@ static class RebirthTests
   {
    var player=new WolfMotor();var game=new GameFlow{Player=player,Panel="",Health=100};player.game=game;game.Profile.wins=1;
    var lower=new LowerArena{game=game,cover=new GameObject(),chamber=new GameObject(),fragments=Array.Empty<Transform>(),mirror=new GameObject().transform};Call(lower,"Awake");Call(lower,"Start");
-   Check(!lower.mirror.gameObject.activeSelf,"Return mirror is present before victory");LowerArena.TrialFinished(true);player.transform.position=LowerArena.Centre+Vector3.up*.05f;Call(lower,"Update");Check(game.bossStarts==1,"Entering lower chamber fails to start one boss");
+   Check(!lower.mirror.gameObject.activeSelf,"Return mirror is present before victory");LowerArena.TrialFinished(true);player.transform.position=new Vector3(35,0,0);Time.deltaTime=3.1f;Call(lower,"Update");player.transform.position=LowerArena.Centre+Vector3.up*.05f;Call(lower,"Update");Check(game.bossStarts==1,"Entering lower chamber fails to start one boss");
    game.InTrial=game.BossTrial=false;LowerArena.BossDefeated();var beacon=Get<GameObject>(lower,"victoryBeacon");
    Check(lower.mirror.gameObject.activeSelf&&(lower.mirror.position-(LowerArena.Centre+Vector3.up*.3f)).magnitude<.001f&&beacon!=null,"Victory mirror/beacon did not appear in centre");
    LowerArena.BossDefeated();Check(Get<GameObject>(lower,"victoryBeacon")==beacon,"Victory beacon duplicates");Call(lower,"Update");Check(game.bossStarts==1,"Closing victory screen respawns boss");
    player.input.Interact.pressedThisFrame=true;Call(lower,"Update");Check(game.homeReturns==1,"Centre mirror interaction cannot call home return");
    LowerArena.Leave();Check(!lower.mirror.gameObject.activeSelf&&beacon.wasDestroyed,"Home exit leaves victory effects/return mirror active");Call(lower,"OnDestroy");
   }
-  checks+=VillageTests.Run()+FestivalTests.Run();FestivalChallengeTests.Run();VillageRefinementTests.Run();GardenPassageTests.Run();
+  checks+=VillageTests.Run()+FestivalTests.Run();FestivalChallengeTests.Run();VillageRefinementTests.Run();GardenPassageTests.Run();TextBoundsTests.Run(args[0]);
   Console.WriteLine("PASS "+checks+" actual three-phase boss/native director checks, stun resistance, first/middle/final deaths, 1x/2x/4x scaling, fire/armour visibility, skip/cancel and paused motion at 15/30/60/120fps. Engine doubles, NOT Unity.");
  }
 }

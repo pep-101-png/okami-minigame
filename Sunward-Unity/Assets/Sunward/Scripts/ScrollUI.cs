@@ -47,10 +47,10 @@ namespace Sunward
             if (index == selected && Gamepad.current != null)
                 GUI.backgroundColor = new Color(.7f, .8f, .6f);
             string text=(index==selected && Gamepad.current!=null?"› ":"")+label;
-            float height=Mathf.Max(46,Mathf.Ceil(text.Length*13f/Mathf.Max(200,contentWidth-35))*27+16);
+            float height=Mathf.Max(48,Sunward.Remaster.InkText.MeasureHeight(text,contentWidth-36,28)+18);
             var rect=GUILayoutUtility.GetRect(contentWidth,height);
             if(hintInk){GUI.color=new Color(.42f,.12f,.055f,index==selected?.22f:.10f);GUI.DrawTexture(rect,hintInk);GUI.color=Color.white;}
-            Sunward.Remaster.InkText.Draw(text,new Rect(rect.x+14,rect.y+7,rect.width-28,rect.height-8),30,new Color(.16f,.07f,.035f,1));
+            Sunward.Remaster.InkText.Draw(text,new Rect(rect.x+14,rect.y+7,rect.width-28,rect.height-8),28,new Color(.16f,.07f,.035f,1));
             bool click=GUI.Button(rect,"",GUIStyle.none);
             GUI.backgroundColor = old;
             if (activate && index == selected && Event.current.type == EventType.Repaint)
@@ -64,11 +64,12 @@ namespace Sunward
 
         void Label(string text,GUIStyle style)
         {
-            float em=style==title?38:style==small?27:31;
-            int lines=0;foreach(var line in text.Split('\n'))lines+=Mathf.Max(1,Mathf.CeilToInt(line.Length*em*.47f/Mathf.Max(100,contentWidth-10)));
-            var rect=GUILayoutUtility.GetRect(contentWidth,lines*em*.98f+8);
-            Sunward.Remaster.InkText.Draw(text,rect,em,style.normal.textColor);
+            float em=style==title?34:style==small?24:29;
+            float height=Sunward.Remaster.InkText.MeasureHeight(text,contentWidth,em)+10;
+            var rect=GUILayoutUtility.GetRect(contentWidth,height);
+            Sunward.Remaster.InkText.Draw(text,new Rect(rect.x,rect.y,Mathf.Min(contentWidth,rect.width),rect.height),em,style.normal.textColor);
         }
+
         bool InkButton(Rect rect,string text)
         {Sunward.Remaster.InkText.Draw(text,rect,29,new Color(.3f,.09f,.045f,1));return GUI.Button(rect,"",GUIStyle.none);}
         void Styles()
@@ -126,18 +127,17 @@ namespace Sunward
             float scale = Mathf.Clamp(Mathf.Min(Screen.height / 900f, Screen.width / 1000f), .75f, 1.6f);
             GUI.matrix = Matrix4x4.Scale(new Vector3(scale, scale, 1));
             float w = Screen.width / scale, h = Screen.height / scale;
-            DrawPaper(new Rect(20, 18, 320, 178));
-            contentWidth=292;GUILayout.BeginArea(new Rect(34, 24, 292, 165));
-            Label("SUNWARD · AMATERASU", small);
+            DrawPaper(new Rect(20, 18, 340, 175));
+            contentWidth=272;GUILayout.BeginArea(new Rect(54, 31, 272, 142));
+            Label("AMATERASU", small);
             Label("Vitality " + Mathf.CeilToInt(game.Health) + " / " + game.MaxHealth, body);
-            Bar(280, game.Health / game.MaxHealth);
+            Bar(260, game.Health / game.MaxHealth);
             Label("Stamina " + (int)game.Stamina + " · Ink " + (int)game.Energy, small);
             GUILayout.EndArea();
-            DrawPaper(new Rect(w - 350, 18, 330, 170));
-            contentWidth=308;GUILayout.BeginArea(new Rect(w - 336, 26, 308, 158));
-            Label(game.Profile.coins + " sun coins · Level " + ProgressionRules.Level(game.Profile), body);
+            DrawPaper(new Rect(w - 350, 18, 330, 175));
+            contentWidth=262;GUILayout.BeginArea(new Rect(w - 316, 31, 262, 142));
+            Label(game.Profile.coins + " coins · Lv " + ProgressionRules.Level(game.Profile), small);
             Label(game.Combat.EquippedTitle, body);
-            Label("Power " + ProgressionRules.Power(game.Profile).ToString("0"), small);
             GUILayout.EndArea();
             var boss = game.Enemies.Find(e => e && !e.Dead && e.definition.id == "boss");
             if (boss)
@@ -169,8 +169,8 @@ namespace Sunward
                 return;
             float pw = Mathf.Min(700, w - 40);
             var panel = new Rect((w - pw) * .5f, 150, pw, h - 270);
-            DrawPaper(panel);contentWidth=panel.width-75;
-            GUILayout.BeginArea(new Rect(panel.x + 26, panel.y + 22, panel.width - 52, panel.height - 44));
+            DrawPaper(panel);contentWidth=panel.width-108;
+            GUILayout.BeginArea(new Rect(panel.x + 42, panel.y + 24, panel.width - 84, panel.height - 48));
             scroll = GUILayout.BeginScrollView(scroll);
             switch (game.Panel)
             {
@@ -260,8 +260,8 @@ namespace Sunward
                     var festival=game.GetComponent<Sunward.Remaster.FestivalChallenges>();
                     Label("FESTIVAL NIGHT · "+game.Profile.festivalTokens+" tokens",title);
                     Label("Sleep in Ammy’s bed to reach night. Optional games award festival tokens; your arena progress is unchanged.",small);
-                    Label(festival.Active?festival.Status:"Spirit run: collect thirteen floating spirit lights in order within 95 seconds. Harvest relay: dig up three different vegetables, then give three to the farmer within 90 seconds. Each win awards 3 tokens.",body);
-                    if(!festival.Active){if(Button("START SPIRIT RUN · 95 seconds",button))festival.Begin(1);if(Button("START HARVEST RELAY · 90 seconds",button))festival.Begin(2);}
+                    Label(festival.Active?festival.Status:"Spirit run: collect thirteen floating spirit lights in order within 55 seconds. Harvest relay: dig up three different vegetables, then give three to the farmer within 90 seconds. Each win awards 3 tokens.",body);
+                    if(!festival.Active){if(Button("START SPIRIT RUN · 55 seconds",button))festival.Begin(1);if(Button("START HARVEST RELAY · 90 seconds",button))festival.Begin(2);}
                     else if(Button("CANCEL CHALLENGE",button))festival.Cancel();
                     Label("Home decorations · permanent rewards placed inside Ammy’s house",body);
                     for(int reward=0;reward<3;reward++)

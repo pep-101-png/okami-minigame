@@ -22,7 +22,7 @@ public static class VillageRefinementTests
         var lower=new LowerArena{game=game,cover=new GameObject(),chamber=new GameObject(),fragments=Array.Empty<Transform>()};game.Profile.wins=5;Call(lower,"Awake");Call(lower,"Start");
         game.Player.transform.position=new Vector3(35,0,0);Call(lower,"Update");Check(!LowerArena.Shaft(game.Player.transform.position),"Saved win opens floor during a peaceful walk");
         LowerArena.TrialFinished(false);Check(!LowerArena.Shaft(game.Player.transform.position),"Defeat reopens shaft from saved unlock");
-        LowerArena.TrialFinished(true);Check(LowerArena.Shaft(game.Player.transform.position),"Current trial victory no longer opens shaft");
+        LowerArena.TrialFinished(true);Time.deltaTime=3.1f;Call(lower,"Update");Check(LowerArena.Shaft(game.Player.transform.position),"Current trial victory no longer opens shaft");
         LowerArena.Leave();Call(lower,"Update");Check(!LowerArena.Shaft(game.Player.transform.position),"Leaving and revisiting reopens floor");Call(lower,"OnDestroy");
         game.Player.transform.position=new Vector3(GardenPond.X,GardenPond.Water,GardenPond.Z);
         var spa=new SpaRest{game=game};game.Spa=spa;spa.Bathe();Check(spa.Bonus==25&&game.MaxHealth==145&&spa.Remaining==300,"Spring bonus has wrong size/duration");

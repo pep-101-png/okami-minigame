@@ -74,6 +74,7 @@ namespace Sunward.Remaster
         }
         public string seatedArmMotion;
         public float seatedArmWeight=.7f;
+        public float seatedArmRate=1,seatedArmPause;
         public string seatedHeadMotion;
         public float seatedHeadWeight=.65f;
         public float ActivityLength(string name) => bank!=null && bank.Find(name)!=null?bank.Find(name).Duration:0;
@@ -190,7 +191,15 @@ namespace Sunward.Remaster
             SampleArmour(dt);
             if(!string.IsNullOrEmpty(seatedHeadMotion) && activity!=null)bank.SampleHeadRotations(bank.Find(seatedHeadMotion),time,rig.Bones,seatedHeadWeight);
             if(!string.IsNullOrEmpty(seatedArmMotion) && activity!=null)
-                bank.SampleArmRotations(bank.Find(seatedArmMotion),time,rig.Bones,seatedArmWeight);
+            {
+                var gesture=bank.Find(seatedArmMotion);
+                if(gesture!=null)
+                {
+                    float gesturePhase=Mathf.Repeat(time*seatedArmRate,gesture.Duration+seatedArmPause);
+                    float fade=seatedArmPause>0?Mathf.SmoothStep(0,1,gesturePhase/.2f)*Mathf.SmoothStep(0,1,(gesture.Duration-gesturePhase)/.25f):1;
+                    if(gesturePhase<gesture.Duration)bank.SampleArmRotations(gesture,gesturePhase,rig.Bones,seatedArmWeight*fade);
+                }
+            }
         }
 
         void OnDestroy() { if(crimsonBody!=null){crimsonBody.Dispose();if(crimsonArmour!=null)crimsonArmour.Dispose();}else if(rig!=null)rig.Dispose(); }

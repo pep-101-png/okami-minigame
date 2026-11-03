@@ -49,7 +49,10 @@ namespace Sunward.Remaster
         void Shelter(string label,Vector3 p,float width,float depth,float headroom)
         {
             var shelter=new GameObject(label);shelter.transform.SetParent(root.transform,false);p.y=Floor(p);shelter.transform.position=p;
-            VillageFestival.Place(shelter.transform,"Okami/farm-canopy",Vector3.zero,new Vector3(width,headroom+1,depth),Vector3.zero);
+            // Actual tiled, hipped roof; the former 'canopy' was a washing platform.
+            VillageFestival.Place(shelter.transform,"Okami/farm-pitched-roof",Vector3.up*headroom,new Vector3(width,width*.315f,depth),Vector3.zero);
+            for(int x=-1;x<=1;x+=2)for(int z=-1;z<=1;z+=2)
+                VillageFestival.Place(shelter.transform,"Okami/farm-post",new Vector3(x*width*.35f,0,z*depth*.35f),new Vector3(headroom<1?.12f:.22f,headroom,headroom<1?.12f:.22f),Vector3.zero);
             if(headroom<1)
             {
                 Rail(p+new Vector3(0,0,depth*.5f),width,0,.55f);
@@ -88,7 +91,7 @@ namespace Sunward.Remaster
             // Native seated pelvis is held below the source feet, not a standing
             // dance mistaken for bathing. Head and shoulders remain above water.
             woman.transform.position=new Vector3(GardenPond.X-1.05f,GardenPond.Water-.48f,GardenPond.Z+.65f);woman.transform.rotation=Quaternion.Euler(0,135,0);
-            var actor=woman.AddComponent<OriginalActor>();spaGuest=actor;actor.game=game;actor.resource="Okami/spa-hm16";actor.idle="hm05_003";actor.walk=actor.run=actor.windup=actor.strike=actor.recover=actor.death=actor.idle;actor.modelScale=.83f;actor.seatedHeadMotion="hm05_001";actor.seatedHeadWeight=.65f;woman.SetActive(true);
+            var actor=woman.AddComponent<OriginalActor>();spaGuest=actor;actor.game=game;actor.resource="Okami/spa-hm16";actor.idle="hm05_003";actor.walk=actor.run=actor.windup=actor.strike=actor.recover=actor.death=actor.idle;actor.modelScale=.83f;actor.seatedHeadMotion="hm05_001";actor.seatedHeadWeight=.65f;actor.seatedArmMotion="hm05_027";actor.seatedArmWeight=.7f;actor.seatedArmRate=.65f;actor.seatedArmPause=.8f;woman.SetActive(true);
         }
     }
 }

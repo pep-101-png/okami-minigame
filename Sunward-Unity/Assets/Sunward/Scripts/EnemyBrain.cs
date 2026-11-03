@@ -106,6 +106,7 @@ namespace Sunward
         {
             visual.localScale=Vector3.one*(definition.scale*multiplier);
             motor.height=3.6f*multiplier;motor.radius=multiplier;motor.center=Vector3.up*(motor.height*.5f);
+            GroundBoss();
         }
         public void CompleteRebirth()
         {
@@ -113,6 +114,13 @@ namespace Sunward
             stun=chargeRemaining=0;struck=false;
         }
 
+        void GroundBoss()
+        {
+            if(!definition || definition.id!="boss" || !game || !game.valley)return;
+            var p=transform.position;if(!Sunward.Remaster.LowerArena.Height(p,out var floor))return;
+            if(Mathf.Abs(p.y-floor)>.025f)
+            {bool enabled=motor.enabled;motor.enabled=false;p.y=floor+.015f;transform.position=p;motor.enabled=enabled;}
+        }
         void Move(Vector3 delta)
         {
             motor.Move(delta);
@@ -121,12 +129,14 @@ namespace Sunward
             float radius=game.BossTrial?Mathf.Min(29,31-motor.radius-.6f):16.8f;
             if (d.magnitude > radius)
                 motor.Move(new Vector3(35, p.y, 0) + d.normalized * radius - p);
+            GroundBoss();
         }
 
         void Update()
         {
             if (!definition || game.Blocked || !game.InTrial)
                 return;
+            GroundBoss();
             float dt = Time.deltaTime;
             clock += dt;
             if (Dead)

@@ -7,13 +7,13 @@ namespace Sunward.Remaster
     public sealed class HeavenlyGarden : MonoBehaviour
     {
         public GameFlow game;
-        public const float WalkRadiusX=35,WalkRadiusZ=32;
+        public const float WalkRadiusX=35,WalkRadiusZ=32,WaterfallLip=36;
         public static readonly Vector3 Centre=new Vector3(230,70,0);
         public static readonly Vector3 Altar=Centre+new Vector3(0,0,22),Return=Centre+new Vector3(0,0,-25);
         public bool Playing {get;private set;}
         float fallTime;Vector3 fallStart;OrbitCamera orbit;GameObject garden,river;bool visible;
         public static bool Inside(Vector3 p)=>p.y>58 && p.y<100 && Mathf.Abs(p.x-Centre.x)<49 && Mathf.Abs(p.z)<47;
-        public static bool RiverLip(Vector3 p)=>p.y>-2 && p.y<2 && p.z>38.5f && p.z<43 && Mathf.Abs(p.x-Valley.RiverX(-p.z))<2.8f;
+        public static bool RiverLip(Vector3 p)=>p.y>-2 && p.y<2 && p.z>WaterfallLip-.75f && p.z<WaterfallLip+1 && Mathf.Abs(p.x-Valley.RiverX(-p.z))<2.8f;
         public static int UpgradeRanks(ProfileData p){int n=0;foreach(var id in ProgressionRules.Upgrades)n+=p.upgrades.Get(id);return n;}
         public static bool GrowthReady(ProfileData p)=>ProgressionRules.Level(p)>=15 && UpgradeRanks(p)>=30;
         public static Vector3 Guard(Vector3 p)
@@ -42,15 +42,16 @@ namespace Sunward.Remaster
         void BuildRiver()
         {
             river=new GameObject("River end · original waterfall and spirit passage");river.transform.SetParent(transform,false);
-            float x=Valley.RiverX(-40);
-            var waterfall=Put(river.transform,"Okami/river-waterfall",new Vector3(x,-6.5f,41),new Vector3(5,6.2f,4.5f),160);
-            if(waterfall)foreach(var r in waterfall.GetComponentsInChildren<Renderer>())r.sharedMaterial.shader=Resources.Load<Material>("Okami/Effects/FallingWater").shader;
-            Put(river.transform,"Okami/vt28",new Vector3(x-5,-6.8f,42.5f),new Vector3(4,6.2f,8));
-            Put(river.transform,"Okami/vt28",new Vector3(x+5,-6.8f,42.5f),new Vector3(4,6.2f,8),125);
-            Put(river.transform,"Okami/river-spirit-portal",new Vector3(x,-6.1f,44),new Vector3(8,.15f,8));
-            OriginalAtmosphere.Create("Steam",river.transform,new Vector3(x,-5.8f,43),7,1.8f,2.8f,.3f,2.1f);
-            OriginalAtmosphere.Create("SpiritGlow",river.transform,new Vector3(x,-5.5f,44),12,.6f,2,.15f,2.6f);
-            var light=river.AddComponent<Light>();light.type=LightType.Point;light.range=13;light.intensity=6;light.color=new Color(.4f,.85f,1);light.shadows=LightShadows.None;
+            float x=Valley.RiverX(-WaterfallLip);
+            var waterfall=Put(river.transform,"Okami/river-waterfall",new Vector3(x-0.036361f,-6.54f,WaterfallLip+0.548696f),new Vector3(5,6.2f,4.5f),-37.445568f);
+            if(waterfall)foreach(var r in waterfall.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {var material=new Material(r.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/FallingWater").shader;material.SetFloat("_FlowDirection",r.sharedMesh.name.StartsWith("Native-1-")?1:-1);r.sharedMaterial=material;r.gameObject.AddComponent<OriginalParticleMaterial>();}
+            Put(river.transform,"Okami/vt28",new Vector3(x-5,-6.8f,39.5f),new Vector3(4,6.2f,8));
+            Put(river.transform,"Okami/vt28",new Vector3(x+5,-6.8f,39.5f),new Vector3(4,6.2f,8),125);
+            Put(river.transform,"Okami/river-spirit-portal",new Vector3(x,-6.1f,40.5f),new Vector3(8,.15f,8));
+            OriginalAtmosphere.Create("Steam",river.transform,new Vector3(x,-5.8f,39.7f),7,1.8f,2.8f,.3f,2.1f);
+            OriginalAtmosphere.Create("SpiritGlow",river.transform,new Vector3(x,-5.5f,40.5f),12,.6f,2,.15f,2.6f);
+            var lamp=new GameObject("Waterfall portal light");lamp.transform.SetParent(river.transform,false);lamp.transform.localPosition=new Vector3(x,-3.8f,40.5f);var light=lamp.AddComponent<Light>();light.type=LightType.Point;light.range=13;light.intensity=6;light.color=new Color(.4f,.85f,1);light.shadows=LightShadows.None;
         }
         void BuildGarden()
         {
