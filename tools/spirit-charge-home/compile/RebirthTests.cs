@@ -62,7 +62,7 @@ static class RebirthTests
    player.input.Interact.pressedThisFrame=true;Call(lower,"Update");Check(game.homeReturns==1,"Centre mirror interaction cannot call home return");
    LowerArena.Leave();Check(!lower.mirror.gameObject.activeSelf&&beacon.wasDestroyed,"Home exit leaves victory effects/return mirror active");Call(lower,"OnDestroy");
   }
-  checks+=VillageTests.Run()+FestivalTests.Run();FestivalChallengeTests.Run();VillageRefinementTests.Run();
+  checks+=VillageTests.Run()+FestivalTests.Run();FestivalChallengeTests.Run();VillageRefinementTests.Run();GardenPassageTests.Run();
   Console.WriteLine("PASS "+checks+" actual three-phase boss/native director checks, stun resistance, first/middle/final deaths, 1x/2x/4x scaling, fire/armour visibility, skip/cancel and paused motion at 15/30/60/120fps. Engine doubles, NOT Unity.");
  }
 }

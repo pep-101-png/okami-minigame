@@ -74,6 +74,8 @@ namespace Sunward.Remaster
         }
         public string seatedArmMotion;
         public float seatedArmWeight=.7f;
+        public string seatedHeadMotion;
+        public float seatedHeadWeight=.65f;
         public float ActivityLength(string name) => bank!=null && bank.Find(name)!=null?bank.Find(name).Duration:0;
         public void PlayActivity(string name,bool loop,float rate=1,float phase=0)
         {
@@ -186,6 +188,7 @@ namespace Sunward.Remaster
             }
             bank.Sample(current, sampleTime, rig.Bones, fromPosition, fromRotation, fromScale, Mathf.Clamp01(blendTime / .12f), loop);
             SampleArmour(dt);
+            if(!string.IsNullOrEmpty(seatedHeadMotion) && activity!=null)bank.SampleHeadRotations(bank.Find(seatedHeadMotion),time,rig.Bones,seatedHeadWeight);
             if(!string.IsNullOrEmpty(seatedArmMotion) && activity!=null)
                 bank.SampleArmRotations(bank.Find(seatedArmMotion),time,rig.Bones,seatedArmWeight);
         }

@@ -17,7 +17,7 @@ public static class FestivalChallengeTests
         festival.Harvest(2);festival.Harvest(3);festival.Deliver(3);
         Check(!festival.Active && game.Profile.festivalTokens==3 && game.Profile.festivalWins==1,"Fresh crops and delivery did not award tokens once");
         festival.Deliver(3);Check(game.Profile.festivalTokens==3,"Repeated delivery duplicates festival reward");
-        festival.Buy(0);Check(game.Profile.festivalTokens==0 && game.Profile.festivalRewards==1,"Decoration purchase not persisted");
+        festival.Buy(0);Check(game.Profile.festivalTokens==3 && game.Profile.festivalRewards==0,"Old cheap price still buys a reward");game.Profile.festivalTokens=9;festival.Buy(0);Check(game.Profile.festivalTokens==0 && game.Profile.festivalRewards==1,"Decoration purchase not persisted");
         festival.Buy(0);festival.Buy(1);Check(game.Profile.festivalTokens==0 && game.Profile.festivalRewards==1,"Duplicate/unaffordable reward mutated profile");
         game.Profile.night=false;festival.Begin(2);Check(!festival.Active,"Daytime festival started");
         game.Profile.night=true;festival.Begin(2);festival.Cancel();Check(!festival.Active && game.Profile.festivalTokens==0,"Cancellation changed reward balance");

@@ -21,6 +21,8 @@ Shader "Sunward/Brush River Recovered Paint" {
  float Square(float x){return x*x;}
  float Raw(float z){return 1.1*sin(z*.13)+.45*sin(z*.31)+2*exp(-Square((z+8)/4));}
  half4 Frag(V i):SV_Target{
+    // River-mouth chasm: retain both banks and expose the original waterfall below.
+    if(i.world.z>39.25 && abs(i.world.x+21.95368)<3.3)clip(-1);
  float z=-i.world.z,cross=exp(-Square(26./4.)),a=(Raw(12)-Raw(-14)*cross)/(1-cross*cross),b=Raw(-14)-a*cross;
  float cx=-23+Raw(z)-a*exp(-Square((z-12)/4))-b*exp(-Square((z+14)/4));
  float width=2.45+.4*sin(z*.17+.4)+.25*cos(z*.31),bank=abs(i.world.x-cx)/width;

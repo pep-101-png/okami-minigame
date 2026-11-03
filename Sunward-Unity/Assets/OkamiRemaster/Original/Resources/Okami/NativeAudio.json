@@ -483,6 +483,10 @@
     {
       "cue": "voice-hm68",
       "resource": "Okami/NativeAudio/hm68-voice-6"
+    },
+    {
+      "cue": "bark",
+      "resource": "Okami/NativeAudio/player-pl00-41-bark"
     }
   ]
 }

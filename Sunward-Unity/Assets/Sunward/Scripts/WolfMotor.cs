@@ -85,6 +85,7 @@ namespace Sunward
                     guarded = new Vector3(35, guarded.y, 0) + d.normalized * radius;
             }
 
+            if(Sunward.Remaster.HeavenlyGarden.Inside(old)){guarded=Sunward.Remaster.HeavenlyGarden.Guard(guarded);if((guarded-transform.position).sqrMagnitude>.000001f)controller.Move(guarded-transform.position);return;}
             if(Sunward.Remaster.VillageInteriors.Inside(old))
             {guarded=Sunward.Remaster.VillageInteriors.Guard(old,guarded);if((guarded-transform.position).sqrMagnitude>.000001f)controller.Move(guarded-transform.position);return;}
             guarded=Sunward.Remaster.NativeHomeRoom.Guard(old,guarded);
@@ -209,7 +210,7 @@ namespace Sunward
         }
         bool UpdateSwimming(float dt)
         {
-            bool deep = !Sunward.Remaster.VillageInteriors.Inside(transform.position) && !game.InTrial && !Sunward.Remaster.NativeHomeRoom.At(transform.position) && !Sunward.Remaster.LowerArena.Inside(transform.position) && !Sunward.Remaster.LowerArena.Shaft(transform.position) && Valley.Depth(transform.position) > .42f;
+            bool deep = !Sunward.Remaster.HeavenlyGarden.Inside(transform.position) && !Sunward.Remaster.VillageInteriors.Inside(transform.position) && !game.InTrial && !Sunward.Remaster.NativeHomeRoom.At(transform.position) && !Sunward.Remaster.LowerArena.Inside(transform.position) && !Sunward.Remaster.LowerArena.Shaft(transform.position) && Valley.Depth(transform.position) > .42f;
             if (!deep || waterLeap > 0 || transform.position.y > .02f)
             {
                 if (Swimming) animationView.Play("Land_Soft", .1f, .2f, true);

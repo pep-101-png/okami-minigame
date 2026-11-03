@@ -12,7 +12,7 @@ voices=json.loads(Path(__file__).with_name('voice-provenance.json').read_text())
 for v in voices:
  check(v['sourceBundle']==v['character']+'v','General action SND substituted for voice family');check(v['conversion']['seconds']<.8,'Long action noise in dialogue family');check(v['conversion']['output']['clippedFraction']==0,'Clipped dialogue derivative')
  p=RES/'NativeAudio'/(v['character']+'-voice-'+str(v['sourceClip'])+'.wav');check(hashlib.sha256(p.read_bytes()).hexdigest()==v['outputSHA256'],'Voice derivative changed without provenance')
-manifest=json.loads((RES/'NativeAudio.json').read_text())['cues'];check(not any(v['cue']=='bark' for v in manifest),'Unidentified bark assigned without listening confirmation')
+manifest=json.loads((RES/'NativeAudio.json').read_text())['cues'];check([v['resource'] for v in manifest if v['cue']=='bark']==['Okami/NativeAudio/player-pl00-41-bark'],'Bark differs from user-selected PL00-41')
 for p in ['hm00','hm01','hm05','hm09','hm0f','hm29','hm44','hm68']:check(sum(v['cue']=='voice-'+p for v in manifest)==7,'Missing native voice family '+p)
 font=json.loads((RES/'UI/MessageGlyphs.json').read_text());glyphs={g['code']:g for g in font['glyphs']}
 for c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,?!+:-':

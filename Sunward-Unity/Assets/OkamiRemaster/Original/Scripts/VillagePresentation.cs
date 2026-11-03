@@ -8,7 +8,8 @@ namespace Sunward.Remaster
         public GameFlow game;
         public bool Playing {get;private set;}
         public bool Title=>game && game.Panel=="title";
-        float elapsed,duration,dialogueTime,entryGrace;bool victory;
+        float elapsed,duration,dialogueTime,entryGrace;bool victory,breaking,shaftRevealed;
+        public bool Breaking=>Playing && breaking;
         readonly System.Collections.Generic.List<GameObject> cinemaEffects=new System.Collections.Generic.List<GameObject>();
         OrbitCamera orbit;Texture2D painting,logo,bubble,ink;
         string lastDialogue="";int page;bool dialogueWasOpen;
@@ -16,11 +17,17 @@ namespace Sunward.Remaster
         void Start(){painting=Resources.Load<Texture2D>("Okami/UI/TitlePainting");logo=Resources.Load<Texture2D>("Okami/UI/TitleLogo");bubble=Resources.Load<Texture2D>("Okami/UI/DialogueBubble");ink=Resources.Load<Texture2D>("Okami/UI/BrushTip");}
         public void Festival(bool won)
         {
-            if(Playing)Cancel();victory=won;elapsed=0;duration=won?4.2f:3.4f;Playing=true;
+            if(Playing)Cancel();breaking=false;victory=won;elapsed=0;duration=won?4.2f:3.4f;Playing=true;
             game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;game.Player.animationView.Play(won?"Bark":"Idle_Natural",.12f,won?1.93f:0,true);
             orbit=FindFirstObjectByType<OrbitCamera>();if(orbit)orbit.BeginCinematic();
             CinemaBurst("SpiritGlow",won?32:16,.35f);
             if(won)CinemaBurst("Blossom",35,.5f);
+        }
+        public void ShaftCollapse()
+        {
+            if(Playing)Cancel();breaking=true;shaftRevealed=false;victory=false;elapsed=0;duration=3.8f;Playing=true;
+            game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;
+            orbit=FindFirstObjectByType<OrbitCamera>();if(orbit)orbit.BeginCinematic();
         }
         void CinemaBurst(string sprite,int count,float size)
         {
@@ -29,7 +36,7 @@ namespace Sunward.Remaster
         }
         public void Cancel()
         {
-            if(!Playing)return;Playing=false;foreach(var fx in cinemaEffects)if(fx)Destroy(fx);cinemaEffects.Clear();if(orbit)orbit.EndCinematic();if(game && game.Player){game.Player.Locked=game.Health<=0;game.Player.animationView.Play("Idle_Natural",.15f,0,true);}
+            if(!Playing)return;if(breaking && !shaftRevealed)LowerArena.RevealShaft();breaking=false;Playing=false;foreach(var fx in cinemaEffects)if(fx)Destroy(fx);cinemaEffects.Clear();if(orbit)orbit.EndCinematic();if(game && game.Player){game.Player.Locked=game.Health<=0;game.Player.animationView.Play("Idle_Natural",.15f,0,true);}
         }
         void Update()
         {
@@ -44,7 +51,16 @@ namespace Sunward.Remaster
             if(Playing)
             {
                 elapsed+=Time.unscaledDeltaTime;float t=Mathf.Clamp01(elapsed/duration);
+                if(breaking)
+                {
+                    if(orbit)orbit.CinematicFrame(new Vector3(35,0,0),Mathf.Lerp(25,80,t),Mathf.Lerp(48,68,t),Mathf.Lerp(19,13,t),48);
+                    if(!shaftRevealed && elapsed>=.9f){shaftRevealed=true;LowerArena.RevealShaft();game.Audio.Cue("land");
+                        var dust=OriginalAtmosphere.Create("Cloud",null,new Vector3(35,.3f,0),0,1.7f,2,.6f,3);if(dust){var main=dust.main;main.useUnscaledTime=true;dust.Emit(28);Destroy(dust.gameObject,5);}}
+                }
+                else
+                {
                 if(orbit)orbit.CinematicFrame(victory?game.Player.transform.position+Vector3.up*.9f:Vector3.Lerp(game.Player.transform.position+Vector3.up*.9f,FestivalChallenges.Board+Vector3.up*1.8f,t*.65f),game.Player.transform.eulerAngles.y+Mathf.Lerp(-45,32,t),victory?16:22,victory?5.8f:8,42);
+                }
                 if(elapsed>=duration || game.Health<=0 || game.Player.input.Pause.WasPressedThisFrame())Cancel();
             }
             if(Dialogue)
@@ -71,14 +87,14 @@ namespace Sunward.Remaster
             if(Playing)
             {
                 if(ink){GUI.color=new Color(.03f,.02f,.01f,.85f);GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height*.055f),ink);GUI.DrawTexture(new Rect(0,Screen.height*.945f,Screen.width,Screen.height*.055f),ink);}
-                InkText.Draw(victory?"Festival blessing · +3 tokens":"Festival night · follow the spirit lights",new Rect(Screen.width*.5f-260,Screen.height*.8f,600,70),42,new Color(1,.94f,.78f,1),false);
+                InkText.Draw(breaking?"The earth yields to the sun":victory?"Festival blessing · +3 tokens":"Festival night · follow the spirit lights",new Rect(Screen.width*.5f-260,Screen.height*.8f,600,70),42,new Color(1,.94f,.78f,1),false);
             }
             if(Dialogue)
             {
-                float w=Mathf.Min(1050,Screen.width*.9f),h=Mathf.Min(350,Screen.height*.45f);var r=new Rect((Screen.width-w)*.5f,Screen.height-h-25,w,h);
+                float w=Mathf.Min(1360,Screen.width*.96f),h=Mathf.Min(460,Screen.height*.56f);var r=new Rect((Screen.width-w)*.5f,Screen.height-h-25,w,h);
                 GUI.color=new Color(1,1,1,.97f);if(bubble)GUI.DrawTexture(r,bubble);
                 string text=DialogueText();int from=Mathf.Min(page*160,text.Length),count=Mathf.Min(160,text.Length-from);string shown=text.Substring(from,count);shown=shown.Substring(0,Mathf.Min(shown.Length,Mathf.FloorToInt(dialogueTime*65)));
-                InkText.Draw(shown,new Rect(r.x+w*.19f,r.y+h*.26f,w*.66f,h*.47f),34*Mathf.Min(1,Screen.height/900f),new Color(.09f,.06f,.035f,1));
+                InkText.Draw(shown,new Rect(r.x+w*.19f,r.y+h*.26f,w*.66f,h*.47f),40*Mathf.Min(1,Screen.height/900f),new Color(.09f,.06f,.035f,1));
                 float y=r.y+h*.77f;
                 bool more=(page+1)*160<text.Length;
                 if(more){if(InkButton("E · Next",new Rect(r.x+w*.72f,y,w*.22f,45)))Advance();}

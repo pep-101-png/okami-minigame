@@ -32,7 +32,8 @@ namespace Sunward
         public Sunward.Remaster.CrimsonHelmAscension BossTransformation { get; private set; }
         public void TrackBossTransformation(Sunward.Remaster.CrimsonHelmAscension sequence){BossTransformation=sequence;}
         public void ReleaseBossTransformation(Sunward.Remaster.CrimsonHelmAscension sequence){if(BossTransformation==sequence)BossTransformation=null;}
-        public bool CinematicActive => (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing) || (Presentation && Presentation.Playing);
+        public Sunward.Remaster.HeavenlyGarden Heaven {get;private set;}
+        public bool CinematicActive => (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing) || (Presentation && Presentation.Playing) || (Heaven && Heaven.Playing);
         public bool Blocked => CinematicActive || Panel != "" || (Brush && Brush.Drawing);
         public Sunward.Remaster.CelestialBrush Brush { get; private set; }
         public int Wave { get; private set; }
@@ -71,11 +72,14 @@ namespace Sunward
                 "wisp",
                 "reed",
                 "elite"
-            }
+            },
+            new[]{"heavy","ranged","elite","reed","elite","wisp","ranged"},
+            new[]{"elite","heavy","elite","ranged","heavy","reed","ranged","elite"}
         };
         void Awake()
         {
             Save = new SaveStore();
+            var passage=GetComponent<Sunward.Remaster.HeavenlyGarden>();if(!passage)passage=gameObject.AddComponent<Sunward.Remaster.HeavenlyGarden>();passage.game=this;Heaven=passage;
             Presentation=GetComponent<Sunward.Remaster.VillagePresentation>();if(!Presentation)Presentation=gameObject.AddComponent<Sunward.Remaster.VillagePresentation>();Presentation.game=this;
             Spa=GetComponent<Sunward.Remaster.SpaRest>();if(!Spa)Spa=gameObject.AddComponent<Sunward.Remaster.SpaRest>();Spa.game=this;
             Brush=GetComponent<Sunward.Remaster.CelestialBrush>();if(!Brush)Brush=gameObject.AddComponent<Sunward.Remaster.CelestialBrush>();Brush.game=this;
@@ -207,7 +211,7 @@ namespace Sunward
                     }
                 }
 
-                Prompt = BossTrial?"CRIMSON HELM · beneath the village":"Trial "+(Profile.wins+1)+" · Wave "+(Wave+1)+" / 3";
+                Prompt = BossTrial?"CRIMSON HELM · beneath the village":"Trial "+(Profile.wins+1)+" · Wave "+(Wave+1)+" / "+waves.Length;
                 return;
             }
 
@@ -516,7 +520,7 @@ namespace Sunward
             InTrial=false;BossTrial=false;
             if(BossTransformation)BossTransformation.Cancel();
             if(Transformation)Transformation.Cancel();
-            if(Presentation)Presentation.Cancel();
+            if(Presentation)Presentation.Cancel();if(Heaven)Heaven.Cancel();
             if(Home)Home.CancelRest();
             if(Services)Services.CancelRest();
             ClearEnemies();
