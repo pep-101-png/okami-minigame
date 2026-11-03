@@ -31,7 +31,7 @@ namespace Sunward.Editor.Automation
             if (f == null) throw new NotSupportedException("Recorder member unavailable: " + name);
             f.SetValue(target,value);
         }
-        public void Start(RenderTexture texture, int fps, string outputBase, bool prefer,bool trailer=false)
+        public void Start(RenderTexture texture, int fps, string outputBase, bool prefer)
         {
             if (!prefer) { status = "disabled_by_configuration"; return; }
             var controllerType = Find("UnityEditor.Recorder.RecorderController");
@@ -48,7 +48,7 @@ namespace Sunward.Editor.Automation
                 Set(input,"OutputWidth",texture.width); Set(input,"OutputHeight",texture.height);
                 SetObject(movie,"ImageInputSettings",input);
                 if (!Set(movie,"Enabled",true) || !Set(movie,"OutputFile",outputBase) || !Set(settings,"FrameRate",fps)) throw new NotSupportedException("Recorder settings unavailable.");
-                Set(movie,"OutputFormat","MP4"); Set(movie,"CaptureAlpha",false); if(!Set(movie,"CaptureAudio",trailer) && trailer)throw new NotSupportedException("Recorder cannot configure soundtrack capture."); Set(movie,"VideoBitRateMode",trailer?"High":"Low");
+                Set(movie,"OutputFormat","MP4"); Set(movie,"CaptureAlpha",false); Set(movie,"CaptureAudio",false); Set(movie,"VideoBitRateMode","Low");
                 Set(settings,"CapFrameRate",true); Set(settings,"FrameRatePlayback","Constant");
                 settingsType.GetMethod("AddRecorderSettings").Invoke(settings,new[] { movie });
                 settingsType.GetMethod("SetRecordModeToManual").Invoke(settings,null);

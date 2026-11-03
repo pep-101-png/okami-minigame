@@ -13,8 +13,6 @@ namespace Sunward.Remaster
         Renderer[] visual;
         void Awake(){planted=transform.position;visual=GetComponentsInChildren<Renderer>();}
         public void Harvest(){Harvested=true;regrow=Time.time+180;foreach(var r in visual)r.enabled=false;}
-        public float PreviewRegrowRemaining=>Mathf.Max(0,regrow-Time.time);
-        public void RestorePreview(bool wasHarvested,float remaining){if(wasHarvested){Harvest();regrow=Time.time+remaining;}else Restore();}
         public bool Bloom(){if(!Harvested)return false;Restore();return true;}
         void Restore(){Harvested=false;transform.position=planted;foreach(var r in visual)r.enabled=true;}
         void Update(){if(Harvested && Time.time>=regrow)Restore();}

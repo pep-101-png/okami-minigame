@@ -70,8 +70,6 @@ namespace Sunward.Remaster
             carriedVisual=new GameObject("Original vegetable carried in mouth");carriedVisual.transform.SetParent(body.Head,false);carriedVisual.transform.localPosition=new Vector3(0,-.08f,.35f);
             if(!string.IsNullOrEmpty(carried.resource))carriedVisual.AddComponent<OriginalVisual>().Load(carried.resource,carried.carryOffset,Vector3.one*carried.carryScale);
         }
-        public bool Carrying=>carried!=null;
-        public void ClearPreviewCarry(){Drop();}
         void Drop(){if(carriedVisual)Destroy(carriedVisual);carriedVisual=null;carried=null;game.Notify("Produce stored in your pouch · H to eat or sell to farmer");}
         public void Eat()
         {

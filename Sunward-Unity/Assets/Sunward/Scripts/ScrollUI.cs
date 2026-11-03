@@ -115,9 +115,6 @@ namespace Sunward
 
         void OnGUI()
         {
-#if UNITY_EDITOR
-            if(Sunward.Editor.Automation.TrailerPlayback.Active)return;
-#endif
             if (!game || game.Save == null || game.CinematicActive || (game.Brush && game.Brush.Drawing))
                 return;
             if(game.Presentation && (game.Presentation.Title || game.Presentation.Dialogue))return;
@@ -235,9 +232,6 @@ namespace Sunward
                         game.Finish(false);
                     if (!game.InTrial && Button("RETURN HOME · KEEP PROGRESS", button))
                         game.ReturnHome();
-#if UNITY_EDITOR
-                    if(Button("WATCH 30-SECOND TRAILER PREVIEW",button)){game.Close();Sunward.Editor.Automation.TrailerPlayback.Begin(game,false);}
-#endif
                     Label("Quality presets change shadows, MSAA and render scale. Performance depends on your hardware.", body);
                     if (Button("QUALITY · HIGH", button))
                         Quality(true);

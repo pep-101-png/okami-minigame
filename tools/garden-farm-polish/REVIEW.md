@@ -17,13 +17,11 @@ Source baseline: `31c4e9213efb55549ac05cb2d06d26c970713fa1`, the preceding Deskt
 - New large isolated garden assembled from original grass-painted geometry, cloud dome, ponds, torii, ritual platform, shrine, vegetation and three original human skins. Two visitors use recovered original walking clips. Keeper explains established Shiranui/Nagi/Orochi lore and Sunward's new quest. Safe floor probing, local movement boundaries, river recovery exclusion and a return portal are implemented.
 - Altar growth requirements: level 15 and thirty total upgrade ranks. The future guardian boss is explicitly pending and cannot be falsely completed. P remains available as the user requested for testing. Existing saves and level/stamina rules are preserved.
 
-## Trailer — not an exported or verified video
+## Trailer correction — feature removed
 
-An Editor-only 30-second sequence drives the real player input/actions: village day walk, farm dig, night festival, upper combat, weapon/strength purchase, Shiranui transformation, final-form boss combat/victory and original howl beneath an original moon mesh. Preview is available in Pause or Sunward > Trailer > Preview 30 seconds. Recording requests 3840×2160, sixty fps, 1,800 frames with high-quality MP4/audio through the existing capability-checked Unity Recorder adapter. It explicitly fails if Recorder/audio capture is unavailable, rather than reporting a file as completed.
+The user requested a standalone video to watch and share. The previously added in-game preview and Editor trailer menu were not that request and have been removed. Installed script filenames are retained only as inert comment-only replacements so the Assets ZIP overwrites and neutralizes them without asking the user to delete files. The broken input-property invocation is therefore absent.
 
-Preview snapshots the profile/player/crops, suppresses disk save writes, and restores progress and input/camera settings. It refuses an active trial, festival, carrying/resting or cinematic activity. It does not alter a current game save to stage trailer combat.
-
-There is **no Unity executable in this environment**. No MP4 has been rendered, exported, watched or probed, and no claim of AAA visual quality or smooth 4K/60 playback is made. Actual recording requires Unity and Unity Recorder on the rendering machine. No Recorder package was silently added to the working project.
+The pause/HUD references and trailer-only save/crop/carry/Recorder adapter changes were removed. The preceding gameplay changes remain intact. No trailer MP4 has been produced. This environment has no Unity renderer; that requested video remains unfinished.
 
 ## Validation
 
