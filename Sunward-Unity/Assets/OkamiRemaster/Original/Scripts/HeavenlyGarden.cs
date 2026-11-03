@@ -11,6 +11,7 @@ namespace Sunward.Remaster
         public static readonly Vector3 Centre=new Vector3(230,70,0);
         public static readonly Vector3 Altar=Centre+new Vector3(0,0,22),Return=Centre+new Vector3(0,0,-25);
         public bool Playing {get;private set;}
+        bool keeperConversation;float keeperCooldown;
         float fallTime;Vector3 fallStart;OrbitCamera orbit;GameObject garden,river;bool visible;
         public static bool Inside(Vector3 p)=>p.y>58 && p.y<100 && Mathf.Abs(p.x-Centre.x)<49 && Mathf.Abs(p.z)<47;
         public static bool RiverLip(Vector3 p)=>p.y>-2 && p.y<2 && p.z>WaterfallLip-.75f && p.z<WaterfallLip+1 && Mathf.Abs(p.x-Valley.RiverX(-p.z))<2.8f;
@@ -65,11 +66,18 @@ namespace Sunward.Remaster
             foreach(var item in layout.items)if(item.kind=="ground")
             {
                 var at=item.position;
-                if(item.resource!="Okami/celestial-meadow" && item.resource!="Okami/celestial-terrace" && Height(Centre+at,out var baseY))at.y+=baseY-Centre.y;
+                if(item.resource!="Okami/celestial-meadow" && item.resource!="Okami/celestial-terrace" && Height(Centre+at,out var baseY))
+                {
+                    if(item.resource=="Okami/vt0a" && item.size.y>.5f)
+                    {foreach(var d in new[]{new Vector3(-4,0,-4),new Vector3(4,0,-4),new Vector3(-4,0,4),new Vector3(4,0,4)})if(Height(Centre+at+d,out var edge))baseY=Mathf.Min(baseY,edge);}
+                    at.y+=baseY-Centre.y;
+                }
                 var ground=VillageFestival.Place(garden.transform,item.resource,at,item.size,new Vector3(0,item.yaw,0));
                 if(!ground)continue;
                 foreach(var renderer in ground.GetComponentsInChildren<SkinnedMeshRenderer>())
-                {var material=new Material(renderer.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/CelestialGround").shader;renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
+                {var material=new Material(renderer.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/CelestialGround").shader;
+                bool meadow=item.resource=="Okami/celestial-meadow" || item.resource=="Okami/celestial-terrace";
+                material.SetFloat("_SurfaceKind",meadow?1:0);material.SetFloat("_Cull",meadow?0:2);material.SetTexture("_GroundPaint",Resources.Load<Texture2D>("Okami/farm-earth/Grass"));material.SetTexture("_CloudPaint",Resources.Load<Texture2D>("Okami/Effects/Cloud"));renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
                 renderer.gameObject.layer=6;renderer.gameObject.name="Heaven garden ground · original mesh";var collider=renderer.gameObject.AddComponent<MeshCollider>();collider.sharedMesh=renderer.sharedMesh;}
                 Physics.SyncTransforms();
             }
@@ -77,9 +85,13 @@ namespace Sunward.Remaster
             Physics.SyncTransforms();
             foreach(var item in layout.items)if(item.kind!="ground")
             {
-                var p=item.position;if(item.kind!="cloud" && Height(Centre+p,out var h))p.y=h-Centre.y+.025f;
+                var p=item.position;if(item.kind!="cloud" && item.kind!="cloudsea" && Height(Centre+p,out var h))p.y=h-Centre.y+.025f;
                 var prop=VillageFestival.Place(garden.transform,item.resource,p,item.size,new Vector3(0,item.yaw,0));
                 if(!prop)continue;
+                if(item.kind=="cloudsea")foreach(var renderer in prop.GetComponentsInChildren<SkinnedMeshRenderer>())
+                {
+                    var material=new Material(renderer.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/CelestialGround").shader;material.SetFloat("_SurfaceKind",2);material.SetFloat("_Cull",0);material.SetTexture("_CloudPaint",Resources.Load<Texture2D>("Okami/Effects/Cloud"));renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
+                }
                 if(item.kind=="tree")prop.AddComponent<OriginalBillboard>();
                 if(item.kind=="cloud")foreach(var renderer in prop.GetComponentsInChildren<SkinnedMeshRenderer>())
                 {
@@ -117,6 +129,12 @@ namespace Sunward.Remaster
                 beam.startColor=new Color(1.5f,1.3f,1.7f,.12f);beam.endColor=new Color(1.5f,1.6f,2,.34f);
                 beam.sharedMaterial=new Material(Resources.Load<Material>("Okami/Effects/SpiritRadiance")){mainTexture=Resources.Load<Texture2D>("Okami/Effects/SpiritGlow")};ray.AddComponent<OriginalParticleMaterial>();
             }
+            foreach(var p in new[]{new Vector3(-4,0,17.3f),new Vector3(4,0,17.3f),new Vector3(-4,0,23),new Vector3(4,0,23)})
+            {
+                var at=p;if(Height(Centre+p,out var h))at.y=h-Centre.y+1.34f;
+                OriginalAtmosphere.Create("Flame",garden.transform,at,2,.16f,1.2f,.04f,.02f);
+                OriginalAtmosphere.Create("SpiritGlow",garden.transform,at,1,.23f,2,.02f,.05f);
+            }
             SpawnVisitor("garden-hm50","hm05_000",new Vector3(0,1,17),180);
             SpawnVisitor("garden-hm40","hm95_000",new Vector3(18,1,-12),240);
             SpawnVisitor("garden-hm06","hm05_000",new Vector3(-23,1,7),90);
@@ -126,6 +144,12 @@ namespace Sunward.Remaster
             var person=new GameObject("Original celestial visitor · "+resource);person.SetActive(false);person.transform.SetParent(garden.transform,false);var world=garden.transform.TransformPoint(p);if(Height(world,out var y))p.y=y-Centre.y+.025f;person.transform.localPosition=p;person.transform.rotation=Quaternion.Euler(0,yaw,0);
             var actor=person.AddComponent<OriginalActor>();actor.game=game;actor.resource="Okami/"+resource;actor.idle=actor.windup=actor.strike=actor.recover=actor.death=idle;actor.walk=actor.run=resource=="garden-hm40"?"hm95_010":"hm05_010";actor.modelScale=1.25f;person.SetActive(true);
             if(resource!="garden-hm50"){var stroll=person.AddComponent<GardenVisitor>();stroll.game=game;stroll.anchor=person.transform.position;stroll.phase=yaw;}
+        }
+        public bool OwnsRenderer(Renderer renderer)
+        {
+            if(!renderer)return false;
+            return (garden && renderer.transform.IsChildOf(garden.transform)) ||
+                (game && game.Player && renderer.transform.IsChildOf(game.Player.transform)) || Inside(renderer.bounds.center);
         }
         void BeginFall()
         {
@@ -148,9 +172,15 @@ namespace Sunward.Remaster
                 var p=fallStart+new Vector3(0,-6.7f*t*t,5.2f*t);game.Player.Teleport(p);
                 if(orbit)orbit.CinematicFrame(p+Vector3.up,Mathf.Lerp(110,150,t),18,10,48);
                 if(t>=1 || game.Health<=0)
-                {Cancel();if(game.Health>0){garden.SetActive(true);Physics.SyncTransforms();var at=Return+Vector3.forward*5;Height(at,out var y);at.y=y+.05f;game.Player.Teleport(at);game.Notify("The river opens into a garden above the clouds · follow the altar lights");if(orbit)orbit.SnapFocus();}}
+                {Cancel();if(game.Health>0){garden.SetActive(true);Physics.SyncTransforms();var at=Return+Vector3.forward*5;Height(at,out var y);at.y=y+.05f;game.Player.Teleport(at);visible=true;Shader.SetGlobalFloat("_SunwardHeaven",1);game.Notify("The river opens into a garden above the clouds · follow the altar lights");if(orbit)orbit.SnapFocus();}}
                 return;
             }
+            if(keeperConversation)
+            {
+                if(game.Panel=="dialogue")return;
+                keeperConversation=false;keeperCooldown=.4f;return;
+            }
+            keeperCooldown=Mathf.Max(0,keeperCooldown-Time.unscaledDeltaTime);
             if(game.Blocked || game.InTrial || game.Health<=0)return;
             var player=game.Player.transform.position;
             if(!inside){if(RiverLip(player))BeginFall();else if(player.z>28 && Mathf.Abs(player.x-Valley.RiverX(-player.z))<4)game.WorldPrompt("The river falls into a spirit passage ahead");return;}
@@ -160,13 +190,14 @@ namespace Sunward.Remaster
             if(game.Player.input.Interact.WasPressedThisFrame())
             {
                 if(nearReturn)game.ReturnHome();
-                else if(nearKeeper)
+                else if(nearKeeper && keeperCooldown<=0)
                 {
+                    keeperConversation=true;
                     game.ShowDialogue("Amaterasu, the Celestial Plain is the gods' home. A century ago, the white wolf Shiranui stood beside Nagi against Orochi. Your journey carries that light onward. This garden and its trial are Sunward's own story.\n\nTo awaken the altar's trial: reach level 15 (now "+ProgressionRules.Level(game.Profile)+"), earn 30 upgrade ranks (now "+UpgradeRanks(game.Profile)+"), and defeat the guardian. That future boss has not yet been added, so the quest cannot be completed. P remains a testing shortcut.");
                 }
             }
         }
-        void OnDisable(){Cancel();Shader.SetGlobalFloat("_SunwardHeaven",0);}
+        void OnDisable(){if(garden)garden.SetActive(false);visible=false;keeperConversation=false;keeperCooldown=0;Cancel();Shader.SetGlobalFloat("_SunwardHeaven",0);}
         void OnDestroy(){if(garden)Destroy(garden);if(river)Destroy(river);}
     }
 }

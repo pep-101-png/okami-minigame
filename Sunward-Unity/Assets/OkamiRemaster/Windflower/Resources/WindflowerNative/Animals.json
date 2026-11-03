@@ -321,7 +321,7 @@
     },
     {
       "asset": "boar",
-      "name": "Windflower boar \u00b7 Woodland boar",
+      "name": "Windflower boar \u00b7 enclosed boar paddock",
       "position": {
         "x": 21,
         "y": 0.014390069991350174,
@@ -333,16 +333,16 @@
           "y": 32
         },
         {
-          "x": 21.7,
+          "x": 19.8,
           "y": 32
         },
         {
-          "x": 21.7,
-          "y": 32.7
+          "x": 19.8,
+          "y": 33.8
         },
         {
           "x": 21,
-          "y": 32.7
+          "y": 33.8
         }
       ],
       "yaw": 0,
@@ -350,7 +350,7 @@
     },
     {
       "asset": "piglet",
-      "name": "Windflower piglet \u00b7 Striped boar piglet",
+      "name": "Windflower piglet \u00b7 enclosed boar paddock",
       "position": {
         "x": 21.5,
         "y": 0.1253691166639328,
@@ -362,16 +362,16 @@
           "y": 29
         },
         {
-          "x": 22.15,
+          "x": 19.7,
           "y": 29
         },
         {
-          "x": 22.15,
-          "y": 29.65
+          "x": 19.7,
+          "y": 30.2
         },
         {
           "x": 21.5,
-          "y": 29.65
+          "y": 30.2
         }
       ],
       "yaw": 30,

@@ -49,5 +49,6 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/HeavenlyGarden.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/WeaponLore.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/GardenVisitor.cs"/>
+<Compile Include="HeavenFollowupTests.cs"/>
 </ItemGroup>
 </Project>

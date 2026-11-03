@@ -173,6 +173,11 @@ s+='\nnamespace UnityEngine{public class MeshCollider:Collider{public Mesh share
 s=s.replace('public class ValleyData{', 'public class ValleyData{public BoxData[] boxes=System.Array.Empty<BoxData>();')
 s+='\nnamespace Sunward{public class BoxData{public float x,z,halfX,halfZ;}}'
 s=s.replace('public class Material:Object{','public class Material:Object{public void SetFloat(string n,float v){}')
+s=s.replace('public Transform parent;', 'public Transform parent;public bool IsChildOf(Transform root){for(Transform t=this;t!=null;t=t.parent)if(System.Object.ReferenceEquals(t,root))return true;return false;}')
+s=s.replace('public class Renderer:Object{', 'public class Renderer:Object{public Bounds bounds;')
+s=s.replace('public static T[] FindObjectsByType<T>(FindObjectsSortMode mode)=>System.Array.Empty<T>();', 'public static T[] FindObjectsByType<T>(FindObjectsSortMode mode)=>SceneQuery.Find<T>();')
+s=s.replace('public static T[] FindObjectsByType<T>(FindObjectsInactive inactive,FindObjectsSortMode mode)=>System.Array.Empty<T>();','public static T[] FindObjectsByType<T>(FindObjectsInactive inactive,FindObjectsSortMode mode)=>SceneQuery.Find<T>();')
+s+='\nnamespace UnityEngine{public static class SceneQuery{public static Object[] objects=System.Array.Empty<Object>();public static T[] Find<T>(){var result=new System.Collections.Generic.List<T>();foreach(var o in objects)if(o is T t)result.Add(t);return result.ToArray();}}}'
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:

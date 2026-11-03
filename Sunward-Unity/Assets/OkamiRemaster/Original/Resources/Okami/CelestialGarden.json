@@ -5,6 +5,21 @@
       "resource": "Okami/celestial-meadow",
       "position": {
         "x": 0,
+        "y": -4,
+        "z": 0
+      },
+      "size": {
+        "x": 450,
+        "y": 0.1,
+        "z": 450
+      },
+      "yaw": 0,
+      "kind": "cloudsea"
+    },
+    {
+      "resource": "Okami/celestial-meadow",
+      "position": {
+        "x": 0,
         "y": -0.15,
         "z": 0
       },
@@ -45,21 +60,6 @@
       },
       "yaw": 0,
       "kind": "prop"
-    },
-    {
-      "resource": "Okami/celestial-bridge",
-      "position": {
-        "x": 0,
-        "y": 0.035,
-        "z": 20
-      },
-      "size": {
-        "x": 14,
-        "y": 3,
-        "z": 7
-      },
-      "yaw": 90,
-      "kind": "ground"
     },
     {
       "resource": "Okami/vt35",
@@ -135,36 +135,6 @@
       },
       "yaw": 95,
       "kind": "pond"
-    },
-    {
-      "resource": "Okami/heaven-cloud",
-      "position": {
-        "x": 0,
-        "y": -18,
-        "z": 0
-      },
-      "size": {
-        "x": 160,
-        "y": 14,
-        "z": 160
-      },
-      "yaw": 180,
-      "kind": "cloud"
-    },
-    {
-      "resource": "Okami/heaven-cloud",
-      "position": {
-        "x": 0,
-        "y": -24,
-        "z": 0
-      },
-      "size": {
-        "x": 210,
-        "y": 18,
-        "z": 210
-      },
-      "yaw": 90,
-      "kind": "cloud"
     },
     {
       "resource": "Okami/vtba",
@@ -3094,6 +3064,21 @@
     {
       "resource": "Okami/vt0a",
       "position": {
+        "x": 0,
+        "y": -0.18,
+        "z": 20
+      },
+      "size": {
+        "x": 10,
+        "y": 0.85,
+        "z": 10
+      },
+      "yaw": 0,
+      "kind": "ground"
+    },
+    {
+      "resource": "Okami/vt0a",
+      "position": {
         "x": -2.2105558166613806,
         "y": 0.035,
         "z": -24
@@ -5384,6 +5369,216 @@
         "z": 3
       },
       "yaw": 0,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/celestial-gate",
+      "position": {
+        "x": -17,
+        "y": 0,
+        "z": -8
+      },
+      "size": {
+        "x": 5.5,
+        "y": 4.6,
+        "z": 1.2
+      },
+      "yaw": 90,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/celestial-gate",
+      "position": {
+        "x": 17,
+        "y": 0,
+        "z": -8
+      },
+      "size": {
+        "x": 5.5,
+        "y": 4.6,
+        "z": 1.2
+      },
+      "yaw": -90,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt67",
+      "position": {
+        "x": -4,
+        "y": 0,
+        "z": 17.3
+      },
+      "size": {
+        "x": 0.35,
+        "y": 1.3,
+        "z": 0.35
+      },
+      "yaw": 0,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt67",
+      "position": {
+        "x": 4,
+        "y": 0,
+        "z": 17.3
+      },
+      "size": {
+        "x": 0.35,
+        "y": 1.3,
+        "z": 0.35
+      },
+      "yaw": 0,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt67",
+      "position": {
+        "x": -4,
+        "y": 0,
+        "z": 23
+      },
+      "size": {
+        "x": 0.35,
+        "y": 1.3,
+        "z": 0.35
+      },
+      "yaw": 0,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt67",
+      "position": {
+        "x": 4,
+        "y": 0,
+        "z": 23
+      },
+      "size": {
+        "x": 0.35,
+        "y": 1.3,
+        "z": 0.35
+      },
+      "yaw": 0,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt4a",
+      "position": {
+        "x": -9.5,
+        "y": 0,
+        "z": 22
+      },
+      "size": {
+        "x": 2.6,
+        "y": 3,
+        "z": 1.1
+      },
+      "yaw": 180,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt4a",
+      "position": {
+        "x": 9.5,
+        "y": 0,
+        "z": 22
+      },
+      "size": {
+        "x": 2.6,
+        "y": 3,
+        "z": 1.1
+      },
+      "yaw": 0,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt22",
+      "position": {
+        "x": -7,
+        "y": 0,
+        "z": -13
+      },
+      "size": {
+        "x": 0.7,
+        "y": 2.8,
+        "z": 0.7
+      },
+      "yaw": 194,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt22",
+      "position": {
+        "x": 7,
+        "y": 0,
+        "z": -13
+      },
+      "size": {
+        "x": 0.7,
+        "y": 2.8,
+        "z": 0.7
+      },
+      "yaw": 292,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt22",
+      "position": {
+        "x": -7,
+        "y": 0,
+        "z": 1
+      },
+      "size": {
+        "x": 0.7,
+        "y": 2.8,
+        "z": 0.7
+      },
+      "yaw": 320,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt22",
+      "position": {
+        "x": 7,
+        "y": 0,
+        "z": 1
+      },
+      "size": {
+        "x": 0.7,
+        "y": 2.8,
+        "z": 0.7
+      },
+      "yaw": 58,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt22",
+      "position": {
+        "x": -7,
+        "y": 0,
+        "z": 13
+      },
+      "size": {
+        "x": 0.7,
+        "y": 2.8,
+        "z": 0.7
+      },
+      "yaw": 68,
+      "kind": "prop"
+    },
+    {
+      "resource": "Okami/vt22",
+      "position": {
+        "x": 7,
+        "y": 0,
+        "z": 13
+      },
+      "size": {
+        "x": 0.7,
+        "y": 2.8,
+        "z": 0.7
+      },
+      "yaw": 166,
       "kind": "prop"
     }
   ]

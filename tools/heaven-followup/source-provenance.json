@@ -1,0 +1,28 @@
+[
+  {
+    "resource": "vt22",
+    "sourceSHA256": "92a665f45d536b35becb38eced831e2b6cff3633b92de0b900a985c9616b5007",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vt4a",
+    "sourceSHA256": "db4a45c1c1c4857b801632ede2305ad9ebd6ef0e36c1aab1f23160bfc699ff1f",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vt67",
+    "sourceSHA256": "532f69e7aff5c0757d66c74bd884c0097e833076e6899e3449afcbdec18ac668",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "vt0a",
+    "sourceSHA256": "ac3c450b6ee45f96c9727a348e4fb87e9aa7c9e199da7ecc1d0a59371c8dc93e",
+    "sourceUnits": "Metres; native X reflected, +Z preserved"
+  },
+  {
+    "resource": "celestial-meadow",
+    "sourceSHA256": "40b1f258e8c2ae94afb22316d2d8457a077aa395215559c008e72669c4dfdf28",
+    "sourceName": "r108/_LY04__Sibati_after",
+    "sourceParts": null
+  }
+]

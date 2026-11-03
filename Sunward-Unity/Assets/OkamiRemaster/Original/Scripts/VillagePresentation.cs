@@ -101,7 +101,7 @@ namespace Sunward.Remaster
                 else if(game.Panel=="elder"){if(InkButton("Yes · tea sounds lovely",new Rect(r.x+w*.15f,y,w*.5f,45)))game.GetComponent<VillageTeaVisit>().Invite();}
                 else if(game.Panel=="tea")
                 {if(InkButton("Another story",new Rect(r.x+w*.14f,y,w*.29f,45)))game.GetComponent<VillageTeaVisit>().NextStory();if(InkButton("Sit for tea",new Rect(r.x+w*.47f,y,w*.23f,45)))game.GetComponent<VillageTeaVisit>().SitForTea();}
-                if(!more && InkButton(game.Panel=="dialogue"?"E · Continue":"Leave",new Rect(r.x+w*.73f,y,w*.22f,45))){if(game.Panel=="dialogue")Advance();else game.Close();}
+                if(!more && InkButton(game.Panel=="dialogue"?"E · Finish":"Leave",new Rect(r.x+w*.73f,y,w*.22f,45))){if(game.Panel=="dialogue")Advance();else game.Close();}
             }
             GUI.color=previous;GUI.matrix=previousMatrix;
         }
