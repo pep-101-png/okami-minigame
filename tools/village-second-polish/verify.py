@@ -12,8 +12,8 @@ clip=D/'NativeAudio/player-pl00-41-bark.wav';old=subprocess.check_output(['git',
 if not old.startswith(b'version https://git-lfs'):check(old==clip.read_bytes(),'Selected bark was altered')
 with wave.open(str(clip)) as f:
  check(f.getsampwidth()==2,'Unexpected bark encoding');v=np.frombuffer(f.readframes(f.getnframes()),'<i2').astype(float)/32768;check(abs(v).max()*.75*.6<1,'New bark gain clips the original waveform')
-festival=text(S/'FestivalChallenges.cs');check('kind==1?55:90' in festival,'Race time was extended again')
-ui=text(A/'Sunward/Scripts/ScrollUI.cs');check('START SPIRIT RUN · 55 seconds' in ui and '95 seconds' not in ui,'Race display disagrees with timing')
+festival=text(S/'FestivalChallenges.cs');check('kind==1?50:90' in festival,'Race time was extended again')
+ui=text(A/'Sunward/Scripts/ScrollUI.cs');check('START SPIRIT RUN · 50 seconds' in ui and '95 seconds' not in ui,'Race display disagrees with timing')
 check('InkText.MeasureHeight' in ui and 'panel.width-108' in ui,'Menu layout ignores native glyph widths or scroll edges');ink=text(S/'InkText.cs');check('GUI.BeginGroup(area)' in ink and 'GUI.EndGroup()' in ink,'Lettering is not clipped')
 check('Bar(260,' in ui and '272, 142' in ui,'Status bar exceeds available scroll space')
 sys.path.insert(0,str(R/'tools/interior-village-repairs'));from verify import blocks
@@ -33,7 +33,7 @@ for resource in ['farm-pitched-roof','farm-post','spa-hm16']:
   if p.suffix!='.meta':check(Path(str(p)+'.meta').exists(),'Missing Unity metadata '+str(p))
 from PIL import Image
 for i in range(0x20,0x25):
- p=D/'WeaponPortraits'/f'wp{i:02x}.png';im=Image.open(p).convert('RGBA');check(im.size==(400,270) and len(set(im.getdata()))>50,'Empty reflector catalogue image');check(p.stat().st_size>20000,'Reflector portrait still an edge/effect sliver')
+ p=D/'WeaponPortraits'/f'wp{i:02x}.png';im=Image.open(p).convert('RGBA');check(im.size==(1024,1024) and len(set(im.getdata()))>50,'Empty reflector catalogue image');check(p.stat().st_size>20000,'Reflector portrait still an edge/effect sliver')
 water=text(S/'HeavenlyGarden.cs');check('WaterfallLip=36' in water and 'p.z>WaterfallLip-.75f' in water,'Portal remains beyond village boundary');check('-37.445568f' in water and '_FlowDirection' in water,'Waterfall still uses guessed reverse direction')
 valley=json.loads((A/'Sunward/Data/Valley.json').read_text());check(36-.75<valley['world']['bounds']['maxZ']+1.5,'Portal unreachable')
 align=json.loads(Path(__file__).with_name('waterfall-alignment.json').read_text());check(abs(align['flowAfterRotationXZ'][0])<1e-5 and align['flowAfterRotationXZ'][1]>1,'Waterfall falls inland')

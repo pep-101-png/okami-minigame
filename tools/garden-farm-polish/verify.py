@@ -26,7 +26,7 @@ from PIL import Image
 source=Image.open(res/'UI/SystemScroll.png').convert('RGBA')
 for n,box in [('MenuScrollBody',(256,68,512,452)),('MenuScrollRoll',(16,10,116,502))]:check(np.array_equal(np.array(Image.open(res/'UI'/(n+'.png')).convert('RGBA')),np.array(source.crop(box))),'Menu art is not the original atlas crop')
 for i in range(0x20,0x2f):
- p=res/'WeaponPortraits'/f'wp{i:02x}.png';check(p.exists() and Image.open(p).size==(400,270),'Missing catalogue portrait '+str(i))
+ p=res/'WeaponPortraits'/f'wp{i:02x}.png';check(p.exists() and Image.open(p).size==(1024,1024),'Missing catalogue portrait '+str(i))
 for name in ['FarmEarthBlend','FallingWater']:
  p=res/'Effects'/(name+'.mat');check(p.exists() and 'NativeFormatImporter:' in Path(str(p)+'.meta').read_text(),'Runtime shader not included through a valid material')
 for name in ['OriginalFarmEarth','OriginalFallingWater']:

@@ -140,7 +140,7 @@ namespace Sunward.Remaster
         void Spawn(Placement p)
         {
             AnimalAsset asset;if(!assets.TryGetValue(p.asset,out asset))throw new InvalidDataException("Unknown farm animal "+p.asset);
-            if (!Clear(p.position, asset.radius, true))
+            if (!FindSpawn(p,asset.radius))
             {
                 Debug.LogWarning("Skipped blocked animal spawn: " + p.name + ". The complete painted body needs a clear footprint.", this);
                 return;
@@ -158,6 +158,25 @@ namespace Sunward.Remaster
             // Ambient actors do not add solid obstacles to existing NPC/player routes.
             Vector3 ground = root.transform.position; ground.y = game.valley.Height(ground); root.transform.position = ground;
             actors.Add(a);ApplyPose(a);
+        }
+        bool FindSpawn(Placement placement,float radius)
+        {
+            if(Clear(placement.position,radius,true))return true;
+            // Pen edits can invalidate an old coordinate. Search within that animal's
+            // own yard rather than silently dropping it or moving it into another pen.
+            Vector2 lo,hi;
+            switch(placement.asset)
+            {
+                case "rooster":lo=new Vector2(45,29);hi=new Vector2(50,35.5f);break;
+                case "cow":lo=new Vector2(24,28);hi=new Vector2(35,35);break;
+                case "pig":lo=new Vector2(37,28);hi=new Vector2(43,35);break;
+                case "rabbit":case "panda-rabbit":lo=new Vector2(51,28.5f);hi=new Vector2(57,34);break;
+                default:return false;
+            }
+            for(float z=lo.y+radius+.2f;z<hi.y-radius-.2f;z+=.55f)
+                for(float x=lo.x+radius+.2f;x<hi.x-radius-.2f;x+=.55f)
+                {var p=new Vector3(x,game.valley.Height(new Vector3(x,0,z)),z);if(Clear(p,radius,true)){placement.position=p;return true;}}
+            return false;
         }
         bool Clear(Vector3 p, float radius, bool otherAnimals, Actor ignore = null)
         {

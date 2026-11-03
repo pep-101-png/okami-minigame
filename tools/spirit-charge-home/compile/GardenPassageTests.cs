@@ -38,6 +38,7 @@ public static class GardenPassageTests
         for(int i=0;i<route.Length-1;i++){g.Player.transform.position=route[i];Call(race,"Update");Check(race.Active,"Race completed before all thirteen checkpoints");}
         g.Player.transform.position=route[route.Length-1];Call(race,"Update");Check(!race.Active && g.Profile.festivalTokens==3,"Thirteen checkpoints did not produce exactly one reward");
         Check(FestivalChallenges.RewardCost(0)==9 && FestivalChallenges.RewardCost(1)==12 && FestivalChallenges.RewardCost(2)==15,"Reward prices failed to increase");
+        race.Begin(1);g.Player.transform.position=new Vector3(30,0,0);Time.deltaTime=49.9f;Call(race,"Update");Check(race.Active,"Race ends before fifty seconds");Time.deltaTime=.2f;Call(race,"Update");Check(!race.Active && g.Profile.festivalTokens==3,"Race lasts longer than fifty seconds or rewards an unfinished run");
         Console.WriteLine("PASS "+checks+" garden boundary/altar progression, cinematic shaft timing/skip and thirteen-checkpoint race contracts; engine doubles");
     }
 }

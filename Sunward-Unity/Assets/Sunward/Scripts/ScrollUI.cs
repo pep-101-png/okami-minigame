@@ -260,8 +260,8 @@ namespace Sunward
                     var festival=game.GetComponent<Sunward.Remaster.FestivalChallenges>();
                     Label("FESTIVAL NIGHT · "+game.Profile.festivalTokens+" tokens",title);
                     Label("Sleep in Ammy’s bed to reach night. Optional games award festival tokens; your arena progress is unchanged.",small);
-                    Label(festival.Active?festival.Status:"Spirit run: collect thirteen floating spirit lights in order within 55 seconds. Harvest relay: dig up three different vegetables, then give three to the farmer within 90 seconds. Each win awards 3 tokens.",body);
-                    if(!festival.Active){if(Button("START SPIRIT RUN · 55 seconds",button))festival.Begin(1);if(Button("START HARVEST RELAY · 90 seconds",button))festival.Begin(2);}
+                    Label(festival.Active?festival.Status:"Spirit run: collect thirteen floating spirit lights in order within 50 seconds. Harvest relay: dig up three different vegetables, then give three to the farmer within 90 seconds. Each win awards 3 tokens.",body);
+                    if(!festival.Active){if(Button("START SPIRIT RUN · 50 seconds",button))festival.Begin(1);if(Button("START HARVEST RELAY · 90 seconds",button))festival.Begin(2);}
                     else if(Button("CANCEL CHALLENGE",button))festival.Cancel();
                     Label("Home decorations · permanent rewards placed inside Ammy’s house",body);
                     for(int reward=0;reward<3;reward++)
@@ -331,7 +331,7 @@ namespace Sunward
             weaponPage=Mathf.Clamp(weaponPage,0,catalogue.Length-1);var entry=catalogue[weaponPage];
             Label((weaponPage+1)+" / "+catalogue.Length+" · "+entry.title,title);
             var portrait=Resources.Load<Texture2D>("Okami/WeaponPortraits/"+entry.resource);
-            if(portrait){var image=GUILayoutUtility.GetRect(contentWidth,210);GUI.DrawTexture(image,portrait,ScaleMode.ScaleToFit);}
+            if(portrait){var image=GUILayoutUtility.GetRect(contentWidth,300);GUI.DrawTexture(image,portrait,ScaleMode.ScaleToFit);}
             Label(entry.family.ToUpperInvariant()+" · "+entry.cost+" coins",body);
             Label(Sunward.Remaster.WeaponLore.Description(entry),body);
             Label(Sunward.Remaster.WeaponLore.Lore(entry),small);
