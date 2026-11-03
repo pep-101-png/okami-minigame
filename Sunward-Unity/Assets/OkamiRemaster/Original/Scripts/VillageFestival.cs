@@ -66,9 +66,10 @@ namespace Sunward.Remaster
         void Update(){if(!game)return;blend=Mathf.MoveTowards(blend,Night?1:0,Time.unscaledDeltaTime/.9f);Apply();}
         void Apply()
         {
-            Shader.SetGlobalFloat("_SunwardNight",blend);
-            if(sun){sun.intensity=Mathf.Lerp(sunIntensity,.12f,blend);sun.color=Color.Lerp(sunColor,new Color(.45f,.58f,1),blend);sun.transform.rotation=Quaternion.Slerp(sunRotation,Quaternion.Euler(32,-30,0),blend);}
-            RenderSettings.fogColor=Color.Lerp(fog,new Color(.035f,.055f,.11f),blend);RenderSettings.ambientLight=Color.Lerp(ambient,new Color(.10f,.14f,.24f),blend);
+            float effective=game && HeavenlyGarden.Inside(game.Player.transform.position)?0:blend;
+            Shader.SetGlobalFloat("_SunwardNight",effective);
+            if(sun){sun.intensity=Mathf.Lerp(sunIntensity,.12f,effective);sun.color=Color.Lerp(sunColor,new Color(.45f,.58f,1),effective);sun.transform.rotation=Quaternion.Slerp(sunRotation,Quaternion.Euler(32,-30,0),effective);}
+            RenderSettings.fogColor=Color.Lerp(fog,new Color(.035f,.055f,.11f),effective);RenderSettings.ambientLight=Color.Lerp(ambient,new Color(.10f,.14f,.24f),effective);
             if(festival)festival.SetActive(true);foreach(var lamp in lamps)if(lamp)lamp.intensity=18*blend;
         }
         void OnDestroy()

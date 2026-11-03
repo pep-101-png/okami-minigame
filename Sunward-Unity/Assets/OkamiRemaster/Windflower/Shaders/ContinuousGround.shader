@@ -49,6 +49,8 @@ Shader "Sunward/Recovered Continuous Ground"
    half4 Frag(V i):SV_Target
    {
     UNITY_SETUP_INSTANCE_ID(i);
+    // River-mouth chasm: retain both banks and expose the original waterfall below.
+    if(i.world.z>39.25 && abs(i.world.x+21.95368)<3.3)clip(-1);
     float2 uv=i.world.xz;
     // Full paintings, mirrored at their boundaries by the import sampler.
     // No atlas cells, tiny per-metre repeats, old wash grid or synthetic noise.

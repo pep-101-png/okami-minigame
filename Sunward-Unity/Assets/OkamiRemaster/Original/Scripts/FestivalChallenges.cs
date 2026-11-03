@@ -13,10 +13,11 @@ namespace Sunward.Remaster
         readonly HashSet<int> freshCrops=new HashSet<int>();
         readonly List<GameObject> checkpoints=new List<GameObject>();
         GameObject rewards;
-        static readonly Vector3[] Route={new Vector3(0,0,-10),new Vector3(2,0,-2),new Vector3(0,0,10),new Vector3(11,0,20),new Vector3(19,0,24),new Vector3(35,0,24)};
+        static readonly Vector3[] Route={new Vector3(0,0,-10),new Vector3(2,0,-2),new Vector3(0,0,10),new Vector3(11,0,20),new Vector3(19,0,24),new Vector3(35,0,24),new Vector3(44,0,26),new Vector3(54,0,27),new Vector3(42,0,37),new Vector3(27,0,27),new Vector3(16,0,11),new Vector3(5,0,-2),new Vector3(3.3f,0,-9)};
         static readonly string[] RewardResources={"Okami/vt99","Okami/vt77","Okami/vt55"};
+        public static int RewardCost(int index)=>index==0?9:index==1?12:15;
         public static string RewardName(int index)=>index==0?"Decorative fan":index==1?"Beckoning cat":"Flower vase";
-        public string Status=>mode==1?"SPIRIT RUN · "+checkpoint+" / 6 · "+Mathf.CeilToInt(remaining)+"s":mode==2?"HARVEST RELAY · dug "+freshCrops.Count+" / 3 · delivered "+delivered+" / 3 · "+Mathf.CeilToInt(remaining)+"s":"Festival challenges · earn tokens at night";
+        public string Status=>mode==1?"SPIRIT RUN · "+checkpoint+" / "+Route.Length+" · "+Mathf.CeilToInt(remaining)+"s":mode==2?"HARVEST RELAY · dug "+freshCrops.Count+" / 3 · delivered "+delivered+" / 3 · "+Mathf.CeilToInt(remaining)+"s":"Festival challenges · earn tokens at night";
         void Start()
         {
             if(!game)game=GetComponent<GameFlow>();
@@ -32,7 +33,7 @@ namespace Sunward.Remaster
             if(kind!=1 && kind!=2)return;
             if(!game.Profile.night){game.Notify("Festival games begin at night · sleep in Ammy’s bed first");return;}
             if(game.InTrial || game.Health<=0 || VillageInteriors.AnyRoom(game.Player.transform.position))return;
-            Clear();mode=kind;remaining=kind==1?55:90;checkpoint=delivered=0;freshCrops.Clear();
+            Clear();mode=kind;remaining=kind==1?95:90;checkpoint=delivered=0;freshCrops.Clear();
             if(kind==1)
                 for(int i=0;i<Route.Length;i++)
                 {
@@ -60,8 +61,8 @@ namespace Sunward.Remaster
         public void Buy(int index)
         {
             if(index<0 || index>2 || (game.Profile.festivalRewards&(1<<index))!=0)return;
-            if(game.Profile.festivalTokens<3){game.Notify("Earn 3 festival tokens to buy this decoration");return;}
-            game.Profile.festivalTokens-=3;game.Profile.festivalRewards|=1<<index;game.Save.Save();game.Notify(RewardName(index)+" placed inside Ammy’s house");
+            if(game.Profile.festivalTokens<RewardCost(index)){game.Notify("Earn "+RewardCost(index)+" festival tokens to buy this decoration");return;}
+            game.Profile.festivalTokens-=RewardCost(index);game.Profile.festivalRewards|=1<<index;game.Save.Save();game.Notify(RewardName(index)+" placed inside Ammy’s house");
         }
         void Update()
         {

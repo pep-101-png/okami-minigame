@@ -7,11 +7,12 @@ namespace Sunward
     {
         public GameFlow game;
         GUIStyle body, title, small, button;
-        Texture2D paper, red,hintInk;
+        Texture2D paper, red,hintInk,scrollRoll;
         Vector2 scroll;
         string importText = "";
         bool importOpen;
-        int selected, lastCount, buttonCount;
+        int selected, lastCount, buttonCount,weaponPage;
+        float contentWidth=600;
         bool activate;
         float nextNavigation;
         string lastPanel = "";
@@ -45,7 +46,12 @@ namespace Sunward
             Color old = GUI.backgroundColor;
             if (index == selected && Gamepad.current != null)
                 GUI.backgroundColor = new Color(.7f, .8f, .6f);
-            bool click = GUILayout.Button((index == selected && Gamepad.current != null ? "› " : "") + label, style);
+            string text=(index==selected && Gamepad.current!=null?"› ":"")+label;
+            float height=Mathf.Max(46,Mathf.Ceil(text.Length*13f/Mathf.Max(200,contentWidth-35))*27+16);
+            var rect=GUILayoutUtility.GetRect(contentWidth,height);
+            if(hintInk){GUI.color=new Color(.42f,.12f,.055f,index==selected?.22f:.10f);GUI.DrawTexture(rect,hintInk);GUI.color=Color.white;}
+            Sunward.Remaster.InkText.Draw(text,new Rect(rect.x+14,rect.y+7,rect.width-28,rect.height-8),30,new Color(.16f,.07f,.035f,1));
+            bool click=GUI.Button(rect,"",GUIStyle.none);
             GUI.backgroundColor = old;
             if (activate && index == selected && Event.current.type == EventType.Repaint)
             {
@@ -56,11 +62,21 @@ namespace Sunward
             return click;
         }
 
+        void Label(string text,GUIStyle style)
+        {
+            float em=style==title?38:style==small?27:31;
+            int lines=0;foreach(var line in text.Split('\n'))lines+=Mathf.Max(1,Mathf.CeilToInt(line.Length*em*.47f/Mathf.Max(100,contentWidth-10)));
+            var rect=GUILayoutUtility.GetRect(contentWidth,lines*em*.98f+8);
+            Sunward.Remaster.InkText.Draw(text,rect,em,style.normal.textColor);
+        }
+        bool InkButton(Rect rect,string text)
+        {Sunward.Remaster.InkText.Draw(text,rect,29,new Color(.3f,.09f,.045f,1));return GUI.Button(rect,"",GUIStyle.none);}
         void Styles()
         {
             if (body != null)
                 return;
-            paper = Resources.Load<Texture2D>("Okami/UI/MenuPaper");
+            paper = Resources.Load<Texture2D>("Okami/UI/MenuScrollBody");
+            scrollRoll=Resources.Load<Texture2D>("Okami/UI/MenuScrollRoll");
             red = Resources.Load<Texture2D>("Okami/UI/Ink");hintInk=Resources.Load<Texture2D>("Okami/UI/HintInk");
             body = new GUIStyle(GUI.skin.label)
             {
@@ -68,7 +84,7 @@ namespace Sunward
                 wordWrap = true
             };
             body.normal.textColor = new Color(.075f, .055f, .035f, 1);
-            body.font = Font.CreateDynamicFontFromOSFont(new[] { "Georgia", "Times New Roman", "Liberation Serif" }, 18);
+            // Visible lettering is drawn exclusively from the original glyph atlas.
             title = new GUIStyle(body)
             {
                 fontSize = 27,
@@ -99,6 +115,9 @@ namespace Sunward
 
         void OnGUI()
         {
+#if UNITY_EDITOR
+            if(Sunward.Editor.Automation.TrailerPlayback.Active)return;
+#endif
             if (!game || game.Save == null || game.CinematicActive || (game.Brush && game.Brush.Drawing))
                 return;
             if(game.Presentation && (game.Presentation.Title || game.Presentation.Dialogue))return;
@@ -110,25 +129,25 @@ namespace Sunward
             float scale = Mathf.Clamp(Mathf.Min(Screen.height / 900f, Screen.width / 1000f), .75f, 1.6f);
             GUI.matrix = Matrix4x4.Scale(new Vector3(scale, scale, 1));
             float w = Screen.width / scale, h = Screen.height / scale;
-            DrawPaper(new Rect(20, 18, 320, 132));
-            GUILayout.BeginArea(new Rect(34, 24, 292, 120));
-            GUILayout.Label("SUNWARD · AMATERASU", small);
-            GUILayout.Label("Vitality " + Mathf.CeilToInt(game.Health) + " / " + game.MaxHealth, body);
+            DrawPaper(new Rect(20, 18, 320, 178));
+            contentWidth=292;GUILayout.BeginArea(new Rect(34, 24, 292, 165));
+            Label("SUNWARD · AMATERASU", small);
+            Label("Vitality " + Mathf.CeilToInt(game.Health) + " / " + game.MaxHealth, body);
             Bar(280, game.Health / game.MaxHealth);
-            GUILayout.Label("Stamina " + (int)game.Stamina + " · Ink " + (int)game.Energy, small);
+            Label("Stamina " + (int)game.Stamina + " · Ink " + (int)game.Energy, small);
             GUILayout.EndArea();
-            DrawPaper(new Rect(w - 350, 18, 330, 112));
-            GUILayout.BeginArea(new Rect(w - 336, 26, 308, 100));
-            GUILayout.Label(game.Profile.coins + " sun coins · Level " + ProgressionRules.Level(game.Profile), body);
-            GUILayout.Label(game.Combat.EquippedTitle, body);
-            GUILayout.Label("Power " + ProgressionRules.Power(game.Profile).ToString("0") + " · " + game.Save.Status, small);
+            DrawPaper(new Rect(w - 350, 18, 330, 170));
+            contentWidth=308;GUILayout.BeginArea(new Rect(w - 336, 26, 308, 158));
+            Label(game.Profile.coins + " sun coins · Level " + ProgressionRules.Level(game.Profile), body);
+            Label(game.Combat.EquippedTitle, body);
+            Label("Power " + ProgressionRules.Power(game.Profile).ToString("0"), small);
             GUILayout.EndArea();
             var boss = game.Enemies.Find(e => e && !e.Dead && e.definition.id == "boss");
             if (boss)
             {
                 DrawPaper(new Rect(w * .5f - 250, 20, 500, 64));
-                GUILayout.BeginArea(new Rect(w * .5f - 236, 26, 472, 58));
-                GUILayout.Label("CRIMSON HELM · THE HOLLOW BELL · " + ("PHASE "+boss.BossPhase+" / 3 · "+(boss.BossRising?"TRANSFORMING":boss.BossPhase==1?"BURNING ARMOUR":boss.FlamePhase?"SKELETAL INFERNO":"ARMOUR SHATTERED")), body);
+                contentWidth=472;GUILayout.BeginArea(new Rect(w * .5f - 236, 26, 472, 88));
+                Label("CRIMSON HELM · THE HOLLOW BELL · " + ("PHASE "+boss.BossPhase+" / 3 · "+(boss.BossRising?"TRANSFORMING":boss.BossPhase==1?"BURNING ARMOUR":boss.FlamePhase?"SKELETAL INFERNO":"ARMOUR SHATTERED")), body);
                 Bar(470, boss.Hp / boss.MaxHp);
                 GUILayout.EndArea();
             }
@@ -140,20 +159,20 @@ namespace Sunward
                 if(hintInk){GUI.color=new Color(.04f,.025f,.015f,.42f);GUI.DrawTexture(new Rect((w-hw)*.5f-18,h-86,hw+36,61),hintInk);GUI.color=Color.white;}
                 Sunward.Remaster.InkText.Draw(hint,new Rect((w-hw)*.5f,h-76,hw,55),30,new Color(1,.95f,.82f,.78f));
             }
-            if(game.Spa && game.Spa.Bonus>0)Sunward.Remaster.InkText.Draw("Spring blessing +25 · "+Mathf.CeilToInt(game.Spa.Remaining/60)+" min",new Rect(28,153,360,55),28,new Color(.55f,1,.65f,.8f));
-            if (game.InTrial && GUI.Button(new Rect(w - 160, h - 140, 140, 34), "RETREAT", button))
+            if(game.Spa && game.Spa.Bonus>0)Sunward.Remaster.InkText.Draw("Spring blessing +25 · "+Mathf.CeilToInt(game.Spa.Remaining/60)+" min",new Rect(28,200,360,55),28,new Color(.55f,1,.65f,.8f));
+            if (game.InTrial && InkButton(new Rect(w - 160, h - 140, 140, 34), "RETREAT"))
                 game.Finish(false);
             var festivalChallenge=game.GetComponent<Sunward.Remaster.FestivalChallenges>();
             if(festivalChallenge && festivalChallenge.Active)
             {
                 DrawPaper(new Rect(w*.5f-220,92,440,60));
-                GUI.Label(new Rect(w*.5f-206,100,412,46),festivalChallenge.Status,body);
+                Sunward.Remaster.InkText.Draw(festivalChallenge.Status,new Rect(w*.5f-206,100,412,46),28,new Color(.1f,.06f,.03f,1));
             }
             if (game.Panel=="")
                 return;
             float pw = Mathf.Min(700, w - 40);
             var panel = new Rect((w - pw) * .5f, 150, pw, h - 270);
-            DrawPaper(panel);
+            DrawPaper(panel);contentWidth=panel.width-75;
             GUILayout.BeginArea(new Rect(panel.x + 26, panel.y + 22, panel.width - 52, panel.height - 44));
             scroll = GUILayout.BeginScrollView(scroll);
             switch (game.Panel)
@@ -165,9 +184,9 @@ namespace Sunward
                     Weapons();
                     break;
                 case "mirror":
-                    GUILayout.Label("The Memory Mirror", title);
+                    Label("The Memory Mirror", title);
                     if(!game.Profile.shrine && Button("OFFER THREE WINDFLOWERS · VITALITY BLESSING",button))game.OfferWindflowers();
-                    GUILayout.Label("Currency, experience, weapons, upgrades, milestones and collectibles share one backed-up Unity save.\n" + game.Save.Path, small);
+                    Label("Currency, experience, weapons, upgrades, milestones and collectibles share one backed-up Unity save.\n" + game.Save.Path, small);
                     if (Button("INSCRIBE MEMORY · SAVE", button))
                     {
                         game.Profile.milestones.homeVisited = true;
@@ -192,7 +211,7 @@ namespace Sunward
                         importOpen = !importOpen;
                     if (importOpen)
                     {
-                        GUILayout.Label("In your old game’s browser console: copy(localStorage.getItem('sunward.rpg.v2')). Paste below. Existing Unity data is backed up on successful import.", small);
+                        Label("In your old game’s browser console: copy(localStorage.getItem('sunward.rpg.v2')). Paste below. Existing Unity data is backed up on successful import.", small);
                         importText = GUILayout.TextArea(importText, GUILayout.Height(110));
                         if (Button("VALIDATE & IMPORT", button))
                         {
@@ -211,12 +230,15 @@ namespace Sunward
 
                     break;
                 case "pause":
-                    GUILayout.Label("A moment of stillness.", title);
+                    Label("A moment of stillness.", title);
                     if (game.InTrial && Button("RETREAT · KEEP EARNED REWARDS", button))
                         game.Finish(false);
                     if (!game.InTrial && Button("RETURN HOME · KEEP PROGRESS", button))
                         game.ReturnHome();
-                    GUILayout.Label("Quality presets change shadows, MSAA and render scale. Performance depends on your hardware.", body);
+#if UNITY_EDITOR
+                    if(Button("WATCH 30-SECOND TRAILER PREVIEW",button)){game.Close();Sunward.Editor.Automation.TrailerPlayback.Begin(game,false);}
+#endif
+                    Label("Quality presets change shadows, MSAA and render scale. Performance depends on your hardware.", body);
                     if (Button("QUALITY · HIGH", button))
                         Quality(true);
                     if (Button("QUALITY · LIGHTWEIGHT", button))
@@ -225,60 +247,60 @@ namespace Sunward
                         AudioListener.volume = AudioListener.volume > 0 ? 0 : 1;
                     break;
                 case "elder":
-                    GUILayout.Label(game.Dialogue,body);
+                    Label(game.Dialogue,body);
                     if(Button("YES · LET’S HAVE TEA",button))game.GetComponent<Sunward.Remaster.VillageTeaVisit>().Invite();
                     break;
                 case "tea":
                     var tea=game.GetComponent<Sunward.Remaster.VillageTeaVisit>();
-                    GUILayout.Label("TEA & STORIES OF NIPPON",title);GUILayout.Label(tea.Story,body);
+                    Label("TEA & STORIES OF NIPPON",title);Label(tea.Story,body);
                     if(Button("TELL ME ANOTHER STORY",button))tea.NextStory();
                     if(Button("SIT FOR TEA",button))tea.SitForTea();
                     break;
                 case "requests":
-                    GUILayout.Label("VILLAGE REQUEST BOARD",title);
+                    Label("VILLAGE REQUEST BOARD",title);
                     var requests=game.GetComponent<Sunward.Remaster.VillageLife>();
-                    GUILayout.Label(requests.RequestDetails(),body);
-                    GUILayout.Label("Turn in completed requests at the farmer’s stall in the northeast farm. These are optional village goals, separate from weapon purchases and arena entry.",small);
+                    Label(requests.RequestDetails(),body);
+                    Label("Turn in completed requests at the farmer’s stall in the northeast farm. These are optional village goals, separate from weapon purchases and arena entry.",small);
                     break;
                 case "festival":
                     var festival=game.GetComponent<Sunward.Remaster.FestivalChallenges>();
-                    GUILayout.Label("FESTIVAL NIGHT · "+game.Profile.festivalTokens+" tokens",title);
-                    GUILayout.Label("Sleep in Ammy’s bed to reach night. Optional games award festival tokens; your arena progress is unchanged.",small);
-                    GUILayout.Label(festival.Active?festival.Status:"Spirit run: collect six floating spirit lights in order within 55 seconds. Harvest relay: dig up three different vegetables, then give three to the farmer within 90 seconds. Each win awards 3 tokens.",body);
-                    if(!festival.Active){if(Button("START SPIRIT RUN · 55 seconds",button))festival.Begin(1);if(Button("START HARVEST RELAY · 90 seconds",button))festival.Begin(2);}
+                    Label("FESTIVAL NIGHT · "+game.Profile.festivalTokens+" tokens",title);
+                    Label("Sleep in Ammy’s bed to reach night. Optional games award festival tokens; your arena progress is unchanged.",small);
+                    Label(festival.Active?festival.Status:"Spirit run: collect thirteen floating spirit lights in order within 95 seconds. Harvest relay: dig up three different vegetables, then give three to the farmer within 90 seconds. Each win awards 3 tokens.",body);
+                    if(!festival.Active){if(Button("START SPIRIT RUN · 95 seconds",button))festival.Begin(1);if(Button("START HARVEST RELAY · 90 seconds",button))festival.Begin(2);}
                     else if(Button("CANCEL CHALLENGE",button))festival.Cancel();
-                    GUILayout.Label("Home decorations · permanent rewards placed inside Ammy’s house",body);
+                    Label("Home decorations · permanent rewards placed inside Ammy’s house",body);
                     for(int reward=0;reward<3;reward++)
                     {
                         int choice=reward;string label=Sunward.Remaster.FestivalChallenges.RewardName(choice);
-                        if((game.Profile.festivalRewards&(1<<choice))!=0)GUILayout.Label(label+" · owned",small);
-                        else if(Button(label+" · 3 tokens",button))festival.Buy(choice);
+                        if((game.Profile.festivalRewards&(1<<choice))!=0)Label(label+" · owned",small);
+                        else if(Button(label+" · "+Sunward.Remaster.FestivalChallenges.RewardCost(choice)+" tokens",button))festival.Buy(choice);
                     }
                     break;
                 case "farm":
-                    GUILayout.Label("FARM SHOP · "+game.Profile.vegetables+" vegetables · "+game.Profile.praise+" Praise",body);
+                    Label("FARM SHOP · "+game.Profile.vegetables+" vegetables · "+game.Profile.praise+" Praise",body);
                     var farm=game.GetComponent<Sunward.Remaster.VillageLife>();
-                    GUILayout.Label("Bring harvested vegetables in your mouth or pouch. Hand over one, sell the pouch, or keep them for a village request.",small);
+                    Label("Bring harvested vegetables in your mouth or pouch. Hand over one, sell the pouch, or keep them for a village request.",small);
                     if(Button("HAND OVER ONE VEGETABLE · +5 coins",button))farm.GiveProduce();
                     if(Button("SELL PRODUCE · 5 coins each",button))farm.Sell();
                     if(Button("EAT VEGETABLE · +1 health",button))farm.Eat();
                     if(Button("FARM MEAL · 5 coins · +10 health",button))farm.BuyMeal();
                     if(Button("VITALITY · "+(25+game.Profile.farmVitality*10)+" coins · permanent +1 max health",button))farm.BuyVitality();
-                    GUILayout.Label(farm.RequestDetails(),body);
+                    Label(farm.RequestDetails(),body);
                     if(game.Profile.restorationStage<3 && Button("TURN IN THIS REQUEST",button))farm.Request();
                     break;
                 case "bossVictory":
-                    GUILayout.Label("CRIMSON HELM DEFEATED",title);
-                    GUILayout.Label("Three forms overcome. The chamber is yours.\n\n"+game.Dialogue,body);
+                    Label("CRIMSON HELM DEFEATED",title);
+                    Label("Three forms overcome. The chamber is yours.\n\n"+game.Dialogue,body);
                     if(Button("CONTINUE",button))game.Close();
                     break;
                 case "result":
-                    GUILayout.Label(game.Dialogue, title);
+                    Label(game.Dialogue, title);
                     if (Button("RETURN HOME →", button))
                         game.ReturnHome();
                     break;
                 default:
-                    GUILayout.Label(game.Dialogue, body);
+                    Label(game.Dialogue, body);
                     break;
             }
 
@@ -292,33 +314,38 @@ namespace Sunward
 
         void Shop()
         {
-            GUILayout.Label("Hana · upgrades & blessings", title);
-            GUILayout.Label(game.Profile.coins + " coins · permanent upgrades survive defeat.", body);
+            Label("Hana · upgrades & blessings", title);
+            Label(game.Profile.coins + " coins · permanent upgrades survive defeat.", body);
             if (Button("TARO'S WEAPON CATALOGUE →", button)) game.SetPanel("weapons");
             if(Button("VILLAGE REQUEST BOARD · goals & rewards",button))game.SetPanel("requests");
             foreach (string id in ProgressionRules.Upgrades)
             {
                 string label=id=="spear"?"GLAIVE MASTERY":id=="sundial"?"MIRROR & ROSARY MASTERY":id=="energy"?"INK CAPACITY":id=="ability"?"BARK TECHNIQUE":id.ToUpperInvariant();
                 int rank=game.Profile.upgrades.Get(id),cap=ProgressionRules.Cap(id);
-                if(rank>=cap)GUILayout.Label(label+" · "+rank+" / "+cap+" · MAXIMUM",body);
+                if(rank>=cap)Label(label+" · "+rank+" / "+cap+" · MAXIMUM",body);
                 else if(Button(label+" · rank "+rank+" / "+cap+" · "+ProgressionRules.Cost(game.Profile,id)+" coins",button))game.Buy(id);
-                GUILayout.Label(ProgressionRules.Explain(id),small);
+                Label(ProgressionRules.Explain(id),small);
             }
         }
         void Weapons()
         {
-            GUILayout.Label("Taro · divine instruments", title);
-            GUILayout.Label(game.Profile.coins + " coins · purchased weapons stay in your save. Q cycles owned weapons in the arena.", body);
+            Label("Taro · divine instruments", title);
+            Label(game.Profile.coins + " coins · purchased weapons stay in your save. Q cycles owned weapons in the arena.", body);
             if(Button("VILLAGE REQUEST BOARD · goals & rewards",button))game.SetPanel("requests");
-            GUILayout.Label("Glaives: sword strikes. Reflectors: broad close-range attacks. Rosaries: bead whips with reach. Hold either attack button to charge; release to strike.",small);
-            foreach (var entry in Sunward.Remaster.OriginalWeaponCatalog.All)
-            {
-                bool owned = Sunward.Remaster.OriginalWeaponCatalog.Owns(game.Profile, entry.id);
-                string label = entry.title + " · " + entry.family + (owned ? game.Profile.equipped == entry.id ? " · EQUIPPED" : " · EQUIP" : " · " + entry.cost + " coins");
-                if (!Button(label, button)) continue;
-                if (owned) { game.Profile.equipped = entry.id; game.Save.Save(); game.Combat.Equip(); }
-                else game.Buy("weapon:" + entry.id);
-            }
+            Label("Glaives: sword strikes. Reflectors: broad close-range attacks. Rosaries: bead whips with reach. Hold either attack button to charge; release to strike.",small);
+            var catalogue=Sunward.Remaster.OriginalWeaponCatalog.All;
+            weaponPage=Mathf.Clamp(weaponPage,0,catalogue.Length-1);var entry=catalogue[weaponPage];
+            Label((weaponPage+1)+" / "+catalogue.Length+" · "+entry.title,title);
+            var portrait=Resources.Load<Texture2D>("Okami/WeaponPortraits/"+entry.resource);
+            if(portrait){var image=GUILayoutUtility.GetRect(contentWidth,210);GUI.DrawTexture(image,portrait,ScaleMode.ScaleToFit);}
+            Label(entry.family.ToUpperInvariant()+" · "+entry.cost+" coins",body);
+            Label(Sunward.Remaster.WeaponLore.Description(entry),body);
+            Label(Sunward.Remaster.WeaponLore.Lore(entry),small);
+            bool owned=Sunward.Remaster.OriginalWeaponCatalog.Owns(game.Profile,entry.id);
+            if(Button(owned?(game.Profile.equipped==entry.id?"EQUIPPED":"EQUIP THIS INSTRUMENT"):"PURCHASE · "+entry.cost+" coins",button))
+            {if(owned){game.Profile.equipped=entry.id;game.Save.Save();game.Combat.Equip();}else game.Buy("weapon:"+entry.id);}
+            if(Button("PREVIOUS INSTRUMENT",button))weaponPage=(weaponPage+catalogue.Length-1)%catalogue.Length;
+            if(Button("NEXT INSTRUMENT",button))weaponPage=(weaponPage+1)%catalogue.Length;
         }
 
         void DrawPaper(Rect r)
@@ -327,7 +354,9 @@ namespace Sunward
             // stretching a small crop across a portrait-shaped menu.
             Color old = GUI.color;
             GUI.color = Color.white;
-            if (paper) GUI.DrawTexture(r, paper, ScaleMode.StretchToFill, false);
+            if(paper)GUI.DrawTexture(new Rect(r.x+17,r.y,r.width-34,r.height),paper,ScaleMode.StretchToFill,true);
+            if(scrollRoll){GUI.DrawTexture(new Rect(r.x-4,r.y-5,32,r.height+10),scrollRoll);GUI.DrawTextureWithTexCoords(new Rect(r.xMax-28,r.y-5,32,r.height+10),scrollRoll,new Rect(1,0,-1,1));}
+            if(hintInk){GUI.color=new Color(.34f,.085f,.035f,.75f);GUI.DrawTexture(new Rect(r.x+24,r.y+10,r.width-48,12),hintInk);GUI.DrawTexture(new Rect(r.x+24,r.yMax-22,r.width-48,12),hintInk);}
             GUI.color = old;
         }
 

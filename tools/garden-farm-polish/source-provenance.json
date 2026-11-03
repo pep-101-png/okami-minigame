@@ -1,0 +1,166 @@
+[
+  {
+    "resource": "farm-rail",
+    "source": "r102/saku_ly16",
+    "sourceSHA256": "b4dbe3436e7fa711e2994f079a07d9c8ff03909cceccd905d69808c50e68b183",
+    "parts": [
+      10
+    ]
+  },
+  {
+    "resource": "river-waterfall",
+    "source": "r114/__LY04_waterfall",
+    "sourceSHA256": "cf5840aa68f21bfbe34637eaee8c742bf4112ca47a9b254a17f34b5111d6c52a",
+    "parts": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "resource": "river-spirit-portal",
+    "source": "r203/sukyouwarp_IDcc",
+    "sourceSHA256": "ae139e6bbedb7791483f8dd778cbfb649ad074fc4a52b28facea48d48825af58",
+    "parts": null
+  },
+  {
+    "resource": "heaven-cloud",
+    "source": "r301/__LY30_cloud",
+    "sourceSHA256": "511829d25e657b3c8eaa77f5ee4ccaec04b70c8ca0cc9050a24778c45f593271",
+    "parts": null
+  },
+  {
+    "resource": "garden-hm40",
+    "idle": "hm95_000",
+    "walk": "hm95_010"
+  },
+  {
+    "resource": "garden-hm50",
+    "idle": "hm05_000",
+    "walk": "hm05_010"
+  },
+  {
+    "resource": "garden-hm06",
+    "idle": "hm05_000",
+    "walk": "hm05_010"
+  },
+  {
+    "id": "PL00-41",
+    "source": "data_pc/se/pl/pl00.ses",
+    "streamIndex": 41,
+    "bankSHA256": "dc6b8e3ecb13e17e44ff6aabf90781126f8fd4a9b36ab6bf1ba427cf94abe9c4",
+    "sourceADX_SHA256": "31279f38a1978ffbfea3a8a664e562a76b78f5a0c1c5eb07fa806ac4b28c1c28",
+    "outputSHA256": "cb6090580c0f5582b053c8948a9da45c8795f1667e14565c9b1fe79e21c693b8",
+    "compilationStartSeconds": 83.147,
+    "conversion": {
+      "sourceVersion": "0x400",
+      "frameScalesDecrypted": false,
+      "decoded": {
+        "rmsDBFS": -12.076,
+        "peak": 0.999969,
+        "clippedFraction": 2.557e-05
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.284272,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -10.924,
+      "seconds": 1.222,
+      "clearADX_SHA256": "31279f38a1978ffbfea3a8a664e562a76b78f5a0c1c5eb07fa806ac4b28c1c28"
+    },
+    "eventIdentity": "Unidentified; original player sound bank, not a confirmed bark",
+    "userConfirmation": "User chose PL00-41 after audition on 2026-11-03"
+  },
+  {
+    "resource": "WeaponPortraits/wp20",
+    "sourceSHA256": "8dac8b57f1b5735a38152866cff0be2aebf396678adf112c908299261ab9fab9",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp21",
+    "sourceSHA256": "0d377c718cf30be54df8e6d27a6db76ae25a35a3f8bb897862441a79d8da063f",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp22",
+    "sourceSHA256": "7accf4fe6d7da8ccfdef7d5e6293e106c8f5775180ec5471be5f6fa431ae6325",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp23",
+    "sourceSHA256": "89e535b20edecc1b6d737827ed2da68a2e1ecd213a5b928a2efd38311b679228",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp24",
+    "sourceSHA256": "7850904c48ed5fd7e94f2abdf66eaae6461a3018a3ef7d094efa1078bbafc19c",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp25",
+    "sourceSHA256": "0e267a173b1b067464f222e66f86d850281ca8d1acc5cbebe2aa0b13fd3c9703",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp26",
+    "sourceSHA256": "b2beff56c9f4238b6a1a7e2f2bab803dc968aa5f6039e00fc4a8a086a98224ea",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp27",
+    "sourceSHA256": "1a25e2a792eb9040b1782da3d6b6d4948c5ed11d20791646699223dc0d460c5b",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp28",
+    "sourceSHA256": "36c42f0bdee030486d4ad9a368bd10eff25da065ccad95fb722f9d3925abadc2",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp29",
+    "sourceSHA256": "7966f9447ad67add50eee729225afe72f3ea83fff09ff8ef1080b11b1d586d84",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp2a",
+    "sourceSHA256": "85051d23fb9883b612276134184609159e6be608d3f3cd9d7cc0d54c1b1aa0cb",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp2b",
+    "sourceSHA256": "9266eb6deda2404f275087ea43fb09812ad9b0346ad5434cea5147c54dffd463",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp2c",
+    "sourceSHA256": "d6cf656cc3740842eed9a2ab9293edebf0ea4ca0f03beb593c557a6a909e9d3a",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp2d",
+    "sourceSHA256": "2fc937257d8443b4c9f8d4afb8b3d7a3150c861d239f7e36e4c76c1052518f91",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "WeaponPortraits/wp2e",
+    "sourceSHA256": "64599535213f3bbeee6543d0cc7282c3f1bf1e2f1bed257b79acdcbfa3b12cce",
+    "derivation": "Rendered original weapon model and original paint for the catalogue portrait"
+  },
+  {
+    "resource": "garden-gate",
+    "source": "r102/torii_ly1b",
+    "sourceSHA256": "158374d419af79791ef095320f7110247eaeb04c8097174136884451cb03bda1",
+    "parts": [
+      0
+    ]
+  },
+  {
+    "resource": "garden-altar",
+    "source": "r102/stage_ly0a",
+    "sourceSHA256": "fbc6488f12375f272ff56faf6ab3e6200ccbd477a6c6c75e4da554c221d2b3d9",
+    "parts": [
+      0
+    ]
+  }
+]

@@ -124,7 +124,7 @@ namespace Sunward
         }
         public void Cue(string id)
         {
-            if(id=="bark")return; // Rejected AN05 cue: await a positively identified original bark.
+            // PL00-41: selected by the user after listening to the original player bank.
             if(id=="flame-impact")id="impact";
             // World actors must supply a position; never route them through 2D playback.
             if(id=="cow" || id=="pig" || id=="rooster" || id.StartsWith("npc") || id.StartsWith("enemy"))return;

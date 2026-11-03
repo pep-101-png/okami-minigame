@@ -117,8 +117,9 @@ namespace Sunward.Remaster
         {
             if(!instance)return;
             instance.Unlocked=instance.Unlocked||won;
-            instance.ApplyOpen(won,won);
+            if(won && instance.game && instance.game.Presentation)instance.game.Presentation.ShaftCollapse();else instance.ApplyOpen(won,won);
         }
+        public static void RevealShaft(){if(instance)instance.ApplyOpen(true,true);}
         void ApplyOpen(bool value,bool animate)
         {
             open=value;collapse=value && animate?0:-1;
@@ -141,9 +142,9 @@ namespace Sunward.Remaster
             var p=game.Player.transform.position;
             bool visible=true;
             if(upperGround && groundVisible!=visible){upperGround.enabled=visible;groundVisible=visible;}
-            if(collapse>=0 && !game.Blocked)
+            if(collapse>=0 && (!game.Blocked || (game.Presentation && game.Presentation.Breaking)))
             {
-                collapse+=Time.deltaTime;
+                collapse+=(game.Presentation && game.Presentation.Breaking)?Time.unscaledDeltaTime:Time.deltaTime;
                 for(int i=0;i<fragments.Length;i++)
                 {
                     fragments[i].localPosition=fragmentPositions[i]+Vector3.down*collapse*collapse*(4+i*.35f);

@@ -4,6 +4,7 @@ namespace Sunward.Remaster
 {
     public sealed class NativeDailyRoutine : MonoBehaviour
     {
+        public static void InvalidateNavigation(){clear=null;}
         public GameFlow game;
         public NativeHomeRoom home;
         public bool farmer;
@@ -59,7 +60,7 @@ namespace Sunward.Remaster
             {
                 destination=phase;resting=false;actor.EndActivity();
                 if(indoors && home){SetPosition(home.exitPoint);indoors=false;}
-                var target=farmer && game.Profile.night?new Vector3(37.2f,0,18.2f):farmer?workplace+(phase==0?Vector3.zero:phase==1?new Vector3(7,0,0):phase==2?new Vector3(10,0,1.5f):new Vector3(2,0,2.8f)):phase==1 && home?home.Approach:phase==2?new Vector3(GardenPond.X+Mathf.Cos((seed*47+20)*Mathf.Deg2Rad)*4.25f,0,GardenPond.Z+Mathf.Sin((seed*47+20)*Mathf.Deg2Rad)*2.9f):workplace;
+                var target=farmer && game.Profile.night?new Vector3(54.2f,0,38.2f):farmer?workplace+(phase==0?Vector3.zero:phase==1?new Vector3(7,0,0):phase==2?new Vector3(10,0,1.5f):new Vector3(2,0,2.8f)):phase==1 && home?home.Approach:phase==2?new Vector3(GardenPond.X+Mathf.Cos((seed*47+20)*Mathf.Deg2Rad)*4.25f,0,GardenPond.Z+Mathf.Sin((seed*47+20)*Mathf.Deg2Rad)*2.9f):workplace;
                 if(!Route(target)){wait=5;destination=-1;return;}
             }
             if(indoors)

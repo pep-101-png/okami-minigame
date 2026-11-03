@@ -116,6 +116,13 @@ s=s.replace('public class Material:Object{', 'public class Material:Object{publi
 s=s.replace('public bool CinematicActive;', 'bool cinematicFlag;public bool CinematicActive{get=>cinematicFlag || (Presentation && Presentation.Playing);set=>cinematicFlag=value;}')
 s=s.replace('BossTrial,waiting,InTrial,CinematicActive;', 'BossTrial,waiting,InTrial;bool cinematicFlag;public bool CinematicActive{get=>cinematicFlag || (Presentation && Presentation.Playing);set=>cinematicFlag=value;}')
 s=s.replace('public bool Blocked,CinematicActive,InTrial,BossTrial,waiting;', 'public bool Blocked,InTrial,BossTrial,waiting;bool cinematicFlag;public bool CinematicActive{get=>cinematicFlag || (Presentation && Presentation.Playing);set=>cinematicFlag=value;}')
+s=s.replace('public class Shader:','public class Shader:')
+s=s.replace('public static class Shader{','public class Shader{public static Shader Find(string n)=>new Shader();')
+s=s.replace('public class Material:Object{','public class Material:Object{public void SetTexture(string n,Texture2D t){}public Shader shader;')
+s=s.replace('namespace Sunward.Remaster{public class HeavenlyGarden:UnityEngine.Object{public bool Playing;public void Cancel(){Playing=false;}}}', '')
+s=s.replace('public class BoxCollider:Collider{','public class MeshCollider:Collider{public Mesh sharedMesh;}public class BoxCollider:Collider{')
+s=s.replace('public static float Height(', 'public static float Height(')
+s=s.replace('public static class OriginalWeaponCatalog{', 'public static class OriginalWeaponCatalog{public class Entry{public string family,resource;public int cost;}')
 s+='\n'+Path(__file__).with_name('VillagePresentationDoubles.cs').read_text()
 s+='\n'+Path(__file__).with_name('FestivalDoubles.cs').read_text()
 s=s.replace('public bool HoldingCharge;', 'public GameFlow game;public bool HoldingCharge;')
@@ -157,6 +164,14 @@ s=s.replace('public const float PI=', 'public const float Rad2Deg=57.2957795f;pu
 s=s.replace('components[typeof(T)]=c;return c;', 'components[typeof(T)]=c;StreetActorLifecycle.Added(c,activeSelf);return c;')
 s=s.replace('public void SetActive(bool b){activeSelf=b;}', 'public void SetActive(bool b){activeSelf=b;if(b)StreetActorLifecycle.Activated(this);}')
 s=s.replace('created.Add(this);', 'activeSelf=StreetActorLifecycle.Enabled;created.Add(this);')
+s=s.replace('public static class Shader{','public class Shader{public static Shader Find(string n)=>new Shader();')
+s=s.replace('public static class OriginalWeaponCatalog{', 'public static class OriginalWeaponCatalog{public class Entry{public string family,resource;public int cost;}')
+s=s.replace('public class GameObject:Object', 'public class GameObject:Object')
+s=s.replace('public GameObject(string n="")', 'public string name;public GameObject(string n="")')
+s=s.replace('public Material(Material source){}', 'public Material(Material source){}public Material(Shader shader){}')
+s+='\nnamespace UnityEngine{public class MeshCollider:Collider{public Mesh sharedMesh;}}'
+s=s.replace('public class ValleyData{', 'public class ValleyData{public BoxData[] boxes=System.Array.Empty<BoxData>();')
+s+='\nnamespace Sunward{public class BoxData{public float x,z,halfX,halfZ;}}'
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:

@@ -14,6 +14,7 @@ namespace Sunward
                 return;
             var player = game.Player;
             var p = player.transform.position;
+            if(Sunward.Remaster.HeavenlyGarden.Inside(p) || (game.Heaven && game.Heaven.Playing))return;
             if(Sunward.Remaster.VillageInteriors.Inside(p) || Sunward.Remaster.NativeHomeRoom.At(p)){submerged=0;return;}
             if(Sunward.Remaster.LowerArena.Inside(p)||Sunward.Remaster.LowerArena.Shaft(p))return;
             timer -= Time.deltaTime;

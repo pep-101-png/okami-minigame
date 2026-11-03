@@ -56,6 +56,15 @@ namespace Sunward.Remaster
             }
         }
         static Vector3 Vector(BinaryReader reader) => new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+        public void SampleHeadRotations(Clip clip,float time,Transform[] bones,float amount)
+        {
+            if(clip==null || BoneCount<=5)return;
+            // Native human bone 5: head. Retain the source seated arms, sleeves and legs.
+            float frame=Mathf.Repeat(time,clip.Duration)/clip.Duration*(clip.Samples-1);
+            int a=Mathf.FloorToInt(frame),b=Mathf.Min(a+1,clip.Samples-1);float u=frame-a;
+            var q=Quaternion.Slerp(clip.Rotation[a*BoneCount+5],clip.Rotation[b*BoneCount+5],u);
+            bones[5].localRotation=Quaternion.Slerp(bones[5].localRotation,q,amount);
+        }
         public Clip Find(string name) => clips.TryGetValue(name, out var clip) ? clip : null;
         public void Sample(Clip clip, float time, Transform[] bones, Vector3[] fromPosition, Quaternion[] fromRotation, Vector3[] fromScale, float blend, bool loop, bool mirror = false)
         {
