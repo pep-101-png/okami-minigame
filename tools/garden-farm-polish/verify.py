@@ -7,7 +7,7 @@ def check(v,msg):
  count+=1;assert v,msg
 ledger=json.loads(Path(__file__).with_name('source-provenance.json').read_text());b=next(x for x in ledger if x.get('id')=='PL00-41');clip=res/'NativeAudio/player-pl00-41-bark.wav'
 check(hashlib.sha256(clip.read_bytes()).hexdigest()==b['outputSHA256'],'Bark differs from selected audition recording');check(b['streamIndex']==41 and b['source']=='data_pc/se/pl/pl00.ses' and b['userConfirmation'],'Wrong sound/event or no listening confirmation')
-entries=json.loads((res/'NativeAudio.json').read_text())['cues'];check([e['resource'] for e in entries if e['cue']=='bark']==['Okami/NativeAudio/player-pl00-41-bark'],'Bark cue rotates or points to puppy bank')
+entries=json.loads((res/'NativeAudio.json').read_text())['cues'];check([e['resource'] for e in entries if e['cue']=='bark']==['Okami/NativeAudio/player-shiranui-layered-bark'],'Bark cue rotates or points to puppy bank')
 check('if(id=="bark")return' not in (A/'Sunward/Scripts/ValleyAudio.cs').read_text(),'Approved bark remains muted')
 for resource in ['farm-rail','river-waterfall','river-spirit-portal','garden-gate','garden-altar','heaven-island','heaven-cloud','heaven-pond','trailer-moon','garden-hm40','garden-hm50','garden-hm06']:
  folder=res/resource;m=json.loads((folder/'Model.json').read_text());check(bool(m['parts']),'Empty original model '+resource)
