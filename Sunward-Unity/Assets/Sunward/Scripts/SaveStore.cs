@@ -9,7 +9,6 @@ namespace Sunward
         public ProfileData Data { get; private set; }
         public string Status { get; private set; }
         public string Path { get; }
-        public bool PreviewOnly {get;set;}
 
         public SaveStore()
         {
@@ -73,7 +72,6 @@ namespace Sunward
 
         public bool Save()
         {
-            if(PreviewOnly)return true;
             try
             {
                 if (!ProgressionRules.Validate(Data))
