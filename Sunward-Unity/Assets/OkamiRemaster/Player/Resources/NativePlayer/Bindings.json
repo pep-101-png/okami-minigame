@@ -740,12 +740,12 @@
     },
     {
       "state": "NativeCharge_glaive",
-      "clip": "pl00_54b",
+      "clip": "pl00_523",
       "intro": "",
       "loop": true,
       "mirror": false,
       "referenceSpeed": 0,
-      "evidence": "Inspected moving native 54b preparation cycle shared for held charging; Sunward family adaptation, never a frozen pose."
+      "evidence": "Recovered glaive heavy preparation sampled as a moving hold; anatomical dorsal attachment retained."
     },
     {
       "state": "NativeCharge_rosary",

@@ -131,7 +131,7 @@ namespace Sunward
             if(id=="cow" || id=="pig" || id=="rooster" || id.StartsWith("npc") || id.StartsWith("enemy"))return;
             if(!Allow(id,id=="step"?.16f:id=="water"?.35f:.07f))return;
             if(id=="water" && (!game || !game.Player || !game.Player.Swimming))return;
-            var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="step"?.01125f:id=="jump"?.0875f:(id=="water" || id=="swim-exit")?.018f:id=="land"?.06f:id=="dash"?.175f:id=="bark"?.75f:.45f);
+            var clip=Clip(id);if(clip)effects.PlayOneShot(clip,id=="thunder-burst"?.65f:id=="step"?.01125f:id=="jump"?.0875f:(id=="water" || id=="swim-exit")?.018f:id=="land"?.06f:id=="dash"?.175f:id=="bark"?.75f:.45f);
         }
         public void TundraAttack(bool charged,bool heavy)
         {

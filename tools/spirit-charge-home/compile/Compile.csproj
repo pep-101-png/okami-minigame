@@ -1,5 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-<PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable><OrbitSource Condition="'$(OrbitSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs</OrbitSource><WaterSource Condition="'$(WaterSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/WaterContact.cs</WaterSource><StreetSource Condition="'$(StreetSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageStreetPlay.cs</StreetSource></PropertyGroup>
+<PropertyGroup><OutputType>Exe</OutputType><NativeBodySource Condition="'$(NativeBodySource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/OkamiRemaster/Player/NativeAmaterasu.cs</NativeBodySource><TargetFramework>net8.0</TargetFramework><EnableDefaultCompileItems>false</EnableDefaultCompileItems><ImplicitUsings>disable</ImplicitUsings><Nullable>disable</Nullable><OrbitSource Condition="'$(OrbitSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/OrbitCamera.cs</OrbitSource><WaterSource Condition="'$(WaterSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/Sunward/Scripts/WaterContact.cs</WaterSource><StreetSource Condition="'$(StreetSource)' == ''">$(MSBuildThisFileDirectory)../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageStreetPlay.cs</StreetSource></PropertyGroup>
 <ItemGroup>
 <Compile Include="$(SemanticDoubles)"/><Compile Include="RebirthTests.cs"/><Compile Include="VillageTests.cs"/><Compile Include="FestivalTests.cs"/><Compile Include="StreetActorLifecycle.cs"/><Compile Include="FestivalChallengeTests.cs"/><Compile Include="VillageRefinementTests.cs"/><Compile Include="GardenPassageTests.cs"/><Compile Include="TextBoundsTests.cs"/>
 <Compile Include="$(OrbitSource)"/>
@@ -7,7 +7,7 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/ShiranuiTransformation.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/TransformationTimeline.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/TundraAttackRules.cs"/>
-<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Player/NativeAmaterasu.cs"/>
+<Compile Include="$(NativeBodySource)"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Player/NativePoseBank.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/Sunward/Scripts/EnemyBrain.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalActor.cs"/>
@@ -53,6 +53,6 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalWeaponEvolution.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/WeaponLore.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/GardenVisitor.cs"/>
-<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalVisual.cs"/><Compile Include="HeavenFollowupTests.cs"/><Compile Include="HeavenTreasureTests.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalVisual.cs"/><Compile Include="HeavenFollowupTests.cs"/><Compile Include="HeavenTreasureTests.cs"/><Compile Include="HeavenPalaceTests.cs"/><Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/HeavenlyGarden.Palace.cs"/><Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/WeaponElementFx.cs"/><Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/ThunderFlash.cs"/><Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/ThunderWeaponAura.cs"/>
 </ItemGroup>
 </Project>

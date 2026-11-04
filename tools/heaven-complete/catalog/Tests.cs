@@ -2,12 +2,12 @@
 using System;using System.Text.Json;using Sunward;using Sunward.Remaster;
 namespace UnityEngine{
 public class Object{public static T Instantiate<T>(T value)=>JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(value,new JsonSerializerOptions{IncludeFields=true}),new JsonSerializerOptions{IncludeFields=true});public static implicit operator bool(Object o)=>o!=null;}
-public class ScriptableObject:Object{}public class GameObject:Object{}public class Transform:Object{}public struct Vector3{public static Vector3 zero=>new Vector3();}public struct Color{public Color(float r,float g,float b,float a){}}
+public class ScriptableObject:Object{}public class GameObject:Object{public T AddComponent<T>()where T:new()=>new T();}public class Transform:Object{public GameObject gameObject=new GameObject();}public struct Vector3{public static Vector3 zero=>new Vector3();}public struct Color{public Color(float r,float g,float b,float a){}}
 public class ParticleSystem:Object{public struct MainModule{public bool useUnscaledTime;public Color startColor;}public MainModule main=>new MainModule();}public class CreateAssetMenuAttribute:Attribute{public string menuName;}
 public static class Mathf{public static float Clamp01(float x)=>Math.Clamp(x,0,1);}
 }
 namespace Sunward{public class ProfileData{public string[] owned=new[]{"spear"};public string equipped="spear";public int coins;}}
-namespace Sunward.Remaster{public static class OriginalAtmosphere{public static UnityEngine.ParticleSystem Create(string n,UnityEngine.Transform p,UnityEngine.Vector3 v,float a,float b,float c,float d,float e)=>null;}}
+namespace Sunward.Remaster{public class ThunderWeaponAura{public bool unscaled;}public static class OriginalAtmosphere{public static UnityEngine.ParticleSystem Create(string n,UnityEngine.Transform p,UnityEngine.Vector3 v,float a,float b,float c,float d,float e)=>null;}}
 class Tests{
 static int n;static void Check(bool ok,string why){n++;if(!ok)throw new Exception(why);}
 static void Main(){

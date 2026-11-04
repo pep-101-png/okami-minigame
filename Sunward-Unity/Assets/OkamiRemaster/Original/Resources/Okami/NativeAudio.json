@@ -495,6 +495,18 @@
     {
       "cue": "heaven-bird",
       "resource": "Okami/NativeAudio/heaven-crane-call"
+    },
+    {
+      "cue": "heaven-gong-strike",
+      "resource": "Okami/NativeAudio/heaven-gong-strike"
+    },
+    {
+      "cue": "thunder-strike",
+      "resource": "Okami/NativeAudio/thunder-strike"
+    },
+    {
+      "cue": "thunder-burst",
+      "resource": "Okami/NativeAudio/thunder-burst"
     }
   ]
 }
