@@ -86,7 +86,7 @@ namespace Sunward
             foreach(var source in worldSources)if(source && source.isPlaying && worldLevels.TryGetValue(source,out var level))
             {
                 float distance=Vector3.Distance(p,source.transform.position);
-                if(distance>=level.x)source.Stop();
+                if(distance>=level.x || !SameRealm(source.transform.position,p))source.Stop();
                 else source.volume=game.CinematicActive?0:level.y*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/level.x));
             }
             bool presentation=game.Presentation && (game.Presentation.Title || game.Presentation.Playing);
@@ -170,11 +170,17 @@ namespace Sunward
         }
         public void StopTransformation()
         {if(transformationVoice)transformationVoice.Stop();if(transformationBurst)transformationBurst.Stop();}
+        static bool SameRealm(Vector3 source,Vector3 listener)
+        {
+            bool a=Sunward.Remaster.HeavenlyGarden.PalaceInside(source),b=Sunward.Remaster.HeavenlyGarden.PalaceInside(listener);
+            if(a || b)return a && b;
+            return Sunward.Remaster.HeavenlyGarden.Inside(source)==Sunward.Remaster.HeavenlyGarden.Inside(listener);
+        }
         public bool World(string cue,Vector3 position,float range=10,float volume=.65f,bool dialogue=false)
         {
             if(!game || !game.Player || (game.Blocked && !dialogue) || game.CinematicActive)return false;
             float distance=Vector3.Distance(position,game.Player.transform.position);
-            if(distance>=range || !Allow("world:"+cue,.5f))return false;
+            if(distance>=range || !SameRealm(position,game.Player.transform.position) || !Allow("world:"+cue,.5f))return false;
             var clip=Clip(cue);if(!clip)return false;
             AudioSource source=worldSources.Find(s=>!s.isPlaying);
             if(!source)

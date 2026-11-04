@@ -13,7 +13,7 @@ namespace Sunward.Remaster
         readonly List<LineRenderer> gongWaves=new List<LineRenderer>();
         readonly List<float> gongWaveTime=new List<float>();
         Vector3 treasurePoint,lookoutPoint,teaPoint;GameObject digGlow,chest,rewardBlade;
-        bool rewardPlaying;float rewardTime,featureCooldown,gongCooldown,birdTime,wetTime,chimeTime;
+        bool rewardPlaying;float rewardTime,featureCooldown,gongCooldown,wetTime,chimeTime;
         Vector3 cranePoint;OrbitCamera treasureCamera;readonly List<GameObject> treasureEffects=new List<GameObject>();
         public static bool Water(Vector3 point,out float level,out float depth)
         {
@@ -89,7 +89,7 @@ namespace Sunward.Remaster
             foreach(int side in new[]{-1,1})
             {
                 var seat=OnGround(teaPoint+Vector3.right*side*1.45f);var stump=FeatureProp("heaven-tea-seat",seat,new Vector3(.9f,.27f,.9f));if(stump)SolidProp(stump);
-                var actorRoot=new GameObject("Celestial tea guest · recovered seated and sipping motions");actorRoot.SetActive(false);actorRoot.transform.SetParent(garden.transform,false);actorRoot.transform.position=seat+Vector3.up*.015f;actorRoot.transform.rotation=Quaternion.Euler(0,side<0?90:270,0);
+                var actorRoot=new GameObject("Celestial tea guest · recovered seated and sipping motions");actorRoot.SetActive(false);actorRoot.transform.SetParent(garden.transform,false);actorRoot.transform.position=seat+Vector3.up*.25f;actorRoot.transform.rotation=Quaternion.Euler(0,side<0?90:270,0);
                 var actor=actorRoot.AddComponent<OriginalActor>();actor.game=game;actor.resource="Okami/heaven-tea-hm50";actor.idle=actor.walk=actor.run=actor.windup=actor.strike=actor.recover=actor.death="hm05_003";actor.modelScale=.82f;
                 var body=actorRoot.AddComponent<BoxCollider>();body.center=Vector3.up*.65f;body.size=new Vector3(.65f,1.3f,.65f);var tea=actorRoot.AddComponent<HeavenTeaGuest>();tea.actor=actor;tea.phase=side<0?.1f:.65f;actorRoot.SetActive(true);
             }
@@ -98,7 +98,6 @@ namespace Sunward.Remaster
             {var pillar=FeatureProp("vt00",OnGround(lookoutPoint+new Vector3(x,0,z)),new Vector3(.23f,2.9f,.23f));if(pillar)SolidProp(pillar);}
             cranePoint=OnGround(Centre+new Vector3(17,0,22));
             var crane=new GameObject("Original crane · quiet garden bird");crane.SetActive(false);crane.transform.SetParent(garden.transform,false);crane.transform.position=cranePoint;crane.transform.rotation=Quaternion.Euler(0,160,0);var bird=crane.AddComponent<OriginalActor>();bird.game=game;bird.resource="Okami/heaven-crane";bird.idle=bird.walk=bird.run=bird.windup=bird.strike=bird.recover=bird.death="an01_000";bird.modelScale=.6f;crane.SetActive(true);
-            var wind=new GameObject("Quiet original garden wind");wind.transform.SetParent(garden.transform,false);wind.transform.position=Centre+Vector3.up*2;var sound=wind.AddComponent<AudioSource>();sound.playOnAwake=false;sound.loop=true;sound.spatialBlend=1;sound.minDistance=12;sound.maxDistance=55;sound.rolloffMode=AudioRolloffMode.Linear;sound.volume=.055f;sound.dopplerLevel=0;sound.clip=Resources.Load<AudioClip>("Okami/NativeAudio/wind-0");if(sound.clip)sound.Play();wind.AddComponent<HeavenAmbience>();
         }
         void MazeMagic(GameObject boundary,Vector3 a,Vector3 b,float height)
         {

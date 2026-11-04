@@ -1,0 +1,76 @@
+{
+  "sourceBase": "2a519cc65eac9587f1ab64bee8e4d9ac8f999050",
+  "scope": [
+    "Increase heaven pond depth from 18 to 45 cm without swimming",
+    "Remove remaining explicitly looping wind-0 sound; isolate positional village/garden/palace voices",
+    "Raise native floor-seated guests onto actual stump cut surface; preserve approved table and tea settings",
+    "Measure native dialogue pages, inset within curved bubble, preserve every character and stable typewriter positions"
+  ],
+  "checks": {
+    "runtimeCsharpSyntaxFiles": 139,
+    "semanticErrors": 0,
+    "nativeTextContracts": 778,
+    "dialogueAndAudioRoutingContracts": 21,
+    "oldFixedPagesReproducedOverflowCases": 52,
+    "seatMesh": {
+      "vertexSurfaceChecks": 13205,
+      "minimumSkinClearanceMetres": 0.0016518862318514183,
+      "seatRootHeight": 0.25,
+      "pondDepthMetres": 0.45,
+      "removedLoop": "Okami/NativeAudio/wind-0 \u00b7 ST102 stream 0 \u00b7 2.997344 seconds",
+      "runtimeVerified": false
+    },
+    "terrainGeometryContracts": 266,
+    "mazeAndFloorContracts": 4898,
+    "palaceAndThunderSourceContracts": 57
+  },
+  "soundAudit": {
+    "removedPlaybackPath": "HeavenlyGarden.FinishFeatures -> looping AudioSource -> Okami/NativeAudio/wind-0",
+    "sourceArchive": "data_pc/se/st/st102.afs2",
+    "stream": 0,
+    "seconds": 2.997344,
+    "sha256": "78c313edd18a0b70e8754601d40022cb7ce3b2530509cd2080eda3efc37de3f6",
+    "audibleChickenIdentityVerified": false,
+    "change": "Remove this remaining unidentified event loop; no replacement guessed. Village animal world calls are denied across heaven/palace realm boundaries."
+  },
+  "visualInspection": [
+    {
+      "path": "/workspace/work/heaven-dialogue/previews-final/garden-0.png",
+      "label": "Corrected native tea seating",
+      "sha256": "23bd91da915b911bd9c1c0c6c9fabcd963cd832ffd411dc4d4246d3a2c292517",
+      "reviewed": true,
+      "isUnityScreenshot": false
+    },
+    {
+      "path": "/workspace/work/heaven-dialogue/previews/garden-1.png",
+      "label": "45 cm pond seated head clearance",
+      "sha256": "299884e03b82a602e9c21f77ff14e6cc7d078bbe8bb4f57e06dc6eb6b5a8a5c7",
+      "reviewed": true,
+      "isUnityScreenshot": false
+    },
+    {
+      "path": "/workspace/work/heaven-dialogue/ui-previews-final/dialogue-800-page-1.png",
+      "label": "Native measured dialogue at 800x600",
+      "sha256": "40f406783b0cfe9975dd21083e3b5244d1b4b99b8dfdc6682717fbdebf9fac0e",
+      "reviewed": true,
+      "isUnityScreenshot": false
+    },
+    {
+      "path": "/workspace/work/heaven-dialogue/ui-previews-final/dialogue-1366-page-2.png",
+      "label": "Native measured dialogue continued at 1366x768",
+      "sha256": "e6d7a588158dcc6a900ce5bfa09e1f25df59139a5e192488575a87b742bcd8c6",
+      "reviewed": true,
+      "isUnityScreenshot": false
+    }
+  ],
+  "feedback": {
+    "latestPublishedSource": "aefd595",
+    "matchingCurrentBuild": false,
+    "all14Clips": "coverage incomplete"
+  },
+  "unityRuntimeVerified": false,
+  "limitations": [
+    "Native geometry/layout diagnostic previews are not Unity renders. Actual PC audio, motion and collision remain unverified.",
+    "Pond preview uses opaque diagnostic water so shore fit and seated head clearance can be inspected."
+  ]
+}

@@ -26,12 +26,31 @@ namespace Sunward.Remaster
             }
             return y+em;
         }
-        public static void Draw(string text,Rect area,float em,Color colour,bool wrap=true)
+        // Page breaks use the same native glyph advances as painting. Preserve every
+        // character, prefer word boundaries, and keep full-page wrapping during reveal.
+        public static List<string> Paginate(string text,float width,float height,float em)
+        {
+            var pages=new List<string>();if(string.IsNullOrEmpty(text)){pages.Add("");return pages;}
+            width=Mathf.Max(1,width);height=Mathf.Max(em,height);
+            int from=0;
+            while(from<text.Length)
+            {
+                int low=1,high=text.Length-from,fit=1;
+                while(low<=high){int n=(low+high)/2;if(MeasureHeight(text.Substring(from,n),width,em)<=height+.001f){fit=n;low=n+1;}else high=n-1;}
+                int end=from+fit;
+                if(end<text.Length && !char.IsWhiteSpace(text[end]) && !char.IsWhiteSpace(text[end-1]))
+                {int split=end;while(split>from && !char.IsWhiteSpace(text[split-1]))split--;if(split>from)end=split;}
+                pages.Add(text.Substring(from,end-from));from=end;
+            }
+            return pages;
+        }
+        public static void Draw(string text,Rect area,float em,Color colour,bool wrap=true,int visibleCharacters=-1)
         {
             Load();if(!texture || string.IsNullOrEmpty(text) || area.width<=0 || area.height<=0)return;
             var old=GUI.color;GUI.color=colour;float x=0,y=0;GUI.BeginGroup(area);
             for(int i=0;i<text.Length;i++)
             {
+                if(visibleCharacters>=0 && i>=visibleCharacters)break;
                 char c=text[i];if(c=='\r')continue;if(c=='\n'){x=0;y+=em*.98f;continue;}
                 if(wrap && c!=' ' && (i==0 || text[i-1]==' ' || text[i-1]=='\n')){float word=WordWidth(text,i,em);if(word<area.width && x>0 && x+word>area.width){x=0;y+=em*.98f;}}
                 var g=Find(c);if(g==null)continue;float advance=Advance(c,em);
