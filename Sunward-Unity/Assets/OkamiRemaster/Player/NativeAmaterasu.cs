@@ -254,7 +254,7 @@ namespace Sunward.Remaster
                 // Ease back and forth inside the original moving preparation
                 // segment. No held frame and no hard wrap to its recovery pose.
                 float pulse=(1-Mathf.Cos(time*Mathf.PI/Mathf.Max(.1f,clip.Duration)))*.5f;
-                t=clip.Duration*Mathf.Lerp(.18f,.72f,pulse);loop=false;
+                t=clip.Duration*Mathf.Lerp(binding.state=="NativeCharge_glaive"?.05f:.18f,binding.state=="NativeCharge_glaive"?.26f:.72f,pulse);loop=false;
             }
             if(tundraClock)
             {
@@ -276,6 +276,12 @@ namespace Sunward.Remaster
                 else {t=tundraPhase*clip.Duration;loop=false;}
             }
             bank.Sample(selected, t, rig.Bones, fromPosition, fromRotation, fromScale, blendDuration > 0 ? Mathf.SmoothStep(0, 1, blendTime / blendDuration) : 1, loop, binding.mirror);
+            if(binding.state=="NativeAttack_524" && time>clip.Duration*.78f)
+            {
+                var rest=bank.Find("pl00_000");
+                for(int i=0;i<bank.BoneCount;i++){fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}
+                bank.Sample(rest,0,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,(time/clip.Duration-.78f)/.22f),true);
+            }
             // Follow the bone pose without inheriting its squash/stretch scale
             // into a separately skinned weapon. Skin scales remain untouched.
             foreach (var socket in sockets)
@@ -285,7 +291,7 @@ namespace Sunward.Remaster
                     // action origin. The held idle rosary instead belongs at the
                     // anatomical dorsal bind on the moving torso. Cast/strike
                     // curves still use their authored action-origin attachment.
-                    bool held=socket.bone==Back && binding.state==TundraAttackRules.Charge && motor && motor.game && motor.game.Combat && motor.game.Combat.HoldingCharge;
+                    bool held=socket.bone==Back && binding.state.StartsWith("NativeCharge_") && motor && motor.game && motor.game.Combat && motor.game.Combat.HoldingCharge;
                     Vector3 point=held?rig.Bones[1].TransformPoint(dorsalBindOffset):socket.bone.TransformPoint(socket.offset);
                     socket.socket.SetPositionAndRotation(point,(held?rig.Bones[1].rotation*dorsalBindRotation:socket.bone.rotation)*socket.rotation);
                 }

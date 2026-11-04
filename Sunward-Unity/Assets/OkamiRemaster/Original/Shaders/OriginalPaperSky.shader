@@ -7,7 +7,7 @@ Shader "Sunward/Original Paper Sky" {
  #pragma vertex vert
  #pragma fragment frag
  #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
- float _SunwardNight,_SunwardHeaven;
+ float _SunwardNight,_SunwardHeaven,_HeavenPalace;
  TEXTURE2D(_MainTex);SAMPLER(sampler_MainTex);
  TEXTURE2D(_SunwardHeavenClouds);SAMPLER(sampler_SunwardHeavenClouds);
  struct A { float4 position:POSITION; };
@@ -20,7 +20,7 @@ Shader "Sunward/Original Paper Sky" {
  half3 cloud=SAMPLE_TEXTURE2D(_SunwardHeavenClouds,sampler_SunwardHeavenClouds,float2(uv.x*3+_Time.y*.0015,uv.y*2)).rgb;
  half curl=saturate((.83-dot(cloud,half3(.333,.333,.334)))*3);
  half3 heaven=lerp(horizon,half3(.85,.77,.91),curl*.45);
- c.rgb=lerp(c.rgb,heaven,_SunwardHeaven);c.rgb*=lerp(float3(1,1,1),float3(.055,.085,.18),_SunwardNight);return c;
+ c.rgb=lerp(c.rgb,heaven,_SunwardHeaven);c.rgb*=lerp(float3(1,1,1),float3(.055,.085,.18),_SunwardNight);if(_HeavenPalace>.5)c.rgb=lerp(half3(.995,.995,1),half3(.92,.95,1),curl*.4);return c;
  }
  ENDHLSL }
  } Fallback Off

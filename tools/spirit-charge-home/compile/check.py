@@ -1,7 +1,7 @@
 """Compile whole camera, cinematic, audio and native drivers with explicit engine doubles."""
 from pathlib import Path
 import tempfile,subprocess,os,re,argparse
-root=Path(__file__).resolve().parents[3];p=argparse.ArgumentParser();p.add_argument('--dotnet',default='dotnet');p.add_argument('--negative-control',action='store_true');p.add_argument('--river-negative-control',action='store_true');p.add_argument('--street-spawn-negative-control',action='store_true');args=p.parse_args()
+root=Path(__file__).resolve().parents[3];p=argparse.ArgumentParser();p.add_argument('--dotnet',default='dotnet');p.add_argument('--negative-control',action='store_true');p.add_argument('--river-negative-control',action='store_true');p.add_argument('--street-spawn-negative-control',action='store_true');p.add_argument("--charge-negative-control",action="store_true");p.add_argument("--dump-doubles");args=p.parse_args()
 s=(root/'tools/spirit-charge-home/tests/RuntimeDoubles.cs').read_text()
 s=s.replace('public sealed partial class GameFlow:MonoBehaviour', 'public sealed partial class GameFlow:MonoBehaviour')
 s=s.replace('namespace Sunward.Remaster{public class VillagePresentation:UnityEngine.Object{public void Cancel(){}}}','')
@@ -70,7 +70,7 @@ s=s.replace('public int bossWins,wins,defeats,coins,xp;', 'public int vegetables
 s=s.replace('public int cancels,rests;', 'public float FormMultiplier=>1;public int cancels,rests;')
 s=s.replace('public float Health,Stamina,Energy,hitUntil;', 'public GameObject[] npcObjects=System.Array.Empty<GameObject>();public System.Collections.Generic.List<EnemyBrain> Enemies=new System.Collections.Generic.List<EnemyBrain>();public void WorldPrompt(string text){}public float Health,Stamina,Energy,hitUntil;')
 s=s.replace('public class VillageResident:UnityEngine.Object{public GameFlow game;}', 'public class VillageResident:UnityEngine.Object{public GameFlow game;public int index;public bool stallkeeper;}')
-s=s.replace('public class VillageServices:Object{', 'public class VillageServices:Object{public static Vector3 Farmer=>Vector3.zero;public static bool InDojo(Vector3 p)=>false;public void RestAt(Vector3 p,float yaw){}')
+s=s.replace('public class VillageServices:Object{', 'public class VillageServices:Object{public static Vector3 Farmer=>Vector3.zero;public static bool InDojo(Vector3 p)=>false;public int restRequests;public Vector3 restPoint;public void RestAt(Vector3 p,float yaw){restRequests++;restPoint=p;}')
 s+='\n'+Path(__file__).with_name('VillageBrushDoubles.cs').read_text()
 s=re.sub(r' public static partial class LowerArena[^\n]*\n','',s)
 s=s.replace('public static Vector3 zero=>','public static Vector3 down=>new Vector3(0,-1,0);public static Vector3 zero=>')
@@ -190,6 +190,9 @@ s=s.replace('public static Vector3 Lerp(', 'public static Vector3 Cross(Vector3 
 s=s.replace('public class ParticleSystem:Object{', 'public class ParticleSystem:Object{public class VelocityModule{public float y;}public VelocityModule velocityOverLifetime=new VelocityModule();')
 s=s.replace('public class LineRenderer:', 'public class LineRenderer:')
 s=s.replace('public int positionCount;', 'public bool loop;public int positionCount;')
+s=s.replace('public GameObject(string n=""){', 'public GameObject(string n=""){name=n;')
+s=s.replace('{foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories))foreach(var ext', '{foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories)){if(typeof(T)==typeof(Material) && File.Exists(Path.Combine(dir,name+".mat")))return new Material((Material)null){shader=new Shader()} as T;}foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories))foreach(var ext')
+if args.dump_doubles:Path(args.dump_doubles).write_text(s)
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:
@@ -198,13 +201,17 @@ with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
   old=Path(temp)/'WaterContactBefore.cs';old.write_bytes(subprocess.check_output(['git','show','d70906a28725bcd7fabc17103b87039b3fc44b91:Sunward-Unity/Assets/Sunward/Scripts/WaterContact.cs'],cwd=root));cmd+=['-p:WaterSource='+str(old)]
  if args.street_spawn_negative_control:
   old=Path(temp)/'StreetBefore.cs';old.write_bytes(subprocess.check_output(['git','show','66029d8a8411860d47d3cc760a90c98b9951f88b:Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/VillageStreetPlay.cs'],cwd=root));cmd+=['-p:StreetSource='+str(old)]
+ if args.charge_negative_control:
+  old=Path(temp)/'NativeBefore.cs';old.write_bytes(subprocess.check_output(['git','show','4bb8a7409797ff8408d0284d989a526c061bf657:Sunward-Unity/Assets/OkamiRemaster/Player/NativeAmaterasu.cs'],cwd=root));cmd+=['-p:NativeBodySource='+str(old)]
  r=subprocess.run(cmd,cwd=root,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'),capture_output=True,text=True);print(r.stdout);print(r.stderr)
  if args.negative_control:
   assert r.returncode!=0 and 'CS0136' in r.stdout,'Compiler failed to catch original scope regression';print('Negative control caught original CS0136 camera regression')
  else:
   assert r.returncode==0,'Whole-script semantic compilation failed (engine doubles, not Unity)'
   command=[args.dotnet,str(Path(__file__).with_name('bin')/'Debug/net8.0/Compile.dll'),str(root/'Sunward-Unity/Assets')]
-  if args.street_spawn_negative_control:
+  if args.charge_negative_control:
+   result=subprocess.run(command,capture_output=True,text=True,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'));assert result.returncode!=0 and 'Glaive release holds displaced final pose' in result.stderr,result.stdout+result.stderr;print('PASS negative control: old charged release fails the native recovery assertion')
+  elif args.street_spawn_negative_control:
    result=subprocess.run(command,capture_output=True,text=True,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'));assert result.returncode!=0 and 'Original Okami actor could not load' in result.stderr,result.stdout+result.stderr;print('PASS negative control: original active-add order runs Awake before actor resources are assigned')
   elif args.river_negative_control:
    result=subprocess.run(command,capture_output=True,text=True,env=dict(os.environ,DOTNET_CLI_TELEMETRY_OPTOUT='1'));assert result.returncode!=0 and 'River recovery ejects player' in result.stderr,result.stdout+result.stderr;print('PASS negative control: previous river code ejects player immediately after walking into a house')

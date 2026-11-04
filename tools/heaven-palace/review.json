@@ -1,0 +1,75 @@
+{
+  "scope": "Heaven shallow ponds, gong, tea staging, treasure reveal, Thunder Edge and palace repairs",
+  "unityRuntimeVerified": false,
+  "feedback": {
+    "latestAvailableSource": "aefd595",
+    "matchesThisUpdate": false,
+    "clipCoverage": "All 14 clips incomplete; no current-build PC recording"
+  },
+  "checks": {
+    "csharpSyntaxFiles": 139,
+    "semanticCompileErrors": 0,
+    "coreEngineDoubleContracts": 1388,
+    "wholeWolfCombatEngineDoubleContracts": 58,
+    "catalogContracts": 33,
+    "nativeGeometryContracts": 264,
+    "mazeAndFloorContracts": 4898,
+    "taskContracts": 57,
+    "negativeControl": "Baseline charged release fails displaced-final-pose assertion; repaired controller passes"
+  },
+  "geometry": {
+    "checks": 57,
+    "pondDepthMetres": 0.18,
+    "teaPelvisHeight": 0.27426725029945376,
+    "stumpHeight": 0.27,
+    "seatedHeadAboveWater": 0.8261241021159278,
+    "scope": "Native geometry/source contracts, not Unity physics or visual playback"
+  },
+  "nativeAssets": {
+    "teaTable": "Assembled from recovered DR0D timber floor tabletop component and VT00 timber legs; not a recovered complete tea-table model",
+    "thunder": "Recovered WP29 side-guard variants selected separately; original Native-0-0 lightning geometry, original WP29 bank streams 1 and 3. No claim of recovered native EST event dispatcher.",
+    "palace": "Recovered PL0D Shiranui skin with original PL00_004 sleep loop, original cloud/spirit art",
+    "quest": "Level 15, 30 total upgrade ranks, future guardian pending; P remains test shortcut"
+  },
+  "visualReview": [
+    {
+      "file": "/workspace/work/heaven-palace/previews/garden-0.png",
+      "label": "Tea seating and two settings",
+      "sha256": "d10961a951bf5c543b3506ec3aac0bf355336c9dabd6ab502794f25d32bb0ff1",
+      "reviewed": true,
+      "type": "Offline native geometry preview; not Unity"
+    },
+    {
+      "file": "/workspace/work/heaven-palace/previews/garden-1.png",
+      "label": "Shallow pond sitting",
+      "sha256": "c13929667356bf18516585e91b1bac56b92fed1699d95668471586db25c29647",
+      "reviewed": true,
+      "type": "Offline native geometry preview; not Unity"
+    },
+    {
+      "file": "/workspace/work/heaven-palace/previews/garden-7.png",
+      "label": "White cloud palace and sleeping Shiranui",
+      "sha256": "120c82a513a9438d2687d3f334dd41757d4a8abc662fcb4002d12faae7c3e94b",
+      "reviewed": true,
+      "type": "Offline native geometry preview; not Unity"
+    },
+    {
+      "file": "/workspace/work/heaven-palace/previews/garden-8.png",
+      "label": "Open chest and vertical reward",
+      "sha256": "718ac67cc5a2f042566807ac5b74bb5aa92b91cfc7e1e42762e1bc0bdf5c6255",
+      "reviewed": true,
+      "type": "Offline native geometry preview; not Unity"
+    },
+    {
+      "file": "/workspace/work/heaven-palace/previews/garden-9.png",
+      "label": "Native lightning strike geometry",
+      "sha256": "1aa699eecdebe5171c0734c14187cfd459d908790f5a98701ecc11e38e9b6479",
+      "reviewed": true,
+      "type": "Offline native geometry preview; not Unity"
+    }
+  ],
+  "limitations": [
+    "Offline native-geometry previews are not Unity rendering; shader import, actual collision, audio mix and game motion need PC play-test.",
+    "Pond preview uses opaque diagnostic water tint to inspect rim fit."
+  ]
+}

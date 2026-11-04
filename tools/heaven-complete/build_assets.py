@@ -51,7 +51,7 @@ pools=[]
 for item in layout['items']:
  if item['kind']!='pond':continue
  x,z=item['position']['x'],item['position']['z'];sx,sz=item['size']['x'],item['size']['z'];level=base.height(x,z)-.06;root=min(base.height(x+dx,z+dz) for dx,dz in [(-.4*sx,-.4*sz),(.4*sx,-.4*sz),(-.4*sx,.4*sz),(.4*sx,.4*sz)])-.10
- pools.append(dict(position=dict(x=x,y=level,z=z),radius=dict(x=sx*.265,y=sz*.265),depth=.85))
+ pools.append(dict(position=dict(x=x,y=level,z=z),radius=dict(x=sx*.265,y=sz*.265),depth=.18))
  item['resource']='Okami/heaven-pond-basin';item['position']['y']=root;item['absoluteHeight']=True;item['yaw']=0
 # Refine original terrain triangles around ponds, then lower those vertices into real basins.
 m=json.load(open(D/'celestial-grounded/Model.json'));origin=np.array([0,-.18,0]);refined=[]
@@ -72,7 +72,7 @@ for part in m['parts']:
  for p in pools:
   xx=(world[:,0]-p['position']['x'])/p['radius']['x'];zz=(world[:,2]-p['position']['z'])/p['radius']['y'];r=np.sqrt(xx*xx+zz*zz);t=np.clip((r-.72)/(1.7-.72),0,1);weight=1-t*t*(3-2*t);bed=p['position']['y']-p['depth'];world[:,1]=world[:,1]*(1-weight)+bed*weight
  rec[:,:3]=world-origin;n=len(rec);q=dict(part);q['positions']=rec[:,:3].ravel().tolist();q['uv']=rec[:,3:5].ravel().tolist();q['colors']=rec[:,5:9].ravel().tolist();q['indices']=np.array(faces).ravel().tolist();q['boneIndices']=[-1]*(n*3);q['weights']=[a for _ in range(n) for a in [1,0,0]];refined.append(q)
-m['parts']=refined;m['derivation']='Original r108 terrain triangles locally refined by midpoint interpolation around native pond banks, then lowered into 0.85m basins. Original UV/pigment are interpolated; no new painted artwork.';save('heaven-basin-terrain',m,'celestial-grounded')
+m['parts']=refined;m['derivation']='Original r108 terrain triangles locally refined by midpoint interpolation around native pond banks, then lowered into 0.18m shallow basins. Original UV/pigment are interpolated; no new painted artwork.';save('heaven-basin-terrain',m,'celestial-grounded')
 # Place terrain without renormalising its new lower bound: compensate bottom origin.
 allv=np.concatenate([np.array(p['positions']).reshape(-1,3) for p in m['parts']]);lo,hi=allv.min(0),allv.max(0)
 for i in layout['items']:

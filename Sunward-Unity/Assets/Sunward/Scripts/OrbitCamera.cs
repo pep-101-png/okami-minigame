@@ -17,10 +17,11 @@ namespace Sunward
         bool savedIgnoreTimeScale;
         float savedFov,cinematicYaw,cinematicPitch,cinematicDistance;
         Vector3 cinematicFocus;
-        public void BeginCinematic()
+        bool cinematicCollisions=true;
+        public void BeginCinematic(bool avoidObstacles=true)
         {
             if(cinematic || !virtualCamera)return;
-            cinematic=true;savedFov=virtualCamera.Lens.FieldOfView;
+            cinematicCollisions=avoidObstacles;cinematic=true;savedFov=virtualCamera.Lens.FieldOfView;
             brain=Camera.main?Camera.main.GetComponent<CinemachineBrain>():null;
             if(brain){savedIgnoreTimeScale=brain.IgnoreTimeScale;brain.IgnoreTimeScale=true;}
         }
@@ -52,7 +53,7 @@ namespace Sunward
             if(cinematic)
             {
                 Vector3 cinematicOffset=Quaternion.Euler(cinematicPitch,cinematicYaw,0)*Vector3.back*cinematicDistance;
-                if(Physics.SphereCast(cinematicFocus,.18f,cinematicOffset.normalized,out var obstruction,cinematicDistance,1<<6,QueryTriggerInteraction.Ignore))
+                if(cinematicCollisions && Physics.SphereCast(cinematicFocus,.18f,cinematicOffset.normalized,out var obstruction,cinematicDistance,1<<6,QueryTriggerInteraction.Ignore))
                     cinematicOffset=cinematicOffset.normalized*Mathf.Max(.4f,obstruction.distance-.2f);
                 virtualCamera.transform.SetPositionAndRotation(cinematicFocus+cinematicOffset,Quaternion.LookRotation(-cinematicOffset));
                 return;

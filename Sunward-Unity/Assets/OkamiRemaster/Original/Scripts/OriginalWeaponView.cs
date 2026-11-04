@@ -32,6 +32,7 @@ namespace Sunward.Remaster
             renderers=rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true);
             foreach(var renderer in renderers)
             {renderer.localBounds=new Bounds(Vector3.zero,new Vector3(64,32,64));renderer.updateWhenOffscreen=true;}
+            combat=GetComponentInParent<WolfCombat>();
             if(Tundra)
             {
                 combat=GetComponentInParent<WolfCombat>();
@@ -96,6 +97,11 @@ namespace Sunward.Remaster
         void LateUpdate()
         {
             if(rig==null || idle==null)return;
+            if(package=="wp29")
+            {
+                int guard=combat && combat.HoldingCharge?3:combat && combat.game && combat.game.Profile.equipped==OriginalWeaponEvolution.ThunderId?4:2;
+                foreach(var r in renderers){int group=int.Parse(r.sharedMesh.name.Split('-')[1]);r.enabled=group==1 || group==guard;}
+            }
             if(!Tundra)
             {if(action!=null)return;idleTime+=Time.deltaTime;Sample(idle,idleTime,true,1);return;}
             if(combat && combat.game && combat.game.Blocked)return;

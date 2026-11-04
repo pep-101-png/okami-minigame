@@ -7,6 +7,7 @@ namespace Sunward.Remaster
     // projectile movement remain Sunward mechanics, not fabricated native events.
     public sealed class OriginalVisual : MonoBehaviour
     {
+        public Transform PaintRoot=>rig!=null?rig.Root.transform:transform;
         NativePaintedRig rig;NativePoseBank motionBank;Vector3[] motionPositions,motionScales;Quaternion[] motionRotations;
         public void SampleMotion(string resource,string clip,float time)
         {

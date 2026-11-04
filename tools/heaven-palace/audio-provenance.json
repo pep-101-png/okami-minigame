@@ -1,0 +1,77 @@
+[
+  {
+    "cue": "heaven-gong-strike",
+    "resource": "Okami/NativeAudio/heaven-gong-strike",
+    "source": "/workspace/work/playtest-repair/source-native/data_pc/se/core/core.ses",
+    "stream": 13,
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 5434,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -14.217,
+        "peak": 0.995667,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.362258,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -8.783,
+      "seconds": 7.2453,
+      "clearADX_SHA256": "a40ff4113596649c962c1a5eabb30af7182ef5b3bac68937bd02f51393238e5e"
+    }
+  },
+  {
+    "cue": "thunder-strike",
+    "resource": "Okami/NativeAudio/thunder-strike",
+    "source": "/workspace/work/playtest-repair/source-native/data_pc/se/wp/wp29.ses",
+    "stream": 1,
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 985,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -8.985,
+        "peak": 1.0,
+        "clippedFraction": 0.00058296
+      },
+      "output": {
+        "rmsDBFS": -23.001,
+        "peak": 0.199795,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -14.014,
+      "seconds": 2.2514,
+      "clearADX_SHA256": "291c42d39710bea4a0796809d4f38cd1272350f2d55d5fb0b149d3bc4fb49592"
+    }
+  },
+  {
+    "cue": "thunder-burst",
+    "resource": "Okami/NativeAudio/thunder-burst",
+    "source": "/workspace/work/playtest-repair/source-native/data_pc/se/wp/wp29.ses",
+    "stream": 3,
+    "conversion": {
+      "sourceVersion": "0x408",
+      "frameScalesDecrypted": true,
+      "frames": 1267,
+      "reference": "vgmstream Okami type-8 frame-scale decoder",
+      "decoded": {
+        "rmsDBFS": -17.263,
+        "peak": 1.0,
+        "clippedFraction": 1.233e-05
+      },
+      "output": {
+        "rmsDBFS": -24.21,
+        "peak": 0.45,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.946,
+      "seconds": 2.534,
+      "clearADX_SHA256": "1129a2b9db17fb8a924d3d70a88524f6ae9574c48d1c70266f53bd4fe2948c85"
+    }
+  }
+]

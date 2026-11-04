@@ -14,18 +14,19 @@ namespace Sunward.Remaster
         bool keeperConversation;float keeperCooldown;
         Vector2 mazeMin,mazeMax;
         float fallTime;Vector3 fallStart;OrbitCamera orbit;GameObject garden,river;bool visible;
-        public static bool Inside(Vector3 p)=>p.y>58 && p.y<100 && Mathf.Abs(p.x-Centre.x)<49 && Mathf.Abs(p.z)<47;
+        public static bool Inside(Vector3 p)=>PalaceInside(p) || p.y>58 && p.y<100 && Mathf.Abs(p.x-Centre.x)<49 && Mathf.Abs(p.z)<47;
         public static bool RiverLip(Vector3 p)=>p.y>-2 && p.y<2 && p.z>WaterfallLip-.75f && p.z<WaterfallLip+1 && Mathf.Abs(p.x-Valley.RiverX(-p.z))<2.8f;
         public static int UpgradeRanks(ProfileData p){int n=0;foreach(var id in ProgressionRules.Upgrades)n+=p.upgrades.Get(id);return n;}
         public static bool GrowthReady(ProfileData p)=>ProgressionRules.Level(p)>=15 && UpgradeRanks(p)>=30;
         public static Vector3 Guard(Vector3 p)
         {
+            if(p.y>76 && p.z>90)return PalaceGuard(p);
             Vector2 d=new Vector2((p.x-Centre.x)/WalkRadiusX,p.z/WalkRadiusZ);if(d.magnitude>1){d=d.normalized;p.x=Centre.x+d.x*WalkRadiusX;p.z=d.y*WalkRadiusZ;}return p;
         }
         static readonly RaycastHit[] hits=new RaycastHit[40];
         public static bool Height(Vector3 p,out float y)
         {
-            y=Centre.y;if(!Inside(p))return false;
+            y=Centre.y;if(PalaceInside(p)){y=PalaceCentre.y+.025f;return true;}if(!Inside(p))return false;
             int n=Physics.RaycastNonAlloc(new Vector3(p.x,98,p.z),Vector3.down,hits,35,1<<6,QueryTriggerInteraction.Ignore);
             float top=float.NegativeInfinity;
             for(int i=0;i<n;i++)if(hits[i].collider.name.StartsWith("Heaven garden ground"))
@@ -168,6 +169,10 @@ namespace Sunward.Remaster
         public bool OwnsRenderer(Renderer renderer)
         {
             if(!renderer)return false;
+            bool inPalace=game && game.Player && PalaceInside(game.Player.transform.position);
+            bool belongsPalace=palace && renderer.transform.IsChildOf(palace.transform);
+            if(inPalace)return belongsPalace || (game && game.Player && renderer.transform.IsChildOf(game.Player.transform)) || PalaceInside(renderer.bounds.center);
+            if(belongsPalace || PalaceInside(renderer.bounds.center))return false;
             return (garden && renderer.transform.IsChildOf(garden.transform)) ||
                 (game && game.Player && renderer.transform.IsChildOf(game.Player.transform)) || Inside(renderer.bounds.center);
         }
@@ -184,7 +189,7 @@ namespace Sunward.Remaster
         void Update()
         {
             if(!game || !game.Player || !garden)return;
-            bool inside=Inside(game.Player.transform.position);
+            bool inside=Inside(game.Player.transform.position);Shader.SetGlobalFloat("_HeavenPalace",PalaceInside(game.Player.transform.position)?1:0);
             if(inside!=visible){visible=inside;garden.SetActive(visible);if(visible){Physics.SyncTransforms();var p=game.Player.transform.position;if(Height(p,out var h))game.Player.Teleport(new Vector3(p.x,h+.05f,p.z));}}
             Shader.SetGlobalFloat("_SunwardHeaven",inside?1:0);Shader.SetGlobalFloat("_SunwardRiverClock",Time.unscaledTime);
             if(rewardPlaying){TickTreasure();return;}
@@ -206,6 +211,7 @@ namespace Sunward.Remaster
             if(game.Blocked || game.InTrial || game.Health<=0)return;
             var player=game.Player.transform.position;
             if(!inside){if(RiverLip(player))BeginFall();else if(player.z>28 && Mathf.Abs(player.x-Valley.RiverX(-player.z))<4)game.WorldPrompt("The river falls into a spirit passage ahead");return;}
+            if(PalaceInteractions())return;
             if(GardenInteractions())return;
             bool nearReturn=new Vector2(player.x-Return.x,player.z-Return.z).magnitude<3.2f;
             bool nearKeeper=new Vector2(player.x-Altar.x,player.z-(Altar.z-5)).magnitude<4.2f;
@@ -216,11 +222,11 @@ namespace Sunward.Remaster
                 else if(nearKeeper && keeperCooldown<=0)
                 {
                     keeperConversation=true;
-                    game.ShowDialogue("Amaterasu, the Celestial Plain is the gods' home. A century ago, the white wolf Shiranui stood beside Nagi against Orochi. Your journey carries that light onward. This garden and its trial are Sunward's own story.\n\nTo awaken the altar's trial: reach level 15 (now "+ProgressionRules.Level(game.Profile)+"), earn 30 upgrade ranks (now "+UpgradeRanks(game.Profile)+"), and defeat the guardian. That future boss has not yet been added, so the quest cannot be completed. P remains a testing shortcut.");
+                    game.ShowDialogue("Amaterasu, Shiranui sleeps behind a mystical barrier inside the heavens palace. Walk up these stairs and through its doorway. You must free him from the seal to awaken your true form. The Celestial Plain is the gods' home. A century ago, the white wolf Shiranui stood beside Nagi against Orochi. Your journey carries that light onward. This garden and its trial are Sunward's own story.\n\nTo free Shiranui from the palace seal: reach level 15 (now "+ProgressionRules.Level(game.Profile)+"), earn 30 upgrade ranks (now "+UpgradeRanks(game.Profile)+"), and defeat the guardian. That future boss has not yet been added, so the quest cannot be completed. P remains a testing shortcut.");
                 }
             }
         }
-        void OnDisable(){if(garden)garden.SetActive(false);visible=false;keeperConversation=false;keeperCooldown=0;Cancel();Shader.SetGlobalFloat("_SunwardHeaven",0);}
+        void OnDisable(){if(garden)garden.SetActive(false);visible=false;keeperConversation=false;keeperCooldown=0;Cancel();Shader.SetGlobalFloat("_HeavenPalace",0);Shader.SetGlobalFloat("_SunwardHeaven",0);}
         void OnDestroy(){ClearFeatures();if(garden)Destroy(garden);if(river)Destroy(river);}
     }
 }

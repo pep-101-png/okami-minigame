@@ -20,6 +20,7 @@ namespace Sunward
         Sunward.Remaster.OriginalWeaponView originalView;
         public string EquippedTitle => originalWeapon != null ? originalWeapon.title : "Tsumugari";
         bool Tundra=>originalWeapon!=null && originalWeapon.resource=="wp2e";
+        bool Thunder=>originalWeapon!=null && originalWeapon.resource=="wp29";
         bool Glaive => originalWeapon == null || originalWeapon.family == "glaive";
         Sunward.Remaster.NativeAmaterasu nativeBody;
         Strike strike;
@@ -32,7 +33,7 @@ namespace Sunward
         readonly HashSet<EnemyBrain> hit = new HashSet<EnemyBrain>();
         readonly HashSet<Sunward.Remaster.TrainingDummy> dummyHits = new HashSet<Sunward.Remaster.TrainingDummy>();
         readonly Collider[] contacts = new Collider[48];
-        float barkCooldown, voice;
+        float barkCooldown, voice;bool thunderBurstUsed,thunderAudioUsed;
         void Start()
         {
             nativeBody=GetComponent<Sunward.Remaster.NativeAmaterasu>();
@@ -82,7 +83,7 @@ namespace Sunward
             float length=nativeBody && nativeBody.Ready?nativeBody.ClipLength(next.clip):next.duration;
             if(originalView)length=Mathf.Max(length,originalView.AttackLength(next.clip));
             strike=new Strike {clip=next.clip,duration=Mathf.Max(.1f,length/FormMultiplier),damage=next.damage,range=next.range,arc=next.arc,start=next.start,end=next.end,lunge=next.lunge,stagger=next.stagger};
-            elapsed = 0;sourceAttackDuration=length;havePreviousBeads=false;previousBeadPhase=0;tundraImpactPlayed=false;
+            elapsed = 0;thunderBurstUsed=thunderAudioUsed=false;sourceAttackDuration=length;havePreviousBeads=false;previousBeadPhase=0;tundraImpactPlayed=false;
             hit.Clear();
             dummyHits.Clear();
             charging = false;
@@ -100,7 +101,7 @@ namespace Sunward
             if(!game)return;
             // An interrupted arena/dojo action must release the shared pose
             // clock rather than leave Amaterasu held in the last attack frame.
-            if(Tundra && (!CombatArea || motor.Locked || motor.Swimming) && (strike!=null || charging))Cancel();
+            if((!CombatArea || motor.Locked || motor.Swimming) && (strike!=null || charging))Cancel();
             if (!CombatArea || game.Blocked || motor.Locked || motor.Swimming)
                 return;
             float dt = Time.deltaTime;
@@ -123,7 +124,7 @@ namespace Sunward
                 voice = .55f;
                 motor.animationView.Play("Bark", .06f, .55f);
                 game.Audio.Cue("bark");
-                game.Fx.Ring(transform.position, new Color(.8f, .9f, .7f), 5.5f);
+                Sunward.Remaster.WeaponElementFx.Bark(game,originalWeapon.resource,transform.position);
                 foreach (var e in game.Enemies)
                     if (Vector3.Distance(e.transform.position, transform.position) < 5.5f)
                         e.Stun(1.1f);
@@ -145,8 +146,11 @@ namespace Sunward
                 motor.Push(transform.forward * (strike.lunge * Mathf.Sin(Mathf.Clamp01(p) * Mathf.PI) * dt));
                 if (!Tundra && p >= strike.start && previousPhase <= strike.end)
                     Hit();
+                if(Thunder && strike.clip=="NativeAttack_524" && !thunderBurstUsed && p>=.48f && motor.Grounded)
+                {var at=transform.position+transform.forward*Mathf.Min(3,strike.range*.65f);at.y=motor.valley.Height(at)+.1f;ThunderContact(at);}
                 if (p >= 1)
                 {
+                    if(Thunder)motor.animationView.Play("Idle_Natural",.14f,0,true);
                     strike = null;havePreviousBeads=false;
                     if(Tundra && nativeBody)nativeBody.EndTundraAction();
                     if(originalView)originalView.EndAttack();
@@ -227,7 +231,7 @@ namespace Sunward
                 {
                     Vector3 toward = dummy.transform.position - transform.position; toward.y = 0;
                     if (toward.sqrMagnitude < .01f || Vector3.Dot(transform.forward,toward.normalized) >= strike.arc)
-                    { dummyHits.Add(dummy); dummy.Strike(); }
+                    { dummyHits.Add(dummy); dummy.Strike(!Thunder); if(Thunder)ThunderContact(dummy.transform.position+Vector3.up*.7f); }
                     continue;
                 }
                 var e = contacts[i].GetComponentInParent<EnemyBrain>();
@@ -243,16 +247,17 @@ namespace Sunward
 
             }
         }
+        void ThunderContact(Vector3 point)
+        {bool large=strike.clip=="NativeAttack_524" && !thunderBurstUsed;if(large)thunderBurstUsed=true;Sunward.Remaster.WeaponElementFx.Thunder(game,point,large,!thunderAudioUsed);thunderAudioUsed=true;}
         void DamageEnemy(EnemyBrain e,Vector3 d)
         {
                 hit.Add(e);
                 float mul = 1 + (ProgressionRules.Level(game.Profile) - 1) * .045f + game.Profile.upgrades.strength * .18f;
                 mul *= 1 + (Glaive ? game.Profile.upgrades.spear * .12f : game.Profile.upgrades.sundial * .14f);
                 e.Damage(strike.damage * mul*FormMultiplier, d.normalized, strike.stagger);
-                game.Fx.Impact(e.transform.position + Vector3.up * .8f, Tundra?new Color(.55f,.85f,1):Glaive ? new Color(.9f, .75f, .48f) : new Color(1, .38f, .13f));
-                Sunward.Remaster.CelestialBrush.Burst("Spark",e.transform.position+Vector3.up*.8f,heavy?18:9,heavy?.7f:.4f);
-                if(originalWeapon.id==Sunward.Remaster.OriginalWeaponEvolution.ThunderId)
-                {Sunward.Remaster.CelestialBrush.Burst("Spark",e.transform.position+Vector3.up,20,.55f);Sunward.Remaster.CelestialBrush.Burst("SpiritGlow",e.transform.position+Vector3.up,7,.22f);}
+                if(!Thunder)game.Fx.Impact(e.transform.position + Vector3.up * .8f, Tundra?new Color(.55f,.85f,1):Glaive ? new Color(.9f, .75f, .48f) : new Color(1, .38f, .13f));
+                if(!Thunder)Sunward.Remaster.CelestialBrush.Burst("Spark",e.transform.position+Vector3.up*.8f,heavy?18:9,heavy?.7f:.4f);
+                if(Thunder)ThunderContact(e.transform.position+Vector3.up*.7f);
                 if(Tundra)
                 {
                     var frost=Sunward.Remaster.OriginalAtmosphere.Create("SpiritGlow",null,e.transform.position+Vector3.up*.8f,0,.28f,.5f,.12f,.25f);
@@ -260,7 +265,7 @@ namespace Sunward
                 }
                 if(originalWeapon.family=="reflector")Sunward.Remaster.CelestialBrush.Burst(originalWeapon.resource=="wp24"?"Flame":"SpiritGlow",e.transform.position+Vector3.up,8,.45f);
                 if(Tundra){if(!tundraImpactPlayed){tundraImpactPlayed=true;if(strike.clip!=Sunward.Remaster.TundraAttackRules.Cast)game.Audio.TundraContact();}}
-                else game.Audio.Cue(heavy ? "heavy-impact" : originalWeapon.family=="reflector" ? "flame-impact" : "impact");
+                else if(!Thunder)game.Audio.Cue(heavy ? "heavy-impact" : originalWeapon.family=="reflector" ? "flame-impact" : "impact");
                 game.HitPause(heavy ? .065f : .04f);
         }
         // Called after native body sockets and bead skinning have sampled the
