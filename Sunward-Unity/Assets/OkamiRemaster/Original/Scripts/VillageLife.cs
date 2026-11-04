@@ -33,6 +33,7 @@ namespace Sunward.Remaster
             {appliedStage=game.Profile.restorationStage;for(int i=0;restorationBeds!=null && i<restorationBeds.Length;i++)if(restorationBeds[i])restorationBeds[i].gameObject.SetActive(i<appliedStage);}
             if(game.Health<=0 || game.Panel!="" || game.InTrial){if(carried && game.Health<=0)Drop();return;}
             if(game.Blocked || game.Player.Locked || game.Player.Swimming || digging)return;
+            if(game.Heaven && game.Heaven.TryDigTreasure())return;
             Vector3 p=game.Player.transform.position;float farmer=Vector3.Distance(p,VillageServices.FarmerPosition);
             if(carried && !carriedVisual)CreateCarry();
             if(game.Player.input.Eat.WasPressedThisFrame())Eat();

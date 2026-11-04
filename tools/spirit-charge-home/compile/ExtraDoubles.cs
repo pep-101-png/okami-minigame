@@ -10,6 +10,7 @@ namespace UnityEngine
  public class Light:Object{public bool enabled;public LightShadows shadows;public float spotAngle;public LightType type;public float range,intensity;public Color color;}
  public class ParticleSystem:Object
  {
+ public struct VelocityOverLifetimeModule{public float y;public bool enabled;}public VelocityOverLifetimeModule velocityOverLifetime=>new VelocityOverLifetimeModule();
   public GameObject gameObject=new GameObject();public Transform transform=>gameObject.transform;
   public struct MainModule{public bool useUnscaledTime;public Color startColor;public MinMaxCurve startSize;}public struct MinMaxCurve{public MinMaxCurve(float a,float b){}}public struct ShapeModule{public bool enabled;public ParticleSystemShapeType shapeType;public SkinnedMeshRenderer skinnedMeshRenderer;public ParticleSystemMeshShapeType meshShapeType;}public ShapeModule shape=>new ShapeModule();
   public struct EmissionModule{public float rateOverTime;}

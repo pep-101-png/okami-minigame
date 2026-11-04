@@ -487,6 +487,14 @@
     {
       "cue": "bark",
       "resource": "Okami/NativeAudio/player-shiranui-layered-bark"
+    },
+    {
+      "cue": "heaven-gong",
+      "resource": "Okami/NativeAudio/heaven-gong"
+    },
+    {
+      "cue": "heaven-bird",
+      "resource": "Okami/NativeAudio/heaven-crane-call"
     }
   ]
 }

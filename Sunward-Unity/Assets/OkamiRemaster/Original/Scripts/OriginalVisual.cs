@@ -7,7 +7,13 @@ namespace Sunward.Remaster
     // projectile movement remain Sunward mechanics, not fabricated native events.
     public sealed class OriginalVisual : MonoBehaviour
     {
-        NativePaintedRig rig;
+        NativePaintedRig rig;NativePoseBank motionBank;Vector3[] motionPositions,motionScales;Quaternion[] motionRotations;
+        public void SampleMotion(string resource,string clip,float time)
+        {
+            if(rig==null)return;
+            if(motionBank==null){motionBank=new NativePoseBank(resource+"/Poses");if(motionBank.BoneCount!=rig.Bones.Length)throw new InvalidOperationException("Native prop motion skeleton mismatch");motionPositions=new Vector3[rig.Bones.Length];motionScales=new Vector3[rig.Bones.Length];motionRotations=new Quaternion[rig.Bones.Length];}
+            var selected=motionBank.Find(clip);if(selected!=null)motionBank.Sample(selected,time,rig.Bones,motionPositions,motionRotations,motionScales,1,false);
+        }
         public bool Load(string resource, Vector3 offset, Vector3 scale)
         {
             try

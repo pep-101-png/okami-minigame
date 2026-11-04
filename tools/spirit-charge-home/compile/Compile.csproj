@@ -47,8 +47,12 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeDailyRoutine.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/NativeHomeRoom.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/HeavenlyGarden.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/HeavenlyGarden.Features.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/HeavenAmbience.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/HeavenTeaGuest.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalWeaponEvolution.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/WeaponLore.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/GardenVisitor.cs"/>
-<Compile Include="HeavenFollowupTests.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/OriginalVisual.cs"/><Compile Include="HeavenFollowupTests.cs"/><Compile Include="HeavenTreasureTests.cs"/>
 </ItemGroup>
 </Project>

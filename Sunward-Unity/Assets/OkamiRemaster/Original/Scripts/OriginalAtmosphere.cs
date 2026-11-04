@@ -90,7 +90,8 @@ namespace Sunward.Remaster
             if(game.Player.Swimming && game.Player.Speed>.15f && !game.Blocked && Time.time>=nextWake)
             {
                 nextWake=Time.time+.3f;
-                var p=Create("Spark",null,new Vector3(game.Player.transform.position.x,-.30f,game.Player.transform.position.z),0,.65f,.55f,.015f);
+                float waterY=HeavenlyGarden.Water(game.Player.transform.position,out var heavenWater,out var depth)?heavenWater+.02f:-.30f;
+                var p=Create("Spark",null,new Vector3(game.Player.transform.position.x,waterY,game.Player.transform.position.z),0,.65f,.55f,.015f);
                 if(p)
                 {
                     var sheet=p.textureSheetAnimation;sheet.enabled=true;sheet.numTilesX=4;sheet.numTilesY=1;sheet.frameOverTime=1;

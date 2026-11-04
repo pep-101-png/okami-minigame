@@ -1,0 +1,96 @@
+{
+  "models": [
+    {
+      "resource": "heaven-gate",
+      "source": "celestial-gate",
+      "sourceSHA256": "2dedf294db8ac1fb332ca4192fc77a0fb1217d10ad8ab8b6be02739888efcd2e",
+      "derivation": "Original torii with intact auxiliary lantern-post groups moved outward 2.4 source metres to clear the main uprights; obsolete small braces omitted."
+    },
+    {
+      "resource": "heaven-tea-cup",
+      "source": "vt65",
+      "sourceSHA256": "40b8bc9f870a6f2c634bc967ab2d2c35319982b9d5d1bb2d9817f6b459aea9b6",
+      "derivation": "One intact original tea cup and its ink shell selected from the VT65 tea tray; original UVs and paint retained."
+    },
+    {
+      "resource": "heaven-tea-tray",
+      "source": "vt65",
+      "sourceSHA256": "40b8bc9f870a6f2c634bc967ab2d2c35319982b9d5d1bb2d9817f6b459aea9b6",
+      "derivation": "Original VT65 tray, cups and ink outline; unrelated disconnected lower component omitted so tray rests on table."
+    },
+    {
+      "resource": "heaven-lookout-roof",
+      "source": "vt05",
+      "sourceSHA256": "0d7e7ff874383a2d62fc861f699be81849a10eb74acf70f75a72de6cd827be6a",
+      "derivation": "Original sloped VT05 roof/rafters selected without the well, bucket or rope; reused as the lookout shelter roof."
+    },
+    {
+      "resource": "heaven-pond-basin",
+      "source": "celestial-pond",
+      "sourceSHA256": "bd57d821a646bea5ab989f2b001aabb55fc3c389752e710f33b00498bcca3167",
+      "derivation": "Original complete pond rim and native water quad; detached oversized foam omitted and the original quad fitted inside the bank. Water level/shore mask handled by the water adapter."
+    },
+    {
+      "resource": "heaven-basin-terrain",
+      "source": "celestial-grounded",
+      "sourceSHA256": "40b1f258e8c2ae94afb22316d2d8457a077aa395215559c008e72669c4dfdf28",
+      "derivation": "Original r108 terrain triangles locally refined by midpoint interpolation around native pond banks, then lowered into 0.85m basins. Original UV/pigment are interpolated; no new painted artwork."
+    }
+  ],
+  "audio": [
+    {
+      "cue": "heaven-gong",
+      "resource": "Okami/NativeAudio/heaven-gong",
+      "source": "/workspace/work/playtest-repair/source-native/data_pc/se/core/core.ses",
+      "stream": 0,
+      "sourceSHA256": "5250841a699ff65c9f814e287feb7b0c5c17139ddc76e1202295b78e8eb86a10",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 2864,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -14.961,
+          "peak": 1.0,
+          "clippedFraction": 4.092e-05
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.404881,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -7.999,
+        "seconds": 3.8187,
+        "clearADX_SHA256": "60026abd9da3012b496c6ef8e701af15b1f2c9c27291e903b073be2d70f56b72"
+      }
+    },
+    {
+      "cue": "heaven-bird",
+      "resource": "Okami/NativeAudio/heaven-crane-call",
+      "source": "/workspace/work/heaven-complete/an01.ses",
+      "stream": 0,
+      "sourceSHA256": "af053656e7edf2ba2d94fa5c84709b63867f000b039f31db5ab8a5c0c383decc",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 155,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -9.059,
+          "peak": 1.0,
+          "clippedFraction": 0.00048621
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.201006,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -13.941,
+        "seconds": 0.4499,
+        "clearADX_SHA256": "ec86245dc85b967da9ae81d853e304335214676001f63f17c9e549e93fc708d7"
+      }
+    }
+  ],
+  "terrainTriangles": 3606,
+  "nativeThunderAlternativeInspection": "wp49 is unrelated rolled mat, not an evolved glaive; retain the genuine wp29 model with native electric-effect choreography."
+}
