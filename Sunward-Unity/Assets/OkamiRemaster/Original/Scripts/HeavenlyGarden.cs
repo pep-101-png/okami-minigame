@@ -12,6 +12,7 @@ namespace Sunward.Remaster
         public static readonly Vector3 Altar=Centre+new Vector3(0,0,22),Return=Centre+new Vector3(0,0,-25);
         public bool Playing {get;private set;}
         bool keeperConversation;float keeperCooldown;
+        Vector2 mazeMin,mazeMax;
         float fallTime;Vector3 fallStart;OrbitCamera orbit;GameObject garden,river;bool visible;
         public static bool Inside(Vector3 p)=>p.y>58 && p.y<100 && Mathf.Abs(p.x-Centre.x)<49 && Mathf.Abs(p.z)<47;
         public static bool RiverLip(Vector3 p)=>p.y>-2 && p.y<2 && p.z>WaterfallLip-.75f && p.z<WaterfallLip+1 && Mathf.Abs(p.x-Valley.RiverX(-p.z))<2.8f;
@@ -54,8 +55,10 @@ namespace Sunward.Remaster
             OriginalAtmosphere.Create("SpiritGlow",river.transform,new Vector3(x,-5.5f,40.5f),12,.6f,2,.15f,2.6f);
             var lamp=new GameObject("Waterfall portal light");lamp.transform.SetParent(river.transform,false);lamp.transform.localPosition=new Vector3(x,-3.8f,40.5f);var light=lamp.AddComponent<Light>();light.type=LightType.Point;light.range=13;light.intensity=6;light.color=new Color(.4f,.85f,1);light.shadows=LightShadows.None;
         }
-        [System.Serializable]sealed class GardenLayout{public int version;public GardenItem[] items;}
+        [System.Serializable]sealed class GardenLayout{public int version;public GardenItem[] items;public GardenWalk[] walks;public GardenWall[] mazeWalls;}
         [System.Serializable]sealed class GardenItem{public string resource,kind;public Vector3 position,size;public float yaw;public bool absoluteHeight;}
+        [System.Serializable]sealed class GardenWalk{public Vector3 a,b;public float width;}
+        [System.Serializable]sealed class GardenWall{public Vector3 a,b;}
         void BuildGarden()
         {
             garden=new GameObject("Celestial garden · original stone walks, flower gardens and cloud sea");garden.transform.SetParent(transform,false);garden.transform.position=Centre;
@@ -65,27 +68,32 @@ namespace Sunward.Remaster
             // Ground first, so every flower, lamp and visitor sits on its actual painted surface.
             foreach(var item in layout.items)if(item.kind=="ground")
             {
-                var at=item.position;
-                if(!item.absoluteHeight && item.resource!="Okami/celestial-meadow" && item.resource!="Okami/celestial-terrace" && Height(Centre+at,out var baseY))
-                {
-                    if(item.resource=="Okami/vt0a" && item.size.y>.5f)
-                    {foreach(var d in new[]{new Vector3(-4,0,-4),new Vector3(4,0,-4),new Vector3(-4,0,4),new Vector3(4,0,4)})if(Height(Centre+at+d,out var edge))baseY=Mathf.Min(baseY,edge);}
-                    at.y+=baseY-Centre.y;
-                }
-                var ground=VillageFestival.Place(garden.transform,item.resource,at,item.size,new Vector3(0,item.yaw,0));
+                // One continuous original terrain mesh owns both the painted walks
+                // and collision. No elevated paper strips or stretched prop tiers.
+                var ground=VillageFestival.Place(garden.transform,item.resource,item.position,item.size,new Vector3(0,item.yaw,0));
                 if(!ground)continue;
                 foreach(var renderer in ground.GetComponentsInChildren<SkinnedMeshRenderer>())
                 {var material=new Material(renderer.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/CelestialGround").shader;
-                bool meadow=item.resource=="Okami/celestial-meadow" || item.resource=="Okami/celestial-terrace";
-                material.SetFloat("_SurfaceKind",meadow?1:item.resource=="Okami/vt0a" && item.size.y>1?3:0);material.SetTexture("_WallPaint",Resources.Load<Texture2D>("Okami/celestial-stair/Texture-0"));bool twoSided=meadow;material.SetFloat("_Cull",twoSided?0:2);material.SetTexture("_GroundPaint",Resources.Load<Texture2D>("Okami/farm-earth/Grass"));material.SetTexture("_CloudPaint",Resources.Load<Texture2D>("Okami/Effects/Cloud"));renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
+                bool meadow=item.resource=="Okami/celestial-meadow" || item.resource=="Okami/celestial-terrace" || item.resource=="Okami/celestial-grounded";
+                material.SetFloat("_SurfaceKind",meadow?1:0);material.SetTexture("_WalkPaint",Resources.Load<Texture2D>("Okami/celestial-stair/Texture-0"));bool twoSided=meadow;material.SetFloat("_Cull",twoSided?0:2);material.SetTexture("_GroundPaint",Resources.Load<Texture2D>("Okami/farm-earth/Grass"));material.SetTexture("_CloudPaint",Resources.Load<Texture2D>("Okami/Effects/Cloud"));renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
                 renderer.gameObject.layer=6;renderer.gameObject.name="Heaven garden ground · original mesh";var collider=renderer.gameObject.AddComponent<MeshCollider>();collider.sharedMesh=renderer.sharedMesh;}
                 Physics.SyncTransforms();
             }
+            var walks=new Vector4[48];var styles=new Vector4[48];int count=layout.walks==null?0:Mathf.Min(48,layout.walks.Length);
+            for(int i=0;i<count;i++){var w=layout.walks[i];walks[i]=new Vector4(w.a.x,w.a.z,w.b.x,w.b.z);styles[i]=new Vector4(w.width,0,0,0);}
+            Shader.SetGlobalVectorArray("_SunwardHeavenWalks",walks);Shader.SetGlobalVectorArray("_SunwardHeavenWalkStyle",styles);Shader.SetGlobalFloat("_SunwardHeavenWalkCount",count);
             Shader.SetGlobalTexture("_SunwardHeavenClouds",Resources.Load<Texture2D>("Okami/Effects/Cloud"));
             Physics.SyncTransforms();
             foreach(var item in layout.items)if(item.kind!="ground")
             {
-                var p=item.position;if(item.kind!="cloud" && item.kind!="cloudsea" && Height(Centre+p,out var h))p.y=h-Centre.y+.025f;
+                var p=item.position;if(item.kind!="cloud" && item.kind!="cloudsea" && Height(Centre+p,out var h))p.y=h-Centre.y+.005f;
+                if(item.kind=="pond")
+                {
+                    // Sink wide native pond rims to their lowest supporting corner.
+                    // Centre-only snapping left the downhill stones hanging in air.
+                    foreach(var d in new[]{new Vector3(-.4f*item.size.x,0,-.4f*item.size.z),new Vector3(.4f*item.size.x,0,-.4f*item.size.z),new Vector3(-.4f*item.size.x,0,.4f*item.size.z),new Vector3(.4f*item.size.x,0,.4f*item.size.z)})
+                        if(Height(Centre+p+d,out var rimFloor))p.y=Mathf.Min(p.y,rimFloor-Centre.y+.005f);
+                }
                 var prop=VillageFestival.Place(garden.transform,item.resource,p,item.size,new Vector3(0,item.yaw,0));
                 if(!prop)continue;
                 if(item.kind=="cloudsea")foreach(var renderer in prop.GetComponentsInChildren<SkinnedMeshRenderer>())
@@ -109,7 +117,14 @@ namespace Sunward.Remaster
                     OriginalAtmosphere.Create("SpiritGlow",garden.transform,p+Vector3.up*.8f,2,.16f,5,.02f,3.7f);
                 }
             }
-            foreach(var p in new[]{new Vector3(20,3,-12),new Vector3(24,3,11),new Vector3(-23,3,5),new Vector3(0,3,22),new Vector3(0,2,-25)})
+            BuildMazeBoundaries(layout.mazeWalls);
+            // Original steam paint makes a soft lower cloud veil around the garden.
+            for(int i=0;i<16;i++)
+            {
+                float angle=i*Mathf.PI*2/16;var p=new Vector3(Mathf.Sin(angle)*39,-1.5f,Mathf.Cos(angle)*37);
+                OriginalAtmosphere.Create("Steam",garden.transform,p,.35f,4.5f,18,.025f,3.5f);
+            }
+            foreach(var p in new[]{new Vector3(22,3,-18),new Vector3(23,3,19),new Vector3(-20,3,20),new Vector3(0,3,22),new Vector3(0,2,-25)})
             {
                 var at=p;if(Height(Centre+p,out var floor))at.y=floor-Centre.y+2;
                 OriginalAtmosphere.Create("SpiritGlow",garden.transform,at,9,.30f,7,.10f,6);
@@ -117,18 +132,18 @@ namespace Sunward.Remaster
             }
             for(int i=0;i<3;i++)
             {
-                var p=new Vector3(i==0?0:i==1?20:24,3,i==0?22:i==1?-12:11);
+                var p=new Vector3(i==0?0:i==1?22:23,3,i==0?22:i==1?-18:19);
                 if(Height(Centre+p,out var floor))p.y=floor-Centre.y+3;
                 var sun=new GameObject("Soft celestial garden radiance");sun.transform.SetParent(garden.transform,false);sun.transform.localPosition=p+Vector3.up*5;var lamp=sun.AddComponent<Light>();lamp.type=LightType.Point;lamp.range=24;lamp.intensity=4;lamp.color=new Color(1,.91f,.73f);lamp.shadows=LightShadows.None;
                 OriginalAtmosphere.Create("Wind",garden.transform,p,1.1f,3.5f,7,.25f,2);
             }
             // Original spirit artwork drawn as soft shafts over the altar and ponds.
-            foreach(var p in new[]{new Vector3(0,1,23),new Vector3(20,1,-12),new Vector3(24,1,11)})
+            foreach(var p in new[]{new Vector3(0,1,23),new Vector3(22,1,-18),new Vector3(23,1,19)})
             {
                 var ray=new GameObject("Celestial shaft · original spirit paint");ray.transform.SetParent(garden.transform,false);var at=p;if(Height(Centre+p,out var floor))at.y=floor-Centre.y+1;ray.transform.localPosition=at;
                 var beam=ray.AddComponent<LineRenderer>();beam.positionCount=2;beam.useWorldSpace=false;
-                beam.SetPosition(0,Vector3.up*20);beam.SetPosition(1,Vector3.zero);beam.startWidth=.65f;beam.endWidth=3.5f;
-                beam.startColor=new Color(1.5f,1.3f,1.7f,.12f);beam.endColor=new Color(1.5f,1.6f,2,.34f);
+                beam.SetPosition(0,Vector3.up*20);beam.SetPosition(1,Vector3.zero);beam.startWidth=.35f;beam.endWidth=1.8f;
+                beam.startColor=new Color(1.5f,1.3f,1.7f,.035f);beam.endColor=new Color(1.5f,1.6f,2,.14f);
                 beam.sharedMaterial=new Material(Resources.Load<Material>("Okami/Effects/SpiritRadiance")){mainTexture=Resources.Load<Texture2D>("Okami/Effects/SpiritGlow")};ray.AddComponent<OriginalParticleMaterial>();
             }
             foreach(var p in new[]{new Vector3(-4,0,17.3f),new Vector3(4,0,17.3f),new Vector3(-4,0,23),new Vector3(4,0,23)})
@@ -138,9 +153,24 @@ namespace Sunward.Remaster
                 OriginalAtmosphere.Create("SpiritGlow",garden.transform,at,1,.23f,2,.02f,.05f);
             }
             SpawnVisitor("garden-hm50","hm05_000",new Vector3(0,1,17),180);
-            SpawnVisitor("garden-hm40","hm95_000",new Vector3(18,1,-20),240);
-            SpawnVisitor("garden-hm06","hm05_000",new Vector3(-25,1,18),90);
+            SpawnVisitor("garden-hm40","hm95_000",new Vector3(12,1,-22),240);
+            SpawnVisitor("garden-hm06","hm05_000",new Vector3(-15,1,26),90);
         }
+        void BuildMazeBoundaries(GardenWall[] walls)
+        {
+            mazeMin=new Vector2(float.PositiveInfinity,float.PositiveInfinity);mazeMax=new Vector2(float.NegativeInfinity,float.NegativeInfinity);
+            if(walls==null)return;
+            foreach(var wall in walls)
+            {
+                mazeMin=new Vector2(Mathf.Min(mazeMin.x,Mathf.Min(wall.a.x,wall.b.x)),Mathf.Min(mazeMin.y,Mathf.Min(wall.a.z,wall.b.z)));
+                mazeMax=new Vector2(Mathf.Max(mazeMax.x,Mathf.Max(wall.a.x,wall.b.x)),Mathf.Max(mazeMax.y,Mathf.Max(wall.a.z,wall.b.z)));
+                var mid=(wall.a+wall.b)*.5f;Height(Centre+wall.a,out var ya);Height(Centre+wall.b,out var yb);Height(Centre+mid,out var ym);
+                float low=Mathf.Min(ym,Mathf.Min(ya,yb))-Centre.y,high=Mathf.Max(ym,Mathf.Max(ya,yb))-Centre.y+2.1f;
+                var root=new GameObject("Original bamboo garden maze boundary");root.transform.SetParent(garden.transform,false);root.transform.localPosition=new Vector3(mid.x,(low+high)*.5f,mid.z);
+                var boundary=root.AddComponent<BoxCollider>();boundary.size=new Vector3(Mathf.Abs(wall.a.x-wall.b.x)+.65f,high-low,Mathf.Abs(wall.a.z-wall.b.z)+.65f);
+            }
+        }
+        bool InMaze(Vector3 player){float x=player.x-Centre.x;return x>=mazeMin.x && x<=mazeMax.x && player.z>=mazeMin.y && player.z<=mazeMax.y;}
         void SpawnVisitor(string resource,string idle,Vector3 p,float yaw)
         {
             var person=new GameObject("Original celestial visitor · "+resource);person.SetActive(false);person.transform.SetParent(garden.transform,false);var world=garden.transform.TransformPoint(p);if(Height(world,out var y))p.y=y-Centre.y+.025f;person.transform.localPosition=p;person.transform.rotation=Quaternion.Euler(0,yaw,0);
@@ -188,7 +218,7 @@ namespace Sunward.Remaster
             if(!inside){if(RiverLip(player))BeginFall();else if(player.z>28 && Mathf.Abs(player.x-Valley.RiverX(-player.z))<4)game.WorldPrompt("The river falls into a spirit passage ahead");return;}
             bool nearReturn=new Vector2(player.x-Return.x,player.z-Return.z).magnitude<3.2f;
             bool nearKeeper=new Vector2(player.x-Altar.x,player.z-(Altar.z-5)).magnitude<4.2f;
-            game.WorldPrompt(nearReturn?"E · Return to Windflower":nearKeeper?"E · Speak with the garden keeper":"Heavenly garden · seek the keeper by the altar");
+            game.WorldPrompt(nearReturn?"E · Return to Windflower":nearKeeper?"E · Speak with the garden keeper":InMaze(player)?"Bamboo garden maze · the east gates lead back to the garden":"Heavenly garden · seek the keeper by the altar");
             if(game.Player.input.Interact.WasPressedThisFrame())
             {
                 if(nearReturn)game.ReturnHome();

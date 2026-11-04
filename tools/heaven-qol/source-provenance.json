@@ -1,0 +1,7 @@
+{
+  "originalTerrainSHA256": "40b1f258e8c2ae94afb22316d2d8457a077aa395215559c008e72669c4dfdf28",
+  "derivation": "Original r108 meadow topology, XZ footprint scaled to 110x108m and existing Y vertices reshaped into continuous gently graded garden levels. All source indices, UVs and vertex count retained; roads are original stone paint on this same mesh.",
+  "sourceVertexCount": 98,
+  "walkArtwork": "Original r102/jimen00_ly04 stair texture, composited on the terrain shader",
+  "mazeArtwork": "Original VT19 bamboo with original VT35 lanterns and original flowers"
+}
