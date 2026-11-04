@@ -15,7 +15,7 @@
     "PASS 23 current-win shaft, spring health/expiry, native rest, brush-gesture and dialogue input contracts; engine doubles",
     "PASS 38 garden boundary/altar progression, cinematic shaft timing/skip and thirteen-checkpoint race contracts; engine doubles",
     "PASS 15 actual keeper dialogue/E-input ordering and shared interior/heaven visibility, including moving world-space effects checks; engine doubles, not Unity",
-    "PASS 28 real evolution ownership/save, reward cancellation/re-entry/death and pond classification checks; engine doubles, not Unity",
+    "PASS 31 real evolution ownership/save, reward cancellation/re-entry/death and pond classification checks; engine doubles, not Unity",
     "PASS 336 actual native glyph-metric layout/clipping contracts; engine doubles, not Unity screenshots",
     "PASS 915 actual three-phase boss/native director checks, stun resistance, first/middle/final deaths, 1x/2x/4x scaling, fire/armour visibility, skip/cancel and paused motion at 15/30/60/120fps. Engine doubles, NOT Unity."
   ],

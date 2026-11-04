@@ -28,7 +28,12 @@ namespace Sunward.Remaster
             y=Centre.y;if(!Inside(p))return false;
             int n=Physics.RaycastNonAlloc(new Vector3(p.x,98,p.z),Vector3.down,hits,35,1<<6,QueryTriggerInteraction.Ignore);
             float top=float.NegativeInfinity;
-            for(int i=0;i<n;i++)if(hits[i].collider.name.StartsWith("Heaven garden ground"))top=Mathf.Max(top,hits[i].point.y);
+            for(int i=0;i<n;i++)if(hits[i].collider.name.StartsWith("Heaven garden ground"))
+            {
+                // A deck above the wolf is a ceiling until reached by its real stairs.
+                if(hits[i].collider.name.Contains("shrine stairs/landing") && hits[i].point.y>p.y+.4f)continue;
+                top=Mathf.Max(top,hits[i].point.y);
+            }
             if(!float.IsNegativeInfinity(top))y=top;return true;
         }
         void Start()
