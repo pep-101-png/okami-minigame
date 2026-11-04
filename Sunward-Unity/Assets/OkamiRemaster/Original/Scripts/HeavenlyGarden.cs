@@ -55,7 +55,7 @@ namespace Sunward.Remaster
             var lamp=new GameObject("Waterfall portal light");lamp.transform.SetParent(river.transform,false);lamp.transform.localPosition=new Vector3(x,-3.8f,40.5f);var light=lamp.AddComponent<Light>();light.type=LightType.Point;light.range=13;light.intensity=6;light.color=new Color(.4f,.85f,1);light.shadows=LightShadows.None;
         }
         [System.Serializable]sealed class GardenLayout{public int version;public GardenItem[] items;}
-        [System.Serializable]sealed class GardenItem{public string resource,kind;public Vector3 position,size;public float yaw;}
+        [System.Serializable]sealed class GardenItem{public string resource,kind;public Vector3 position,size;public float yaw;public bool absoluteHeight;}
         void BuildGarden()
         {
             garden=new GameObject("Celestial garden · original stone walks, flower gardens and cloud sea");garden.transform.SetParent(transform,false);garden.transform.position=Centre;
@@ -66,7 +66,7 @@ namespace Sunward.Remaster
             foreach(var item in layout.items)if(item.kind=="ground")
             {
                 var at=item.position;
-                if(item.resource!="Okami/celestial-meadow" && item.resource!="Okami/celestial-terrace" && Height(Centre+at,out var baseY))
+                if(!item.absoluteHeight && item.resource!="Okami/celestial-meadow" && item.resource!="Okami/celestial-terrace" && Height(Centre+at,out var baseY))
                 {
                     if(item.resource=="Okami/vt0a" && item.size.y>.5f)
                     {foreach(var d in new[]{new Vector3(-4,0,-4),new Vector3(4,0,-4),new Vector3(-4,0,4),new Vector3(4,0,4)})if(Height(Centre+at+d,out var edge))baseY=Mathf.Min(baseY,edge);}
@@ -77,7 +77,7 @@ namespace Sunward.Remaster
                 foreach(var renderer in ground.GetComponentsInChildren<SkinnedMeshRenderer>())
                 {var material=new Material(renderer.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/CelestialGround").shader;
                 bool meadow=item.resource=="Okami/celestial-meadow" || item.resource=="Okami/celestial-terrace";
-                material.SetFloat("_SurfaceKind",meadow?1:0);material.SetFloat("_Cull",meadow?0:2);material.SetTexture("_GroundPaint",Resources.Load<Texture2D>("Okami/farm-earth/Grass"));material.SetTexture("_CloudPaint",Resources.Load<Texture2D>("Okami/Effects/Cloud"));renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
+                material.SetFloat("_SurfaceKind",meadow?1:item.resource=="Okami/vt0a" && item.size.y>1?3:0);material.SetTexture("_WallPaint",Resources.Load<Texture2D>("Okami/celestial-stair/Texture-0"));bool twoSided=meadow;material.SetFloat("_Cull",twoSided?0:2);material.SetTexture("_GroundPaint",Resources.Load<Texture2D>("Okami/farm-earth/Grass"));material.SetTexture("_CloudPaint",Resources.Load<Texture2D>("Okami/Effects/Cloud"));renderer.sharedMaterial=material;renderer.gameObject.AddComponent<OriginalParticleMaterial>();
                 renderer.gameObject.layer=6;renderer.gameObject.name="Heaven garden ground · original mesh";var collider=renderer.gameObject.AddComponent<MeshCollider>();collider.sharedMesh=renderer.sharedMesh;}
                 Physics.SyncTransforms();
             }
@@ -109,21 +109,23 @@ namespace Sunward.Remaster
                     OriginalAtmosphere.Create("SpiritGlow",garden.transform,p+Vector3.up*.8f,2,.16f,5,.02f,3.7f);
                 }
             }
-            foreach(var p in new[]{new Vector3(-20,3,-8),new Vector3(21,3,9),new Vector3(-18,3,22),new Vector3(0,3,22),new Vector3(0,2,-25)})
+            foreach(var p in new[]{new Vector3(20,3,-12),new Vector3(24,3,11),new Vector3(-23,3,5),new Vector3(0,3,22),new Vector3(0,2,-25)})
             {
-                OriginalAtmosphere.Create("SpiritGlow",garden.transform,p,9,.30f,7,.10f,6);
-                OriginalAtmosphere.Create("Blossom",garden.transform,p+Vector3.up*3,2,.23f,9,.10f,5);
+                var at=p;if(Height(Centre+p,out var floor))at.y=floor-Centre.y+2;
+                OriginalAtmosphere.Create("SpiritGlow",garden.transform,at,9,.30f,7,.10f,6);
+                OriginalAtmosphere.Create("Blossom",garden.transform,at+Vector3.up*3,2,.23f,9,.10f,5);
             }
             for(int i=0;i<3;i++)
             {
-                var p=new Vector3(i==0?0:i==1?-20:21,3,i==0?22:i==1?-8:9);
+                var p=new Vector3(i==0?0:i==1?20:24,3,i==0?22:i==1?-12:11);
+                if(Height(Centre+p,out var floor))p.y=floor-Centre.y+3;
                 var sun=new GameObject("Soft celestial garden radiance");sun.transform.SetParent(garden.transform,false);sun.transform.localPosition=p+Vector3.up*5;var lamp=sun.AddComponent<Light>();lamp.type=LightType.Point;lamp.range=24;lamp.intensity=4;lamp.color=new Color(1,.91f,.73f);lamp.shadows=LightShadows.None;
                 OriginalAtmosphere.Create("Wind",garden.transform,p,1.1f,3.5f,7,.25f,2);
             }
             // Original spirit artwork drawn as soft shafts over the altar and ponds.
-            foreach(var p in new[]{new Vector3(0,1,23),new Vector3(-20,1,-8),new Vector3(21,1,9)})
+            foreach(var p in new[]{new Vector3(0,1,23),new Vector3(20,1,-12),new Vector3(24,1,11)})
             {
-                var ray=new GameObject("Celestial shaft · original spirit paint");ray.transform.SetParent(garden.transform,false);ray.transform.localPosition=p;
+                var ray=new GameObject("Celestial shaft · original spirit paint");ray.transform.SetParent(garden.transform,false);var at=p;if(Height(Centre+p,out var floor))at.y=floor-Centre.y+1;ray.transform.localPosition=at;
                 var beam=ray.AddComponent<LineRenderer>();beam.positionCount=2;beam.useWorldSpace=false;
                 beam.SetPosition(0,Vector3.up*20);beam.SetPosition(1,Vector3.zero);beam.startWidth=.65f;beam.endWidth=3.5f;
                 beam.startColor=new Color(1.5f,1.3f,1.7f,.12f);beam.endColor=new Color(1.5f,1.6f,2,.34f);
@@ -136,8 +138,8 @@ namespace Sunward.Remaster
                 OriginalAtmosphere.Create("SpiritGlow",garden.transform,at,1,.23f,2,.02f,.05f);
             }
             SpawnVisitor("garden-hm50","hm05_000",new Vector3(0,1,17),180);
-            SpawnVisitor("garden-hm40","hm95_000",new Vector3(18,1,-12),240);
-            SpawnVisitor("garden-hm06","hm05_000",new Vector3(-23,1,7),90);
+            SpawnVisitor("garden-hm40","hm95_000",new Vector3(18,1,-20),240);
+            SpawnVisitor("garden-hm06","hm05_000",new Vector3(-25,1,18),90);
         }
         void SpawnVisitor(string resource,string idle,Vector3 p,float yaw)
         {
