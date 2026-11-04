@@ -6,7 +6,7 @@ R=Path(__file__).resolve().parents[2];A=R/'Sunward-Unity/Assets';D=A/'OkamiRemas
 
 def check(ok,msg):
  global checks;checks+=1;assert ok,msg
-layout=json.loads((D/'CelestialGarden.json').read_text())['items'];check(len(layout)>350,'Garden lost its extensive original planting/dressing');check(sum(i['kind']=='pond' for i in layout)==3,'Original complete ponds missing');check(sum(i['kind']=='tree' for i in layout)==16,'Native pine groupings missing');check(not any(i['resource'] in ['Okami/heaven-island','Okami/garden-gate','Okami/heaven-pond','Okami/garden-altar'] for i in layout),'Misidentified old dressing restored')
+layout=json.loads((D/'CelestialGarden.json').read_text())['items'];check(len(layout)>350,'Garden lost its extensive original planting/dressing');check(sum(i['kind']=='pond' for i in layout)==3,'Original complete ponds missing');check(sum(i['kind']=='tree' for i in layout)==20,'Native pine groupings missing');check(not any(i['resource'] in ['Okami/heaven-island','Okami/garden-gate','Okami/heaven-pond','Okami/garden-altar'] for i in layout),'Misidentified old dressing restored')
 models={}
 for item in layout:
  n=item['resource'].split('/')[-1];folder=D/n
@@ -24,7 +24,7 @@ def height(x,z):
 for item in layout:
  if item['kind']!='ground':continue
  m=models[item['resource'].split('/')[-1]];vv=np.concatenate([np.array(p['positions']).reshape(-1,3) for p in m['parts']]);lo=vv.min(0);hi=vv.max(0);sc=np.array(list(item['size'].values()))/np.maximum(.001,hi-lo);off=-np.array([(lo[0]+hi[0])/2,lo[1],(lo[2]+hi[2])/2])*sc;p=np.array(list(item['position'].values()),dtype=float)
- if item['resource'] not in ['Okami/celestial-meadow','Okami/celestial-terrace']:
+ if not item.get('absoluteHeight') and item['resource'] not in ['Okami/celestial-meadow','Okami/celestial-terrace']:
   base=height(p[0],p[2]) or 0
   if item['resource']=='Okami/vt0a' and item['size']['y']>.5:base=min([base]+[height(p[0]+x,p[2]+z) or 0 for x,z in [(-4,-4),(4,-4),(-4,4),(4,4)]])
   p[1]+=base

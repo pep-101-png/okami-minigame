@@ -1,0 +1,22 @@
+[
+  {
+    "resource": "celestial-stair",
+    "source": "r102/jimen00_ly04",
+    "sourceSHA256": "ee1c979127f8f07a852dfb1aa49b77e6653d36f5be72993e3eca4e039027d088",
+    "parts": [
+      0
+    ],
+    "sourceDivisions": [
+      [
+        0,
+        0
+      ]
+    ]
+  },
+  {
+    "resource": "celestial-cloud-bank",
+    "source": "r101/___LY17__x1_kumo3",
+    "sourceSHA256": "35ec4c7ff5913effbbdbebb97148d98e9a592cc1aef8682b3ea2ee934648cce2",
+    "parts": null
+  }
+]
