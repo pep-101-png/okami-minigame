@@ -3,8 +3,8 @@ import sys,json,shutil,copy,struct,subprocess
 import numpy as np
 ROOT=Path(__file__).resolve().parents[2];D=ROOT/'Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami'
 sys.path[:0]=['/workspace/work/reference-repairs','/workspace/work/heaven-complete','/workspace/work/full-asset-inspection','/workspace/sunward-remaster/tools/playtest-followup'];import assets;from meta import meta;from components import components
-# Rebuild the real original terrain with only 18 cm water depth.
-p=ROOT/'tools/heaven-complete/build_assets.py';s=p.read_text().replace('depth=.85','depth=.18').replace('0.85m basins','0.18m shallow basins');p.write_text(s)
+# Rebuild the native terrain using the depth configured in build_assets.py.
+p=ROOT/'tools/heaven-complete/build_assets.py'
 subprocess.run([sys.executable,str(p)],cwd=ROOT,check=True,stdout=subprocess.DEVNULL)
 def save(name,m,source):
  dest=D/name;dest.mkdir(exist_ok=True);(dest/'Model.json').write_text(json.dumps(m,separators=(',',':')))

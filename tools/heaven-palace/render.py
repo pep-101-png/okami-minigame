@@ -123,7 +123,7 @@ for dx in [-1.9,1.9]:
 sys.path.insert(0,'/workspace/sunward-remaster/tools/playtest-followup');from pose_audit import bank
 from asset_geometry import skin
 for side in [-1,1]:
- folder=D/'heaven-tea-hm50';model=json.loads((folder/'Model.json').read_text());pose=bank(folder/'Poses.bytes')['hm05_003'][0][0];root=matrix([11+side*1.45,height(11+side*1.45,13)+.015,13],90 if side<0 else 270)
+ folder=D/'heaven-tea-hm50';model=json.loads((folder/'Model.json').read_text());pose=bank(folder/'Poses.bytes')['hm05_003'][0][0];root=matrix([11+side*1.45,height(11+side*1.45,13)+.25,13],90 if side<0 else 270)
  for part,vv in zip(model['parts'],skin(model,pose)):
   tx=next(t for t in model['textures'] if t['index']==part['texture'])
   if not tx.get('vertexOnly'):mesh('Original seated tea guest',vv*.82,np.array(part['indices']).reshape(-1,3),np.array(part['uv']).reshape(-1,2),texture_material(folder/tx['path']),root,np.array(part['colors']).reshape(-1,4))

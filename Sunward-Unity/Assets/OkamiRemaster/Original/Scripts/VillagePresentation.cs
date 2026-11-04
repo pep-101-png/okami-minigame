@@ -13,6 +13,10 @@ namespace Sunward.Remaster
         readonly System.Collections.Generic.List<GameObject> cinemaEffects=new System.Collections.Generic.List<GameObject>();
         OrbitCamera orbit;Texture2D painting,logo,bubble,ink;
         string lastDialogue="";int page;bool dialogueWasOpen;
+        System.Collections.Generic.List<string> dialoguePages=new System.Collections.Generic.List<string>();
+        float pageWidth,pageHeight,pageEm;
+        string CurrentPage=>dialoguePages.Count>0?dialoguePages[Mathf.Clamp(page,0,dialoguePages.Count-1)]:"";
+        bool MorePages=>page+1<dialoguePages.Count;
         public bool Dialogue=>game && (game.Panel=="dialogue" || game.Panel=="elder" || game.Panel=="tea");
         void Start(){painting=Resources.Load<Texture2D>("Okami/UI/TitlePainting");logo=Resources.Load<Texture2D>("Okami/UI/TitleLogo");bubble=Resources.Load<Texture2D>("Okami/UI/DialogueBubble");ink=Resources.Load<Texture2D>("Okami/UI/BrushTip");}
         public void Festival(bool won)
@@ -65,13 +69,27 @@ namespace Sunward.Remaster
             }
             if(Dialogue)
             {
-                string text=DialogueText();if(!dialogueWasOpen || text!=lastDialogue){lastDialogue=text;page=0;dialogueTime=0;}dialogueTime+=Time.unscaledDeltaTime;if(dialogueTime*65<Mathf.Min(160,text.Length-page*160) && game.Audio)game.Audio.DialogueSyllable();
-                dialogueWasOpen=true;if(dialogueTime>.2f && (game.Panel=="dialogue" || (page+1)*160<text.Length) && game.Player.input.Interact.WasPressedThisFrame())Advance();
+                EnsureDialoguePages();dialogueTime+=Time.unscaledDeltaTime;if(dialogueTime*65<CurrentPage.Length && game.Audio)game.Audio.DialogueSyllable();
+                dialogueWasOpen=true;if(dialogueTime>.2f && (game.Panel=="dialogue" || MorePages) && game.Player.input.Interact.WasPressedThisFrame())Advance();
             }
             else dialogueWasOpen=false;
         }
         string DialogueText()=>game.Panel=="tea"?game.GetComponent<VillageTeaVisit>().Story:game.Dialogue;
-        void Advance(){if(dialogueTime*65<Mathf.Min(160,DialogueText().Length-page*160)){dialogueTime=999;return;}if((page+1)*160<DialogueText().Length){page++;dialogueTime=0;}else game.Close();}
+        static Rect DialogueBounds()
+        {float w=Mathf.Min(1360,Screen.width*.96f),h=Mathf.Min(460,Screen.height*.56f);return new Rect((Screen.width-w)*.5f,Screen.height-h-25,w,h);}
+        static Rect DialogueBody(Rect r)=>new Rect(r.x+r.width*.23f,r.y+r.height*.28f,r.width*.56f,r.height*.38f);
+        static float DialogueEm=>40*Mathf.Min(1,Screen.height/900f);
+        void EnsureDialoguePages()
+        {
+            string text=DialogueText()??"";var body=DialogueBody(DialogueBounds());float em=DialogueEm;
+            bool changed=!dialogueWasOpen || text!=lastDialogue;
+            if(!changed && body.width==pageWidth && body.height==pageHeight && em==pageEm)return;
+            int offset=0;if(!changed)for(int i=0;i<page && i<dialoguePages.Count;i++)offset+=dialoguePages[i].Length;
+            dialoguePages=InkText.Paginate(text,body.width,body.height,em);lastDialogue=text;pageWidth=body.width;pageHeight=body.height;pageEm=em;page=0;
+            if(!changed)while(page+1<dialoguePages.Count && offset>=dialoguePages[page].Length){offset-=dialoguePages[page].Length;page++;}
+            dialogueTime=changed?0:999;
+        }
+        void Advance(){EnsureDialoguePages();if(dialogueTime*65<CurrentPage.Length){dialogueTime=999;return;}if(MorePages){page++;dialogueTime=0;}else game.Close();}
         void OnGUI()
         {
             if(!game || (!Title && !Playing && !Dialogue))return;var previousMatrix=GUI.matrix;GUI.matrix=Matrix4x4.identity;var previous=GUI.color;
@@ -91,12 +109,12 @@ namespace Sunward.Remaster
             }
             if(Dialogue)
             {
-                float w=Mathf.Min(1360,Screen.width*.96f),h=Mathf.Min(460,Screen.height*.56f);var r=new Rect((Screen.width-w)*.5f,Screen.height-h-25,w,h);
+                EnsureDialoguePages();var r=DialogueBounds();float w=r.width,h=r.height;
                 GUI.color=new Color(1,1,1,.97f);if(bubble)GUI.DrawTexture(r,bubble);
-                string text=DialogueText();int from=Mathf.Min(page*160,text.Length),count=Mathf.Min(160,text.Length-from);string shown=text.Substring(from,count);shown=shown.Substring(0,Mathf.Min(shown.Length,Mathf.FloorToInt(dialogueTime*65)));
-                InkText.Draw(shown,new Rect(r.x+w*.19f,r.y+h*.26f,w*.66f,h*.47f),40*Mathf.Min(1,Screen.height/900f),new Color(.09f,.06f,.035f,1));
+                InkText.Draw(CurrentPage,DialogueBody(r),DialogueEm,new Color(.09f,.06f,.035f,1),true,Mathf.FloorToInt(dialogueTime*65));
                 float y=r.y+h*.77f;
-                bool more=(page+1)*160<text.Length;
+                bool more=MorePages;
+                if(dialoguePages.Count>1 && (more || game.Panel=="dialogue"))InkText.Draw((page+1)+" / "+dialoguePages.Count,new Rect(r.x+w*.2f,y,w*.2f,45),Mathf.Min(24,DialogueEm),new Color(.32f,.10f,.055f,1),false);
                 if(more){if(InkButton("E · Next",new Rect(r.x+w*.72f,y,w*.22f,45)))Advance();}
                 else if(game.Panel=="elder"){if(InkButton("Yes · tea sounds lovely",new Rect(r.x+w*.15f,y,w*.5f,45)))game.GetComponent<VillageTeaVisit>().Invite();}
                 else if(game.Panel=="tea")
@@ -105,7 +123,7 @@ namespace Sunward.Remaster
             }
             GUI.color=previous;GUI.matrix=previousMatrix;
         }
-        static bool InkButton(string label,Rect r){InkText.Draw(label,r,30,new Color(.32f,.10f,.055f,1),false);return GUI.Button(r,"",GUIStyle.none);}
+        static bool InkButton(string label,Rect r){float em=Mathf.Min(30,r.height*.7f);while(em>12 && InkText.MeasureHeight(label,r.width,em)>em+.001f)em--;InkText.Draw(label,r,em,new Color(.32f,.10f,.055f,1),false);return GUI.Button(r,"",GUIStyle.none);}
         void OnDisable(){Cancel();}
     }
 }

@@ -51,7 +51,7 @@ pools=[]
 for item in layout['items']:
  if item['kind']!='pond':continue
  x,z=item['position']['x'],item['position']['z'];sx,sz=item['size']['x'],item['size']['z'];level=base.height(x,z)-.06;root=min(base.height(x+dx,z+dz) for dx,dz in [(-.4*sx,-.4*sz),(.4*sx,-.4*sz),(-.4*sx,.4*sz),(.4*sx,.4*sz)])-.10
- pools.append(dict(position=dict(x=x,y=level,z=z),radius=dict(x=sx*.265,y=sz*.265),depth=.18))
+ pools.append(dict(position=dict(x=x,y=level,z=z),radius=dict(x=sx*.265,y=sz*.265),depth=.45))
  item['resource']='Okami/heaven-pond-basin';item['position']['y']=root;item['absoluteHeight']=True;item['yaw']=0
 # Refine original terrain triangles around ponds, then lower those vertices into real basins.
 m=json.load(open(D/'celestial-grounded/Model.json'));origin=np.array([0,-.18,0]);refined=[]
@@ -72,7 +72,7 @@ for part in m['parts']:
  for p in pools:
   xx=(world[:,0]-p['position']['x'])/p['radius']['x'];zz=(world[:,2]-p['position']['z'])/p['radius']['y'];r=np.sqrt(xx*xx+zz*zz);t=np.clip((r-.72)/(1.7-.72),0,1);weight=1-t*t*(3-2*t);bed=p['position']['y']-p['depth'];world[:,1]=world[:,1]*(1-weight)+bed*weight
  rec[:,:3]=world-origin;n=len(rec);q=dict(part);q['positions']=rec[:,:3].ravel().tolist();q['uv']=rec[:,3:5].ravel().tolist();q['colors']=rec[:,5:9].ravel().tolist();q['indices']=np.array(faces).ravel().tolist();q['boneIndices']=[-1]*(n*3);q['weights']=[a for _ in range(n) for a in [1,0,0]];refined.append(q)
-m['parts']=refined;m['derivation']='Original r108 terrain triangles locally refined by midpoint interpolation around native pond banks, then lowered into 0.18m shallow basins. Original UV/pigment are interpolated; no new painted artwork.';save('heaven-basin-terrain',m,'celestial-grounded')
+m['parts']=refined;m['derivation']='Original r108 terrain triangles locally refined by midpoint interpolation around native pond banks, then lowered into 0.45m wading basins. Original UV/pigment are interpolated; no new painted artwork.';save('heaven-basin-terrain',m,'celestial-grounded')
 # Place terrain without renormalising its new lower bound: compensate bottom origin.
 allv=np.concatenate([np.array(p['positions']).reshape(-1,3) for p in m['parts']]);lo,hi=allv.min(0),allv.max(0)
 for i in layout['items']:
@@ -112,6 +112,6 @@ records=[]
 for rawpath,index,name,cue in [(Path('/workspace/work/playtest-repair/source-native/data_pc/se/core/core.ses'),0,'heaven-gong','heaven-gong'),(Path('/workspace/work/heaven-complete/an01.ses'),0,'heaven-crane-call','heaven-bird')]:
  if not rawpath.exists():continue
  raw=rawpath.read_bytes();clear=decrypt(raw);entry=inspect_sound(clear)['ADX'][index];stream=clear[entry['offset']:entry['offset']+entry['bytes']];dest=D/'NativeAudio'/(name+'.wav');info=render(stream,dest,cue);meta(dest);records.append(dict(cue=cue,resource='Okami/NativeAudio/'+name,source=str(rawpath),stream=index,sourceSHA256=hashlib.sha256(stream).hexdigest(),decoding=info))
-audio=json.load(open(D/'NativeAudio.json'));audio['cues']=[r for r in audio['cues'] if r['cue'] not in ['heaven-gong','heaven-bird']]+[dict(cue=r['cue'],resource=r['resource']) for r in records];(D/'NativeAudio.json').write_text(json.dumps(audio,indent=2)+'\n')
+audio=json.load(open(D/'NativeAudio.json'));existing={r['cue'] for r in audio['cues']};audio['cues']+=[dict(cue=r['cue'],resource=r['resource']) for r in records if r['cue'] not in existing];(D/'NativeAudio.json').write_text(json.dumps(audio,indent=2)+'\n')
 (W/'asset-provenance.json').write_text(json.dumps(dict(models=ledger,audio=records,terrainTriangles=sum(len(p['indices'])//3 for p in m['parts']),nativeThunderAlternativeInspection='wp49 is unrelated rolled mat, not an evolved glaive; retain the genuine wp29 model with native electric-effect choreography.'),indent=2)+'\n')
 print('Built basin terrain:',sum(len(p['indices'])//3 for p in m['parts']),'triangles;',len(walks),'path segments;',len(records),'decoded sound cues')
