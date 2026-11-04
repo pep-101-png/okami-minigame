@@ -31,19 +31,21 @@ namespace Sunward.Remaster
             new Entry("wp2d","Resurrection Beads","wp2d","rosary",340),
             new Entry("wp2e","Tundra Beads","wp2e","rosary",450)
         };
-        public static Entry Find(string id) => Array.Find(All, e => e.id == id);
+        public static readonly Entry AwakenedThunder=new Entry(OriginalWeaponEvolution.ThunderId,"Thunder Edge · Awakened","wp29","glaive",450);
+        public static Entry Find(string id) => id==OriginalWeaponEvolution.ThunderId?AwakenedThunder:Array.Find(All, e => e.id == id);
         public static bool Owns(ProfileData profile, string id) => profile.owned != null && Array.IndexOf(profile.owned,id)>=0;
         public static bool Buy(ProfileData profile, string id)
         {
             var entry=Find(id);
-            if(entry==null || Owns(profile,id) || profile.coins<entry.cost) return false;
+            if(id==OriginalWeaponEvolution.ThunderId || entry==null || Owns(profile,id) || profile.coins<entry.cost) return false;
             profile.coins-=entry.cost;Array.Resize(ref profile.owned,profile.owned.Length+1);
             profile.owned[profile.owned.Length-1]=id;profile.equipped=id;return true;
         }
         public static string Next(ProfileData profile)
         {
-            int start=Array.FindIndex(All,e=>e.id==profile.equipped);
-            for(int i=1;i<=All.Length;i++) { var e=All[(Mathf.Max(0,start)+i)%All.Length];if(Owns(profile,e.id))return e.id; }
+            int total=All.Length+(OriginalWeaponEvolution.Owns(profile)?1:0);
+            int start=profile.equipped==OriginalWeaponEvolution.ThunderId?All.Length:Array.FindIndex(All,e=>e.id==profile.equipped);
+            for(int i=1;i<=total;i++){int at=(start+i+total)%total;var entry=at==All.Length?AwakenedThunder:All[at];if(Owns(profile,entry.id))return entry.id;}
             return "spear";
         }
         public static WeaponDefinition Definition(Entry entry, WeaponDefinition spear, WeaponDefinition solar)
@@ -67,10 +69,12 @@ namespace Sunward.Remaster
                 result.charged=Tundra(TundraAttackRules.Cast,4.2f);result.chargedHeavy=Tundra(TundraAttackRules.Cast,4.6f);
                 result.air=Tundra("Tundra_54f",3f);
             }
+            float reach=OriginalWeaponEvolution.Reach(entry.id);
             float power=entry.id=="spear" || entry.id=="sundial"?1:1+Mathf.Clamp01((entry.cost-70)/380f)*.35f;
-            foreach(var strike in result.light)strike.damage*=power;
-            foreach(var strike in result.heavy)strike.damage*=power;
-            result.charged.damage*=power;result.chargedHeavy.damage*=power;result.air.damage*=power;
+            power*=OriginalWeaponEvolution.Power(entry.id);
+            foreach(var strike in result.light){strike.damage*=power;strike.range*=reach;}
+            foreach(var strike in result.heavy){strike.damage*=power;strike.range*=reach;}
+            result.charged.damage*=power;result.chargedHeavy.damage*=power;result.air.damage*=power;result.charged.range*=reach;result.chargedHeavy.range*=reach;result.air.range*=reach;
             return result;
         }
         static Strike Tundra(string state,float damage)=>new Strike {clip=state,duration=.9666667f,damage=damage,range=15,arc=-1,start=.12f,end=.85f,lunge=.15f,stagger=.3f};

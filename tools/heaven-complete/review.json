@@ -1,0 +1,57 @@
+{
+  "scope": "Offline native geometry/material placement diagnostics, selected C# engine-double execution, actual weapon catalogue checks. Unity import/shader compilation and PC play-testing are not available here.",
+  "sourceBaseline": "4a462f16381ff13b6c6efe0b4fde085ecfd367d5",
+  "syntaxFiles": 135,
+  "geometry": {
+    "terrainTriangles": 3606,
+    "maximumSlopeDegrees": 39.419228836293335,
+    "pondDepthMetres": 0.85,
+    "nativeShrineWalkFaces": 132,
+    "checks": 190,
+    "scope": "Native geometry, metadata and source contracts; not Unity runtime"
+  },
+  "runtimeChecks": [
+    "PASS 13 festival reward/harvest/cancel/time contracts; engine doubles",
+    "PASS 23 current-win shaft, spring health/expiry, native rest, brush-gesture and dialogue input contracts; engine doubles",
+    "PASS 38 garden boundary/altar progression, cinematic shaft timing/skip and thirteen-checkpoint race contracts; engine doubles",
+    "PASS 15 actual keeper dialogue/E-input ordering and shared interior/heaven visibility, including moving world-space effects checks; engine doubles, not Unity",
+    "PASS 31 real evolution ownership/save, reward cancellation/re-entry/death and pond classification checks; engine doubles, not Unity",
+    "PASS 336 actual native glyph-metric layout/clipping contracts; engine doubles, not Unity screenshots",
+    "PASS 915 actual three-phase boss/native director checks, stun resistance, first/middle/final deaths, 1x/2x/4x scaling, fire/armour visibility, skip/cancel and paused motion at 15/30/60/120fps. Engine doubles, NOT Unity."
+  ],
+  "catalogue": "PASS 33 actual catalogue, 16-weapon cycle, purchase guard and evolved strike checks; no Unity runtime claim",
+  "qolRegression": "PASS 4898 native topology, continuous floor, slope, painted route support, actual maze clearances/solvability and protected art/audio checks; NOT Unity gameplay",
+  "negativeControl": "Negative control caught original CS0136 camera regression",
+  "evolvedForm": "Sunward awakening of the authentic WP29 blade and recovered glaive motions, using original electric/spirit artwork; not a claim of a recovered separate evolved model. Other weapon evolutions deferred by user.",
+  "waterDiagnostic": "Pond shore-fit preview uses an opaque diagnostic tint to isolate shore/collision geometry; it does not validate Unity transparency/refraction.",
+  "previews": [
+    {
+      "file": "garden-0.png",
+      "sha256": "178abc231b88ac726c650ac00e1ae6401d608cb30cf95527f826dfe51f7ace92"
+    },
+    {
+      "file": "garden-1.png",
+      "sha256": "091a490cecf65238916aaf5803d26f6482416c0616f58400d9d2ec148db1fb2c"
+    },
+    {
+      "file": "garden-2.png",
+      "sha256": "98cd9bd61e628b71c1d1174cb046b8c89cfd829fe7b1c3aa02729edde861455e"
+    },
+    {
+      "file": "garden-3.png",
+      "sha256": "2d9c5198d259168e3f03f60fbce9e8db20a87fd4078a4f6c3bf13dd22a2e557b"
+    },
+    {
+      "file": "garden-4.png",
+      "sha256": "395369d3dc99e218a043f19273759894ceb2160efbe7a8bc81196479570a3c2a"
+    },
+    {
+      "file": "garden-5.png",
+      "sha256": "d4f4b196208759ee92d3c23cd87ef41fa9095d78fcfa99c2f233b0887e5202ea"
+    },
+    {
+      "file": "garden-6.png",
+      "sha256": "efa39f1b0e8e29381510891f362b460761b851b87193163aa77f9634fc739f66"
+    }
+  ]
+}

@@ -55,6 +55,7 @@ namespace Sunward
             {
                 var obj=new GameObject(originalWeapon.title+" · original instrument");obj.transform.SetParent(backSocket,false);
                 originalView=obj.AddComponent<Sunward.Remaster.OriginalWeaponView>();originalView.Load(originalWeapon.resource,originalWeapon.family);
+                if(originalWeapon.id==Sunward.Remaster.OriginalWeaponEvolution.ThunderId)Sunward.Remaster.OriginalWeaponEvolution.Attach(obj.transform);
                 obj.SetActive(CombatArea && !motor.Locked);
             }
         }
@@ -250,6 +251,8 @@ namespace Sunward
                 e.Damage(strike.damage * mul*FormMultiplier, d.normalized, strike.stagger);
                 game.Fx.Impact(e.transform.position + Vector3.up * .8f, Tundra?new Color(.55f,.85f,1):Glaive ? new Color(.9f, .75f, .48f) : new Color(1, .38f, .13f));
                 Sunward.Remaster.CelestialBrush.Burst("Spark",e.transform.position+Vector3.up*.8f,heavy?18:9,heavy?.7f:.4f);
+                if(originalWeapon.id==Sunward.Remaster.OriginalWeaponEvolution.ThunderId)
+                {Sunward.Remaster.CelestialBrush.Burst("Spark",e.transform.position+Vector3.up,20,.55f);Sunward.Remaster.CelestialBrush.Burst("SpiritGlow",e.transform.position+Vector3.up,7,.22f);}
                 if(Tundra)
                 {
                     var frost=Sunward.Remaster.OriginalAtmosphere.Create("SpiritGlow",null,e.transform.position+Vector3.up*.8f,0,.28f,.5f,.12f,.25f);

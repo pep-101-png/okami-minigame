@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "items": [
     {
       "resource": "Okami/vtaa",
@@ -18,23 +18,7 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/river-spirit-portal",
-      "position": {
-        "x": 0,
-        "y": 0,
-        "z": -25
-      },
-      "size": {
-        "x": 5,
-        "y": 0.1,
-        "z": 5
-      },
-      "yaw": 0,
-      "kind": "prop",
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/celestial-gate",
+      "resource": "Okami/heaven-gate",
       "position": {
         "x": 0,
         "y": 0,
@@ -43,7 +27,7 @@
       "size": {
         "x": 10,
         "y": 7.5,
-        "z": 2
+        "z": 3.4
       },
       "yaw": 0,
       "kind": "prop",
@@ -1522,22 +1506,6 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/vt40",
-      "position": {
-        "x": -25.2515,
-        "y": 0,
-        "z": 12.9056
-      },
-      "size": {
-        "x": 1.374823277151162,
-        "y": 1.1780432427049043,
-        "z": 1.0998586217209296
-      },
-      "yaw": 67,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
       "resource": "Okami/vt46",
       "position": {
         "x": -21.0294,
@@ -1554,38 +1522,6 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/vt47",
-      "position": {
-        "x": -25.3771,
-        "y": 0,
-        "z": 13.4141
-      },
-      "size": {
-        "x": 1.487141391142425,
-        "y": 0.9811392675793189,
-        "z": 1.18971311291394
-      },
-      "yaw": 75,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt48",
-      "position": {
-        "x": -27.2036,
-        "y": 0,
-        "z": 14.5093
-      },
-      "size": {
-        "x": 1.3876824385978959,
-        "y": 0.9396848765401045,
-        "z": 1.1101459508783167
-      },
-      "yaw": 107,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
       "resource": "Okami/vt29",
       "position": {
         "x": -25.9974,
@@ -1598,38 +1534,6 @@
         "z": 1.5943095442472446
       },
       "yaw": 58,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt40",
-      "position": {
-        "x": -25.435,
-        "y": 0,
-        "z": 12.0955
-      },
-      "size": {
-        "x": 1.8459288836223127,
-        "y": 0.7949724358954748,
-        "z": 1.4767431068978503
-      },
-      "yaw": 324,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt46",
-      "position": {
-        "x": -24.7824,
-        "y": 0,
-        "z": 11.3234
-      },
-      "size": {
-        "x": 1.3267420641278846,
-        "y": 0.9909935253916434,
-        "z": 1.0613936513023077
-      },
-      "yaw": 133,
       "kind": "flower",
       "absoluteHeight": false
     },
@@ -1666,38 +1570,6 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/vt29",
-      "position": {
-        "x": -25.5949,
-        "y": 0,
-        "z": 14.6088
-      },
-      "size": {
-        "x": 1.6442246213433318,
-        "y": 1.212370297432253,
-        "z": 1.3153796970746656
-      },
-      "yaw": 313,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt40",
-      "position": {
-        "x": -28.0538,
-        "y": 0,
-        "z": 12.7641
-      },
-      "size": {
-        "x": 1.33514700755028,
-        "y": 0.8719653191671408,
-        "z": 1.068117606040224
-      },
-      "yaw": 107,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
       "resource": "Okami/vt46",
       "position": {
         "x": -20.8107,
@@ -1710,22 +1582,6 @@
         "z": 1.1272741748960797
       },
       "yaw": 344,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt48",
-      "position": {
-        "x": -25.9644,
-        "y": 0,
-        "z": 13.293
-      },
-      "size": {
-        "x": 1.145457980800776,
-        "y": 0.7233768560516652,
-        "z": 0.9163663846406209
-      },
-      "yaw": 58,
       "kind": "flower",
       "absoluteHeight": false
     },
@@ -1778,22 +1634,6 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/vt47",
-      "position": {
-        "x": -24.4396,
-        "y": 0,
-        "z": 10.5286
-      },
-      "size": {
-        "x": 1.4980772240026727,
-        "y": 1.2180329572632773,
-        "z": 1.1984617792021381
-      },
-      "yaw": 17,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
       "resource": "Okami/vt48",
       "position": {
         "x": -20.154,
@@ -1826,22 +1666,6 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/vt46",
-      "position": {
-        "x": -24.0577,
-        "y": 0,
-        "z": 12.0637
-      },
-      "size": {
-        "x": 2.0808697406208134,
-        "y": 1.1640459962828156,
-        "z": 1.6646957924966508
-      },
-      "yaw": 31,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
       "resource": "Okami/vt48",
       "position": {
         "x": -22.3779,
@@ -1854,22 +1678,6 @@
         "z": 1.578601135736961
       },
       "yaw": 102,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt40",
-      "position": {
-        "x": -26.5202,
-        "y": 0,
-        "z": 11.1589
-      },
-      "size": {
-        "x": 2.0647493333165707,
-        "y": 0.7859887230981295,
-        "z": 1.6517994666532567
-      },
-      "yaw": 134,
       "kind": "flower",
       "absoluteHeight": false
     },
@@ -5218,22 +5026,6 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/vt40",
-      "position": {
-        "x": 12.551493414074635,
-        "y": 0,
-        "z": 14.027197812601873
-      },
-      "size": {
-        "x": 1.5,
-        "y": 0.9,
-        "z": 1.3
-      },
-      "kind": "flower",
-      "yaw": 58,
-      "absoluteHeight": false
-    },
-    {
       "resource": "Okami/vt46",
       "position": {
         "x": 14.458246043065774,
@@ -5250,86 +5042,6 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/vt47",
-      "position": {
-        "x": 13.162971361066631,
-        "y": 0,
-        "z": 14.127242036925784
-      },
-      "size": {
-        "x": 1.5,
-        "y": 0.9,
-        "z": 1.3
-      },
-      "kind": "flower",
-      "yaw": 241,
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt48",
-      "position": {
-        "x": 13.288015149415724,
-        "y": 0,
-        "z": 11.587798317998567
-      },
-      "size": {
-        "x": 1.5,
-        "y": 0.9,
-        "z": 1.3
-      },
-      "kind": "flower",
-      "yaw": 65,
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt40",
-      "position": {
-        "x": 12.63154358710217,
-        "y": 0,
-        "z": 13.446378769519676
-      },
-      "size": {
-        "x": 1.5,
-        "y": 0.9,
-        "z": 1.3
-      },
-      "kind": "flower",
-      "yaw": 123,
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt46",
-      "position": {
-        "x": 12.569076988171227,
-        "y": 0,
-        "z": 12.73832999604538
-      },
-      "size": {
-        "x": 1.5,
-        "y": 0.9,
-        "z": 1.3
-      },
-      "kind": "flower",
-      "yaw": 286,
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt47",
-      "position": {
-        "x": 12.281895955558966,
-        "y": 0,
-        "z": 11.39576392655222
-      },
-      "size": {
-        "x": 1.5,
-        "y": 0.9,
-        "z": 1.3
-      },
-      "kind": "flower",
-      "yaw": 255,
-      "absoluteHeight": false
-    },
-    {
       "resource": "Okami/vt48",
       "position": {
         "x": 14.10644611900835,
@@ -5343,22 +5055,6 @@
       },
       "kind": "flower",
       "yaw": 103,
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt40",
-      "position": {
-        "x": 13.758497195896224,
-        "y": 0,
-        "z": 12.59521236452399
-      },
-      "size": {
-        "x": 1.5,
-        "y": 0.9,
-        "z": 1.3
-      },
-      "kind": "flower",
-      "yaw": 217,
       "absoluteHeight": false
     },
     {
@@ -5778,15 +5474,15 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/celestial-grounded",
+      "resource": "Okami/heaven-basin-terrain",
       "position": {
         "x": 0,
-        "y": -0.18,
+        "y": -1.0635827804877602,
         "z": 0
       },
       "size": {
         "x": 110,
-        "y": 2.69358471815183,
+        "y": 3.5771674986395903,
         "z": 108
       },
       "yaw": 0,
@@ -5794,10 +5490,10 @@
       "absoluteHeight": true
     },
     {
-      "resource": "Okami/celestial-pond",
+      "resource": "Okami/heaven-pond-basin",
       "position": {
         "x": 22,
-        "y": 0,
+        "y": -0.2572178550693408,
         "z": -18
       },
       "size": {
@@ -5805,15 +5501,15 @@
         "y": 0.85,
         "z": 8.5
       },
-      "yaw": 20,
+      "yaw": 0,
       "kind": "pond",
-      "absoluteHeight": false
+      "absoluteHeight": true
     },
     {
-      "resource": "Okami/celestial-pond",
+      "resource": "Okami/heaven-pond-basin",
       "position": {
         "x": 23,
-        "y": 0,
+        "y": 2.1205444576554457,
         "z": 19
       },
       "size": {
@@ -5821,15 +5517,15 @@
         "y": 0.85,
         "z": 8.5
       },
-      "yaw": 110,
+      "yaw": 0,
       "kind": "pond",
-      "absoluteHeight": false
+      "absoluteHeight": true
     },
     {
-      "resource": "Okami/celestial-pond",
+      "resource": "Okami/heaven-pond-basin",
       "position": {
         "x": -20,
-        "y": 0,
+        "y": 2.113542657551188,
         "z": 20
       },
       "size": {
@@ -5837,9 +5533,9 @@
         "y": 0.85,
         "z": 8.5
       },
-      "yaw": 55,
+      "yaw": 0,
       "kind": "pond",
-      "absoluteHeight": false
+      "absoluteHeight": true
     },
     {
       "resource": "Okami/celestial-cloud-bank",
@@ -14482,22 +14178,6 @@
       "absoluteHeight": false
     },
     {
-      "resource": "Okami/vt48",
-      "position": {
-        "x": -24.8126,
-        "y": 0,
-        "z": 14.2646
-      },
-      "size": {
-        "x": 1.2,
-        "y": 0.85,
-        "z": 1.1
-      },
-      "yaw": 353,
-      "kind": "flower",
-      "absoluteHeight": false
-    },
-    {
       "resource": "Okami/vt29",
       "position": {
         "x": -23.1114,
@@ -14768,123 +14448,389 @@
       "yaw": 0,
       "kind": "tree",
       "absoluteHeight": false
+    },
+    {
+      "resource": "Okami/et19",
+      "position": {
+        "x": 0,
+        "y": 0.65,
+        "z": -25
+      },
+      "size": {
+        "x": 1.2,
+        "y": 2.3,
+        "z": 0.35
+      },
+      "kind": "prop",
+      "yaw": 180,
+      "absoluteHeight": false
+    },
+    {
+      "resource": "Okami/vt0a",
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": -25
+      },
+      "size": {
+        "x": 1.5,
+        "y": 0.55,
+        "z": 1.2
+      },
+      "kind": "prop",
+      "yaw": 0,
+      "absoluteHeight": false
     }
   ],
   "walks": [
     {
       "a": {
-        "x": 0,
+        "x": 0.0,
         "y": 0,
-        "z": -25
+        "z": -25.0
       },
       "b": {
-        "x": 0,
+        "x": -0.0741,
         "y": 0,
-        "z": -21
+        "z": -24.0
       },
       "width": 1.45
     },
     {
       "a": {
-        "x": 0,
+        "x": -0.0741,
         "y": 0,
-        "z": -21
+        "z": -24.0
       },
       "b": {
-        "x": 2,
+        "x": -0.1481,
         "y": 0,
-        "z": -16
+        "z": -22.5556
       },
       "width": 1.45
     },
     {
       "a": {
-        "x": 2,
+        "x": -0.1481,
         "y": 0,
-        "z": -16
+        "z": -22.5556
       },
       "b": {
-        "x": 3,
+        "x": 0.0,
         "y": 0,
-        "z": -11
+        "z": -21.0
       },
       "width": 1.45
     },
     {
       "a": {
-        "x": 3,
+        "x": 0.0,
         "y": 0,
-        "z": -11
+        "z": -21.0
       },
       "b": {
-        "x": 1,
+        "x": 0.5556,
         "y": 0,
-        "z": -5
+        "z": -19.4074
       },
       "width": 1.45
     },
     {
       "a": {
-        "x": 1,
+        "x": 0.5556,
         "y": 0,
-        "z": -5
+        "z": -19.4074
       },
       "b": {
-        "x": -1,
+        "x": 1.3333,
         "y": 0,
-        "z": 1
+        "z": -17.7037
       },
       "width": 1.45
     },
     {
       "a": {
-        "x": -1,
+        "x": 1.3333,
         "y": 0,
-        "z": 1
+        "z": -17.7037
       },
       "b": {
-        "x": 0,
+        "x": 2.0,
         "y": 0,
-        "z": 7
+        "z": -16.0
       },
       "width": 1.45
     },
     {
       "a": {
-        "x": 0,
+        "x": 2.0,
         "y": 0,
-        "z": 7
+        "z": -16.0
       },
       "b": {
-        "x": 1,
+        "x": 2.5185,
         "y": 0,
-        "z": 12
+        "z": -14.3704
       },
       "width": 1.45
     },
     {
       "a": {
-        "x": 1,
+        "x": 2.5185,
         "y": 0,
-        "z": 12
+        "z": -14.3704
       },
       "b": {
-        "x": 0,
+        "x": 2.9259,
         "y": 0,
-        "z": 17
+        "z": -12.7407
       },
       "width": 1.45
     },
     {
       "a": {
-        "x": 0,
+        "x": 2.9259,
         "y": 0,
-        "z": 17
+        "z": -12.7407
       },
       "b": {
-        "x": 0,
+        "x": 3.0,
         "y": 0,
-        "z": 22
+        "z": -11.0
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 3.0,
+        "y": 0,
+        "z": -11.0
+      },
+      "b": {
+        "x": 2.5556,
+        "y": 0,
+        "z": -9.0741
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 2.5556,
+        "y": 0,
+        "z": -9.0741
+      },
+      "b": {
+        "x": 1.7778,
+        "y": 0,
+        "z": -7.037
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 1.7778,
+        "y": 0,
+        "z": -7.037
+      },
+      "b": {
+        "x": 1.0,
+        "y": 0,
+        "z": -5.0
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 1.0,
+        "y": 0,
+        "z": -5.0
+      },
+      "b": {
+        "x": 0.2222,
+        "y": 0,
+        "z": -3.0
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 0.2222,
+        "y": 0,
+        "z": -3.0
+      },
+      "b": {
+        "x": -0.5556,
+        "y": 0,
+        "z": -1.0
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": -0.5556,
+        "y": 0,
+        "z": -1.0
+      },
+      "b": {
+        "x": -1.0,
+        "y": 0,
+        "z": 1.0
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": -1.0,
+        "y": 0,
+        "z": 1.0
+      },
+      "b": {
+        "x": -0.8889,
+        "y": 0,
+        "z": 3.037
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": -0.8889,
+        "y": 0,
+        "z": 3.037
+      },
+      "b": {
+        "x": -0.4444,
+        "y": 0,
+        "z": 5.0741
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": -0.4444,
+        "y": 0,
+        "z": 5.0741
+      },
+      "b": {
+        "x": 0.0,
+        "y": 0,
+        "z": 7.0
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 0.0,
+        "y": 0,
+        "z": 7.0
+      },
+      "b": {
+        "x": 0.4074,
+        "y": 0,
+        "z": 8.7407
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 0.4074,
+        "y": 0,
+        "z": 8.7407
+      },
+      "b": {
+        "x": 0.8148,
+        "y": 0,
+        "z": 10.3704
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 0.8148,
+        "y": 0,
+        "z": 10.3704
+      },
+      "b": {
+        "x": 1.0,
+        "y": 0,
+        "z": 12.0
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 1.0,
+        "y": 0,
+        "z": 12.0
+      },
+      "b": {
+        "x": 0.7778,
+        "y": 0,
+        "z": 13.6667
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 0.7778,
+        "y": 0,
+        "z": 13.6667
+      },
+      "b": {
+        "x": 0.3333,
+        "y": 0,
+        "z": 15.3333
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 0.3333,
+        "y": 0,
+        "z": 15.3333
+      },
+      "b": {
+        "x": 0.0,
+        "y": 0,
+        "z": 17.0
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": 0.0,
+        "y": 0,
+        "z": 17.0
+      },
+      "b": {
+        "x": -0.0741,
+        "y": 0,
+        "z": 18.8519
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": -0.0741,
+        "y": 0,
+        "z": 18.8519
+      },
+      "b": {
+        "x": -0.037,
+        "y": 0,
+        "z": 20.7037
+      },
+      "width": 1.45
+    },
+    {
+      "a": {
+        "x": -0.037,
+        "y": 0,
+        "z": 20.7037
+      },
+      "b": {
+        "x": 0.0,
+        "y": 0,
+        "z": 22.0
       },
       "width": 1.45
     },
@@ -15186,6 +15132,32 @@
         "z": 3
       },
       "width": 1.8
+    },
+    {
+      "a": {
+        "x": -11,
+        "y": 0,
+        "z": 4.25
+      },
+      "b": {
+        "x": -19,
+        "y": 0,
+        "z": 8
+      },
+      "width": 1.0
+    },
+    {
+      "a": {
+        "x": -19,
+        "y": 0,
+        "z": 8
+      },
+      "b": {
+        "x": -25,
+        "y": 0,
+        "z": 12
+      },
+      "width": 1.0
     }
   ],
   "mazeWalls": [
@@ -15856,5 +15828,58 @@
         ]
       ]
     ]
+  },
+  "ponds": [
+    {
+      "position": {
+        "x": 22,
+        "y": -0.2135827804877602,
+        "z": -18
+      },
+      "radius": {
+        "x": 2.6500000000000004,
+        "y": 2.2525
+      },
+      "depth": 0.85
+    },
+    {
+      "position": {
+        "x": 23,
+        "y": 2.4305200866749193,
+        "z": 19
+      },
+      "radius": {
+        "x": 2.6500000000000004,
+        "y": 2.2525
+      },
+      "depth": 0.85
+    },
+    {
+      "position": {
+        "x": -20,
+        "y": 2.3972852118003902,
+        "z": 20
+      },
+      "radius": {
+        "x": 2.6500000000000004,
+        "y": 2.2525
+      },
+      "depth": 0.85
+    }
+  ],
+  "treasure": {
+    "x": -19.75,
+    "y": 0,
+    "z": -2.75
+  },
+  "lookout": {
+    "x": -26,
+    "y": 0,
+    "z": 12
+  },
+  "tea": {
+    "x": 11,
+    "y": 0,
+    "z": 13
   }
 }

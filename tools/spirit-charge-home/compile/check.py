@@ -178,6 +178,18 @@ s=s.replace('public class Renderer:Object{', 'public class Renderer:Object{publi
 s=s.replace('public static T[] FindObjectsByType<T>(FindObjectsSortMode mode)=>System.Array.Empty<T>();', 'public static T[] FindObjectsByType<T>(FindObjectsSortMode mode)=>SceneQuery.Find<T>();')
 s=s.replace('public static T[] FindObjectsByType<T>(FindObjectsInactive inactive,FindObjectsSortMode mode)=>System.Array.Empty<T>();','public static T[] FindObjectsByType<T>(FindObjectsInactive inactive,FindObjectsSortMode mode)=>SceneQuery.Find<T>();')
 s+='\nnamespace UnityEngine{public static class SceneQuery{public static Object[] objects=System.Array.Empty<Object>();public static T[] Find<T>(){var result=new System.Collections.Generic.List<T>();foreach(var o in objects)if(o is T t)result.Add(t);return result.ToArray();}}}'
+s=s.replace('public void Equip(){throw new Exception("Return home attempted a visual reload");}','public bool allowEquip;public int equips;public void Equip(){if(!allowEquip)throw new Exception("Return home attempted a visual reload");equips++;}')
+s=re.sub(r' public class OriginalVisual:UnityEngine.MonoBehaviour\{[^\n]*\}\n','',s)
+# NativePaintedRig loads static models without requiring a motion bank, as the real engine adapter does.
+s=s.replace('var bank=new NativePoseBank(resource+"/Poses");Bones=', 'var motion=Resources.Load<TextAsset>(resource+"/Poses");var bank=new {BoneCount=motion==null?1:new NativePoseBank(resource+"/Poses").BoneCount};Bones=')
+s=s.replace('public static int RaycastNonAlloc(Vector3 p,Vector3 dir,RaycastHit[] hits,float d,int mask,QueryTriggerInteraction q)=>0;', 'public static int RaycastNonAlloc(Vector3 p,Vector3 dir,RaycastHit[] hits,float d,int mask,QueryTriggerInteraction q){int n=System.Math.Min(hits.Length,HeavenPhysicsFixture.hits.Length);System.Array.Copy(HeavenPhysicsFixture.hits,hits,n);return n;}')
+s+='\nnamespace UnityEngine{public static class HeavenPhysicsFixture{public static RaycastHit[] hits=System.Array.Empty<RaycastHit>();}}'
+# Public Unity APIs used by the real native shrine floor and veil adapters.
+s=s.replace('public class Mesh:Object{', 'public class Mesh:Object{public Vector3[] vertices=System.Array.Empty<Vector3>();public int[] triangles=System.Array.Empty<int>();public void RecalculateBounds(){}')
+s=s.replace('public static Vector3 Lerp(', 'public static Vector3 Cross(Vector3 a,Vector3 b)=>new Vector3(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x);public static Vector3 Lerp(')
+s=s.replace('public class ParticleSystem:Object{', 'public class ParticleSystem:Object{public class VelocityModule{public float y;}public VelocityModule velocityOverLifetime=new VelocityModule();')
+s=s.replace('public class LineRenderer:', 'public class LineRenderer:')
+s=s.replace('public int positionCount;', 'public bool loop;public int positionCount;')
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
  if args.negative_control:

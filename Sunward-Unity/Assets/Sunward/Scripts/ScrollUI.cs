@@ -338,6 +338,13 @@ namespace Sunward
             bool owned=Sunward.Remaster.OriginalWeaponCatalog.Owns(game.Profile,entry.id);
             if(Button(owned?(game.Profile.equipped==entry.id?"EQUIPPED":"EQUIP THIS INSTRUMENT"):"PURCHASE · "+entry.cost+" coins",button))
             {if(owned){game.Profile.equipped=entry.id;game.Save.Save();game.Combat.Equip();}else game.Buy("weapon:"+entry.id);}
+            if(entry.resource=="wp29")
+            {
+                bool awakened=Sunward.Remaster.OriginalWeaponEvolution.Owns(game.Profile);
+                Label(awakened?"AWAKENED · +35% damage · +15% reach":"AWAKENING · Find and dig up the buried chest in the heavenly garden maze.",small);
+                if(awakened && Button(game.Profile.equipped==Sunward.Remaster.OriginalWeaponEvolution.ThunderId?"AWAKENED FORM EQUIPPED":"EQUIP AWAKENED THUNDER EDGE",button))
+                {game.Profile.equipped=Sunward.Remaster.OriginalWeaponEvolution.ThunderId;game.Save.Save();game.Combat.Equip();}
+            }
             if(Button("PREVIOUS INSTRUMENT",button))weaponPage=(weaponPage+catalogue.Length-1)%catalogue.Length;
             if(Button("NEXT INSTRUMENT",button))weaponPage=(weaponPage+1)%catalogue.Length;
         }

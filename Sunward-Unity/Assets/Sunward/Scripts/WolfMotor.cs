@@ -210,8 +210,9 @@ namespace Sunward
         }
         bool UpdateSwimming(float dt)
         {
-            bool deep = !Sunward.Remaster.HeavenlyGarden.Inside(transform.position) && !Sunward.Remaster.VillageInteriors.Inside(transform.position) && !game.InTrial && !Sunward.Remaster.NativeHomeRoom.At(transform.position) && !Sunward.Remaster.LowerArena.Inside(transform.position) && !Sunward.Remaster.LowerArena.Shaft(transform.position) && Valley.Depth(transform.position) > .42f;
-            if (!deep || waterLeap > 0 || transform.position.y > .02f)
+            bool heavenWater=Sunward.Remaster.HeavenlyGarden.Water(transform.position,out var heavenLevel,out var heavenDepth);
+            bool deep = (heavenWater && heavenDepth>.65f) || (!Sunward.Remaster.HeavenlyGarden.Inside(transform.position) && !Sunward.Remaster.VillageInteriors.Inside(transform.position) && !game.InTrial && !Sunward.Remaster.NativeHomeRoom.At(transform.position) && !Sunward.Remaster.LowerArena.Inside(transform.position) && !Sunward.Remaster.LowerArena.Shaft(transform.position) && Valley.Depth(transform.position) > .42f);
+            if (!deep || waterLeap > 0 || transform.position.y > (heavenWater?heavenLevel+.10f:.02f))
             {
                 if (Swimming) animationView.Play("Land_Soft", .1f, .2f, true);
                 Swimming = false; return false;
@@ -224,7 +225,7 @@ namespace Sunward
             Vector3 direction = Vector3.ClampMagnitude(forward * m.y + right * m.x, 1);
             horizontal = Vector3.MoveTowards(horizontal, direction * (input.Sprint.IsPressed() ? 2.0f : 1.35f)*game.Combat.FormMultiplier, dt * 5);
             // Put the torso at the waterline so the leg stroke is submerged.
-            float surface = Mathf.Max(valley.Height(transform.position)+.03f, -.34f - .12f);
+            float surface = Mathf.Max(valley.Height(transform.position)+.03f, heavenWater?heavenLevel-.38f:-.34f - .12f);
             Vertical = 0;
             Vector3 before = transform.position;
             Push(horizontal * dt + Vector3.up * Mathf.Clamp(surface - before.y, -dt * 3, dt * 3));

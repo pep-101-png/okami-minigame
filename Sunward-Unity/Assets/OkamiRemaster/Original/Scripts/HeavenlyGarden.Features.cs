@@ -1,0 +1,175 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+namespace Sunward.Remaster
+{
+    public sealed partial class HeavenlyGarden
+    {
+        [Serializable]sealed class GardenPool{public Vector3 position;public Vector2 radius;public float depth;}
+        static HeavenlyGarden activeGarden;
+        GardenPool[] pools=Array.Empty<GardenPool>();
+        readonly List<Mesh> featureMeshes=new List<Mesh>();
+        readonly List<Vector3> gongs=new List<Vector3>();
+        readonly List<LineRenderer> gongWaves=new List<LineRenderer>();
+        readonly List<float> gongWaveTime=new List<float>();
+        Vector3 treasurePoint,lookoutPoint,teaPoint;GameObject digGlow,chest,rewardBlade;
+        bool rewardPlaying;float rewardTime,featureCooldown,gongCooldown,birdTime,wetTime,chimeTime;
+        Vector3 cranePoint;OrbitCamera treasureCamera;readonly List<GameObject> treasureEffects=new List<GameObject>();
+        public static bool Water(Vector3 point,out float level,out float depth)
+        {
+            level=depth=0;var owner=activeGarden;
+            if(!owner || !owner.isActiveAndEnabled || !Inside(point))return false;
+            foreach(var pool in owner.pools)
+            {
+                float x=(point.x-Centre.x-pool.position.x)/pool.radius.x,z=(point.z-pool.position.z)/pool.radius.y;
+                if(x*x+z*z>.99f*.99f)continue;
+                level=Centre.y+pool.position.y;Height(point,out var floor);depth=Mathf.Max(0,level-floor);return true;
+            }
+            return false;
+        }
+        void PrepareFeatures(GardenLayout layout)
+        {
+            activeGarden=this;pools=layout.ponds??Array.Empty<GardenPool>();treasurePoint=Centre+layout.treasure;lookoutPoint=Centre+layout.lookout;teaPoint=Centre+layout.tea;
+            Shader.SetGlobalVectorArray("_HeavenDig",new[]{new Vector4(layout.treasure.x,layout.treasure.z,.8f,OriginalWeaponEvolution.Owns(game.Profile)?0:1)});
+            var areas=new Vector4[4];var levels=new Vector4[4];
+            for(int i=0;i<Mathf.Min(4,pools.Length);i++)
+            {var p=pools[i];areas[i]=new Vector4(p.position.x,p.position.z,p.radius.x,p.radius.y);levels[i]=new Vector4(p.position.y,p.depth,0,0);}
+            Shader.SetGlobalVectorArray("_HeavenPonds",areas);Shader.SetGlobalVectorArray("_HeavenPondLevels",levels);Shader.SetGlobalFloat("_HeavenPondCount",Mathf.Min(4,pools.Length));
+        }
+        void PondMaterial(GameObject prop,GardenItem item)
+        {
+            var pool=Array.Find(pools,p=>Mathf.Abs(p.position.x-item.position.x)<.1f && Mathf.Abs(p.position.z-item.position.z)<.1f);if(pool==null)return;
+            foreach(var r in prop.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                if(r.sharedMesh.name=="Native-1-0")
+                {
+                    var mat=new Material(r.sharedMaterial);mat.shader=Resources.Load<Material>("Okami/Effects/CelestialWater").shader;
+                    mat.SetTexture("_RipplePaint",Resources.Load<Texture2D>("Okami/celestial-pond/Texture-0"));mat.SetFloat("_CentreX",Centre.x+pool.position.x);mat.SetFloat("_CentreZ",pool.position.z);mat.SetFloat("_RadiusX",pool.radius.x);mat.SetFloat("_RadiusZ",pool.radius.y);mat.SetFloat("_WaterLevel",Centre.y+pool.position.y);r.sharedMaterial=mat;r.localBounds=new Bounds(r.sharedMesh.bounds.center,r.sharedMesh.bounds.size+Vector3.up*6);r.updateWhenOffscreen=true;r.gameObject.AddComponent<OriginalParticleMaterial>();
+                }
+                else
+                {r.gameObject.layer=6;r.gameObject.name="Heaven garden ground · native pond rim";r.gameObject.AddComponent<MeshCollider>().sharedMesh=r.sharedMesh;}
+            }
+            var steam=OriginalAtmosphere.Create("Steam",garden.transform,new Vector3(pool.position.x,pool.position.y+.05f,pool.position.z),.65f,.65f,3,.01f,1.5f);
+            if(steam){var main=steam.main;main.startColor=new Color(.8f,.9f,1,.13f);}
+        }
+        void SolidProp(GameObject prop,bool temple=false)
+        {
+            foreach(var r in prop.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {
+                // The original complete model blocks the body, including risers/posts.
+                r.gameObject.AddComponent<MeshCollider>().sharedMesh=r.sharedMesh;
+                if(!temple)continue;
+                var mesh=r.sharedMesh;var v=mesh.vertices;var t=mesh.triangles;var walk=new List<int>();
+                float limit=prop.transform.position.y+3.1f;
+                for(int i=0;i<t.Length;i+=3)
+                {
+                    var a=r.transform.TransformPoint(v[t[i]]);var b=r.transform.TransformPoint(v[t[i+1]]);var c=r.transform.TransformPoint(v[t[i+2]]);
+                    if(Mathf.Max(a.y,Mathf.Max(b.y,c.y))>limit)continue;
+                    var normal=Vector3.Cross(b-a,c-a).normalized;if(normal.y<.55f)continue;
+                    walk.Add(t[i]);walk.Add(t[i+1]);walk.Add(t[i+2]);
+                }
+                if(walk.Count==0)continue;
+                var floor=new Mesh{name="Original shrine stair treads and timber landing"};floor.vertices=v;floor.triangles=walk.ToArray();floor.RecalculateBounds();featureMeshes.Add(floor);
+                var surface=new GameObject("Heaven garden ground · real shrine stairs/landing");surface.layer=6;surface.transform.SetParent(r.transform,false);surface.AddComponent<MeshCollider>().sharedMesh=floor;
+            }
+        }
+        Vector3 OnGround(Vector3 world,float extra=0){Height(world,out var y);world.y=y+extra;return world;}
+        GameObject FeatureProp(string resource,Vector3 world,Vector3 size,float yaw=0)
+        {return VillageFestival.Place(garden.transform,"Okami/"+resource,world-Centre,size,new Vector3(0,yaw,0));}
+        void FinishFeatures()
+        {
+            treasurePoint=OnGround(treasurePoint);lookoutPoint=OnGround(lookoutPoint);teaPoint=OnGround(teaPoint);
+            chest=FeatureProp("vt4b",treasurePoint-Vector3.up*.7f,new Vector3(.9f,.65f,.75f));if(chest)chest.SetActive(false);
+            var glow=OriginalAtmosphere.Create("SpiritGlow",garden.transform,treasurePoint-Centre+Vector3.up*.08f,3,.14f,2,.015f,.42f);digGlow=glow?glow.gameObject:null;
+            if(digGlow)digGlow.SetActive(!OriginalWeaponEvolution.Owns(game.Profile));
+            FeatureProp("vt9a",teaPoint,new Vector3(1.65f,.6f,1.45f));
+            FeatureProp("heaven-tea-tray",teaPoint+Vector3.up*.62f,new Vector3(.45f,.20f,.3f));
+            foreach(int side in new[]{-1,1})
+            {
+                var seat=OnGround(teaPoint+Vector3.right*side*1.45f);var stump=FeatureProp("vt74",seat,new Vector3(1.3f,.38f,1.25f));if(stump)SolidProp(stump);
+                var actorRoot=new GameObject("Celestial tea guest · recovered seated and sipping motions");actorRoot.SetActive(false);actorRoot.transform.SetParent(garden.transform,false);actorRoot.transform.position=seat+Vector3.up*.39f;actorRoot.transform.rotation=Quaternion.Euler(0,side<0?90:270,0);
+                var actor=actorRoot.AddComponent<OriginalActor>();actor.game=game;actor.resource="Okami/heaven-tea-hm50";actor.idle=actor.walk=actor.run=actor.windup=actor.strike=actor.recover=actor.death="hm05_003";actor.modelScale=.82f;
+                var tea=actorRoot.AddComponent<HeavenTeaGuest>();tea.actor=actor;tea.phase=side<0?.1f:.65f;actorRoot.SetActive(true);
+            }
+            var roof=FeatureProp("heaven-lookout-roof",lookoutPoint+Vector3.up*2.65f,new Vector3(5,1.35f,4.7f));if(roof)SolidProp(roof);
+            foreach(float x in new[]{-1.9f,1.9f})foreach(float z in new[]{-1.65f,1.65f})
+            {var pillar=FeatureProp("vt00",OnGround(lookoutPoint+new Vector3(x,0,z)),new Vector3(.23f,2.9f,.23f));if(pillar)SolidProp(pillar);}
+            // One source waterfall drops into the western pool, behind its bank.
+            var cascade=FeatureProp("river-waterfall",new Vector3(Centre.x-21.6f,Centre.y+pools[2].position.y+.02f,22.1f),new Vector3(2.6f,2.2f,1.6f),-37.445568f);
+            if(cascade)foreach(var r in cascade.GetComponentsInChildren<SkinnedMeshRenderer>())
+            {var mat=new Material(r.sharedMaterial);mat.shader=Resources.Load<Material>("Okami/Effects/FallingWater").shader;mat.SetFloat("_FlowDirection",r.sharedMesh.name.StartsWith("Native-1-")?1:-1);r.sharedMaterial=mat;r.gameObject.AddComponent<OriginalParticleMaterial>();}
+            foreach(var p in new[]{new Vector3(-23.8f,0,23.8f),new Vector3(-22.6f,0,24.5f)})FeatureProp("vt2a",OnGround(Centre+p),new Vector3(2.2f,2.5f,2.4f),p.x*7);
+            if(cascade){var stream=cascade.AddComponent<AudioSource>();stream.playOnAwake=false;stream.loop=true;stream.spatialBlend=1;stream.minDistance=1;stream.maxDistance=12;stream.rolloffMode=AudioRolloffMode.Linear;stream.volume=.035f;stream.dopplerLevel=0;stream.clip=Resources.Load<AudioClip>("Okami/NativeAudio/swim-water-0");cascade.AddComponent<HeavenAmbience>();}
+            cranePoint=OnGround(Centre+new Vector3(17,0,22));
+            var crane=new GameObject("Original crane · quiet garden bird");crane.SetActive(false);crane.transform.SetParent(garden.transform,false);crane.transform.position=cranePoint;crane.transform.rotation=Quaternion.Euler(0,160,0);var bird=crane.AddComponent<OriginalActor>();bird.game=game;bird.resource="Okami/heaven-crane";bird.idle=bird.walk=bird.run=bird.windup=bird.strike=bird.recover=bird.death="an01_000";bird.modelScale=.6f;crane.SetActive(true);
+            birdTime=Time.time+12;chimeTime=Time.time+38;
+            var wind=new GameObject("Quiet original garden wind");wind.transform.SetParent(garden.transform,false);wind.transform.position=Centre+Vector3.up*2;var sound=wind.AddComponent<AudioSource>();sound.playOnAwake=false;sound.loop=true;sound.spatialBlend=1;sound.minDistance=12;sound.maxDistance=55;sound.rolloffMode=AudioRolloffMode.Linear;sound.volume=.055f;sound.dopplerLevel=0;sound.clip=Resources.Load<AudioClip>("Okami/NativeAudio/wind-0");if(sound.clip)sound.Play();wind.AddComponent<HeavenAmbience>();
+        }
+        void MazeMagic(GameObject boundary,Vector3 a,Vector3 b,float height)
+        {
+            var lineRoot=new GameObject("Mystical maze veil · original spirit artwork");lineRoot.transform.SetParent(garden.transform,false);
+            var line=lineRoot.AddComponent<LineRenderer>();line.useWorldSpace=false;line.positionCount=2;line.SetPosition(0,new Vector3(a.x,boundary.transform.localPosition.y,a.z));line.SetPosition(1,new Vector3(b.x,boundary.transform.localPosition.y,b.z));line.startWidth=line.endWidth=height;line.startColor=line.endColor=Color.white;line.sharedMaterial=Resources.Load<Material>("Okami/Effects/HeavenBarrier");
+            var motes=OriginalAtmosphere.Create("Spirit",garden.transform,new Vector3((a.x+b.x)*.5f,boundary.transform.localPosition.y-height*.5f+.1f,(a.z+b.z)*.5f),3,.11f,3,0,.1f);
+            if(motes){var v=motes.velocityOverLifetime;v.enabled=true;v.y=2.3f;var main=motes.main;main.startColor=new Color(.4f,.85f,1,.5f);}
+        }
+        public bool TryDigTreasure()
+        {
+            if(!game || !Inside(game.Player.transform.position) || Vector2.Distance(new Vector2(game.Player.transform.position.x,game.Player.transform.position.z),new Vector2(treasurePoint.x,treasurePoint.z))>1.6f || !game.Player.input.Dig.WasPressedThisFrame())return false;
+            if(OriginalWeaponEvolution.Owns(game.Profile)){game.Notify("The chest's thunder blessing is already yours");return true;}
+            if(Playing || !game.Player.Grounded)return true;
+            Playing=rewardPlaying=true;rewardTime=0;game.Combat.Cancel();game.Services.CancelRest();game.Player.StopMotion();game.Player.Locked=true;var facing=treasurePoint-game.Player.transform.position;facing.y=0;if(facing.sqrMagnitude>.001f)game.Player.transform.rotation=Quaternion.LookRotation(facing);game.Player.animationView.Play("Dig",.12f,1.25f,true);
+            treasureCamera=FindFirstObjectByType<OrbitCamera>();if(treasureCamera)treasureCamera.BeginCinematic();if(digGlow)digGlow.SetActive(false);if(chest){chest.transform.position=treasurePoint-Vector3.up*.7f;chest.SetActive(true);}return true;
+        }
+        void TickTreasure()
+        {
+            rewardTime+=Time.unscaledDeltaTime;float t=rewardTime;
+            if(treasureCamera)treasureCamera.CinematicFrame(treasurePoint+Vector3.up*.9f,Mathf.Lerp(125,160,Mathf.Clamp01(t/7)),18,5.5f,43);
+            if(chest){chest.transform.position=treasurePoint+Vector3.up*Mathf.Lerp(-.7f,.03f,Mathf.SmoothStep(0,1,(t-1)/1.2f));chest.GetComponent<OriginalVisual>().SampleMotion("Okami/vt4b",t<2.1f?"vt4b_000":"vt4b_001",Mathf.Max(0,t-2.1f));}
+            if(t>1 && t-Time.unscaledDeltaTime<=1){TreasureBurst("Cloud",treasurePoint,10,.25f);game.Audio.Cue("land");}
+            if(t>2.4f && !rewardBlade)
+            {rewardBlade=FeatureProp("wp29",treasurePoint+Vector3.up*1.1f,new Vector3(.6f,1.8f,.28f));if(rewardBlade)OriginalWeaponEvolution.Attach(rewardBlade.transform,true);TreasureBurst("Spark",treasurePoint+Vector3.up*1.2f,24,.5f);TreasureBurst("SpiritGlow",treasurePoint+Vector3.up,14,.35f);game.Audio.Cue("collect");}
+            if(rewardBlade){rewardBlade.transform.position=treasurePoint+Vector3.up*(1.1f+Mathf.Sin(t*2)*.08f);rewardBlade.transform.rotation=Quaternion.Euler(0,t*23,0);}
+            if(game.Health<=0)FinishTreasure(false);
+            else if(t>=7 || game.Player.input.Pause.WasPressedThisFrame())FinishTreasure(true);
+        }
+        void TreasureBurst(string sprite,Vector3 point,int count,float size)
+        {var effect=OriginalAtmosphere.Create(sprite,null,point,0,size,1.2f,.4f,.3f);if(effect){var main=effect.main;main.useUnscaledTime=true;if(sprite=="Cloud")main.startColor=new Color(.45f,.32f,.18f,.65f);effect.Emit(count);treasureEffects.Add(effect.gameObject);}}
+        void FinishTreasure(bool grant)
+        {
+            if(!rewardPlaying)return;
+            if(grant && OriginalWeaponEvolution.Unlock(game.Profile)){game.Save.Save();game.Combat.Equip();game.Audio.Cue("collect");game.Notify("Thunder Edge awakened · +35% damage, +15% reach · Q cycles your owned instruments");}
+            Shader.SetGlobalVectorArray("_HeavenDig",new[]{new Vector4(treasurePoint.x-Centre.x,treasurePoint.z,.8f,OriginalWeaponEvolution.Owns(game.Profile)?0:1)});
+            foreach(var effect in treasureEffects)if(effect)Destroy(effect);treasureEffects.Clear();
+            rewardPlaying=Playing=false;if(treasureCamera)treasureCamera.EndCinematic();if(game && game.Player){game.Player.Locked=game.Health<=0;if(game.Player.animationView!=null)game.Player.animationView.Play("Idle_Natural",.12f,0,true);}if(chest)chest.SetActive(false);if(rewardBlade)Destroy(rewardBlade);rewardBlade=null;if(digGlow)digGlow.SetActive(!OriginalWeaponEvolution.Owns(game.Profile));featureCooldown=.6f;
+        }
+        void Gong(Vector3 point)
+        {
+            game.Audio.World("heaven-gong",point,24,1);gongCooldown=4;
+            var root=new GameObject("Gong blessing · spreading native spirit light");root.transform.SetParent(garden.transform,false);root.transform.position=point;
+            var wave=root.AddComponent<LineRenderer>();wave.useWorldSpace=false;wave.loop=true;wave.positionCount=64;wave.startWidth=wave.endWidth=.22f;wave.sharedMaterial=new Material(Resources.Load<Material>("Okami/Effects/SpiritRadiance")){mainTexture=Resources.Load<Texture2D>("Okami/Effects/SpiritGlow")};root.AddComponent<OriginalParticleMaterial>();gongWaves.Add(wave);gongWaveTime.Add(0);
+            foreach(var offset in new[]{Vector3.zero,new Vector3(3,0,2),new Vector3(-3,0,2)})
+            {CelestialBrush.Burst("Blossom",point+offset+Vector3.up*.5f,14,.24f);CelestialBrush.Burst("SpiritGlow",point+offset,12,.16f);}
+        }
+        bool GardenInteractions()
+        {
+            featureCooldown=Mathf.Max(0,featureCooldown-Time.unscaledDeltaTime);gongCooldown=Mathf.Max(0,gongCooldown-Time.deltaTime);
+            for(int i=gongWaves.Count-1;i>=0;i--)
+            {var line=gongWaves[i];float t=gongWaveTime[i]+=Time.deltaTime;if(!line || t>3){if(line)Destroy(line.gameObject);gongWaves.RemoveAt(i);gongWaveTime.RemoveAt(i);continue;}float r=1+t*4;for(int k=0;k<64;k++){float a=k*Mathf.PI*2/64;line.SetPosition(k,new Vector3(Mathf.Sin(a)*r,.18f,Mathf.Cos(a)*r));}line.startColor=line.endColor=new Color(1,.86f,.45f,(1-t/3)*.6f);}
+            var p=game.Player.transform.position;if(game.Player.Locked || game.Services.Resting)return false;
+            if(Time.time>birdTime){birdTime=Time.time+28;game.Audio.World("heaven-bird",cranePoint,18,.08f);}
+            if(Time.time>chimeTime){chimeTime=Time.time+49;game.Audio.World("heaven-gong",lookoutPoint,16,.045f);}
+            if(Water(p,out var level,out var depth) && depth>.05f && game.Player.Speed>.2f && Time.time>wetTime){wetTime=Time.time+.8f;game.Audio.World("water",p,6,.055f);}
+            bool use=game.Player.input.Interact.WasPressedThisFrame() && featureCooldown<=0;
+            foreach(var gong in gongs)if(new Vector2(p.x-gong.x,p.z-gong.z).magnitude<2.6f)
+            {game.WorldPrompt(gongCooldown>0?"The gong's blessing drifts through the garden":"E · Strike the gong");if(use && gongCooldown<=0){Gong(gong);featureCooldown=.6f;}return true;}
+            if(new Vector2(p.x-treasurePoint.x,p.z-treasurePoint.z).magnitude<2 && !OriginalWeaponEvolution.Owns(game.Profile)){game.WorldPrompt("F · Dig beneath the glowing earth");return true;}
+            if(Vector3.Distance(p,lookoutPoint)<3)
+            {game.WorldPrompt("E · Rest at the cloud lookout");if(use){game.Services.RestAt(OnGround(lookoutPoint,.03f),270);featureCooldown=.6f;}return true;}
+            if(Vector3.Distance(p,teaPoint)<3)
+            {game.WorldPrompt("E · Join the celestial tea gathering");if(use){featureCooldown=.6f;game.ShowDialogue("The Celestial Plain was the gods' home. Shiranui's courage lived on in the stories of Nippon, and Amaterasu restored hope wherever she travelled. Rest a moment; even a long journey has room for tea.");}return true;}
+            return false;
+        }
+        void ClearFeatures()
+        {FinishTreasure(false);if(activeGarden==this)activeGarden=null;foreach(var mesh in featureMeshes)if(mesh)Destroy(mesh);featureMeshes.Clear();}
+    }
+}
