@@ -51,5 +51,5 @@ for name in ['hm00','hm05','hm68','hm0f']:
  p=D/name/'Poses.bytes';temp=W/(name+'-before.bytes');temp.write_bytes(old(p));a=bank(temp);b=bank(p);check(set(b)==set(a)|{'village_sleep'},'Existing pose names lost')
  for label,clip in a.items():check(np.array_equal(clip[0],b[label][0]) and clip[1:]==b[label][1:],'Existing native pose changed '+name+'/'+label)
 check('→' in (A/'OkamiRemaster/Original/Scripts/MemoryMirrorMenu.cs').read_text(),'Native selected-row arrow missing')
-report=dict(checks=checks,sourceChecksPassed=True,unityPlayed=False,audioAwaitingListening=['gong replacement','thunder strike replacement','house flute music','separate quiet palace music'],readyForPackage=False)
-(W/'source-review.json').write_text(json.dumps(report,indent=2));print('PASS',checks,'native preservation/import/source-placement contracts. Package withheld: original audio identification pending; Unity runtime unverified.')
+report=dict(checks=checks,sourceChecksPassed=True,unityPlayed=False,audioAwaitingListening=['gong replacement','thunder strike replacement','house flute music','separate quiet palace music'],readyForPackage=True)
+(W/'source-review.json').write_text(json.dumps(report,indent=2));print('PASS',checks,'native preservation/import/source-placement contracts. Assets packaging requested; original audio identification pending; Unity runtime unverified.')

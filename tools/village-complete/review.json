@@ -7,7 +7,7 @@
     },
     {
       "request": "Separate quiet Shiranui-room music",
-      "status": "routing implemented; original recording selection pending"
+      "status": "quiet room routing implemented using existing original garden recording; distinct recording selection pending"
     },
     {
       "request": "Actual gong sound",
@@ -69,5 +69,7 @@
   "assetsRule": "Original Okami archives only",
   "unityRuntime": "Unavailable; no same-build Windows Unity feedback retrieved",
   "publishedDownload": false,
-  "ready": false
+  "ready": false,
+  "downloadRequested": true,
+  "releaseScope": "Assets-only update requested by user; original sound identification remains unfinished"
 }

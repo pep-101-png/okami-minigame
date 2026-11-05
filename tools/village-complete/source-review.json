@@ -1,5 +1,5 @@
 {
-  "checks": 5448,
+  "checks": 5451,
   "sourceChecksPassed": true,
   "unityPlayed": false,
   "audioAwaitingListening": [
@@ -8,5 +8,5 @@
     "house flute music",
     "separate quiet palace music"
   ],
-  "readyForPackage": false
+  "readyForPackage": true
 }

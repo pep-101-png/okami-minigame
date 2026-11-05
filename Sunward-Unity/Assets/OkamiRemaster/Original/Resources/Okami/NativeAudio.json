@@ -511,6 +511,10 @@
     {
       "cue": "gardenmusic",
       "resource": "Okami/NativeAudio/house-melody-67"
+    },
+    {
+      "cue": "palacemusic",
+      "resource": "Okami/NativeAudio/house-melody-67"
     }
   ]
 }

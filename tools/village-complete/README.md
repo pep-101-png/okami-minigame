@@ -1,12 +1,11 @@
 # Village and heaven update — source review
 
-This branch is **unfinished and not an installable release**. Original gong,
+This update is **unfinished in its sound replacements**. The user requested the usual Assets-only download, so a playable patch is being packaged with existing original audio preserved. Original gong,
 thunder and room-music candidates have been decoded and presented to the user;
-their identities/selections are unresolved. All media comes from original Ōkami
+their identities/selections are unresolved. The palace temporarily uses the existing original garden recording at its quieter room volume. All media comes from original Ōkami
 archives. No outside recordings or replacement drawings/models were introduced.
 
-`review.json` records all sixteen requests and the remaining work. Do not package
-or merge this branch as complete while its audio choices remain unresolved.
+`review.json` records all sixteen requests and the remaining work. Do not describe the sound requests as complete while their identities remain unresolved.
 
 Implemented source covers the torii walk-through portal, original ET90 memory
 mirror and celestial seal, four backed-up manual save slots, timed home blessings,
