@@ -1,0 +1,26 @@
+[
+  {
+    "package": "hm00",
+    "sourceMotion": "hm00_039",
+    "runtimeAlias": "village_sleep",
+    "samePackage": true
+  },
+  {
+    "package": "hm05",
+    "sourceMotion": "hm05_039",
+    "runtimeAlias": "village_sleep",
+    "samePackage": true
+  },
+  {
+    "package": "hm68",
+    "sourceMotion": "hm00_039",
+    "runtimeAlias": "village_sleep",
+    "samePackage": true
+  },
+  {
+    "package": "hm0f",
+    "sourceMotion": "hm05_039",
+    "runtimeAlias": "village_sleep",
+    "samePackage": true
+  }
+]

@@ -98,6 +98,34 @@ namespace Sunward
             }
         }
 
+        string SlotPath(int slot)
+        {if(slot<0 || slot>=4)throw new ArgumentOutOfRangeException(nameof(slot));return Path+".slot"+(slot+1)+".json";}
+        public ProfileData ReadSlot(int slot)
+        {
+            string path=SlotPath(slot);ProfileData best=null;
+            foreach(string file in new[]{path,path+".backup"})try{if(File.Exists(file)){var p=Parse(File.ReadAllText(file));if(p!=null && (best==null || p.revision>best.revision))best=p;}}catch(IOException){}
+            // Keep the existing single-save game available in the first row.
+            if(best==null && slot==0 && !File.Exists(path))try{if(File.Exists(Path))best=Parse(File.ReadAllText(Path));}catch(IOException){}
+            return best;
+        }
+        public bool SaveSlot(int slot)
+        {
+            try
+            {
+                string path=SlotPath(slot);if(!Save())return false;string text=JsonUtility.ToJson(Data,true),temp=path+".tmp";
+                File.WriteAllText(temp,text);if(Parse(File.ReadAllText(temp))==null)throw new IOException("Slot verification failed");
+                if(File.Exists(path) && Parse(File.ReadAllText(path))!=null)File.Copy(path,path+".backup",true);
+                File.Copy(temp,path,true);File.Delete(temp);Status="Memory "+(slot+1)+" inscribed";return true;
+            }
+            catch(Exception e){Status="Memory could not be inscribed · "+e.Message;return false;}
+        }
+        public bool LoadSlot(int slot)
+        {
+            var restored=ReadSlot(slot);if(restored==null){Status="This memory is empty or damaged";return false;}
+            var previous=Data;restored.revision=Math.Max(restored.revision,previous.revision);Data=restored;
+            if(!Save()){Data=previous;return false;}Status="Memory "+(slot+1)+" restored";return true;
+        }
+
         public bool Import(string text)
         {
             try

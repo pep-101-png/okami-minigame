@@ -82,6 +82,8 @@ namespace Sunward
         };
         public UpgradeLevels upgrades = new UpgradeLevels();
         public bool shrine, night;
+        public double dayElapsed;public float playSeconds;
+        public long bedBlessingUntil,fireBlessingUntil;
         public string[] collectibles = Array.Empty<string>(), windflowers = Array.Empty<string>();
         public Milestones milestones = new Milestones();
     }

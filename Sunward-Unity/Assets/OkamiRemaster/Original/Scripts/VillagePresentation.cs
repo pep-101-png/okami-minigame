@@ -7,8 +7,10 @@ namespace Sunward.Remaster
     {
         public GameFlow game;
         public bool Playing {get;private set;}
+        public int SkipHandledFrame {get;private set;}=-1;
+        public void Skip(){SkipHandledFrame=Time.frameCount;Cancel();}
         public bool Title=>game && game.Panel=="title";
-        float elapsed,duration,dialogueTime,entryGrace;bool victory,breaking,shaftRevealed;
+        float elapsed,duration,dialogueTime,entryGrace;bool victory,breaking,shaftRevealed,bossVictory,skyTransition,skyNight,howled;
         public bool Breaking=>Playing && breaking;
         readonly System.Collections.Generic.List<GameObject> cinemaEffects=new System.Collections.Generic.List<GameObject>();
         OrbitCamera orbit;Texture2D painting,logo,bubble,ink;
@@ -21,7 +23,7 @@ namespace Sunward.Remaster
         void Start(){painting=Resources.Load<Texture2D>("Okami/UI/TitlePainting");logo=Resources.Load<Texture2D>("Okami/UI/TitleLogo");bubble=Resources.Load<Texture2D>("Okami/UI/DialogueBubble");ink=Resources.Load<Texture2D>("Okami/UI/BrushTip");}
         public void Festival(bool won)
         {
-            if(Playing)Cancel();breaking=false;victory=won;elapsed=0;duration=won?4.2f:3.4f;Playing=true;
+            if(Playing)Cancel();bossVictory=skyTransition=false;breaking=false;victory=won;elapsed=0;duration=won?4.2f:3.4f;Playing=true;
             game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;game.Player.animationView.Play(won?"Bark":"Idle_Natural",.12f,won?1.93f:0,true);
             orbit=FindFirstObjectByType<OrbitCamera>();if(orbit)orbit.BeginCinematic();
             CinemaBurst("SpiritGlow",won?32:16,.35f);
@@ -29,9 +31,24 @@ namespace Sunward.Remaster
         }
         public void ShaftCollapse()
         {
-            if(Playing)Cancel();breaking=true;shaftRevealed=false;victory=false;elapsed=0;duration=3.8f;Playing=true;
+            if(Playing)Cancel();bossVictory=skyTransition=false;breaking=true;shaftRevealed=false;victory=false;elapsed=0;duration=3.8f;Playing=true;
             game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;
             orbit=FindFirstObjectByType<OrbitCamera>();if(orbit)orbit.BeginCinematic();
+        }
+        public void BossVictory()
+        {
+            if(Playing)Cancel();bossVictory=true;skyTransition=breaking=false;howled=false;elapsed=0;duration=6.5f;Playing=true;
+            game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;
+            foreach(var enemy in game.Enemies)if(enemy && enemy.Dead && enemy.definition.id=="boss")enemy.gameObject.SetActive(false);
+            if(LowerArena.Inside(game.Player.transform.position)){game.Player.Teleport(LowerArena.Centre+new Vector3(0,.08f,-4));game.Player.transform.rotation=Quaternion.Euler(0,135,0);}
+            game.Player.animationView.Play("Idle_Natural",.12f,0,true);orbit=FindFirstObjectByType<OrbitCamera>();if(orbit)orbit.BeginCinematic(false);
+            CinemaBurst("Blossom",48,.32f);CinemaBurst("SpiritGlow",24,.18f);
+        }
+        public void SkyTransition(bool night)
+        {
+            if(Playing)Cancel();skyTransition=true;skyNight=night;bossVictory=breaking=false;elapsed=0;duration=6;Playing=true;
+            game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;game.Player.animationView.Play("Idle_Natural",.15f,0,true);
+            orbit=FindFirstObjectByType<OrbitCamera>();if(orbit)orbit.BeginCinematic(false);
         }
         void CinemaBurst(string sprite,int count,float size)
         {
@@ -55,7 +72,14 @@ namespace Sunward.Remaster
             if(Playing)
             {
                 elapsed+=Time.unscaledDeltaTime;float t=Mathf.Clamp01(elapsed/duration);
-                if(breaking)
+                if(bossVictory)
+                {
+                    if(!howled && elapsed>=1){howled=true;game.Player.animationView.Play("Bark",.1f,1.93f,true);game.Audio.VictoryHowl();}
+                    var focus=game.Player.transform.position+Vector3.up*.8f;if(orbit)orbit.CinematicFrame(focus,game.Player.transform.eulerAngles.y+Mathf.Lerp(-50,45,t),Mathf.Lerp(10,24,t),Mathf.Lerp(5.5f,7,t),39);
+                }
+                else if(skyTransition)
+                {if(orbit)orbit.CinematicFrame(game.Player.transform.position+Vector3.up*Mathf.Lerp(6,18,t),-35,Mathf.Lerp(-18,-35,t),7,50);}
+                else if(breaking)
                 {
                     if(orbit)orbit.CinematicFrame(new Vector3(35,0,0),Mathf.Lerp(25,80,t),Mathf.Lerp(48,68,t),Mathf.Lerp(19,13,t),48);
                     if(!shaftRevealed && elapsed>=.9f){shaftRevealed=true;LowerArena.RevealShaft();game.Audio.Cue("land");
@@ -65,7 +89,7 @@ namespace Sunward.Remaster
                 {
                 if(orbit)orbit.CinematicFrame(victory?game.Player.transform.position+Vector3.up*.9f:Vector3.Lerp(game.Player.transform.position+Vector3.up*.9f,FestivalChallenges.Board+Vector3.up*1.8f,t*.65f),game.Player.transform.eulerAngles.y+Mathf.Lerp(-45,32,t),victory?16:22,victory?5.8f:8,42);
                 }
-                if(elapsed>=duration || game.Health<=0 || game.Player.input.Pause.WasPressedThisFrame())Cancel();
+                if(game.Player.input.Pause.WasPressedThisFrame())Skip();else if(elapsed>=duration || game.Health<=0)Cancel();
             }
             if(Dialogue)
             {
@@ -105,7 +129,7 @@ namespace Sunward.Remaster
             if(Playing)
             {
                 if(ink){GUI.color=new Color(.03f,.02f,.01f,.85f);GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height*.055f),ink);GUI.DrawTexture(new Rect(0,Screen.height*.945f,Screen.width,Screen.height*.055f),ink);}
-                InkText.Draw(breaking?"The earth yields to the sun":victory?"Festival blessing · +3 tokens":"Festival night · follow the spirit lights",new Rect(Screen.width*.5f-260,Screen.height*.8f,600,70),42,new Color(1,.94f,.78f,1),false);
+                InkText.Draw(bossVictory?"Crimson Helm defeated · the sun endures":skyTransition?(skyNight?"The moon rises · festival night":"The sun returns · a new day"):breaking?"The earth yields to the sun":victory?"Festival blessing · +3 tokens":"Festival night · follow the spirit lights",new Rect(Screen.width*.5f-260,Screen.height*.8f,600,70),42,new Color(1,.94f,.78f,1),false);
             }
             if(Dialogue)
             {

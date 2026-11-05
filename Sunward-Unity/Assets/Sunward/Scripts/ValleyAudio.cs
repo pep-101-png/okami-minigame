@@ -11,9 +11,9 @@ namespace Sunward
         [Serializable] sealed class CueBank { public CueEntry[] cues; }
         readonly Dictionary<string,List<AudioClip>> bank = new Dictionary<string,List<AudioClip>>();
         readonly Dictionary<string,int> next = new Dictionary<string,int>();
-        AudioSource effects, music, wind, river,houseMusic,presentationMusic;
+        AudioSource effects, music, wind, river,houseMusic,gardenMusic,palaceMusic,presentationMusic;
         float presentationBlend;
-        float houseBlend;
+        float houseBlend,gardenBlend,palaceBlend;
         AudioSource tundraSwing,tundraImpact,transformationVoice,transformationBurst;
         readonly List<AudioSource> worldSources = new List<AudioSource>();
         readonly Dictionary<AudioSource,Vector2> worldLevels = new Dictionary<AudioSource,Vector2>();
@@ -27,7 +27,7 @@ namespace Sunward
         Vector3 lastPosition;
         void Awake()
         {
-            effects = Source(.60f, false); music = Source(.45f, true);houseMusic=Source(0,true);presentationMusic=Source(0,true);
+            effects = Source(.60f, false); music = Source(.45f, true);houseMusic=Source(0,true);gardenMusic=Source(0,true);palaceMusic=Source(0,true);presentationMusic=Source(0,true);
             wind = Source(.22f, true); river = Source(.25f, true);
             tundraSwing=Source(1,false);tundraImpact=Source(1,false);
             transformationVoice=Source(1,false);transformationBurst=Source(1,false);
@@ -57,8 +57,8 @@ namespace Sunward
             // Use an original quiet melodic passage for the musician; its track title
             // is unlabelled in source metadata. Keep it separate from battle.
             // Short cleansing/save cues must never become looping background music.
-            if(cue!="battle" && cue!="housemusic")return;
-            var clip=Clip(cue);if(!clip || clip.length<(cue=="housemusic"?8:45))return;source.clip=clip;source.Play();
+            if(cue!="battle" && cue!="housemusic" && cue!="gardenmusic" && cue!="palacemusic")return;
+            var clip=Clip(cue);if(!clip || clip.length<(cue=="battle"?45:8))return;source.clip=clip;source.Play();
         }
         void Start()
         {
@@ -91,21 +91,21 @@ namespace Sunward
             }
             bool presentation=game.Presentation && (game.Presentation.Title || game.Presentation.Playing);
             float presentationTarget=presentation?(game.Presentation.Title?.065f:.10f):0;
-            if(presentationTarget>0 && !presentationMusic.isPlaying)Loop(presentationMusic,"housemusic");
+            if(presentationTarget>0 && !presentationMusic.isPlaying)Loop(presentationMusic,"gardenmusic");
             presentationBlend=Mathf.MoveTowards(presentationBlend,presentationTarget,Time.unscaledDeltaTime*(presentation && !game.Presentation.Title?.12f:.03f));presentationMusic.volume=presentationBlend;
             if(!presentation && presentationBlend<=0 && presentationMusic.isPlaying)presentationMusic.Stop();
             bool inMusicHouse=Sunward.Remaster.VillageServices.InFoodHouse(p);
             string desired=game.InTrial?"battle":"town";
             bool heaven=Sunward.Remaster.HeavenlyGarden.Inside(p);
-            float houseTarget=(inMusicHouse || heaven) && !game.InTrial && !presentation?.10f:0;
-            if(houseTarget>0 && !houseMusic.isPlaying){houseMusic.volume=0;Loop(houseMusic,"housemusic");}
-            houseBlend=Mathf.MoveTowards(houseBlend,houseTarget,Time.unscaledDeltaTime*.035f);
-            houseMusic.volume=houseBlend*(game.CinematicActive?.3f:1);
-            if(houseTarget==0 && houseBlend<=.0001f && houseMusic.isPlaying)houseMusic.Stop();
+            bool palace=Sunward.Remaster.HeavenlyGarden.PalaceInside(p);
+            bool roomAllowed=!game.InTrial && !presentation;
+            FadeRoom(houseMusic,"housemusic",ref houseBlend,inMusicHouse && roomAllowed?.10f:0);
+            FadeRoom(gardenMusic,"gardenmusic",ref gardenBlend,heaven && !palace && roomAllowed?.10f:0);
+            FadeRoom(palaceMusic,"palacemusic",ref palaceBlend,palace && roomAllowed?.045f:0);
             if(desired!=musicCue){musicCue=desired;Loop(music,desired);}
             river.volume=(heaven?0:.25f)*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15);
             wind.volume=heaven?.025f:Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f;
-            music.volume=Mathf.MoveTowards(music.volume,heaven?0:game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f);
+            music.volume=Mathf.MoveTowards(music.volume,(heaven || inMusicHouse || presentation)?0:game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f);
             Vector3 delta=p-lastPosition;delta.y=0;lastPosition=p;
             if(game.Blocked || game.Player.Locked || delta.magnitude>2)return;
             if(!game.Player.Swimming && game.Player.Grounded && game.Player.Speed>.2f)
@@ -117,6 +117,14 @@ namespace Sunward
             {
                 water+=Time.deltaTime;if(water>1.1f){water=0;Cue("water");}
             }
+        }
+        void FadeRoom(AudioSource source,string cue,ref float blend,float target)
+        {
+            if(target>0 && !source.isPlaying){source.volume=0;Loop(source,cue);}
+            // A full house entrance takes four seconds, with no overlapping outside music.
+            blend=Mathf.MoveTowards(blend,target,Time.unscaledDeltaTime*.025f);
+            source.volume=blend*(game.CinematicActive?.3f:1);
+            if(target==0 && blend<=.0001f && source.isPlaying)source.Stop();
         }
         bool Allow(string id,float interval)
         {

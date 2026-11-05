@@ -123,6 +123,7 @@ s=s.replace('namespace Sunward.Remaster{public class HeavenlyGarden:UnityEngine.
 s=s.replace('public class BoxCollider:Collider{','public class MeshCollider:Collider{public Mesh sharedMesh;}public class BoxCollider:Collider{')
 s=s.replace('public static float Height(', 'public static float Height(')
 s=s.replace('public static class OriginalWeaponCatalog{', 'public static class OriginalWeaponCatalog{public class Entry{public string family,resource;public int cost;}')
+s=s.replace('public sealed partial class GameFlow:MonoBehaviour\n {','public sealed partial class GameFlow:MonoBehaviour\n {public void OfferWindflowers(){}')
 s+='\n'+Path(__file__).with_name('VillagePresentationDoubles.cs').read_text()
 s+='\n'+Path(__file__).with_name('FestivalDoubles.cs').read_text()
 s=s.replace('public bool HoldingCharge;', 'public GameFlow game;public bool HoldingCharge;')
@@ -192,6 +193,39 @@ s=s.replace('public class LineRenderer:', 'public class LineRenderer:')
 s=s.replace('public int positionCount;', 'public bool loop;public int positionCount;')
 s=s.replace('public GameObject(string n=""){', 'public GameObject(string n=""){name=n;')
 s=s.replace('{foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories))foreach(var ext', '{foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories)){if(typeof(T)==typeof(Material) && File.Exists(Path.Combine(dir,name+".mat")))return new Material((Material)null){shader=new Shader()} as T;}foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories))foreach(var ext')
+# API doubles for the native home, time and save-menu additions. These do not
+# model Unity rendering, real save I/O or the player's PC.
+s=s.replace('public class SaveStore{public int saves;public void Save(){saves++;}}','public class SaveStore{public int saves;public string Status="";public void Save(){saves++;}public ProfileData ReadSlot(int i)=>null;public bool SaveSlot(int i)=>true;public bool LoadSlot(int i)=>false;}')
+s=s.replace('public sealed partial class GameFlow:MonoBehaviour\n {','public sealed partial class GameFlow:MonoBehaviour\n {public CollectibleShelf Shelf=new CollectibleShelf();public void RefreshQuest(){}')
+s+='\nnamespace Sunward{public class CollectibleShelf{public void Refresh(){}}}'
+s=s.replace('public bool Sleeping;', 'public bool Active;public bool Sleeping;')
+s=s.replace('public struct Matrix4x4{','public struct Matrix4x4{public static Matrix4x4 Scale(Vector3 p)=>identity;')
+s=s.replace('public enum ParticleSystemRenderMode{','public enum ParticleSystemRenderMode{VerticalBillboard,')
+s+='\nnamespace UnityEngine{public enum LineAlignment{View,TransformZ}}'
+s=s.replace('public class LineRenderer:Renderer{','public class LineRenderer:Renderer{public LineAlignment alignment;')
+s=s.replace('public bool useUnscaledTime;', 'public bool useUnscaledTime,startSize3D;public float startSizeX,startSizeY,startSizeZ;')
+s=s.replace('public class Transform:Object\n {','public class Transform:Object\n {public string name=>gameObject!=null?gameObject.name:"";')
+s=s.replace('public class WolfCombat:Object{','public class WolfCombat:Object{public T GetComponent<T>()where T:new()=>new T();')
+s=s.replace('public string family,resource;public int cost;}public static object Find(string id)=>new object();','public string id,title,family,resource;public int cost;}public static Entry Find(string id)=>new Entry();')
+s=s.replace('public struct MainModule{public bool useUnscaledTime,startSize3D;', 'public struct MainModule{public ParticleSystemSimulationSpace simulationSpace;public float startRotation;public bool useUnscaledTime,startSize3D;')
+s=s.replace('public class ParticleSystem:Object\n {','public class ParticleSystem:Object\n {public T GetComponent<T>()where T:new()=>new T();public struct TextureSheetAnimationModule{public bool enabled;public int numTilesX,numTilesY;public MinMaxCurve startFrame;public float frameOverTime;}public TextureSheetAnimationModule textureSheetAnimation=>new TextureSheetAnimationModule();')
+s+='\nnamespace UnityEngine{public enum ParticleSystemSimulationSpace{Local,World}public enum ParticleSystemRenderMode{Billboard,HorizontalBillboard,VerticalBillboard}public class ParticleSystemRenderer:Renderer{public ParticleSystemRenderMode renderMode;}}'
+s=s.replace('public static class Time{','public static class Time{public static int frameCount;')
+s=s.replace('public class Keyboard{','public class Keyboard{public Controls.ButtonControl upArrowKey=new Controls.ButtonControl(),downArrowKey=new Controls.ButtonControl(),leftArrowKey=new Controls.ButtonControl(),rightArrowKey=new Controls.ButtonControl();')
+# Execute the real GameFlow.Finish implementation so victory coverage cannot
+# pass against a mock callback that never starts the actual sequence.
+start=flow.index('public void Finish(bool win)');pos=flow.index('{',start);level=1;end=pos+1
+while level:
+ if flow[end]=='{':level+=1
+ elif flow[end]=='}':level-=1
+ end+=1
+s+='\nnamespace Sunward {public sealed partial class GameFlow {'+flow[start:end]+'}}\n'
+start=flow.index('void ClearBarrier()');pos=flow.index('{',start);level=1;end=pos+1
+while level:
+ if flow[end]=='{':level+=1
+ elif flow[end]=='}':level-=1
+ end+=1
+s+='\nnamespace Sunward {public sealed partial class GameFlow {'+flow[start:end]+'}}\n'
 if args.dump_doubles:Path(args.dump_doubles).write_text(s)
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]

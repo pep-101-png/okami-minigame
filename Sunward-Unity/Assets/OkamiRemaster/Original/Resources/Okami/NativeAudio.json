@@ -507,6 +507,10 @@
     {
       "cue": "thunder-burst",
       "resource": "Okami/NativeAudio/thunder-burst"
+    },
+    {
+      "cue": "gardenmusic",
+      "resource": "Okami/NativeAudio/house-melody-67"
     }
   ]
 }

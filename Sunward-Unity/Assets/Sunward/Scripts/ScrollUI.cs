@@ -118,6 +118,7 @@ namespace Sunward
         {
             if (!game || game.Save == null || game.CinematicActive || (game.Brush && game.Brush.Drawing))
                 return;
+            if(game.Panel=="mirror")return;
             if(game.Presentation && (game.Presentation.Title || game.Presentation.Dialogue))return;
             Styles();
             GUI.color = Color.white;

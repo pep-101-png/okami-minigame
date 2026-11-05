@@ -54,9 +54,8 @@ namespace Sunward.Remaster
             var waterfall=Put(river.transform,"Okami/river-waterfall",new Vector3(x-0.036361f,-6.54f,WaterfallLip+0.548696f),new Vector3(5,6.2f,4.5f),-37.445568f);
             if(waterfall)foreach(var r in waterfall.GetComponentsInChildren<SkinnedMeshRenderer>())
             {var material=new Material(r.sharedMaterial);material.shader=Resources.Load<Material>("Okami/Effects/FallingWater").shader;material.SetFloat("_FlowDirection",r.sharedMesh.name.StartsWith("Native-1-")?1:-1);r.sharedMaterial=material;r.gameObject.AddComponent<OriginalParticleMaterial>();}
-            Put(river.transform,"Okami/vt28",new Vector3(x-5,-6.8f,39.5f),new Vector3(4,6.2f,8));
-            Put(river.transform,"Okami/vt28",new Vector3(x+5,-6.8f,39.5f),new Vector3(4,6.2f,8),125);
-            Put(river.transform,"Okami/river-spirit-portal",new Vector3(x,-6.1f,40.5f),new Vector3(8,.15f,8));
+            var passage=OriginalAtmosphere.Create("OriginalWhiteRing",river.transform,new Vector3(x,-6.2f,40.5f),2.2f,4.5f,1.8f,0);
+            if(passage){var main=passage.main;main.startRotation=0;main.startColor=new Color(.7f,.9f,1,.9f);var velocity=passage.velocityOverLifetime;velocity.enabled=false;passage.GetComponent<ParticleSystemRenderer>().renderMode=ParticleSystemRenderMode.HorizontalBillboard;}
             OriginalAtmosphere.Create("Steam",river.transform,new Vector3(x,-5.8f,39.7f),7,1.8f,2.8f,.3f,2.1f);
             OriginalAtmosphere.Create("SpiritGlow",river.transform,new Vector3(x,-5.5f,40.5f),12,.6f,2,.15f,2.6f);
             var lamp=new GameObject("Waterfall portal light");lamp.transform.SetParent(river.transform,false);lamp.transform.localPosition=new Vector3(x,-3.8f,40.5f);var light=lamp.AddComponent<Light>();light.type=LightType.Point;light.range=13;light.intensity=6;light.color=new Color(.4f,.85f,1);light.shadows=LightShadows.None;
@@ -197,7 +196,7 @@ namespace Sunward.Remaster
             {
                 fallTime+=Time.unscaledDeltaTime;float t=Mathf.Clamp01(fallTime/1.6f);
                 var p=fallStart+new Vector3(0,-6.7f*t*t,5.2f*t);game.Player.Teleport(p);
-                if(orbit)orbit.CinematicFrame(p+Vector3.up,Mathf.Lerp(110,150,t),18,10,48);
+                if(orbit)orbit.CinematicFrame(p+Vector3.up,Mathf.Lerp(-100,-70,t),Mathf.Lerp(32,60,t),12,44);
                 if(t>=1 || game.Health<=0)
                 {Cancel();if(game.Health>0){garden.SetActive(true);Physics.SyncTransforms();var at=Return+Vector3.forward*5;Height(at,out var y);at.y=y+.05f;game.Player.Teleport(at);visible=true;Shader.SetGlobalFloat("_SunwardHeaven",1);game.Notify("The river opens into a garden above the clouds · follow the altar lights");if(orbit)orbit.SnapFocus();}}
                 return;
@@ -211,15 +210,15 @@ namespace Sunward.Remaster
             if(game.Blocked || game.InTrial || game.Health<=0)return;
             var player=game.Player.transform.position;
             if(!inside){if(RiverLip(player))BeginFall();else if(player.z>28 && Mathf.Abs(player.x-Valley.RiverX(-player.z))<4)game.WorldPrompt("The river falls into a spirit passage ahead");return;}
+            if(ReturnGate(player))return;
             if(PalaceInteractions())return;
             if(GardenInteractions())return;
             bool nearReturn=new Vector2(player.x-Return.x,player.z-Return.z).magnitude<3.2f;
             bool nearKeeper=new Vector2(player.x-Altar.x,player.z-(Altar.z-5)).magnitude<4.2f;
-            game.WorldPrompt(nearReturn?"E · Return to Windflower":nearKeeper?"E · Speak with the garden keeper":InMaze(player)?"Bamboo garden maze · the east gates lead back to the garden":"Heavenly garden · seek the keeper by the altar");
+            game.WorldPrompt(nearReturn?"Walk through the glowing torii passage to return":nearKeeper?"E · Speak with the garden keeper":InMaze(player)?"Bamboo garden maze · the east gates lead back to the garden":"Heavenly garden · seek the keeper by the altar");
             if(game.Player.input.Interact.WasPressedThisFrame())
             {
-                if(nearReturn)game.ReturnHome();
-                else if(nearKeeper && keeperCooldown<=0)
+                if(nearKeeper && keeperCooldown<=0)
                 {
                     keeperConversation=true;
                     game.ShowDialogue("Amaterasu, Shiranui sleeps behind a mystical barrier inside the heavens palace. Walk up these stairs and through its doorway. You must free him from the seal to awaken your true form. The Celestial Plain is the gods' home. A century ago, the white wolf Shiranui stood beside Nagi against Orochi. Your journey carries that light onward. This garden and its trial are Sunward's own story.\n\nTo free Shiranui from the palace seal: reach level 15 (now "+ProgressionRules.Level(game.Profile)+"), earn 30 upgrade ranks (now "+UpgradeRanks(game.Profile)+"), and defeat the guardian. That future boss has not yet been added, so the quest cannot be completed. P remains a testing shortcut.");
