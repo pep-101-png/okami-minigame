@@ -11,8 +11,10 @@ namespace Sunward
         [Serializable] sealed class CueBank { public CueEntry[] cues; }
         readonly Dictionary<string,List<AudioClip>> bank = new Dictionary<string,List<AudioClip>>();
         readonly Dictionary<string,int> next = new Dictionary<string,int>();
-        AudioSource effects, music, wind, river,houseMusic,gardenMusic,palaceMusic,raceMusic,presentationMusic;
+        AudioSource effects, music, wind, river,houseMusic,gardenMusic,palaceMusic,palaceTail,raceMusic,presentationMusic;
         float presentationBlend;
+        readonly Dictionary<AudioSource,float> levels=new Dictionary<AudioSource,float>();
+        readonly HashSet<AudioSource> musical=new HashSet<AudioSource>();
         float houseBlend,gardenBlend,palaceBlend,raceBlend;
         AudioSource tundraSwing,tundraImpact,transformationVoice,transformationBurst,ammyVoice,fullPowerVoice;
         Sunward.Remaster.FestivalChallenges challenges;
@@ -28,7 +30,7 @@ namespace Sunward
         Vector3 lastPosition;
         void Awake()
         {
-            effects = Source(.60f, false); music = Source(.45f, true);houseMusic=Source(0,true);gardenMusic=Source(0,true);palaceMusic=Source(0,true);raceMusic=Source(0,true);presentationMusic=Source(0,true);
+            GameAudioSettings.Load();effects = Source(.60f, false); music = Source(.45f, true,true);houseMusic=Source(0,true,true);gardenMusic=Source(0,true,true);palaceMusic=Source(0,false,true);palaceTail=Source(0,false,true);raceMusic=Source(0,true,true);presentationMusic=Source(0,true,true);
             wind = Source(.22f, true); river = Source(.25f, true);
             tundraSwing=Source(1,false);tundraImpact=Source(1,false);
             transformationVoice=Source(1,false);transformationBurst=Source(1,false);ammyVoice=Source(.16f,false);fullPowerVoice=Source(.35f,false);
@@ -42,11 +44,14 @@ namespace Sunward
                 bank[entry.cue].Add(clip);
             }
         }
-        AudioSource Source(float volume,bool loop)
+        AudioSource Source(float volume,bool loop,bool isMusic=false)
         {
-            var s=gameObject.AddComponent<AudioSource>();s.volume=volume;s.loop=loop;
+            var s=gameObject.AddComponent<AudioSource>();if(isMusic)musical.Add(s);Level(s,volume);s.loop=loop;
             s.playOnAwake=false;s.spatialBlend=0;return s;
         }
+        void Level(AudioSource source,float value){if(!source)return;levels[source]=value;source.volume=value*(musical.Contains(source)?GameAudioSettings.Music:GameAudioSettings.Effects);}
+        void OnDisable(){GameAudioSettings.Save();}
+        void OnApplicationQuit(){GameAudioSettings.Save();}
         AudioClip Clip(string cue)
         {
             if(!bank.TryGetValue(cue,out var list) || list.Count==0)return null;
@@ -78,7 +83,7 @@ namespace Sunward
         }
         void LateUpdate()
         {
-            if(ears && Camera.main)ears.rotation=Camera.main.transform.rotation;
+            if(ears && Camera.main)ears.rotation=Camera.main.transform.rotation;foreach(var item in levels)if(item.Key)item.Key.volume=item.Value*(musical.Contains(item.Key)?GameAudioSettings.Music:GameAudioSettings.Effects);
         }
         void Update()
         {
@@ -88,26 +93,26 @@ namespace Sunward
             {
                 float distance=Vector3.Distance(p,source.transform.position);
                 if(distance>=level.x || !SameRealm(source.transform.position,p))source.Stop();
-                else source.volume=game.CinematicActive?0:level.y*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/level.x));
+                else Level(source,game.CinematicActive?0:level.y*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/level.x)));
             }
             bool presentation=game.Presentation && (game.Presentation.Title || game.Presentation.Playing);
             float presentationTarget=presentation?(game.Presentation.Title?.065f:.10f):0;
             if(presentationTarget>0 && !presentationMusic.isPlaying)Loop(presentationMusic,"gardenmusic");
-            presentationBlend=Mathf.MoveTowards(presentationBlend,presentationTarget,Time.unscaledDeltaTime*(presentation && !game.Presentation.Title?.12f:.03f));presentationMusic.volume=presentationBlend;
+            presentationBlend=Mathf.MoveTowards(presentationBlend,presentationTarget,Time.unscaledDeltaTime*(presentation && !game.Presentation.Title?.12f:.03f));Level(presentationMusic,presentationBlend);
             if(!presentation && presentationBlend<=0 && presentationMusic.isPlaying)presentationMusic.Stop();
             bool inMusicHouse=Sunward.Remaster.VillageServices.InFoodHouse(p);
             string desired=game.InTrial?"battle":"town";
             bool heaven=Sunward.Remaster.HeavenlyGarden.Inside(p);
             bool palace=Sunward.Remaster.HeavenlyGarden.PalaceInside(p);
             bool roomAllowed=!game.InTrial && !presentation;
-            FadeRoom(houseMusic,"housemusic",ref houseBlend,inMusicHouse && roomAllowed?.10f:0);
-            FadeRoom(gardenMusic,"gardenmusic",ref gardenBlend,heaven && !palace && roomAllowed?.10f:0);
-            FadeRoom(palaceMusic,"palacemusic",ref palaceBlend,palace && roomAllowed?.045f:0);
+            FadeRoom(houseMusic,"housemusic",ref houseBlend,inMusicHouse && roomAllowed?.035f:0);
+            FadeRoom(gardenMusic,"gardenmusic",ref gardenBlend,heaven && !palace && roomAllowed?.035f:0);
+            FadePalace(palace && roomAllowed?.014f:0);
             FadeRoom(raceMusic,"festivalrace",ref raceBlend,challenges && challenges.Racing && !heaven && !inMusicHouse && !game.InTrial?.28f:0,.16f);
             if(desired!=musicCue){musicCue=desired;Loop(music,desired);}
-            river.volume=(heaven?0:.25f)*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15);
-            wind.volume=heaven?.025f:Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f;
-            music.volume=Mathf.MoveTowards(music.volume,(heaven || inMusicHouse || presentation)?0:game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f);
+            Level(river,(heaven?0:.25f)*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15));
+            Level(wind,heaven?.025f:Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f);
+            Level(music,Mathf.MoveTowards(levels.TryGetValue(music,out var currentMusic)?currentMusic:0,(heaven || inMusicHouse || presentation)?0:game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f));
             Vector3 delta=p-lastPosition;delta.y=0;lastPosition=p;
             if(game.Blocked || game.Player.Locked || delta.magnitude>2)return;
             if(!game.Player.Swimming && game.Player.Grounded && game.Player.Speed>.2f)
@@ -120,13 +125,27 @@ namespace Sunward
                 water+=Time.deltaTime;if(water>1.1f){water=0;Cue("water");}
             }
         }
+        void FadePalace(float target)
+        {
+            if(!palaceMusic)return;if(!palaceTail)palaceTail=Source(0,false,true);
+            palaceBlend=Mathf.MoveTowards(palaceBlend,target,Time.unscaledDeltaTime*.014f);
+            if(target>0 && !palaceMusic.isPlaying && !palaceTail.isPlaying){Loop(palaceMusic,"palacemusic");palaceMusic.loop=false;}
+            float overlap=palaceMusic.clip?Mathf.Min(1.2f,palaceMusic.clip.length*.35f):.5f;
+            if(palaceMusic.clip && palaceMusic.isPlaying && !palaceTail.isPlaying && palaceMusic.time>=palaceMusic.clip.length-overlap)
+            {palaceTail.clip=palaceMusic.clip;palaceTail.loop=false;Level(palaceTail,0);palaceTail.Play();}
+            float mix=palaceTail.isPlaying?Mathf.Clamp01(palaceTail.time/overlap):0;
+            if(palaceTail.isPlaying && (mix>=1 || !palaceMusic.isPlaying))
+            {palaceMusic.Stop();var old=palaceMusic;palaceMusic=palaceTail;palaceTail=old;mix=0;}
+            float gain=palaceBlend*(game.CinematicActive?.3f:1);Level(palaceMusic,gain*(1-mix));Level(palaceTail,gain*mix);
+            if(target==0 && palaceBlend<=.0001f){palaceMusic.Stop();palaceTail.Stop();}
+        }
         void FadeRoom(AudioSource source,string cue,ref float blend,float target,float rate=.025f)
         {
             if(!source)return;
-            if(target>0 && !source.isPlaying){source.volume=0;Loop(source,cue);}
+            if(target>0 && !source.isPlaying){Level(source,0);Loop(source,cue);}
             // A full house entrance takes four seconds, with no overlapping outside music.
             blend=Mathf.MoveTowards(blend,target,Time.unscaledDeltaTime*rate);
-            source.volume=blend*(game.CinematicActive?.3f:1);
+            Level(source,blend*(game.CinematicActive?.3f:1));
             if(target==0 && blend<=.0001f && source.isPlaying)source.Stop();
         }
         bool Allow(string id,float interval)
@@ -157,34 +176,34 @@ namespace Sunward
             // One bounded voice per swing. Avoid stacking the generic impact
             // and heavy fanfare over this instrument's own ice sounds.
             tundraSwing.Stop();tundraSwing.clip=Clip(charged?"weapon-wp2e-heavy":"weapon-wp2e");
-            tundraSwing.volume=charged?.11f:heavy?.10f:.09f;
+            Level(tundraSwing,charged?.11f:heavy?.10f:.09f);
             if(tundraSwing.clip)tundraSwing.Play();
         }
         public void TundraContact()
         {
             if(tundraImpact.isPlaying)return;
-            tundraImpact.clip=Clip("weapon-wp2e-impact");tundraImpact.volume=.04f;
+            tundraImpact.clip=Clip("weapon-wp2e-impact");Level(tundraImpact,.04f);
             if(tundraImpact.clip)tundraImpact.Play();
         }
         public void StopTundra(){if(ammyVoice)ammyVoice.Stop();if(tundraSwing)tundraSwing.Stop();}
         public void TransformationVoice()
         {
-            transformationVoice.Stop();transformationVoice.clip=Clip("transformation-voice");transformationVoice.volume=.38f;
+            transformationVoice.Stop();transformationVoice.clip=Clip("transformation-voice");Level(transformationVoice,.38f);
             if(transformationVoice.clip)transformationVoice.Play();
         }
         public void VictoryHowl()
         {
-            transformationVoice.Stop();transformationVoice.clip=Clip("transformation-voice");transformationVoice.volume=.38f;
+            transformationVoice.Stop();transformationVoice.clip=Clip("transformation-voice");Level(transformationVoice,.38f);
             if(transformationVoice.clip)transformationVoice.Play();
         }
         public void BossTransformationVoice()
         {
-            transformationVoice.Stop();transformationVoice.clip=Clip("enemy5");transformationVoice.volume=.35f;
+            transformationVoice.Stop();transformationVoice.clip=Clip("enemy5");Level(transformationVoice,.35f);
             if(transformationVoice.clip)transformationVoice.Play();
         }
         public void TransformationBurst()
         {
-            transformationBurst.Stop();transformationBurst.clip=Clip("weapon-wp2e-heavy");transformationBurst.volume=.28f;
+            transformationBurst.Stop();transformationBurst.clip=Clip("weapon-wp2e-heavy");Level(transformationBurst,.28f);
             if(transformationBurst.clip)transformationBurst.Play();
         }
         public void StopTransformation()
@@ -212,7 +231,7 @@ namespace Sunward
             }
             source.transform.position=position;source.clip=clip;source.maxDistance=range;
             worldLevels[source]=new Vector2(range,volume);
-            source.volume=volume*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/range));source.Play();return true;
+            Level(source,volume*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/range)));source.Play();return true;
         }
         public bool Animal(string species,Vector3 position)
         {

@@ -14,7 +14,7 @@ namespace Sunward
         int selected, lastCount, buttonCount,weaponPage;
         float contentWidth=600;
         bool activate;
-        float nextNavigation;
+        float nextNavigation,volumeNavigation;GUIStyle volumeTrack,volumeThumb;
         string lastPanel = "";
         void Update()
         {
@@ -238,8 +238,15 @@ namespace Sunward
                         Quality(true);
                     if (Button("QUALITY · LIGHTWEIGHT", button))
                         Quality(false);
-                    if (Button("MUTE / UNMUTE", button))
-                        AudioListener.volume = AudioListener.volume > 0 ? 0 : 1;
+                    if (Button("SOUND · VOLUME CONTROLS", button))game.SetPanel("audio");
+                    break;
+                case "audio":
+                    Label("Sound & stillness",title);
+                    VolumeControl("MASTER VOLUME",0,GameAudioSettings.Master);
+                    VolumeControl("MUSIC",1,GameAudioSettings.Music);
+                    VolumeControl("SOUND EFFECTS & VOICES",2,GameAudioSettings.Effects);
+                    Label("Drag the ink markers. Controller: select a row, then press left or right.",small);
+                    if(Button("RETURN",button)){GameAudioSettings.Save();game.SetPanel("pause");}
                     break;
                 case "elder":
                     Label(game.Dialogue,body);
@@ -366,6 +373,17 @@ namespace Sunward
         {
             Rect r = GUILayoutUtility.GetRect(width, 7);
             GUI.DrawTexture(new Rect(r.x, r.y, r.width * Mathf.Clamp01(value), r.height), red);
+        }
+
+        void VolumeControl(string label,int channel,float value)
+        {
+            Label(label+" · "+Mathf.RoundToInt(value*100)+"%",body);
+            if(volumeTrack==null){volumeTrack=new GUIStyle(GUI.skin.horizontalSlider);volumeThumb=new GUIStyle(GUI.skin.horizontalSliderThumb);volumeTrack.normal.background=hintInk;volumeTrack.fixedHeight=10;volumeThumb.normal.background=hintInk;volumeThumb.fixedWidth=24;volumeThumb.fixedHeight=30;}
+            int index=buttonCount++;var rect=GUILayoutUtility.GetRect(contentWidth,38);
+            float next=GUI.HorizontalSlider(rect,value,0,1,volumeTrack,volumeThumb);
+            if(index==selected && Gamepad.current!=null && Event.current.type==EventType.Repaint && Time.unscaledTime>=volumeNavigation)
+            {float x=Mathf.Abs(Gamepad.current.dpad.x.ReadValue())>.2f?Gamepad.current.dpad.x.ReadValue():Gamepad.current.leftStick.x.ReadValue();if(Mathf.Abs(x)>.3f){next=Mathf.Clamp01(value+Mathf.Sign(x)*.05f);volumeNavigation=Time.unscaledTime+.16f;}}
+            if(Mathf.Abs(next-value)>.0001f)GameAudioSettings.Set(channel,next);
         }
 
         void Quality(bool high)

@@ -106,7 +106,7 @@ namespace Sunward.Remaster
                 if(item.kind=="pond")PondMaterial(prop,item);
                 if(item.resource=="Okami/vtaa")SolidProp(prop,true);
                 else if(item.resource=="Okami/vt4a"){SolidProp(prop);gongs.Add(prop.transform.position);}
-                else if(item.resource=="Okami/heaven-gate")SolidProp(prop);
+                else if(item.resource=="Okami/heaven-gate")SolidGate(prop);
 
             }
             BuildMazeBoundaries(layout.mazeWalls);

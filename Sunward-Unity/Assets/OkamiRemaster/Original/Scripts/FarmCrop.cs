@@ -12,6 +12,7 @@ namespace Sunward.Remaster
         float regrow;
         Renderer[] visual;
         void Awake(){planted=transform.position;visual=GetComponentsInChildren<Renderer>();}
+        public void SetSoilHeight(float height){planted.y=Mathf.Max(planted.y,height);if(!Harvested)transform.position=planted;}
         public void Harvest(){Harvested=true;regrow=Time.time+180;foreach(var r in visual)r.enabled=false;}
         public bool Bloom(){if(!Harvested)return false;Restore();return true;}
         void Restore(){Harvested=false;transform.position=planted;foreach(var r in visual)r.enabled=true;}
