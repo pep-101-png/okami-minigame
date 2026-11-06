@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Sunward.Remaster
 {
-    // Cinematic direction around original PL animation, PL0d skin and original
+    // Cinematic direction around original PL animation, PL0D/ES3A skins and original
     // core sprites/audio. This is not a recovered original game cutscene.
     [DefaultExecutionOrder(-250)]
     public sealed class ShiranuiTransformation : MonoBehaviour
@@ -15,14 +15,14 @@ namespace Sunward.Remaster
         Light glow;
         ParticleSystem gathering;
         Texture2D ink;
-        bool ownsControl,returning;
+        bool ownsControl,returning,fullPower;int targetForm;
         public bool Playing=>ownsControl;
         public void Begin(NativeAmaterasu player)
         {
             if(!game || !player || !player.Ready || Playing || game.Blocked || game.Health<=0 || !game.Player.Grounded || game.Player.Locked || game.Player.Swimming)return;
-            if(!player.PrepareShiranui())return;
-            body=player;returning=body.Shiranui;
-            game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;ownsControl=true;timeline.Begin();Time.timeScale=0;
+            targetForm=(player.FormLevel+1)%3;fullPower=targetForm==2;if(!player.PreparePowerForm(targetForm))return;
+            body=player;returning=targetForm==0;
+            game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;ownsControl=true;timeline.Begin();Time.timeScale=0;if(fullPower)game.Audio.FullPowerVoice();
             game.Player.animationView.Play("Idle_Natural",.1f,0,true);
             orbit=FindFirstObjectByType<OrbitCamera>();if(orbit)orbit.BeginCinematic();
             ink=Resources.Load<Texture2D>("Okami/UI/Ink");
@@ -42,7 +42,7 @@ namespace Sunward.Remaster
         {
             if(!Playing)return;
             if(!game || !game.Player || !body){Cancel();return;}
-            Handle(timeline.Tick(Time.unscaledDeltaTime));
+            Handle(timeline.Tick(Time.unscaledDeltaTime/(fullPower?2:1)));
             if(Playing)Frame();
         }
         void Handle(TransformationCue cue)
@@ -55,12 +55,13 @@ namespace Sunward.Remaster
             if((cue&TransformationCue.Reveal)!=0)
             {
                 if(gathering){var emission=gathering.emission;emission.rateOverTime=0;}
-                if(!body.ApplyShiranuiForm()){Cancel();return;}
-                game.Audio.TransformationBurst();
+                if(!body.ApplyPowerForm(targetForm)){Cancel();return;}
+                game.Audio.TransformationBurst();if(fullPower){game.Player.animationView.Play("Bark",.18f,1.9333333f,true);}
+                if(fullPower){var ring=Particles("OriginalWhiteRing",0,7,.8f,0,0,new Color(1,.9f,.55f,.8f));if(ring)ring.Emit(1);var seal=Particles("OriginalElectricity",0,5,.7f,0,0,new Color(1,.9f,.4f,.75f));if(seal)seal.Emit(1);}
                 var flare=Particles("Spirit",0,2.5f,.55f,0,0,new Color(.75f,.9f,1,.85f));if(flare)flare.Emit(1);
-                var burst=Particles("SpiritGlow",0,.65f,.85f,3.8f,.45f,new Color(.72f,.88f,1,.8f));if(burst)burst.Emit(45);
-                var sparks=Particles("Spark",0,.22f,.7f,4.3f,.35f,Color.white);if(sparks)sparks.Emit(32);
-                var leaves=Particles("Leaf",0,.18f,1.3f,2.3f,.8f,new Color(.8f,.93f,1,.8f));if(leaves)leaves.Emit(24);
+                var burst=Particles("SpiritGlow",0,.65f,.85f,3.8f,.45f,new Color(.72f,.88f,1,.8f));if(burst)burst.Emit(fullPower?135:45);
+                var sparks=Particles("Spark",0,.22f,.7f,4.3f,.35f,Color.white);if(sparks)sparks.Emit(fullPower?96:32);
+                var leaves=Particles("Leaf",0,.18f,1.3f,2.3f,.8f,new Color(.8f,.93f,1,.8f));if(leaves)leaves.Emit(fullPower?72:24);
             }
             if((cue&TransformationCue.Settle)!=0)game.Player.animationView.Play("Idle_Natural",.22f,0,true);
             if((cue&TransformationCue.Finish)!=0)Finish();
@@ -68,10 +69,10 @@ namespace Sunward.Remaster
         void Frame()
         {
             float p=Mathf.Clamp01(timeline.Elapsed/TransformationTimeline.Duration),s=Mathf.SmoothStep(0,1,p);
-            if(glow)glow.intensity=12*Mathf.Pow(Mathf.Sin(p*Mathf.PI),2)+30*Mathf.Exp(-Mathf.Pow((timeline.Elapsed-TransformationTimeline.RevealTime)/.18f,2));
+            if(glow)glow.intensity=(fullPower?24:12)*Mathf.Pow(Mathf.Sin(p*Mathf.PI),2)+(fullPower?65:30)*Mathf.Exp(-Mathf.Pow((timeline.Elapsed-TransformationTimeline.RevealTime)/.18f,2));
             if(orbit)
             {
-                orbit.CinematicFrame(game.Player.transform.position+Vector3.up*.95f,game.Player.transform.eulerAngles.y+Mathf.Lerp(-65,24,s),Mathf.Lerp(12,19,s),Mathf.Lerp(5.4f,6.8f,s),Mathf.Lerp(37,43,s));
+                orbit.CinematicFrame(game.Player.transform.position+Vector3.up*.95f,game.Player.transform.eulerAngles.y+Mathf.Lerp(fullPower?-110:-65,fullPower?80:24,s),Mathf.Lerp(12,fullPower?26:19,s),Mathf.Lerp(fullPower?6.2f:5.4f,fullPower?9.5f:6.8f,s),Mathf.Lerp(37,43,s));
                 orbit.ReturnCinematic(Mathf.SmoothStep(0,1,(timeline.Elapsed-(TransformationTimeline.Duration-.4f))/.4f));
             }
         }
@@ -79,7 +80,7 @@ namespace Sunward.Remaster
         void Finish()
         {
             Cleanup();
-            if(game)game.Notify(returning?"Amaterasu · spirit restored":"Shiranui awakened · double strength, speed and attack speed");
+            if(game)game.Notify(returning?"Amaterasu · spirit restored":fullPower?"Shiranui full power · 20% larger · 10% stronger than awakened form":"Shiranui awakened · double strength, speed and attack speed");
         }
         public void Cancel(){if(Playing)Cleanup();}
         void Cleanup()

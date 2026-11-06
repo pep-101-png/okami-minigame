@@ -8,6 +8,7 @@ namespace Sunward.Remaster
         public GameFlow game;
         public static readonly Vector3 Board=new Vector3(3.3f,0,-9);
         public bool Active=>mode!=0;
+        public bool Racing=>mode==1;
         int mode,checkpoint,delivered,decorated=-1;
         float remaining;
         readonly HashSet<int> freshCrops=new HashSet<int>();

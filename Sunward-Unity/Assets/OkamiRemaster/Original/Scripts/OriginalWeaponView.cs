@@ -100,8 +100,8 @@ namespace Sunward.Remaster
             if(rig==null || idle==null)return;
             if(package=="wp29")
             {
-                int guard=combat && combat.HoldingCharge?3:combat && combat.game && combat.game.Profile.equipped==OriginalWeaponEvolution.ThunderId?4:2;
-                foreach(var r in renderers){int group=int.Parse(r.sharedMesh.name.Split('-')[1]);r.enabled=group==1 || group==guard;}
+                // These are complementary blade/spike sections, not exclusive forms.
+                foreach(var r in renderers)r.enabled=true;
             }
             if(!Tundra)
             {if(action!=null)return;idleTime+=Time.deltaTime;Sample(idle,idleTime,true,1);BladeClearance();return;}
@@ -132,12 +132,12 @@ namespace Sunward.Remaster
             var body=combat.GetComponent<NativeAmaterasu>();if(!body || !body.Ready || !body.Head)return;
             // Preserve the recovered charge pose. Move only the separate weapon
             // skin back over the shoulders, then clear the live skull volume.
-            rig.Root.transform.position+=Vector3.up*.22f-combat.transform.forward*.5f;
+            float size=body.FullPower?1.2f:1;float radius=.45f*size;rig.Root.transform.position+=Vector3.up*(.22f*size)-combat.transform.forward*(.5f*size);
             if(!clearanceMesh)clearanceMesh=new Mesh();float lift=0;var head=body.Head.position;
             foreach(var renderer in renderers)if(renderer.enabled)
             {
                 renderer.BakeMesh(clearanceMesh);clearanceVertices.Clear();clearanceMesh.GetVertices(clearanceVertices);
-                foreach(var vertex in clearanceVertices){var p=renderer.transform.TransformPoint(vertex);float d=(p.x-head.x)*(p.x-head.x)+(p.z-head.z)*(p.z-head.z);if(d<.2025f)lift=Mathf.Max(lift,head.y+Mathf.Sqrt(.2025f-d)-p.y);}
+                foreach(var vertex in clearanceVertices){var p=renderer.transform.TransformPoint(vertex);float d=(p.x-head.x)*(p.x-head.x)+(p.z-head.z)*(p.z-head.z);if(d<radius*radius)lift=Mathf.Max(lift,head.y+Mathf.Sqrt(radius*radius-d)-p.y);}
             }
             rig.Root.transform.position+=Vector3.up*(lift>0?lift+.025f:0);
         }

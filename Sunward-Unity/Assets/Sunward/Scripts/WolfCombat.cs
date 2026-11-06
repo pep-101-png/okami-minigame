@@ -13,7 +13,7 @@ namespace Sunward
         public bool HoldingCharge=>charging && hold>.28f;
         public bool Attacking => strike != null;
         public bool TundraAir => Tundra && strike!=null && strike.clip=="Tundra_54f";
-        public float FormMultiplier => nativeBody && nativeBody.Shiranui?2:1;
+        public float FormMultiplier => nativeBody && nativeBody.FullPower?2.2f:nativeBody && nativeBody.Shiranui?2:1;
 
         WeaponDefinition weapon;
         Sunward.Remaster.OriginalWeaponCatalog.Entry originalWeapon;
@@ -90,15 +90,18 @@ namespace Sunward
             motor.animationView.Play(strike.clip,Mathf.Min(.12f,strike.duration*.2f),strike.duration,true);
             if(Tundra && nativeBody)nativeBody.SetTundraPhase(0,sourceAttackDuration);
             if(originalView)originalView.BeginAttack(strike.clip);
+            game.Audio.AmmyAttack();
             if(Tundra)tundraSoundPending=true;
             else game.Audio.Cue("weapon-"+originalWeapon.resource+(heavy?"-heavy":""));
             if (originalWeapon.resource=="wp24")
                 game.Fx.SundialOrbit(transform.position, heavy);
         }
 
+        public bool CanCycleWeapon=>game && motor && !game.InTrial && !game.Blocked && !motor.Locked && !motor.Swimming && !Busy && !game.Enemies.Exists(e=>e && !e.Dead);
         void Update()
         {
             if(!game)return;
+            if(motor.input.Switch.WasPressedThisFrame() && CanCycleWeapon){game.Profile.equipped=Sunward.Remaster.OriginalWeaponCatalog.Next(game.Profile);game.Save.Save();Equip();}
             // An interrupted arena/dojo action must release the shared pose
             // clock rather than leave Amaterasu held in the last attack frame.
             if((!CombatArea || motor.Locked || motor.Swimming) && (strike!=null || charging))Cancel();
@@ -110,12 +113,6 @@ namespace Sunward
             voice = Mathf.Max(0, voice - dt);
             if (voice > 0)
                 return;
-            if (motor.input.Switch.WasPressedThisFrame() && !Busy)
-            {
-                game.Profile.equipped = Sunward.Remaster.OriginalWeaponCatalog.Next(game.Profile);
-                game.Save.Save();
-                Equip();
-            }
 
             if (motor.input.Bark.WasPressedThisFrame() && !Busy && barkCooldown <= 0 && game.Energy >= 15)
             {

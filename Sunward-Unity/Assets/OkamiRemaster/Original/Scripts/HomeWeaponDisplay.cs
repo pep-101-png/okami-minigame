@@ -26,7 +26,7 @@ namespace Sunward.Remaster
             Vector3 size=entry.family=="glaive"?new Vector3(.55f,.18f,1.7f):entry.family=="rosary"?new Vector3(1.5f,.45f,1.5f):new Vector3(1.15f,.25f,1.15f);
             weapon=VillageFestival.Place(root.transform,"Okami/"+entry.resource,Vector3.up*1.45f,size,entry.family=="glaive"?new Vector3(-65,0,0):new Vector3(65,0,0));
             if(entry.resource=="wp29" && weapon)foreach(var r in weapon.GetComponentsInChildren<SkinnedMeshRenderer>())
-            {int g=int.Parse(r.sharedMesh.name.Split('-')[1]);r.enabled=g==1 || g==(shown==OriginalWeaponEvolution.ThunderId?4:2);}
+            {r.enabled=true;}
         }
         void Update()
         {
@@ -38,8 +38,13 @@ namespace Sunward.Remaster
         {
             if(!root || !root.activeSelf || !Camera.main || game.Blocked || Vector3.Distance(game.Player.transform.position,Position)>5)return;
             var p=Camera.main.WorldToScreenPoint(Position+Vector3.up*.4f);if(p.z<=0)return;
-            float w=Mathf.Min(400,Screen.width*.58f);var r=new Rect(Mathf.Clamp(p.x-w*.5f,12,Screen.width-w-12),Mathf.Clamp(Screen.height-p.y,12,Screen.height-120),w,110);
-            var entry=OriginalWeaponCatalog.Find(shown);string text=Title+"\n"+(entry!=null?(entry.family=="glaive"?"A divine blade for deliberate, powerful strikes.":entry.family=="rosary"?"Sacred beads for reaching whips and charged casts.":"A divine mirror for broad, close-range blows."):"");InkText.Draw(text,r,22,new Color(.15f,.07f,.025f,1));
+            var previous=GUI.matrix;var previousColor=GUI.color;GUI.matrix=Matrix4x4.identity;
+            float width=Mathf.Min(540,Screen.width*.72f);var r=new Rect(Mathf.Clamp(p.x-width*.5f,12,Screen.width-width-12),Mathf.Clamp(Screen.height-p.y+12,12,Screen.height-155),width,142);
+            var paper=Resources.Load<Texture2D>("Okami/UI/MenuScrollBody");var roll=Resources.Load<Texture2D>("Okami/UI/MenuScrollRoll");GUI.color=new Color(1,1,1,.96f);if(paper)GUI.DrawTexture(r,paper);GUI.color=Color.white;if(roll){GUI.DrawTexture(new Rect(r.x-6,r.y,12,r.height),roll);GUI.DrawTexture(new Rect(r.x+r.width-6,r.y,12,r.height),roll);}
+            float titleSize=32;while(titleSize>20 && InkText.MeasureHeight(Title,width-36,titleSize)>titleSize+.01f)titleSize--;
+            InkText.Draw(Title,new Rect(r.x+18,r.y+12,width-36,40),titleSize,new Color(.09f,.045f,.015f,1),false);
+            var entry=OriginalWeaponCatalog.Find(shown);string text=entry==null?"":entry.family=="glaive"?"A divine blade for deliberate, powerful strikes.":entry.family=="rosary"?"Sacred beads for reaching whips and charged casts.":"A divine mirror for broad, close-range blows.";
+            float bodySize=23;while(bodySize>15 && InkText.MeasureHeight(text,width-36,bodySize)>75)bodySize--;InkText.Draw(text,new Rect(r.x+18,r.y+54,width-36,75),bodySize,new Color(.13f,.075f,.035f,1));GUI.color=previousColor;GUI.matrix=previous;
         }
     }
 }

@@ -148,6 +148,7 @@ namespace Sunward
         public void SetPanel(string panel)
         {
             if(Health<=0 && panel!="result")return;
+            if(panel!=Panel && panel!="" && panel!="title" && panel!="dialogue" && panel!="elder" && panel!="tea" && panel!="result" && Audio)Audio.Cue("menu-open");
             Panel = panel;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

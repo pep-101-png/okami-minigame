@@ -24,8 +24,14 @@ class CombatTests
   }
   {
    var game=new GameFlow{Player=new WolfMotor(),InTrial=true,Panel="",Health=100};var combat=new WolfCombat{game=game,motor=game.Player};game.Combat=combat;game.Player.game=game;game.Profile.equipped="wp29e";var view=new OriginalWeaponView();view.Load("wp29","glaive");Set(view,"combat",combat);
-   void Guard(int expected){Call(view,"LateUpdate");var renderers=(SkinnedMeshRenderer[])view.GetType().GetField("renderers",flags).GetValue(view);Check(renderers.Where(r=>r.enabled).All(r=>int.Parse(r.sharedMesh.name.Split('_')[0].Split('-')[1])==1 || int.Parse(r.sharedMesh.name.Split('-')[1])==expected) && renderers.Any(r=>r.enabled && r.sharedMesh.name.StartsWith("Native-"+expected+"-")),"Native Thunder Edge side pieces missing or overlapping");}
-   Guard(4);game.Profile.equipped="wp29";Guard(2);Set(combat,"charging",true);Set(combat,"hold",1f);Guard(3);
+   void Guard(){Call(view,"LateUpdate");var renderers=(SkinnedMeshRenderer[])view.GetType().GetField("renderers",flags).GetValue(view);Check(renderers.All(r=>r.enabled),"Complementary original Thunder Edge sections were hidden");}
+   Guard();game.Profile.equipped="wp29";Guard();Set(combat,"charging",true);Set(combat,"hold",1f);Guard();
+
+  }
+  {
+   var game=new GameFlow{Player=new WolfMotor(),Panel="",Health=100};var combat=new WolfCombat{game=game,motor=game.Player};game.Combat=combat;
+   Check(combat.CanCycleWeapon,"Outside-combat cycle blocked");game.InTrial=true;Check(!combat.CanCycleWeapon,"Q allowed during combat trial");game.InTrial=false;var enemy=new EnemyBrain{Hp=10};game.Enemies.Add(enemy);Check(!combat.CanCycleWeapon,"Q allowed with a living enemy");game.Enemies.Clear();game.Blocked=true;Check(!combat.CanCycleWeapon,"Q allowed during a menu/cinematic");game.Blocked=false;Set(combat,"charging",true);Check(!combat.CanCycleWeapon,"Q interrupts a held charge");Set(combat,"charging",false);
+   var body=new NativeAmaterasu();Set(body,"<FormLevel>k__BackingField",1);Set(body,"<Shiranui>k__BackingField",true);Set(combat,"nativeBody",body);Check(combat.FormMultiplier==2,"Second form baseline changed");Set(body,"<FormLevel>k__BackingField",2);Check(Math.Abs(combat.FormMultiplier/2-1.1f)<.0001f,"Full power is not ten percent above second form");
   }
   Console.WriteLine("PASS "+n+" actual WolfCombat normal/heavy hold, release recovery, charged explosion and interrupt checks at 15/30/60/120fps; engine doubles, not Unity");
  }
