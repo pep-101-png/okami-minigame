@@ -17,6 +17,8 @@ namespace Sunward.Remaster
         public bool Ready { get; private set; }
         public bool Visible { get; private set; }
         public bool Shiranui { get; private set; }
+        public int FormLevel {get;private set;}
+        public bool FullPower=>FormLevel==2;
         NativePaintedRig surfaceRig;
         SkinnedMeshRenderer surfaceRenderer;
         public SkinnedMeshRenderer BodySurface
@@ -39,7 +41,7 @@ namespace Sunward.Remaster
         public float Phase => tundraClock?tundraPhase:clip == null ? 0 : time / Mathf.Max(.001f, clip.Duration + (intro != null ? intro.Duration : 0));
         public float BlendPhase => blendDuration > 0 ? Mathf.Clamp01(blendTime / blendDuration) : 1;
         NativePaintedRig rig;
-        NativePaintedRig amaterasuRig, shiranuiRig;
+        NativePaintedRig amaterasuRig, shiranuiRig,fullPowerRig;
         NativePoseBank bank;
         Binding[] bindings;
         Renderer[] legacy;
@@ -218,27 +220,24 @@ namespace Sunward.Remaster
             }
             catch(Exception error){Debug.LogError("Original Shiranui appearance could not load: "+error.Message,this);return false;}
         }
-        public bool ApplyShiranuiForm()
+        public bool PreparePowerForm(int level)
         {
-            if(!PrepareShiranui())return false;
+            if(level!=2)return level==0 || PrepareShiranui();
+            try{if(fullPowerRig==null)fullPowerRig=new NativePaintedRig("Okami/es3a",transform);if(fullPowerRig.Bones.Length!=bank.BoneCount)throw new InvalidOperationException("Original ES3A skeleton does not match the native wolf motions");return true;}
+            catch(Exception error){Debug.LogError("Original full-power Shiranui could not load: "+error.Message,this);return false;}
+        }
+        public bool ApplyShiranuiForm()=>ApplyPowerForm(Shiranui?0:1);
+        public bool ApplyPowerForm(int level)
+        {
+            if(level<0 || level>2 || !PreparePowerForm(level))return false;
             try
             {
-                var previous = rig; Shiranui = !Shiranui; rig = Shiranui ? shiranuiRig : amaterasuRig;
-                for (int i = 0; i < rig.Bones.Length; i++)
-                {
-                    rig.Bones[i].localPosition = previous.Bones[i].localPosition;
-                    rig.Bones[i].localRotation = previous.Bones[i].localRotation;
-                    rig.Bones[i].localScale = previous.Bones[i].localScale;
-                }
-                foreach (var socket in sockets)
-                {
-                    int index = Array.IndexOf(previous.Bones, socket.bone);
-                    if (index >= 0) socket.bone = rig.Bones[index];
-                }
-                previous.Root.SetActive(false); rig.Root.SetActive(true);
-                return true;
+                var previous=rig;var target=level==2?fullPowerRig:level==1?shiranuiRig:amaterasuRig;
+                for(int i=0;i<target.Bones.Length;i++){target.Bones[i].localPosition=previous.Bones[i].localPosition;target.Bones[i].localRotation=previous.Bones[i].localRotation;target.Bones[i].localScale=previous.Bones[i].localScale;}
+                foreach(var socket in sockets){int index=Array.IndexOf(previous.Bones,socket.bone);if(index>=0)socket.bone=target.Bones[index];}
+                previous.Root.SetActive(false);rig=target;FormLevel=level;Shiranui=level>0;rig.Root.transform.localScale=Vector3.one*(FullPower?1.2f:1);rig.Root.SetActive(true);return true;
             }
-            catch (Exception error) { Debug.LogError("Original Shiranui appearance could not load: " + error.Message, this);return false; }
+            catch(Exception error){Debug.LogError("Original wolf form could not load: "+error.Message,this);return false;}
         }
         void Apply()
         {
@@ -298,6 +297,6 @@ namespace Sunward.Remaster
         }
         void OnDisable() { Show(false); }
         void OnEnable() { if (Ready) Show(true); }
-        void OnDestroy() { if (amaterasuRig != null) amaterasuRig.Dispose(); if (shiranuiRig != null) shiranuiRig.Dispose(); }
+        void OnDestroy() { if (amaterasuRig != null) amaterasuRig.Dispose(); if (shiranuiRig != null) shiranuiRig.Dispose();if(fullPowerRig!=null)fullPowerRig.Dispose(); }
     }
 }

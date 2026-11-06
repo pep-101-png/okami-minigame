@@ -514,7 +514,35 @@
     },
     {
       "cue": "palacemusic",
-      "resource": "Okami/NativeAudio/house-melody-67"
+      "resource": "Okami/SelectedAudio/core-core-subsong-16"
+    },
+    {
+      "cue": "menu-open",
+      "resource": "Okami/SelectedAudio/core-core-subsong-35"
+    },
+    {
+      "cue": "ammy-swing",
+      "resource": "Okami/SelectedAudio/pl-pl00-subsong-14"
+    },
+    {
+      "cue": "ammy-swing",
+      "resource": "Okami/SelectedAudio/pl-pl00-subsong-15"
+    },
+    {
+      "cue": "ammy-swing",
+      "resource": "Okami/SelectedAudio/pl-pl00-subsong-16"
+    },
+    {
+      "cue": "pond-sit",
+      "resource": "Okami/SelectedAudio/pl-pl00-subsong-27"
+    },
+    {
+      "cue": "festivalrace",
+      "resource": "Okami/SelectedAudio/bgm00-subsong-27"
+    },
+    {
+      "cue": "full-power",
+      "resource": "Okami/SelectedAudio/ev-evbc-subsong-5"
     }
   ]
 }

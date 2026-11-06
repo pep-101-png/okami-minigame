@@ -1,5 +1,5 @@
 {
-  "status": "User said done; implementation authorized. Preserve existing weapon/combat sounds and layer new Ammy attacks.",
+  "status": "Implemented; source and engine-double tests passed. Unity import/playback and user sound-list numbering remain unverified.",
   "requests": [
     {
       "label": "CORE #16",
@@ -30,7 +30,7 @@
       "use": "Preserve all current weapon/combat recordings; add PL00 #14\u201316 Ammy attack vocals on top, not as replacements"
     }
   ],
-  "indexing": "Preserve the user's displayed labels; confirm container/subsong numbering against the source before binding. No sound patch is authorized until the user finishes the list.",
+  "indexing": "One-based original player subsong order assumed because user could not identify the numbering. See tools/full-power-update/audio-provenance.json.",
   "nextGameUpdate": [
     {
       "request": "Third full-power Shiranui transformation",
@@ -38,7 +38,7 @@
       "scaleComparedToSecond": 1.2,
       "statsComparedToSecond": 1.1,
       "cutscene": "Bigger and more powerful than second transformation",
-      "status": "Record only; user said next game update when they say done"
+      "status": "Implemented in full-power update; Unity playback unverified"
     },
     {
       "request": "Original Shiranui body tendrils",
@@ -47,23 +47,27 @@
         "ES4B"
       ],
       "motion": "Continuously and smoothly flowing over and around his body, like tentacles moving in wind, at all times while transformed",
-      "status": "Record only; hold for user done"
+      "status": "Implemented in full-power update; Unity playback unverified"
     },
     {
       "request": "Awakened weapons replace their originals",
-      "details": "After unlocking an awakened weapon, remove the base form from ownership/selection/displays and avoid duplicate or re-buyable base entries. Apply to Thunder Edge now and future evolutions."
+      "details": "After unlocking an awakened weapon, remove the base form from ownership/selection/displays and avoid duplicate or re-buyable base entries. Apply to Thunder Edge now and future evolutions.",
+      "status": "Implemented in full-power update; Unity playback unverified"
     },
     {
       "request": "Complete Thunder Edge spikes",
-      "details": "Only two spikes were restored. Inspect the original complete assembly and recover all missing spikes."
+      "details": "Only two spikes were restored. Inspect the original complete assembly and recover all missing spikes.",
+      "status": "Implemented in full-power update; Unity playback unverified"
     },
     {
       "request": "Divine Retribution green disc",
-      "details": "Restore the missing original green disc component."
+      "details": "Restore the missing original green disc component.",
+      "status": "Implemented in full-power update; Unity playback unverified"
     },
     {
       "request": "Tsumugari missing weapon pieces",
-      "details": "Inspect its original complete assembly and restore all missing original components."
+      "details": "Inspect its original complete assembly and restore all missing original components.",
+      "status": "Implemented in full-power update; Unity playback unverified"
     }
   ]
 }

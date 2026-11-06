@@ -1,0 +1,41 @@
+{
+  "models": [
+    {
+      "resource": "Okami/es3a",
+      "source": "data_pc/es/es3a.dat"
+    },
+    {
+      "resource": "Okami/es4a",
+      "source": "data_pc/es/es4a.dat"
+    },
+    {
+      "resource": "Okami/es4b",
+      "source": "data_pc/es/es4b.dat"
+    }
+  ],
+  "fullPowerRig": "ES3A and PL0D have identical original 38-bone parent/bind data",
+  "tendrils": "ES4A and ES4B have identical original model/skeleton data; both use recovered ES4A et03 motion curves",
+  "verifiedOriginalDownloads": [
+    {
+      "path": "es/es3a.dat",
+      "oid": "566a4509e8894f1ae86fd1eb2658bb16c2cbf393fea980b1685c42fdf6254433",
+      "size": 824992
+    },
+    {
+      "path": "es/es4a.dat",
+      "oid": "9fff49d6889026ebcab40e0d1ccda414e4317adfd8673673c93d47ffac84ce3e",
+      "size": 7232
+    },
+    {
+      "path": "es/es4b.dat",
+      "oid": "0179afc78232e4981d45e9b49e35a99d0643752752ea13a2cee8f8983fdeca8c",
+      "size": 5184
+    },
+    {
+      "path": "se/ev/evbc.afs2",
+      "oid": "6e3c733f1f423ff4939672513c9ce93532e31dbb22108c09a6d4608e0b1a287f",
+      "size": 5094346
+    }
+  ],
+  "sourceRepository": "pep-101-png/okami-hd-assets"
+}

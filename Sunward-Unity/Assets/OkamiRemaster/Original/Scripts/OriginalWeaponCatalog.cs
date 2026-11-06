@@ -37,7 +37,7 @@ namespace Sunward.Remaster
         public static bool Buy(ProfileData profile, string id)
         {
             var entry=Find(id);
-            if(id==OriginalWeaponEvolution.ThunderId || entry==null || Owns(profile,id) || profile.coins<entry.cost) return false;
+            if(OriginalWeaponEvolution.Replaced(profile,id) || id==OriginalWeaponEvolution.ThunderId || entry==null || Owns(profile,id) || profile.coins<entry.cost) return false;
             profile.coins-=entry.cost;Array.Resize(ref profile.owned,profile.owned.Length+1);
             profile.owned[profile.owned.Length-1]=id;profile.equipped=id;return true;
         }

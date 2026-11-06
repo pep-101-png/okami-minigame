@@ -325,10 +325,10 @@ namespace Sunward
         void Weapons()
         {
             Label("Taro · divine instruments", title);
-            Label(game.Profile.coins + " coins · purchased weapons stay in your save. Q cycles owned weapons in the arena.", body);
+            Label(game.Profile.coins + " coins · purchased weapons stay in your save. Q cycles owned weapons while out of combat.", body);
             if(Button("VILLAGE REQUEST BOARD · goals & rewards",button))game.SetPanel("requests");
             Label("Glaives: sword strikes. Reflectors: broad close-range attacks. Rosaries: bead whips with reach. Hold either attack button to charge; release to strike.",small);
-            var catalogue=Sunward.Remaster.OriginalWeaponCatalog.All;
+            var catalogue=System.Array.ConvertAll(Sunward.Remaster.OriginalWeaponCatalog.All,e=>Sunward.Remaster.OriginalWeaponEvolution.Replaced(game.Profile,e.id)?Sunward.Remaster.OriginalWeaponCatalog.AwakenedThunder:e);
             weaponPage=Mathf.Clamp(weaponPage,0,catalogue.Length-1);var entry=catalogue[weaponPage];
             Label((weaponPage+1)+" / "+catalogue.Length+" · "+entry.title,title);
             var portrait=Resources.Load<Texture2D>("Okami/WeaponPortraits/"+entry.resource);
@@ -343,7 +343,7 @@ namespace Sunward
             {
                 bool awakened=Sunward.Remaster.OriginalWeaponEvolution.Owns(game.Profile);
                 Label(awakened?"AWAKENED · +35% damage · +15% reach":"AWAKENING · Find and dig up the buried chest in the heavenly garden maze.",small);
-                if(awakened && Button(game.Profile.equipped==Sunward.Remaster.OriginalWeaponEvolution.ThunderId?"AWAKENED FORM EQUIPPED":"EQUIP AWAKENED THUNDER EDGE",button))
+                if(awakened && entry.id!=Sunward.Remaster.OriginalWeaponEvolution.ThunderId && Button(game.Profile.equipped==Sunward.Remaster.OriginalWeaponEvolution.ThunderId?"AWAKENED FORM EQUIPPED":"EQUIP AWAKENED THUNDER EDGE",button))
                 {game.Profile.equipped=Sunward.Remaster.OriginalWeaponEvolution.ThunderId;game.Save.Save();game.Combat.Equip();}
             }
             if(Button("PREVIOUS INSTRUMENT",button))weaponPage=(weaponPage+catalogue.Length-1)%catalogue.Length;
