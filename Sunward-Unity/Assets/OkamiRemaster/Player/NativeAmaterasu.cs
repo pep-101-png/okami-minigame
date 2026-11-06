@@ -33,6 +33,7 @@ namespace Sunward.Remaster
                 surfaceRig=rig;surfaceRenderer=largest;return largest;
             }
         }
+        public Transform Torso => Ready ? rig.Bones[1] : null; // Original native torso, not the raised weapon socket.
         public Transform Head => Ready ? rig.Bones[8] : null;  // Original MD bone 7, skull/ear parent.
         public Transform Back => Ready ? rig.Bones[31] : null; // Original MD bone 30, dorsal attachment.
         public Transform[] PowerBones => Ready ? new[] { rig.Bones[9], rig.Bones[14], rig.Bones[13], rig.Bones[18], rig.Bones[21], rig.Bones[25] } : null;
