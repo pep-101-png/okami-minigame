@@ -7,7 +7,7 @@ namespace Sunward.Remaster
     public sealed class VillageFarm : MonoBehaviour
     {
         public GameFlow game;
-        GameObject root;OriginalActor spaGuest;bool spaAnimated;
+        GameObject root;OriginalActor spaGuest;bool spaAnimated;readonly RaycastHit[] soilHits=new RaycastHit[16];
         void Start()
         {
             if(!game)game=GetComponent<GameFlow>();if(!game || !game.valley)return;
@@ -36,7 +36,7 @@ namespace Sunward.Remaster
             Place("Okami/vt91",new Vector3(55.5f,0,38.8f),new Vector3(.65f,.35f,.65f));
             Place("Okami/vt65",new Vector3(55.5f,0,38.8f),new Vector3(.35f,.3f,.35f),.35f);
             // One continuous original low-poly bed; world-space paint feathers its edge into grass.
-            Earth(new Vector3(46,0,23.5f),new Vector3(12.8f,.10f,6.8f),0);
+            Earth(new Vector3(46,0,23.5f),new Vector3(16.8f,.26f,9.0f),0);
             SpaResident();
         }
         float Floor(Vector3 p)=>game.valley.Height(p)+.025f;
@@ -46,7 +46,14 @@ namespace Sunward.Remaster
         {
             p.y=Floor(p);var visual=VillageFestival.Place(root.transform,"Okami/farm-earth",p,size,new Vector3(0,yaw,0));
             if(visual)foreach(var renderer in visual.GetComponentsInChildren<Renderer>()){
-                var material=new Material(Resources.Load<Material>("Okami/Effects/FarmEarthBlend"));material.SetTexture("_EarthTex",Resources.Load<Texture2D>("Okami/farm-earth/Earth"));material.SetTexture("_GrassTex",Resources.Load<Texture2D>("Okami/farm-earth/Grass"));renderer.sharedMaterial=material;
+                var material=new Material(Resources.Load<Material>("Okami/Effects/FarmEarthBlend"));material.SetTexture("_EarthTex",Resources.Load<Texture2D>("Okami/farm-earth/Earth"));material.SetTexture("_GrassTex",Resources.Load<Texture2D>("Okami/farm-earth/Grass"));renderer.sharedMaterial=material;if(renderer is SkinnedMeshRenderer skin){renderer.gameObject.layer=6;renderer.gameObject.name="Farm growing earth · original rounded soil";renderer.gameObject.AddComponent<MeshCollider>().sharedMesh=skin.sharedMesh;}
+            }
+            Physics.SyncTransforms();
+            foreach(var crop in FindObjectsByType<FarmCrop>(FindObjectsSortMode.None))
+            {
+                var at=crop.transform.position;if(Mathf.Abs(at.x-p.x)>size.x*.46f || Mathf.Abs(at.z-p.z)>size.z*.46f)continue;
+                int count=Physics.RaycastNonAlloc(at+Vector3.up*3,Vector3.down,soilHits,6,1<<6,QueryTriggerInteraction.Ignore);
+                for(int i=0;i<count;i++)if(soilHits[i].collider.name.StartsWith("Farm growing earth"))crop.SetSoilHeight(soilHits[i].point.y+.015f);
             }
         }
         void Shelter(string label,Vector3 p,float width,float depth,float headroom)
