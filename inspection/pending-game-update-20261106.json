@@ -1,0 +1,69 @@
+{
+  "status": "User said done; implementation authorized. Preserve existing weapon/combat sounds and layer new Ammy attacks.",
+  "requests": [
+    {
+      "label": "CORE #16",
+      "use": "Soft sound in Shiranui room"
+    },
+    {
+      "label": "CORE #35",
+      "use": "Opening menus, including the save menu"
+    },
+    {
+      "label": "PL00 #14\u201316",
+      "use": "Ammy attack swings, synchronized with combat attacks"
+    },
+    {
+      "label": "PL00 #27",
+      "use": "Sitting in a pond"
+    },
+    {
+      "label": "BGM00 #27",
+      "use": "Festival race music"
+    },
+    {
+      "label": "EVBC #5",
+      "use": "Third/full-power Shiranui transformation cutscene power-up sound"
+    },
+    {
+      "label": "Combat audio layering constraint",
+      "use": "Preserve all current weapon/combat recordings; add PL00 #14\u201316 Ammy attack vocals on top, not as replacements"
+    }
+  ],
+  "indexing": "Preserve the user's displayed labels; confirm container/subsong numbering against the source before binding. No sound patch is authorized until the user finishes the list.",
+  "nextGameUpdate": [
+    {
+      "request": "Third full-power Shiranui transformation",
+      "requestedAsset": "ES3A",
+      "scaleComparedToSecond": 1.2,
+      "statsComparedToSecond": 1.1,
+      "cutscene": "Bigger and more powerful than second transformation",
+      "status": "Record only; user said next game update when they say done"
+    },
+    {
+      "request": "Original Shiranui body tendrils",
+      "requestedAssets": [
+        "ES4A",
+        "ES4B"
+      ],
+      "motion": "Continuously and smoothly flowing over and around his body, like tentacles moving in wind, at all times while transformed",
+      "status": "Record only; hold for user done"
+    },
+    {
+      "request": "Awakened weapons replace their originals",
+      "details": "After unlocking an awakened weapon, remove the base form from ownership/selection/displays and avoid duplicate or re-buyable base entries. Apply to Thunder Edge now and future evolutions."
+    },
+    {
+      "request": "Complete Thunder Edge spikes",
+      "details": "Only two spikes were restored. Inspect the original complete assembly and recover all missing spikes."
+    },
+    {
+      "request": "Divine Retribution green disc",
+      "details": "Restore the missing original green disc component."
+    },
+    {
+      "request": "Tsumugari missing weapon pieces",
+      "details": "Inspect its original complete assembly and restore all missing original components."
+    }
+  ]
+}
