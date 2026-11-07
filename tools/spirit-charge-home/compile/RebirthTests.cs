@@ -13,7 +13,7 @@ static class RebirthTests
  static void Call(object x,string n)=>x.GetType().GetMethod(n,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(x,null);
  static void Main(string[] args)
  {
-  Resources.Root=args[0];FullPowerTests.Run();HeavenAudioPolishTests.Run();
+  Resources.Root=args[0];FullPowerTests.Run();HeavenAudioPolishTests.Run();TrailingRibbonTests.Run();
   foreach(int fps in new[]{15,30,60,120})foreach(int mode in new[]{0,1,2,3,4})
   {
    var player=new WolfMotor();var game=new GameFlow{Player=player,Audio=new ValleyAudio(),InTrial=true,BossTrial=true,Panel="",Health=100};player.game=game;
