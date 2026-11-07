@@ -551,6 +551,50 @@
     {
       "cue": "palacemusic",
       "resource": "Okami/SelectedAudio/palace-continuous"
+    },
+    {
+      "cue": "imp-eb00-0",
+      "resource": "Okami/ImpAudio/imp-eb00-0"
+    },
+    {
+      "cue": "imp-eb00-71",
+      "resource": "Okami/ImpAudio/imp-eb00-71"
+    },
+    {
+      "cue": "imp-eb00-50",
+      "resource": "Okami/ImpAudio/imp-eb00-50"
+    },
+    {
+      "cue": "imp-em01-170",
+      "resource": "Okami/ImpAudio/imp-em01-170"
+    },
+    {
+      "cue": "imp-em02-207",
+      "resource": "Okami/ImpAudio/imp-em02-207"
+    },
+    {
+      "cue": "imp-eb00-5",
+      "resource": "Okami/ImpAudio/imp-eb00-5"
+    },
+    {
+      "cue": "imp-eb00-70",
+      "resource": "Okami/ImpAudio/imp-eb00-70"
+    },
+    {
+      "cue": "imp-eb00-4",
+      "resource": "Okami/ImpAudio/imp-eb00-4"
+    },
+    {
+      "cue": "imp-em03-130",
+      "resource": "Okami/ImpAudio/imp-em03-130"
+    },
+    {
+      "cue": "imp-em03-120",
+      "resource": "Okami/ImpAudio/imp-em03-120"
+    },
+    {
+      "cue": "imp-em04-150",
+      "resource": "Okami/ImpAudio/imp-em04-150"
     }
   ]
 }

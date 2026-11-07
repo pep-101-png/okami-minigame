@@ -20,9 +20,11 @@ namespace Sunward
         // not move the visible attack backwards while its timer is running.
         float visualDuration=.9f;
         public float VisualStateDuration => visualDuration;
-        public float HitHeight=>motor?motor.height:1.7f;
+        float impHeight;
+        public float HitHeight=>(motor?motor.height:1.7f)+impHeight;
+        public void SetImpHeight(float height){if(!IsImp || !motor)return;float next=Mathf.Max(0,height);if(Mathf.Abs(next-impHeight)<.004f)return;impHeight=next;motor.center=Vector3.up*(motor.height*.5f+impHeight);}
         public bool Frozen=>Time.time<frozenUntil;
-        public bool VisualStunned => !Dead && (stun>0 || Frozen);
+        public bool VisualStunned => !Dead && (stun>0 || State=="stagger" || Frozen);
         float frozenUntil,nextFreeze;
         public void Freeze(float duration){if(definition.id=="boss"){Stun(.12f);return;}if(Time.time<nextFreeze)return;frozenUntil=Time.time+Mathf.Min(1.2f,duration);nextFreeze=frozenUntil+2;}
 
@@ -36,6 +38,26 @@ namespace Sunward
         string move;
         public string ActiveMove=>move;
         Sunward.Remaster.OriginalActor nativeActor;
+        bool IsImp=>nativeActor && nativeActor.Imp!=null;
+        string rootMotionState;Vector3 previousAttackRoot;
+        void ImpRootMotion()
+        {
+            if(!IsImp || (State!="windup" && State!="strike" && State!="recover")){rootMotionState=null;return;}
+            var profile=nativeActor.Imp;
+            if(rootMotionState!=State){rootMotionState=State;previousAttackRoot=profile.Root(State,0);}
+            Vector3 next=profile.Root(State,VisualStateProgress);
+            Vector3 delta=transform.rotation*((next-previousAttackRoot)*nativeActor.ImpWorldScale);previousAttackRoot=next;
+            if(definition.id=="ranged")
+            {
+                // Native drum recoil is authored for a much larger battlefield.
+                // Consume it through collision/range limits instead of retreating
+                // out of the trial and leaving the shot animation off camera.
+                Vector3 away=transform.position-game.Player.transform.position;away.y=0;
+                if((away+delta).magnitude>Mathf.Max(10,away.magnitude) && Vector3.Dot(delta,away)>0)
+                    delta-=away.normalized*Vector3.Dot(delta,away.normalized);
+            }
+            if(delta.sqrMagnitude>0)Move(delta);
+        }
         bool struck;
         LineRenderer tell;
         Vector3 visualBase;
@@ -59,6 +81,7 @@ namespace Sunward
             nativeActor=native;
             originalVisual = native != null;
             if(native && native.Ready && native.splitAttackClip)nativeAttackLength=native.ActivityLength(native.strike);
+            if(IsImp){motor.height=Mathf.Max(.85f,1.7f*nativeActor.ImpWorldScale);motor.radius=Mathf.Clamp(.52f*nativeActor.ImpWorldScale,.24f,.6f);motor.center=Vector3.up*motor.height*.5f;}
             if(spec.id=="boss")gameObject.AddComponent<Sunward.Remaster.CrimsonHelmAscension>().Initialise(this,nativeActor);
         }
 
@@ -70,6 +93,12 @@ namespace Sunward
                 // every windup or extend one flinch into a permanent stun lock.
                 if(BossRising || State=="windup" || State=="strike" || Time.time<nextStagger || time<=0)return;
                 nextStagger=Time.time+2.5f;time=Mathf.Min(.12f,time);
+            }
+            if(IsImp)
+            {
+                if(time<=0 || Time.time<nextStagger || Dead)return;
+                nextStagger=Time.time+.75f;State="stagger";timer=visualDuration=.32f;stun=0;struck=true;rootMotionState=null;
+                if(tell){Destroy(tell.gameObject);tell=null;}return;
             }
             if(definition.id!="boss"){if(Time.time<nextStagger)return;nextStagger=Time.time+.45f;time=Mathf.Min(.18f,time);}
             stun=Mathf.Max(stun,time);
@@ -88,12 +117,13 @@ namespace Sunward
                 if(!sequence)sequence=gameObject.AddComponent<Sunward.Remaster.CrimsonHelmAscension>();
                 sequence.Begin(this,nativeActor);return;
             }
-            if (game.Audio && (Dead || Time.time >= nextVoice)) { game.Audio.Enemy(definition.id,transform.position); nextVoice = Time.time + .9f; }
+            if (!IsImp && game.Audio && (Dead || Time.time >= nextVoice)) { game.Audio.Enemy(definition.id,transform.position); nextVoice = Time.time + .9f; }
             Stun(stagger);
             if (motor.enabled && definition.id!="boss")
                 motor.Move(away * .15f);
             if (Dead)
             {
+                frozenUntil=stun=0;rootMotionState=null;
                 if(definition.id=="boss")crimson.Defeat();
                 State = "dead";
                 timer = clock;
@@ -102,7 +132,8 @@ namespace Sunward
                 motor.enabled = false;
                 game.Reward(this);
                 game.Fx.Ring(transform.position, new Color(.6f, .8f, .65f), 2);
-                Destroy(gameObject, 1.1f);
+                if(IsImp && game.Audio)game.Audio.World("imp-eb00-0",transform.position,14,.22f);
+                Destroy(gameObject, IsImp?1.5f:1.1f);
             }
         }
 
@@ -158,7 +189,7 @@ namespace Sunward
             diff.y = 0;
             float distance = diff.magnitude;
             bool boss = definition.id == "boss", ranged = definition.id == "ranged";
-            if ((State=="approach" || State=="recover") && diff.sqrMagnitude > .01f)
+            if ((State=="approach" || (!IsImp && State=="recover")) && diff.sqrMagnitude > .01f)
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(diff), dt * 7);
             if (!originalVisual)
             {
@@ -172,14 +203,20 @@ namespace Sunward
             }
 
             timer -= dt;
+            ImpRootMotion();
+            diff=game.Player.transform.position-transform.position;diff.y=0;distance=diff.magnitude;
             if (State == "approach")
             {
                 float reach = ranged ? 9 : boss ? 4*BossScale : definition.id == "heavy" ? 2.8f : 2;
                 if (distance > reach)
-                    Move(diff.normalized * definition.speed * (Phase2 ? 1.2f : 1) * dt);
+                {
+                    float speed=definition.speed;
+                    if(IsImp)speed=Mathf.Min(speed,nativeActor.Imp.walkDistance*nativeActor.ImpWorldScale/Mathf.Max(.1f,nativeActor.ActivityLength(nativeActor.walk))*2.4f);
+                    Move(diff.normalized * speed * (Phase2 ? 1.2f : 1) * dt);
+                }
                 else if (ranged && distance < 5)
                     Move(-diff.normalized * dt * 1.5f);
-                if (timer <= 0 && distance < reach + 1)
+                if (timer <= 0 && distance < reach + (IsImp?.05f:1))
                 {
                     attacks++;
                     direction = diff.normalized;
@@ -192,7 +229,8 @@ namespace Sunward
                     if(nativeActor && nativeActor.Ready && nativeActor.splitAttackClip)nativeAttackLength=nativeActor.ActivityLength(nativeActor.AttackMotion(move));
                     State = "windup";
                     timer = Mathf.Max(definition.windup * (Phase2 ? .8f : 1),nativeAttackLength*.25f);
-                    visualDuration=timer;
+                    if(IsImp)timer=Mathf.Max(definition.windup,nativeActor.Imp.Duration("windup"));
+                    visualDuration=timer;rootMotionState=null;
                     struck = false;
                     tell = game.Fx.Ring(move == "slam" ? transform.position : game.Player.transform.position, new Color(.75f, .24f, .17f), move == "slam" ? (boss ? 5*BossScale : 3) : .7f, timer + .1f);
                 }
@@ -200,11 +238,12 @@ namespace Sunward
             else if (State == "windup" && timer <= 0)
             {
                 State = "strike";
-                game.Audio.World("attack",transform.position,12,.18f);
+                if(!IsImp)game.Audio.World("attack",transform.position,12,.18f);
                 chargeRemaining = move == "charge" ? (boss ? .65f : .32f) : 0;
                 timer = Mathf.Max(move == "charge" ? chargeRemaining : .18f,nativeAttackLength*.37f);
+                if(IsImp)timer=nativeActor.Imp.Duration("strike");
                 visualDuration=timer;
-                if (move == "fan" || move == "shot")
+                if (!IsImp && (move == "fan" || move == "shot"))
                 {
                     int count = move == "fan" ? (Phase2 ? 7 : 5) : 1;
                     Vector3 origin=transform.position+Vector3.up*(1.5f*BossScale);
@@ -227,10 +266,17 @@ namespace Sunward
             {
                 // Normal imps swing in place; controller lunges previously slid
                 // their stationary native weapon actions through the player.
-                if(move=="melee" && !struck && VisualStateProgress>=.55f)
+                if(IsImp && move=="shot" && !struck && VisualStateProgress>=nativeActor.Imp.StrikeContact)
+                {
+                    struck=true;var drum=nativeActor.NativeBone(21);
+                    Vector3 origin=drum?drum.position:transform.position+Vector3.up*HitHeight*.7f;
+                    Vector3 aim=(game.Player.transform.position+Vector3.up*.55f-origin).normalized;
+                    game.Projectile(origin,aim,AttackDamage,false);
+                }
+                if(move=="melee" && !struck && VisualStateProgress>=(IsImp?nativeActor.Imp.StrikeContact:.55f))
                 {
                     struck=true;float reach=definition.id=="heavy"?3.2f:2.6f;
-                    if(distance<reach && Mathf.Abs(game.Player.transform.position.y-transform.position.y)<1.25f)
+                    if(distance<reach && Vector3.Dot(direction,diff.normalized)>.15f && Mathf.Abs(game.Player.transform.position.y-transform.position.y)<1.25f)
                     {game.Hurt(AttackDamage,direction);game.Audio.World(definition.id=="heavy"?"heavy-impact":"impact",transform.position,12,.18f);}
                 }
                 if (move == "charge" && chargeRemaining>0)
@@ -251,9 +297,11 @@ namespace Sunward
                 {
                     State = "recover";
                     timer = Mathf.Max(boss ? .95f : .65f,nativeAttackLength*.38f);
+                    if(IsImp)timer=nativeActor.Imp.Duration("recover");
                     visualDuration=timer;
                 }
             }
+            else if (State == "stagger" && timer<=0){State="approach";timer=.45f;rootMotionState=null;}
             else if (State == "recover" && timer <= 0)
             {
                 State = "approach";

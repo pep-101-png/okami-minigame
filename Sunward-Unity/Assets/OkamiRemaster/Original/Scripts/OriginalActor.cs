@@ -86,6 +86,45 @@ namespace Sunward.Remaster
         }
         public void EndActivity(){activity=null;Change(idle);}
 
+        public ImpMotionProfile Imp { get; private set; }
+        public float ImpWorldScale=>modelScale*(enemy && enemy.definition?enemy.definition.scale:Mathf.Abs(transform.localScale.y));
+        public float CurrentSourceTime { get; private set; }
+        string impState,impSoundClip;float impSoundTime=-.001f,impPoseTime;
+        void TickImp(float dt,float speed)
+        {
+            if(enemy.Frozen || (game && game.Blocked && !enemy.Dead))return;
+            string state=enemy.State;
+            bool locomotion=state=="approach";
+            string selected=Imp.Clip(state) ?? (locomotion && speed>.08f?walk:idle);
+            bool loop=locomotion;
+            bool continuingAttack=(impState=="windup" || impState=="strike") && (state=="strike" || state=="recover") && selected==CurrentSourceMotion;
+            if(impState!=state){if(!continuingAttack)impPoseTime=0;impState=state;}
+            if(selected!=CurrentSourceMotion)impPoseTime=0;
+            Change(selected);blendTime+=dt;
+            float sample;
+            if(state=="windup" || state=="strike" || state=="recover" || state=="stagger")
+                sample=current.Duration*Imp.Phase(state,enemy.VisualStateProgress);
+            else
+            {
+                float metres=Imp.walkDistance*ImpWorldScale;
+                float pace=selected==walk?speed*current.Duration/Mathf.Max(.05f,metres):1;
+                impPoseTime+=dt*Mathf.Clamp(pace,.25f,4.5f);sample=impPoseTime;
+            }
+            CurrentSourceTime=loop?Mathf.Repeat(sample,current.Duration):Mathf.Min(sample,current.Duration);
+            float blend=Mathf.Clamp01(blendTime/.09f);
+            bank.Sample(current,sample,rig.Bones,fromPosition,fromRotation,fromScale,blend,loop);
+            // Root X/Z is consumed by EnemyBrain through its CharacterController.
+            // Root Y stays in the original bank, so jumping attacks can leave the floor.
+            rig.Bones[0].localPosition=new Vector3(0,rig.Bones[0].localPosition.y,0);
+            enemy.SetImpHeight(rig.Bones[0].localPosition.y*ImpWorldScale);
+            var motion=Imp.Find(selected);float before=impSoundClip==selected?impSoundTime:-.001f;
+            if(motion!=null && motion.sounds!=null && game && game.Audio)
+                foreach(var e in motion.sounds)
+                    if((loop && CurrentSourceTime<before-.01f?e.time>before || e.time<=CurrentSourceTime:e.time>before && e.time<=CurrentSourceTime))
+                        game.Audio.World(e.cue,transform.position,18,.42f*e.gain);
+            impSoundClip=selected;impSoundTime=CurrentSourceTime;
+        }
+
         string lastState;
 
         void Awake()
@@ -103,6 +142,7 @@ namespace Sunward.Remaster
             previous = transform.position;
             try
             {
+                Imp=ImpMotionProfile.Load(resource);
                 bank = new NativePoseBank(resource + "/Poses");
                 rig = new NativePaintedRig(resource, transform);
                 if (bank.BoneCount != rig.Bones.Length) throw new InvalidOperationException("Original model and motion skeletons disagree: " + resource);
@@ -111,11 +151,12 @@ namespace Sunward.Remaster
                 fromPosition = new Vector3[bank.BoneCount];
                 fromRotation = new Quaternion[bank.BoneCount];
                 fromScale = new Vector3[bank.BoneCount];
+                if(Imp!=null)foreach(var motion in Imp.motions)if(bank.Find(motion.name)==null)throw new InvalidOperationException("Original imp motion is missing: "+motion.name);
                 if (bank.Find(idle) == null) throw new InvalidOperationException("Original idle is missing: " + idle);
                 Change(idle);
                 bank.Sample(current, 0, rig.Bones, fromPosition, fromRotation, fromScale, 1, true);
                 if(enemy)foreach(var renderer in rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true))
-                {renderer.localBounds=new Bounds(Vector3.zero,new Vector3(32,24,32));renderer.updateWhenOffscreen=true;}
+                {renderer.localBounds=new Bounds(Vector3.zero,Imp!=null?new Vector3(12,12,14):new Vector3(32,24,32));renderer.updateWhenOffscreen=Imp==null;}
                 if(resource=="Okami/em11")SetCrimsonPhase(enemy?enemy.BossPhase:2);
                 rig.Root.SetActive(true);
                 Ready = true;
@@ -152,6 +193,7 @@ namespace Sunward.Remaster
             filteredSpeed=Mathf.Lerp(filteredSpeed,speed,1-Mathf.Exp(-dt*10));
             moving=filteredSpeed>(moving?.08f:.15f);
             running=filteredSpeed>(running?2.8f:3.4f);
+            if(enemy && Imp!=null){TickImp(dt,speed);return;}
             string state = enemy ? (enemy.VisualStunned?"hit":enemy.State) : "village";
             string selected = moving ? walk : idle;
             bool loop = true;
