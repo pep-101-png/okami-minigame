@@ -240,12 +240,20 @@ namespace Sunward.Remaster
             }
             catch(Exception error){Debug.LogError("Original wolf form could not load: "+error.Message,this);return false;}
         }
-        bool solarPose;float solarTime,solarRelease,solarFloor;Vector3 solarCentre;Quaternion solarRotation;
+        bool solarPose;float solarTime,solarRelease,solarFloor;Vector3 solarCentre;Quaternion solarRotation,solarTorsoFrame;
         public bool BeginSolarPose()
         {
             if(!Ready || bank.Find("pl00_017")==null || bank.Find("pl00_018")==null || bank.Find("pl00_021")==null)return false;
             for(int i=0;i<bank.BoneCount;i++){fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}
-            solarFloor=transform.position.y;solarRotation=rig.Root.transform.localRotation;solarPose=true;solarTime=solarRelease=0;return true;
+            solarFloor=transform.position.y;solarRotation=rig.Root.transform.localRotation;
+            // The selected MOT postures include different rigid body facings.
+            // Use the outgoing rise's torso frame so blending their articulation
+            // cannot add an unintended half-turn against the cinematic motion.
+            var rise=bank.Find("pl00_017");float handoff=.30f*Mathf.SmoothStep(0,1,1.6f/1.8f);
+            bank.Sample(rise,rise.Duration*handoff,rig.Bones,fromPosition,fromRotation,fromScale,1,false);
+            solarTorsoFrame=Quaternion.Inverse(rig.Root.transform.rotation)*rig.Bones[1].rotation;
+            for(int i=0;i<bank.BoneCount;i++){rig.Bones[i].localPosition=fromPosition[i];rig.Bones[i].localRotation=fromRotation[i];rig.Bones[i].localScale=fromScale[i];}
+            solarPose=true;solarTime=solarRelease=0;return true;
         }
         public void SolarPose(float elapsed,Vector3 centre,float release)
         {solarTime=elapsed;solarCentre=centre;solarRelease=Mathf.Clamp01(release);}
@@ -257,15 +265,17 @@ namespace Sunward.Remaster
         {
             var roll=bank.Find("pl00_017");float phase=solarTime<1.8f?Mathf.Lerp(0,.30f,Mathf.SmoothStep(0,1,solarTime/1.8f)):.30f+.018f*Mathf.Sin(solarTime*2.8f);
             bank.Sample(roll,phase*roll.Duration,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,solarTime/.35f),false);
-            // Preserve the approved ascent through 2.1s. Then pose 3 (native
+            // Carry the rise into pose 3 while the spiral is still turning.
+            // Overlap the forward roll and native fold rather than ending one
+            // eased rotation before starting another from zero speed. Pose 3 (native
             // 018 at 25%) folds into pose 2 (native 021 at 65%). Direct both
             // postures forward around the sun, rather than playing the native
             // backward-dodge action and reversing the requested roll direction.
-            if(solarTime>2.1f)
+            if(solarTime>1.6f)
             {
                 CaptureSolarPose();
                 var folded=bank.Find("pl00_018");
-                bank.Sample(folded,folded.Duration*.25f,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,(solarTime-2.1f)/.42f),false);
+                bank.Sample(folded,folded.Duration*.25f,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,(solarTime-1.6f)/.60f),false);
             }
             if(solarTime>3.05f)
             {
@@ -273,8 +283,8 @@ namespace Sunward.Remaster
                 var tuck=bank.Find("pl00_021");float breath=.65f+.008f*Mathf.Sin((solarTime-3.05f)*2.8f);
                 bank.Sample(tuck,tuck.Duration*breath,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,(solarTime-3.05f)/.60f),false);
             }
-            float forwardRoll=720*Mathf.SmoothStep(0,1,(solarTime-2.1f)/2.3f);
-            rig.Root.transform.localRotation=solarRotation*Quaternion.Euler(forwardRoll,0,0);
+            float forwardRoll=720*Mathf.SmoothStep(0,1,(solarTime-1.6f)/2.8f);
+            rig.Root.transform.localRotation=solarRotation;
             if(solarTime>=ShiranuiUltimate.BlastTime)
             {
                 // Unfurl into a native extended leap at the flash, then reach
@@ -299,6 +309,10 @@ namespace Sunward.Remaster
                     }
                 }
             }
+            float carry=Mathf.SmoothStep(0,1,(solarTime-1.6f)/.10f)*(1-Mathf.SmoothStep(0,1,(solarTime-ShiranuiUltimate.BlastTime)/.24f));
+            var nativeFrame=Quaternion.Inverse(rig.Root.transform.rotation)*rig.Bones[1].rotation;
+            var alignment=Quaternion.Slerp(Quaternion.identity,solarTorsoFrame*Quaternion.Inverse(nativeFrame),carry);
+            rig.Root.transform.localRotation=solarRotation*Quaternion.Euler(-forwardRoll,0,0)*alignment;
             rig.Root.transform.localPosition=Vector3.zero;
             // Airborne poses stay centred in the sun. Hand ground contact back
             // to the native landing root before the paws touch down, so its
