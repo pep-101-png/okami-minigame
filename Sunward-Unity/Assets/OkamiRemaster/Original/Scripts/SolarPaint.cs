@@ -16,7 +16,7 @@ namespace Sunward.Remaster
             var root=new GameObject(kind==0?"Celestial sun · original paint":kind==1?"Celestial sunburst · original paint":"Divine sword · original dust and debris");
             root.transform.position=point;var p=root.AddComponent<SolarPaint>();p.game=g;p.mode=kind;p.ground=p.centre=point;
             p.layers=kind==0?new[]{p.Make("SolarGlow",1),p.Make("OriginalSun",1),p.Make("CannonFire",24),p.Make("SpiritGlow",48),p.Make("OriginalGodSeal",1)}:
-                new[]{p.Make("SolarGlow",1),p.Make("CannonCore",1),p.Make("SolarBlast",kind==1?16:5),p.Make("CannonFire",kind==1?48:10),p.Make("SolarPuff",kind==1?36:12,4),p.Make("ImpactDust",kind==1?32:14),p.Make("OriginalWhiteRing",kind==1?3:1),p.Make("ImpactRocks",kind==1?48:20,4)};
+                new[]{p.Make("SolarGlow",1),p.Make("CannonCore",1),p.Make("SolarBlast",kind==1?32:5),p.Make("CannonFire",kind==1?96:10),p.Make("SolarPuff",kind==1?72:12,4),p.Make("ImpactDust",kind==1?64:14),p.Make("OriginalWhiteRing",kind==1?6:1),p.Make("ImpactRocks",kind==1?96:20,4)};
             return p;
         }
         Layer Make(string sprite,int count,int tiles=1)
@@ -63,9 +63,12 @@ namespace Sunward.Remaster
                         else if(g==3){float v=Mathf.Clamp01(t/(mode==1?1.4f:.65f));float speed=12+(i%7)*2;pos+=new Vector3(Mathf.Sin(a),0,Mathf.Cos(a))*speed*t*power+Vector3.up*Mathf.Max(.08f,(3+i%5)*t-4*t*t);size=(3.6f-2.8f*v)*power;alpha=1-v;rotation=a+t*1.8f;}
                         else if(g==4){float delay=mode==1?.12f:.04f;float v=Mathf.Clamp01((t-delay)/(mode==1?2.4f:1.15f));pos+=new Vector3(Mathf.Sin(a),0,Mathf.Cos(a))*(2+v*(18+(i%6)*2))*power+Vector3.up*(.4f+v*(2+i%3)*power);size=(2+v*4)*power;alpha=t<delay?0:(1-v)*.64f;tile=(i+Mathf.Min(15,Mathf.FloorToInt(v*16)))%16;rotation=a*.08f;tint=new Color(.60f,.49f,.35f);}
                         else if(g==5){float v=Mathf.Clamp01(t/(mode==1?1.6f:1.1f));pos+=new Vector3(Mathf.Sin(a),0,Mathf.Cos(a))*(.2f+v*29)*power+Vector3.up*(.3f+v*1.6f*power);size=(2.5f+v*6)*power;alpha=Mathf.Sin(v*Mathf.PI)*.7f;rotation=-.2f*Mathf.Sin(a);tint=new Color(.84f,.72f,.50f);}
-                        else if(g==6){float v=Mathf.Clamp01((t-i*.13f)/(mode==1?.95f:.45f));pos+=Vector3.up*(.09f+i*.025f);size=(1+v*88)*power;alpha=v<=0?0:(1-v)*.8f;flat=true;tint=new Color(1,.83f,.46f);rotation=0;}
+                        else if(g==6){float v=Mathf.Clamp01((t-i*(mode==1?.065f:.13f))/(mode==1?.95f:.45f));pos+=Vector3.up*(.09f+i*.025f);size=(1+v*88)*power;alpha=v<=0?0:(1-v)*.8f;flat=true;tint=new Color(1,.83f,.46f);rotation=0;}
                         else{float speed=(7+i%9)*power;pos+=new Vector3(Mathf.Sin(a),0,Mathf.Cos(a))*speed*t+Vector3.up*Mathf.Max(.03f,(5+(i%5))*t-7*t*t);size=(.22f+(i%4)*.1f)*(mode==1?1.3f:1);alpha=(1-u)*Mathf.Clamp01((pos.y-ground.y)*5);rotation=a+t*(2+i%4);tint=new Color(.9f,.83f,.7f);}
                     }
+                    // Double the ultimate burst footprint and each painted layer.
+                    // Keep charge, sword impacts and effect lifetimes unchanged.
+                    if(mode==1){pos=ground+(pos-ground)*2;size*=2;}
                     Vector3 x=flat?Vector3.right:right,y=flat?Vector3.forward:up;var xx=(x*Mathf.Cos(rotation)+y*Mathf.Sin(rotation))*size*.5f;var yy=(-x*Mathf.Sin(rotation)+y*Mathf.Cos(rotation))*size*.5f;
                     int k=i*4;l.vertices[k]=pos-transform.position-xx-yy;l.vertices[k+1]=pos-transform.position+xx-yy;l.vertices[k+2]=pos-transform.position+xx+yy;l.vertices[k+3]=pos-transform.position-xx+yy;
                     for(int j=0;j<4;j++)l.colors[k+j]=new Color(tint.r,tint.g,tint.b,Mathf.Clamp01(alpha));
