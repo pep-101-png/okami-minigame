@@ -240,21 +240,41 @@ namespace Sunward.Remaster
             }
             catch(Exception error){Debug.LogError("Original wolf form could not load: "+error.Message,this);return false;}
         }
-        bool solarPose;float solarTime,solarRelease;Vector3 solarCentre;
+        bool solarPose;float solarTime,solarRelease;Vector3 solarCentre;Quaternion solarRotation;
         public bool BeginSolarPose()
         {
-            if(!Ready || bank.Find("pl00_017")==null)return false;
+            if(!Ready || bank.Find("pl00_017")==null || bank.Find("pl00_018")==null || bank.Find("pl00_021")==null)return false;
             for(int i=0;i<bank.BoneCount;i++){fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}
-            solarPose=true;solarTime=solarRelease=0;return true;
+            solarRotation=rig.Root.transform.localRotation;solarPose=true;solarTime=solarRelease=0;return true;
         }
         public void SolarPose(float elapsed,Vector3 centre,float release)
         {solarTime=elapsed;solarCentre=centre;solarRelease=Mathf.Clamp01(release);}
         public void EndSolarPose()
-        {solarPose=false;if(rig!=null)rig.Root.transform.localPosition=Vector3.zero;Play("Idle_Natural",.18f,0,true,false);}
+        {solarPose=false;if(rig!=null){rig.Root.transform.localPosition=Vector3.zero;rig.Root.transform.localRotation=solarRotation;}Play("Idle_Natural",.18f,0,true,false);}
+        void CaptureSolarPose()
+        {for(int i=0;i<bank.BoneCount;i++){fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}}
         void ApplySolarPose()
         {
             var roll=bank.Find("pl00_017");float phase=solarTime<1.8f?Mathf.Lerp(0,.30f,Mathf.SmoothStep(0,1,solarTime/1.8f)):.30f+.018f*Mathf.Sin(solarTime*2.8f);
             bank.Sample(roll,phase*roll.Duration,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,solarTime/.35f),false);
+            // Preserve the approved ascent through 2.1s. Then pose 3 (native
+            // 018 at 25%) folds into pose 2 (native 021 at 65%). Direct both
+            // postures forward around the sun, rather than playing the native
+            // backward-dodge action and reversing the requested roll direction.
+            if(solarTime>2.1f)
+            {
+                CaptureSolarPose();
+                var folded=bank.Find("pl00_018");
+                bank.Sample(folded,folded.Duration*.25f,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,(solarTime-2.1f)/.42f),false);
+            }
+            if(solarTime>3.05f)
+            {
+                CaptureSolarPose();
+                var tuck=bank.Find("pl00_021");float breath=.65f+.008f*Mathf.Sin((solarTime-3.05f)*2.8f);
+                bank.Sample(tuck,tuck.Duration*breath,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,(solarTime-3.05f)/.60f),false);
+            }
+            float forwardRoll=720*Mathf.SmoothStep(0,1,(solarTime-2.1f)/2.3f);
+            rig.Root.transform.localRotation=solarRotation*Quaternion.Euler(forwardRoll,0,0);
             if(solarRelease>0)
             {
                 // Blend from this frame's source curl, not accumulated previous frames.
