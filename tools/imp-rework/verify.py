@@ -7,7 +7,7 @@ receipt=json.loads((W/'runtime-receipt.json').read_text())
 for name,sha in receipt['sourceHashes'].items():assert hashlib.sha256((R/name).read_bytes()).hexdigest()==sha,'Stale runtime trace: '+name
 profiles=json.loads((D/'ImpMotions.json').read_text())['profiles'];report=[]
 for p,role in zip(profiles,['wisp','reed','ranged','heavy','elite']):
- pkg=p['resource'].split('/')[-1];j=json.loads((D/pkg/'Model.json').read_text());old=json.loads(subprocess.check_output(['git','show','HEAD:'+str((D/pkg/'Model.json').relative_to(R))],cwd=R));a=j.copy();b=old.copy();a.pop('visibleGroups');b.pop('visibleGroups');assert a==b,'Geometry, UVs or pigment changed outside the inspected masks'
+ pkg=p['resource'].split('/')[-1];j=json.loads((D/pkg/'Model.json').read_text());old=json.loads(subprocess.check_output(['git','show','bd432b0625ddadbce0fe5f34d654a520b141695c:'+str((D/pkg/'Model.json').relative_to(R))],cwd=R));a=j.copy();b=old.copy();a.pop('visibleGroups');b.pop('visibleGroups');assert a==b,'Geometry, UVs or pigment changed outside the inspected masks'
  body=2 if pkg=='em02' else 1;parts=[q for q in j['parts'] if int(q['name'].split('-')[1])==body];bones=set(i for q in parts for i in q['boneIndices']);assert len(bones)>=20,'Rigid LOD selected again'
  for tx in j['textures']:
   if tx.get('vertexOnly'):continue
