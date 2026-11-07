@@ -459,6 +459,7 @@ namespace Sunward
         {
             foreach (var b in FindObjectsByType<InkProjectile>(FindObjectsSortMode.None))
                 Destroy(b.gameObject);
+            foreach(var shell in FindObjectsByType<Sunward.Remaster.ImpCannonProjectile>(FindObjectsSortMode.None))Destroy(shell.gameObject);
         }
 
         public void Reward(EnemyBrain e)

@@ -1,0 +1,741 @@
+{
+  "audio": [
+    {
+      "cue": "imp-eb00-0",
+      "bank": "eb00",
+      "sourceBankSHA256": "8581156d0f0901c08969f45e33b7dc25ccc8c178cbea11136feefa1be069ee71",
+      "sequenceSoundID": "0x100",
+      "cueIndex": 0,
+      "sampleIndex": 5,
+      "streamIndex": 1,
+      "sourceStreamSHA256": "9b07c3267568c3a90d10a14b81fd71abffbcc99e8c7c4edc8e6d2a7b5193c0bb",
+      "outputSHA256": "1006c4083a24e0666209cd1a525206676bff08cfbc9caff200519af76ed95c8b",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 2619,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -12.566,
+          "peak": 1.0,
+          "clippedFraction": 0.00026847
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.302999,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -10.431,
+        "seconds": 3.492,
+        "clearADX_SHA256": "e20871691fb3c4407102fe1aa6b8c0820654e6bbc5b8274f6508202e21ea2257"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -200,
+        600
+      ],
+      "playbackPitch": 1.122462048309373
+    },
+    {
+      "cue": "imp-eb00-71",
+      "bank": "eb00",
+      "sourceBankSHA256": "8581156d0f0901c08969f45e33b7dc25ccc8c178cbea11136feefa1be069ee71",
+      "sequenceSoundID": "0x147",
+      "cueIndex": 71,
+      "sampleIndex": 26,
+      "streamIndex": 8,
+      "sourceStreamSHA256": "360d86ed69f612a77f0744b9f72e62ef7354730ecad010e40e10180db5573360",
+      "outputSHA256": "43774e30fd7495103f4f91fe29ee786b4d2f1f50fe00ce247e33d216a9773108",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 288,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -13.413,
+          "peak": 1.0,
+          "clippedFraction": 0.00016276
+        },
+        "output": {
+          "rmsDBFS": -23.002,
+          "peak": 0.331956,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -9.587,
+        "seconds": 0.576,
+        "clearADX_SHA256": "7b5369e00ce883253ca1bbeaebfc3bce8c6e5bacd609fd4cd2200b1d52c400ae"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    },
+    {
+      "cue": "imp-eb00-50",
+      "bank": "eb00",
+      "sourceBankSHA256": "8581156d0f0901c08969f45e33b7dc25ccc8c178cbea11136feefa1be069ee71",
+      "sequenceSoundID": "0x132",
+      "cueIndex": 50,
+      "sampleIndex": 17,
+      "streamIndex": 12,
+      "sourceStreamSHA256": "8af37e1a7ed7cda565b010692320deeb568c5b6090f9ad18ff3433c838cca822",
+      "outputSHA256": "5fb448e9a5e7da790a5ad6a174166c809fd3dd1743d27e01f5aae12188a84a8f",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 616,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -17.894,
+          "peak": 0.40329,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -23.09,
+          "peak": 0.279038,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -0.667,
+        "seconds": 0.894,
+        "clearADX_SHA256": "5df153b1a3ee112c9d067455305a7c819ea6f65f0527be8102bc8dce85525b93"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    },
+    {
+      "cue": "imp-em00-100",
+      "bank": "em00",
+      "sourceBankSHA256": "6f2f9f0b91d22f6d2c850100b8329180752e26f1223f267c6f12c420895ae414",
+      "sequenceSoundID": "0x164",
+      "cueIndex": 100,
+      "sampleIndex": 0,
+      "streamIndex": 4,
+      "sourceStreamSHA256": "5489c087a9743c21a6ed8bd561922ba51c2da3b17cd3f74a4b3a967d6b6e3d50",
+      "outputSHA256": "b7866dcf39b7331d26d203fc1f934e3930d5e75fd371fa363b476c3690a9fecb",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 566,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -14.541,
+          "peak": 0.999969,
+          "clippedFraction": 3.804e-05
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.379625,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -8.456,
+        "seconds": 0.8214,
+        "clearADX_SHA256": "ff9dfd6700e3decd772127b76c07de81a7b087d085ebed4917e8ae1fd2f917f7"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    },
+    {
+      "cue": "imp-em00-101",
+      "bank": "em00",
+      "sourceBankSHA256": "6f2f9f0b91d22f6d2c850100b8329180752e26f1223f267c6f12c420895ae414",
+      "sequenceSoundID": "0x165",
+      "cueIndex": 101,
+      "sampleIndex": 1,
+      "streamIndex": 3,
+      "sourceStreamSHA256": "7bfb078f0feeac64cf06f19dc850e6dd2e99371546fe6a750f7e172b6d8d3609",
+      "outputSHA256": "f35bd6f75c09c9407b4c05874c6998d2a3392e2d4725b501147ba720792b3fa5",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 303,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -15.876,
+          "peak": 0.970123,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -23.001,
+          "peak": 0.426744,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -7.124,
+        "seconds": 0.4397,
+        "clearADX_SHA256": "b894fe6cc255da5ea1994ae8c837567c309200e05f71f8f5a661f6679afe0d3e"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    },
+    {
+      "cue": "imp-em00-102",
+      "bank": "em00",
+      "sourceBankSHA256": "6f2f9f0b91d22f6d2c850100b8329180752e26f1223f267c6f12c420895ae414",
+      "sequenceSoundID": "0x166",
+      "cueIndex": 102,
+      "sampleIndex": 2,
+      "streamIndex": 2,
+      "sourceStreamSHA256": "d9d827bcbb779623f8f57e912ecc0793ddd832d23d48338d49fcdf9cbde2e0d0",
+      "outputSHA256": "0de4d8db0cf03df06b41096a2e2f3800b20adcea521918f88ca6bde73c77254d",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 435,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -14.011,
+          "peak": 1.0,
+          "clippedFraction": 0.000297
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.356267,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -8.988,
+        "seconds": 0.6313,
+        "clearADX_SHA256": "e0f28c732d7f71cb5087a61790922c6c8aab5380b34474fc26cd786a798cb091"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -800,
+        -500
+      ],
+      "playbackPitch": 0.6869768237290446
+    },
+    {
+      "cue": "imp-em01-170",
+      "bank": "em01",
+      "sourceBankSHA256": "84e742e32ab7cc829894a33ebc5b754f925339c82f6428579dc007e778f6b0c5",
+      "sequenceSoundID": "0x1aa",
+      "cueIndex": 170,
+      "sampleIndex": 1,
+      "streamIndex": 0,
+      "sourceStreamSHA256": "cc741c0a43345514674aa36f3ba9bbc32d678e63ec941becfdc88e2ca737604f",
+      "outputSHA256": "5e480d2759c87bf2608634732dce3bfe739e62d9205339da65a3e7be0b1aa2d8",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 487,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -15.021,
+          "peak": 0.975128,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.388706,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -7.979,
+        "seconds": 0.974,
+        "clearADX_SHA256": "d229076911114a40acb9afd7d4e4b75659317065e3b78ad0b524e592cc1bd555"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        200,
+        600
+      ],
+      "playbackPitch": 1.2599210498948732
+    },
+    {
+      "cue": "imp-eb00-60",
+      "bank": "eb00",
+      "sourceBankSHA256": "8581156d0f0901c08969f45e33b7dc25ccc8c178cbea11136feefa1be069ee71",
+      "sequenceSoundID": "0x13c",
+      "cueIndex": 60,
+      "sampleIndex": 21,
+      "streamIndex": 18,
+      "sourceStreamSHA256": "4265e034df90c8e853c169e04d7c8f93fbb929c15da91157664c6fa8692678f1",
+      "outputSHA256": "20e962f392636965b2635ff77cc0e961eebb9db0b2f08b7976986aebf3f1d6d0",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 319,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -9.432,
+          "peak": 1.0,
+          "clippedFraction": 0.00176332
+        },
+        "output": {
+          "rmsDBFS": -23.002,
+          "peak": 0.210474,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -13.567,
+        "seconds": 0.638,
+        "clearADX_SHA256": "4550f391fbb654c985b9c52daa6a7fdb93fbbda2b2c8387deaff2fc02cd0e432"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    },
+    {
+      "cue": "imp-eb00-70",
+      "bank": "eb00",
+      "sourceBankSHA256": "8581156d0f0901c08969f45e33b7dc25ccc8c178cbea11136feefa1be069ee71",
+      "sequenceSoundID": "0x146",
+      "cueIndex": 70,
+      "sampleIndex": 25,
+      "streamIndex": 7,
+      "sourceStreamSHA256": "9eafdb4cefd36bb988dad25a371a103c26e4368586c8618c0103b80b8260df1b",
+      "outputSHA256": "80b17f8b9d80662c4eeec6637f4f2aff69d47725d0b95d6e6ea5cef22007a3c8",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 133,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -19.043,
+          "peak": 0.824524,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -24.36,
+          "peak": 0.45,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -5.263,
+        "seconds": 0.266,
+        "clearADX_SHA256": "3f893e528d91de58d65665f2306d9f915c21f5d62cb85b870dd09bcdb2167011"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    },
+    {
+      "cue": "imp-eb00-4",
+      "bank": "eb00",
+      "sourceBankSHA256": "8581156d0f0901c08969f45e33b7dc25ccc8c178cbea11136feefa1be069ee71",
+      "sequenceSoundID": "0x104",
+      "cueIndex": 4,
+      "sampleIndex": 9,
+      "streamIndex": 0,
+      "sourceStreamSHA256": "aa3e09a7dfbfaf3203a4502a12e669f7c3a74a85145a69f9cf06e36373256059",
+      "outputSHA256": "05903c2cb1839fa8231a0a13d1fb263e42f2d36f35b3d16db4b22e67a4b558d6",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 2945,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -12.243,
+          "peak": 1.0,
+          "clippedFraction": 0.00069238
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.300086,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -10.698,
+        "seconds": 3.9267,
+        "clearADX_SHA256": "8a75a50551a75ecbb335ce1921028cf805151f83412b89d8e5c7b672bafb5d3f"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -200,
+        600
+      ],
+      "playbackPitch": 1.122462048309373
+    },
+    {
+      "cue": "imp-em02-207",
+      "bank": "em02",
+      "sourceBankSHA256": "025db4008e645aacaf45d08a076893f54cad2cf79707b7ca5bcaaeb93551eb45",
+      "sequenceSoundID": "0x1cf",
+      "cueIndex": 207,
+      "sampleIndex": 7,
+      "streamIndex": 2,
+      "sourceStreamSHA256": "92ee8c09525134bbdb45d436b7f977550bcec1d5b7e035db5c4771715b9f49b7",
+      "outputSHA256": "52016cf1c4def4c75902fb7bac095bdcf96aa522eb204239bc81bacf915d488e",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 857,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -13.354,
+          "peak": 1.0,
+          "clippedFraction": 0.00016409
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.329812,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -9.646,
+        "seconds": 1.714,
+        "clearADX_SHA256": "b135a3b04a2349b23f858518b715b9e056a90b0fc83338b65a5117ddddf926e8"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -400,
+        0
+      ],
+      "playbackPitch": 0.8908987181403393
+    },
+    {
+      "cue": "imp-eb00-5",
+      "bank": "eb00",
+      "sourceBankSHA256": "8581156d0f0901c08969f45e33b7dc25ccc8c178cbea11136feefa1be069ee71",
+      "sequenceSoundID": "0x105",
+      "cueIndex": 5,
+      "sampleIndex": 10,
+      "streamIndex": 5,
+      "sourceStreamSHA256": "cb447f5452b0a4f0cb12f05bd79f73215df1fed9fb8ab2d0f16dd5208ddbcea1",
+      "outputSHA256": "d27f473ad1d4ae6dced6ade3f8f3140a89f14d9ee1565b843fc91d28ac41d4e1",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 99,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -19.982,
+          "peak": 0.661377,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -23.39,
+          "peak": 0.45,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -3.347,
+        "seconds": 0.198,
+        "clearADX_SHA256": "fa08aef658a6c14f95619dfe95adf4c768c4c80b022cf8037f3b346f54a6bb93"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -200,
+        600
+      ],
+      "playbackPitch": 1.122462048309373
+    },
+    {
+      "cue": "imp-em02-204",
+      "bank": "em02",
+      "sourceBankSHA256": "025db4008e645aacaf45d08a076893f54cad2cf79707b7ca5bcaaeb93551eb45",
+      "sequenceSoundID": "0x1cc",
+      "cueIndex": 204,
+      "sampleIndex": 4,
+      "streamIndex": 3,
+      "sourceStreamSHA256": "6c5396715bc177aa0ec2f08e95773dadb937b05766eca9bfe1fd42bdcefb5555",
+      "outputSHA256": "056a2e2cf2e9ed483553b431a218e88974306125015a68fa807215405430a255",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 560,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -14.418,
+          "peak": 1.0,
+          "clippedFraction": 0.00022321
+        },
+        "output": {
+          "rmsDBFS": -23.024,
+          "peak": 0.372753,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -8.582,
+        "seconds": 1.12,
+        "clearADX_SHA256": "f5d7aedf26c82e86633d75913b6a7f19a0908b3e6c02e79603908a0ab2d02e7e"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    },
+    {
+      "cue": "imp-em02-205",
+      "bank": "em02",
+      "sourceBankSHA256": "025db4008e645aacaf45d08a076893f54cad2cf79707b7ca5bcaaeb93551eb45",
+      "sequenceSoundID": "0x1cd",
+      "cueIndex": 205,
+      "sampleIndex": 5,
+      "streamIndex": 3,
+      "sourceStreamSHA256": "6c5396715bc177aa0ec2f08e95773dadb937b05766eca9bfe1fd42bdcefb5555",
+      "outputSHA256": "056a2e2cf2e9ed483553b431a218e88974306125015a68fa807215405430a255",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 560,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -14.418,
+          "peak": 1.0,
+          "clippedFraction": 0.00022321
+        },
+        "output": {
+          "rmsDBFS": -23.024,
+          "peak": 0.372753,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -8.582,
+        "seconds": 1.12,
+        "clearADX_SHA256": "f5d7aedf26c82e86633d75913b6a7f19a0908b3e6c02e79603908a0ab2d02e7e"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    },
+    {
+      "cue": "imp-em02-203",
+      "bank": "em02",
+      "sourceBankSHA256": "025db4008e645aacaf45d08a076893f54cad2cf79707b7ca5bcaaeb93551eb45",
+      "sequenceSoundID": "0x1cb",
+      "cueIndex": 203,
+      "sampleIndex": 3,
+      "streamIndex": 2,
+      "sourceStreamSHA256": "92ee8c09525134bbdb45d436b7f977550bcec1d5b7e035db5c4771715b9f49b7",
+      "outputSHA256": "52016cf1c4def4c75902fb7bac095bdcf96aa522eb204239bc81bacf915d488e",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 857,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -13.354,
+          "peak": 1.0,
+          "clippedFraction": 0.00016409
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.329812,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -9.646,
+        "seconds": 1.714,
+        "clearADX_SHA256": "b135a3b04a2349b23f858518b715b9e056a90b0fc83338b65a5117ddddf926e8"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -1000,
+        -700
+      ],
+      "playbackPitch": 0.6120267716523276
+    },
+    {
+      "cue": "imp-em03-130",
+      "bank": "em03",
+      "sourceBankSHA256": "28007371b01a25c28005c705f8ac65d4c0d9b23e10357b3f743d82e5ab82889e",
+      "sequenceSoundID": "0x182",
+      "cueIndex": 130,
+      "sampleIndex": 4,
+      "streamIndex": 4,
+      "sourceStreamSHA256": "0b871ba8965294f50bf9100a7c92a29e09bfb55ab726ff2f69d89326c4fb4188",
+      "outputSHA256": "e6ceb8a29436937d78465298ae091e863c3e27786cdcf92a05fb41b7f9927e1b",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 400,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -10.544,
+          "peak": 1.0,
+          "clippedFraction": 0.00035156
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.238342,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -12.456,
+        "seconds": 0.8,
+        "clearADX_SHA256": "5ec98832a599204d2ce194610af5a46ab833d3130e3a9ddb334a6ad6d13f10a2"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        200,
+        600
+      ],
+      "playbackPitch": 1.2599210498948732
+    },
+    {
+      "cue": "imp-em03-120",
+      "bank": "em03",
+      "sourceBankSHA256": "28007371b01a25c28005c705f8ac65d4c0d9b23e10357b3f743d82e5ab82889e",
+      "sequenceSoundID": "0x178",
+      "cueIndex": 120,
+      "sampleIndex": 0,
+      "streamIndex": 0,
+      "sourceStreamSHA256": "853cb071dbc024c0abe6c5ed505d9550815b51a1301fb70f30fb9883c64713f6",
+      "outputSHA256": "ce31aac7aa9d2c1ee6139265c9aabd1d9c23314883c3397a0f88cb7e9fc55476",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 516,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -9.59,
+          "peak": 1.0,
+          "clippedFraction": 0.00171097
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.216483,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -13.403,
+        "seconds": 1.4977,
+        "clearADX_SHA256": "db201cbaad0ed86757e17b13574e089963ce3be417385461cd778d705e3ddc1c"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        650,
+        900
+      ],
+      "playbackPitch": 1.5646427984077742
+    },
+    {
+      "cue": "imp-eb00-40",
+      "bank": "eb00",
+      "sourceBankSHA256": "8581156d0f0901c08969f45e33b7dc25ccc8c178cbea11136feefa1be069ee71",
+      "sequenceSoundID": "0x128",
+      "cueIndex": 40,
+      "sampleIndex": 16,
+      "streamIndex": 19,
+      "sourceStreamSHA256": "1bad79ce980a0f0d5cbe3e8600e23993b4dbab20f8cfe1f371758f8860d2d583",
+      "outputSHA256": "4d7ed076c0bd43631773f511d7be08fcc655bf40ee0cd4dcc26890de70a5c0a7",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 462,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -9.214,
+          "peak": 1.0,
+          "clippedFraction": 0.00209686
+        },
+        "output": {
+          "rmsDBFS": -23.007,
+          "peak": 0.205848,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -13.785,
+        "seconds": 0.924,
+        "clearADX_SHA256": "360c86fe6eca15d36cb179b04a5578dba73072c194f86da5265e97e778ddf65b"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    },
+    {
+      "cue": "imp-em04-145",
+      "bank": "em04",
+      "sourceBankSHA256": "5866c4ddd721c74043371a6edd491b988219a0677e1f4cf4ee0f8af821f7f751",
+      "sequenceSoundID": "0x191",
+      "cueIndex": 145,
+      "sampleIndex": 2,
+      "streamIndex": 3,
+      "sourceStreamSHA256": "b11ca6a1dea5981cb330c14f3fb2c8f35e990b89f790f25e7e9a579c7dc56147",
+      "outputSHA256": "5eb86565cfafd1d93597e64bde966de56b8fc1391b6498984b2d555beae31866",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 340,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -15.185,
+          "peak": 0.980164,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.398467,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -7.815,
+        "seconds": 0.68,
+        "clearADX_SHA256": "feac38d225979145487bb6708684797bac8b1f8d476f567fa1cf352309390ef7"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        200,
+        600
+      ],
+      "playbackPitch": 1.2599210498948732
+    },
+    {
+      "cue": "imp-em04-150",
+      "bank": "em04",
+      "sourceBankSHA256": "5866c4ddd721c74043371a6edd491b988219a0677e1f4cf4ee0f8af821f7f751",
+      "sequenceSoundID": "0x196",
+      "cueIndex": 150,
+      "sampleIndex": 3,
+      "streamIndex": 0,
+      "sourceStreamSHA256": "5489c087a9743c21a6ed8bd561922ba51c2da3b17cd3f74a4b3a967d6b6e3d50",
+      "outputSHA256": "b7866dcf39b7331d26d203fc1f934e3930d5e75fd371fa363b476c3690a9fecb",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 566,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -14.541,
+          "peak": 0.999969,
+          "clippedFraction": 3.804e-05
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.379625,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -8.456,
+        "seconds": 0.8214,
+        "clearADX_SHA256": "ff9dfd6700e3decd772127b76c07de81a7b087d085ebed4917e8ae1fd2f917f7"
+      },
+      "assignment": "Native SEQ sound ID -> matching SES cue -> sample record -> ADX stream; no guessed neighbouring stream",
+      "pitchCentsRange": [
+        -100,
+        300
+      ],
+      "playbackPitch": 1.0594630943592953
+    }
+  ],
+  "paint": [
+    {
+      "resource": "Okami/Effects/CannonCore",
+      "original": "fire_00",
+      "sourceSHA256": "9c75a18ccc64de8d910eef058575e9dbc5d73062dbdf321b86afd82afa61f9da"
+    },
+    {
+      "resource": "Okami/Effects/CannonFire",
+      "original": "fire_15",
+      "sourceSHA256": "1f5cfa8dda8d610d7fa08c50d45a73faa78f9eee86e5b8eb3a5849eec355d687"
+    },
+    {
+      "resource": "Okami/Effects/CannonSmoke",
+      "original": "smoke_00",
+      "sourceSHA256": "e73256106e463b8926db8169a4c8daf2f9672d253727d09e4479f04ca2248e27"
+    }
+  ]
+}

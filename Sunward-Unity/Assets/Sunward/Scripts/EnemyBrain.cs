@@ -32,7 +32,7 @@ namespace Sunward
 
         CharacterController motor;
         Transform visual;
-        Vector3 direction;
+        Vector3 direction,impAim;
         float timer = .9f, stun, clock;
         int attacks;
         string move;
@@ -44,8 +44,8 @@ namespace Sunward
         {
             if(!IsImp || (State!="windup" && State!="strike" && State!="recover")){rootMotionState=null;return;}
             var profile=nativeActor.Imp;
-            if(rootMotionState!=State){rootMotionState=State;previousAttackRoot=profile.Root(State,0);}
-            Vector3 next=profile.Root(State,VisualStateProgress);
+            if(rootMotionState!=State){rootMotionState=State;previousAttackRoot=profile.Root(State,0,move);}
+            Vector3 next=profile.Root(State,VisualStateProgress,move);
             Vector3 delta=transform.rotation*((next-previousAttackRoot)*nativeActor.ImpWorldScale);previousAttackRoot=next;
             if(definition.id=="ranged")
             {
@@ -226,22 +226,25 @@ namespace Sunward
                         "slam",
                         "fan"
                     }[attacks % 3] : ranged ? "shot" : "melee";
+                    if(IsImp){move=nativeActor.Imp.Choose(attacks,ranged && distance<3.5f);impAim=game.Player.transform.position+Vector3.up*.55f;}
                     if(nativeActor && nativeActor.Ready && nativeActor.splitAttackClip)nativeAttackLength=nativeActor.ActivityLength(nativeActor.AttackMotion(move));
                     State = "windup";
                     timer = Mathf.Max(definition.windup * (Phase2 ? .8f : 1),nativeAttackLength*.25f);
-                    if(IsImp)timer=Mathf.Max(definition.windup,nativeActor.Imp.Duration("windup"));
+                    if(IsImp)timer=Mathf.Max(definition.windup,nativeActor.Imp.Duration("windup",move));
                     visualDuration=timer;rootMotionState=null;
                     struck = false;
                     tell = game.Fx.Ring(move == "slam" ? transform.position : game.Player.transform.position, new Color(.75f, .24f, .17f), move == "slam" ? (boss ? 5*BossScale : 3) : .7f, timer + .1f);
                 }
             }
-            else if (State == "windup" && timer <= 0)
+            else if ((State == "windup" || State=="aim") && timer <= 0)
             {
+                if(IsImp && State=="windup" && !string.IsNullOrEmpty(nativeActor.Imp.Clip("aim",move)))
+                {State="aim";timer=visualDuration=nativeActor.Imp.Duration("aim",move);return;}
                 State = "strike";
                 if(!IsImp)game.Audio.World("attack",transform.position,12,.18f);
                 chargeRemaining = move == "charge" ? (boss ? .65f : .32f) : 0;
                 timer = Mathf.Max(move == "charge" ? chargeRemaining : .18f,nativeAttackLength*.37f);
-                if(IsImp)timer=nativeActor.Imp.Duration("strike");
+                if(IsImp)timer=nativeActor.Imp.Duration("strike",move);
                 visualDuration=timer;
                 if (!IsImp && (move == "fan" || move == "shot"))
                 {
@@ -266,14 +269,9 @@ namespace Sunward
             {
                 // Normal imps swing in place; controller lunges previously slid
                 // their stationary native weapon actions through the player.
-                if(IsImp && move=="shot" && !struck && VisualStateProgress>=nativeActor.Imp.StrikeContact)
-                {
-                    struck=true;var drum=nativeActor.NativeBone(21);
-                    Vector3 origin=drum?drum.position:transform.position+Vector3.up*HitHeight*.7f;
-                    Vector3 aim=(game.Player.transform.position+Vector3.up*.55f-origin).normalized;
-                    game.Projectile(origin,aim,AttackDamage,false);
-                }
-                if(move=="melee" && !struck && VisualStateProgress>=(IsImp?nativeActor.Imp.StrikeContact:.55f))
+                if(IsImp && nativeActor.Imp.IsCannon(move) && !struck && VisualStateProgress>=nativeActor.Imp.Contact(move))
+                {struck=true;nativeActor.QueueCannon(impAim,AttackDamage);}
+                if((move=="melee" || (IsImp && !nativeActor.Imp.IsCannon(move))) && !struck && VisualStateProgress>=(IsImp?nativeActor.Imp.Contact(move):.55f))
                 {
                     struck=true;float reach=definition.id=="heavy"?3.2f:2.6f;
                     if(distance<reach && Vector3.Dot(direction,diff.normalized)>.15f && Mathf.Abs(game.Player.transform.position.y-transform.position.y)<1.25f)
@@ -297,7 +295,7 @@ namespace Sunward
                 {
                     State = "recover";
                     timer = Mathf.Max(boss ? .95f : .65f,nativeAttackLength*.38f);
-                    if(IsImp)timer=nativeActor.Imp.Duration("recover");
+                    if(IsImp)timer=nativeActor.Imp.Duration("recover",move);
                     visualDuration=timer;
                 }
             }

@@ -565,16 +565,24 @@
       "resource": "Okami/ImpAudio/imp-eb00-50"
     },
     {
+      "cue": "imp-em00-100",
+      "resource": "Okami/ImpAudio/imp-em00-100"
+    },
+    {
+      "cue": "imp-em00-101",
+      "resource": "Okami/ImpAudio/imp-em00-101"
+    },
+    {
+      "cue": "imp-em00-102",
+      "resource": "Okami/ImpAudio/imp-em00-102"
+    },
+    {
       "cue": "imp-em01-170",
       "resource": "Okami/ImpAudio/imp-em01-170"
     },
     {
-      "cue": "imp-em02-207",
-      "resource": "Okami/ImpAudio/imp-em02-207"
-    },
-    {
-      "cue": "imp-eb00-5",
-      "resource": "Okami/ImpAudio/imp-eb00-5"
+      "cue": "imp-eb00-60",
+      "resource": "Okami/ImpAudio/imp-eb00-60"
     },
     {
       "cue": "imp-eb00-70",
@@ -585,12 +593,40 @@
       "resource": "Okami/ImpAudio/imp-eb00-4"
     },
     {
+      "cue": "imp-em02-207",
+      "resource": "Okami/ImpAudio/imp-em02-207"
+    },
+    {
+      "cue": "imp-eb00-5",
+      "resource": "Okami/ImpAudio/imp-eb00-5"
+    },
+    {
+      "cue": "imp-em02-204",
+      "resource": "Okami/ImpAudio/imp-em02-204"
+    },
+    {
+      "cue": "imp-em02-205",
+      "resource": "Okami/ImpAudio/imp-em02-205"
+    },
+    {
+      "cue": "imp-em02-203",
+      "resource": "Okami/ImpAudio/imp-em02-203"
+    },
+    {
       "cue": "imp-em03-130",
       "resource": "Okami/ImpAudio/imp-em03-130"
     },
     {
       "cue": "imp-em03-120",
       "resource": "Okami/ImpAudio/imp-em03-120"
+    },
+    {
+      "cue": "imp-eb00-40",
+      "resource": "Okami/ImpAudio/imp-eb00-40"
+    },
+    {
+      "cue": "imp-em04-145",
+      "resource": "Okami/ImpAudio/imp-em04-145"
     },
     {
       "cue": "imp-em04-150",
