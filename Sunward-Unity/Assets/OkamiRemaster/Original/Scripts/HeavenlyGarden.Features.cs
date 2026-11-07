@@ -78,7 +78,7 @@ namespace Sunward.Remaster
         {return VillageFestival.Place(garden.transform,"Okami/"+resource,world-Centre,size,new Vector3(0,yaw,0));}
         void FinishFeatures()
         {
-            BuildPalace();BuildReturnGate();
+            BuildPalace();
             treasurePoint=OnGround(treasurePoint);lookoutPoint=OnGround(lookoutPoint);teaPoint=OnGround(teaPoint);
             chest=FeatureProp("vt4b",treasurePoint-Vector3.up*.7f,new Vector3(.9f,.65f,.75f));if(chest){bool found=OriginalWeaponEvolution.Owns(game.Profile);chest.SetActive(found);if(found){chest.transform.position=treasurePoint+Vector3.up*.03f;chest.GetComponent<OriginalVisual>().SampleMotion("Okami/vt4b","vt4b_001",1);}}
             var glow=OriginalAtmosphere.Create("SpiritGlow",garden.transform,treasurePoint-Centre+Vector3.up*.08f,3,.14f,2,.015f,.42f);digGlow=glow?glow.gameObject:null;

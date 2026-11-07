@@ -21,6 +21,7 @@ namespace Sunward
         public bool Swimming { get; private set; }
 
         public bool Locked;
+        public int TeleportRevision { get; private set; }
         public Vector3 Velocity { get; private set; }
 
         Vector3 horizontal, dodgeDirection;
@@ -41,6 +42,7 @@ namespace Sunward
 
         public void Teleport(Vector3 point)
         {
+            TeleportRevision++;
             controller.enabled = false;
             transform.position = point;
             controller.enabled = true;

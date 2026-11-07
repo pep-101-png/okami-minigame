@@ -29,7 +29,6 @@ s=s.replace('public class ScriptableObject:Object{','public class CreateAssetMen
 s=s.replace('public static T Instantiate<T>(T x,Transform parent)','public static T Instantiate<T>(T x)where T:Object=>(T)x.GetType().GetMethod("MemberwiseClone",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).Invoke(x,null);public static T Instantiate<T>(T x,Transform parent)')
 s=s.replace('public int MaxHealth=>120+(Spa?Spa.Bonus:0);','public int MaxHealth=>ProgressionRules.MaxHp(Profile)+(Spa?Spa.Bonus:0)+Sunward.Remaster.HomeBlessings.HealthBonus(Profile,Sunward.Remaster.HomeBlessings.Now);')
 s=s.replace('public class VisualFx{','public class VisualFx{public void SundialOrbit(UnityEngine.Vector3 p,bool h){}public void Impact(UnityEngine.Vector3 p,UnityEngine.Color c){}')
-s=s.replace('public class Collider:Object{','public class Collider:Object{public T GetComponentInParent<T>()where T:class=>null;')
 s=s.replace('public static class Physics{','public static class Physics{public static bool Linecast(Vector3 a,Vector3 b,int layer,QueryTriggerInteraction q)=>false;')
 s=s.replace('public sealed partial class GameFlow:MonoBehaviour\n {','public sealed partial class GameFlow:MonoBehaviour\n {public void HitPause(float t){}')
 s=s.replace('public class TrainingDummy:','public class TrainingDummy:')

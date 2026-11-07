@@ -239,6 +239,10 @@ s=s.replace('public class Mesh:Object{','public class Mesh:Object{public Vector2
 s=s.replace('public struct Vector3{','public struct Vector3{public void Normalize(){this=normalized;}')
 s=s.replace('public class WolfInput{','public class WolfInput{public UnityEngine.InputSystem.InputAction Ultimate=new UnityEngine.InputSystem.InputAction();')
 s=s.replace('public float MaxStamina=>100;', 'public float MaxStamina=>100+Profile.upgrades.stamina*15+Sunward.Remaster.HomeBlessings.StaminaBonus(Profile,Sunward.Remaster.HomeBlessings.Now);')
+s=s.replace('public sealed class Rigidbody:Object{','public sealed class Rigidbody:Object{public bool useGravity;')
+s=s.replace('public class BoxCollider:Object{','public class BoxCollider:Collider{public bool isTrigger;')
+s=s.replace('public class Collider:Object{','public class Collider:Object{public Sunward.WolfMotor owner;public T GetComponentInParent<T>()where T:class=>owner as T;')
+s=s.replace('public sealed partial class WolfMotor:MonoBehaviour\n {','public sealed partial class WolfMotor:MonoBehaviour\n {public int TeleportRevision;')
 if args.dump_doubles:Path(args.dump_doubles).write_text(s)
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
