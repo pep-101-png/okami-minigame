@@ -12,7 +12,7 @@ namespace Sunward
         readonly Dictionary<string,List<AudioClip>> bank = new Dictionary<string,List<AudioClip>>();
         readonly Dictionary<string,int> next = new Dictionary<string,int>();
         AudioSource effects, music, wind, river,houseMusic,gardenMusic,palaceMusic,palaceTail,raceMusic,presentationMusic;
-        float presentationBlend;
+        float presentationBlend,victoryTime;string presentationCue,victoryCue;
         readonly Dictionary<AudioSource,float> levels=new Dictionary<AudioSource,float>();
         readonly HashSet<AudioSource> musical=new HashSet<AudioSource>();
         float houseBlend,gardenBlend,palaceBlend,raceBlend;
@@ -63,8 +63,8 @@ namespace Sunward
             // Use an original quiet melodic passage for the musician; its track title
             // is unlabelled in source metadata. Keep it separate from battle.
             // Short cleansing/save cues must never become looping background music.
-            if(cue!="battle" && cue!="housemusic" && cue!="gardenmusic" && cue!="palacemusic" && cue!="festivalrace")return;
-            var clip=Clip(cue);if(!clip || clip.length<(cue=="battle"?45:(cue=="palacemusic" || cue=="festivalrace")?.1f:8))return;source.clip=clip;source.Play();
+            if(cue!="battle" && cue!="housemusic" && cue!="gardenmusic" && cue!="palacemusic" && cue!="festivalrace" && cue!="trial-victory" && cue!="boss-victory")return;
+            var clip=Clip(cue);if(!clip || clip.length<(cue=="battle"?45:(cue=="palacemusic" || cue=="festivalrace" || cue=="trial-victory" || cue=="boss-victory")?.1f:8))return;source.clip=clip;source.Play();
         }
         void Start()
         {
@@ -95,19 +95,21 @@ namespace Sunward
                 if(distance>=level.x || !SameRealm(source.transform.position,p))source.Stop();
                 else Level(source,game.CinematicActive?0:level.y*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/level.x)));
             }
+            victoryTime=Mathf.Max(0,victoryTime-Time.unscaledDeltaTime);
             bool presentation=game.Presentation && (game.Presentation.Title || game.Presentation.Playing);
-            float presentationTarget=presentation?(game.Presentation.Title?.065f:.10f):0;
-            if(presentationTarget>0 && !presentationMusic.isPlaying)Loop(presentationMusic,"gardenmusic");
-            presentationBlend=Mathf.MoveTowards(presentationBlend,presentationTarget,Time.unscaledDeltaTime*(presentation && !game.Presentation.Title?.12f:.03f));Level(presentationMusic,presentationBlend);
-            if(!presentation && presentationBlend<=0 && presentationMusic.isPlaying)presentationMusic.Stop();
+            string wanted=victoryTime>0?victoryCue:presentation?game.Presentation.MusicCue:null;
+            if(wanted!=presentationCue){presentationCue=wanted;if(wanted!=null){Loop(presentationMusic,wanted);presentationMusic.loop=wanted=="gardenmusic" || wanted=="festivalrace";}}
+            float presentationTarget=wanted==null?0:game.Presentation && game.Presentation.Title?.035f:.08f;
+            presentationBlend=Mathf.MoveTowards(presentationBlend,presentationTarget,Time.unscaledDeltaTime*.04f);Level(presentationMusic,presentationBlend);
+            if(wanted==null && presentationBlend<=0 && presentationMusic.isPlaying)presentationMusic.Stop();
             bool inMusicHouse=Sunward.Remaster.VillageServices.InFoodHouse(p);
             string desired=game.InTrial?"battle":"town";
             bool heaven=Sunward.Remaster.HeavenlyGarden.Inside(p);
             bool palace=Sunward.Remaster.HeavenlyGarden.PalaceInside(p);
-            bool roomAllowed=!game.InTrial && !presentation;
+            bool roomAllowed=!game.InTrial && !presentation && victoryTime<=0;
             FadeRoom(houseMusic,"housemusic",ref houseBlend,inMusicHouse && roomAllowed?.035f:0);
-            FadeRoom(gardenMusic,"gardenmusic",ref gardenBlend,heaven && !palace && roomAllowed?.035f:0);
-            FadePalace(palace && roomAllowed?.014f:0);
+            FadeRoom(gardenMusic,"gardenmusic",ref gardenBlend,heaven && !palace && roomAllowed?.012f:0);
+            FadePalace(palace && roomAllowed?.004f:0);
             FadeRoom(raceMusic,"festivalrace",ref raceBlend,challenges && challenges.Racing && !heaven && !inMusicHouse && !game.InTrial?.28f:0,.16f);
             if(desired!=musicCue){musicCue=desired;Loop(music,desired);}
             Level(river,(heaven?0:.25f)*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15));
@@ -127,18 +129,22 @@ namespace Sunward
         }
         void FadePalace(float target)
         {
-            if(!palaceMusic)return;if(!palaceTail)palaceTail=Source(0,false,true);
-            palaceBlend=Mathf.MoveTowards(palaceBlend,target,Time.unscaledDeltaTime*.014f);
-            if(target>0 && !palaceMusic.isPlaying && !palaceTail.isPlaying){Loop(palaceMusic,"palacemusic");palaceMusic.loop=false;}
-            float overlap=palaceMusic.clip?Mathf.Min(1.2f,palaceMusic.clip.length*.35f):.5f;
-            if(palaceMusic.clip && palaceMusic.isPlaying && !palaceTail.isPlaying && palaceMusic.time>=palaceMusic.clip.length-overlap)
-            {palaceTail.clip=palaceMusic.clip;palaceTail.loop=false;Level(palaceTail,0);palaceTail.Play();}
-            float mix=palaceTail.isPlaying?Mathf.Clamp01(palaceTail.time/overlap):0;
-            if(palaceTail.isPlaying && (mix>=1 || !palaceMusic.isPlaying))
-            {palaceMusic.Stop();var old=palaceMusic;palaceMusic=palaceTail;palaceTail=old;mix=0;}
-            float gain=palaceBlend*(game.CinematicActive?.3f:1);Level(palaceMusic,gain*(1-mix));Level(palaceTail,gain*mix);
-            if(target==0 && palaceBlend<=.0001f){palaceMusic.Stop();palaceTail.Stop();}
+            if(!palaceMusic)return;palaceBlend=Mathf.MoveTowards(palaceBlend,target,Time.unscaledDeltaTime*.003f);
+            // The derivative already joins the original waveform across its seam.
+            // Let the audio mixer loop it continuously; frame-timed Play calls gap.
+            if(target>0 && !palaceMusic.isPlaying){Loop(palaceMusic,"palacemusic");palaceMusic.loop=true;}
+            Level(palaceMusic,palaceBlend*(game.CinematicActive?.3f:1));if(palaceTail)palaceTail.Stop();
+            if(target==0 && palaceBlend<=.0001f)palaceMusic.Stop();
         }
+        public void VictoryMusic(bool boss){victoryTime=6.5f;victoryCue=boss?"boss-victory":"trial-victory";}
+        public void BedHowl(){if(!transformationVoice)transformationVoice=Source(.10f,false);transformationVoice.Stop();transformationVoice.clip=Clip("transformation-voice");Level(transformationVoice,.10f);if(transformationVoice.clip)transformationVoice.Play();}
+        public void ThunderImpact(bool charged)
+        {
+            if(!charged){Cue("thunder-strike");return;}
+            if(!Allow("charged-thunder-impact",.15f))return;var crack=Clip("thunder-strike");var impact=Clip("heavy-impact");if(crack)effects.PlayOneShot(crack,.9f);if(impact)effects.PlayOneShot(impact,.65f);
+        }
+        public void WeaponRumble(){if(!Allow("weapon-rumble",3))return;var clip=Clip("thunder-strike");if(clip)effects.PlayOneShot(clip,.035f);}
+        public void SolarExplosion(){var impact=Clip("heavy-impact");var fire=Clip("weapon-wp24-heavy");if(impact)effects.PlayOneShot(impact,.9f);if(fire)effects.PlayOneShot(fire,.6f);}
         void FadeRoom(AudioSource source,string cue,ref float blend,float target,float rate=.025f)
         {
             if(!source)return;

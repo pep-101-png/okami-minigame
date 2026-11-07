@@ -125,6 +125,11 @@ namespace Sunward.Remaster
                 if(combat)combat.TundraBeadContacts(points,count);
             }
         }
+        public bool LightningEndpoints(out Vector3 hilt,out Vector3 tip)
+        {
+            hilt=tip=transform.position;if(rig==null || package!="wp29" || rig.Bones.Length<3)return false;
+            hilt=rig.Bones[2].TransformPoint(new Vector3(0,0,.65f));tip=rig.Bones[2].TransformPoint(new Vector3(0,0,-1.55f));return true;
+        }
         void BladeClearance()
         {
             if(package!="wp29")return;rig.Root.transform.localPosition=Vector3.zero;

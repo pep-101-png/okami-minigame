@@ -42,6 +42,7 @@ namespace Sunward
             }
 
             p.animationView.Play("Sleep_Down", .1f);
+            game.Audio.BedHowl();
             yield return new WaitForSeconds(p.animationView.ClipLength("Sleep_Down"));
             Sleeping = true;
             var festival=game.GetComponent<Sunward.Remaster.VillageFestival>();if(festival)festival.SleepToNextTime();
@@ -59,6 +60,7 @@ namespace Sunward
             p.animationView.Play("Sleep_Up", .1f);
             yield return new WaitForSeconds(p.animationView.ClipLength("Sleep_Up"));
             p.Teleport(new Vector3(to.x, game.valley.Height(to)+.025f, to.z));
+            Sunward.Remaster.HomeBlessings.BedBonus(game.Profile,Sunward.Remaster.HomeBlessings.Now);game.Stamina=game.MaxStamina;game.Save.Save();
             p.Locked = false;
             game.Combat.Rest(false);
             Active = false;

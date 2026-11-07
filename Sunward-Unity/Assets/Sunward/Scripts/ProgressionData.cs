@@ -75,6 +75,7 @@ namespace Sunward
         public int version = 2, revision, coins = 35, xp, wins, defeats, kills;
         public int bossWins, vegetables, cropsSold, praise, restorationStage, farmVitality;
         public int festivalTokens, festivalRewards, festivalWins;
+        public Sunward.Remaster.WeaponMastery[] weaponMastery=Array.Empty<Sunward.Remaster.WeaponMastery>();
         public string equipped = "spear";
         public string[] owned =
         {
@@ -156,10 +157,11 @@ namespace Sunward
 
         public static bool Buy(ProfileData p, string id)
         {
+            if(id.StartsWith("awakening:"))return Sunward.Remaster.AwakeningProgress.Upgrade(p,id.Substring(10));
             if (id.StartsWith("weapon:")) return Sunward.Remaster.OriginalWeaponCatalog.Buy(p, id.Substring(7));
             if (id == "unlock-sundial")
             {
-                if (Array.IndexOf(p.owned, "sundial") >= 0 || p.coins < 110)
+                if ((Array.IndexOf(p.owned, "sundial") >= 0 || Array.IndexOf(p.owned,"sundiale")>=0) || p.coins < 110)
                     return false;
                 p.coins -= 110;
                 Array.Resize(ref p.owned, p.owned.Length + 1);
@@ -169,7 +171,7 @@ namespace Sunward
             }
 
             int i = Array.IndexOf(Upgrades, id);
-            if (i < 0 || p.upgrades.Get(id) >= Caps[i] || p.coins < Cost(p, id) || (id == "sundial" && Array.IndexOf(p.owned, "sundial") < 0))
+            if (i < 0 || p.upgrades.Get(id) >= Caps[i] || p.coins < Cost(p, id) || (id == "sundial" && (Array.IndexOf(p.owned, "sundial") < 0 && Array.IndexOf(p.owned,"sundiale")<0)))
                 return false;
             p.coins -= Cost(p, id);
             p.upgrades.Add(id);
@@ -179,7 +181,7 @@ namespace Sunward
         public static bool Validate(ProfileData p)
         {
             Sunward.Remaster.OriginalWeaponEvolution.Normalize(p);
-            if (p == null || (p.version != 1 && p.version != 2) || p.coins < 0 || p.xp < 0 || p.wins < 0 || p.defeats < 0 || p.revision < 0 || p.upgrades == null || p.owned == null || Array.IndexOf(p.owned, "spear") < 0 || Array.IndexOf(p.owned, p.equipped) < 0)
+            if (p == null || (p.version != 1 && p.version != 2) || p.coins < 0 || p.xp < 0 || p.wins < 0 || p.defeats < 0 || p.revision < 0 || p.upgrades == null || p.owned == null || (Array.IndexOf(p.owned, "spear") < 0 && Array.IndexOf(p.owned,"speare")<0) || Array.IndexOf(p.owned, p.equipped) < 0)
                 return false;
             for (int i = 0; i < Upgrades.Length; i++)
                 if (p.upgrades.Get(Upgrades[i]) < 0 || p.upgrades.Get(Upgrades[i]) > Caps[i])
@@ -189,6 +191,8 @@ namespace Sunward
             p.milestones = p.milestones ?? new Milestones();
             if(p.bossWins<0 || p.vegetables<0 || p.cropsSold<0 || p.praise<0 || p.restorationStage<0 || p.restorationStage>3 || p.farmVitality<0 || p.farmVitality>10)return false;
             if(p.festivalTokens<0 || p.festivalTokens>1000000 || p.festivalRewards<0 || p.festivalRewards>7 || p.festivalWins<0)return false;
+            p.weaponMastery=p.weaponMastery??Array.Empty<Sunward.Remaster.WeaponMastery>();
+            var seen=new System.Collections.Generic.HashSet<string>();foreach(var row in p.weaponMastery)if(row==null || Sunward.Remaster.OriginalWeaponCatalog.Find(row.id)==null || !seen.Add(row.id) || row.rank<0 || row.rank>5 || row.hits<0 || row.kills<0 || row.charged<0 || row.brush<0 || row.deflected<0 || row.trials<0 || row.bosses<0)return false;
             p.version = 2;
             return true;
         }

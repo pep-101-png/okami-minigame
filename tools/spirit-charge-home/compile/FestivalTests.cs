@@ -90,9 +90,9 @@ static class FestivalTests
   sounds["palacemusic"]=new System.Collections.Generic.List<AudioClip>{new AudioClip{length=62f,name="separate native palace melody"}};
   var gardenAudio=(AudioSource)audioType.GetField("gardenMusic",flags).GetValue(audio);var palaceAudio=(AudioSource)audioType.GetField("palaceMusic",flags).GetValue(audio);
   player.transform.position=HeavenlyGarden.Centre;for(int i=0;i<45;i++)update.Invoke(audio,null);
-  Check(gardenAudio.isPlaying&&Math.Abs(gardenAudio.volume-.035f)<.001f&&!houseAudio.isPlaying&&!palaceAudio.isPlaying,"Garden reuses indoor house source or starts palace music");
+  Check(gardenAudio.isPlaying&&Math.Abs(gardenAudio.volume-.012f)<.001f&&!houseAudio.isPlaying&&!palaceAudio.isPlaying,"Garden reuses indoor house source or starts palace music");
   player.transform.position=HeavenlyGarden.PalaceCentre;for(int i=0;i<45;i++)update.Invoke(audio,null);
-  Check(palaceAudio.isPlaying&&Math.Abs(palaceAudio.volume-.014f)<.001f&&!gardenAudio.isPlaying,"Palace lacks its own quiet exclusive music");
+  Check(palaceAudio.isPlaying&&Math.Abs(palaceAudio.volume-.004f)<.001f&&!gardenAudio.isPlaying,"Palace lacks its own quiet exclusive music");
   player.transform.position=VillageInteriors.FoodCentre;for(int i=0;i<45;i++)update.Invoke(audio,null);
   Check(!palaceAudio.isPlaying&&houseAudio.isPlaying&&!gardenAudio.isPlaying,"Room music leaks across realms");
   var life=new VillageLife{game=game};game.Profile.vegetables=2;int coins=game.Profile.coins;life.GiveProduce();Check(game.Profile.vegetables==1&&game.Profile.coins==coins+5,"Farmer cannot receive one carried/pouch vegetable");

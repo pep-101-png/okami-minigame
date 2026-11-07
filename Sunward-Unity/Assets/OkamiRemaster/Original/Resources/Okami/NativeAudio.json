@@ -509,14 +509,6 @@
       "resource": "Okami/NativeAudio/thunder-burst"
     },
     {
-      "cue": "gardenmusic",
-      "resource": "Okami/NativeAudio/house-melody-67"
-    },
-    {
-      "cue": "palacemusic",
-      "resource": "Okami/SelectedAudio/core-core-subsong-16"
-    },
-    {
       "cue": "menu-open",
       "resource": "Okami/SelectedAudio/core-core-subsong-35"
     },
@@ -543,6 +535,22 @@
     {
       "cue": "full-power",
       "resource": "Okami/SelectedAudio/ev-evbc-subsong-5"
+    },
+    {
+      "cue": "gardenmusic",
+      "resource": "Okami/SelectedAudio/bgm00-index-196"
+    },
+    {
+      "cue": "trial-victory",
+      "resource": "Okami/SelectedAudio/bgm00-index-6"
+    },
+    {
+      "cue": "boss-victory",
+      "resource": "Okami/SelectedAudio/bgm00-index-17"
+    },
+    {
+      "cue": "palacemusic",
+      "resource": "Okami/SelectedAudio/palace-continuous"
     }
   ]
 }

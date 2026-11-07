@@ -15,8 +15,9 @@ namespace Sunward.Remaster
         public static bool InReturnPassage(Vector3 p)
         {
             // Match the visible opening, including the approach side of the gate.
-            if(PalaceInside(p))return false;Height(p,out var floor);
-            return Mathf.Abs(p.x-GateCentre.x)<2.3f && Mathf.Abs(p.z-GateCentre.z)<1.9f && p.y>=floor-.5f && p.y<floor+4.7f;
+            // Ground probes can see the upper garden tier above the wolf. The
+            // passage belongs to the gate's XZ footprint, not that probe height.
+            return Inside(p) && !PalaceInside(p) && Mathf.Abs(p.x-GateCentre.x)<2.3f && Mathf.Abs(p.z-GateCentre.z)<1.9f;
         }
         void SolidGate(GameObject prop)
         {

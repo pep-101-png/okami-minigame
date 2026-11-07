@@ -33,7 +33,8 @@ namespace Sunward
         public void TrackBossTransformation(Sunward.Remaster.CrimsonHelmAscension sequence){BossTransformation=sequence;}
         public void ReleaseBossTransformation(Sunward.Remaster.CrimsonHelmAscension sequence){if(BossTransformation==sequence)BossTransformation=null;}
         public Sunward.Remaster.HeavenlyGarden Heaven {get;private set;}
-        public bool CinematicActive => (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing) || (Presentation && Presentation.Playing) || (Heaven && Heaven.Playing);
+        public Sunward.Remaster.ShiranuiUltimate Ultimate{get;private set;}
+        public bool CinematicActive => (Ultimate && Ultimate.Playing) || (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing) || (Presentation && Presentation.Playing) || (Heaven && Heaven.Playing);
         public bool Blocked => CinematicActive || Panel != "" || (Brush && Brush.Drawing);
         public Sunward.Remaster.CelestialBrush Brush { get; private set; }
         public int Wave { get; private set; }
@@ -90,6 +91,7 @@ namespace Sunward
             Transformation=GetComponent<Sunward.Remaster.ShiranuiTransformation>();
             if(!Transformation)Transformation=gameObject.AddComponent<Sunward.Remaster.ShiranuiTransformation>();
             Transformation.game=this;
+            Ultimate=gameObject.AddComponent<Sunward.Remaster.ShiranuiUltimate>();Ultimate.game=this;
             var festival=GetComponent<Sunward.Remaster.VillageFestival>();if(!festival)festival=gameObject.AddComponent<Sunward.Remaster.VillageFestival>();festival.game=this;
             var tea=GetComponent<Sunward.Remaster.VillageTeaVisit>();if(!tea)tea=gameObject.AddComponent<Sunward.Remaster.VillageTeaVisit>();tea.game=this;
             var dressing=GetComponent<Sunward.Remaster.NativeInteriorDressing>();if(!dressing)dressing=gameObject.AddComponent<Sunward.Remaster.NativeInteriorDressing>();dressing.game=this;
@@ -172,7 +174,7 @@ namespace Sunward
             if(Presentation && Presentation.SkipHandledFrame==Time.frameCount)return;
             if(CinematicActive)
             {
-                if(Player.input.Pause.WasPressedThisFrame()){if(BossTransformation && BossTransformation.Playing)BossTransformation.Skip();else if(Presentation && Presentation.Playing)Presentation.Skip();else if(Transformation)Transformation.Skip();}
+                if(Player.input.Pause.WasPressedThisFrame()){if(Ultimate && Ultimate.Playing)Ultimate.Skip();else if(BossTransformation && BossTransformation.Playing)BossTransformation.Skip();else if(Presentation && Presentation.Playing)Presentation.Skip();else if(Transformation)Transformation.Skip();}
                 return;
             }
             if (Time.unscaledTime > messageUntil)
@@ -389,6 +391,7 @@ namespace Sunward
             Close();
             ClearEnemies();
             Sunward.Remaster.LowerArena.TrialStarted();
+            if(Ultimate)Ultimate.ResetFight();
             InTrial = true;BossTrial=false;Player.Locked=false;
             Combat.Equip();
             Wave = 0;
@@ -410,6 +413,7 @@ namespace Sunward
             if(InTrial || Health<=0 || !Sunward.Remaster.LowerArena.Inside(Player.transform.position))return;
             var spec=System.Array.Find(spirits,e=>e.id=="boss");
             if(!spec){Notify("Crimson Helm definition unavailable");return;}
+            if(Ultimate)Ultimate.ResetFight();
             ClearEnemies();BossTrial=InTrial=true;waiting=false;Wave=0;runCoins=runXp=0;
             Health=MaxHealth;Stamina=MaxStamina;Energy=MaxEnergy;Combat.Cancel();Combat.Equip();
             var obj=new GameObject(spec.title);Vector3 p=Sunward.Remaster.LowerArena.Centre+new Vector3(16,1,8);
@@ -463,6 +467,8 @@ namespace Sunward
             Profile.coins += coins;
             Profile.xp += xp;
             Profile.kills++;
+            Sunward.Remaster.AwakeningProgress.Record(this,"kill");
+            if(Profile.equipped=="wp2be")Health=Mathf.Min(MaxHealth,Health+5);
             runCoins += coins;
             runXp += xp;
             Save.Save();
@@ -496,7 +502,7 @@ namespace Sunward
         {
             if (!InTrial)
                 return;
-            bool bossEncounter=BossTrial;InTrial=false;BossTrial=false;waiting=false;
+            bool bossEncounter=BossTrial;if(win){Sunward.Remaster.AwakeningProgress.Record(this,bossEncounter?"boss":"trial");Audio.VictoryMusic(bossEncounter);}InTrial=false;BossTrial=false;waiting=false;
             if(BossTransformation)BossTransformation.Cancel();
             Player.Locked=Health<=0;
             Combat.Cancel();
@@ -529,6 +535,7 @@ namespace Sunward
 
         public void ReturnHome()
         {
+            if(Ultimate)Ultimate.Cancel();
             var digging=GetComponent<Sunward.Remaster.VillageLife>();if(digging)digging.CancelDig();
             InTrial=false;BossTrial=false;
             if(BossTransformation)BossTransformation.Cancel();

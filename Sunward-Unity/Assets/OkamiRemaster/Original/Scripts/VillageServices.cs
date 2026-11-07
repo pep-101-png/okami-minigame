@@ -67,7 +67,7 @@ namespace Sunward.Remaster
             game.Player.animationView.Play("Sit",.18f,0,true);game.Notify("Rest quietly · E or movement to stand");
             yield return null;
             while(!game.Player.input.Interact.WasPressedThisFrame() && !game.Player.input.Jump.WasPressedThisFrame() && !game.Player.input.Pause.WasPressedThisFrame() && game.Player.input.Move.ReadValue<Vector2>().sqrMagnitude<.1f)
-            {game.Health=Mathf.Min(game.MaxHealth,game.Health+Time.deltaTime*3);yield return null;}
+            {game.Health=Mathf.Min(game.MaxHealth,game.Health+Time.deltaTime*3);game.Stamina=Mathf.Min(game.MaxStamina,game.Stamina+Time.deltaTime*20);yield return null;}
             game.Player.Locked=false;game.Player.animationView.Play("Idle_Natural",.15f,0,true);
             game.Combat.Rest(false);Resting=false;
         }
