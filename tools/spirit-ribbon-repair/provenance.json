@@ -1,0 +1,24 @@
+[
+  {
+    "original": "es4a",
+    "derived": "es4a-flow",
+    "sourceSHA256": "3c7bd714ef474826ff9d16914741fa1e7ce5eabc007f78806c82a25bf4d25153",
+    "mesh": [
+      {
+        "vertices": 2012,
+        "triangles": 3024
+      }
+    ]
+  },
+  {
+    "original": "es4b",
+    "derived": "es4b-flow",
+    "sourceSHA256": "3c7bd714ef474826ff9d16914741fa1e7ce5eabc007f78806c82a25bf4d25153",
+    "mesh": [
+      {
+        "vertices": 2012,
+        "triangles": 3024
+      }
+    ]
+  }
+]

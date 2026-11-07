@@ -1,0 +1,40 @@
+{
+  "status": "Implemented except exact sound replacement identities awaiting user listening choices",
+  "unityImportTested": false,
+  "unityPlayModeTested": false,
+  "engineDoubles": true,
+  "checks": {
+    "compile": [
+      "PASS 96 full-power reveal/skip/control/size, native idle tendril motion, layered attack voice and evolution migration checks; engine doubles, not Unity",
+      "PASS 51 actual torii return, third-form-only seamless ribbons, quiet music crossfade and persistent category-volume contracts; engine doubles, not Unity",
+      "PASS 13 festival reward/harvest/cancel/time contracts; engine doubles",
+      "PASS 23 current-win shaft, spring health/expiry, native rest, brush-gesture and dialogue input contracts; engine doubles",
+      "PASS 38 garden boundary/altar progression, cinematic shaft timing/skip and thirteen-checkpoint race contracts; engine doubles",
+      "PASS 15 actual keeper dialogue/E-input ordering and shared interior/heaven visibility, including moving world-space effects checks; engine doubles, not Unity",
+      "PASS 31 real evolution ownership/save, reward cancellation/re-entry/death and pond classification checks; engine doubles, not Unity",
+      "PASS 17 palace entry/exit, realm isolation, elemental colour and shallow pond sitting checks; engine doubles, not Unity",
+      "PASS 21 real dialogue advance/reopen/resize and audio realm routing checks; engine doubles, not Unity",
+      "PASS 778 actual native glyph-metric layout/clipping contracts; engine doubles, not Unity screenshots",
+      "PASS 49 actual time-cycle, home buff, final-boss victory/howl and cinematic skip checks at 15/30/60/120fps; engine doubles, not Unity",
+      "PASS 918 actual three-phase boss/native director checks, stun resistance, first/middle/final deaths, 1x/2x/4x scaling, fire/armour visibility, skip/cancel and paused motion at 15/30/60/120fps. Engine doubles, NOT Unity."
+    ],
+    "combat": [
+      "PASS 65 actual WolfCombat normal/heavy hold, release recovery, charged explosion and interrupt checks at 15/30/60/120fps; engine doubles, not Unity"
+    ],
+    "saves": [
+      "PASS 20 real SaveStore file/slot/backup/corruption/legacy-profile checks in an isolated temporary directory; JsonUtility uses a .NET test adapter, not Unity"
+    ],
+    "preservation": [
+      "PASS 5496 native preservation/import/source-placement contracts. Assets packaging requested; original audio identification pending; Unity runtime unverified."
+    ]
+  },
+  "assetIntegrityChecks": 400,
+  "offlineVisuals": [
+    "four-angle native weapon assemblies",
+    "four full-power ribbon motion samples",
+    "original soil paint and mesh relief"
+  ],
+  "audioBindingsChanged": false,
+  "audioAlternativesAssigned": false,
+  "audioReview": "Separate exact-waveform listening pack, original recordings only"
+}

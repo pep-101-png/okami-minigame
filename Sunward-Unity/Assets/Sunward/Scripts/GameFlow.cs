@@ -18,10 +18,10 @@ namespace Sunward
         public ProfileData Profile => Save.Data;
 
         public float Health, Stamina, Energy;
-        public int MaxHealth => ProgressionRules.MaxHp(Profile)+(Spa?Spa.Bonus:0);
+        public int MaxHealth => ProgressionRules.MaxHp(Profile)+(Spa?Spa.Bonus:0)+Sunward.Remaster.HomeBlessings.HealthBonus(Profile,Sunward.Remaster.HomeBlessings.Now);
         public Sunward.Remaster.VillagePresentation Presentation {get;private set;}
         public Sunward.Remaster.SpaRest Spa {get;private set;}
-        public float MaxStamina => 100 + Profile.upgrades.stamina * 15;
+        public float MaxStamina => 100 + Profile.upgrades.stamina * 15+Sunward.Remaster.HomeBlessings.StaminaBonus(Profile,Sunward.Remaster.HomeBlessings.Now);
         public float MaxEnergy => 80 + Profile.upgrades.energy * 15;
 
         public readonly List<EnemyBrain> Enemies = new List<EnemyBrain>();
@@ -97,6 +97,11 @@ namespace Sunward
             var farmLayout=GetComponent<Sunward.Remaster.VillageFarm>();if(!farmLayout)farmLayout=gameObject.AddComponent<Sunward.Remaster.VillageFarm>();farmLayout.game=this;
             var challenges=GetComponent<Sunward.Remaster.FestivalChallenges>();if(!challenges)challenges=gameObject.AddComponent<Sunward.Remaster.FestivalChallenges>();challenges.game=this;
             var streetPlay=GetComponent<Sunward.Remaster.VillageStreetPlay>();if(!streetPlay)streetPlay=gameObject.AddComponent<Sunward.Remaster.VillageStreetPlay>();streetPlay.game=this;
+            gameObject.AddComponent<Sunward.Remaster.HomeBlessings>().game=this;
+            gameObject.AddComponent<Sunward.Remaster.VillageDayCycle>().game=this;
+            gameObject.AddComponent<Sunward.Remaster.HomeWeaponDisplay>().game=this;
+            gameObject.AddComponent<Sunward.Remaster.MemoryMirrorMenu>().game=this;
+            gameObject.AddComponent<Sunward.Remaster.VillagePolish>().game=this;
             Health = MaxHealth;
             Stamina = MaxStamina;
             Energy = MaxEnergy;
@@ -143,6 +148,7 @@ namespace Sunward
         public void SetPanel(string panel)
         {
             if(Health<=0 && panel!="result")return;
+            if(panel!=Panel && panel!="" && panel!="title" && panel!="dialogue" && panel!="elder" && panel!="tea" && panel!="result" && Audio)Audio.Cue("menu-open");
             Panel = panel;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -163,9 +169,10 @@ namespace Sunward
         void Update()
         {
             Time.timeScale = (CinematicActive || Panel == "pause" || (Brush && Brush.Drawing)) ? 0 : Time.unscaledTime < hitUntil ? .08f : 1;
+            if(Presentation && Presentation.SkipHandledFrame==Time.frameCount)return;
             if(CinematicActive)
             {
-                if(Player.input.Pause.WasPressedThisFrame()){if(BossTransformation && BossTransformation.Playing)BossTransformation.Skip();else if(Transformation)Transformation.Skip();}
+                if(Player.input.Pause.WasPressedThisFrame()){if(BossTransformation && BossTransformation.Playing)BossTransformation.Skip();else if(Presentation && Presentation.Playing)Presentation.Skip();else if(Transformation)Transformation.Skip();}
                 return;
             }
             if (Time.unscaledTime > messageUntil)
@@ -221,6 +228,8 @@ namespace Sunward
             if(Sunward.Remaster.VillageInteriors.AnyRoom(Player.transform.position) && action=="")Prompt="Walk through the entrance to return to the village";
             if(action.StartsWith("interior:"))Prompt=Sunward.Remaster.VillageInteriors.Inside(Player.transform.position)?"E · Leave the building":"E · Enter Amaterasu’s house";
             if(action.StartsWith("home:"))Prompt="E · "+(action.EndsWith(":exit")?"Leave home":"Enter village home");
+            if(action=="home-fire")Prompt="E · Sit by the fire · +50 stamina for five minutes";
+            if(action=="home-weapon")Prompt="E · Cycle your unlocked divine instruments";
             if(action=="festival")Prompt="E · Festival challenges & decorations";
             if (action.StartsWith("venue:")) Prompt = Sunward.Remaster.VillageServices.Label(action,Player.transform.position);
             if (Player.input.Interact.WasPressedThisFrame() && !Home.Active)
@@ -230,6 +239,10 @@ namespace Sunward
                     case "festival":
                         SetPanel("festival");
                         break;
+                    case "home-fire":
+                        GetComponent<Sunward.Remaster.HomeBlessings>().SitByFire();break;
+                    case "home-weapon":
+                        GetComponent<Sunward.Remaster.HomeWeaponDisplay>().Cycle();break;
                     case "bed":
                         Home.Begin();
                         break;
@@ -508,7 +521,7 @@ namespace Sunward
             if(win && bossEncounter)
             {
                 Sunward.Remaster.LowerArena.BossDefeated();
-                Close();Player.StopMotion();Player.animationView.Play("Bark",.12f,1.93f,true);Audio.VictoryHowl();
+                Close();Presentation.BossVictory();
             }
             else if(win){Close();Notify("Trial complete · rewards saved");}
             else SetPanel("result");

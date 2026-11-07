@@ -1,0 +1,44 @@
+{
+  "path": "/workspace/work/trailer30/Sunward-30s-Cinematic-Trailer-1080p60-2026-11-06.mp4",
+  "bytes": 37635015,
+  "sha256": "03f2a9830720d2029be08374f346f7140c5d1a0906d994373bca1cb8d77c7550",
+  "width": 1920,
+  "height": 1080,
+  "fps": 60,
+  "frames": 1800,
+  "duration": 30,
+  "audioChannels": 2,
+  "sourceCommit": "fe99c7e921a74c079b0a283a16c4453e8747bcc6",
+  "type": "Standalone offline cinematic, not recorded Unity gameplay",
+  "fullDecode": "passed",
+  "reviewFrames": [
+    75,
+    210,
+    330,
+    435,
+    540,
+    684,
+    810,
+    912,
+    1050,
+    1194,
+    1362,
+    1450,
+    1620,
+    1740
+  ],
+  "renderedFrameRanges": [
+    [
+      0,
+      1344
+    ],
+    [
+      1345,
+      1799
+    ]
+  ],
+  "nativeFrameRendering": true,
+  "videoMotionInterpolation": false,
+  "visualReview": "All 14 shots inspected from the encoded MP4",
+  "audioProvenance": "Existing original-source project recordings, see audio receipt"
+}

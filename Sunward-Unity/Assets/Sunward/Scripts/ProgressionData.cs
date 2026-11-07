@@ -82,6 +82,8 @@ namespace Sunward
         };
         public UpgradeLevels upgrades = new UpgradeLevels();
         public bool shrine, night;
+        public double dayElapsed;public float playSeconds;
+        public long bedBlessingUntil,fireBlessingUntil;
         public string[] collectibles = Array.Empty<string>(), windflowers = Array.Empty<string>();
         public Milestones milestones = new Milestones();
     }
@@ -176,6 +178,7 @@ namespace Sunward
 
         public static bool Validate(ProfileData p)
         {
+            Sunward.Remaster.OriginalWeaponEvolution.Normalize(p);
             if (p == null || (p.version != 1 && p.version != 2) || p.coins < 0 || p.xp < 0 || p.wins < 0 || p.defeats < 0 || p.revision < 0 || p.upgrades == null || p.owned == null || Array.IndexOf(p.owned, "spear") < 0 || Array.IndexOf(p.owned, p.equipped) < 0)
                 return false;
             for (int i = 0; i < Upgrades.Length; i++)

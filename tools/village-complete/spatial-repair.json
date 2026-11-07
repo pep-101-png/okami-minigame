@@ -1,0 +1,26 @@
+{
+  "removedHouseBehindDojo": [
+    8000000000000005219,
+    8000000000000005223,
+    8000000000000005227,
+    8000000000000005231,
+    8000000000000013150,
+    8000000000000013154,
+    8000000000000013158,
+    8000000000000013162
+  ],
+  "rotatedHouseByBoarPen": [
+    8000000000000005235,
+    8000000000000005239,
+    8000000000000005243
+  ],
+  "rotationDegrees": -90,
+  "newDoorFacing": "South, toward the open village approach",
+  "retiredCollisionGo": 1808887473,
+  "relocatedCollisionGo": 1166610200,
+  "relocatedHouse13Delta": [
+    7.89,
+    0.0,
+    15.0
+  ]
+}

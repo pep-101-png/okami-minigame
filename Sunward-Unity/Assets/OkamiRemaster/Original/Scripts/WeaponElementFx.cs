@@ -29,14 +29,9 @@ namespace Sunward.Remaster
         {
             if(charged && game.Player && game.Player.valley)point.y=game.Player.valley.Height(point)+.04f;
             var root=new GameObject(charged?"Original Thunder Edge · charged thunderstrike":"Original Thunder Edge · lightning contact");root.transform.position=point;
-            for(int i=0;i<(charged?7:3);i++)
-            {
-                bool sky=i==0;float angle=i*51.4f;
-                var bolt=VillageFestival.Place(root.transform,"Okami/thunder-lightning",sky?Vector3.up*(charged?4:1):new Vector3(Mathf.Sin(angle*Mathf.Deg2Rad)*.45f,.15f,Mathf.Cos(angle*Mathf.Deg2Rad)*.45f),sky?new Vector3(.5f,.12f,charged?8:2):new Vector3(.28f,.18f,charged?4.8f:1.2f),sky?new Vector3(90,angle,0):new Vector3(0,angle,0));
-                if(bolt)Tint(bolt,Colour("wp29"));
-            }
-            var lamp=root.AddComponent<Light>();lamp.type=LightType.Point;lamp.color=Colour("wp29");lamp.range=charged?12:4;lamp.intensity=charged?12:4;
-            var life=root.AddComponent<ThunderFlash>();life.life=charged?.65f:.24f;
+            ThunderPainting.Burst(root.transform,Vector3.zero,charged);
+            var lamp=root.AddComponent<Light>();lamp.type=LightType.Point;lamp.color=Colour("wp29");lamp.range=charged?22:7;lamp.intensity=charged?18:6;
+            var life=root.AddComponent<ThunderFlash>();life.life=charged?.9f:.4f;
             if(sound)game.Audio.Cue(charged?"thunder-burst":"thunder-strike");
         }
     }

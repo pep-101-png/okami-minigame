@@ -14,7 +14,7 @@ namespace Sunward
         int selected, lastCount, buttonCount,weaponPage;
         float contentWidth=600;
         bool activate;
-        float nextNavigation;
+        float nextNavigation,volumeNavigation;GUIStyle volumeTrack,volumeThumb;
         string lastPanel = "";
         void Update()
         {
@@ -118,6 +118,7 @@ namespace Sunward
         {
             if (!game || game.Save == null || game.CinematicActive || (game.Brush && game.Brush.Drawing))
                 return;
+            if(game.Panel=="mirror")return;
             if(game.Presentation && (game.Presentation.Title || game.Presentation.Dialogue))return;
             Styles();
             GUI.color = Color.white;
@@ -237,8 +238,15 @@ namespace Sunward
                         Quality(true);
                     if (Button("QUALITY · LIGHTWEIGHT", button))
                         Quality(false);
-                    if (Button("MUTE / UNMUTE", button))
-                        AudioListener.volume = AudioListener.volume > 0 ? 0 : 1;
+                    if (Button("SOUND · VOLUME CONTROLS", button))game.SetPanel("audio");
+                    break;
+                case "audio":
+                    Label("Sound & stillness",title);
+                    VolumeControl("MASTER VOLUME",0,GameAudioSettings.Master);
+                    VolumeControl("MUSIC",1,GameAudioSettings.Music);
+                    VolumeControl("SOUND EFFECTS & VOICES",2,GameAudioSettings.Effects);
+                    Label("Drag the ink markers. Controller: select a row, then press left or right.",small);
+                    if(Button("RETURN",button)){GameAudioSettings.Save();game.SetPanel("pause");}
                     break;
                 case "elder":
                     Label(game.Dialogue,body);
@@ -324,10 +332,10 @@ namespace Sunward
         void Weapons()
         {
             Label("Taro · divine instruments", title);
-            Label(game.Profile.coins + " coins · purchased weapons stay in your save. Q cycles owned weapons in the arena.", body);
+            Label(game.Profile.coins + " coins · purchased weapons stay in your save. Q cycles owned weapons while out of combat.", body);
             if(Button("VILLAGE REQUEST BOARD · goals & rewards",button))game.SetPanel("requests");
             Label("Glaives: sword strikes. Reflectors: broad close-range attacks. Rosaries: bead whips with reach. Hold either attack button to charge; release to strike.",small);
-            var catalogue=Sunward.Remaster.OriginalWeaponCatalog.All;
+            var catalogue=System.Array.ConvertAll(Sunward.Remaster.OriginalWeaponCatalog.All,e=>Sunward.Remaster.OriginalWeaponEvolution.Replaced(game.Profile,e.id)?Sunward.Remaster.OriginalWeaponCatalog.AwakenedThunder:e);
             weaponPage=Mathf.Clamp(weaponPage,0,catalogue.Length-1);var entry=catalogue[weaponPage];
             Label((weaponPage+1)+" / "+catalogue.Length+" · "+entry.title,title);
             var portrait=Resources.Load<Texture2D>("Okami/WeaponPortraits/"+entry.resource);
@@ -342,7 +350,7 @@ namespace Sunward
             {
                 bool awakened=Sunward.Remaster.OriginalWeaponEvolution.Owns(game.Profile);
                 Label(awakened?"AWAKENED · +35% damage · +15% reach":"AWAKENING · Find and dig up the buried chest in the heavenly garden maze.",small);
-                if(awakened && Button(game.Profile.equipped==Sunward.Remaster.OriginalWeaponEvolution.ThunderId?"AWAKENED FORM EQUIPPED":"EQUIP AWAKENED THUNDER EDGE",button))
+                if(awakened && entry.id!=Sunward.Remaster.OriginalWeaponEvolution.ThunderId && Button(game.Profile.equipped==Sunward.Remaster.OriginalWeaponEvolution.ThunderId?"AWAKENED FORM EQUIPPED":"EQUIP AWAKENED THUNDER EDGE",button))
                 {game.Profile.equipped=Sunward.Remaster.OriginalWeaponEvolution.ThunderId;game.Save.Save();game.Combat.Equip();}
             }
             if(Button("PREVIOUS INSTRUMENT",button))weaponPage=(weaponPage+catalogue.Length-1)%catalogue.Length;
@@ -365,6 +373,17 @@ namespace Sunward
         {
             Rect r = GUILayoutUtility.GetRect(width, 7);
             GUI.DrawTexture(new Rect(r.x, r.y, r.width * Mathf.Clamp01(value), r.height), red);
+        }
+
+        void VolumeControl(string label,int channel,float value)
+        {
+            Label(label+" · "+Mathf.RoundToInt(value*100)+"%",body);
+            if(volumeTrack==null){volumeTrack=new GUIStyle(GUI.skin.horizontalSlider);volumeThumb=new GUIStyle(GUI.skin.horizontalSliderThumb);volumeTrack.normal.background=hintInk;volumeTrack.fixedHeight=10;volumeThumb.normal.background=hintInk;volumeThumb.fixedWidth=24;volumeThumb.fixedHeight=30;}
+            int index=buttonCount++;var rect=GUILayoutUtility.GetRect(contentWidth,38);
+            float next=GUI.HorizontalSlider(rect,value,0,1,volumeTrack,volumeThumb);
+            if(index==selected && Gamepad.current!=null && Event.current.type==EventType.Repaint && Time.unscaledTime>=volumeNavigation)
+            {float x=Mathf.Abs(Gamepad.current.dpad.x.ReadValue())>.2f?Gamepad.current.dpad.x.ReadValue():Gamepad.current.leftStick.x.ReadValue();if(Mathf.Abs(x)>.3f){next=Mathf.Clamp01(value+Mathf.Sign(x)*.05f);volumeNavigation=Time.unscaledTime+.16f;}}
+            if(Mathf.Abs(next-value)>.0001f)GameAudioSettings.Set(channel,next);
         }
 
         void Quality(bool high)

@@ -1,0 +1,90 @@
+[
+  {
+    "candidate": "gong A",
+    "archive": "data_pc/se/core/core.ses",
+    "stream": 23,
+    "decodedSHA256": "d2d5e5de08c307adb10cffc27372378fc84e29d0a2a0d4a3909527b39e212165",
+    "identity": "Awaiting listening confirmation"
+  },
+  {
+    "candidate": "gong B",
+    "archive": "data_pc/se/core/core.ses",
+    "stream": 11,
+    "decodedSHA256": "f87adb4b72ed06ba529a0be0e9807adf00c08f4bca4fc041189dab23a6f24703",
+    "identity": "Awaiting listening confirmation"
+  },
+  {
+    "candidate": "thunder A",
+    "archive": "data_pc/se/core/core.ses",
+    "stream": 14,
+    "decodedSHA256": "e8d45debe99f6602f2085fde35ca61b34444526d6bb5ace2112404b1b7871e72",
+    "identity": "Awaiting listening confirmation"
+  },
+  {
+    "candidate": "thunder B",
+    "archive": "data_pc/se/core/core.ses",
+    "stream": 5,
+    "decodedSHA256": "ce98aaed135d2e8082d1d6b19f6d824e812d7d3880b6fe6c6427e5f898111361",
+    "identity": "Awaiting listening confirmation"
+  },
+  {
+    "stream": 0,
+    "source": "data_pc/bgm/bgm00.afs2",
+    "sourceSHA256": "1c3c7104d6071fcdc25366f72b46a3965845a9bdb04df668f847d2ad3aad8184",
+    "sourceVersion": "0x400",
+    "frameScalesDecrypted": false,
+    "decoded": {
+      "rmsDBFS": -17.471,
+      "peak": 0.731567,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -24.0,
+      "peak": 0.346003,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -6.528,
+    "seconds": 62.1831,
+    "clearADX_SHA256": "1c3c7104d6071fcdc25366f72b46a3965845a9bdb04df668f847d2ad3aad8184"
+  },
+  {
+    "stream": 41,
+    "source": "data_pc/bgm/bgm00.afs2",
+    "sourceSHA256": "46be67430316d58213110153c0452ee294df77a2f5d8c567a1e545ef1358cf29",
+    "sourceVersion": "0x400",
+    "frameScalesDecrypted": false,
+    "decoded": {
+      "rmsDBFS": -15.509,
+      "peak": 1.0,
+      "clippedFraction": 2.583e-05
+    },
+    "output": {
+      "rmsDBFS": -24.0,
+      "peak": 0.376364,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -8.491,
+    "seconds": 39.314,
+    "clearADX_SHA256": "46be67430316d58213110153c0452ee294df77a2f5d8c567a1e545ef1358cf29"
+  },
+  {
+    "stream": 66,
+    "source": "data_pc/bgm/bgm00.afs2",
+    "sourceSHA256": "c937a520d0d2751d62ccc7da6f7a67bcf96ec20a4bd2d0d0293405d9f5459b0c",
+    "sourceVersion": "0x400",
+    "frameScalesDecrypted": false,
+    "decoded": {
+      "rmsDBFS": -12.624,
+      "peak": 0.993683,
+      "clippedFraction": 0.0
+    },
+    "output": {
+      "rmsDBFS": -24.0,
+      "peak": 0.268203,
+      "clippedFraction": 0.0
+    },
+    "gainDB": -11.376,
+    "seconds": 63.707,
+    "clearADX_SHA256": "c937a520d0d2751d62ccc7da6f7a67bcf96ec20a4bd2d0d0293405d9f5459b0c"
+  }
+]

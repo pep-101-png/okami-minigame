@@ -14448,38 +14448,6 @@
       "yaw": 0,
       "kind": "tree",
       "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/et19",
-      "position": {
-        "x": 0,
-        "y": 0.65,
-        "z": -25
-      },
-      "size": {
-        "x": 1.2,
-        "y": 2.3,
-        "z": 0.35
-      },
-      "kind": "prop",
-      "yaw": 180,
-      "absoluteHeight": false
-    },
-    {
-      "resource": "Okami/vt0a",
-      "position": {
-        "x": 0,
-        "y": 0,
-        "z": -25
-      },
-      "size": {
-        "x": 1.5,
-        "y": 0.55,
-        "z": 1.2
-      },
-      "kind": "prop",
-      "yaw": 0,
-      "absoluteHeight": false
     }
   ],
   "walks": [

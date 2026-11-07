@@ -2,6 +2,7 @@ Shader "Sunward/Recovered Continuous Ground"
 {
  Properties
  {
+  _CliffTex("Recovered cliff painting",2D)="white"{}
   _GrassTex("Recovered grass painting",2D)="white"{}
   _EarthTex("Recovered earth painting",2D)="white"{}
   _LayoutMask("Existing roads and riverbanks",2D)="black"{}
@@ -26,7 +27,7 @@ Shader "Sunward/Recovered Continuous Ground"
    #pragma multi_compile_fog
    #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
    #include "../../Village/Demo/Shaders/VillageLighting.hlsl"
-   TEXTURE2D(_GrassTex); SAMPLER(sampler_GrassTex);
+   TEXTURE2D(_GrassTex); SAMPLER(sampler_GrassTex);TEXTURE2D(_CliffTex);SAMPLER(sampler_CliffTex);
    TEXTURE2D(_EarthTex); SAMPLER(sampler_EarthTex);
    TEXTURE2D(_LayoutMask); SAMPLER(sampler_LayoutMask);
    CBUFFER_START(UnityPerMaterial)
@@ -49,8 +50,7 @@ Shader "Sunward/Recovered Continuous Ground"
    half4 Frag(V i):SV_Target
    {
     UNITY_SETUP_INSTANCE_ID(i);
-    // River-mouth chasm: retain both banks and expose the original waterfall below.
-    if(i.world.z>36 && abs(i.world.x+22.0)<3.3)clip(-1);
+    // Continuous sculpted terrain owns the river gorge; never cut a rectangular void.
     float2 uv=i.world.xz;
     // Full paintings, mirrored at their boundaries by the import sampler.
     // No atlas cells, tiny per-metre repeats, old wash grid or synthetic noise.
@@ -63,6 +63,8 @@ Shader "Sunward/Recovered Continuous Ground"
     float3 normal=normalize(i.normal);
     float slope=1-smoothstep(.58,.85,normal.y);
     half3 paint=lerp(grass,earth,saturate(max(mask.r,max(mask.g,slope))));
+    half3 cliff=SAMPLE_TEXTURE2D(_CliffTex,sampler_CliffTex,lerp(i.world.zy,i.world.xy,abs(normal.z))*.18).rgb;
+    paint=lerp(paint,cliff,slope*step(35.5,i.world.z)*(1-smoothstep(8,11,abs(i.world.x+22))));
     Light light=GetMainLight(i.shadow);
     half shade=saturate(dot(normal,light.direction));
     half3 illumination=SampleSH(normal)*.60+light.color*(.32+.48*shade)*lerp(.65,1,light.shadowAttenuation);

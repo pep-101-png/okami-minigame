@@ -11,7 +11,7 @@ namespace Sunward.Remaster
         public void Bathe()
         {
             if(!game || game.InTrial || game.Blocked || game.Health<=0 || !Near(game.Player.transform.position))return;
-            Remaining=300;bathing=true;
+            Remaining=300;bathing=true;game.Audio.Cue("pond-sit");
             game.Services.RestAt(new Vector3(GardenPond.X+.9f,GardenPond.Water-.34f,GardenPond.Z-.5f),320);
             if(!sparkle){sparkle=OriginalAtmosphere.Create("SpiritGlow",game.Player.transform,Vector3.up*.45f,9,.16f,1.6f,.18f,.8f);if(sparkle){var main=sparkle.main;main.startColor=new Color(.35f,1,.52f,.8f);}}
             game.Notify("Spring blessing · vitality grows as you rest · +25 maximum health for five minutes");

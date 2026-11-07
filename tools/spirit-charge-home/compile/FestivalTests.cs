@@ -76,16 +76,25 @@ static class FestivalTests
   for(int i=0;i<=200;i++)foreach(bool forward in new[]{true,false})
   {var p=VillageStreetPlay.BallPosition(i/200f,forward);Check(p.x>=-1.81f&&p.x<=1.81f&&p.z>=-5.21f&&p.z<=-1.29f&&p.y>=.17f&&p.y<=.25f,"Street ball leaves its safe play area");}
   var audio=new ValleyAudio();var audioType=typeof(ValleyAudio);var flags=BindingFlags.Instance|BindingFlags.NonPublic;
-  foreach(string field in new[]{"music","wind","river","houseMusic","presentationMusic"})audioType.GetField(field,flags).SetValue(audio,new AudioSource());
+  foreach(string field in new[]{"music","wind","river","houseMusic","gardenMusic","palaceMusic","presentationMusic"})audioType.GetField(field,flags).SetValue(audio,new AudioSource());
   audioType.GetField("game",flags).SetValue(audio,game);
   var sounds=(System.Collections.Generic.Dictionary<string,System.Collections.Generic.List<AudioClip>>)audioType.GetField("bank",flags).GetValue(audio);
   sounds["housemusic"]=new System.Collections.Generic.List<AudioClip>{new AudioClip{length=34.7f,name="original melody"}};
   var houseAudio=(AudioSource)audioType.GetField("houseMusic",flags).GetValue(audio);var update=audioType.GetMethod("Update",flags);
   player.transform.position=VillageInteriors.FoodCentre;Time.unscaledDeltaTime=.1f;update.Invoke(audio,null);
   Check(houseAudio.isPlaying&&houseAudio.volume>0&&houseAudio.volume<.01f,"Music enters at full volume");
-  for(int i=0;i<35;i++)update.Invoke(audio,null);Check(Math.Abs(houseAudio.volume-.1f)<.001f,"House music never reaches quiet target");
-  player.transform.position=Vector3.zero;update.Invoke(audio,null);Check(houseAudio.volume>0&&houseAudio.volume<.1f&&houseAudio.isPlaying,"Leaving music house stops abruptly");
-  for(int i=0;i<35;i++)update.Invoke(audio,null);Check(!houseAudio.isPlaying&&houseAudio.volume==0,"House music leaks outside indefinitely");
+  for(int i=0;i<45;i++)update.Invoke(audio,null);Check(Math.Abs(houseAudio.volume-.035f)<.001f,"House music never reaches quiet target");
+  player.transform.position=Vector3.zero;update.Invoke(audio,null);Check(houseAudio.volume>0&&houseAudio.volume<.035f&&houseAudio.isPlaying,"Leaving music house stops abruptly");
+  for(int i=0;i<45;i++)update.Invoke(audio,null);Check(!houseAudio.isPlaying&&houseAudio.volume==0,"House music leaks outside indefinitely");
+  sounds["gardenmusic"]=new System.Collections.Generic.List<AudioClip>{new AudioClip{length=34.7f,name="original garden melody"}};
+  sounds["palacemusic"]=new System.Collections.Generic.List<AudioClip>{new AudioClip{length=62f,name="separate native palace melody"}};
+  var gardenAudio=(AudioSource)audioType.GetField("gardenMusic",flags).GetValue(audio);var palaceAudio=(AudioSource)audioType.GetField("palaceMusic",flags).GetValue(audio);
+  player.transform.position=HeavenlyGarden.Centre;for(int i=0;i<45;i++)update.Invoke(audio,null);
+  Check(gardenAudio.isPlaying&&Math.Abs(gardenAudio.volume-.035f)<.001f&&!houseAudio.isPlaying&&!palaceAudio.isPlaying,"Garden reuses indoor house source or starts palace music");
+  player.transform.position=HeavenlyGarden.PalaceCentre;for(int i=0;i<45;i++)update.Invoke(audio,null);
+  Check(palaceAudio.isPlaying&&Math.Abs(palaceAudio.volume-.014f)<.001f&&!gardenAudio.isPlaying,"Palace lacks its own quiet exclusive music");
+  player.transform.position=VillageInteriors.FoodCentre;for(int i=0;i<45;i++)update.Invoke(audio,null);
+  Check(!palaceAudio.isPlaying&&houseAudio.isPlaying&&!gardenAudio.isPlaying,"Room music leaks across realms");
   var life=new VillageLife{game=game};game.Profile.vegetables=2;int coins=game.Profile.coins;life.GiveProduce();Check(game.Profile.vegetables==1&&game.Profile.coins==coins+5,"Farmer cannot receive one carried/pouch vegetable");
   var tea=new VillageTeaVisit{game=game};string first=tea.Story;tea.NextStory();Check(tea.Story!=first&&first.Contains("Shiranui"),"Tea stories do not advance or lack original lore");
   StreetActorLifecycle.Enabled=true;
