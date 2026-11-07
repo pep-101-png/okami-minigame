@@ -1,0 +1,17 @@
+{
+  "scope": "Actual C# native pose/camera capture with API doubles; offline, not Unity Play Mode",
+  "window": "1.65\u20132.65 seconds",
+  "oldVisibleDegreesPerSecond": [
+    -23.525287017361478,
+    2266.0249340684913
+  ],
+  "newVisibleDegreesPerSecond": [
+    -370.34867066297465,
+    -110.32265287621289
+  ],
+  "oldMinimumTorsoDegreesPerSecond": 25.779269678316844,
+  "newMinimumTorsoDegreesPerSecond": 145.89585318524277,
+  "ascentBeforeHandoffPreserved": true,
+  "releaseLandingPreserved": true,
+  "damageAndAudioTimingPreserved": true
+}
