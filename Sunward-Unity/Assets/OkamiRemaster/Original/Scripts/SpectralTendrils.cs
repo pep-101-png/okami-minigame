@@ -7,16 +7,17 @@ namespace Sunward.Remaster
         const int Segments=40;const float CurveLength=3.8271732f;
         NativeAmaterasu native;NativePaintedRig[] rigs;Material[][] materials;Vector4[][] curves;
         Light aura;float clock;
-        readonly Vector3[] mounts={new Vector3(-.38f,-.02f,-.26f),new Vector3(.42f,.015f,-.34f),new Vector3(-.43f,0,-.48f),new Vector3(.35f,-.035f,-.54f),new Vector3(-.34f,.02f,-.68f),new Vector3(.40f,-.01f,-.75f)};
-        readonly float[] lengths={.76f,.94f,.82f,.88f,.71f,1.0f};
-        readonly float[] rates={.85f,1.08f,.94f,.77f,1.16f,.89f};
-        readonly float[] phases={.43f,1.91f,3.72f,5.16f,7.88f,10.37f};
-        readonly float[] headings={-3f,4.5f,1f,-5f,6f,-1.5f};
-        readonly float[] breadth={.62f,.55f,.74f,.58f,.68f,.51f};
+        readonly Vector3[] mounts={new Vector3(-.38f,-.02f,-.26f),new Vector3(.42f,.015f,-.34f),new Vector3(-.43f,0,-.48f),new Vector3(.35f,-.035f,-.54f),new Vector3(-.34f,.02f,-.68f),new Vector3(.40f,-.01f,-.75f),new Vector3(-.30f,.08f,-.38f),new Vector3(.29f,.06f,-.59f),new Vector3(-.41f,-.03f,-.79f),new Vector3(.37f,.09f,-.43f)};
+        readonly float[] lengths={.76f,.94f,.82f,.88f,.71f,1.0f,.43f,.58f,1.14f,.65f};
+        readonly float[] rates={.85f,1.08f,.94f,.77f,1.16f,.89f,1.03f,.81f,.96f,1.12f};
+        readonly float[] phases={.43f,1.91f,3.72f,5.16f,7.88f,10.37f,12.19f,14.63f,17.31f,19.82f};
+        readonly float[] headings={-3f,4.5f,1f,-5f,6f,-1.5f,2.7f,-4.2f,5.3f,-2.4f};
+        readonly float[] breadth={.62f,.55f,.74f,.58f,.68f,.51f,.57f,.66f,.60f,.72f};
+        readonly float[] widths={1f,1f,1f,1f,1f,1f,.65f,.80f,1.15f,.70f};
         void Start(){native=GetComponent<NativeAmaterasu>();}
         void Build()
         {
-            rigs=new NativePaintedRig[6];materials=new Material[6][];curves=new Vector4[6][];
+            rigs=new NativePaintedRig[lengths.Length];materials=new Material[lengths.Length][];curves=new Vector4[lengths.Length][];
             var shader=Resources.Load<Material>("Okami/Effects/SpiritRibbon").shader;
             for(int i=0;i<rigs.Length;i++)
             {
@@ -24,7 +25,7 @@ namespace Sunward.Remaster
                 var renderers=rigs[i].Root.GetComponentsInChildren<SkinnedMeshRenderer>();materials[i]=new Material[renderers.Length];
                 for(int k=0;k<renderers.Length;k++)
                 {
-                    var renderer=renderers[k];var material=renderer.sharedMaterial;material.shader=shader;material.SetColor("_Tint",new Color(.92f,.95f,1,.38f));material.SetFloat("_CurveLength",CurveLength);renderer.updateWhenOffscreen=true;renderer.localBounds=new Bounds(Vector3.zero,new Vector3(14,10,14));materials[i][k]=material;
+                    var renderer=renderers[k];var material=renderer.sharedMaterial;material.shader=shader;material.SetColor("_Tint",new Color(.92f,.95f,1,.38f));material.SetFloat("_CurveLength",CurveLength);material.SetFloat("_StrandWidth",widths[i]);renderer.updateWhenOffscreen=true;renderer.localBounds=new Bounds(Vector3.zero,new Vector3(14,10,14));materials[i][k]=material;
                 }
             }
             var lamp=new GameObject("Original full-power wisp radiance");lamp.transform.SetParent(transform,false);lamp.transform.localPosition=Vector3.up*1.2f;aura=lamp.AddComponent<Light>();aura.type=LightType.Point;aura.range=5;aura.shadows=LightShadows.None;aura.color=new Color(.8f,.9f,1);aura.intensity=.4f;

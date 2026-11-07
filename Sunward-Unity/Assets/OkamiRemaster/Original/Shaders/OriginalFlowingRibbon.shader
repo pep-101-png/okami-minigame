@@ -1,6 +1,6 @@
 Shader "Sunward/Original Flowing Spirit Ribbon"
 {
-    Properties { _MainTex("Original ES paint",2D)="white"{} _Tint("Spirit pigment",Color)=(.92,.95,1,.38) _CurveLength("Original strand length",Float)=3.8271732 }
+    Properties { _MainTex("Original ES paint",2D)="white"{} _Tint("Spirit pigment",Color)=(.92,.95,1,.38) _CurveLength("Original strand length",Float)=3.8271732 _StrandWidth("Individual strand width",Float)=1 }
     SubShader
     {
         Tags { "RenderType"="Transparent" "Queue"="Transparent" "RenderPipeline"="UniversalPipeline" }
@@ -13,7 +13,7 @@ Shader "Sunward/Original Flowing Spirit Ribbon"
             #pragma vertex vert
             #pragma fragment frag
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-            TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);half4 _Tint;float _CurveLength;float4 _CurvePoints[41];
+            TEXTURE2D(_MainTex); SAMPLER(sampler_MainTex);half4 _Tint;float _CurveLength;float _StrandWidth;float4 _CurvePoints[41];
             struct A { float4 p:POSITION;float2 uv:TEXCOORD0;half4 color:COLOR; };
             struct V { float4 p:SV_POSITION;float3 n:TEXCOORD1;float3 world:TEXCOORD2;float2 uv:TEXCOORD0;half4 color:COLOR; };
             float3 Curve(float u)
@@ -26,7 +26,7 @@ Shader "Sunward/Original Flowing Spirit Ribbon"
             {
                 V o;float u=saturate(i.p.z/_CurveLength);float3 tangent=normalize(Curve(min(1,u+.002))-Curve(max(0,u-.002)));
                 float3 right=normalize(cross(float3(0,1,0),tangent)),up=cross(tangent,right);
-                float width=.9+2.1*sin(u*3.14159265);
+                float width=(.9+2.1*sin(u*3.14159265))*_StrandWidth;
                 float3 p=Curve(u)+(right*i.p.x+up*i.p.y)*width;
                 float2 radial=length(i.p.xy)>.00001?normalize(i.p.xy):float2(1,0);float3 n=right*radial.x+up*radial.y;
                 o.world=TransformObjectToWorld(p);o.p=TransformWorldToHClip(o.world);o.n=TransformObjectToWorldNormal(n);o.uv=i.uv;o.color=i.color;return o;

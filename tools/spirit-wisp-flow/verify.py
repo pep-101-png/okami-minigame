@@ -35,7 +35,7 @@ body=json.loads((D/'es3a/Model.json').read_text());bodybank=pose_bank(A/'OkamiRe
 bindings=json.loads((A/'OkamiRemaster/Player/Resources/NativePlayer/Bindings.json').read_text())['bindings'];run=next(b['clip'] for b in bindings if b['state'].startswith('Sprint'));howl=next(b['clip'] for b in bindings if b['state']=='Bark');closest=999
 source=(A/'OkamiRemaster/Original/Scripts/SpectralTendrils.cs').read_text()
 def values(name):return [float(v.strip().rstrip('f')) for v in re.search(r'float\[\] '+name+r'=\{([^}]+)',source)[1].split(',')]
-lengths,rates,phases,headings,breadth=[values(k) for k in ['lengths','rates','phases','headings','breadth']]
+lengths,rates,phases,headings,breadth,widths=[values(k) for k in ['lengths','rates','phases','headings','breadth','widths']]
 mounts=[np.array([float(v.strip().rstrip('f')) for v in row.split(',')]) for row in re.findall(r'new Vector3\(([^)]+)\)',re.search(r'Vector3\[\] mounts=\{([^}]+)',source)[1])]
 def deform(i,time):
  point=np.zeros(3);control=[point.copy()];step=3.8271732/40
@@ -45,17 +45,17 @@ def deform(i,time):
  control=np.array(control)
  def curve(u):
   f=np.clip(u,0,1)*40;k=np.minimum(39,np.floor(f).astype(int));t=(f-k)[:,None];a=control[np.maximum(0,k-1)];b=control[k];c=control[k+1];d=control[np.minimum(40,k+2)];return .5*(2*b+(-a+c)*t+(2*a-5*b+4*c-d)*t*t+(-a+3*b-3*c+d)*t*t*t)
- v=np.array(part['positions']).reshape(-1,3);u=np.clip(v[:,2]/3.8271732,0,1);tangent=curve(np.minimum(1,u+.002))-curve(np.maximum(0,u-.002));tangent/=np.linalg.norm(tangent,axis=1,keepdims=True);right=np.cross([0,1,0],tangent);right/=np.linalg.norm(right,axis=1,keepdims=True);up=np.cross(tangent,right);width=.9+2.1*np.sin(u*np.pi)
+ v=np.array(part['positions']).reshape(-1,3);u=np.clip(v[:,2]/3.8271732,0,1);tangent=curve(np.minimum(1,u+.002))-curve(np.maximum(0,u-.002));tangent/=np.linalg.norm(tangent,axis=1,keepdims=True);right=np.cross([0,1,0],tangent);right/=np.linalg.norm(right,axis=1,keepdims=True);up=np.cross(tangent,right);width=(.9+2.1*np.sin(u*np.pi))*widths[i]
  return curve(u)+(right*v[:,0,None]+up*v[:,1,None])*width[:,None]
 maximumBend=0
 for bodyclip in ['pl00_000',run,'pl00_523',howl]:
  for t in [.1,.4,.8]:
   mats=matrices(body,sample(bodybank,bodyclip,t));torso=mats[1][:3,3]*1.2;head=mats[8][:3,3]*1.2
-  for i in range(6):
+  for i in range(len(lengths)):
    origin=torso+mounts[i];angle=np.deg2rad(180+headings[i]);rot=np.array([[np.cos(angle),0,np.sin(angle)],[0,1,0],[-np.sin(angle),0,np.cos(angle)]])
    for time in [0,.7,1.8,3.4,5.9]:
     points=deform(i,time)[visible]@(rot*lengths[i]).T+origin;check(np.isfinite(points).all(),'Nonfinite shader deformation');distance=np.linalg.norm((points-head)/np.array([.32,.34,.36]),axis=1).min();closest=min(closest,float(distance));check(distance>1,'Visible wisp crosses head volume')
-for name in ['lengths','rates','phases','headings','breadth']:check(len(set(values(name)))==6,'Paired profiles remain')
+for name in ['lengths','rates','phases','headings','breadth']:check(len(set(values(name)))==len(lengths),'Paired profiles remain')
 
 shader=(A/'OkamiRemaster/Original/Shaders/OriginalFlowingRibbon.shader').read_text();check('Blend SrcAlpha OneMinusSrcAlpha' in shader and 'saturate(paint.rgb' in shader,'Unbounded additive glare remains');check('sqrt(saturate(energy))' in shader,'Native additive fade becomes opaque black');check('native.Torso.position' in (A/'OkamiRemaster/Original/Scripts/SpectralTendrils.cs').read_text(),'Mount regressed to weapon/head socket')
 sys.path.insert(0,'/workspace/work/csharp-syntax');import tree_sitter,tree_sitter_c_sharp
