@@ -1,0 +1,94 @@
+[
+  {
+    "output": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/Effects/SolarBlast.png",
+    "original": "bafooon",
+    "sourceSHA256": "6e31b21515bc857e2fdd00714d992e3641d38e73c2f59f6a5184547bd4f37eb3",
+    "pixelSHA256": "51e19b81add3ac9e7751a87d25958375322c6f7fbeee25260e85768e7675a00b"
+  },
+  {
+    "output": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/Effects/ImpactDust.png",
+    "original": "sand_01",
+    "sourceSHA256": "7813a27483e98d7ee25bb872c7474f9e3a5f13be1b9810aebd9a71b0e0ed2e83",
+    "pixelSHA256": "0cd67b1cb3eaf0803b542f7f8957da5994f5d76c539a430125e2a9e15f76ca97"
+  },
+  {
+    "output": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/Effects/ImpactRocks.png",
+    "original": "rcok_gray",
+    "sourceSHA256": "7b4172a84cd5dbe2961106b0ff5a7492b8104a7e9391dc55d507c4bb89f314e9",
+    "pixelSHA256": "e9747dae8193c430c6301681bcaa30c93febe738916743cbe93eb464dd23d272"
+  },
+  {
+    "output": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/Effects/SolarPuff.png",
+    "original": "kemuri_01",
+    "sourceSHA256": "d239a72beaf3e1d1cb9b83c50af20abf9538bd40579282f5d8a4480915deea62",
+    "pixelSHA256": "634608ecbbdfbc2f510e012b42870afec87817b56b6ecb4f2d316241e1fd478d"
+  },
+  {
+    "output": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/Effects/SolarFlare.png",
+    "original": "fire_02",
+    "sourceSHA256": "0fc3f267295fba3449c7f7969b184fa4437f6704a3c99319705c3dc7513a2451",
+    "pixelSHA256": "1e28e34fb57adb4811d381cfa65a14a78364158039fc95d1619b675daab2fd82"
+  },
+  {
+    "output": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/Effects/SolarGlow.png",
+    "original": "circleLight",
+    "sourceSHA256": "dd94eace60713d3ee66c6121ef2e45d0c0ec15d1d36e8e75d2df6ef9eb881f02",
+    "pixelSHA256": "b4d314c12dbba4c966d13d68097129ff95eea8fdcbd3780760320a96b48b1ded"
+  },
+  {
+    "output": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/SelectedAudio/SolarDetonation.wav",
+    "layers": [
+      {
+        "cue": "imp-em02-203",
+        "path": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/ImpAudio/imp-em02-203.wav",
+        "sha256": "52016cf1c4def4c75902fb7bac095bdcf96aa522eb204239bc81bacf915d488e",
+        "pitch": 0.64,
+        "gain": 0.85,
+        "delay": 0
+      },
+      {
+        "cue": "heavy-impact",
+        "path": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/heavy-impact-21.wav",
+        "sha256": "aee68109aac223200ac1d08c986e0167bbad6ffd62a3527217e9e1ab9ece15a1",
+        "pitch": 0.8,
+        "gain": 0.55,
+        "delay": 0
+      },
+      {
+        "cue": "weapon-wp24-heavy",
+        "path": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/weapon-wp24-heavy-0.wav",
+        "sha256": "babf95d6187b5bf25ad9c9db6d0c9bf7c43b0a758dc2dda6e72602806860c27c",
+        "pitch": 0.93,
+        "gain": 0.55,
+        "delay": 0.035
+      }
+    ],
+    "masterGain": 2.233076614430239,
+    "peak": 0.9,
+    "sha256": "302eacebfecbd75a89f3d8b72a74aead2eebe0ca9d2d5cfbaa51e3e4140700c5"
+  },
+  {
+    "output": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/SelectedAudio/DivineSwordImpact.wav",
+    "layers": [
+      {
+        "cue": "imp-em02-203",
+        "path": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/ImpAudio/imp-em02-203.wav",
+        "sha256": "52016cf1c4def4c75902fb7bac095bdcf96aa522eb204239bc81bacf915d488e",
+        "pitch": 0.92,
+        "gain": 0.85,
+        "delay": 0
+      },
+      {
+        "cue": "heavy-impact",
+        "path": "Sunward-Unity/Assets/OkamiRemaster/Original/Resources/Okami/NativeAudio/heavy-impact-21.wav",
+        "sha256": "aee68109aac223200ac1d08c986e0167bbad6ffd62a3527217e9e1ab9ece15a1",
+        "pitch": 1,
+        "gain": 0.65,
+        "delay": 0
+      }
+    ],
+    "masterGain": 3.188850326927645,
+    "peak": 0.9,
+    "sha256": "af370162cd404f21aa221dac0891efe31009e25a0f0d51430e90074d9d8688ff"
+  }
+]

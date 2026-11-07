@@ -39,6 +39,7 @@ namespace Sunward
         }
         public void ReturnCinematic(float blend)
         {
+            if(!target)return;
             cinematicFocus=Vector3.Lerp(cinematicFocus,target.transform.position+Vector3.up*.9f,blend);
             cinematicYaw=Mathf.LerpAngle(cinematicYaw,yaw,blend);cinematicPitch=Mathf.Lerp(cinematicPitch,pitch,blend);
             cinematicDistance=Mathf.Lerp(cinematicDistance,distance,blend);
@@ -46,6 +47,15 @@ namespace Sunward
         }
         public void RotateHeading(float degrees){yaw+=degrees;SnapFocus();}
         public void SnapFocus(){initialized=false;}
+        float shakeStart,shakeDuration,shakeAmplitude;
+        public void Shake(float amplitude,float duration)
+        {shakeStart=Time.unscaledTime;shakeDuration=Mathf.Max(.01f,duration);shakeAmplitude=Mathf.Clamp(amplitude,0,.6f);}
+        Vector3 ShakeOffset()
+        {
+            float t=Time.unscaledTime-shakeStart,u=Mathf.Clamp01(t/Mathf.Max(.01f,shakeDuration));
+            float strength=shakeAmplitude*(1-u)*(1-u);
+            return new Vector3(Mathf.Sin(t*91)+.35f*Mathf.Sin(t*143),Mathf.Sin(t*117)*.7f,0)*strength;
+        }
         void LateUpdate()
         {
             if (!target)
@@ -55,7 +65,7 @@ namespace Sunward
                 Vector3 cinematicOffset=Quaternion.Euler(cinematicPitch,cinematicYaw,0)*Vector3.back*cinematicDistance;
                 if(cinematicCollisions && Physics.SphereCast(cinematicFocus,.18f,cinematicOffset.normalized,out var obstruction,cinematicDistance,1<<6,QueryTriggerInteraction.Ignore))
                     cinematicOffset=cinematicOffset.normalized*Mathf.Max(.4f,obstruction.distance-.2f);
-                virtualCamera.transform.SetPositionAndRotation(cinematicFocus+cinematicOffset,Quaternion.LookRotation(-cinematicOffset));
+                virtualCamera.transform.SetPositionAndRotation(cinematicFocus+cinematicOffset+ShakeOffset(),Quaternion.LookRotation(-cinematicOffset));
                 return;
             }
             var input = target.input;
@@ -85,7 +95,7 @@ namespace Sunward
             if (Physics.SphereCast(focus, .25f, offset.normalized, out var hit, viewDistance, 1 << 6, QueryTriggerInteraction.Ignore))
                 position = focus + offset.normalized * Mathf.Max(.35f, hit.distance - .28f);
             if(indoors)position=Sunward.Remaster.VillageInteriors.CameraPosition(target.transform.position,position);
-            virtualCamera.transform.SetPositionAndRotation(position, Quaternion.LookRotation(focus - position));
+            virtualCamera.transform.SetPositionAndRotation(position+ShakeOffset(), Quaternion.LookRotation(focus - position));
         }
     }
 }

@@ -16,7 +16,6 @@ while level:
  elif flow[c]=='}':level-=1
  c+=1
 s+='\nnamespace Sunward{using UnityEngine;public sealed partial class GameFlow{'+flow[a:c]+'}}'
-s=s.replace('public sealed partial class GameFlow:MonoBehaviour\n {','public sealed partial class GameFlow:MonoBehaviour\n {public Remaster.ShiranuiUltimate Ultimate;')
 s=s.replace('cinematicFlag || (Presentation','cinematicFlag || (Ultimate && Ultimate.Playing) || (Presentation')
 s=s.replace('public class EnemyDefinition:UnityEngine.Object{','public class EnemyDefinition:UnityEngine.Object{public int reward=1,xp=1;')
 s=s.replace('public class WolfInput{','public class WolfInput{public UnityEngine.InputSystem.InputAction Switch=new UnityEngine.InputSystem.InputAction(),Bark=new UnityEngine.InputSystem.InputAction(),Heavy=new UnityEngine.InputSystem.InputAction();')

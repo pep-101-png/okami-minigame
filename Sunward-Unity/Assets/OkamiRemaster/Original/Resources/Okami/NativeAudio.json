@@ -631,6 +631,14 @@
     {
       "cue": "imp-em04-150",
       "resource": "Okami/ImpAudio/imp-em04-150"
+    },
+    {
+      "cue": "solar-detonation",
+      "resource": "Okami/SelectedAudio/SolarDetonation"
+    },
+    {
+      "cue": "divine-sword-impact",
+      "resource": "Okami/SelectedAudio/DivineSwordImpact"
     }
   ]
 }

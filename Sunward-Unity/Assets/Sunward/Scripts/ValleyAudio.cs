@@ -144,7 +144,17 @@ namespace Sunward
             if(!Allow("charged-thunder-impact",.15f))return;var crack=Clip("thunder-strike");var impact=Clip("heavy-impact");if(crack)effects.PlayOneShot(crack,.9f);if(impact)effects.PlayOneShot(impact,.65f);
         }
         public void WeaponRumble(){if(!Allow("weapon-rumble",3))return;var clip=Clip("thunder-strike");if(clip)effects.PlayOneShot(clip,.035f);}
-        public void SolarExplosion(){var impact=Clip("heavy-impact");var fire=Clip("weapon-wp24-heavy");if(impact)effects.PlayOneShot(impact,.9f);if(fire)effects.PlayOneShot(fire,.6f);}
+        AudioSource solarCharge;
+        public void SolarCharge(float heat,bool stop=false)
+        {
+            if(stop){if(solarCharge)solarCharge.Stop();return;}
+            if(heat<=0){if(solarCharge)Level(solarCharge,0);return;}
+            if(!solarCharge){solarCharge=Source(0,true);solarCharge.clip=Clip("flame");solarCharge.loop=true;}
+            if(!solarCharge.isPlaying && solarCharge.clip)solarCharge.Play();
+            solarCharge.pitch=Mathf.Lerp(.65f,1.3f,heat);Level(solarCharge,Mathf.Lerp(.025f,.18f,heat*heat));
+        }
+        public void DivineSwordImpact(){var clip=Clip("divine-sword-impact");if(clip)effects.PlayOneShot(clip,.9f);}
+        public void SolarExplosion(){var clip=Clip("solar-detonation");if(clip){effects.PlayOneShot(clip,.95f);return;}var impact=Clip("heavy-impact");var fire=Clip("weapon-wp24-heavy");if(impact)effects.PlayOneShot(impact,.9f);if(fire)effects.PlayOneShot(fire,.6f);}
         void FadeRoom(AudioSource source,string cue,ref float blend,float target,float rate=.025f)
         {
             if(!source)return;
