@@ -1,0 +1,21 @@
+{
+  "originalComparisons": 189,
+  "sourceModel": "36c42f0bdee030486d4ad9a368bd10eff25da065ccad95fb722f9d3925abadc2",
+  "normalVisibleGroups": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "excludedGroup0": "White effect overlay; not the painted metal blade",
+  "playerAttackSourceHashes": {
+    "520": "c4e26033ec79be1435e7fb379a99f06b5f58cc67cf04743cfc267544fb94eb91",
+    "521": "4def9a8294632ea6946c1be54eb571136d40290569ba5f6c7b1556bb026b3c9d",
+    "522": "23326aa10470d4811af26b9f33a32545e68174fb0616329371800a27fad6ccab",
+    "523": "73edbc2ecf58f33a6002d257e7e7ae0b223115ff4bd0898b4074259debc0fa27",
+    "524": "d5d77bc2ab3cc3743050aa045c282b83b549f04d50481d7dddaef7fd6036f489",
+    "525": "3439921262cf8b9775c273dd5e239ee73d60c0b8365e3ab62aab38fe95f36ca3"
+  },
+  "originalPaintAndMotionBytesUnchanged": true,
+  "unityPlayed": false
+}

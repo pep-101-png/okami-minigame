@@ -53,7 +53,8 @@ namespace Sunward.Remaster
             }
             var extent=hi-lo;Vector3 scale=new Vector3(size.x/Mathf.Max(.001f,extent.x),size.y/Mathf.Max(.001f,extent.y),size.z/Mathf.Max(.001f,extent.z));
             var root=new GameObject("Original native prop "+resource);root.transform.SetParent(parent,false);root.transform.localPosition=position;root.transform.localRotation=Quaternion.Euler(rotation);
-            root.AddComponent<OriginalVisual>().Load(resource,-Vector3.Scale(new Vector3((lo.x+hi.x)*.5f,lo.y,(lo.z+hi.z)*.5f),scale),scale);
+            var visual=root.AddComponent<OriginalVisual>();visual.Load(resource,-Vector3.Scale(new Vector3((lo.x+hi.x)*.5f,lo.y,(lo.z+hi.z)*.5f),scale),scale);
+            if(resource=="Okami/wp28")root.AddComponent<EighthWonderMotion>().visual=visual;
             return root;
         }
         [System.Serializable]sealed class BoundsModel{public BoundsPart[] parts;public int[] visibleGroups;}

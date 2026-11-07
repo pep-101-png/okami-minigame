@@ -28,7 +28,7 @@ namespace Sunward.Remaster
             if(bank.BoneCount!=rig.Bones.Length)throw new InvalidOperationException("Original weapon skeleton mismatch: "+source);
             position=new Vector3[bank.BoneCount];scale=new Vector3[bank.BoneCount];rotation=new Quaternion[bank.BoneCount];
             for(int i=0;i<position.Length;i++){position[i]=rig.Bones[i].localPosition;scale[i]=Vector3.one;rotation[i]=Quaternion.identity;}
-            idle=bank.Find(package+(family=="glaive"?"_001":"_000"));
+            idle=bank.Find(package+(family=="glaive" && package!="wp28"?"_001":"_000"));
             if(idle==null)throw new InvalidOperationException("Original weapon idle is missing: "+source);
             renderers=rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true);
             foreach(var renderer in renderers)
@@ -132,7 +132,7 @@ namespace Sunward.Remaster
         }
         void BladeClearance()
         {
-            if(package!="wp29")return;rig.Root.transform.localPosition=Vector3.zero;
+            if(package!="wp29" && package!="wp28")return;rig.Root.transform.localPosition=Vector3.zero;
             if(!combat || !combat.HoldingCharge)return;
             var body=combat.GetComponent<NativeAmaterasu>();if(!body || !body.Ready || !body.Head)return;
             // Preserve the recovered charge pose. Move only the separate weapon
