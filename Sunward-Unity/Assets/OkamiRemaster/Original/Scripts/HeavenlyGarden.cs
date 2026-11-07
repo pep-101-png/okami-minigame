@@ -106,7 +106,7 @@ namespace Sunward.Remaster
                 if(item.kind=="pond")PondMaterial(prop,item);
                 if(item.resource=="Okami/vtaa")SolidProp(prop,true);
                 else if(item.resource=="Okami/vt4a"){SolidProp(prop);gongs.Add(prop.transform.position);}
-                else if(item.resource=="Okami/heaven-gate")SolidGate(prop);
+                else if(item.resource=="Okami/heaven-gate"){SolidGate(prop);BuildReturnGate(prop.transform);}
 
             }
             BuildMazeBoundaries(layout.mazeWalls);
@@ -201,7 +201,6 @@ namespace Sunward.Remaster
                 {Cancel();if(game.Health>0){garden.SetActive(true);Physics.SyncTransforms();var at=Return+Vector3.forward*5;Height(at,out var y);at.y=y+.05f;game.Player.Teleport(at);visible=true;Shader.SetGlobalFloat("_SunwardHeaven",1);game.Notify("The river opens into a garden above the clouds · follow the altar lights");if(orbit)orbit.SnapFocus();}}
                 return;
             }
-            if(inside && !game.Player.Locked && ReturnGate(game.Player.transform.position))return;
             if(keeperConversation)
             {
                 if(game.Panel=="dialogue")return;
