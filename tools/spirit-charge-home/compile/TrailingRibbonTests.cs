@@ -1,30 +1,33 @@
 using System;using System.Linq;using System.Reflection;using Sunward.Remaster;using UnityEngine;
 static class TrailingRibbonTests
 {
- static int n;static BindingFlags flags=BindingFlags.NonPublic|BindingFlags.Instance;
+ static int n;static BindingFlags f=BindingFlags.NonPublic|BindingFlags.Instance;
  static void Check(bool b,string s){n++;if(!b)throw new Exception(s);}
- static T Get<T>(object o,string name)=>(T)o.GetType().GetField(name,flags).GetValue(o);
- static void Set(object o,string name,object value)=>o.GetType().GetField(name,flags).SetValue(o,value);
- static void Call(object o,string name)=>o.GetType().GetMethod(name,flags).Invoke(o,null);
+ static T Get<T>(object o,string k)=>(T)o.GetType().GetField(k,f).GetValue(o);
+ static void Set(object o,string k,object v)=>o.GetType().GetField(k,f).SetValue(o,v);
+ static void Call(object o,string m)=>o.GetType().GetMethod(m,f).Invoke(o,null);
+ static Vector3 V(Vector4 v)=>new Vector3(v.x,v.y,v.z);
  public static void Run()
  {
   foreach(int fps in new[]{15,30,60,120})
   {
-   var body=new NativeAmaterasu();Call(body,"Awake");body.ApplyPowerForm(2);var effect=new SpectralTendrils();Set(effect,"native",body);Time.unscaledDeltaTime=1f/fps;Time.deltaTime=0;Call(effect,"LateUpdate");var rigs=Get<NativePaintedRig[]>(effect,"rigs");var mounts=Get<Vector3[]>(effect,"mounts");var scales=rigs.Select(r=>r.Root.transform.localScale).ToArray();var bind=rigs.Select(r=>r.Bones.Select(b=>b.localPosition).ToArray()).ToArray();
-   foreach(string field in new[]{"lengths","rates","phases","headings","gains","rolls","bows"})Check(Get<float[]>(effect,field).Distinct().Count()==6,"Paired ribbon profile restored: "+field);
-   float maximum=0;
+   var body=new NativeAmaterasu();Call(body,"Awake");body.ApplyPowerForm(2);var effect=new SpectralTendrils();Set(effect,"native",body);Time.unscaledDeltaTime=1f/fps;Time.deltaTime=0;Call(effect,"LateUpdate");var rigs=Get<NativePaintedRig[]>(effect,"rigs");var mounts=Get<Vector3[]>(effect,"mounts");var scales=rigs.Select(r=>r.Root.transform.localScale).ToArray();
+   foreach(string k in new[]{"lengths","rates","phases","headings","breadth"})Check(Get<float[]>(effect,k).Distinct().Count()==6,"Paired wisp profile "+k);
+   bool moving=false;var before=Get<Vector4[][]>(effect,"curves").Select(row=>row.Select(V).ToArray()).ToArray();
    for(int frame=0;frame<fps*6;frame++)
    {
-    body.Torso.position=new Vector3(frame*.003f,1,0);Call(effect,"LateUpdate");
-    for(int i=0;i<rigs.Length;i++)
+    body.Torso.position=new Vector3(frame*.003f,1,0);Call(effect,"LateUpdate");var curves=Get<Vector4[][]>(effect,"curves");
+    for(int i=0;i<6;i++)
     {
-     Check(Vector3.Distance(rigs[i].Root.transform.position,body.Torso.position+mounts[i])<.0001f,"Ribbon root elastically lags torso");Check(Vector3.Distance(rigs[i].Root.transform.localScale,scales[i])<.0001f,"Ribbon length pulses");
-     foreach(var bone in rigs[i].Bones){var q=bone.localRotation;double norm=Math.Sqrt(q.x*q.x+q.y*q.y+q.z*q.z+q.w*q.w);float degrees=(float)(2*Math.Acos(Math.Min(1,Math.Abs(q.w)/norm))*180/Math.PI);maximum=Math.Max(maximum,degrees);Check(degrees<12,"Joint bend "+degrees+" at "+fps+"fps, frame "+frame+", stream "+i);Check(Vector3.Distance(bone.localScale,Vector3.one)<.0001f,"Wind stretches original bones");}
-     for(int b=0;b<rigs[i].Bones.Length;b++)Check(Vector3.Distance(rigs[i].Bones[b].localPosition,bind[i][b])<.0001f,"Wind lengthens the bind chain");
+     Check(Vector3.Distance(rigs[i].Root.transform.position,body.Torso.position+mounts[i])<.0001f,"Wisp root elastically lags");Check(Vector3.Distance(scales[i],rigs[i].Root.transform.localScale)<.0001f,"Wisp stretches");
+     for(int j=1;j<curves[i].Length;j++)
+     {
+      var a=V(curves[i][j-1]);var b=V(curves[i][j]);var d=b-a;Check(Math.Abs(d.magnitude-3.8271732f/40)<.00001f,"Arc length pulses");Check(d.z>0 && d.z/d.magnitude>.74f,"Wisp turns sideways into a fan");if(Vector3.Distance(b,before[i][j])>.01f)moving=true;
+     }
     }
    }
-   Check(maximum>.2f,"Wind motion disappeared");Console.WriteLine("Maximum normalized local ribbon bend at "+fps+"fps: "+maximum);body.ApplyPowerForm(1);Call(effect,"LateUpdate");Check(rigs.All(r=>!r.Root.activeSelf),"Second form displays full-power trails");
+   Check(moving,"Continuous wind freezes with timeScale zero");body.ApplyPowerForm(1);Call(effect,"LateUpdate");Check(rigs.All(r=>!r.Root.activeSelf),"Second form displays wisps");
   }
-  Console.WriteLine("PASS "+n+" actual independent-profile, small-angle native wind, pinned-root and fixed-length ribbon checks at 15/30/60/120fps; engine doubles, not Unity");
+  Console.WriteLine("PASS "+n+" actual continuous-curve wind, fixed arc length, independent profiles, pinned roots and third-form visibility contracts; engine doubles, not Unity");
  }
 }

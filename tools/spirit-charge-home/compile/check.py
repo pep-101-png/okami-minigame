@@ -231,6 +231,7 @@ while level:
 s+='\nnamespace Sunward {public sealed partial class GameFlow {'+flow[start:end]+'}}\n'
 s+='\nnamespace UnityEngine{public static class PlayerPrefs{static System.Collections.Generic.Dictionary<string,float> values=new System.Collections.Generic.Dictionary<string,float>();public static float GetFloat(string k,float d)=>values.TryGetValue(k,out var v)?v:d;public static void SetFloat(string k,float v){values[k]=v;}public static void Save(){}}}'
 s=s.replace('public bool isPlaying,loop,playOnAwake;', 'public float time;public bool isPlaying,loop,playOnAwake;')
+s=s.replace('public class Material:Object{', 'public class Material:Object{public void SetVectorArray(string n,Vector4[] v){}')
 if args.dump_doubles:Path(args.dump_doubles).write_text(s)
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]
