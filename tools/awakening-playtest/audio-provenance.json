@@ -1,0 +1,98 @@
+[
+  {
+    "cue": "gardenmusic",
+    "source": "/workspace/work/playtest-repair/source-native/data_pc/bgm/bgm00.afs2",
+    "zeroBasedIndex": 196,
+    "sourceSHA256": "a0dd750d8a5b77b0d4ab462529677536dc4fb8b054f1b13e53ea1fc1785b33d5",
+    "outputSHA256": "e19dfad2eef6886c6d4a4af5b81d22bd0b0e06e69fb9a3bd68cd1a7a58eb4f8e",
+    "conversion": {
+      "sourceVersion": "0x400",
+      "frameScalesDecrypted": false,
+      "decoded": {
+        "rmsDBFS": -14.245,
+        "peak": 0.957031,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -24.0,
+        "peak": 0.311295,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -9.755,
+      "seconds": 56.685,
+      "clearADX_SHA256": "a0dd750d8a5b77b0d4ab462529677536dc4fb8b054f1b13e53ea1fc1785b33d5",
+      "seam": {
+        "seconds": 55.1739375,
+        "crossfadeSeconds": 1.5,
+        "boundaryStep": 0.022313466295599937,
+        "peak": 0.3123328983783722
+      }
+    },
+    "resource": "Okami/SelectedAudio/bgm00-index-196",
+    "identity": "Original bank entry; no unverified soundtrack title assigned"
+  },
+  {
+    "cue": "trial-victory",
+    "source": "/workspace/work/playtest-repair/source-native/data_pc/bgm/bgm00.afs2",
+    "zeroBasedIndex": 6,
+    "sourceSHA256": "f1e7c5446fc25175a2caf2fc511f23df126dc2f3ec0dad32e6a3a1fa503a1f6a",
+    "outputSHA256": "9995451422ced6ae63b8833520924a31cb87c68a77293f2c85a10f7655b57b0e",
+    "conversion": {
+      "sourceVersion": "0x400",
+      "frameScalesDecrypted": false,
+      "decoded": {
+        "rmsDBFS": -16.357,
+        "peak": 0.90332,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.420419,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -6.643,
+      "seconds": 6.212,
+      "clearADX_SHA256": "f1e7c5446fc25175a2caf2fc511f23df126dc2f3ec0dad32e6a3a1fa503a1f6a"
+    },
+    "resource": "Okami/SelectedAudio/bgm00-index-6",
+    "identity": "Original bank entry; no unverified soundtrack title assigned"
+  },
+  {
+    "cue": "boss-victory",
+    "source": "/workspace/work/playtest-repair/source-native/data_pc/bgm/bgm00.afs2",
+    "zeroBasedIndex": 17,
+    "sourceSHA256": "289dd361fe5b27faa3a3cdbe3216338517e228721c36f5f11b6d217193b3d6d4",
+    "outputSHA256": "0a4e4b9e72bc7dba71e9b65001a5f3e4ca2c9b4951021edaba2cc86675bd0dca",
+    "conversion": {
+      "sourceVersion": "0x400",
+      "frameScalesDecrypted": false,
+      "decoded": {
+        "rmsDBFS": -15.217,
+        "peak": 0.967468,
+        "clippedFraction": 0.0
+      },
+      "output": {
+        "rmsDBFS": -23.0,
+        "peak": 0.394883,
+        "clippedFraction": 0.0
+      },
+      "gainDB": -7.783,
+      "seconds": 6.336,
+      "clearADX_SHA256": "289dd361fe5b27faa3a3cdbe3216338517e228721c36f5f11b6d217193b3d6d4"
+    },
+    "resource": "Okami/SelectedAudio/bgm00-index-17",
+    "identity": "Original bank entry; no unverified soundtrack title assigned"
+  },
+  {
+    "cue": "palacemusic",
+    "source": "Okami/SelectedAudio/core-core-subsong-16",
+    "conversion": {
+      "seconds": 3.2455,
+      "crossfadeSeconds": 0.7,
+      "boundaryStep": 0.0018247365951538086,
+      "peak": 0.24963998794555664
+    },
+    "outputSHA256": "7476986291c7b121f07b407f8e50c2ad621e38f675b599e9810f45b9532dd21a",
+    "resource": "Okami/SelectedAudio/palace-continuous"
+  }
+]

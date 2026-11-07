@@ -128,13 +128,17 @@ namespace Sunward
             float scale = Mathf.Clamp(Mathf.Min(Screen.height / 900f, Screen.width / 1000f), .75f, 1.6f);
             GUI.matrix = Matrix4x4.Scale(new Vector3(scale, scale, 1));
             float w = Screen.width / scale, h = Screen.height / scale;
-            DrawPaper(new Rect(20, 18, 340, 175));
-            contentWidth=272;GUILayout.BeginArea(new Rect(54, 31, 272, 142));
-            Label("AMATERASU", small);
-            Label("Vitality " + Mathf.CeilToInt(game.Health) + " / " + game.MaxHealth, body);
-            Bar(260, game.Health / game.MaxHealth);
-            Label("Stamina " + (int)game.Stamina + " · Ink " + (int)game.Energy, small);
-            GUILayout.EndArea();
+            string vitality="Vitality "+Mathf.CeilToInt(game.Health)+" / "+game.MaxHealth;
+            string stamina="Stamina "+(int)game.Stamina+" / "+(int)game.MaxStamina+" · Ink "+(int)game.Energy;
+            var playerForm=game.Player.GetComponent<Sunward.Remaster.NativeAmaterasu>();
+            string ultimate=game.Ultimate && game.InTrial && playerForm && playerForm.FullPower?(game.Ultimate.Used?"Celestial Sunburst · spent this fight":"U · Celestial Sunburst · once this fight"):"";
+            string blessing=Sunward.Remaster.HomeBlessings.Status(game.Profile,Sunward.Remaster.HomeBlessings.Now);
+            float hudHeight=Sunward.Remaster.InkText.MeasureHeight("AMATERASU",272,24)+10+Sunward.Remaster.InkText.MeasureHeight(vitality,272,29)+10+7+Sunward.Remaster.InkText.MeasureHeight(stamina,272,24)+10;
+            if(ultimate.Length>0)hudHeight+=Sunward.Remaster.InkText.MeasureHeight(ultimate,272,24)+10;
+            if(blessing.Length>0)hudHeight+=Sunward.Remaster.InkText.MeasureHeight(blessing,272,24)+10;
+            DrawPaper(new Rect(20,18,340,hudHeight+34));contentWidth=272;GUILayout.BeginArea(new Rect(54,31,272,hudHeight));
+            Label("AMATERASU",small);Label(vitality,body);Bar(260,game.Health/game.MaxHealth);Label(stamina,small);
+            if(ultimate.Length>0)Label(ultimate,small);if(blessing.Length>0)Label(blessing,small);GUILayout.EndArea();
             DrawPaper(new Rect(w - 350, 18, 330, 175));
             contentWidth=262;GUILayout.BeginArea(new Rect(w - 316, 31, 262, 142));
             Label(game.Profile.coins + " coins · Lv " + ProgressionRules.Level(game.Profile), small);
@@ -335,7 +339,7 @@ namespace Sunward
             Label(game.Profile.coins + " coins · purchased weapons stay in your save. Q cycles owned weapons while out of combat.", body);
             if(Button("VILLAGE REQUEST BOARD · goals & rewards",button))game.SetPanel("requests");
             Label("Glaives: sword strikes. Reflectors: broad close-range attacks. Rosaries: bead whips with reach. Hold either attack button to charge; release to strike.",small);
-            var catalogue=System.Array.ConvertAll(Sunward.Remaster.OriginalWeaponCatalog.All,e=>Sunward.Remaster.OriginalWeaponEvolution.Replaced(game.Profile,e.id)?Sunward.Remaster.OriginalWeaponCatalog.AwakenedThunder:e);
+            var catalogue=System.Array.ConvertAll(Sunward.Remaster.OriginalWeaponCatalog.All,e=>Sunward.Remaster.OriginalWeaponCatalog.Display(game.Profile,e));
             weaponPage=Mathf.Clamp(weaponPage,0,catalogue.Length-1);var entry=catalogue[weaponPage];
             Label((weaponPage+1)+" / "+catalogue.Length+" · "+entry.title,title);
             var portrait=Resources.Load<Texture2D>("Okami/WeaponPortraits/"+entry.resource);
@@ -346,13 +350,14 @@ namespace Sunward
             bool owned=Sunward.Remaster.OriginalWeaponCatalog.Owns(game.Profile,entry.id);
             if(Button(owned?(game.Profile.equipped==entry.id?"EQUIPPED":"EQUIP THIS INSTRUMENT"):"PURCHASE · "+entry.cost+" coins",button))
             {if(owned){game.Profile.equipped=entry.id;game.Save.Save();game.Combat.Equip();}else game.Buy("weapon:"+entry.id);}
-            if(entry.resource=="wp29")
+            Label("AWAKENING · "+Sunward.Remaster.AwakeningProgress.Ability(entry.resource),small);
+            if(Sunward.Remaster.OriginalWeaponEvolution.IsAwakened(entry.id))
             {
-                bool awakened=Sunward.Remaster.OriginalWeaponEvolution.Owns(game.Profile);
-                Label(awakened?"AWAKENED · +35% damage · +15% reach":"AWAKENING · Find and dig up the buried chest in the heavenly garden maze.",small);
-                if(awakened && entry.id!=Sunward.Remaster.OriginalWeaponEvolution.ThunderId && Button(game.Profile.equipped==Sunward.Remaster.OriginalWeaponEvolution.ThunderId?"AWAKENED FORM EQUIPPED":"EQUIP AWAKENED THUNDER EDGE",button))
-                {game.Profile.equipped=Sunward.Remaster.OriginalWeaponEvolution.ThunderId;game.Save.Save();game.Combat.Equip();}
+                int rank=Sunward.Remaster.AwakeningProgress.Rank(game.Profile,entry.id);
+                Label("Awakened rank "+rank+" / 5 · +"+(rank*8)+"% damage · +"+(rank*2)+"% reach from ranks",small);
+                if(rank<5 && Button("UPGRADE AWAKENED FORM · "+Sunward.Remaster.AwakeningProgress.Cost(game.Profile,entry.id)+" coins",button))game.Buy("awakening:"+entry.id);
             }
+            else Label("UNLOCK CHALLENGE · "+Sunward.Remaster.AwakeningProgress.Challenge(game.Profile,entry.id)+" Progress counts against arena enemies while this weapon is equipped.",small);
             if(Button("PREVIOUS INSTRUMENT",button))weaponPage=(weaponPage+catalogue.Length-1)%catalogue.Length;
             if(Button("NEXT INSTRUMENT",button))weaponPage=(weaponPage+1)%catalogue.Length;
         }

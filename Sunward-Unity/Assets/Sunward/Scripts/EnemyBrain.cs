@@ -20,7 +20,11 @@ namespace Sunward
         // not move the visible attack backwards while its timer is running.
         float visualDuration=.9f;
         public float VisualStateDuration => visualDuration;
-        public bool VisualStunned => !Dead && stun>0;
+        public float HitHeight=>motor?motor.height:1.7f;
+        public bool Frozen=>Time.time<frozenUntil;
+        public bool VisualStunned => !Dead && (stun>0 || Frozen);
+        float frozenUntil,nextFreeze;
+        public void Freeze(float duration){if(definition.id=="boss"){Stun(.12f);return;}if(Time.time<nextFreeze)return;frozenUntil=Time.time+Mathf.Min(1.2f,duration);nextFreeze=frozenUntil+2;}
 
         public float VisualStateProgress => Mathf.Clamp01(1 - timer / Mathf.Max(.001f, VisualStateDuration));
 
@@ -149,6 +153,7 @@ namespace Sunward
                 return;
             }
 
+            if(Frozen)return;
             Vector3 diff = game.Player.transform.position - transform.position;
             diff.y = 0;
             float distance = diff.magnitude;

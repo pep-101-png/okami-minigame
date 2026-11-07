@@ -62,5 +62,9 @@
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/ThunderPainting.cs"/>
 <Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/HeavenlyGarden.ReturnGate.cs"/>
 
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/AwakeningProgress.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/AwakenedWeaponArts.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/PalaceSeal.cs"/>
+<Compile Include="../../../Sunward-Unity/Assets/OkamiRemaster/Original/Scripts/ShiranuiUltimate.cs"/>
 </ItemGroup>
 </Project>

@@ -16,7 +16,7 @@ namespace Sunward.Remaster
         float fallTime;Vector3 fallStart;OrbitCamera orbit;GameObject garden,river;bool visible;
         public static bool Inside(Vector3 p)=>PalaceInside(p) || p.y>58 && p.y<100 && Mathf.Abs(p.x-Centre.x)<49 && Mathf.Abs(p.z)<47;
         public static bool RiverLip(Vector3 p)=>p.y>-2 && p.y<2 && p.z>WaterfallLip-.75f && p.z<WaterfallLip+1 && Mathf.Abs(p.x-Valley.RiverX(-p.z))<2.8f;
-        public static int UpgradeRanks(ProfileData p){int n=0;foreach(var id in ProgressionRules.Upgrades)n+=p.upgrades.Get(id);return n;}
+        public static int UpgradeRanks(ProfileData p){int n=0;foreach(var id in ProgressionRules.Upgrades)n+=p.upgrades.Get(id);if(p.weaponMastery!=null)foreach(var weapon in p.weaponMastery)if(weapon!=null)n+=weapon.rank;return n;}
         public static bool GrowthReady(ProfileData p)=>ProgressionRules.Level(p)>=15 && UpgradeRanks(p)>=30;
         public static Vector3 Guard(Vector3 p)
         {
@@ -201,6 +201,7 @@ namespace Sunward.Remaster
                 {Cancel();if(game.Health>0){garden.SetActive(true);Physics.SyncTransforms();var at=Return+Vector3.forward*5;Height(at,out var y);at.y=y+.05f;game.Player.Teleport(at);visible=true;Shader.SetGlobalFloat("_SunwardHeaven",1);game.Notify("The river opens into a garden above the clouds · follow the altar lights");if(orbit)orbit.SnapFocus();}}
                 return;
             }
+            if(inside && !game.Player.Locked && ReturnGate(game.Player.transform.position))return;
             if(keeperConversation)
             {
                 if(game.Panel=="dialogue")return;
@@ -210,7 +211,7 @@ namespace Sunward.Remaster
             if(game.Blocked || game.InTrial || game.Health<=0)return;
             var player=game.Player.transform.position;
             if(!inside){if(RiverLip(player))BeginFall();else if(player.z>28 && Mathf.Abs(player.x-Valley.RiverX(-player.z))<4)game.WorldPrompt("The river falls into a spirit passage ahead");return;}
-            if(ReturnGate(player))return;
+
             if(PalaceInteractions())return;
             if(GardenInteractions())return;
             bool nearReturn=new Vector2(player.x-Return.x,player.z-Return.z).magnitude<3.2f;

@@ -14,8 +14,15 @@ namespace Sunward.Remaster
         public void SitByFire()
         {
             if(!VillageInteriors.Home(game.Player.transform.position))return;
-            FireBonus(game.Profile,Now);game.Stamina=Mathf.Min(game.MaxStamina,game.Stamina+50);game.Save.Save();
+            FireBonus(game.Profile,Now);game.Stamina=game.MaxStamina;game.Player.StopMotion();game.Save.Save();
             game.Services.RestAt(Fire+new Vector3(-1.15f,0,-.15f),90);game.Notify("Hearth blessing · +50 stamina for five minutes");
+        }
+        public static string Status(ProfileData p,long now)
+        {
+            long bed=Math.Max(0,p.bedBlessingUntil-now),fire=Math.Max(0,p.fireBlessingUntil-now);
+            string text=bed>0?"Bed blessing · +50 health & stamina · "+(bed/60)+":"+(bed%60).ToString("D2"):"";
+            if(fire>bed)text+=(text.Length>0?" / ":"")+"Hearth · +50 stamina · "+(fire/60)+":"+(fire%60).ToString("D2");
+            return text;
         }
         void Update(){if(!game)return;game.Health=Mathf.Min(game.Health,game.MaxHealth);game.Stamina=Mathf.Min(game.Stamina,game.MaxStamina);}
     }

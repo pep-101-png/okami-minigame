@@ -32,23 +32,28 @@ namespace Sunward.Remaster
             new Entry("wp2e","Tundra Beads","wp2e","rosary",450)
         };
         public static readonly Entry AwakenedThunder=new Entry(OriginalWeaponEvolution.ThunderId,"Thunder Edge · Awakened","wp29","glaive",450);
-        public static Entry Find(string id) => id==OriginalWeaponEvolution.ThunderId?AwakenedThunder:Array.Find(All, e => e.id == id);
+        public static Entry Find(string id)
+        {
+            if(id==OriginalWeaponEvolution.ThunderId)return AwakenedThunder;
+            var entry=Array.Find(All,e=>e.id==OriginalWeaponEvolution.BaseId(id));
+            return entry==null || !OriginalWeaponEvolution.IsAwakened(id)?entry:new Entry(id,entry.title+" · Awakened",entry.resource,entry.family,entry.cost);
+        }
+        public static Entry Display(ProfileData p,Entry entry)=>OriginalWeaponEvolution.Replaced(p,entry.id)?Find(OriginalWeaponEvolution.EvolvedId(entry.id)):entry;
         public static bool Owns(ProfileData profile, string id) => profile.owned != null && Array.IndexOf(profile.owned,id)>=0;
         public static bool Buy(ProfileData profile, string id)
         {
             var entry=Find(id);
-            if(OriginalWeaponEvolution.Replaced(profile,id) || id==OriginalWeaponEvolution.ThunderId || entry==null || Owns(profile,id) || profile.coins<entry.cost) return false;
+            if(OriginalWeaponEvolution.Replaced(profile,id) || OriginalWeaponEvolution.IsAwakened(id) || entry==null || Owns(profile,id) || profile.coins<entry.cost) return false;
             profile.coins-=entry.cost;Array.Resize(ref profile.owned,profile.owned.Length+1);
             profile.owned[profile.owned.Length-1]=id;profile.equipped=id;return true;
         }
         public static string Next(ProfileData profile)
         {
-            int total=All.Length+(OriginalWeaponEvolution.Owns(profile)?1:0);
-            int start=profile.equipped==OriginalWeaponEvolution.ThunderId?All.Length:Array.FindIndex(All,e=>e.id==profile.equipped);
-            for(int i=1;i<=total;i++){int at=(start+i+total)%total;var entry=at==All.Length?AwakenedThunder:All[at];if(Owns(profile,entry.id))return entry.id;}
-            return "spear";
+            int start=Array.FindIndex(All,e=>e.id==OriginalWeaponEvolution.BaseId(profile.equipped));
+            for(int i=1;i<=All.Length;i++){var entry=Display(profile,All[(start+i+All.Length)%All.Length]);if(Owns(profile,entry.id))return entry.id;}
+            return profile.equipped;
         }
-        public static WeaponDefinition Definition(Entry entry, WeaponDefinition spear, WeaponDefinition solar)
+        public static WeaponDefinition Definition(Entry entry, WeaponDefinition spear, WeaponDefinition solar,ProfileData profile=null)
         {
             var result=UnityEngine.Object.Instantiate(entry.family=="reflector"?solar:spear);
             result.id=entry.id;result.title=entry.title;
@@ -71,7 +76,8 @@ namespace Sunward.Remaster
             }
             float reach=OriginalWeaponEvolution.Reach(entry.id);
             float power=entry.id=="spear" || entry.id=="sundial"?1:1+Mathf.Clamp01((entry.cost-70)/380f)*.35f;
-            power*=OriginalWeaponEvolution.Power(entry.id);
+            power*=OriginalWeaponEvolution.Power(entry.id)*(1+(profile==null?0:AwakeningProgress.Rank(profile,entry.id))*.08f);
+            if(profile!=null)reach+=AwakeningProgress.Rank(profile,entry.id)*.02f;
             foreach(var strike in result.light){strike.damage*=power;strike.range*=reach;}
             foreach(var strike in result.heavy){strike.damage*=power;strike.range*=reach;}
             result.charged.damage*=power;result.chargedHeavy.damage*=power;result.air.damage*=power;result.charged.range*=reach;result.chargedHeavy.range*=reach;result.air.range*=reach;

@@ -9,6 +9,7 @@ namespace Sunward.Remaster
         public bool Playing {get;private set;}
         public int SkipHandledFrame {get;private set;}=-1;
         public void Skip(){SkipHandledFrame=Time.frameCount;Cancel();}
+        public string MusicCue=>Title || skyTransition?"gardenmusic":bossVictory?"boss-victory":breaking || victory?"trial-victory":"festivalrace";
         public bool Title=>game && game.Panel=="title";
         float elapsed,duration,dialogueTime,entryGrace;bool victory,breaking,shaftRevealed,bossVictory,skyTransition,skyNight,howled;
         public bool Breaking=>Playing && breaking;
