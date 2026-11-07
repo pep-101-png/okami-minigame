@@ -240,6 +240,31 @@ namespace Sunward.Remaster
             }
             catch(Exception error){Debug.LogError("Original wolf form could not load: "+error.Message,this);return false;}
         }
+        bool solarPose;float solarTime,solarRelease;Vector3 solarCentre;
+        public bool BeginSolarPose()
+        {
+            if(!Ready || bank.Find("pl00_017")==null)return false;
+            for(int i=0;i<bank.BoneCount;i++){fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}
+            solarPose=true;solarTime=solarRelease=0;return true;
+        }
+        public void SolarPose(float elapsed,Vector3 centre,float release)
+        {solarTime=elapsed;solarCentre=centre;solarRelease=Mathf.Clamp01(release);}
+        public void EndSolarPose()
+        {solarPose=false;if(rig!=null)rig.Root.transform.localPosition=Vector3.zero;Play("Idle_Natural",.18f,0,true,false);}
+        void ApplySolarPose()
+        {
+            var roll=bank.Find("pl00_017");float phase=solarTime<1.8f?Mathf.Lerp(0,.30f,Mathf.SmoothStep(0,1,solarTime/1.8f)):.30f+.018f*Mathf.Sin(solarTime*2.8f);
+            bank.Sample(roll,phase*roll.Duration,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,solarTime/.35f),false);
+            if(solarRelease>0)
+            {
+                // Blend from this frame's source curl, not accumulated previous frames.
+                var rest=bank.Find("pl00_000");
+                for(int i=0;i<bank.BoneCount;i++){fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}
+                bank.Sample(rest,0,rig.Bones,fromPosition,fromRotation,fromScale,solarRelease,true);
+            }
+            rig.Root.transform.localPosition=Vector3.zero;
+            rig.Root.transform.position+=solarCentre-rig.Bones[1].position;
+        }
         void Apply()
         {
             float t = time; var selected = clip;
@@ -275,8 +300,9 @@ namespace Sunward.Remaster
                 }
                 else {t=tundraPhase*clip.Duration;loop=false;}
             }
-            bank.Sample(selected, t, rig.Bones, fromPosition, fromRotation, fromScale, blendDuration > 0 ? Mathf.SmoothStep(0, 1, blendTime / blendDuration) : 1, loop, binding.mirror);
-            if(binding.state=="NativeAttack_524" && time>clip.Duration*.78f)
+            if(solarPose)ApplySolarPose();
+            else bank.Sample(selected, t, rig.Bones, fromPosition, fromRotation, fromScale, blendDuration > 0 ? Mathf.SmoothStep(0, 1, blendTime / blendDuration) : 1, loop, binding.mirror);
+            if(!solarPose && binding.state=="NativeAttack_524" && time>clip.Duration*.78f)
             {
                 var rest=bank.Find("pl00_000");
                 for(int i=0;i<bank.BoneCount;i++){fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}

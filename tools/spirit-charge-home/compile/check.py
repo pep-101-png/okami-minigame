@@ -246,6 +246,7 @@ s=s.replace('public sealed partial class WolfMotor:MonoBehaviour\n {','public se
 s=s.replace('public class Mesh:Object{','public class Mesh:Object{public Color[] colors;')
 s=s.replace('public class AudioSource:Object{','public class AudioSource:Object{public float pitch=1;')
 s=s.replace('public struct RaycastHit{','public struct RaycastHit{public Vector3 normal;')
+s=s.replace('public sealed partial class GameFlow:MonoBehaviour\n {','public sealed partial class GameFlow:MonoBehaviour\n {public Remaster.ShiranuiUltimate Ultimate;')
 if args.dump_doubles:Path(args.dump_doubles).write_text(s)
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]

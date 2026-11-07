@@ -198,7 +198,8 @@ namespace Sunward.Remaster
             Vector3 delta = transform.position - previous;
             delta.y = 0; previous = transform.position;
             bool bossCinematic=cinematicActivity && game && game.BossTransformation && game.BossTransformation.Playing;
-            float dt = bossCinematic?Time.unscaledDeltaTime:Time.deltaTime;
+            bool sunburstFall=enemy && enemy.Dead && game && game.Ultimate && game.Ultimate.Playing;
+            float dt = bossCinematic || sunburstFall?Time.unscaledDeltaTime:Time.deltaTime;
             float speed = delta.magnitude < 1 ? delta.magnitude / Mathf.Max(dt, .0001f) : 0;
             filteredSpeed=Mathf.Lerp(filteredSpeed,speed,1-Mathf.Exp(-dt*10));
             moving=filteredSpeed>(moving?.08f:.15f);

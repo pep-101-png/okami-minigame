@@ -1,0 +1,6 @@
+{
+  "scope": "Offline native-asset render of actual C# poses, camera, effect meshes and scheduled one-shot/charge-loop audio; not Unity Play Mode",
+  "runtimeReceipt": "b8a096a259191040c0a3bfcadc9d6b872a13606273bd45f59541e51ccb800014",
+  "sha256": "3b6ed104aa78389cdb21d9e63347c9fe8ea6560d05ca8d215e024d9348f2daaf",
+  "audioPeakBeforeAttenuation": 0.515521240234375
+}

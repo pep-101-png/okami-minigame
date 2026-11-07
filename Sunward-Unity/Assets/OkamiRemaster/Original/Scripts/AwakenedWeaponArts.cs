@@ -49,6 +49,17 @@ namespace Sunward.Remaster
     {
         GameFlow game;GameObject blade;Vector3 point;float time;bool landed;
         public static void Begin(GameFlow g,Vector3 at){var root=new GameObject("Eighth Wonder · divine falling sword");var effect=root.AddComponent<FallingDivineSword>();effect.game=g;effect.point=at;root.transform.position=at;effect.blade=VillageFestival.Place(root.transform,"Okami/wp28",Vector3.up*11,new Vector3(2.5f,.7f,8),new Vector3(-90,0,0));}
-        void Update(){if(!game){Destroy(gameObject);return;}if(game.Blocked)return;time+=Time.deltaTime;if(blade)blade.transform.localPosition=Vector3.up*Mathf.Lerp(11,3,Mathf.Clamp01(time/.6f));if(!landed && time>=.6f){landed=true;AwakenedWeaponArts.Pulse(game,point,5.5f,35,"Cloud",new Color(.8f,.7f,.4f),.5f);game.Audio.Cue("heavy-impact");}if(time>1.2f)Destroy(gameObject);}
+        public const float FallTime=.36f;
+        void Update()
+        {
+            if(!game || !game.InTrial){Destroy(gameObject);return;}if(game.Blocked)return;time+=Time.deltaTime;
+            if(blade){float u=Mathf.Clamp01(time/FallTime);blade.transform.localPosition=Vector3.up*Mathf.Lerp(11,3,u*u);}
+            if(!landed && time>=FallTime)
+            {
+                landed=true;AwakenedWeaponArts.Pulse(game,point,5.5f,35,"Cloud",new Color(.8f,.7f,.4f),.5f);
+                SolarPaint.Create(game,point,2);game.Audio.DivineSwordImpact();var camera=FindFirstObjectByType<OrbitCamera>();if(camera)camera.Shake(.12f,.24f);
+            }
+            if(time>1.1f)Destroy(gameObject);
+        }
     }
 }

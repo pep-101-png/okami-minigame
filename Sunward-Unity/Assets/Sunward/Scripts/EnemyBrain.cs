@@ -104,9 +104,16 @@ namespace Sunward
             stun=Mathf.Max(stun,time);
         }
 
-        public void Damage(float damage, Vector3 away, float stagger)
+        public void Damage(float damage, Vector3 away, float stagger)=>ReceiveDamage(damage,away,stagger,false);
+        // Only the active sunburst may show its non-boss victims falling during its camera hold.
+        public void SunburstHit(Vector3 from)
         {
-            if (Dead || BossRising || game.CinematicActive)
+            if(!game.Ultimate || !game.Ultimate.Playing || !game.Ultimate.Detonated || definition.id=="boss")return;
+            ReceiveDamage(MaxHp+1,(transform.position-from).normalized,.7f,true);
+        }
+        void ReceiveDamage(float damage,Vector3 away,float stagger,bool sunburst)
+        {
+            if (Dead || BossRising || (game.CinematicActive && !sunburst))
                 return;
             Hp -= damage;
             if(Hp<=0 && definition.id=="boss" && crimson.TryRise())
