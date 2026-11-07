@@ -89,21 +89,24 @@ namespace Sunward.Remaster
         public ImpMotionProfile Imp { get; private set; }
         public float ImpWorldScale=>modelScale*(enemy && enemy.definition?enemy.definition.scale:Mathf.Abs(transform.localScale.y));
         public float CurrentSourceTime { get; private set; }
+        bool cannonPending;Vector3 cannonTarget;float cannonDamage;
+        public Vector3 CannonMuzzle=>NativeBone(21)?NativeBone(21).TransformPoint(Imp.cannon.Muzzle):transform.position+Vector3.up;
+        public void QueueCannon(Vector3 target,float damage){cannonPending=true;cannonTarget=target;cannonDamage=damage;}
         string impState,impSoundClip;float impSoundTime=-.001f,impPoseTime;
         void TickImp(float dt,float speed)
         {
             if(enemy.Frozen || (game && game.Blocked && !enemy.Dead))return;
             string state=enemy.State;
             bool locomotion=state=="approach";
-            string selected=Imp.Clip(state) ?? (locomotion && speed>.08f?walk:idle);
+            string selected=Imp.Clip(state,enemy.ActiveMove) ?? (locomotion && speed>.08f?walk:idle);
             bool loop=locomotion;
             bool continuingAttack=(impState=="windup" || impState=="strike") && (state=="strike" || state=="recover") && selected==CurrentSourceMotion;
             if(impState!=state){if(!continuingAttack)impPoseTime=0;impState=state;}
             if(selected!=CurrentSourceMotion)impPoseTime=0;
             Change(selected);blendTime+=dt;
             float sample;
-            if(state=="windup" || state=="strike" || state=="recover" || state=="stagger")
-                sample=current.Duration*Imp.Phase(state,enemy.VisualStateProgress);
+            if(state=="windup" || state=="strike" || state=="recover" || state=="stagger" || state=="aim")
+                sample=current.Duration*Imp.Phase(state,enemy.VisualStateProgress,enemy.ActiveMove);
             else
             {
                 float metres=Imp.walkDistance*ImpWorldScale;
@@ -117,11 +120,18 @@ namespace Sunward.Remaster
             // Root Y stays in the original bank, so jumping attacks can leave the floor.
             rig.Bones[0].localPosition=new Vector3(0,rig.Bones[0].localPosition.y,0);
             enemy.SetImpHeight(rig.Bones[0].localPosition.y*ImpWorldScale);
+            // Release after sampling this frame, so the shell starts at the live
+            // barrel mouth instead of yesterday's attachment-pivot pose.
+            if(cannonPending)
+            {
+                if(!enemy.Dead && state=="strike" && Imp.IsCannon(enemy.ActiveMove))ImpCannonProjectile.Spawn(game,CannonMuzzle,cannonTarget,cannonDamage,Imp.cannon);
+                cannonPending=false;
+            }
             var motion=Imp.Find(selected);float before=impSoundClip==selected?impSoundTime:-.001f;
             if(motion!=null && motion.sounds!=null && game && game.Audio)
                 foreach(var e in motion.sounds)
                     if((loop && CurrentSourceTime<before-.01f?e.time>before || e.time<=CurrentSourceTime:e.time>before && e.time<=CurrentSourceTime))
-                        game.Audio.World(e.cue,transform.position,18,.42f*e.gain);
+                        game.Audio.World(e.cue,transform.position,18,.42f*e.gain,false,e.pitch>0?e.pitch:1);
             impSoundClip=selected;impSoundTime=CurrentSourceTime;
         }
 

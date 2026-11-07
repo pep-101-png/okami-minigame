@@ -220,7 +220,7 @@ namespace Sunward
             if(a || b)return a && b;
             return Sunward.Remaster.HeavenlyGarden.Inside(source)==Sunward.Remaster.HeavenlyGarden.Inside(listener);
         }
-        public bool World(string cue,Vector3 position,float range=10,float volume=.65f,bool dialogue=false)
+        public bool World(string cue,Vector3 position,float range=10,float volume=.65f,bool dialogue=false,float pitch=1)
         {
             if(!game || !game.Player || (game.Blocked && !dialogue) || game.CinematicActive)return false;
             float distance=Vector3.Distance(position,game.Player.transform.position);
@@ -235,7 +235,7 @@ namespace Sunward
                 source.dopplerLevel=0;source.rolloffMode=AudioRolloffMode.Linear;
                 source.minDistance=1.5f;source.maxDistance=range;worldSources.Add(source);
             }
-            source.transform.position=position;source.clip=clip;source.maxDistance=range;
+            source.transform.position=position;source.clip=clip;source.maxDistance=range;source.pitch=Mathf.Clamp(pitch,.5f,2);
             worldLevels[source]=new Vector2(range,volume);
             Level(source,volume*Mathf.SmoothStep(1,0,Mathf.Clamp01(distance/range)));source.Play();return true;
         }

@@ -955,13 +955,13 @@ MonoBehaviour:
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Sunward.Remaster.OriginalActor
   resource: Okami/em01
-  idle: em00_000
-  walk: em00_010
-  run: em00_010
+  idle: em00_180
+  walk: em00_188
+  run: em00_188
   windup: em00_184
   strike: em00_184
   recover: em00_184
-  death: em00_032
+  death: em00_182
   modelOffset: {x: 0.04659345, y: 0.104591, z: -0.3158608}
   modelScale: 0.5126863411293356
   game: {fileID: 0}
