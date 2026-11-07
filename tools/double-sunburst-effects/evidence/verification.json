@@ -1,0 +1,10 @@
+{
+  "scope": "Actual C# effect meshes using API doubles, not Unity Play Mode",
+  "quadComparisons": 15355,
+  "blastSize": 2,
+  "burstCopies": 2,
+  "burstQuads": 368,
+  "chargeUnchanged": true,
+  "swordImpactUnchanged": true,
+  "bodyCameraAudioDamageTimingUnchanged": true
+}
