@@ -240,12 +240,12 @@ namespace Sunward.Remaster
             }
             catch(Exception error){Debug.LogError("Original wolf form could not load: "+error.Message,this);return false;}
         }
-        bool solarPose;float solarTime,solarRelease;Vector3 solarCentre;Quaternion solarRotation;
+        bool solarPose;float solarTime,solarRelease,solarFloor;Vector3 solarCentre;Quaternion solarRotation;
         public bool BeginSolarPose()
         {
             if(!Ready || bank.Find("pl00_017")==null || bank.Find("pl00_018")==null || bank.Find("pl00_021")==null)return false;
             for(int i=0;i<bank.BoneCount;i++){fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}
-            solarRotation=rig.Root.transform.localRotation;solarPose=true;solarTime=solarRelease=0;return true;
+            solarFloor=transform.position.y;solarRotation=rig.Root.transform.localRotation;solarPose=true;solarTime=solarRelease=0;return true;
         }
         public void SolarPose(float elapsed,Vector3 centre,float release)
         {solarTime=elapsed;solarCentre=centre;solarRelease=Mathf.Clamp01(release);}
@@ -275,15 +275,42 @@ namespace Sunward.Remaster
             }
             float forwardRoll=720*Mathf.SmoothStep(0,1,(solarTime-2.1f)/2.3f);
             rig.Root.transform.localRotation=solarRotation*Quaternion.Euler(forwardRoll,0,0);
-            if(solarRelease>0)
+            if(solarTime>=ShiranuiUltimate.BlastTime)
             {
-                // Blend from this frame's source curl, not accumulated previous frames.
-                var rest=bank.Find("pl00_000");
-                for(int i=0;i<bank.BoneCount;i++){fromPosition[i]=rig.Bones[i].localPosition;fromRotation[i]=rig.Bones[i].localRotation;fromScale[i]=rig.Bones[i].localScale;}
-                bank.Sample(rest,0,rig.Bones,fromPosition,fromRotation,fromScale,solarRelease,true);
+                // Unfurl into a native extended leap at the flash, then reach
+                // down with the inspected early fall pose. Avoid the later
+                // 022 stretch, which points the forelegs straight overhead.
+                CaptureSolarPose();var extension=bank.Find("pl00_025");
+                bank.Sample(extension,extension.Duration*.30f,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,(solarTime-ShiranuiUltimate.BlastTime)/.24f),false);
+                if(solarTime>4.95f)
+                {
+                    CaptureSolarPose();var air=bank.Find("pl00_022");
+                    float airPhase=Mathf.Lerp(.24f,.34f,Mathf.SmoothStep(0,1,(solarTime-4.95f)/(ShiranuiUltimate.LandingTime-4.95f)));
+                    bank.Sample(air,air.Duration*airPhase,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,(solarTime-4.95f)/.30f),false);
+                }
+                if(solarTime>=ShiranuiUltimate.LandingTime)
+                {
+                    CaptureSolarPose();var landing=bank.Find("pl00_02d");float contact=solarTime-ShiranuiUltimate.LandingTime;
+                    bank.Sample(landing,Mathf.Clamp01(contact/.50f)*landing.Duration,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,contact/.12f),false);
+                    if(contact>.50f)
+                    {
+                        CaptureSolarPose();var rest=bank.Find("pl00_000");
+                        bank.Sample(rest,0,rig.Bones,fromPosition,fromRotation,fromScale,Mathf.SmoothStep(0,1,(contact-.50f)/.20f),true);
+                    }
+                }
             }
             rig.Root.transform.localPosition=Vector3.zero;
-            rig.Root.transform.position+=solarCentre-rig.Bones[1].position;
+            // Airborne poses stay centred in the sun. Hand ground contact back
+            // to the native landing root before the paws touch down, so its
+            // compression is not cancelled by a permanently pinned torso.
+            float grounded=Mathf.SmoothStep(0,1,(solarTime-ShiranuiUltimate.LandingTime+.18f)/.18f);
+            rig.Root.transform.position+=(solarCentre-rig.Bones[1].position)*(1-grounded);
+            if(grounded>0)
+            {
+                float feet=Mathf.Min(Mathf.Min(rig.Bones[13].position.y,rig.Bones[18].position.y),Mathf.Min(rig.Bones[22].position.y,rig.Bones[26].position.y));
+                float settle=Mathf.SmoothStep(0,1,(solarTime-ShiranuiUltimate.LandingTime-.50f)/.20f);
+                rig.Root.transform.position+=Vector3.up*Mathf.Max(0,solarFloor+.06f-feet)*(1-settle);
+            }
         }
         void Apply()
         {
