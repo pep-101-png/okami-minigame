@@ -1,0 +1,75 @@
+{
+  "base": "e17c75d275d0fb2fa2f4dd09cb99dd8af57c54a6",
+  "items": [
+    {
+      "request": "Walk-through glowing torii return portal",
+      "status": "implemented"
+    },
+    {
+      "request": "Separate quiet Shiranui-room music",
+      "status": "quiet room routing implemented using existing original garden recording; distinct recording selection pending"
+    },
+    {
+      "request": "Actual gong sound",
+      "status": "decoded original candidates awaiting listening confirmation"
+    },
+    {
+      "request": "Original memory save mirror",
+      "status": "recovered ET90 model; native celestial seal"
+    },
+    {
+      "request": "Four-slot native scroll save menu",
+      "status": "implemented; isolated real file/backup/legacy-save tests pass"
+    },
+    {
+      "request": "Timed fire and bed blessings",
+      "status": "implemented"
+    },
+    {
+      "request": "One bobbing cycling owned weapon display",
+      "status": "implemented"
+    },
+    {
+      "request": "Thunder Edge lightning/charge clearance",
+      "status": "native lightning paintings and clearance implemented; strike audio identification pending"
+    },
+    {
+      "request": "Crimson Helm howl victory cinematic",
+      "status": "implemented; actual Finish path tested"
+    },
+    {
+      "request": "River waterfall/gorge/entry camera",
+      "status": "continuous terrain repaired; offline inspected, Unity playback not verified"
+    },
+    {
+      "request": "Invisible wall across from watermill",
+      "status": "orphan collider disabled"
+    },
+    {
+      "request": "Unwanted house behind dojo",
+      "status": "retired parent shell and associated room/collision"
+    },
+    {
+      "request": "Rotate house beside boars",
+      "status": "90-degree parent-shell rotation and matching door/collider changes; offline inspected"
+    },
+    {
+      "request": "Music-house gradual flute entrance",
+      "status": "exclusive four-second fade tested; original flute recording selection pending"
+    },
+    {
+      "request": "15-minute day and night clock/cutscenes",
+      "status": "implemented; busy/interior transitions defer the sky shot until outside"
+    },
+    {
+      "request": "Residents sleep in assigned homes",
+      "status": "implemented with four recovered own-package sleep clips"
+    }
+  ],
+  "assetsRule": "Original Okami archives only",
+  "unityRuntime": "Unavailable; no same-build Windows Unity feedback retrieved",
+  "publishedDownload": false,
+  "ready": false,
+  "downloadRequested": true,
+  "releaseScope": "Assets-only update requested by user; original sound identification remains unfinished"
+}

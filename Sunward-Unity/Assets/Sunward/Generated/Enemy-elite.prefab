@@ -1230,12 +1230,12 @@ MonoBehaviour:
   resource: Okami/em04
   idle: em00_000
   walk: em00_010
-  run: em00_012
+  run: em00_010
   windup: em00_194
   strike: em00_194
   recover: em00_194
-  death: em00_040
-  modelOffset: {x: -0.1172062, y: 0.07295226, z: -0.4190359}
+  death: em00_032
+  modelOffset: {x: -0.1172062, y: 0.165691, z: -0.4190359}
   modelScale: 0.8097522785162592
   game: {fileID: 0}
   splitAttackClip: 1

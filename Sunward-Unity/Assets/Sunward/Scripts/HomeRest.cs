@@ -42,22 +42,25 @@ namespace Sunward
             }
 
             p.animationView.Play("Sleep_Down", .1f);
+            game.Audio.BedHowl();
             yield return new WaitForSeconds(p.animationView.ClipLength("Sleep_Down"));
             Sleeping = true;
             var festival=game.GetComponent<Sunward.Remaster.VillageFestival>();if(festival)festival.SleepToNextTime();
             p.animationView.Play("Sleep_Loop", .1f);
+            Sunward.Remaster.HomeBlessings.BedBonus(game.Profile,Sunward.Remaster.HomeBlessings.Now);
             game.Health = game.MaxHealth;
             game.Stamina = game.MaxStamina;
             game.Energy = game.MaxEnergy;
             game.Profile.milestones.sleptAtHome = true;
             game.Save.Save();
-            game.Notify(game.Profile.night?"Festival night · E or movement to wake":"A new morning · E or movement to wake");
+            game.Notify("Bed blessing · +50 health and stamina for fifteen minutes · E or movement to wake");
             while (!p.input.Interact.WasPressedThisFrame() && !p.input.Pause.WasPressedThisFrame() && !p.input.Jump.WasPressedThisFrame() && p.input.Move.ReadValue<Vector2>().sqrMagnitude < .1f)
                 yield return null;
             Sleeping = false;
             p.animationView.Play("Sleep_Up", .1f);
             yield return new WaitForSeconds(p.animationView.ClipLength("Sleep_Up"));
             p.Teleport(new Vector3(to.x, game.valley.Height(to)+.025f, to.z));
+            Sunward.Remaster.HomeBlessings.BedBonus(game.Profile,Sunward.Remaster.HomeBlessings.Now);game.Stamina=game.MaxStamina;game.Save.Save();
             p.Locked = false;
             game.Combat.Rest(false);
             Active = false;

@@ -61,6 +61,7 @@ namespace Sunward.Remaster
             for(int i=1;i<stroke.Count;i++){length+=Vector2.Distance(stroke[i-1],stroke[i]);lo=Vector2.Min(lo,stroke[i]);hi=Vector2.Max(hi,stroke[i]);}
             float span=(hi-lo).magnitude,end=Vector2.Distance(stroke[0],stroke[stroke.Count-1]);
             if(span<60)return;
+            if(ConnectLightning())return;
             bool bomb=BrushPatterns.CherryBomb(stroke);
             bool bloom=!bomb && end<span*.3f && length>span*1.8f;
             bool slash=end>60 && length/end<1.3f;
@@ -79,22 +80,34 @@ namespace Sunward.Remaster
             else
             {
                 BrushStrokeFlash.Slash(world[0]+Vector3.up*.6f,world[world.Count-1]+Vector3.up*.6f);
-                int hits=0;var a=stroke[0];var b=stroke[stroke.Count-1];var camera=Camera.main;
+                int hits=0;bool giantSword=false;var a=stroke[0];var b=stroke[stroke.Count-1];var camera=Camera.main;
                 foreach(var enemy in game.Enemies)
                 {
                     if(!enemy || enemy.Dead || Vector3.Distance(enemy.transform.position,game.Player.transform.position)>24)continue;
                     var q=camera.WorldToScreenPoint(enemy.transform.position+Vector3.up);if(q.z<=0)continue;
                     Vector2 delta=b-a;float t=Mathf.Clamp01(Vector2.Dot((Vector2)q-a,delta)/delta.sqrMagnitude);
                     if(Vector2.Distance(q,a+delta*t)>75)continue;
-                    enemy.Damage(28*game.Combat.FormMultiplier,(enemy.transform.position-game.Player.transform.position).normalized,.6f);Burst("Spark",enemy.transform.position+Vector3.up,12,.5f);hits++;
+                    enemy.Damage(28*game.Combat.FormMultiplier*AwakenedWeaponArts.BrushPower(game.Profile.equipped)*(1+AwakeningProgress.Rank(game.Profile,game.Profile.equipped)*.08f),(enemy.transform.position-game.Player.transform.position).normalized,.6f);Burst("Spark",enemy.transform.position+Vector3.up,12,.5f);hits++;AwakeningProgress.Record(game,"brush");AwakenedWeaponArts.BrushHit(game,enemy,!giantSword);giantSword=true;
                 }
                 foreach(var bolt in FindObjectsByType<InkProjectile>(FindObjectsSortMode.None))
                 {
                     var q=camera.WorldToScreenPoint(bolt.transform.position);Vector2 delta=b-a;float t=Mathf.Clamp01(Vector2.Dot((Vector2)q-a,delta)/delta.sqrMagnitude);
-                    if(q.z>0 && Vector2.Distance(q,a+delta*t)<65)Destroy(bolt.gameObject);
+                    if(q.z>0 && Vector2.Distance(q,a+delta*t)<65){AwakeningProgress.Record(game,"deflect");Destroy(bolt.gameObject);}
                 }
                 game.Audio.Cue("attack");game.Notify("Power Slash · "+hits+" enemies struck");
             }
+        }
+        bool ConnectLightning()
+        {
+            if(game.Profile.equipped!=OriginalWeaponEvolution.ThunderId || !Camera.main)return false;
+            var start=game.Combat.LightningSource;var screen=Camera.main.WorldToScreenPoint(start);
+            if(screen.z<=0 || Vector2.Distance(stroke[0],screen)>140)return false;
+            EnemyBrain target=null;float nearest=100,targetHeight=.45f;var end=stroke[stroke.Count-1];
+            foreach(var enemy in game.Enemies)if(enemy && !enemy.Dead && Vector3.Distance(enemy.transform.position,game.Player.transform.position)<24)
+            {var low=Camera.main.WorldToScreenPoint(enemy.transform.position+Vector3.up*.35f);var high=Camera.main.WorldToScreenPoint(enemy.transform.position+Vector3.up*enemy.HitHeight*.9f);var axis=(Vector2)(high-low);float t=axis.sqrMagnitude>.001f?Mathf.Clamp01(Vector2.Dot(end-(Vector2)low,axis)/axis.sqrMagnitude):0;float d=Vector2.Distance(end,(Vector2)low+axis*t);if(low.z>0 && d<nearest){nearest=d;target=enemy;targetHeight=Mathf.Lerp(.35f,enemy.HitHeight*.9f,t);}}
+            if(!target)return false;if(game.Energy<20){game.Notify("Not enough Ink for Thunderstorm");return true;}
+            game.Energy-=20;var at=target.transform.position+Vector3.up*targetHeight;ThunderPainting.Arc(null,start,at,.2f,.45f,7);WeaponElementFx.Thunder(game,at,true);AwakeningProgress.Record(game,"brush");
+            target.Damage(60*game.Combat.FormMultiplier*(1+AwakeningProgress.Rank(game.Profile,game.Profile.equipped)*.08f),(at-start).normalized,.7f);game.Notify("Thunderstorm · lightning follows the brush");return true;
         }
         public static void Burst(string sprite,Vector3 point,int count,float size)
         {var p=OriginalAtmosphere.Create(sprite,null,point,0,size,1.2f,.5f,.4f);if(p){p.Emit(count);Destroy(p.gameObject,2);}}
@@ -119,8 +132,8 @@ namespace Sunward.Remaster
             GUI.color=new Color(.05f,.025f,.015f,.95f);float tip=42*scale;
             GUI.DrawTexture(new Rect(cursor.x-tip*.26f,Screen.height-cursor.y-tip*.76f,tip,tip),ink);
             GUI.color=Color.white;
-            InkText.Draw("Celestial Brush · Ink "+Mathf.CeilToInt(game.Energy)+" · Slash / Bloom / Cherry Bomb",new Rect(22,18,Screen.width-44,48),32,new Color(.05f,.025f,.015f,.9f),false);
-            InkText.Draw("Cherry Bomb: circle, then a short straight fuse · 25 Ink",new Rect(22,57,Screen.width-44,40),26,new Color(.05f,.025f,.015f,.65f),false);
+            InkText.Draw("Celestial Brush · Ink "+Mathf.CeilToInt(game.Energy)+" · Slash / Bloom / Cherry Bomb / Thunderstorm",new Rect(22,18,Screen.width-44,48),32,new Color(.05f,.025f,.015f,.9f),false);
+            InkText.Draw(game.Profile.equipped==OriginalWeaponEvolution.ThunderId?"Thunderstorm: connect the glowing blade tip to an enemy · 20 Ink":"Cherry Bomb: circle, then a short straight fuse · 25 Ink",new Rect(22,57,Screen.width-44,40),26,new Color(.05f,.025f,.015f,.65f),false);
             GUI.color=old;GUI.matrix=previous;
         }
         void OnDestroy(){if(paperProfile)Destroy(paperProfile);}

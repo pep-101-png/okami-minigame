@@ -65,6 +65,13 @@ namespace Sunward.Remaster
             var q=Quaternion.Slerp(clip.Rotation[a*BoneCount+5],clip.Rotation[b*BoneCount+5],u);
             bones[5].localRotation=Quaternion.Slerp(bones[5].localRotation,q,amount);
         }
+        public void SampleBone(Clip clip,float time,Transform bone,int index,bool loop=true)
+        {
+            if(clip==null || !bone || index<0 || index>=BoneCount)return;
+            float phase=loop?Mathf.Repeat(time,clip.Duration)/clip.Duration:Mathf.Clamp01(time/clip.Duration);
+            float frame=phase*(clip.Samples-1);int a=Mathf.FloorToInt(frame),b=Mathf.Min(a+1,clip.Samples-1);float u=frame-a;int ka=a*BoneCount+index,kb=b*BoneCount+index;
+            bone.localPosition=Vector3.Lerp(clip.Position[ka],clip.Position[kb],u);bone.localRotation=Quaternion.Slerp(clip.Rotation[ka],clip.Rotation[kb],u);bone.localScale=Vector3.Lerp(clip.Scale[ka],clip.Scale[kb],u);
+        }
         public Clip Find(string name) => clips.TryGetValue(name, out var clip) ? clip : null;
         public void Sample(Clip clip, float time, Transform[] bones, Vector3[] fromPosition, Quaternion[] fromRotation, Vector3[] fromScale, float blend, bool loop, bool mirror = false)
         {

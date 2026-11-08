@@ -1,0 +1,11 @@
+{
+  "scope": "Actual C# output with API doubles; not Unity Play Mode",
+  "approvedChargeFramesPreserved": 139,
+  "flashDamageTimingPreserved": true,
+  "releaseUnfurls": true,
+  "forwardHeadingDegrees": 59.74060522564032,
+  "oneLandingCue": true,
+  "groundedRig": true,
+  "minLandingFootJointY": -0.019975060785409796,
+  "playerRestored": true
+}

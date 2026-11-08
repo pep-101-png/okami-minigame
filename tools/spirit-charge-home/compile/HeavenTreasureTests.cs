@@ -15,7 +15,7 @@ public static class HeavenTreasureTests
  {
   var p=new ProfileData{coins=777,owned=new[]{"spear","wp2e"}};
   Check(!OriginalWeaponEvolution.Owns(p),"Fresh save owns maze reward");Check(!OriginalWeaponEvolution.Unlock(null),"Null save accepted");
-  Check(OriginalWeaponEvolution.Unlock(p),"Cannot unlock evolved Thunder Edge");Check(p.coins==777 && p.equipped=="wp29e","Reward spends currency or fails to equip");Check(Array.IndexOf(p.owned,"wp29")>=0 && Array.IndexOf(p.owned,"wp2e")>=0,"Reward loses existing weapons or base Thunder Edge");
+  Check(OriginalWeaponEvolution.Unlock(p),"Cannot unlock evolved Thunder Edge");Check(p.coins==777 && p.equipped=="wp29e","Reward spends currency or fails to equip");Check(Array.IndexOf(p.owned,"wp29")<0 && Array.IndexOf(p.owned,"wp2e")>=0,"Awakened reward must replace only its original weapon");
   int count=p.owned.Length;Check(!OriginalWeaponEvolution.Unlock(p) && p.owned.Length==count,"Duplicate reward on revisit");
   var options=new JsonSerializerOptions{IncludeFields=true};var saved=JsonSerializer.Serialize(p,options);var loaded=JsonSerializer.Deserialize<ProfileData>(saved,options);Check(OriginalWeaponEvolution.Owns(loaded) && loaded.equipped=="wp29e","Reward lost on save round trip");Check(Math.Abs(OriginalWeaponEvolution.Power("wp29e")-1.35f)<.001 && OriginalWeaponEvolution.Power("wp29")==1,"Evolution damage corrupts base weapons");Check(Math.Abs(OriginalWeaponEvolution.Reach("wp29e")-1.15f)<.001,"Awakened reach missing");
   var game=new GameFlow{Player=new WolfMotor(),Health=100};game.Player.game=game;game.Services.game=game;game.Combat.allowEquip=true;

@@ -13,7 +13,7 @@ namespace Sunward
         public bool HoldingCharge=>charging && hold>.28f;
         public bool Attacking => strike != null;
         public bool TundraAir => Tundra && strike!=null && strike.clip=="Tundra_54f";
-        public float FormMultiplier => nativeBody && nativeBody.Shiranui?2:1;
+        public float FormMultiplier => nativeBody && nativeBody.FullPower?2.2f:nativeBody && nativeBody.Shiranui?2:1;
 
         WeaponDefinition weapon;
         Sunward.Remaster.OriginalWeaponCatalog.Entry originalWeapon;
@@ -28,7 +28,11 @@ namespace Sunward
         readonly Vector3[] previousBeads=new Vector3[12];
         bool havePreviousBeads,tundraSoundPending,tundraImpactPlayed;float previousBeadPhase;
         int chain;
-        bool heavy, queued, queuedHeavy, charging;
+        bool heavy, queued, queuedHeavy, charging,awakeningEquipPending;
+        public void QueueAwakeningEquip(){awakeningEquipPending=true;}
+        public Transform WeaponAnchor=>originalView?originalView.transform:backSocket;
+        public Vector3 LightningSource{get{Vector3 a,b;return originalView && originalView.LightningEndpoints(out a,out b)?b:transform.position+Vector3.up;}}
+        public bool ChargedStrike=>strike!=null && (strike.clip=="NativeAttack_524" || strike.clip=="NativeAttack_504" || strike.clip=="NativeAttack_54c" || strike.clip==Sunward.Remaster.TundraAttackRules.Cast);
         readonly AttackSequence sequence = new AttackSequence();
         readonly HashSet<EnemyBrain> hit = new HashSet<EnemyBrain>();
         readonly HashSet<Sunward.Remaster.TrainingDummy> dummyHits = new HashSet<Sunward.Remaster.TrainingDummy>();
@@ -47,7 +51,7 @@ namespace Sunward
             originalWeapon=Sunward.Remaster.OriginalWeaponCatalog.Find(game.Profile.equipped);
             if(originalWeapon==null){game.Profile.equipped="spear";originalWeapon=Sunward.Remaster.OriginalWeaponCatalog.Find("spear");}
             if(weapon && weapon!=spear && weapon!=sundial)Destroy(weapon);
-            weapon=Sunward.Remaster.OriginalWeaponCatalog.Definition(originalWeapon,spear,sundial);
+            weapon=Sunward.Remaster.OriginalWeaponCatalog.Definition(originalWeapon,spear,sundial,game.Profile);
             if(originalView){originalView.gameObject.SetActive(false);Destroy(originalView.gameObject);originalView=null;}
             // Start is called after GameFlow Awake; defer attachment until native
             // player Awake has completed. Never instantiate a second legacy view.
@@ -56,6 +60,7 @@ namespace Sunward
             {
                 var obj=new GameObject(originalWeapon.title+" · original instrument");obj.transform.SetParent(backSocket,false);
                 originalView=obj.AddComponent<Sunward.Remaster.OriginalWeaponView>();originalView.Load(originalWeapon.resource,originalWeapon.family);
+                obj.transform.localScale=Vector3.one*(originalWeapon.id=="wp29"?.86f:Sunward.Remaster.OriginalWeaponEvolution.IsAwakened(originalWeapon.id)?1.08f:1f);
                 if(originalWeapon.id==Sunward.Remaster.OriginalWeaponEvolution.ThunderId)Sunward.Remaster.OriginalWeaponEvolution.Attach(obj.transform);
                 obj.SetActive(CombatArea && !motor.Locked);
             }
@@ -90,15 +95,19 @@ namespace Sunward
             motor.animationView.Play(strike.clip,Mathf.Min(.12f,strike.duration*.2f),strike.duration,true);
             if(Tundra && nativeBody)nativeBody.SetTundraPhase(0,sourceAttackDuration);
             if(originalView)originalView.BeginAttack(strike.clip);
+            game.Audio.AmmyAttack();
             if(Tundra)tundraSoundPending=true;
             else game.Audio.Cue("weapon-"+originalWeapon.resource+(heavy?"-heavy":""));
             if (originalWeapon.resource=="wp24")
                 game.Fx.SundialOrbit(transform.position, heavy);
         }
 
+        public bool CanCycleWeapon=>game && motor && !game.InTrial && !game.Blocked && !motor.Locked && !motor.Swimming && !Busy && !game.Enemies.Exists(e=>e && !e.Dead);
         void Update()
         {
             if(!game)return;
+            if(awakeningEquipPending && !Busy && !game.Blocked){awakeningEquipPending=false;Equip();}
+            if(motor.input.Switch.WasPressedThisFrame() && CanCycleWeapon){game.Profile.equipped=Sunward.Remaster.OriginalWeaponCatalog.Next(game.Profile);game.Save.Save();Equip();}
             // An interrupted arena/dojo action must release the shared pose
             // clock rather than leave Amaterasu held in the last attack frame.
             if((!CombatArea || motor.Locked || motor.Swimming) && (strike!=null || charging))Cancel();
@@ -110,12 +119,6 @@ namespace Sunward
             voice = Mathf.Max(0, voice - dt);
             if (voice > 0)
                 return;
-            if (motor.input.Switch.WasPressedThisFrame() && !Busy)
-            {
-                game.Profile.equipped = Sunward.Remaster.OriginalWeaponCatalog.Next(game.Profile);
-                game.Save.Save();
-                Equip();
-            }
 
             if (motor.input.Bark.WasPressedThisFrame() && !Busy && barkCooldown <= 0 && game.Energy >= 15)
             {
@@ -248,13 +251,19 @@ namespace Sunward
             }
         }
         void ThunderContact(Vector3 point)
-        {bool large=strike.clip=="NativeAttack_524" && !thunderBurstUsed;if(large)thunderBurstUsed=true;Sunward.Remaster.WeaponElementFx.Thunder(game,point,large,!thunderAudioUsed);thunderAudioUsed=true;}
+        {bool large=strike!=null && strike.clip=="NativeAttack_524" && !thunderBurstUsed;if(large)thunderBurstUsed=true;Sunward.Remaster.WeaponElementFx.Thunder(game,point,large,!thunderAudioUsed);thunderAudioUsed=true;
+            if(large && originalWeapon.id==Sunward.Remaster.OriginalWeaponEvolution.ThunderId)Sunward.Remaster.AwakenedWeaponArts.Pulse(game,point,7.5f,24,"Spark",new Color(1,.8f,.2f),.4f);}
         void DamageEnemy(EnemyBrain e,Vector3 d)
         {
                 hit.Add(e);
                 float mul = 1 + (ProgressionRules.Level(game.Profile) - 1) * .045f + game.Profile.upgrades.strength * .18f;
                 mul *= 1 + (Glaive ? game.Profile.upgrades.spear * .12f : game.Profile.upgrades.sundial * .14f);
+                bool charged=ChargedStrike;
                 e.Damage(strike.damage * mul*FormMultiplier, d.normalized, strike.stagger);
+                Sunward.Remaster.AwakeningProgress.Record(game,"hit",charged);
+                if(game.CinematicActive || strike==null)return;
+                Sunward.Remaster.AwakenedWeaponArts.Contact(game,e,charged);
+                if(game.CinematicActive || strike==null)return;
                 if(!Thunder)game.Fx.Impact(e.transform.position + Vector3.up * .8f, Tundra?new Color(.55f,.85f,1):Glaive ? new Color(.9f, .75f, .48f) : new Color(1, .38f, .13f));
                 if(!Thunder)Sunward.Remaster.CelestialBrush.Burst("Spark",e.transform.position+Vector3.up*.8f,heavy?18:9,heavy?.7f:.4f);
                 if(Thunder)ThunderContact(e.transform.position+Vector3.up*.7f);
@@ -263,7 +272,7 @@ namespace Sunward
                     var frost=Sunward.Remaster.OriginalAtmosphere.Create("SpiritGlow",null,e.transform.position+Vector3.up*.8f,0,.28f,.5f,.12f,.25f);
                     if(frost){var main=frost.main;main.startColor=new Color(.5f,.8f,1,.65f);frost.Emit(5);Destroy(frost.gameObject,1);}
                 }
-                if(originalWeapon.family=="reflector")Sunward.Remaster.CelestialBrush.Burst(originalWeapon.resource=="wp24"?"Flame":"SpiritGlow",e.transform.position+Vector3.up,8,.45f);
+                if(originalWeapon.family=="reflector")Sunward.Remaster.CelestialBrush.Burst(originalWeapon.resource=="wp24" || originalWeapon.resource=="wp20"?"Flame":"SpiritGlow",e.transform.position+Vector3.up,8,.45f);
                 if(Tundra){if(!tundraImpactPlayed){tundraImpactPlayed=true;if(strike.clip!=Sunward.Remaster.TundraAttackRules.Cast)game.Audio.TundraContact();}}
                 else if(!Thunder)game.Audio.Cue(heavy ? "heavy-impact" : originalWeapon.family=="reflector" ? "flame-impact" : "impact");
                 game.HitPause(heavy ? .065f : .04f);

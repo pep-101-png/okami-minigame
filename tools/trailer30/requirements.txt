@@ -1,0 +1,4 @@
+moderngl>=5.13,<6
+glcontext>=3,<4
+numpy
+Pillow

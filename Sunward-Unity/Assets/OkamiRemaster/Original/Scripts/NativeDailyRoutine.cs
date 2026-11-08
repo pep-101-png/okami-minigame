@@ -8,6 +8,7 @@ namespace Sunward.Remaster
         public GameFlow game;
         public NativeHomeRoom home;
         public bool farmer;
+        public bool Sleeping {get;private set;}
         public int seed;
         public Vector3 workplace;
         OriginalActor actor;
@@ -53,19 +54,21 @@ namespace Sunward.Remaster
         void Update()
         {
             if(!game || game.Blocked || !actor || !actor.Ready)return;
-            int phase=farmer && game.Profile.night?4:teaVisit?1:farmer?(int)((Time.time+seed*7)/16)%4:(int)((Time.time+seed*13)/40)%4;
+            bool sleep=!farmer && !teaVisit && home && actor.ActivityLength("village_sleep")>0 && VillageDayCycle.SleepTime(game.Profile,seed);
+            Sleeping=sleep && indoors;
+            int phase=sleep?5:farmer && game.Profile.night?4:teaVisit?1:farmer?(int)((Time.time+seed*7)/16)%4:(int)((Time.time+seed*13)/40)%4;
             if(wait>0){wait-=Time.deltaTime;return;}
             if(farmer && Vector3.Distance(transform.position,game.Player.transform.position)<3.2f){actor.EndActivity();return;}
             if(phase!=destination)
             {
                 destination=phase;resting=false;actor.EndActivity();
                 if(indoors && home){SetPosition(home.exitPoint);indoors=false;}
-                var target=farmer && game.Profile.night?new Vector3(54.2f,0,38.2f):farmer?workplace+(phase==0?Vector3.zero:phase==1?new Vector3(7,0,0):phase==2?new Vector3(10,0,1.5f):new Vector3(2,0,2.8f)):phase==1 && home?home.Approach:phase==2?new Vector3(GardenPond.X+Mathf.Cos((seed*47+20)*Mathf.Deg2Rad)*4.25f,0,GardenPond.Z+Mathf.Sin((seed*47+20)*Mathf.Deg2Rad)*2.9f):workplace;
+                var target=farmer && game.Profile.night?new Vector3(54.2f,0,38.2f):farmer?workplace+(phase==0?Vector3.zero:phase==1?new Vector3(7,0,0):phase==2?new Vector3(10,0,1.5f):new Vector3(2,0,2.8f)):(phase==1 || phase==5) && home?home.Approach:phase==2?new Vector3(GardenPond.X+Mathf.Cos((seed*47+20)*Mathf.Deg2Rad)*4.25f,0,GardenPond.Z+Mathf.Sin((seed*47+20)*Mathf.Deg2Rad)*2.9f):workplace;
                 if(!Route(target)){wait=5;destination=-1;return;}
             }
             if(indoors)
             {
-                if(!resting){actor.PlayActivity(actor.idle,true);resting=true;}
+                if(!resting){RestPose(sleep);resting=true;}
             }
             else if(pathIndex<path.Count)
             {
@@ -77,16 +80,22 @@ namespace Sunward.Remaster
             else if(!resting)
             {
                 resting=true;
-                if(!farmer && phase==1 && home){SetPosition(teaVisit?home.transform.position+new Vector3(.7f,.02f,-.7f):home.bed+new Vector3(.8f,0,0));indoors=true;}
+                if(!farmer && (phase==1 || phase==5) && home){SetPosition(teaVisit?home.transform.position+new Vector3(.7f,.02f,-.7f):home.bed);indoors=true;Sleeping=sleep;}
                 if(!farmer && phase==2){var d=new Vector3(GardenPond.X,transform.position.y,GardenPond.Z)-transform.position;if(d.sqrMagnitude>.01f)transform.rotation=Quaternion.LookRotation(d);}
                 // Own original seated action, only where present. No cross-rig pose copy.
                 string seat=(actor.resource.EndsWith("hm09") || actor.resource.EndsWith("hm05"))?"hm05_003":actor.resource.EndsWith("hm00")?"hm00_003":null;
-                if(!farmer && !string.IsNullOrEmpty(seat) && actor.ActivityLength(seat)>0)actor.PlayActivity(seat,true,.8f);
+                if(sleep){RestPose(true);}
+                else if(!farmer && !string.IsNullOrEmpty(seat) && actor.ActivityLength(seat)>0)actor.PlayActivity(seat,true,.8f);
                 else if(farmer && actor.ActivityLength("hm00_003")>0)actor.PlayActivity("hm00_003",true,.7f);
             }
             var playerRoom=NativeHomeRoom.At(game.Player.transform.position);
             bool visible=indoors?playerRoom==home:!playerRoom && !VillageInteriors.Inside(game.Player.transform.position);
             actor.SetVenueVisible(visible);
+        }
+        void RestPose(bool sleep)
+        {
+            if(sleep && actor.ActivityLength("village_sleep")>0){transform.rotation=Quaternion.Euler(0,90,0);actor.PlayActivity("village_sleep",true,.55f);}
+            else actor.PlayActivity(actor.idle,true);
         }
         void SetPosition(Vector3 p){transform.position=p;if(body)body.position=p;}
         void OnDisable(){if(actor)actor.EndActivity();if(resident)resident.enabled=true;}

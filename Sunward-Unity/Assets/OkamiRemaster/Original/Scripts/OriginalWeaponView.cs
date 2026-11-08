@@ -17,6 +17,7 @@ namespace Sunward.Remaster
         Quaternion[] rotation;
         SkinnedMeshRenderer[] renderers;
         WolfCombat combat;
+        Mesh clearanceMesh;readonly System.Collections.Generic.List<Vector3> clearanceVertices=new System.Collections.Generic.List<Vector3>();
         readonly Vector3[] points=new Vector3[12];
         bool Tundra=>package=="wp2e";
         public void Load(string source,string kind="reflector")
@@ -27,7 +28,7 @@ namespace Sunward.Remaster
             if(bank.BoneCount!=rig.Bones.Length)throw new InvalidOperationException("Original weapon skeleton mismatch: "+source);
             position=new Vector3[bank.BoneCount];scale=new Vector3[bank.BoneCount];rotation=new Quaternion[bank.BoneCount];
             for(int i=0;i<position.Length;i++){position[i]=rig.Bones[i].localPosition;scale[i]=Vector3.one;rotation[i]=Quaternion.identity;}
-            idle=bank.Find(package+(family=="glaive"?"_001":"_000"));
+            idle=bank.Find(package+(family=="glaive" && package!="wp28"?"_001":"_000"));
             if(idle==null)throw new InvalidOperationException("Original weapon idle is missing: "+source);
             renderers=rig.Root.GetComponentsInChildren<SkinnedMeshRenderer>(true);
             foreach(var renderer in renderers)
@@ -99,11 +100,11 @@ namespace Sunward.Remaster
             if(rig==null || idle==null)return;
             if(package=="wp29")
             {
-                int guard=combat && combat.HoldingCharge?3:combat && combat.game && combat.game.Profile.equipped==OriginalWeaponEvolution.ThunderId?4:2;
-                foreach(var r in renderers){int group=int.Parse(r.sharedMesh.name.Split('-')[1]);r.enabled=group==1 || group==guard;}
+                // These are complementary blade/spike sections, not exclusive forms.
+                foreach(var r in renderers)r.enabled=true;
             }
             if(!Tundra)
-            {if(action!=null)return;idleTime+=Time.deltaTime;Sample(idle,idleTime,true,1);return;}
+            {if(action!=null)return;idleTime+=Time.deltaTime;Sample(idle,idleTime,true,1);BladeClearance();return;}
             if(combat && combat.game && combat.game.Blocked)return;
             blendTime+=Time.deltaTime;
             float blend=blendLength>0?Mathf.SmoothStep(0,1,blendTime/blendLength):1;
@@ -124,6 +125,27 @@ namespace Sunward.Remaster
                 if(combat)combat.TundraBeadContacts(points,count);
             }
         }
+        public bool LightningEndpoints(out Vector3 hilt,out Vector3 tip)
+        {
+            hilt=tip=transform.position;if(rig==null || package!="wp29" || rig.Bones.Length<3)return false;
+            hilt=rig.Bones[2].TransformPoint(new Vector3(0,0,.65f));tip=rig.Bones[2].TransformPoint(new Vector3(0,0,-1.55f));return true;
+        }
+        void BladeClearance()
+        {
+            if(package!="wp29" && package!="wp28")return;rig.Root.transform.localPosition=Vector3.zero;
+            if(!combat || !combat.HoldingCharge)return;
+            var body=combat.GetComponent<NativeAmaterasu>();if(!body || !body.Ready || !body.Head)return;
+            // Preserve the recovered charge pose. Move only the separate weapon
+            // skin back over the shoulders, then clear the live skull volume.
+            float size=body.FullPower?1.2f:1;float radius=.45f*size;rig.Root.transform.position+=Vector3.up*(.22f*size)-combat.transform.forward*(.5f*size);
+            if(!clearanceMesh)clearanceMesh=new Mesh();float lift=0;var head=body.Head.position;
+            foreach(var renderer in renderers)if(renderer.enabled)
+            {
+                renderer.BakeMesh(clearanceMesh);clearanceVertices.Clear();clearanceMesh.GetVertices(clearanceVertices);
+                foreach(var vertex in clearanceVertices){var p=renderer.transform.TransformPoint(vertex);float d=(p.x-head.x)*(p.x-head.x)+(p.z-head.z)*(p.z-head.z);if(d<radius*radius)lift=Mathf.Max(lift,head.y+Mathf.Sqrt(radius*radius-d)-p.y);}
+            }
+            rig.Root.transform.position+=Vector3.up*(lift>0?lift+.025f:0);
+        }
         void ChargeClearance()
         {
             rig.Root.transform.localPosition=Vector3.zero;
@@ -135,6 +157,6 @@ namespace Sunward.Remaster
             rig.Root.transform.position+=Vector3.up*chargeLift;
         }
         void Sample(NativePoseBank.Clip clip,float time,bool loop,float blend)=>bank.Sample(clip,time,rig.Bones,position,rotation,scale,blend,loop);
-        void OnDestroy(){if(rig!=null)rig.Dispose();}
+        void OnDestroy(){if(clearanceMesh)Destroy(clearanceMesh);if(rig!=null)rig.Dispose();}
     }
 }

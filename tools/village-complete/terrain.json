@@ -1,0 +1,7 @@
+{
+  "changedVertices": 960,
+  "preservedVertices": 50080,
+  "preservedTriangles": 99188,
+  "minRiverBed": -7.2099127769470215,
+  "operation": "Existing valley terrain vertices lowered into continuous river gorge; topology/UV/pigment retained; hardcoded shader hole removed"
+}

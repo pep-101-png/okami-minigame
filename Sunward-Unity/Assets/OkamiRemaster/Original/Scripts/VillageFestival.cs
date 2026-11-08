@@ -18,7 +18,7 @@ namespace Sunward.Remaster
         public bool Night=>game && game.Profile.night;
         void Start()
         {
-            if(!game)game=GetComponent<GameFlow>();sun=RenderSettings.sun;
+            if(!game)game=GetComponent<GameFlow>();Shader.SetGlobalTexture("_SunwardSunArt",Resources.Load<Texture2D>("Okami/Effects/OriginalSun"));Shader.SetGlobalTexture("_SunwardMoonArt",Resources.Load<Texture2D>("Okami/Effects/OriginalMoon"));sun=RenderSettings.sun;
             if(sun){sunIntensity=sun.intensity;sunColor=sun.color;sunRotation=sun.transform.rotation;}
             fog=RenderSettings.fogColor;ambient=RenderSettings.ambientLight;blend=Night?1:0;
             festival=new GameObject("Original village festival lanterns");festival.transform.SetParent(transform,false);
@@ -53,17 +53,18 @@ namespace Sunward.Remaster
             }
             var extent=hi-lo;Vector3 scale=new Vector3(size.x/Mathf.Max(.001f,extent.x),size.y/Mathf.Max(.001f,extent.y),size.z/Mathf.Max(.001f,extent.z));
             var root=new GameObject("Original native prop "+resource);root.transform.SetParent(parent,false);root.transform.localPosition=position;root.transform.localRotation=Quaternion.Euler(rotation);
-            root.AddComponent<OriginalVisual>().Load(resource,-Vector3.Scale(new Vector3((lo.x+hi.x)*.5f,lo.y,(lo.z+hi.z)*.5f),scale),scale);
+            var visual=root.AddComponent<OriginalVisual>();visual.Load(resource,-Vector3.Scale(new Vector3((lo.x+hi.x)*.5f,lo.y,(lo.z+hi.z)*.5f),scale),scale);
+            if(resource=="Okami/wp28")root.AddComponent<EighthWonderMotion>().visual=visual;
             return root;
         }
         [System.Serializable]sealed class BoundsModel{public BoundsPart[] parts;public int[] visibleGroups;}
         [System.Serializable]sealed class BoundsPart{public string name;public float[] positions;}
         public void SleepToNextTime()
         {
-            game.Profile.night=NextNight(game.Profile.night);game.Save.Save();
+            var cycle=game.GetComponent<VillageDayCycle>();if(cycle)cycle.AdvanceByBed();else {game.Profile.night=NextNight(game.Profile.night);game.Profile.dayElapsed=0;game.Save.Save();}
             game.Notify(Night?"Night falls · festival lanterns light the village":"Morning returns · the village wakes");
         }
-        void Update(){if(!game)return;blend=Mathf.MoveTowards(blend,Night?1:0,Time.unscaledDeltaTime/.9f);Apply();}
+        void Update(){if(!game)return;blend=Mathf.MoveTowards(blend,Night?1:0,Time.unscaledDeltaTime/(game.Presentation && game.Presentation.Playing?5f:18f));Apply();}
         void Apply()
         {
             float effective=game && HeavenlyGarden.Inside(game.Player.transform.position)?0:blend;

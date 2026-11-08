@@ -1,0 +1,18 @@
+{
+  "scope": "Source conservation and actual C# driver capture with API doubles, not Unity Play Mode",
+  "originalPaint": [
+    "bafooon",
+    "sand_01",
+    "rcok_gray",
+    "kemuri_01",
+    "fire_02",
+    "circleLight"
+  ],
+  "existingAudioBindingsPreserved": true,
+  "flashDamageTime": 4.633333,
+  "swordImpactTime": 0.33333334,
+  "ultimateFrames": 222,
+  "swordFrames": 54,
+  "maxPaintedQuads": 185,
+  "oneDetonation": true
+}

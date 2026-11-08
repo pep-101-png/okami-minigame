@@ -8,7 +8,7 @@ namespace Sunward.Remaster
         {
             string technique=e.family=="rosary"?"Long-reaching bead whips. Chain light attacks; hold and release for a charged cast.":e.family=="glaive"?"A cutting instrument with advancing sword strikes. Charge a deliberate heavy blow.":"A divine mirror for broad close-range strikes and heavy charged blows.";
             if(e.resource=="wp2e")technique+=" Tundra Beads release an icy spiral. Keep space around Ammy for its reach.";
-            return technique;
+            return technique+(OriginalWeaponEvolution.IsAwakened(e.id)?" Empowered Sunward variant using the recovered original model.":"");
         }
         public static string Lore(OriginalWeaponCatalog.Entry e)
         {

@@ -48,6 +48,8 @@ namespace Sunward.Remaster
         public static Vector3 DojoDoor=>new Vector3(0.025f,0.1f,17.05418f);
         public static string Action(Vector3 p)
         {
+            if(Home(p) && Vector3.Distance(p,HomeWeaponDisplay.Position)<1.6f)return "home-weapon";
+            if(Home(p) && Vector3.Distance(p,HomeBlessings.Fire)<1.7f)return "home-fire";
             if(Home(p))return Vector3.Distance(p,HomeLayout.Bed)<1.9f?"bed":Vector3.Distance(p,HomeLayout.Mirror)<2?"mirror":null;
             if(Food(p))return Vector3.Distance(p,Mat)<1.35f?"venue:mat":null;
             return null;

@@ -123,6 +123,7 @@ s=s.replace('namespace Sunward.Remaster{public class HeavenlyGarden:UnityEngine.
 s=s.replace('public class BoxCollider:Collider{','public class MeshCollider:Collider{public Mesh sharedMesh;}public class BoxCollider:Collider{')
 s=s.replace('public static float Height(', 'public static float Height(')
 s=s.replace('public static class OriginalWeaponCatalog{', 'public static class OriginalWeaponCatalog{public class Entry{public string family,resource;public int cost;}')
+s=s.replace('public sealed partial class GameFlow:MonoBehaviour\n {','public sealed partial class GameFlow:MonoBehaviour\n {public void OfferWindflowers(){}')
 s+='\n'+Path(__file__).with_name('VillagePresentationDoubles.cs').read_text()
 s+='\n'+Path(__file__).with_name('FestivalDoubles.cs').read_text()
 s=s.replace('public bool HoldingCharge;', 'public GameFlow game;public bool HoldingCharge;')
@@ -184,6 +185,9 @@ s=re.sub(r' public class OriginalVisual:UnityEngine.MonoBehaviour\{[^\n]*\}\n','
 s=s.replace('var bank=new NativePoseBank(resource+"/Poses");Bones=', 'var motion=Resources.Load<TextAsset>(resource+"/Poses");var bank=new {BoneCount=motion==null?1:new NativePoseBank(resource+"/Poses").BoneCount};Bones=')
 s=s.replace('public static int RaycastNonAlloc(Vector3 p,Vector3 dir,RaycastHit[] hits,float d,int mask,QueryTriggerInteraction q)=>0;', 'public static int RaycastNonAlloc(Vector3 p,Vector3 dir,RaycastHit[] hits,float d,int mask,QueryTriggerInteraction q){int n=System.Math.Min(hits.Length,HeavenPhysicsFixture.hits.Length);System.Array.Copy(HeavenPhysicsFixture.hits,hits,n);return n;}')
 s+='\nnamespace UnityEngine{public static class HeavenPhysicsFixture{public static RaycastHit[] hits=System.Array.Empty<RaycastHit>();}}'
+# Static native ES3A has no motion bank: read the original model's bone count.
+s=s.replace('motion==null?1:new NativePoseBank(resource+"/Poses").BoneCount', 'motion==null?System.Text.Json.JsonDocument.Parse(Resources.Load<TextAsset>(resource+"/Model").text).RootElement.GetProperty("bones").GetArrayLength()+1:new NativePoseBank(resource+"/Poses").BoneCount')
+s=s.replace('new SkinnedMeshRenderer{sharedMesh=new Mesh{name=p.GetProperty', 'new SkinnedMeshRenderer{sharedMaterial=new Material((Material)null),sharedMesh=new Mesh{name=p.GetProperty')
 # Public Unity APIs used by the real native shrine floor and veil adapters.
 s=s.replace('public class Mesh:Object{', 'public class Mesh:Object{public Vector3[] vertices=System.Array.Empty<Vector3>();public int[] triangles=System.Array.Empty<int>();public void RecalculateBounds(){}')
 s=s.replace('public static Vector3 Lerp(', 'public static Vector3 Cross(Vector3 a,Vector3 b)=>new Vector3(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x);public static Vector3 Lerp(')
@@ -192,6 +196,57 @@ s=s.replace('public class LineRenderer:', 'public class LineRenderer:')
 s=s.replace('public int positionCount;', 'public bool loop;public int positionCount;')
 s=s.replace('public GameObject(string n=""){', 'public GameObject(string n=""){name=n;')
 s=s.replace('{foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories))foreach(var ext', '{foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories)){if(typeof(T)==typeof(Material) && File.Exists(Path.Combine(dir,name+".mat")))return new Material((Material)null){shader=new Shader()} as T;}foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories))foreach(var ext')
+# API doubles for the native home, time and save-menu additions. These do not
+# model Unity rendering, real save I/O or the player's PC.
+s=s.replace('public class SaveStore{public int saves;public void Save(){saves++;}}','public class SaveStore{public int saves;public string Status="";public void Save(){saves++;}public ProfileData ReadSlot(int i)=>null;public bool SaveSlot(int i)=>true;public bool LoadSlot(int i)=>false;}')
+s=s.replace('public sealed partial class GameFlow:MonoBehaviour\n {','public sealed partial class GameFlow:MonoBehaviour\n {public CollectibleShelf Shelf=new CollectibleShelf();public void RefreshQuest(){}')
+s+='\nnamespace Sunward{public class CollectibleShelf{public void Refresh(){}}}'
+s=s.replace('public bool Sleeping;', 'public bool Active;public bool Sleeping;')
+s=s.replace('public struct Matrix4x4{','public struct Matrix4x4{public static Matrix4x4 Scale(Vector3 p)=>identity;')
+s=s.replace('public enum ParticleSystemRenderMode{','public enum ParticleSystemRenderMode{VerticalBillboard,')
+s+='\nnamespace UnityEngine{public enum LineAlignment{View,TransformZ}}'
+s=s.replace('public class LineRenderer:Renderer{','public class LineRenderer:Renderer{public LineAlignment alignment;')
+s=s.replace('public bool useUnscaledTime;', 'public bool useUnscaledTime,startSize3D;public float startSizeX,startSizeY,startSizeZ;')
+s=s.replace('public class Transform:Object\n {','public class Transform:Object\n {public string name=>gameObject!=null?gameObject.name:"";')
+s=s.replace('public class WolfCombat:Object{','public class WolfCombat:Object{public T GetComponent<T>()where T:new()=>new T();')
+s=s.replace('public string family,resource;public int cost;}public static object Find(string id)=>new object();','public string id,title,family,resource;public int cost;}public static Entry Find(string id)=>new Entry();')
+s=s.replace('public struct MainModule{public bool useUnscaledTime,startSize3D;', 'public struct MainModule{public ParticleSystemSimulationSpace simulationSpace;public float startRotation;public bool useUnscaledTime,startSize3D;')
+s=s.replace('public class ParticleSystem:Object\n {','public class ParticleSystem:Object\n {public T GetComponent<T>()where T:new()=>new T();public struct TextureSheetAnimationModule{public bool enabled;public int numTilesX,numTilesY;public MinMaxCurve startFrame;public float frameOverTime;}public TextureSheetAnimationModule textureSheetAnimation=>new TextureSheetAnimationModule();')
+s+='\nnamespace UnityEngine{public enum ParticleSystemSimulationSpace{Local,World}public enum ParticleSystemRenderMode{Billboard,HorizontalBillboard,VerticalBillboard}public class ParticleSystemRenderer:Renderer{public ParticleSystemRenderMode renderMode;}}'
+s=s.replace('public static class Time{','public static class Time{public static int frameCount;')
+s=s.replace('public class Keyboard{','public class Keyboard{public Controls.ButtonControl upArrowKey=new Controls.ButtonControl(),downArrowKey=new Controls.ButtonControl(),leftArrowKey=new Controls.ButtonControl(),rightArrowKey=new Controls.ButtonControl();')
+# Execute the real GameFlow.Finish implementation so victory coverage cannot
+# pass against a mock callback that never starts the actual sequence.
+start=flow.index('public void Finish(bool win)');pos=flow.index('{',start);level=1;end=pos+1
+while level:
+ if flow[end]=='{':level+=1
+ elif flow[end]=='}':level-=1
+ end+=1
+s+='\nnamespace Sunward {public sealed partial class GameFlow {'+flow[start:end]+'}}\n'
+start=flow.index('void ClearBarrier()');pos=flow.index('{',start);level=1;end=pos+1
+while level:
+ if flow[end]=='{':level+=1
+ elif flow[end]=='}':level-=1
+ end+=1
+s+='\nnamespace Sunward {public sealed partial class GameFlow {'+flow[start:end]+'}}\n'
+s+='\nnamespace UnityEngine{public static class PlayerPrefs{static System.Collections.Generic.Dictionary<string,float> values=new System.Collections.Generic.Dictionary<string,float>();public static float GetFloat(string k,float d)=>values.TryGetValue(k,out var v)?v:d;public static void SetFloat(string k,float v){values[k]=v;}public static void Save(){}}}'
+s=s.replace('public bool isPlaying,loop,playOnAwake;', 'public float time;public bool isPlaying,loop,playOnAwake;')
+s=s.replace('public class Material:Object{', 'public class Material:Object{public void SetVectorArray(string n,Vector4[] v){}')
+# API doubles for the awakening expansion; these do not validate Unity playback.
+s=s.replace('public class WolfCombat:Object{','public class WolfCombat:Object{public void QueueAwakeningEquip(){}public Vector3 LightningSource=>transform.position+Vector3.up;')
+s=s.replace('public static bool Buy(Sunward.ProfileData p,string id)=>false;','public static bool Owns(Sunward.ProfileData p,string id)=>p.owned!=null && System.Array.IndexOf(p.owned,id)>=0;public static bool Buy(Sunward.ProfileData p,string id)=>false;')
+s=s.replace('public class Mesh:Object{','public class Mesh:Object{public Vector2[] uv;')
+s=s.replace('public struct Vector3{','public struct Vector3{public void Normalize(){this=normalized;}')
+s=s.replace('public class WolfInput{','public class WolfInput{public UnityEngine.InputSystem.InputAction Ultimate=new UnityEngine.InputSystem.InputAction();')
+s=s.replace('public float MaxStamina=>100;', 'public float MaxStamina=>100+Profile.upgrades.stamina*15+Sunward.Remaster.HomeBlessings.StaminaBonus(Profile,Sunward.Remaster.HomeBlessings.Now);')
+s=s.replace('public sealed class Rigidbody:Object{','public sealed class Rigidbody:Object{public bool useGravity;')
+s=s.replace('public class BoxCollider:Object{','public class BoxCollider:Collider{public bool isTrigger;')
+s=s.replace('public class Collider:Object{','public class Collider:Object{public Sunward.WolfMotor owner;public T GetComponentInParent<T>()where T:class=>owner as T;')
+s=s.replace('public sealed partial class WolfMotor:MonoBehaviour\n {','public sealed partial class WolfMotor:MonoBehaviour\n {public int TeleportRevision;')
+s=s.replace('public class Mesh:Object{','public class Mesh:Object{public Color[] colors;')
+s=s.replace('public class AudioSource:Object{','public class AudioSource:Object{public float pitch=1;')
+s=s.replace('public struct RaycastHit{','public struct RaycastHit{public Vector3 normal;')
+s=s.replace('public sealed partial class GameFlow:MonoBehaviour\n {','public sealed partial class GameFlow:MonoBehaviour\n {public Remaster.ShiranuiUltimate Ultimate;')
 if args.dump_doubles:Path(args.dump_doubles).write_text(s)
 with tempfile.TemporaryDirectory(prefix='sunward-semantic-') as temp:
  d=Path(temp)/'Doubles.cs';d.write_text(s);cmd=[args.dotnet,'build',str(Path(__file__).with_name('Compile.csproj')),'--nologo','-p:SemanticDoubles='+str(d)]

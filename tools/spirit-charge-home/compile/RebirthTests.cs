@@ -13,7 +13,7 @@ static class RebirthTests
  static void Call(object x,string n)=>x.GetType().GetMethod(n,BindingFlags.NonPublic|BindingFlags.Instance).Invoke(x,null);
  static void Main(string[] args)
  {
-  Resources.Root=args[0];
+  Resources.Root=args[0];FullPowerTests.Run();HeavenAudioPolishTests.Run();TrailingRibbonTests.Run();
   foreach(int fps in new[]{15,30,60,120})foreach(int mode in new[]{0,1,2,3,4})
   {
    var player=new WolfMotor();var game=new GameFlow{Player=player,Audio=new ValleyAudio(),InTrial=true,BossTrial=true,Panel="",Health=100};player.game=game;
@@ -62,7 +62,7 @@ static class RebirthTests
    player.input.Interact.pressedThisFrame=true;Call(lower,"Update");Check(game.homeReturns==1,"Centre mirror interaction cannot call home return");
    LowerArena.Leave();Check(!lower.mirror.gameObject.activeSelf&&beacon.wasDestroyed,"Home exit leaves victory effects/return mirror active");Call(lower,"OnDestroy");
   }
-  checks+=VillageTests.Run()+FestivalTests.Run();FestivalChallengeTests.Run();VillageRefinementTests.Run();GardenPassageTests.Run();HeavenFollowupTests.Run();HeavenTreasureTests.Run();HeavenPalaceTests.Run();TextBoundsTests.Run(args[0]);
+  checks+=VillageTests.Run()+FestivalTests.Run();FestivalChallengeTests.Run();VillageRefinementTests.Run();GardenPassageTests.Run();HeavenFollowupTests.Run();HeavenTreasureTests.Run();HeavenPalaceTests.Run();TextBoundsTests.Run(args[0]);VillageCompleteTests.Run();
   Console.WriteLine("PASS "+checks+" actual three-phase boss/native director checks, stun resistance, first/middle/final deaths, 1x/2x/4x scaling, fire/armour visibility, skip/cancel and paused motion at 15/30/60/120fps. Engine doubles, NOT Unity.");
  }
 }

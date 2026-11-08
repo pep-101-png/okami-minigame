@@ -1,0 +1,231 @@
+{
+  "numbering": "Standard player subsong numbering: #1 is first entry. Original bank/table order is preserved. User could not confirm numbering by audition.",
+  "selections": [
+    {
+      "cue": "palacemusic",
+      "userLabel": "core/core #16",
+      "source": "/workspace/work/playtest-repair/source-native/data_pc/se/core/core.afs2",
+      "subsong": 16,
+      "arrayIndex": 15,
+      "sourceSHA256": "25995459ccea3a70d61714ef66969b5b24978a76aaa4c93cf2a6c2c8463c5ac2",
+      "outputSHA256": "b72d0dc772d9350574f47d7bd968456d6352af16f49652df94c8dce1341b67fe",
+      "resource": "Okami/SelectedAudio/core-core-subsong-16",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 1489,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -14.462,
+          "peak": 0.727112,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -24.0,
+          "peak": 0.242508,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -9.538,
+        "seconds": 3.9707,
+        "clearADX_SHA256": "08b054a738c2cb3604480191de4424b5fe7e8446c6a5377cdbe5c1bded168372"
+      }
+    },
+    {
+      "cue": "menu-open",
+      "userLabel": "core/core #35",
+      "source": "/workspace/work/playtest-repair/source-native/data_pc/se/core/core.ses",
+      "subsong": 35,
+      "arrayIndex": 34,
+      "sourceSHA256": "bed66ac6f88cc60369be582b3f9dfb730525fe388570372f8cfbab8a221fd182",
+      "outputSHA256": "9eeb8efc2ff2c8fdef77775632b58810bfb20541197a874782eddc6679fa410f",
+      "resource": "Okami/SelectedAudio/core-core-subsong-35",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 377,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -11.246,
+          "peak": 0.901215,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -23.038,
+          "peak": 0.231344,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -11.751,
+        "seconds": 0.754,
+        "clearADX_SHA256": "fde487b7da7ad9dda5be54d7991172c4eb8f35dca1720116d776eaab18965ce0"
+      }
+    },
+    {
+      "cue": "ammy-swing",
+      "userLabel": "pl/pl00 #14",
+      "source": "/workspace/work/playtest-repair/source-native/data_pc/se/pl/pl00.ses",
+      "subsong": 14,
+      "arrayIndex": 13,
+      "sourceSHA256": "c4df2fd464e5da65b89ac8584e85f06cede44858b6966ff72c306a69e4166632",
+      "outputSHA256": "bc7fb2603c89d69c20927f4bb08035c4876631af4f2321603f140fc545e2c674",
+      "resource": "Okami/SelectedAudio/pl-pl00-subsong-14",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 1128,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -12.666,
+          "peak": 1.0,
+          "clippedFraction": 0.00012467
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.304337,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -10.334,
+        "seconds": 2.256,
+        "clearADX_SHA256": "c4d3004236bcff97f3b6ce6a295d7f64c68d67cc164251561ba960511e22b274"
+      }
+    },
+    {
+      "cue": "ammy-swing",
+      "userLabel": "pl/pl00 #15",
+      "source": "/workspace/work/playtest-repair/source-native/data_pc/se/pl/pl00.ses",
+      "subsong": 15,
+      "arrayIndex": 14,
+      "sourceSHA256": "85242e6bf9e72c82f8f6714a58fec4b9387ca706b17343cc57e77607ae8d3103",
+      "outputSHA256": "d0bb1f8d3b98c88dabc027c3dc893c794e1fa6cd6e7df2b52ed7553cf05cbc43",
+      "resource": "Okami/SelectedAudio/pl-pl00-subsong-15",
+      "decoding": {
+        "sourceVersion": "0x400",
+        "frameScalesDecrypted": false,
+        "decoded": {
+          "rmsDBFS": -10.397,
+          "peak": 1.0,
+          "clippedFraction": 0.00094077
+        },
+        "output": {
+          "rmsDBFS": -23.002,
+          "peak": 0.234661,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -12.602,
+        "seconds": 0.8969,
+        "clearADX_SHA256": "85242e6bf9e72c82f8f6714a58fec4b9387ca706b17343cc57e77607ae8d3103"
+      }
+    },
+    {
+      "cue": "ammy-swing",
+      "userLabel": "pl/pl00 #16",
+      "source": "/workspace/work/playtest-repair/source-native/data_pc/se/pl/pl00.ses",
+      "subsong": 16,
+      "arrayIndex": 15,
+      "sourceSHA256": "bc9697cbe50947013a76fd2985576ab0139978f6041ede9f1985daa56f55e68d",
+      "outputSHA256": "f4c9cd12f558e82c972bae698ad2fa77e795dbbb902a6b07d5749590de23a5d3",
+      "resource": "Okami/SelectedAudio/pl-pl00-subsong-16",
+      "decoding": {
+        "sourceVersion": "0x400",
+        "frameScalesDecrypted": false,
+        "decoded": {
+          "rmsDBFS": -8.586,
+          "peak": 1.0,
+          "clippedFraction": 0.00249831
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.19025,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -14.414,
+        "seconds": 0.788,
+        "clearADX_SHA256": "bc9697cbe50947013a76fd2985576ab0139978f6041ede9f1985daa56f55e68d"
+      }
+    },
+    {
+      "cue": "pond-sit",
+      "userLabel": "pl/pl00 #27",
+      "source": "/workspace/work/playtest-repair/source-native/data_pc/se/pl/pl00.ses",
+      "subsong": 27,
+      "arrayIndex": 26,
+      "sourceSHA256": "d34e17bb3c0678f894561c591390afa2e03d4b66e5b674bc0730eb30f6e1f101",
+      "outputSHA256": "09cde2e9181cc174f8ccc14482fb6e91e352b4397ea19c9d35b783460476db38",
+      "resource": "Okami/SelectedAudio/pl-pl00-subsong-27",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 534,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -9.669,
+          "peak": 1.0,
+          "clippedFraction": 0.00048389
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.215504,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -13.331,
+        "seconds": 1.5499,
+        "clearADX_SHA256": "67822f5e6909c91baff9b58da3243f417b703256b26df3009f10020079d310a5"
+      }
+    },
+    {
+      "cue": "festivalrace",
+      "userLabel": "bgm00 #27",
+      "source": "/workspace/work/playtest-repair/source-native/data_pc/bgm/bgm00.afs2",
+      "subsong": 27,
+      "arrayIndex": 26,
+      "sourceSHA256": "fbc788848292d8d2d000db677cf0dcdaa09587e8fb161509d4d4a05ec8493998",
+      "outputSHA256": "a9cd60b6cb533abdf682bddeaca0ec0baefbe4d6346fb69fa78b8ca57c9b8e42",
+      "resource": "Okami/SelectedAudio/bgm00-subsong-27",
+      "decoding": {
+        "sourceVersion": "0x400",
+        "frameScalesDecrypted": false,
+        "decoded": {
+          "rmsDBFS": -19.331,
+          "peak": 0.697327,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -24.0,
+          "peak": 0.407343,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -4.669,
+        "seconds": 13.577,
+        "clearADX_SHA256": "fbc788848292d8d2d000db677cf0dcdaa09587e8fb161509d4d4a05ec8493998"
+      }
+    },
+    {
+      "cue": "full-power",
+      "userLabel": "ev/evbc #5",
+      "source": "/workspace/work/native-power-update/se/ev/evbc.afs2",
+      "subsong": 5,
+      "arrayIndex": 4,
+      "sourceSHA256": "1cbee04da7e8d2ee310e590d1a3f1bf6121f53102559f7aa6cca91c1b2657865",
+      "outputSHA256": "3f954edf6b1e64de76915c2580988556c19daddf6ba8990e410464a03d79cfb7",
+      "resource": "Okami/SelectedAudio/ev-evbc-subsong-5",
+      "decoding": {
+        "sourceVersion": "0x408",
+        "frameScalesDecrypted": true,
+        "frames": 11996,
+        "reference": "vgmstream Okami type-8 frame-scale decoder",
+        "decoded": {
+          "rmsDBFS": -13.741,
+          "peak": 0.996185,
+          "clippedFraction": 0.0
+        },
+        "output": {
+          "rmsDBFS": -23.0,
+          "peak": 0.343474,
+          "clippedFraction": 0.0
+        },
+        "gainDB": -9.259,
+        "seconds": 5.998,
+        "clearADX_SHA256": "c7c372feb4851ada511c34a9a26bcee425eced062a4795a3f001c9d37085112b"
+      }
+    }
+  ]
+}

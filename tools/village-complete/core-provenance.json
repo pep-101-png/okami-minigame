@@ -1,0 +1,79 @@
+[
+  {
+    "resource": "Okami/Effects/OriginalSun",
+    "source": "data_pc/etc/core.dat/coreEff/coretex/taiyou00",
+    "index": 15,
+    "sha256": "44f490b09e37e319c678a3d2fee215ef312b55c5de72aa13f9bb06166ce66da5",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "resource": "Okami/Effects/OriginalThunderSheet",
+    "source": "data_pc/etc/core.dat/coreEff/coretex/kaninari4p_2",
+    "index": 39,
+    "sha256": "e728cd074f8027e8dad522b5a30049525a5590d2d75497daa0240ab87e24b1f8",
+    "size": [
+      512,
+      512
+    ]
+  },
+  {
+    "resource": "Okami/Effects/OriginalWhiteRing",
+    "source": "data_pc/etc/core.dat/coreEff/coretex/white_ring",
+    "index": 46,
+    "sha256": "1d089158801aea1e0e1f5b785daa04c737bd6e4ab0d43f9cc42f728fb0ad475e",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "resource": "Okami/Effects/OriginalElectricity",
+    "source": "data_pc/etc/core.dat/coreEff/coretex/biri_00",
+    "index": 47,
+    "sha256": "82f2e50458f4741469e58580fdd9aaa4b238353f07bb94b392f1b7c86b671bda",
+    "size": [
+      512,
+      512
+    ]
+  },
+  {
+    "resource": "Okami/Effects/OriginalLightning",
+    "source": "data_pc/etc/core.dat/coreEff/coretex/inazuma_00",
+    "index": 67,
+    "sha256": "2b60cc42c91975fdb70b6bfd4a0b8b0cddd0630bfa29c4231473aaf2cb95e504",
+    "size": [
+      256,
+      256
+    ]
+  },
+  {
+    "resource": "Okami/Effects/OriginalMoon",
+    "source": "data_pc/etc/core.dat/coreEff/coretex/moon_gekko",
+    "index": 74,
+    "sha256": "0c0ade30ebf2aac736bf380db2a70c01d2b794435e3926f3dc751fe2b01be8e7",
+    "size": [
+      512,
+      512
+    ]
+  },
+  {
+    "resource": "Okami/Effects/OriginalGodSeal",
+    "source": "data_pc/etc/core.dat/coreEff/coretex/kanji_kami",
+    "index": 81,
+    "sha256": "cd4008b2e9a1400daaf324d3b6a94a924654768dde9d38eed901b1fc3d3abe3d",
+    "size": [
+      1024,
+      1024
+    ]
+  },
+  {
+    "resource": "Okami/Effects/OriginalSaveSeal",
+    "source": "data_pc/etc/core.dat/coreEff/coretex/kanji_kami",
+    "cropColumn": 2,
+    "cropRow": 3,
+    "operation": "Intact original celestial glyph crop, no repainting"
+  }
+]
