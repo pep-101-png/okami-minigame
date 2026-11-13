@@ -16,7 +16,7 @@ namespace Sunward.Remaster
             if(!Ready)return false;body=game.Player.GetComponent<NativeAmaterasu>();if(!body.BeginSolarPose())return false;
             Used=Playing=true;time=0;exploded=bossApplied=landed=false;origin=game.Player.transform.position;facing=game.Player.transform.rotation;facingYaw=game.Player.transform.eulerAngles.y;
             game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;
-            Vector3 inward=new Vector3(35-origin.x,0,-origin.z);
+            Vector3 arena=game.Celestial && game.Celestial.Active?game.Celestial.ArenaCentre:new Vector3(35,origin.y,0);Vector3 inward=arena-origin;inward.y=0;
             cameraYaw=inward.sqrMagnitude>36?Mathf.Atan2(-inward.x,-inward.z)*Mathf.Rad2Deg:facingYaw;
             orbit=FindFirstObjectByType<OrbitCamera>();if(orbit)orbit.BeginCinematic();game.Audio.FullPowerVoice();
             gather=SolarPaint.Create(game,origin,0);lightRoot=new GameObject("Sunburst · charging light");sunlight=lightRoot.AddComponent<Light>();sunlight.color=new Color(1,.65f,.15f);sunlight.range=30;sunlight.intensity=0;
@@ -48,7 +48,7 @@ namespace Sunward.Remaster
             game.Audio.SolarCharge(exploded?0:heat);
             if(orbit)
             {
-                float blastView=Mathf.SmoothStep(0,1,(time-BlastTime+.3f)/.65f);Vector3 focus=Vector3.Lerp(SunCentre,new Vector3(35,origin.y+1.3f,0),blastView);
+                float blastView=Mathf.SmoothStep(0,1,(time-BlastTime+.3f)/.65f);Vector3 focus=Vector3.Lerp(SunCentre,(game.Celestial && game.Celestial.Active?game.Celestial.ArenaCentre:new Vector3(35,origin.y,0))+Vector3.up*1.3f,blastView);
                 float recover=Mathf.SmoothStep(0,1,(time-BlastTime-.65f)/.65f);
                 focus=Vector3.Lerp(focus,SunCentre,recover);
                 orbit.CinematicFrame(focus,Mathf.Lerp(cameraYaw+Mathf.Lerp(-28,28,rise),cameraYaw+85,recover),Mathf.Lerp(Mathf.Lerp(16,32,blastView),22,recover),Mathf.Lerp(Mathf.Lerp(Mathf.Lerp(10,14,heat),37,blastView),12,recover),Mathf.Lerp(Mathf.Lerp(44,60,blastView),44,recover));

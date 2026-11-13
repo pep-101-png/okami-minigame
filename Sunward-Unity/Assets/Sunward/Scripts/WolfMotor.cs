@@ -81,15 +81,17 @@ namespace Sunward
             var guarded = transform.position;
             if (game.InTrial)
             {
-                var d = guarded - new Vector3(35, guarded.y, 0);
-                float radius=game.BossTrial?29:17;
+                var centre=game.Celestial && game.Celestial.Active?game.Celestial.ArenaCentre:new Vector3(35,guarded.y,0);centre.y=guarded.y;
+                var d = guarded - centre;
+                float radius=game.Celestial && game.Celestial.Active?24:game.BossTrial?29:17;
                 if (d.magnitude > radius)
-                    guarded = new Vector3(35, guarded.y, 0) + d.normalized * radius;
+                    guarded = centre + d.normalized * radius;
             }
 
             if(Sunward.Remaster.HeavenlyGarden.Inside(old)){guarded=Sunward.Remaster.HeavenlyGarden.Guard(guarded);if((guarded-transform.position).sqrMagnitude>.000001f)controller.Move(guarded-transform.position);return;}
             if(Sunward.Remaster.VillageInteriors.Inside(old))
             {guarded=Sunward.Remaster.VillageInteriors.Guard(old,guarded);if((guarded-transform.position).sqrMagnitude>.000001f)controller.Move(guarded-transform.position);return;}
+            if(game.Profile.bossWins<=0 && guarded.z>Sunward.Remaster.HeavenlyGarden.WaterfallLip-.85f && Mathf.Abs(guarded.x-Valley.RiverX(-guarded.z))<3.2f && guarded.y<2)guarded.z=Sunward.Remaster.HeavenlyGarden.WaterfallLip-.85f;
             guarded=Sunward.Remaster.NativeHomeRoom.Guard(old,guarded);
             guarded=Sunward.Remaster.LowerArena.Guard(guarded);
             var b = valley.Data.bounds;

@@ -198,7 +198,7 @@ namespace Sunward.Remaster
             Vector3 delta = transform.position - previous;
             delta.y = 0; previous = transform.position;
             bool bossCinematic=cinematicActivity && game && game.BossTransformation && game.BossTransformation.Playing;
-            bool sunburstFall=enemy && enemy.Dead && game && game.Ultimate && game.Ultimate.Playing;
+            bool sunburstFall=enemy && enemy.Dead && game && ((game.Ultimate && game.Ultimate.Playing) || (game.Celestial && game.Celestial.Playing));
             float dt = bossCinematic || sunburstFall?Time.unscaledDeltaTime:Time.deltaTime;
             float speed = delta.magnitude < 1 ? delta.magnitude / Mathf.Max(dt, .0001f) : 0;
             filteredSpeed=Mathf.Lerp(filteredSpeed,speed,1-Mathf.Exp(-dt*10));
@@ -228,7 +228,7 @@ namespace Sunward.Remaster
             if(gaitChange)time=phase*current.Duration;
             if (state != lastState) { time = 0; lastState = state; }
             blendTime += dt;
-            if ((bossCinematic || !game || !game.Blocked) && (!enemy || !enemy.VisualStunned || state=="hit"))
+            if ((bossCinematic || sunburstFall || !game || !game.Blocked) && (!enemy || !enemy.VisualStunned || state=="hit"))
             {
                 float pace=bossCinematic?1:duration>.001f?current.Duration/duration:enemy && moving?Mathf.Clamp(filteredSpeed/(running && run!=walk?4.5f:2),.4f,1.5f):!string.IsNullOrEmpty(activity)?activityRate:moving?Mathf.Clamp(filteredSpeed/Mathf.Max(.1f,walkMetresPerSecond),.3f,1.6f):1;
                 time+=dt*pace;

@@ -1,0 +1,306 @@
+// Explicit engine doubles: these tests are not Unity compilation or playback.
+using System;
+using System.IO;
+using System.Linq;
+using N=System.Numerics;
+namespace UnityEngine
+{
+ public class Object
+ {public static implicit operator bool(Object x)=>x!=null;public bool wasDestroyed;public static int destroyedObjects;public static T Instantiate<T>(T x,Transform parent)where T:Object=>x;public static void Destroy(Object x,float delay){Destroy(x);}public static void Destroy(Object x){if(x!=null){x.wasDestroyed=true;destroyedObjects++;}}public static T[] FindObjectsByType<T>(FindObjectsInactive inactive,FindObjectsSortMode mode)=>SceneQuery.Find<T>();public static T[] FindObjectsByType<T>(FindObjectsSortMode mode)=>SceneQuery.Find<T>();public static T FindFirstObjectByType<T>()where T:class=>MonoBehaviour.CameraInstance as T;}
+ [AttributeUsage(AttributeTargets.Class)]public class DefaultExecutionOrder:Attribute{public DefaultExecutionOrder(int n){}}
+ public class MonoBehaviour:Object
+ {
+  public static Sunward.OrbitCamera CameraInstance=new Sunward.OrbitCamera();public Coroutine StartCoroutine(System.Collections.IEnumerator routine)=>new Coroutine();public void StopAllCoroutines(){}public void StopCoroutine(Coroutine routine){}public GameObject gameObject=new GameObject();public Transform transform=>gameObject.transform;public bool enabled=true;public bool isActiveAndEnabled=true;
+  public T GetComponent<T>()where T:class=>gameObject.GetComponent<T>();public T GetComponentInParent<T>()where T:class=>null;public T GetComponentInChildren<T>(bool b=false)where T:class=>null;public T[] GetComponentsInChildren<T>(bool b=false)=>Array.Empty<T>();
+ }
+ public class GameObject:Object
+ {
+  public int layer;public Transform transform;public bool activeSelf;public SkinnedMeshRenderer[] renderers=Array.Empty<SkinnedMeshRenderer>();
+  public T GetComponentInChildren<T>(bool include=false)where T:class=>GetComponent<T>();public static System.Collections.Generic.List<GameObject> created=new System.Collections.Generic.List<GameObject>();public string name;public GameObject(string n=""){name=n;activeSelf=StreetActorLifecycle.Enabled;created.Add(this);transform=new Transform();transform.gameObject=this;}
+  public void SetActive(bool b){activeSelf=b;if(b)StreetActorLifecycle.Activated(this);}readonly System.Collections.Generic.Dictionary<Type,object> components=new System.Collections.Generic.Dictionary<Type,object>();public T AddComponent<T>()where T:new(){var c=new T();if(c is MonoBehaviour m)m.gameObject=this;components[typeof(T)]=c;StreetActorLifecycle.Added(c,activeSelf);return c;}public T GetComponent<T>()where T:class=>components.TryGetValue(typeof(T),out var c)?c as T:null;
+  public T[] GetComponentsInChildren<T>(bool b=false)=>renderers.Select(x=>(T)(object)x).ToArray();
+ }
+ public class Renderer:Object{public Bounds bounds;public bool forceRenderingOff;public GameObject gameObject=new GameObject();public Transform transform=new Transform();public string name;public bool enabled;public Material sharedMaterial;}
+ public class Mesh:Object{public Color[] colors;public Vector2[] uv;public Vector3[] vertices=System.Array.Empty<Vector3>();public int[] triangles=System.Array.Empty<int>();public void RecalculateBounds(){}public string name;public int vertexCount;public Bounds bounds;public void GetVertices(System.Collections.Generic.List<Vector3> v){}}
+ public class MeshFilter{public Bounds localBounds;public bool updateWhenOffscreen;public Mesh sharedMesh=new Mesh();}
+ public class SkinnedMeshRenderer:Renderer{public void BakeMesh(Mesh mesh,bool scale=false){}public Bounds localBounds;public bool updateWhenOffscreen;public Mesh sharedMesh=new Mesh();}
+ public struct Vector3
+ {
+  public float x,y,z;public Vector3(float a,float b,float c){x=a;y=b;z=c;}
+  public static Vector3 down=>new Vector3(0,-1,0);public static Vector3 forward=>new Vector3(0,0,1);public static Vector3 left=>new Vector3(-1,0,0);public static Vector3 zero=>new Vector3();public static Vector3 one=>new Vector3(1,1,1);public static Vector3 right=>new Vector3(1,0,0);public static Vector3 up=>new Vector3(0,1,0);
+  public float sqrMagnitude=>x*x+y*y+z*z;public float magnitude=>MathF.Sqrt(sqrMagnitude);public Vector3 normalized=>magnitude>0?this*(1/magnitude):zero;public static float Dot(Vector3 a,Vector3 b)=>a.x*b.x+a.y*b.y+a.z*b.z;public static float Distance(Vector3 a,Vector3 b)=>(a-b).magnitude;public static Vector3 back=>new Vector3(0,0,-1);public static Vector3 ClampMagnitude(Vector3 v,float max)=>v.magnitude>max?v.normalized*max:v;public static Vector3 operator /(Vector3 v,float t)=>v*(1/t);public static implicit operator Vector2(Vector3 v)=>new Vector2(v.x,v.y);public static Vector3 operator -(Vector3 v)=>v*(-1);public static Vector3 Scale(Vector3 a,Vector3 b)=>new Vector3(a.x*b.x,a.y*b.y,a.z*b.z);public static Vector3 Min(Vector3 a,Vector3 b)=>new Vector3(MathF.Min(a.x,b.x),MathF.Min(a.y,b.y),MathF.Min(a.z,b.z));public static Vector3 Max(Vector3 a,Vector3 b)=>new Vector3(MathF.Max(a.x,b.x),MathF.Max(a.y,b.y),MathF.Max(a.z,b.z));public static Vector3 ProjectOnPlane(Vector3 a,Vector3 normal)=>a-normal*Dot(a,normal);public static Vector3 MoveTowards(Vector3 a,Vector3 b,float step)=>(b-a).magnitude<=step?b:a+(b-a).normalized*step;public static Vector3 Cross(Vector3 a,Vector3 b)=>new Vector3(a.y*b.z-a.z*b.y,a.z*b.x-a.x*b.z,a.x*b.y-a.y*b.x);public static Vector3 Lerp(Vector3 a,Vector3 b,float t)=>a+(b-a)*t;
+  public static Vector3 operator +(Vector3 a,Vector3 b)=>new Vector3(a.x+b.x,a.y+b.y,a.z+b.z);public static Vector3 operator -(Vector3 a,Vector3 b)=>new Vector3(a.x-b.x,a.y-b.y,a.z-b.z);public static Vector3 operator *(Vector3 a,float t)=>new Vector3(a.x*t,a.y*t,a.z*t);
+ }
+ public struct Vector2{public static Vector2 zero=>new Vector2();public static Vector2 operator *(Vector2 v,float x)=>new Vector2(v.x*x,v.y*x);public static Vector2 operator +(Vector2 a,Vector2 b)=>new Vector2(a.x+b.x,a.y+b.y);public float x,y;public Vector2 normalized=>magnitude>0?this*(1/magnitude):zero;public float sqrMagnitude=>x*x+y*y;public static float Dot(Vector2 a,Vector2 b)=>a.x*b.x+a.y*b.y;public static float Distance(Vector2 a,Vector2 b)=>(a-b).magnitude;public static Vector2 Min(Vector2 a,Vector2 b)=>new Vector2(MathF.Min(a.x,b.x),MathF.Min(a.y,b.y));public static Vector2 Max(Vector2 a,Vector2 b)=>new Vector2(MathF.Max(a.x,b.x),MathF.Max(a.y,b.y));public static Vector2 Lerp(Vector2 a,Vector2 b,float t)=>a+(b-a)*t;public static Vector2 operator -(Vector2 a,Vector2 b)=>new Vector2(a.x-b.x,a.y-b.y);public float xUnused;public Vector2(float a,float b){x=a;y=b;}public float magnitude=>MathF.Sqrt(x*x+y*y);}
+ public struct Quaternion
+ {
+  public float x,y,z,w;public Quaternion(float a,float b,float c,float d){x=a;y=b;z=c;w=d;}public static Quaternion identity=>new Quaternion(0,0,0,1);
+  N.Quaternion NQ=>new N.Quaternion(x,y,z,w);static Quaternion Q(N.Quaternion q)=>new Quaternion(q.X,q.Y,q.Z,q.W);
+  public static Quaternion RotateTowards(Quaternion a,Quaternion b,float t)=>b;public static Quaternion FromToRotation(Vector3 a,Vector3 b)=>identity;public static Quaternion Euler(Vector3 v)=>identity;public static Quaternion Euler(float a,float b,float c)=>identity;public static Quaternion LookRotation(Vector3 v)=>identity;public static Vector3 operator *(Quaternion q,Vector3 v)=>v;public static Quaternion Slerp(Quaternion a,Quaternion b,float t)=>Q(N.Quaternion.Slerp(a.NQ,b.NQ,t));public static Quaternion Inverse(Quaternion a)=>Q(N.Quaternion.Inverse(a.NQ));public static Quaternion operator *(Quaternion a,Quaternion b)=>Q(a.NQ*b.NQ);
+ }
+ public class Transform:Object
+ {public string name=>gameObject!=null?gameObject.name:"";
+  public GameObject gameObject;public Vector3 right=new Vector3(1,0,0),forward=new Vector3(0,0,1);public Transform parent;public bool IsChildOf(Transform root){for(Transform t=this;t!=null;t=t.parent)if(System.Object.ReferenceEquals(t,root))return true;return false;}public Matrix4x4 worldToLocalMatrix=>Matrix4x4.identity;public Matrix4x4 localToWorldMatrix=>Matrix4x4.identity;public Vector3 eulerAngles;public Vector3 localPosition,localScale=Vector3.one,position;public Quaternion localRotation=Quaternion.identity,rotation=Quaternion.identity;
+  public T[] GetComponentsInChildren<T>(bool b=false)=>gameObject.GetComponentsInChildren<T>(b);public T GetComponentInChildren<T>(bool b=false)where T:class=>gameObject.GetComponent<T>();public void Rotate(float x,float y,float z){}public void SetParent(Transform parent,bool world=false){}public void SetPositionAndRotation(Vector3 p,Quaternion q){position=p;rotation=q;}
+  public Vector3 TransformPoint(Vector3 p)=>position+p;public Vector3 InverseTransformPoint(Vector3 p)=>p-position;
+ }
+ public static class Mathf
+ {
+  public static float Cos(float x)=>MathF.Cos(x);public const float Rad2Deg=57.2957795f;public static float Atan2(float y,float x)=>MathF.Atan2(y,x);public const float PI=MathF.PI;public static float Clamp01(float x)=>Math.Clamp(x,0,1);public static float Clamp(float x,float a,float b)=>Math.Clamp(x,a,b);
+  public static float Repeat(float t,float n)=>t-MathF.Floor(t/n)*n;public static int CeilToInt(float v)=>(int)MathF.Ceiling(v);public static int Max(int a,int b)=>Math.Max(a,b);public static int FloorToInt(float x)=>(int)MathF.Floor(x);public static int Min(int a,int b)=>Math.Min(a,b);
+  public static float Min(float a,float b)=>Math.Min(a,b);public static float Max(float a,float b)=>Math.Max(a,b);public static float Abs(float x)=>Math.Abs(x);
+  public static float Ceil(float x)=>MathF.Ceiling(x);public const float Deg2Rad=MathF.PI/180;public static int Abs(int x)=>Math.Abs(x);public static int RoundToInt(float x)=>(int)MathF.Round(x);public static int Clamp(int x,int a,int b)=>Math.Max(a,Math.Min(b,x));public static float Sign(float x)=>MathF.Sign(x);public static float Sin(float x)=>MathF.Sin(x);public static float Pow(float x,float y)=>MathF.Pow(x,y);public static float MoveTowards(float a,float b,float t)=>MathF.Abs(a-b)<t?b:a+MathF.Sign(b-a)*t;public static float LerpAngle(float a,float b,float t)=>a+(Repeat(b-a+180,360)-180)*Clamp01(t);public static float Sqrt(float x)=>MathF.Sqrt(x);public static float Exp(float x)=>MathF.Exp(x);public static float Lerp(float a,float b,float t)=>a+(b-a)*t;public static float SmoothStep(float a,float b,float t){t=Clamp01(t);return Lerp(a,b,t*t*(3-2*t));}
+ }
+ public static class Time{public static int frameCount;public static float deltaTime=1f/60,unscaledDeltaTime=1f/60,timeScale=1,unscaledTime,time;}
+ public static class Debug{public static void LogError(string s,Object context=null){throw new Exception(s);}}
+ public class TextAsset:Object{public byte[] bytes;public string text=>System.Text.Encoding.UTF8.GetString(bytes);}
+ public static class JsonUtility{public static T FromJson<T>(string s)=>System.Text.Json.JsonSerializer.Deserialize<T>(s,new System.Text.Json.JsonSerializerOptions{IncludeFields=true});}
+ public class Coroutine{}public class WaitForSeconds{public WaitForSeconds(float t){}}public static class Cursor{public static bool visible=true;}public static class Resources
+ {
+  public static string Root;
+  public static T Load<T>(string name)where T:class
+  {foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories)){if(typeof(T)==typeof(Material) && File.Exists(Path.Combine(dir,name+".mat")))return new Material((Material)null){shader=new Shader()} as T;}foreach(var dir in Directory.EnumerateDirectories(Root,"Resources",SearchOption.AllDirectories))foreach(var ext in new[]{".bytes",".json"}){var p=Path.Combine(dir,name+ext);if(File.Exists(p))return new TextAsset{bytes=File.ReadAllBytes(p)} as T;}return null;}
+ }
+ public class AudioClip:Object{public string name;public float length;}
+ public class AudioSource:Object{public float pitch=1;public Transform transform=new Transform();public float time;public bool isPlaying,loop,playOnAwake;public float spatialBlend,dopplerLevel,minDistance,maxDistance;public AudioRolloffMode rolloffMode;public void PlayOneShot(AudioClip clip,float gain){}public AudioClip clip;public float volume;public int plays;public void Play(){isPlaying=true;plays++;}public void Stop(){isPlaying=false;}}
+ public enum CameraClearFlags{Skybox,SolidColor}public class Camera:Object
+ {public int cullingMask=-1;public CameraClearFlags clearFlags;public Color backgroundColor;public Ray ScreenPointToRay(Vector2 p)=>new Ray();public Vector3 WorldToScreenPoint(Vector3 p)=>p;public Transform transform=new Transform();public static Camera main=new Camera();public Unity.Cinemachine.CinemachineBrain brain=new Unity.Cinemachine.CinemachineBrain();public T GetComponent<T>()where T:class=>brain as T;}
+ public class CharacterController: Object{public bool enabled=true;public float radius,height;public Vector3 center;public void Move(Vector3 delta){}}
+ public static class Physics{public static int RaycastNonAlloc(Vector3 p,Vector3 dir,RaycastHit[] hits,float d,int mask,QueryTriggerInteraction q){int n=System.Math.Min(hits.Length,HeavenPhysicsFixture.hits.Length);System.Array.Copy(HeavenPhysicsFixture.hits,hits,n);return n;}public static bool Raycast(Ray r,out RaycastHit hit,float range,int mask,QueryTriggerInteraction q){hit=new RaycastHit();return false;}public static bool SphereCast(Vector3 a,float r,Vector3 d,out RaycastHit hit,float n,int mask,QueryTriggerInteraction trigger){hit=new RaycastHit();return false;}public static int syncs;public static void SyncTransforms(){syncs++;}}
+}
+namespace UnityEngine.InputSystem
+{public class Key{public bool wasPressedThisFrame,isPressed;}public class Keyboard{public Controls.ButtonControl upArrowKey=new Controls.ButtonControl(),downArrowKey=new Controls.ButtonControl(),leftArrowKey=new Controls.ButtonControl(),rightArrowKey=new Controls.ButtonControl();public Key anyKey=new Key();public static Keyboard current;public Key pKey=new Key();}}
+namespace Sunward
+{
+ using UnityEngine;
+ public class SaveStore{public int saves;public string Status="";public void Save(){saves++;}public ProfileData ReadSlot(int i)=>null;public bool SaveSlot(int i)=>true;public bool LoadSlot(int i)=>false;}
+ public sealed partial class WolfMotor:MonoBehaviour
+ {public int TeleportRevision;
+  public const float Gravity=21;public float Vertical,Speed;public bool Grounded,Swimming,Locked,doubleUsed;public Vector3 Velocity,horizontal;
+  public float dodgeTimer,landing,jumpBuffer,coyote,airborneTime;public CharacterController controller=new CharacterController();public Valley valley=new Valley();public GameFlow game;public WolfAnimation animationView=new WolfAnimation();public WolfInput input=new WolfInput();public void StopMotion(){}public void Recover(Vector3 p){transform.position=p;}public void Teleport(Vector3 p){transform.position=p;}
+ }
+ public class WolfAnimation{public string current;public float ClipLength(string state)=>1;public void Play(string state,float blend=0,float duration=0,bool restart=false){current=state;}}
+ public class Valley:UnityEngine.Object{public static float Depth(Vector3 p)=>0;public static float RiverX(float z)=>0;public class Terrain{}public class ValleyData{public BoxData[] boxes=System.Array.Empty<BoxData>();public Terrain terrain=new Terrain();}public ValleyData Data=new ValleyData();public float Height(Vector3 p)=>.7f;public static float SurfaceHeight(Terrain t,Vector3 p)=>.7f;}
+ public class WolfCombat:Object{public void QueueAwakeningEquip(){}public Vector3 LightningSource=>transform.position+Vector3.up;public T GetComponent<T>()where T:new()=>new T();public GameFlow game;public bool HoldingCharge;public float FormMultiplier=>1;public Transform transform=new Transform();public void TundraBeadContacts(Vector3[] p,int count){}public int cancels,rests;public void Cancel(){cancels++;}public bool allowEquip;public int equips;public void Equip(){if(!allowEquip)throw new Exception("Return home attempted a visual reload");equips++;}public void Rest(bool rest){rests++;}}
+ public sealed partial class GameFlow:MonoBehaviour
+ {public Remaster.ShiranuiUltimate Ultimate;public CollectibleShelf Shelf=new CollectibleShelf();public void RefreshQuest(){}public void OfferWindflowers(){}public Sunward.Remaster.SpaRest Spa;public Remaster.VillagePresentation Presentation;
+  public ValleyAudio Audio=new ValleyAudio();public Remaster.CrimsonHelmAscension BossTransformation;public bool Blocked,InTrial,BossTrial,waiting;bool cinematicFlag;public bool CinematicActive{get=>cinematicFlag || (Presentation && Presentation.Playing);set=>cinematicFlag=value;}public ProfileData Profile=new ProfileData();public Remaster.HeavenlyGarden Heaven;public Remaster.ShiranuiTransformation Transformation=new Remaster.ShiranuiTransformation();
+  public WolfMotor Player;public WolfCombat Combat=new WolfCombat();public Valley valley=new Valley();public HomeRest Home=new HomeRest();public Remaster.VillageServices Services=new Remaster.VillageServices();
+  public GameObject[] npcObjects=System.Array.Empty<GameObject>();public System.Collections.Generic.List<EnemyBrain> Enemies=new System.Collections.Generic.List<EnemyBrain>();public int bossStarts,homeReturns;public void ReturnHome(){homeReturns++;InTrial=BossTrial=false;}public void StartBossTrial(){bossStarts++;InTrial=BossTrial=true;}public void WorldPrompt(string text){}public float Health,Stamina,Energy,hitUntil;public int MaxHealth=>120+(Spa?Spa.Bonus:0);public float MaxStamina=>100+Profile.upgrades.stamina*15+Sunward.Remaster.HomeBlessings.StaminaBonus(Profile,Sunward.Remaster.HomeBlessings.Now);public float MaxEnergy=>80;public string Panel="result";public string Dialogue {get;private set;}public GameObject barrier;public int clears,projectiles,runCoins=10,runXp=20;public SaveStore Save=new SaveStore();
+  public VisualFx Fx=new VisualFx();public void TrackBossTransformation(Remaster.CrimsonHelmAscension c){BossTransformation=c;}public void ReleaseBossTransformation(Remaster.CrimsonHelmAscension c){if(BossTransformation==c)BossTransformation=null;}public int rewards;public void Reward(EnemyBrain b){rewards++;}public void Hurt(float damage,Vector3 away){}public void Projectile(Vector3 p,Vector3 d,float damage,bool flame=false){}public void ClearProjectiles(){projectiles++;}public void SetPanel(string panel){Panel=panel;}public void ClearEnemies(){clears++;}public void Close(){Panel="";Player.Locked=false;}public void Notify(string s){}
+ }
+}
+namespace Sunward.Remaster
+{
+ using UnityEngine;
+ public partial class VillageServices:Object{public bool Resting;public static Vector3 Farmer=>Vector3.zero;public static Vector3 FarmerPosition=>Farmer;public static bool InDojo(Vector3 p)=>false;public int restRequests;public Vector3 restPoint;public void RestAt(Vector3 p,float yaw){restRequests++;restPoint=p;}public static bool InFoodHouse(Vector3 p)=>Sunward.Remaster.VillageInteriors.Food(p);public int cancels;public void CancelRest(){cancels++;}}
+ public sealed class NativePaintedRig:IDisposable
+ {
+  public GameObject Root=new GameObject();public Transform[] Bones;
+  public NativePaintedRig(string resource,Transform parent){var motion=Resources.Load<TextAsset>(resource+"/Poses");var bank=new {BoneCount=motion==null?System.Text.Json.JsonDocument.Parse(Resources.Load<TextAsset>(resource+"/Model").text).RootElement.GetProperty("bones").GetArrayLength()+1:new NativePoseBank(resource+"/Poses").BoneCount};Bones=Enumerable.Range(0,bank.BoneCount).Select(_=>new Transform()).ToArray();var model=Resources.Load<TextAsset>(resource+"/Model");if(model!=null){using var json=System.Text.Json.JsonDocument.Parse(model.text);Root.renderers=json.RootElement.GetProperty("parts").EnumerateArray().Select(p=>new SkinnedMeshRenderer{sharedMaterial=new Material((Material)null),sharedMesh=new Mesh{name=p.GetProperty("name").GetString(),vertexCount=p.GetProperty("positions").GetArrayLength()/3}}).ToArray();}}
+  public void Dispose(){}
+ }
+}
+
+namespace Unity.Cinemachine
+{public struct LensSettings{public float FieldOfView;}public class CinemachineCamera:UnityEngine.Object{public UnityEngine.Transform transform=new UnityEngine.Transform();public LensSettings Lens=new LensSettings{FieldOfView=50};}public class CinemachineBrain:UnityEngine.Object{public bool IgnoreTimeScale;}}
+
+
+
+
+
+// Only stand-ins for semantic compilation, never a claim of Unity API/build verification.
+namespace UnityEngine
+{
+ public enum FindObjectsInactive{Include,Exclude}public enum FindObjectsSortMode{None}public enum QueryTriggerInteraction{Ignore}public enum AudioRolloffMode{Linear}public enum LightShadows{None}public enum LightType{Point,Spot}
+ public struct RaycastHit{public Vector3 normal;public float distance;public Collider collider;public Vector3 point;}
+ public struct Color{public float r,g,b,a;public Color(float x,float y,float z,float w=1){r=x;g=y;b=z;a=w;}public static Color Lerp(Color a,Color b,float t)=>new Color(a.r+(b.r-a.r)*t,a.g+(b.g-a.g)*t,a.b+(b.b-a.b)*t,a.a+(b.a-a.a)*t);public static Color white=>new Color(1,1,1);}
+ public class MeshRenderer:Renderer{}
+ public class Texture2D:Object{}
+ public class AudioListener:Object{public bool enabled;public static float volume;}
+ public class Light:Object{public Transform transform=new Transform();public bool enabled;public LightShadows shadows;public float spotAngle;public LightType type;public float range,intensity;public Color color;}
+ public class ParticleSystem:Object
+ {public T GetComponent<T>()where T:new()=>new T();public struct TextureSheetAnimationModule{public bool enabled;public int numTilesX,numTilesY;public MinMaxCurve startFrame;public float frameOverTime;}public TextureSheetAnimationModule textureSheetAnimation=>new TextureSheetAnimationModule();
+ public struct VelocityOverLifetimeModule{public float y;public bool enabled;}public VelocityOverLifetimeModule velocityOverLifetime=>new VelocityOverLifetimeModule();
+  public Coroutine StartCoroutine(System.Collections.IEnumerator routine)=>new Coroutine();public void StopAllCoroutines(){}public void StopCoroutine(Coroutine routine){}public GameObject gameObject=new GameObject();public Transform transform=>gameObject.transform;
+  public struct MainModule{public ParticleSystemSimulationSpace simulationSpace;public float startRotation;public bool useUnscaledTime,startSize3D;public float startSizeX,startSizeY,startSizeZ;public Color startColor;public MinMaxCurve startSize;}public struct MinMaxCurve{public MinMaxCurve(float a,float b){}}public struct ShapeModule{public bool enabled;public ParticleSystemShapeType shapeType;public SkinnedMeshRenderer skinnedMeshRenderer;public ParticleSystemMeshShapeType meshShapeType;}public ShapeModule shape=>new ShapeModule();
+  public struct EmissionModule{public float rateOverTime;}
+  public MainModule main=>new MainModule();public EmissionModule emission=>new EmissionModule();public void Emit(int count){}
+ }
+ public struct Rect{public float x,y,width,height;public Rect(float x,float y,float w,float h){this.x=x;this.y=y;width=w;height=h;}}
+ public static partial class GUI{public static Matrix4x4 matrix;public static Color color;public static void Label(Rect r,string text){}public static void DrawTexture(Rect r,Texture2D t){}}
+ public static class Screen{public static int width=1280,height=720;}
+}
+namespace UnityEngine.InputSystem
+{
+ public class VectorControl{public UnityEngine.Vector2 ReadValue()=>new UnityEngine.Vector2();}
+ public class PadDirection{public UnityEngine.InputSystem.Key up=new UnityEngine.InputSystem.Key();}public class Gamepad{public object[] allControls=System.Array.Empty<object>();public UnityEngine.InputSystem.Key buttonSouth=new UnityEngine.InputSystem.Key();public UnityEngine.InputSystem.Key startButton=new UnityEngine.InputSystem.Key();public PadDirection dpad=new PadDirection();public static Gamepad current;public VectorControl rightStick=new VectorControl();}
+ public class Mouse{public Key rightButton=new Key(),middleButton=new Key();public Key leftButton=new Key();public VectorControl position=new VectorControl();public static Mouse current;public VectorControl delta=new VectorControl();}
+ public class InputAction{public bool pressedThisFrame;public bool WasPressedThisFrame()=>pressedThisFrame;public bool IsPressed()=>false;public T ReadValue<T>()=>default(T);}
+}
+namespace Sunward
+{public class WolfInput{public UnityEngine.InputSystem.InputAction Ultimate=new UnityEngine.InputSystem.InputAction();public UnityEngine.InputSystem.InputAction Jump=new UnityEngine.InputSystem.InputAction(),Move=new UnityEngine.InputSystem.InputAction();public UnityEngine.InputSystem.InputAction Brush=new UnityEngine.InputSystem.InputAction(),Light=new UnityEngine.InputSystem.InputAction(),Pause=new UnityEngine.InputSystem.InputAction(),Dig=new UnityEngine.InputSystem.InputAction(),Eat=new UnityEngine.InputSystem.InputAction(),Carry=new UnityEngine.InputSystem.InputAction(),Interact=new UnityEngine.InputSystem.InputAction();public UnityEngine.InputSystem.InputAction Orbit=new UnityEngine.InputSystem.InputAction(),Zoom=new UnityEngine.InputSystem.InputAction();}}
+namespace Sunward.Remaster
+{
+ public static class OriginalAtmosphere
+ {public static UnityEngine.ParticleSystem Create(string a,UnityEngine.Transform b,UnityEngine.Vector3 c,float d,float e,float f,float g,float h=0)=>new UnityEngine.ParticleSystem();}
+}
+
+namespace UnityEngine
+{
+ public struct Bounds{public Vector3 center,size;public Vector3 min=>center-size*.5f;public Bounds(Vector3 a,Vector3 b){center=a;size=b;}}
+ public enum ParticleSystemShapeType{SkinnedMeshRenderer}public enum ParticleSystemMeshShapeType{Triangle}
+ public class Material:Object{public void SetVectorArray(string n,Vector4[] v){}public void SetFloat(string n,float v){}public void SetTexture(string n,Texture2D t){}public Shader shader;public void SetColor(string name,Color value){}public Material(Material source){}public Material(Shader shader){}public Texture2D mainTexture;}
+ public class AnimationCurve{public static AnimationCurve Linear(float a,float b,float c,float d)=>new AnimationCurve();}
+ public class LineRenderer:Renderer{public LineAlignment alignment;public GameObject gameObject=new GameObject();public bool useWorldSpace;public bool loop;public int positionCount;public float startWidth,endWidth;public Color startColor,endColor;public void SetPosition(int i,Vector3 p){}}
+ public class TrailRenderer:LineRenderer{public Transform transform=>gameObject.transform;public float time,minVertexDistance,widthMultiplier;public AnimationCurve widthCurve;public bool emitting;public void Clear(){}}
+}
+namespace Sunward
+{
+ public class EnemyDefinition:UnityEngine.Object{public string id;public float hp,damage,speed,scale,windup;public UnityEngine.GameObject visual;}
+ public class VisualFx{public UnityEngine.LineRenderer Ring(UnityEngine.Vector3 p,UnityEngine.Color c,float radius,float duration=1)=>new UnityEngine.LineRenderer();}
+ public class ResidentLocomotion:UnityEngine.Object{public bool enabled;}
+ public class VillageResident:UnityEngine.Object{public bool enabled=true;public GameFlow game;public int index;public bool stallkeeper;}
+}
+
+namespace UnityEngine
+{
+ public class Collider:Object{public Sunward.WolfMotor owner;public T GetComponentInParent<T>()where T:class=>owner as T;public string name;public bool enabled;}
+ public struct Ray{public Vector3 GetPoint(float distance)=>Vector3.zero;}
+ public struct Plane{public Plane(Vector3 n,Vector3 p){}public bool Raycast(Ray r,out float d){d=0;return true;}}
+ public struct Matrix4x4{public static Matrix4x4 Scale(Vector3 p)=>identity;public Vector3 MultiplyPoint3x4(Vector3 p)=>p;public static Matrix4x4 operator *(Matrix4x4 a,Matrix4x4 b)=>a;public static Matrix4x4 identity=>new Matrix4x4();}
+ public class ScriptableObject:Object{public static T CreateInstance<T>()where T:new()=>new T();}
+}
+namespace UnityEngine.Rendering
+{
+ public class Volume:UnityEngine.MonoBehaviour{public bool isGlobal;public float priority,weight;public VolumeProfile sharedProfile;}
+ public class VolumeProfile:UnityEngine.ScriptableObject{public T Add<T>()where T:new()=>new T();}
+ public class Parameter<T>{public void Override(T value){}}
+}
+namespace UnityEngine.Rendering.Universal
+{
+ public class UniversalAdditionalCameraData:UnityEngine.Object{public bool renderPostProcessing;}
+ public class ColorAdjustments{public UnityEngine.Rendering.Parameter<float> saturation=new UnityEngine.Rendering.Parameter<float>(),contrast=new UnityEngine.Rendering.Parameter<float>();public UnityEngine.Rendering.Parameter<UnityEngine.Color> colorFilter=new UnityEngine.Rendering.Parameter<UnityEngine.Color>();}
+}
+namespace Sunward
+{
+ public static class GardenPond{public const float Water=-.23f,RadiusX=3.05f,RadiusZ=2.05f;public const float X=-15,Z=-22;}
+ public class InkProjectile:UnityEngine.MonoBehaviour{}
+}
+namespace Sunward.Remaster
+{
+ public class TrainingDummy:UnityEngine.MonoBehaviour{public Sunward.GameFlow game;public int contacts;public void PracticeContact(){contacts++;}}
+}
+
+namespace UnityEngine{public class BoxCollider:Collider{public bool isTrigger;public Vector3 center,size;}}
+namespace Sunward.Remaster{using UnityEngine;using System.Collections;public partial class VillageServices{public Sunward.GameFlow game;        IEnumerator SitAt(Vector3 point,float yaw)
+        {
+            Resting=true;game.Player.Locked=true;game.Combat.Cancel();game.Combat.Rest(true);
+            game.Player.Teleport(point);game.Player.transform.rotation=Quaternion.Euler(0,yaw,0);
+            game.Player.animationView.Play("Sit",.18f,0,true);game.Notify("Rest quietly · E or movement to stand");
+            yield return null;
+            while(!game.Player.input.Interact.WasPressedThisFrame() && !game.Player.input.Jump.WasPressedThisFrame() && !game.Player.input.Pause.WasPressedThisFrame() && game.Player.input.Move.ReadValue<Vector2>().sqrMagnitude<.1f)
+            {game.Health=Mathf.Min(game.MaxHealth,game.Health+Time.deltaTime*3);game.Stamina=Mathf.Min(game.MaxStamina,game.Stamina+Time.deltaTime*20);yield return null;}
+            game.Player.Locked=false;game.Player.animationView.Play("Idle_Natural",.15f,0,true);
+            game.Combat.Rest(false);Resting=false;
+        }}}
+
+namespace UnityEngine
+{
+    public class GUIStyle{public static GUIStyle none=new GUIStyle();}
+    public enum ScaleMode{ScaleAndCrop,ScaleToFit,StretchToFill}
+    public static partial class GUI
+    {
+        public static System.Collections.Generic.List<Rect> InkRects=new System.Collections.Generic.List<Rect>();public static int InkGroups;public static void BeginGroup(Rect r){InkGroups++;}public static void EndGroup(){}
+        public static void DrawTextureWithTexCoords(Rect r,Texture2D t,Rect uv){InkRects.Add(r);}
+        public static void DrawTexture(Rect r,Texture2D t,ScaleMode mode){}
+        public static bool Button(Rect r,string text,GUIStyle style)=>false;
+    }
+}
+
+namespace UnityEngine.InputSystem.Controls{public class ButtonControl:UnityEngine.InputSystem.Key{}}
+
+namespace UnityEngine
+{
+ public struct Vector4{public float x,y,z,w;public Vector4(float a,float b,float c,float d){x=a;y=b;z=c;w=d;}}
+ public static class RenderSettings{public static Light sun;public static Color fogColor,ambientLight;}
+ public class Shader{public static Shader Find(string n)=>new Shader();public static void SetGlobalTexture(string name,Texture2D texture){}public static void SetGlobalFloat(string name,float value){}public static void SetGlobalVectorArray(string name,Vector4[] value){}}
+}
+namespace Sunward{public static class HomeLayout{public static UnityEngine.Vector3 Bed=>new UnityEngine.Vector3(-37.36f,-249.82f,-14.08f);public static UnityEngine.Vector3 Mirror=>new UnityEngine.Vector3(-28.4f,-249.88f,-13.12f);}}
+
+namespace Sunward.Remaster
+{public static class OriginalWeaponCatalog{public class Entry{public string id,title,family,resource;public int cost;}public static Entry Find(string id)=>new Entry();public static bool Owns(Sunward.ProfileData p,string id)=>p.owned!=null && System.Array.IndexOf(p.owned,id)>=0;public static bool Buy(Sunward.ProfileData p,string id)=>false;}}
+namespace UnityEngine
+{
+ public sealed class Rigidbody:Object{public bool useGravity;public bool isKinematic;public Vector3 position;}
+ public struct Vector2Int{public int x,y;public Vector2Int(int a,int b){x=a;y=b;}public static Vector2Int left=>new Vector2Int(-1,0);public static Vector2Int right=>new Vector2Int(1,0);public static Vector2Int up=>new Vector2Int(0,1);public static Vector2Int down=>new Vector2Int(0,-1);}
+}
+namespace Sunward
+{
+ public static class VillageNavigation
+ {public static bool Clear(Valley.ValleyData data,UnityEngine.Vector3 p,float r)=>true;public static bool SegmentClear(Valley.ValleyData data,UnityEngine.Vector3 a,UnityEngine.Vector3 b,float r)=>true;public static bool FindSafe(Valley.ValleyData data,UnityEngine.Vector3 p,out UnityEngine.Vector3 goal,float radius=.5f,float distance=16){goal=p;return true;}}
+}
+
+namespace Sunward.Remaster{public sealed class OriginalBillboard:UnityEngine.Object{}}
+
+namespace Sunward {public sealed partial class GameFlow {public void ShowDialogue(string text,string panel="dialogue")
+        {
+            Dialogue=text;
+            SetPanel(panel);
+        }}}
+
+namespace Sunward{public static class MeshSafety{public static bool Finite(UnityEngine.Vector3 p)=>float.IsFinite(p.x)&&float.IsFinite(p.y)&&float.IsFinite(p.z);}}
+namespace UnityEngine{public class MeshCollider:Collider{public Mesh sharedMesh;}}
+namespace Sunward{public class BoxData{public float x,z,halfX,halfZ;}}
+namespace UnityEngine{public static class SceneQuery{public static Object[] objects=System.Array.Empty<Object>();public static T[] Find<T>(){var result=new System.Collections.Generic.List<T>();foreach(var o in objects)if(o is T t)result.Add(t);return result.ToArray();}}}
+namespace UnityEngine{public static class HeavenPhysicsFixture{public static RaycastHit[] hits=System.Array.Empty<RaycastHit>();}}
+namespace Sunward{public class CollectibleShelf{public void Refresh(){}}}
+namespace UnityEngine{public enum LineAlignment{View,TransformZ}}
+namespace UnityEngine{public enum ParticleSystemSimulationSpace{Local,World}public enum ParticleSystemRenderMode{Billboard,HorizontalBillboard,VerticalBillboard}public class ParticleSystemRenderer:Renderer{public ParticleSystemRenderMode renderMode;}}
+namespace Sunward {public sealed partial class GameFlow {public void Finish(bool win)
+        {
+            if (!InTrial)
+                return;
+            if(Celestial && Celestial.Active){FinishCelestial(win);return;}
+            bool bossEncounter=BossTrial;if(win){Sunward.Remaster.AwakeningProgress.Record(this,bossEncounter?"boss":"trial");Audio.VictoryMusic(bossEncounter);}InTrial=false;BossTrial=false;waiting=false;
+            if(BossTransformation)BossTransformation.Cancel();
+            Player.Locked=Health<=0;
+            Combat.Cancel();
+            Combat.Rest(false);
+            ClearBarrier();
+
+            if (win)
+            {
+                if(bossEncounter)Profile.bossWins++;else Profile.wins++;
+                Profile.coins += bossEncounter?150:65 + Profile.wins * 10;
+                Profile.xp += 100;
+                Profile.milestones.hollowBell = true;
+            }
+            else
+                Profile.defeats++;
+            Save.Save();
+            ClearProjectiles();
+            Dialogue = win ? (bossEncounter?"Crimson Helm falls.\n\nThe depths are quiet.":"The upper trial is complete.\n\nThe seal below has opened.") : "Your spirit endures.\n\nEarned currency and permanent growth are safe.";
+            Dialogue += "\n\n" + runCoins + " combat coins · " + runXp + " combat XP";
+            if(!bossEncounter)Sunward.Remaster.LowerArena.TrialFinished(win);
+            if(!win)ClearEnemies();
+            if(win && bossEncounter)
+            {
+                Sunward.Remaster.LowerArena.BossDefeated();
+                Close();Presentation.BossVictory();
+            }
+            else if(win){Close();Notify("Trial complete · rewards saved");}
+            else SetPanel("result");
+        }}}
+
+namespace Sunward {public sealed partial class GameFlow {void ClearBarrier()
+        {
+            // The original wind boundary is a particle system, not a mesh.
+            // Its emitter owns its material cleanup. Never dereference or
+            // destroy a shared mesh asset while ending a trial.
+            var previous=barrier;
+            barrier=null;
+            if(previous){previous.SetActive(false);Destroy(previous);}
+        }}}
+
+namespace UnityEngine{public static class PlayerPrefs{static System.Collections.Generic.Dictionary<string,float> values=new System.Collections.Generic.Dictionary<string,float>();public static float GetFloat(string k,float d)=>values.TryGetValue(k,out var v)?v:d;public static void SetFloat(string k,float v){values[k]=v;}public static void Save(){}}}

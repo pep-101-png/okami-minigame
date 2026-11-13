@@ -144,12 +144,12 @@ namespace Sunward
             Label(game.Profile.coins + " coins · Lv " + ProgressionRules.Level(game.Profile), small);
             Label(game.Combat.EquippedTitle, body);
             GUILayout.EndArea();
-            var boss = game.Enemies.Find(e => e && !e.Dead && e.definition.id == "boss");
+            var boss = game.Enemies.Find(e => e && !e.Dead && (e.definition.id == "boss" || e.CelestialBoss));
             if (boss)
             {
                 DrawPaper(new Rect(w * .5f - 250, 20, 500, 64));
                 contentWidth=472;GUILayout.BeginArea(new Rect(w * .5f - 236, 26, 472, 88));
-                Label("CRIMSON HELM · THE HOLLOW BELL · " + ("PHASE "+boss.BossPhase+" / 3 · "+(boss.BossRising?"TRANSFORMING":boss.BossPhase==1?"BURNING ARMOUR":boss.FlamePhase?"SKELETAL INFERNO":"ARMOUR SHATTERED")), body);
+                Label(boss.CelestialBoss?boss.definition.title+" · "+(boss.State=="windup"?"GATHERING POWER":boss.State=="recover"?"GUARD OPEN":"WATCH ITS MOVEMENT"):"CRIMSON HELM · THE HOLLOW BELL · " + ("PHASE "+boss.BossPhase+" / 3 · "+(boss.BossRising?"TRANSFORMING":boss.BossPhase==1?"BURNING ARMOUR":boss.FlamePhase?"SKELETAL INFERNO":"ARMOUR SHATTERED")), body);
                 Bar(470, boss.Hp / boss.MaxHp);
                 GUILayout.EndArea();
             }
@@ -233,6 +233,7 @@ namespace Sunward
                     break;
                 case "pause":
                     Label("A moment of stillness.", title);
+                    if(game.Profile.shiranuiUnlock>0)Label("T · change earned forms · P remains the testing shortcut",small);
                     if (game.InTrial && Button("RETREAT · KEEP EARNED REWARDS", button))
                         game.Finish(false);
                     if (!game.InTrial && Button("RETURN HOME · KEEP PROGRESS", button))
@@ -324,10 +325,11 @@ namespace Sunward
             Label(game.Profile.coins + " coins · permanent upgrades survive defeat.", body);
             if (Button("TARO'S WEAPON CATALOGUE →", button)) game.SetPanel("weapons");
             if(Button("VILLAGE REQUEST BOARD · goals & rewards",button))game.SetPanel("requests");
+            Label(Sunward.Remaster.CelestialHints.Shop(game.Profile),small);
             foreach (string id in ProgressionRules.Upgrades)
             {
                 string label=id=="spear"?"GLAIVE MASTERY":id=="sundial"?"MIRROR & ROSARY MASTERY":id=="energy"?"INK CAPACITY":id=="ability"?"BARK TECHNIQUE":id.ToUpperInvariant();
-                int rank=game.Profile.upgrades.Get(id),cap=ProgressionRules.Cap(id);
+                int rank=game.Profile.upgrades.Get(id),cap=ProgressionRules.Cap(game.Profile,id);
                 if(rank>=cap)Label(label+" · "+rank+" / "+cap+" · MAXIMUM",body);
                 else if(Button(label+" · rank "+rank+" / "+cap+" · "+ProgressionRules.Cost(game.Profile,id)+" coins",button))game.Buy(id);
                 Label(ProgressionRules.Explain(id),small);

@@ -1,0 +1,259 @@
+[
+  {
+    "package": "em61",
+    "modelSHA256": "a8c0a92bf0781a80f2b7189cf255bed6b82fa13964ca67db508bf3ef3f664576",
+    "resource": "guardian-fox",
+    "motions": [
+      {
+        "name": "em61_000",
+        "sha256": "57e3de9d8ebf65accf4c679cfe2fbdc651c47150f19a248bd6457522a13fe158",
+        "frames": 81
+      },
+      {
+        "name": "em61_010",
+        "sha256": "81be34a509fecc31b06f7031cb526ee618a91dc8f329bf512ff4913ed90150d6",
+        "frames": 37
+      },
+      {
+        "name": "em61_011",
+        "sha256": "a44466494314a50eca6d950a61cf2b9bdc3a9277e548eb4626b6a570238468a7",
+        "frames": 15
+      },
+      {
+        "name": "em61_020",
+        "sha256": "67425321fc621d750303d20b8298dc8d957de5a5d3d3b60ab3422cd51bc98802",
+        "frames": 34
+      },
+      {
+        "name": "em61_030",
+        "sha256": "70400928494da0786d1dc7685de050b62eda776b79169cd047c90a96066b7060",
+        "frames": 20
+      },
+      {
+        "name": "em61_031",
+        "sha256": "c8dc3c2bac4ac05ede4bcf113da44670eabc5304aa3c0d7d2cc51a9b6708d916",
+        "frames": 38
+      },
+      {
+        "name": "em61_032",
+        "sha256": "9a17371e1205aaa0a693874e7bca2f95ae4438948884cf91a48725536a077c3b",
+        "frames": 48
+      },
+      {
+        "name": "em61_033",
+        "sha256": "6055691498d2d3f091e5246b1a551e43e889b8f64bf506534a53a0bf233c3742",
+        "frames": 131
+      },
+      {
+        "name": "em61_040",
+        "sha256": "b2e6259b41949786d578b535bb6390f09adaa8bde7edb7febe515502ab85476d",
+        "frames": 28
+      },
+      {
+        "name": "em61_050",
+        "sha256": "ebd401646bd3219211d458ae33d73cff7bb8b345b825bfb0f4f8545a22526214",
+        "frames": 55
+      }
+    ],
+    "textures": [
+      {
+        "index": 1,
+        "path": "Texture-1.png",
+        "sourceSHA256": "8d2ad9463604ff1263e5b61129d1871cb4fd49d59cd1508862f575eba0739dbd"
+      },
+      {
+        "index": 2,
+        "path": "Texture-2.png",
+        "sourceSHA256": "cffd44a4326f7aba3e7db4247da0250ba4a9bfbb2ef14e5f105c1205954c701a"
+      },
+      {
+        "index": 0,
+        "path": "Texture-0.png",
+        "sourceSHA256": "49005ffada90e6fc23fb9dbe7c852885eb30d7f72e8db2dab680f4bfe78a996c"
+      },
+      {
+        "index": 3,
+        "path": "Texture-3.png",
+        "sourceSHA256": "663352ad6d09710a5ec4f62389362f70ea5807f65ae03831d266d8bfc51d2664"
+      },
+      {
+        "index": 4,
+        "path": "Texture-4.png",
+        "sourceSHA256": "30db2ec1aedc92a8cdb716ac22a6d9fa0fcc6bdb1da315572e2b83e52ed7fc4b"
+      },
+      {
+        "index": 5,
+        "path": "Texture-5.png",
+        "sourceSHA256": "958b916b02876a54afeb2c4f15712890c63a5aeaa57b18ef6eb4179f9f1fc718"
+      },
+      {
+        "index": 6,
+        "path": "Texture-6.png",
+        "sourceSHA256": "35d1f7b4217679016fa3f4aa87e1af277f1c8dc3401ddc05a01bc987962b34e0"
+      }
+    ],
+    "parts": 9
+  },
+  {
+    "package": "em16",
+    "modelSHA256": "3dcd6420b91c04ae61fa788ae6989ae78d6fd319d4b7743d50f8dc95cc0627a7",
+    "resource": "guardian-sentinel",
+    "motions": [
+      {
+        "name": "em60_001",
+        "sha256": "7a3b34cfa19fb4694312ecf6143f0d16fc69183f9f63d356e866dcd21eb02d39",
+        "frames": 91
+      },
+      {
+        "name": "em60_010",
+        "sha256": "9d7cf27ccb19c493f49e420811ff085129e9a5f88ce3c1c8cfec136c12b9d92f",
+        "frames": 37
+      },
+      {
+        "name": "em60_011",
+        "sha256": "bf82c44dc301ae8d4add0e8a453c2843322ae703462897dab4db3c7ecf4595ab",
+        "frames": 14
+      },
+      {
+        "name": "em60_020",
+        "sha256": "43eaa54016d0be596666e4aec88f1cba9ab6fd973300bc143361c87af1c29028",
+        "frames": 5
+      },
+      {
+        "name": "em60_030",
+        "sha256": "575c333c5faa9926d507a088df11140c077069e6f1100d69054582ce52a74023",
+        "frames": 17
+      },
+      {
+        "name": "em60_031",
+        "sha256": "22c8fc23a2b455b16be26e52e45db00b27faa9ddbc498dc31e068ea9a1a41d37",
+        "frames": 35
+      },
+      {
+        "name": "em60_035",
+        "sha256": "cafc6120e20f6e7df0f9e6188a6b383ac21dd86e9df5c271844b9fce330069fe",
+        "frames": 89
+      },
+      {
+        "name": "em60_043",
+        "sha256": "4133e1a93bbf344c01d3d21db2096d173fe14c9b9d6ab068de7d1c87b9f3e6cd",
+        "frames": 39
+      }
+    ],
+    "textures": [
+      {
+        "index": 2,
+        "path": "Texture-2.png",
+        "sourceSHA256": "a786d0900d30db923d059f25f6c3acfd941801ba195bd5b5ceffdfa4a0611ed9"
+      },
+      {
+        "index": 3,
+        "path": "Texture-3.png",
+        "sourceSHA256": "b36e4a186b59c33b5c2f3ea839fac91b7179a274f7d05f0526e426dcb899cfef"
+      },
+      {
+        "index": 1,
+        "path": "Texture-1.png",
+        "sourceSHA256": "0ca26723b3167abee6fafdcd8ce6a26145bc2323a32e256303f9297f39082418"
+      },
+      {
+        "index": 4,
+        "path": "Texture-4.png",
+        "sourceSHA256": "91a1b10ad6387e4741cebc883bea8b61e35520bb33a8abbca5aef63935e5d463"
+      },
+      {
+        "index": 0,
+        "path": "Texture-0.png",
+        "sourceSHA256": "8c2beec702dcf907c8e5f10e92165c37eac9e8b32d6fa46539b65c1f29bf1ffd"
+      }
+    ],
+    "parts": 11
+  },
+  {
+    "package": "em62",
+    "modelSHA256": "e018c721422f8df4a411b13e2f84b583b5746e675fc43d6e2d62d5982a32880e",
+    "resource": "guardian-eclipse",
+    "motions": [
+      {
+        "name": "em62_000",
+        "sha256": "9d46c2d31b1fa05041533c3117c20113a3a59bb17f7dba2ea96902d634a2a59b",
+        "frames": 81
+      },
+      {
+        "name": "em62_010",
+        "sha256": "c768c5de7324f197483c87ebc5b212a6dd045fabad11eb68e45d880ac9c22b2d",
+        "frames": 37
+      },
+      {
+        "name": "em62_011",
+        "sha256": "47ec79a9a760d0704d6395ae95bd5640cfcc2de1f3c9e766261884c7477c58d5",
+        "frames": 15
+      },
+      {
+        "name": "em62_020",
+        "sha256": "53e11436e5b6ef50eeb6af9eda9b841ca3263b1e30f641f563ddc4b40803b56c",
+        "frames": 34
+      },
+      {
+        "name": "em62_030",
+        "sha256": "ef1a4a3ff58927bae2fe7bbb6123d2acbd6ad5142796967c404ce81c1d513cf3",
+        "frames": 20
+      },
+      {
+        "name": "em62_031",
+        "sha256": "1da82aa27565b98269bfb9ab038a5596f46a7b0e811601f9a49268f64928e849",
+        "frames": 38
+      },
+      {
+        "name": "em62_032",
+        "sha256": "299f982a00e58645c03b01af7f677b305a217654a04f37eeb8d273b342ecf576",
+        "frames": 48
+      },
+      {
+        "name": "em62_033",
+        "sha256": "429a0b8abfe27fbc7f68996b66759770bbbc08f0e72a4864e5eeb40f6640208a",
+        "frames": 81
+      },
+      {
+        "name": "em62_040",
+        "sha256": "751d6427c98c5cd8884baced4fe3b5abb9723e20232771949ee4fa0481c4cad9",
+        "frames": 28
+      },
+      {
+        "name": "em62_050",
+        "sha256": "bf23295c6c41352b127b7756467ed3ce1237ba4661e788b45f9c5f986a32c527",
+        "frames": 55
+      }
+    ],
+    "textures": [
+      {
+        "index": 1,
+        "path": "Texture-1.png",
+        "sourceSHA256": "663352ad6d09710a5ec4f62389362f70ea5807f65ae03831d266d8bfc51d2664"
+      },
+      {
+        "index": 3,
+        "path": "Texture-3.png",
+        "sourceSHA256": "f0b5364d9683edab14feeeba3ef1379b203149f83a0ac11fe3de7c6d12d53f37"
+      },
+      {
+        "index": 0,
+        "path": "Texture-0.png",
+        "sourceSHA256": "49005ffada90e6fc23fb9dbe7c852885eb30d7f72e8db2dab680f4bfe78a996c"
+      },
+      {
+        "index": 2,
+        "path": "Texture-2.png",
+        "sourceSHA256": "025546a7188320eb756fd0c96ee17669a3518c75fa8c4442d61e25854f9714aa"
+      }
+    ],
+    "parts": 23
+  },
+  {
+    "resource": "palace-shiranui",
+    "motion": "pl00_000",
+    "sourceBank": "Sunward-Unity/Assets/OkamiRemaster/Player/Resources/NativePlayer/pl00/Poses.bytes",
+    "sourceRecordSHA256": "d729aec8e0875c06ec70dc7b000ff048bd90ce3d04fa61dbe8cad606289243b0",
+    "conversion": "Exact compatible original idle record; existing sleeping clip preserved"
+  }
+]

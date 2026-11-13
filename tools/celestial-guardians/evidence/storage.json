@@ -1,0 +1,5 @@
+{
+  "reason": "GitHub LFS quota blocks its pre-push check of existing ancestor objects. All new and modified Assets in this update are already ordinary Git blobs; no LFS upload is required. Delivery ZIP and MP4 also use ordinary Git.",
+  "newOrModifiedLFSPointers": [],
+  "changedAssets": 80
+}

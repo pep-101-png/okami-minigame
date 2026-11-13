@@ -1,0 +1,15 @@
+{
+  "runtimeAssertions": 89,
+  "assetChecks": 71,
+  "actualGameFlowSemanticCompilation": "succeeded with engine API doubles",
+  "visualReview": "Original pose/group contact sheets and new encoded arena sequence frames inspected",
+  "unityPlayMode": false,
+  "pcPlaybackAndPerformance": "unverified",
+  "latestPublishedUnityFeedback": {
+    "commit": "aefd595771e933a3313ecb4170251764c94ab1e3",
+    "all14ClipStatuses": "frames_captured_coverage_incomplete",
+    "validation": "passed",
+    "logErrors": []
+  },
+  "palaceStandingIdle": "Original compatible record added and actor awake/standing transition exercised"
+}

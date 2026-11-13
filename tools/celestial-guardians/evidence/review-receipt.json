@@ -1,0 +1,6 @@
+{
+  "scope": "Offline native asset render of actual captured guardian C# driver poses and arena placements. Scripted target, no Unity physics or Play Mode. Original battle track added at review gain; attack SFX are not rendered.",
+  "runtimeReceipt": "e2f4faea5b1808c11f5e0a2da4f555a96b542511aaf5569234eb37a7a442bde3",
+  "sha256": "6a4ef17dd1e11811e421c8d967558a47d382ee8479bf3eb5569822ebb69382a4",
+  "unchangedRenderInputs": "Battle captures and all previous source inputs are byte-identical; added palace standing idle is outside this battle render."
+}

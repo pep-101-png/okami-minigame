@@ -8,7 +8,9 @@ namespace Sunward.Remaster
         public GameFlow game;
         public bool Playing {get;private set;}
         public int SkipHandledFrame {get;private set;}=-1;
-        public void Skip(){SkipHandledFrame=Time.frameCount;Cancel();}
+        public void Skip(){SkipHandledFrame=Time.frameCount;FinishSequence();}
+        void FinishSequence()
+        {bool revealRiver=bossVictory && game && game.Profile.bossWins>0 && !game.Profile.waterfallVision;Cancel();if(revealRiver && game.Celestial)game.Celestial.RevealWaterfall();}
         public string MusicCue=>Title || skyTransition?"gardenmusic":bossVictory?"boss-victory":breaking || victory?"trial-victory":"festivalrace";
         public bool Title=>game && game.Panel=="title";
         float elapsed,duration,dialogueTime,entryGrace;bool victory,breaking,shaftRevealed,bossVictory,skyTransition,skyNight,howled;
@@ -58,7 +60,7 @@ namespace Sunward.Remaster
         }
         public void Cancel()
         {
-            if(!Playing)return;if(breaking && !shaftRevealed)LowerArena.RevealShaft();breaking=false;Playing=false;foreach(var fx in cinemaEffects)if(fx)Destroy(fx);cinemaEffects.Clear();if(orbit)orbit.EndCinematic();if(game && game.Player){game.Player.Locked=game.Health<=0;game.Player.animationView.Play("Idle_Natural",.15f,0,true);}
+            if(!Playing)return;bossVictory=false;if(breaking && !shaftRevealed)LowerArena.RevealShaft();breaking=false;Playing=false;foreach(var fx in cinemaEffects)if(fx)Destroy(fx);cinemaEffects.Clear();if(orbit)orbit.EndCinematic();if(game && game.Player){game.Player.Locked=game.Health<=0;game.Player.animationView.Play("Idle_Natural",.15f,0,true);}
         }
         void Update()
         {
@@ -90,7 +92,7 @@ namespace Sunward.Remaster
                 {
                 if(orbit)orbit.CinematicFrame(victory?game.Player.transform.position+Vector3.up*.9f:Vector3.Lerp(game.Player.transform.position+Vector3.up*.9f,FestivalChallenges.Board+Vector3.up*1.8f,t*.65f),game.Player.transform.eulerAngles.y+Mathf.Lerp(-45,32,t),victory?16:22,victory?5.8f:8,42);
                 }
-                if(game.Player.input.Pause.WasPressedThisFrame())Skip();else if(elapsed>=duration || game.Health<=0)Cancel();
+                if(game.Player.input.Pause.WasPressedThisFrame())Skip();else if(game.Health<=0)Cancel();else if(elapsed>=duration)FinishSequence();
             }
             if(Dialogue)
             {

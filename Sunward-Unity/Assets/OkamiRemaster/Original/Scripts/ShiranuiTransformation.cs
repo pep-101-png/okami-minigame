@@ -17,10 +17,19 @@ namespace Sunward.Remaster
         Texture2D ink;
         bool ownsControl,returning,fullPower;int targetForm;
         public bool Playing=>ownsControl;
-        public void Begin(NativeAmaterasu player)
+        // P deliberately remains the unrestricted testing shortcut.
+        public void Begin(NativeAmaterasu player)=>BeginAt(player,(player.FormLevel+1)%3);
+        public void BeginEarned(NativeAmaterasu player)
         {
-            if(!game || !player || !player.Ready || Playing || game.Blocked || game.Health<=0 || !game.Player.Grounded || game.Player.Locked || game.Player.Swimming)return;
-            targetForm=(player.FormLevel+1)%3;fullPower=targetForm==2;if(!player.PreparePowerForm(targetForm))return;
+            int unlocked=game.Profile.shiranuiUnlock;
+            if(unlocked<=0){game.Notify("The sleeping wolf's light has not yet answered.");return;}
+            BeginAt(player,(player.FormLevel+1)%(unlocked+1));
+        }
+        public void Reveal(NativeAmaterasu player,int form)=>BeginAt(player,form,true);
+        void BeginAt(NativeAmaterasu player,int form,bool reveal=false)
+        {
+            if(!game || !player || !player.Ready || Playing || game.Blocked || game.Health<=0 || (!reveal && !game.Player.Grounded) || game.Player.Locked || game.Player.Swimming)return;
+            targetForm=form;fullPower=targetForm==2;if(!player.PreparePowerForm(targetForm))return;
             body=player;returning=targetForm==0;
             game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;ownsControl=true;timeline.Begin();Time.timeScale=0;if(fullPower)game.Audio.FullPowerVoice();
             game.Player.animationView.Play("Idle_Natural",.1f,0,true);

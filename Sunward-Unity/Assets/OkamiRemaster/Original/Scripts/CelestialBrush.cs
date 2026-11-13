@@ -87,7 +87,7 @@ namespace Sunward.Remaster
                     var q=camera.WorldToScreenPoint(enemy.transform.position+Vector3.up);if(q.z<=0)continue;
                     Vector2 delta=b-a;float t=Mathf.Clamp01(Vector2.Dot((Vector2)q-a,delta)/delta.sqrMagnitude);
                     if(Vector2.Distance(q,a+delta*t)>75)continue;
-                    enemy.Damage(28*game.Combat.FormMultiplier*AwakenedWeaponArts.BrushPower(game.Profile.equipped)*(1+AwakeningProgress.Rank(game.Profile,game.Profile.equipped)*.08f),(enemy.transform.position-game.Player.transform.position).normalized,.6f);Burst("Spark",enemy.transform.position+Vector3.up,12,.5f);hits++;AwakeningProgress.Record(game,"brush");AwakenedWeaponArts.BrushHit(game,enemy,!giantSword);giantSword=true;
+                    enemy.BrushCounter();enemy.Damage(28*game.Combat.FormMultiplier*AwakenedWeaponArts.BrushPower(game.Profile.equipped)*(1+AwakeningProgress.Rank(game.Profile,game.Profile.equipped)*.08f),(enemy.transform.position-game.Player.transform.position).normalized,.6f);Burst("Spark",enemy.transform.position+Vector3.up,12,.5f);hits++;AwakeningProgress.Record(game,"brush");AwakenedWeaponArts.BrushHit(game,enemy,!giantSword);giantSword=true;
                 }
                 foreach(var bolt in FindObjectsByType<InkProjectile>(FindObjectsSortMode.None))
                 {
