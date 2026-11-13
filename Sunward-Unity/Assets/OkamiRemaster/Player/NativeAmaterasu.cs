@@ -206,6 +206,7 @@ namespace Sunward.Remaster
             if (motor && motor.game && motor.game.Blocked && !cinematic) return;
             if (UnityEngine.InputSystem.Keyboard.current != null && UnityEngine.InputSystem.Keyboard.current.pKey.wasPressedThisFrame)
                 if(motor && motor.game && motor.game.Transformation)motor.game.Transformation.Begin(this);
+            if(motor && motor.input.TransformForm!=null && motor.input.TransformForm.WasPressedThisFrame() && motor.game && motor.game.Transformation)motor.game.Transformation.BeginEarned(this);
             float dt=cinematic?Time.unscaledDeltaTime:Time.deltaTime;
             if(!tundraClock)time += dt * rate;
             blendTime += dt;

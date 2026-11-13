@@ -114,7 +114,7 @@ namespace Sunward
             if(desired!=musicCue){musicCue=desired;Loop(music,desired);}
             Level(river,(heaven?0:.25f)*Mathf.Clamp01(1-Mathf.Abs(p.x-Valley.RiverX(-p.z))/15));
             Level(wind,heaven?.025f:Sunward.Remaster.VillageServices.InFoodHouse(p)?.06f:.22f);
-            Level(music,Mathf.MoveTowards(levels.TryGetValue(music,out var currentMusic)?currentMusic:0,(heaven || inMusicHouse || presentation)?0:game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f));
+            Level(music,Mathf.MoveTowards(levels.TryGetValue(music,out var currentMusic)?currentMusic:0,((heaven && !game.InTrial) || inMusicHouse || presentation)?0:game.CinematicActive?.10f:game.Panel=="dialogue"?.12f:musicCue=="housemusic"?.28f:.4f,Time.unscaledDeltaTime*.6f));
             Vector3 delta=p-lastPosition;delta.y=0;lastPosition=p;
             if(game.Blocked || game.Player.Locked || delta.magnitude>2)return;
             if(!game.Player.Swimming && game.Player.Grounded && game.Player.Speed>.2f)

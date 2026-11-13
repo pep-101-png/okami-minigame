@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Sunward
 {
-    public sealed class GameFlow : MonoBehaviour
+    public sealed partial class GameFlow : MonoBehaviour
     {
         public Valley valley;
         public WolfMotor Player;
@@ -34,7 +34,8 @@ namespace Sunward
         public void ReleaseBossTransformation(Sunward.Remaster.CrimsonHelmAscension sequence){if(BossTransformation==sequence)BossTransformation=null;}
         public Sunward.Remaster.HeavenlyGarden Heaven {get;private set;}
         public Sunward.Remaster.ShiranuiUltimate Ultimate{get;private set;}
-        public bool CinematicActive => (Ultimate && Ultimate.Playing) || (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing) || (Presentation && Presentation.Playing) || (Heaven && Heaven.Playing);
+        public Sunward.Remaster.CelestialTrials Celestial{get;private set;}
+        public bool CinematicActive => (Celestial && Celestial.Playing) || (Ultimate && Ultimate.Playing) || (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing) || (Presentation && Presentation.Playing) || (Heaven && Heaven.Playing);
         public bool Blocked => CinematicActive || Panel != "" || (Brush && Brush.Drawing);
         public Sunward.Remaster.CelestialBrush Brush { get; private set; }
         public int Wave { get; private set; }
@@ -104,6 +105,7 @@ namespace Sunward
             gameObject.AddComponent<Sunward.Remaster.HomeWeaponDisplay>().game=this;
             gameObject.AddComponent<Sunward.Remaster.MemoryMirrorMenu>().game=this;
             gameObject.AddComponent<Sunward.Remaster.VillagePolish>().game=this;
+            Celestial=gameObject.AddComponent<Sunward.Remaster.CelestialTrials>();Celestial.game=this;
             Health = MaxHealth;
             Stamina = MaxStamina;
             Energy = MaxEnergy;
@@ -174,7 +176,7 @@ namespace Sunward
             if(Presentation && Presentation.SkipHandledFrame==Time.frameCount)return;
             if(CinematicActive)
             {
-                if(Player.input.Pause.WasPressedThisFrame()){if(Ultimate && Ultimate.Playing)Ultimate.Skip();else if(BossTransformation && BossTransformation.Playing)BossTransformation.Skip();else if(Presentation && Presentation.Playing)Presentation.Skip();else if(Transformation)Transformation.Skip();}
+                if(Player.input.Pause.WasPressedThisFrame()){if(Celestial && Celestial.Playing)Celestial.Skip();else if(Ultimate && Ultimate.Playing)Ultimate.Skip();else if(BossTransformation && BossTransformation.Playing)BossTransformation.Skip();else if(Presentation && Presentation.Playing)Presentation.Skip();else if(Transformation)Transformation.Skip();}
                 return;
             }
             if (Time.unscaledTime > messageUntil)
@@ -220,6 +222,7 @@ namespace Sunward
                     }
                 }
 
+                if(Celestial && Celestial.Active){Prompt=Celestial.Title;return;}
                 Prompt = BossTrial?"CRIMSON HELM · beneath the village":"Trial "+(Profile.wins+1)+" · Wave "+(Wave+1)+" / "+waves.Length;
                 return;
             }
@@ -287,7 +290,7 @@ namespace Sunward
                             int i = int.Parse(action.Substring(4));
                             if(i==2){GetComponent<Sunward.Remaster.VillageTeaVisit>().Talk();break;}
                             Audio.Npc(i,npcObjects[i].transform.position);
-                            Dialogue = npcData[i].name + "\n\n" + string.Join("\n\n", npcData[i].lines);
+                            Dialogue = npcData[i].name + "\n\n" + string.Join("\n\n", npcData[i].lines)+"\n\n"+Sunward.Remaster.CelestialHints.Villager(Profile,i);
                             SetPanel(i==0?"weapons":i==1?"shop":"dialogue");
                         }
 
@@ -503,6 +506,7 @@ namespace Sunward
         {
             if (!InTrial)
                 return;
+            if(Celestial && Celestial.Active){FinishCelestial(win);return;}
             bool bossEncounter=BossTrial;if(win){Sunward.Remaster.AwakeningProgress.Record(this,bossEncounter?"boss":"trial");Audio.VictoryMusic(bossEncounter);}InTrial=false;BossTrial=false;waiting=false;
             if(BossTransformation)BossTransformation.Cancel();
             Player.Locked=Health<=0;
@@ -536,6 +540,7 @@ namespace Sunward
 
         public void ReturnHome()
         {
+            if(Celestial)Celestial.Cancel();
             if(Ultimate)Ultimate.Cancel();
             var digging=GetComponent<Sunward.Remaster.VillageLife>();if(digging)digging.CancelDig();
             InTrial=false;BossTrial=false;

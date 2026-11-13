@@ -26,10 +26,16 @@ namespace Sunward
         public bool Frozen=>Time.time<frozenUntil;
         public bool VisualStunned => !Dead && (stun>0 || State=="stagger" || Frozen);
         float frozenUntil,nextFreeze;
-        public void Freeze(float duration){if(definition.id=="boss"){Stun(.12f);return;}if(Time.time<nextFreeze)return;frozenUntil=Time.time+Mathf.Min(1.2f,duration);nextFreeze=frozenUntil+2;}
+        public void Freeze(float duration){if(definition.id=="boss" || CelestialBoss){Stun(.12f);return;}if(Time.time<nextFreeze)return;frozenUntil=Time.time+Mathf.Min(1.2f,duration);nextFreeze=frozenUntil+2;}
 
         public float VisualStateProgress => Mathf.Clamp01(1 - timer / Mathf.Max(.001f, VisualStateDuration));
 
+        public bool CelestialBoss=>definition && (definition.id=="guardian-dawn" || definition.id=="guardian-eclipse");
+        Sunward.Remaster.CelestialGuardian guardian;
+        public void CelestialState(string state,string attack,float duration,float remaining)
+        {State=state;move=attack;visualDuration=duration;timer=remaining;}
+        public void CelestialMove(Vector3 delta){if(motor && motor.enabled)motor.Move(delta);}
+        public void BrushCounter(){if(guardian)guardian.BrushCounter();}
         CharacterController motor;
         Transform visual;
         Vector3 direction,impAim;
@@ -76,17 +82,20 @@ namespace Sunward
             motor.center = Vector3.up * motor.height * .5f;
             visual = Instantiate(spec.visual, transform).transform;
             visual.localScale = Vector3.one * spec.scale;
+            visual.gameObject.SetActive(true);
             visualBase = visual.localPosition;
             var native = visual.GetComponentInChildren<Sunward.Remaster.OriginalActor>(true);
             nativeActor=native;
             originalVisual = native != null;
             if(native && native.Ready && native.splitAttackClip)nativeAttackLength=native.ActivityLength(native.strike);
             if(IsImp){motor.height=Mathf.Max(.85f,1.7f*nativeActor.ImpWorldScale);motor.radius=Mathf.Clamp(.52f*nativeActor.ImpWorldScale,.24f,.6f);motor.center=Vector3.up*motor.height*.5f;}
+            if(CelestialBoss){motor.height=3.8f;motor.radius=1.2f;motor.center=Vector3.up*1.9f;guardian=gameObject.AddComponent<Sunward.Remaster.CelestialGuardian>();guardian.Initialise(this,nativeActor);}
             if(spec.id=="boss")gameObject.AddComponent<Sunward.Remaster.CrimsonHelmAscension>().Initialise(this,nativeActor);
         }
 
         public void Stun(float time)
         {
+            if(CelestialBoss)return;
             if(definition.id=="boss")
             {
                 // Damage remains valid, but ordinary bead contacts cannot restart
@@ -115,6 +124,7 @@ namespace Sunward
         {
             if (Dead || BossRising || (game.CinematicActive && !sunburst))
                 return;
+            if(guardian)damage=guardian.FilterDamage(damage);
             Hp -= damage;
             if(Hp<=0 && definition.id=="boss" && crimson.TryRise())
             {
@@ -126,7 +136,7 @@ namespace Sunward
             }
             if (!IsImp && game.Audio && (Dead || Time.time >= nextVoice)) { game.Audio.Enemy(definition.id,transform.position); nextVoice = Time.time + .9f; }
             Stun(stagger);
-            if (motor.enabled && definition.id!="boss")
+            if (motor.enabled && definition.id!="boss" && !CelestialBoss)
                 motor.Move(away * .15f);
             if (Dead)
             {
@@ -178,6 +188,7 @@ namespace Sunward
         {
             if (!definition || game.Blocked || !game.InTrial)
                 return;
+            if(CelestialBoss)return;
             GroundBoss();
             float dt = Time.deltaTime;
             clock += dt;

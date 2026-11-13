@@ -17,7 +17,7 @@ namespace Sunward.Remaster
             "Susano is Nagi's descendant. His loud boasts often hide doubt, yet his story reminds us that courage can grow. Even a frightened person can choose to help someone else.",
             "Shiranui was the white wolf who stood beside Nagi a hundred years before Amaterasu's journey. Stories of that guardian survived in Kamiki long after people forgot the wolf's true nature. A good deed can outlive the one who performs it."
         };
-        public string Story=>stories[story%stories.Length];
+        public string Story=>stories[story%stories.Length]+"\n\n"+CelestialHints.Villager(game.Profile,story);
         public void NextStory(){story=(story+1)%stories.Length;}
         void Start()
         {

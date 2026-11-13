@@ -73,6 +73,7 @@ namespace Sunward
     public class ProfileData
     {
         public int version = 2, revision, coins = 35, xp, wins, defeats, kills;
+        public int shiranuiUnlock;
         public int bossWins, vegetables, cropsSold, praise, restorationStage, farmVitality;
         public int festivalTokens, festivalRewards, festivalWins;
         public Sunward.Remaster.WeaponMastery[] weaponMastery=Array.Empty<Sunward.Remaster.WeaponMastery>();
@@ -82,7 +83,7 @@ namespace Sunward
             "spear"
         };
         public UpgradeLevels upgrades = new UpgradeLevels();
-        public bool shrine, night;
+        public bool shrine, night,waterfallVision;
         public double dayElapsed;public float playSeconds;
         public long bedBlessingUntil,fireBlessingUntil;
         public string[] collectibles = Array.Empty<string>(), windflowers = Array.Empty<string>();
@@ -134,6 +135,14 @@ namespace Sunward
 
         public static int MaxHp(ProfileData p) => 100 + (Level(p) - 1) * 4 + p.upgrades.vitality * 12 + (p.shrine ? 20 : 0)+Math.Max(0,Math.Min(10,p.farmVitality));
         public static int Cap(string id){int i=Array.IndexOf(Upgrades,id);return i<0?0:Caps[i];}
+        public static bool Advanced(ProfileData p)=>p!=null && p.shiranuiUnlock>=1 && Level(p)>=30;
+        public static int Cap(ProfileData p,string id)=>Cap(id)+(Advanced(p)?5:0);
+        public static bool PathsComplete(ProfileData p,bool advanced=false)
+        {if(p==null || p.upgrades==null)return false;foreach(var id in Upgrades)if(p.upgrades.Get(id)<Cap(id)+(advanced?5:0))return false;return true;}
+        public static int CompletedPaths(ProfileData p,bool advanced=false)
+        {int n=0;foreach(var id in Upgrades)if(p.upgrades.Get(id)>=Cap(id)+(advanced?5:0))n++;return n;}
+        public static bool DawnReady(ProfileData p)=>p!=null && p.bossWins>0 && p.shiranuiUnlock==0 && Level(p)>=20 && PathsComplete(p);
+        public static bool EclipseReady(ProfileData p)=>Advanced(p) && p.shiranuiUnlock==1 && PathsComplete(p,true);
         public static string Explain(string id)
         {
             switch(id)
@@ -171,7 +180,7 @@ namespace Sunward
             }
 
             int i = Array.IndexOf(Upgrades, id);
-            if (i < 0 || p.upgrades.Get(id) >= Caps[i] || p.coins < Cost(p, id) || (id == "sundial" && (Array.IndexOf(p.owned, "sundial") < 0 && Array.IndexOf(p.owned,"sundiale")<0)))
+            if (i < 0 || p.upgrades.Get(id) >= Cap(p,id) || p.coins < Cost(p, id) || (id == "sundial" && (Array.IndexOf(p.owned, "sundial") < 0 && Array.IndexOf(p.owned,"sundiale")<0)))
                 return false;
             p.coins -= Cost(p, id);
             p.upgrades.Add(id);
@@ -180,11 +189,12 @@ namespace Sunward
 
         public static bool Validate(ProfileData p)
         {
+            if(p==null || p.shiranuiUnlock<0 || p.shiranuiUnlock>2)return false;
             Sunward.Remaster.OriginalWeaponEvolution.Normalize(p);
             if (p == null || (p.version != 1 && p.version != 2) || p.coins < 0 || p.xp < 0 || p.wins < 0 || p.defeats < 0 || p.revision < 0 || p.upgrades == null || p.owned == null || (Array.IndexOf(p.owned, "spear") < 0 && Array.IndexOf(p.owned,"speare")<0) || Array.IndexOf(p.owned, p.equipped) < 0)
                 return false;
             for (int i = 0; i < Upgrades.Length; i++)
-                if (p.upgrades.Get(Upgrades[i]) < 0 || p.upgrades.Get(Upgrades[i]) > Caps[i])
+                if (p.upgrades.Get(Upgrades[i]) < 0 || p.upgrades.Get(Upgrades[i]) > Cap(p,Upgrades[i]))
                     return false;
             p.collectibles = p.collectibles ?? Array.Empty<string>();
             p.windflowers = p.windflowers ?? Array.Empty<string>();
