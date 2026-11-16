@@ -105,6 +105,7 @@ namespace Sunward
         public bool CanCycleWeapon=>game && motor && !game.InTrial && !game.Blocked && !motor.Locked && !motor.Swimming && !Busy && !game.Enemies.Exists(e=>e && !e.Dead);
         void Update()
         {
+            if(game && game.Adventures && game.Adventures.Fishing && game.Adventures.Fishing.Active)return;
             if(!game)return;
             if(awakeningEquipPending && !Busy && !game.Blocked){awakeningEquipPending=false;Equip();}
             if(motor.input.Switch.WasPressedThisFrame() && CanCycleWeapon){game.Profile.equipped=Sunward.Remaster.OriginalWeaponCatalog.Next(game.Profile);game.Save.Save();Equip();}
@@ -128,6 +129,7 @@ namespace Sunward
                 motor.animationView.Play("Bark", .06f, .55f);
                 game.Audio.Cue("bark");
                 Sunward.Remaster.WeaponElementFx.Bark(game,originalWeapon.resource,transform.position);
+                Sunward.Remaster.AwakenedWeaponArts.Bark(game);
                 foreach (var e in game.Enemies)
                     if (Vector3.Distance(e.transform.position, transform.position) < 5.5f)
                         e.Stun(1.1f);

@@ -18,7 +18,7 @@ namespace Sunward.Remaster
         {
             if(!game || !game.Player || game.Panel=="title")return;
             game.Profile.playSeconds+=Time.unscaledDeltaTime;
-            if(Tick(game.Profile,Time.unscaledDeltaTime)){pending=true;game.Save.Save();}
+            if(!(game.Adventures && game.Adventures.Fishing && game.Adventures.Fishing.Active) && Tick(game.Profile,Time.unscaledDeltaTime)){pending=true;game.Save.Save();}
             saveTime+=Time.unscaledDeltaTime;if(saveTime>=60){saveTime=0;game.Save.Save();}
             if(pending && !game.Blocked && !game.InTrial && !game.Home.Active && !game.Player.Locked && !VillageInteriors.AnyRoom(game.Player.transform.position) && !HeavenlyGarden.Inside(game.Player.transform.position))
             {pending=false;game.Presentation.SkyTransition(game.Profile.night);}

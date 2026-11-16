@@ -58,6 +58,7 @@ namespace Sunward.Remaster
         {
             if(!g || !g.InTrial)return;string id=OriginalWeaponEvolution.BaseId(g.Profile.equipped);var m=Get(g.Profile,id);
             switch(kind){case "hit":m.hits++;if(charged)m.charged++;break;case "kill":m.kills++;break;case "brush":m.brush++;break;case "deflect":m.deflected++;break;case "trial":m.trials++;break;case "boss":m.bosses++;break;}
+            VillageAdventures.Record(g,kind);if(charged)VillageAdventures.Record(g,"charged");
             if(!OriginalWeaponEvolution.IsAwakened(g.Profile.equipped) && Ready(g.Profile,id) && OriginalWeaponEvolution.Unlock(g.Profile,id))
             {g.Save.Save();g.Combat.QueueAwakeningEquip();g.Audio.Cue("collect");g.Notify(OriginalWeaponCatalog.Find(g.Profile.equipped).title+" · challenge complete");}
         }

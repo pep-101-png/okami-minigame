@@ -1,0 +1,152 @@
+[
+  {
+    "package": "ana1",
+    "sourceSHA256": "121a6d2c250fe8ebd52b8744b979dc3e0913e4b3039fb4ed69c49201bd904391",
+    "motions": [
+      {
+        "name": "ana1_002",
+        "sha256": "a96324aa52e2ee737a423b0c32a559fe76755ee3cf63c84f3f91ecf8b0374f58"
+      },
+      {
+        "name": "ana1_003",
+        "sha256": "f0de74253adb4448ac96a438d4e18801c46291d14494a0c1ccdd06260e2a7499"
+      },
+      {
+        "name": "ana1_004",
+        "sha256": "65fc7cf50cf602efbe748a768d5d1f0b17044c4c13e00f6d90d197d8dfeabd21"
+      }
+    ],
+    "textures": [
+      {
+        "index": 0,
+        "path": "Texture-0.png",
+        "sourceSHA256": "cdf896810050ab35f962d33ddfe1dd2caefbfac911c3d6f44c19e64e8340dcdc"
+      }
+    ]
+  },
+  {
+    "package": "ana5",
+    "sourceSHA256": "9e462d742e6fbe1b1a27101f677b1d8fb945ea70f994e0db699b1a62c35651b1",
+    "motions": [
+      {
+        "name": "ana5_002",
+        "sha256": "a96324aa52e2ee737a423b0c32a559fe76755ee3cf63c84f3f91ecf8b0374f58"
+      },
+      {
+        "name": "ana5_003",
+        "sha256": "f0de74253adb4448ac96a438d4e18801c46291d14494a0c1ccdd06260e2a7499"
+      },
+      {
+        "name": "ana5_004",
+        "sha256": "65fc7cf50cf602efbe748a768d5d1f0b17044c4c13e00f6d90d197d8dfeabd21"
+      }
+    ],
+    "textures": [
+      {
+        "index": 0,
+        "path": "Texture-0.png",
+        "sourceSHA256": "6c1bf51f362d3f41de28e806a7a2031a18ed9b880989d18eb021fa07e30e42ac"
+      }
+    ]
+  },
+  {
+    "package": "ana6",
+    "sourceSHA256": "fd352d84a85aaa540714a6850543ce70edcecf8a0545bd341e8a6f4b1468295d",
+    "motions": [
+      {
+        "name": "ana6_002",
+        "sha256": "9ec7dfab784961fb8d841ed71a7f52f030236095f937637365f1d7d96babec0f"
+      },
+      {
+        "name": "ana6_003",
+        "sha256": "f0de74253adb4448ac96a438d4e18801c46291d14494a0c1ccdd06260e2a7499"
+      },
+      {
+        "name": "ana6_004",
+        "sha256": "65fc7cf50cf602efbe748a768d5d1f0b17044c4c13e00f6d90d197d8dfeabd21"
+      }
+    ],
+    "textures": [
+      {
+        "index": 0,
+        "path": "Texture-0.png",
+        "sourceSHA256": "54a307c82bdd5e92ca182da3c6bcec757d2a174dd74c9836b4295410443fb426"
+      }
+    ]
+  },
+  {
+    "package": "ana8",
+    "sourceSHA256": "f3328f8f521843ff0996799f3deba5d7ee1540b9cb7c573ff19076c5e23624a1",
+    "motions": [
+      {
+        "name": "ana8_002",
+        "sha256": "0f41b65262b07f9b6c3a261e1f9392409d32c1dfbae93a0e07d394ec3b24b1f1"
+      },
+      {
+        "name": "ana8_003",
+        "sha256": "f0de74253adb4448ac96a438d4e18801c46291d14494a0c1ccdd06260e2a7499"
+      },
+      {
+        "name": "ana8_004",
+        "sha256": "afb3d3d36b5fbe6e273063b10a21f244d272a05f9b2c9228da285b1b300bf155"
+      }
+    ],
+    "textures": [
+      {
+        "index": 0,
+        "path": "Texture-0.png",
+        "sourceSHA256": "af5f4722d257882e84750641bf83301580d6b9402749d88e04e1ec750973b727"
+      }
+    ]
+  },
+  {
+    "package": "anac",
+    "sourceSHA256": "1f82c6fb3d6e35989038f92f6771dcb2e494ec473ea5248913ad31a2b55713ce",
+    "motions": [
+      {
+        "name": "anac_002",
+        "sha256": "a9bb86e06dc654949f7f8ad97205ab88295a706fbfabe0cb13b0be1d467a30dd"
+      },
+      {
+        "name": "anac_003",
+        "sha256": "f0de74253adb4448ac96a438d4e18801c46291d14494a0c1ccdd06260e2a7499"
+      },
+      {
+        "name": "anac_004",
+        "sha256": "65fc7cf50cf602efbe748a768d5d1f0b17044c4c13e00f6d90d197d8dfeabd21"
+      }
+    ],
+    "textures": [
+      {
+        "index": 0,
+        "path": "Texture-0.png",
+        "sourceSHA256": "346cca5900ef9fd132c031a4de730c8d991416bdd9c5983fad3393f189e7fb46"
+      }
+    ]
+  },
+  {
+    "package": "anad",
+    "sourceSHA256": "bfcd0032868c8fb236d71f54eaa861f76ee37b78b5d4b36a431dd85f18e73d40",
+    "motions": [
+      {
+        "name": "anad_002",
+        "sha256": "a9bb86e06dc654949f7f8ad97205ab88295a706fbfabe0cb13b0be1d467a30dd"
+      },
+      {
+        "name": "anad_003",
+        "sha256": "f0de74253adb4448ac96a438d4e18801c46291d14494a0c1ccdd06260e2a7499"
+      },
+      {
+        "name": "anad_004",
+        "sha256": "65fc7cf50cf602efbe748a768d5d1f0b17044c4c13e00f6d90d197d8dfeabd21"
+      }
+    ],
+    "textures": [
+      {
+        "index": 0,
+        "path": "Texture-0.png",
+        "sourceSHA256": "6fd392ca75a2817e6ae151888b18734151806b4446ed9fe3592664348c614687"
+      }
+    ]
+  }
+]

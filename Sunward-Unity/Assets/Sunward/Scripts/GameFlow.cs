@@ -35,7 +35,8 @@ namespace Sunward
         public Sunward.Remaster.HeavenlyGarden Heaven {get;private set;}
         public Sunward.Remaster.ShiranuiUltimate Ultimate{get;private set;}
         public Sunward.Remaster.CelestialTrials Celestial{get;private set;}
-        public bool CinematicActive => (Celestial && Celestial.Playing) || (Ultimate && Ultimate.Playing) || (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing) || (Presentation && Presentation.Playing) || (Heaven && Heaven.Playing);
+        public Sunward.Remaster.VillageAdventures Adventures{get;private set;}
+        public bool CinematicActive => (Adventures && Adventures.Playing) || (Celestial && Celestial.Playing) || (Ultimate && Ultimate.Playing) || (Transformation && Transformation.Playing) || (BossTransformation && BossTransformation.Playing) || (Presentation && Presentation.Playing) || (Heaven && Heaven.Playing);
         public bool Blocked => CinematicActive || Panel != "" || (Brush && Brush.Drawing);
         public Sunward.Remaster.CelestialBrush Brush { get; private set; }
         public int Wave { get; private set; }
@@ -105,6 +106,7 @@ namespace Sunward
             gameObject.AddComponent<Sunward.Remaster.HomeWeaponDisplay>().game=this;
             gameObject.AddComponent<Sunward.Remaster.MemoryMirrorMenu>().game=this;
             gameObject.AddComponent<Sunward.Remaster.VillagePolish>().game=this;
+            Adventures=gameObject.AddComponent<Sunward.Remaster.VillageAdventures>();Adventures.game=this;
             Celestial=gameObject.AddComponent<Sunward.Remaster.CelestialTrials>();Celestial.game=this;
             Health = MaxHealth;
             Stamina = MaxStamina;
@@ -176,7 +178,7 @@ namespace Sunward
             if(Presentation && Presentation.SkipHandledFrame==Time.frameCount)return;
             if(CinematicActive)
             {
-                if(Player.input.Pause.WasPressedThisFrame()){if(Celestial && Celestial.Playing)Celestial.Skip();else if(Ultimate && Ultimate.Playing)Ultimate.Skip();else if(BossTransformation && BossTransformation.Playing)BossTransformation.Skip();else if(Presentation && Presentation.Playing)Presentation.Skip();else if(Transformation)Transformation.Skip();}
+                if(Player.input.Pause.WasPressedThisFrame()){if(Adventures && Adventures.Playing)Adventures.Skip();else if(Celestial && Celestial.Playing)Celestial.Skip();else if(Ultimate && Ultimate.Playing)Ultimate.Skip();else if(BossTransformation && BossTransformation.Playing)BossTransformation.Skip();else if(Presentation && Presentation.Playing)Presentation.Skip();else if(Transformation)Transformation.Skip();}
                 return;
             }
             if (Time.unscaledTime > messageUntil)
@@ -202,6 +204,8 @@ namespace Sunward
             Enemies.RemoveAll(e => !e);
             if (InTrial)
             {
+                if(Adventures && Adventures.Trail && Adventures.Trail.BattleActive){Prompt="Moonlit trail · clear the restless spirits";return;}
+                if(Adventures && Adventures.Mastery && Adventures.Mastery.Active){Prompt=Adventures.Mastery.Status;return;}
                 if (waiting)
                 {
                     breakTimer -= Time.deltaTime;
@@ -467,12 +471,13 @@ namespace Sunward
 
         public void Reward(EnemyBrain e)
         {
+            if(Adventures && Adventures.Mastery && Adventures.Mastery.Active){Sunward.Remaster.AwakeningProgress.Record(this,"kill");if(Profile.equipped=="wp2be"){float before=Health;Health=Mathf.Min(MaxHealth,Health+Mathf.RoundToInt(5*Sunward.Remaster.AwakenedWeaponArts.SpecialPower(this)));if(Health>before)Sunward.Remaster.VillageAdventures.Record(this,"life");}return;}
             int coins = Mathf.RoundToInt(e.definition.reward * (1 + Profile.wins * .15f)), xp = Mathf.RoundToInt(e.definition.xp * Mathf.Sqrt(1 + Profile.wins * .1f));
             Profile.coins += coins;
             Profile.xp += xp;
             Profile.kills++;
             Sunward.Remaster.AwakeningProgress.Record(this,"kill");
-            if(Profile.equipped=="wp2be")Health=Mathf.Min(MaxHealth,Health+5);
+            if(Profile.equipped=="wp2be"){float before=Health;Health=Mathf.Min(MaxHealth,Health+Mathf.RoundToInt(5*Sunward.Remaster.AwakenedWeaponArts.SpecialPower(this)));if(Health>before)Sunward.Remaster.VillageAdventures.Record(this,"life");}
             runCoins += coins;
             runXp += xp;
             Save.Save();
@@ -483,6 +488,7 @@ namespace Sunward
         {
             if (!InTrial || Player.Invulnerable > 0 || Home.Active)
                 return;
+            if(Adventures && Adventures.Mastery)Adventures.Mastery.Hurt();
             Health = Mathf.Max(0, Health - damage);
             Player.Invulnerable = .70f;
             Player.Push(direction * .40f);
@@ -507,6 +513,8 @@ namespace Sunward
             if (!InTrial)
                 return;
             if(Celestial && Celestial.Active){FinishCelestial(win);return;}
+            if(Adventures && Adventures.Trail && Adventures.Trail.BattleActive){EndTrailBattle(win);return;}
+            if(Adventures && Adventures.Mastery && Adventures.Mastery.Active){EndMasteryBattle(win);return;}
             bool bossEncounter=BossTrial;if(win){Sunward.Remaster.AwakeningProgress.Record(this,bossEncounter?"boss":"trial");Audio.VictoryMusic(bossEncounter);}InTrial=false;BossTrial=false;waiting=false;
             if(BossTransformation)BossTransformation.Cancel();
             Player.Locked=Health<=0;
@@ -540,6 +548,7 @@ namespace Sunward
 
         public void ReturnHome()
         {
+            if(Adventures)Adventures.Cancel();
             if(Celestial)Celestial.Cancel();
             if(Ultimate)Ultimate.Cancel();
             var digging=GetComponent<Sunward.Remaster.VillageLife>();if(digging)digging.CancelDig();

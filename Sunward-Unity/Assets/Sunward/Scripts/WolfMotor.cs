@@ -81,9 +81,9 @@ namespace Sunward
             var guarded = transform.position;
             if (game.InTrial)
             {
-                var centre=game.Celestial && game.Celestial.Active?game.Celestial.ArenaCentre:new Vector3(35,guarded.y,0);centre.y=guarded.y;
+                var centre=game.Adventures && game.Adventures.Trail && game.Adventures.Trail.BattleActive?Sunward.Remaster.VillageAdventures.TrailCentre:game.Adventures && game.Adventures.Mastery && game.Adventures.Mastery.Active?Sunward.Remaster.VillageAdventures.PracticeCentre:game.Celestial && game.Celestial.Active?game.Celestial.ArenaCentre:new Vector3(35,guarded.y,0);centre.y=guarded.y;
                 var d = guarded - centre;
-                float radius=game.Celestial && game.Celestial.Active?24:game.BossTrial?29:17;
+                float radius=game.Adventures && ((game.Adventures.Mastery && game.Adventures.Mastery.Active) || (game.Adventures.Trail && game.Adventures.Trail.BattleActive))?24:game.Celestial && game.Celestial.Active?24:game.BossTrial?29:17;
                 if (d.magnitude > radius)
                     guarded = centre + d.normalized * radius;
             }
@@ -103,6 +103,7 @@ namespace Sunward
 
         void Update()
         {
+            if(game && game.Adventures && game.Adventures.Fishing && game.Adventures.Fishing.Active)return;
             if (game == null || valley == null || game.Blocked || Locked)
                 return;
             float dt = Time.deltaTime;
@@ -210,7 +211,7 @@ namespace Sunward
             if (!Dodging && !game.Combat.Busy && landing <= 0)
                 animationView.Locomotion(Speed, turn, !Grounded, Vertical);
             game.Stamina = Mathf.Clamp(game.Stamina + dt * (Speed/game.Combat.FormMultiplier > 5 ? -7 : 19 + game.Profile.upgrades.stamina), 0, game.MaxStamina);
-            game.Energy = Mathf.Min(game.MaxEnergy, game.Energy + dt * (game.InTrial ? 5 : 12));
+            game.Energy = Mathf.Min(game.MaxEnergy, game.Energy + dt * (game.InTrial ? 5 : 12+(game.Profile.adventures.moonCharm?3:0)));
         }
         bool UpdateSwimming(float dt)
         {

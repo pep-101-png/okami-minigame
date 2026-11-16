@@ -17,7 +17,7 @@ namespace Sunward.Remaster
         {
             if(!game || game.Blocked || exploded)return;
             fuse-=Time.deltaTime;if(fuse>0)return;exploded=true;
-            var p=transform.position;CelestialBrush.Burst("Cloud",p+Vector3.up*.5f,35,1.7f);CelestialBrush.Burst("Flame",p+Vector3.up*.5f,20,.75f);CelestialBrush.Burst("Spark",p+Vector3.up*.7f,32,.5f);
+            var p=transform.position;if(game.Adventures)game.Adventures.Brush("bomb",p);CelestialBrush.Burst("Cloud",p+Vector3.up*.5f,35,1.7f);CelestialBrush.Burst("Flame",p+Vector3.up*.5f,20,.75f);CelestialBrush.Burst("Spark",p+Vector3.up*.7f,32,.5f);
             foreach(var enemy in game.Enemies)if(enemy && !enemy.Dead && Vector3.Distance(enemy.transform.position,p)<5.5f)enemy.Damage(55*game.Combat.FormMultiplier,(enemy.transform.position-p).normalized,.3f);
             // No glacial weapon sound substituted for an unidentified bomb event.
             Destroy(gameObject);

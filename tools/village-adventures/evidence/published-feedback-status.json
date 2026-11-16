@@ -1,0 +1,79 @@
+{
+  "sourceCommit": "aefd595771e933a3313ecb4170251764c94ab1e3",
+  "runId": "20261021T092745607Z-9936e8",
+  "validation": "passed",
+  "logErrors": [],
+  "clips": [
+    {
+      "name": "walk-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "walk-front",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "walk-rear-quarter",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "jog-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "jog-front",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "jog-rear-quarter",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "sprint-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "sprint-front",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "sprint-rear-quarter",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "jump-air-land-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "gait-stop-turn-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "dodge-directions-rear-quarter",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "combat-light-heavy-charge-side",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    },
+    {
+      "name": "windflower-gameplay-route",
+      "captureStatus": "frames_captured_coverage_incomplete",
+      "encodingStatus": "encoded_verified_unreviewed"
+    }
+  ],
+  "currentUpdateValidated": false
+}

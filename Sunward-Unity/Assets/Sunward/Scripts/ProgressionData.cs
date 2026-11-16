@@ -74,6 +74,7 @@ namespace Sunward
     {
         public int version = 2, revision, coins = 35, xp, wins, defeats, kills;
         public int shiranuiUnlock;
+        public Sunward.Remaster.VillageAdventureData adventures=new Sunward.Remaster.VillageAdventureData();
         public int bossWins, vegetables, cropsSold, praise, restorationStage, farmVitality;
         public int festivalTokens, festivalRewards, festivalWins;
         public Sunward.Remaster.WeaponMastery[] weaponMastery=Array.Empty<Sunward.Remaster.WeaponMastery>();
@@ -190,6 +191,7 @@ namespace Sunward
         public static bool Validate(ProfileData p)
         {
             if(p==null || p.shiranuiUnlock<0 || p.shiranuiUnlock>2)return false;
+            if(!Sunward.Remaster.VillageAdventureRules.Validate(p))return false;
             Sunward.Remaster.OriginalWeaponEvolution.Normalize(p);
             if (p == null || (p.version != 1 && p.version != 2) || p.coins < 0 || p.xp < 0 || p.wins < 0 || p.defeats < 0 || p.revision < 0 || p.upgrades == null || p.owned == null || (Array.IndexOf(p.owned, "spear") < 0 && Array.IndexOf(p.owned,"speare")<0) || Array.IndexOf(p.owned, p.equipped) < 0)
                 return false;

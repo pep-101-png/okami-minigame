@@ -25,7 +25,9 @@ namespace Sunward
         public void SetImpHeight(float height){if(!IsImp || !motor)return;float next=Mathf.Max(0,height);if(Mathf.Abs(next-impHeight)<.004f)return;impHeight=next;motor.center=Vector3.up*(motor.height*.5f+impHeight);}
         public bool Frozen=>Time.time<frozenUntil;
         public bool VisualStunned => !Dead && (stun>0 || State=="stagger" || Frozen);
-        float frozenUntil,nextFreeze;
+        float frozenUntil,nextFreeze,weakenUntil;
+        public void Weaken(float duration){weakenUntil=Mathf.Max(weakenUntil,Time.time+Mathf.Min(6,duration));}
+        public void ElementPush(Vector3 from){if(!CelestialBoss && definition.id!="boss")Move((transform.position-from).normalized*.6f);}
         public void Freeze(float duration){if(definition.id=="boss" || CelestialBoss){Stun(.12f);return;}if(Time.time<nextFreeze)return;frozenUntil=Time.time+Mathf.Min(1.2f,duration);nextFreeze=frozenUntil+2;}
 
         public float VisualStateProgress => Mathf.Clamp01(1 - timer / Mathf.Max(.001f, VisualStateDuration));
@@ -125,6 +127,7 @@ namespace Sunward
             if (Dead || BossRising || (game.CinematicActive && !sunburst))
                 return;
             if(guardian)damage=guardian.FilterDamage(damage);
+            if(Time.time<weakenUntil)damage*=CelestialBoss || definition.id=="boss"?1.08f:1.15f;
             Hp -= damage;
             if(Hp<=0 && definition.id=="boss" && crimson.TryRise())
             {
@@ -177,10 +180,10 @@ namespace Sunward
         {
             motor.Move(delta);
             var p = transform.position;
-            var d = p - new Vector3(35, p.y, 0);
-            float radius=game.BossTrial?Mathf.Min(29,31-motor.radius-.6f):16.8f;
+            var centre=game.Adventures && game.Adventures.Trail && game.Adventures.Trail.BattleActive?Sunward.Remaster.VillageAdventures.TrailCentre:game.Adventures && game.Adventures.Mastery && game.Adventures.Mastery.Active?Sunward.Remaster.VillageAdventures.PracticeCentre:new Vector3(35,p.y,0);centre.y=p.y;var d=p-centre;
+            float radius=game.Adventures && ((game.Adventures.Mastery && game.Adventures.Mastery.Active) || (game.Adventures.Trail && game.Adventures.Trail.BattleActive))?22:game.BossTrial?Mathf.Min(29,31-motor.radius-.6f):16.8f;
             if (d.magnitude > radius)
-                motor.Move(new Vector3(35, p.y, 0) + d.normalized * radius - p);
+                motor.Move(centre + d.normalized * radius - p);
             GroundBoss();
         }
 

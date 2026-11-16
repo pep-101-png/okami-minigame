@@ -1,0 +1,16 @@
+  Determining projects to restore...
+  Restored /workspace/work/village-adventures/UICompile.csproj (in 88 ms).
+/workspace/work/village-adventures/FullDoubles.cs(139,86): warning CS0108: 'LineRenderer.gameObject' hides inherited member 'Renderer.gameObject'. Use the new keyword if hiding was intended. [/workspace/work/village-adventures/UICompile.csproj]
+/workspace/work/village-adventures/FullDoubles.cs(140,59): warning CS0108: 'TrailRenderer.transform' hides inherited member 'Renderer.transform'. Use the new keyword if hiding was intended. [/workspace/work/village-adventures/UICompile.csproj]
+/workspace/work/village-adventures/FullDoubles.cs(300,193): warning CS0067: The event 'RenderPipelineManager.beginCameraRendering' is never used [/workspace/work/village-adventures/UICompile.csproj]
+  UICompile -> /workspace/work/village-adventures/bin/Debug/net8.0/UICompile.dll
+
+Build succeeded.
+
+/workspace/work/village-adventures/FullDoubles.cs(139,86): warning CS0108: 'LineRenderer.gameObject' hides inherited member 'Renderer.gameObject'. Use the new keyword if hiding was intended. [/workspace/work/village-adventures/UICompile.csproj]
+/workspace/work/village-adventures/FullDoubles.cs(140,59): warning CS0108: 'TrailRenderer.transform' hides inherited member 'Renderer.transform'. Use the new keyword if hiding was intended. [/workspace/work/village-adventures/UICompile.csproj]
+/workspace/work/village-adventures/FullDoubles.cs(300,193): warning CS0067: The event 'RenderPipelineManager.beginCameraRendering' is never used [/workspace/work/village-adventures/UICompile.csproj]
+    3 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:05.38
