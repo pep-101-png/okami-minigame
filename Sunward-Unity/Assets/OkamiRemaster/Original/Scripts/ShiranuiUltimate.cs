@@ -9,14 +9,14 @@ namespace Sunward.Remaster
         public GameFlow game;public bool Playing{get;private set;}public bool Used{get;private set;}
         public bool Detonated=>exploded;public Vector3 SunCentre{get;private set;}
         float time,facingYaw,cameraYaw;Vector3 origin;Quaternion facing;OrbitCamera orbit;NativeAmaterasu body;SolarPaint gather,blast;Light sunlight;GameObject lightRoot;bool exploded,bossApplied,landed;
-        public bool Ready=>game && game.InTrial && !Used && !Playing && !game.Blocked && game.Health>0 && !game.Player.Locked && game.Player.Grounded && game.Player.GetComponent<NativeAmaterasu>() && game.Player.GetComponent<NativeAmaterasu>().FullPower && game.Enemies.Exists(e=>e && !e.Dead);
+        public bool Ready=>game && !(game.Adventures && game.Adventures.Mastery && game.Adventures.Mastery.Active) && game.InTrial && !Used && !Playing && !game.Blocked && game.Health>0 && !game.Player.Locked && game.Player.Grounded && game.Player.GetComponent<NativeAmaterasu>() && game.Player.GetComponent<NativeAmaterasu>().FullPower && game.Enemies.Exists(e=>e && !e.Dead);
         public void ResetFight(){Cancel();Used=false;}
         public bool Begin()
         {
             if(!Ready)return false;body=game.Player.GetComponent<NativeAmaterasu>();if(!body.BeginSolarPose())return false;
             Used=Playing=true;time=0;exploded=bossApplied=landed=false;origin=game.Player.transform.position;facing=game.Player.transform.rotation;facingYaw=game.Player.transform.eulerAngles.y;
             game.Combat.Cancel();game.Player.StopMotion();game.Player.Locked=true;
-            Vector3 arena=game.Celestial && game.Celestial.Active?game.Celestial.ArenaCentre:new Vector3(35,origin.y,0);Vector3 inward=arena-origin;inward.y=0;
+            Vector3 arena=game.Adventures && game.Adventures.Trail && game.Adventures.Trail.BattleActive?VillageAdventures.TrailCentre:game.Celestial && game.Celestial.Active?game.Celestial.ArenaCentre:new Vector3(35,origin.y,0);Vector3 inward=arena-origin;inward.y=0;
             cameraYaw=inward.sqrMagnitude>36?Mathf.Atan2(-inward.x,-inward.z)*Mathf.Rad2Deg:facingYaw;
             orbit=FindFirstObjectByType<OrbitCamera>();if(orbit)orbit.BeginCinematic();game.Audio.FullPowerVoice();
             gather=SolarPaint.Create(game,origin,0);lightRoot=new GameObject("Sunburst · charging light");sunlight=lightRoot.AddComponent<Light>();sunlight.color=new Color(1,.65f,.15f);sunlight.range=30;sunlight.intensity=0;
@@ -48,7 +48,7 @@ namespace Sunward.Remaster
             game.Audio.SolarCharge(exploded?0:heat);
             if(orbit)
             {
-                float blastView=Mathf.SmoothStep(0,1,(time-BlastTime+.3f)/.65f);Vector3 focus=Vector3.Lerp(SunCentre,(game.Celestial && game.Celestial.Active?game.Celestial.ArenaCentre:new Vector3(35,origin.y,0))+Vector3.up*1.3f,blastView);
+                float blastView=Mathf.SmoothStep(0,1,(time-BlastTime+.3f)/.65f);Vector3 focus=Vector3.Lerp(SunCentre,(game.Adventures && game.Adventures.Trail && game.Adventures.Trail.BattleActive?VillageAdventures.TrailCentre:game.Celestial && game.Celestial.Active?game.Celestial.ArenaCentre:new Vector3(35,origin.y,0))+Vector3.up*1.3f,blastView);
                 float recover=Mathf.SmoothStep(0,1,(time-BlastTime-.65f)/.65f);
                 focus=Vector3.Lerp(focus,SunCentre,recover);
                 orbit.CinematicFrame(focus,Mathf.Lerp(cameraYaw+Mathf.Lerp(-28,28,rise),cameraYaw+85,recover),Mathf.Lerp(Mathf.Lerp(16,32,blastView),22,recover),Mathf.Lerp(Mathf.Lerp(Mathf.Lerp(10,14,heat),37,blastView),12,recover),Mathf.Lerp(Mathf.Lerp(44,60,blastView),44,recover));

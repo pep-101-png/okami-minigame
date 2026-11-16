@@ -1,0 +1,18 @@
+  Determining projects to restore...
+  Restored /workspace/work/village-adventures/Runtime.csproj (in 89 ms).
+/workspace/work/village-adventures/RuntimeDoubles.cs(145,86): warning CS0108: 'LineRenderer.gameObject' hides inherited member 'Renderer.gameObject'. Use the new keyword if hiding was intended. [/workspace/work/village-adventures/Runtime.csproj]
+/workspace/work/village-adventures/RuntimeDoubles.cs(146,59): warning CS0108: 'TrailRenderer.transform' hides inherited member 'Renderer.transform'. Use the new keyword if hiding was intended. [/workspace/work/village-adventures/Runtime.csproj]
+/workspace/work/village-adventures/RuntimeDoubles.cs(352,193): warning CS0067: The event 'RenderPipelineManager.beginCameraRendering' is never used [/workspace/work/village-adventures/Runtime.csproj]
+  Runtime -> /workspace/work/village-adventures/bin/Debug/net8.0/Runtime.dll
+
+Build succeeded.
+
+/workspace/work/village-adventures/RuntimeDoubles.cs(145,86): warning CS0108: 'LineRenderer.gameObject' hides inherited member 'Renderer.gameObject'. Use the new keyword if hiding was intended. [/workspace/work/village-adventures/Runtime.csproj]
+/workspace/work/village-adventures/RuntimeDoubles.cs(146,59): warning CS0108: 'TrailRenderer.transform' hides inherited member 'Renderer.transform'. Use the new keyword if hiding was intended. [/workspace/work/village-adventures/Runtime.csproj]
+/workspace/work/village-adventures/RuntimeDoubles.cs(352,193): warning CS0067: The event 'RenderPipelineManager.beginCameraRendering' is never used [/workspace/work/village-adventures/Runtime.csproj]
+    3 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.47
+PASS 346 activity driver assertions; actual original rigs, controlled inputs and API doubles, not Unity
+PASS 170 activity persistence and reward assertions; API doubles, not Unity

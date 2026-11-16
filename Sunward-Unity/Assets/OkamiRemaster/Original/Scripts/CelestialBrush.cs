@@ -62,6 +62,7 @@ namespace Sunward.Remaster
             float span=(hi-lo).magnitude,end=Vector2.Distance(stroke[0],stroke[stroke.Count-1]);
             if(span<60)return;
             if(ConnectLightning())return;
+            if(game.Adventures && game.Adventures.Fishing && game.Adventures.Fishing.Active){if(world.Count>1 && !game.Adventures.FishStroke(world[0],world[world.Count-1]))game.Notify("Connect Ammy to a visible fish with one brush line");return;}
             bool bomb=BrushPatterns.CherryBomb(stroke);
             bool bloom=!bomb && end<span*.3f && length>span*1.8f;
             bool slash=end>60 && length/end<1.3f;
@@ -75,10 +76,12 @@ namespace Sunward.Remaster
             else if(bloom)
             {
                 var life=game.GetComponent<VillageLife>();int restored=life?life.Bloom(centre):0;
+                if(game.Adventures)game.Adventures.Brush("bloom",centre);
                 Burst("Blossom",centre,45,.65f);Burst("Leaf",centre,14,.35f);var breath=OriginalAtmosphere.Create("Wind",null,centre+Vector3.up*.3f,0,2.4f,.8f,.15f,2);if(breath){breath.Emit(3);Destroy(breath.gameObject,1.5f);}game.Audio.Cue("collect");game.Notify(restored>0?"Bloom · the land answers your brush":"Bloom · a shower of petals");
             }
             else
             {
+                if(game.Adventures && game.Adventures.Trail)game.Adventures.Trail.Slash(world[0],world[world.Count-1]);
                 BrushStrokeFlash.Slash(world[0]+Vector3.up*.6f,world[world.Count-1]+Vector3.up*.6f);
                 int hits=0;bool giantSword=false;var a=stroke[0];var b=stroke[stroke.Count-1];var camera=Camera.main;
                 foreach(var enemy in game.Enemies)
@@ -94,6 +97,8 @@ namespace Sunward.Remaster
                     var q=camera.WorldToScreenPoint(bolt.transform.position);Vector2 delta=b-a;float t=Mathf.Clamp01(Vector2.Dot((Vector2)q-a,delta)/delta.sqrMagnitude);
                     if(q.z>0 && Vector2.Distance(q,a+delta*t)<65){AwakeningProgress.Record(game,"deflect");Destroy(bolt.gameObject);}
                 }
+                foreach(var shell in FindObjectsByType<ImpCannonProjectile>(FindObjectsSortMode.None))
+                {var q=camera.WorldToScreenPoint(shell.transform.position);var delta=b-a;float t=Mathf.Clamp01(Vector2.Dot((Vector2)q-a,delta)/delta.sqrMagnitude);if(q.z>0 && Vector2.Distance(q,a+delta*t)<75){AwakeningProgress.Record(game,"deflect");Destroy(shell.gameObject);}}
                 game.Audio.Cue("attack");game.Notify("Power Slash · "+hits+" enemies struck");
             }
         }
@@ -107,7 +112,7 @@ namespace Sunward.Remaster
             {var low=Camera.main.WorldToScreenPoint(enemy.transform.position+Vector3.up*.35f);var high=Camera.main.WorldToScreenPoint(enemy.transform.position+Vector3.up*enemy.HitHeight*.9f);var axis=(Vector2)(high-low);float t=axis.sqrMagnitude>.001f?Mathf.Clamp01(Vector2.Dot(end-(Vector2)low,axis)/axis.sqrMagnitude):0;float d=Vector2.Distance(end,(Vector2)low+axis*t);if(low.z>0 && d<nearest){nearest=d;target=enemy;targetHeight=Mathf.Lerp(.35f,enemy.HitHeight*.9f,t);}}
             if(!target)return false;if(game.Energy<20){game.Notify("Not enough Ink for Thunderstorm");return true;}
             game.Energy-=20;var at=target.transform.position+Vector3.up*targetHeight;ThunderPainting.Arc(null,start,at,.2f,.45f,7);WeaponElementFx.Thunder(game,at,true);AwakeningProgress.Record(game,"brush");
-            target.Damage(60*game.Combat.FormMultiplier*(1+AwakeningProgress.Rank(game.Profile,game.Profile.equipped)*.08f),(at-start).normalized,.7f);game.Notify("Thunderstorm · lightning follows the brush");return true;
+            VillageAdventures.Record(game,"thunderstorm");target.Damage(60*game.Combat.FormMultiplier*(1+AwakeningProgress.Rank(game.Profile,game.Profile.equipped)*.08f),(at-start).normalized,.7f);game.Notify("Thunderstorm · lightning follows the brush");return true;
         }
         public static void Burst(string sprite,Vector3 point,int count,float size)
         {var p=OriginalAtmosphere.Create(sprite,null,point,0,size,1.2f,.5f,.4f);if(p){p.Emit(count);Destroy(p.gameObject,2);}}
@@ -132,8 +137,8 @@ namespace Sunward.Remaster
             GUI.color=new Color(.05f,.025f,.015f,.95f);float tip=42*scale;
             GUI.DrawTexture(new Rect(cursor.x-tip*.26f,Screen.height-cursor.y-tip*.76f,tip,tip),ink);
             GUI.color=Color.white;
-            InkText.Draw("Celestial Brush · Ink "+Mathf.CeilToInt(game.Energy)+" · Slash / Bloom / Cherry Bomb / Thunderstorm",new Rect(22,18,Screen.width-44,48),32,new Color(.05f,.025f,.015f,.9f),false);
-            InkText.Draw(game.Profile.equipped==OriginalWeaponEvolution.ThunderId?"Thunderstorm: connect the glowing blade tip to an enemy · 20 Ink":"Cherry Bomb: circle, then a short straight fuse · 25 Ink",new Rect(22,57,Screen.width-44,40),26,new Color(.05f,.025f,.015f,.65f),false);
+            InkText.Draw((game.Adventures && game.Adventures.Fishing && game.Adventures.Fishing.Active?"Pond Brush · Ink ":"Celestial Brush · Ink ")+Mathf.CeilToInt(game.Energy)+" · Slash / Bloom / Cherry Bomb / Thunderstorm",new Rect(22,18,Screen.width-44,48),32,new Color(.05f,.025f,.015f,.9f),false);
+            InkText.Draw(game.Adventures && game.Adventures.Fishing && game.Adventures.Fishing.Active?"Draw from Ammy to a visible fish, then release R · 8 Ink":game.Profile.equipped==OriginalWeaponEvolution.ThunderId?"Thunderstorm: connect the glowing blade tip to an enemy · 20 Ink":"Cherry Bomb: circle, then a short straight fuse · 25 Ink",new Rect(22,57,Screen.width-44,40),26,new Color(.05f,.025f,.015f,.65f),false);
             GUI.color=old;GUI.matrix=previous;
         }
         void OnDestroy(){if(paperProfile)Destroy(paperProfile);}

@@ -14,13 +14,14 @@ namespace Sunward.Remaster
         bool keeperConversation;float keeperCooldown;
         Vector2 mazeMin,mazeMax;
         float fallTime;Vector3 fallStart;OrbitCamera orbit;GameObject garden,river,riverPassage;bool visible;
-        public static bool Inside(Vector3 p)=>CelestialTrials.InArena(p) || PalaceInside(p) || p.y>58 && p.y<100 && Mathf.Abs(p.x-Centre.x)<49 && Mathf.Abs(p.z)<47;
+        public static bool Inside(Vector3 p)=>VillageAdventures.Inside(p) ||CelestialTrials.InArena(p) || PalaceInside(p) || p.y>58 && p.y<100 && Mathf.Abs(p.x-Centre.x)<49 && Mathf.Abs(p.z)<47;
         public static bool RiverLip(Vector3 p)=>p.y>-2 && p.y<2 && p.z>WaterfallLip-.75f && p.z<WaterfallLip+1 && Mathf.Abs(p.x-Valley.RiverX(-p.z))<2.8f;
         public static int UpgradeRanks(ProfileData p){int n=0;foreach(var id in ProgressionRules.Upgrades)n+=p.upgrades.Get(id);if(p.weaponMastery!=null)foreach(var weapon in p.weaponMastery)if(weapon!=null)n+=weapon.rank;return n;}
         public static bool GrowthReady(ProfileData p)=>ProgressionRules.DawnReady(p);
         public static bool RiverOpen(ProfileData p)=>p!=null && p.bossWins>0;
         public static Vector3 Guard(Vector3 p)
         {
+            if(VillageAdventures.Inside(p))return VillageAdventures.Guard(p);
             if(CelestialTrials.InArena(p))return CelestialTrials.Guard(p);
             if(p.y>76 && p.z>90)return PalaceGuard(p);
             Vector2 d=new Vector2((p.x-Centre.x)/WalkRadiusX,p.z/WalkRadiusZ);if(d.magnitude>1){d=d.normalized;p.x=Centre.x+d.x*WalkRadiusX;p.z=d.y*WalkRadiusZ;}return p;
@@ -28,6 +29,7 @@ namespace Sunward.Remaster
         static readonly RaycastHit[] hits=new RaycastHit[40];
         public static bool Height(Vector3 p,out float y)
         {
+            if(VillageAdventures.Height(p,out y))return true;
             if(CelestialTrials.Floor(p,out y))return true;
             y=Centre.y;if(PalaceInside(p)){y=PalaceCentre.y+.025f;return true;}if(!Inside(p))return false;
             int n=Physics.RaycastNonAlloc(new Vector3(p.x,98,p.z),Vector3.down,hits,35,1<<6,QueryTriggerInteraction.Ignore);
@@ -172,6 +174,9 @@ namespace Sunward.Remaster
         public bool OwnsRenderer(Renderer renderer)
         {
             if(!renderer)return false;
+            int adventure=game && game.Player?VillageAdventures.Realm(game.Player.transform.position):0;
+            if(adventure!=0)return renderer.transform.IsChildOf(game.Player.transform) || VillageAdventures.Realm(renderer.bounds.center)==adventure;
+            if(VillageAdventures.Inside(renderer.bounds.center))return false;
             int realm=game && game.Player?CelestialTrials.ArenaAt(game.Player.transform.position):0;
             if(realm!=0)return renderer.transform.IsChildOf(game.Player.transform) || CelestialTrials.ArenaAt(renderer.bounds.center)==realm;
             if(CelestialTrials.InArena(renderer.bounds.center))return false;
@@ -219,7 +224,7 @@ namespace Sunward.Remaster
             var player=game.Player.transform.position;
             if(!inside){if(RiverLip(player) && RiverOpen(game.Profile))BeginFall();else if(player.z>28 && Mathf.Abs(player.x-Valley.RiverX(-player.z))<4)game.WorldPrompt(RiverOpen(game.Profile)?"A pale light moves behind the falling water":"The waterfall sings, but the mist will not part");return;}
 
-            if(CelestialTrials.InArena(player))return;
+            if(CelestialTrials.InArena(player) || VillageAdventures.Inside(player))return;
             if(PalaceInteractions())return;
             if(GardenInteractions())return;
             bool nearReturn=new Vector2(player.x-Return.x,player.z-Return.z).magnitude<3.2f;

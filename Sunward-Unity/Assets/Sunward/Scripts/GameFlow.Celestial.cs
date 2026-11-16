@@ -15,12 +15,13 @@ namespace Sunward
         }
         void FinishCelestial(bool win)
         {
+            if(win)Sunward.Remaster.AwakeningProgress.Record(this,"boss");
             InTrial=BossTrial=waiting=false;Combat.Cancel();Combat.Rest(false);ClearBarrier();ClearProjectiles();Player.Locked=Health<=0;
             if(win)
             {
                 Profile.shiranuiUnlock=Mathf.Max(Profile.shiranuiUnlock,Celestial.Kind);
                 Profile.coins+=Celestial.Kind==1?1600:4000;Profile.xp+=Celestial.Kind==1?1400:2500;
-                Sunward.Remaster.AwakeningProgress.Record(this,"boss");Audio.VictoryMusic(true);
+                Audio.VictoryMusic(true);
             }
             else{Profile.defeats++;ClearEnemies();Health=MaxHealth;}
             Save.Save();Close();Celestial.Complete(win);

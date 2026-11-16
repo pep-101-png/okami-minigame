@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 namespace Sunward
 {
-    public sealed class ScrollUI : MonoBehaviour
+    public sealed partial class ScrollUI : MonoBehaviour
     {
         public GameFlow game;
         GUIStyle body, title, small, button;
@@ -154,7 +154,7 @@ namespace Sunward
                 GUILayout.EndArea();
             }
 
-            string hint=game.Prompt.StartsWith("E ") || game.Prompt.StartsWith("E ·") || game.Prompt.StartsWith("F ")?game.Prompt:game.Message;
+            string hint=game.Adventures && game.Adventures.Trail && game.Adventures.Trail.Inside?game.Prompt:game.Prompt.StartsWith("E ") || game.Prompt.StartsWith("E ·") || game.Prompt.StartsWith("F ")?game.Prompt:game.Message;
             if(!string.IsNullOrEmpty(hint))
             {
                 float hw=Mathf.Min(w*.76f,Mathf.Max(280,hint.Length*11));
@@ -170,6 +170,7 @@ namespace Sunward
                 DrawPaper(new Rect(w*.5f-220,92,440,60));
                 Sunward.Remaster.InkText.Draw(festivalChallenge.Status,new Rect(w*.5f-206,100,412,46),28,new Color(.1f,.06f,.03f,1));
             }
+            AdventureHUD(w,h);
             if (game.Panel=="")
                 return;
             float pw = Mathf.Min(700, w - 40);
@@ -179,6 +180,10 @@ namespace Sunward
             scroll = GUILayout.BeginScrollView(scroll);
             switch (game.Panel)
             {
+                case "adventures":AdventureJournal();break;
+                case "mastery":MasteryMenu();break;
+                case "fishing":FishingMenu();break;
+                case "projects":ProjectMenu();break;
                 case "shop":
                     Shop();
                     break;
@@ -233,6 +238,7 @@ namespace Sunward
                     break;
                 case "pause":
                     Label("A moment of stillness.", title);
+                    if(Button("VILLAGE JOURNAL · trials, fishing & restoration",button))game.SetPanel("adventures");
                     if(game.Profile.shiranuiUnlock>0)Label("T · change earned forms · P remains the testing shortcut",small);
                     if (game.InTrial && Button("RETREAT · KEEP EARNED REWARDS", button))
                         game.Finish(false);
@@ -270,6 +276,7 @@ namespace Sunward
                     Label("Turn in completed requests at the farmer’s stall in the northeast farm. These are optional village goals, separate from weapon purchases and arena entry.",small);
                     break;
                 case "festival":
+                    if(Button("VILLAGE RESTORATION PROJECTS",button))game.SetPanel("projects");
                     var festival=game.GetComponent<Sunward.Remaster.FestivalChallenges>();
                     Label("FESTIVAL NIGHT · "+game.Profile.festivalTokens+" tokens",title);
                     Label("Sleep in Ammy’s bed to reach night. Optional games award festival tokens; your arena progress is unchanged.",small);
@@ -352,11 +359,13 @@ namespace Sunward
             bool owned=Sunward.Remaster.OriginalWeaponCatalog.Owns(game.Profile,entry.id);
             if(Button(owned?(game.Profile.equipped==entry.id?"EQUIPPED":"EQUIP THIS INSTRUMENT"):"PURCHASE · "+entry.cost+" coins",button))
             {if(owned){game.Profile.equipped=entry.id;game.Save.Save();game.Combat.Equip();}else game.Buy("weapon:"+entry.id);}
+            int mastery=System.Array.FindIndex(Sunward.Remaster.OriginalWeaponCatalog.All,e=>e.id==Sunward.Remaster.OriginalWeaponEvolution.BaseId(entry.id));
+            if(mastery>=0)Label("Dojo mastery stages · "+game.Profile.adventures.mastery[mastery]+" / 3",small);
             Label("AWAKENING · "+Sunward.Remaster.AwakeningProgress.Ability(entry.resource),small);
             if(Sunward.Remaster.OriginalWeaponEvolution.IsAwakened(entry.id))
             {
                 int rank=Sunward.Remaster.AwakeningProgress.Rank(game.Profile,entry.id);
-                Label("Awakened rank "+rank+" / 5 · +"+(rank*8)+"% damage · +"+(rank*2)+"% reach from ranks",small);
+                Label("Awakened rank "+rank+" / 5 · +"+(rank*8)+"% damage · +"+(rank*2)+"% reach from ranks · +"+(rank*10)+"% special power",small);
                 if(rank<5 && Button("UPGRADE AWAKENED FORM · "+Sunward.Remaster.AwakeningProgress.Cost(game.Profile,entry.id)+" coins",button))game.Buy("awakening:"+entry.id);
             }
             else Label("UNLOCK CHALLENGE · "+Sunward.Remaster.AwakeningProgress.Challenge(game.Profile,entry.id)+" Progress counts against arena enemies while this weapon is equipped.",small);

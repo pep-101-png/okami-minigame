@@ -4,7 +4,7 @@ namespace Sunward.Remaster
     // These hints describe Sunward's new quest, not an episode of the original story.
     public static class CelestialHints
     {
-        public static string Shop(ProfileData p)=>p.shiranuiUnlock>=2?"Every blessing carries the warmth of the restored sun.":ProgressionRules.Advanced(p)?"Five deeper ranks have appeared along each blessing path.":p.shiranuiUnlock==1?"The old paths may yet deepen when your spirit reaches its thirtieth season.":"Hana: A blessing left untended can leave even a great spirit unbalanced.";
+        public static string Shop(ProfileData p)=>"The dojo scroll helps you practise awakened instruments. The pond angler and noticeboard have work of their own.\n\n"+(p.shiranuiUnlock>=2?"Every blessing carries the warmth of the restored sun.":ProgressionRules.Advanced(p)?"Five deeper ranks have appeared along each blessing path.":p.shiranuiUnlock==1?"The old paths may yet deepen when your spirit reaches its thirtieth season.":"Hana: A blessing left untended can leave even a great spirit unbalanced.");
         public static string Villager(ProfileData p,int person)
         {
             if(p.bossWins==0)return person%2==0?"When the bell beneath us grows quiet, listen again to the river. Some roads are hidden by their own song.":"The river keeper used to speak of a light behind the falling water. I have only ever seen mist.";

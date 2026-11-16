@@ -1,0 +1,3 @@
+from pathlib import Path
+import xml.etree.ElementTree as ET,subprocess,os
+R=Path(__file__).resolve().parents[2];W=Path('/workspace/work/village-adventures');x=ET.parse(W/'FullCompile.csproj');x.getroot().find('PropertyGroup/OutputType').text='Exe';x.getroot().find('ItemGroup').append(ET.Element('Compile',Include=str(R/'tools/village-adventures/FullFlowTests.cs')));x.write(W/'FlowTests.csproj');env=dict(os.environ,DOTNET_CLI_HOME='/workspace/work/tundra-beads/dotnet-home');exe='/workspace/work/tundra-beads/dotnet/dotnet';subprocess.run([exe,'build',str(W/'FlowTests.csproj'),'--nologo'],env=env,check=True);subprocess.run([exe,str(W/'bin/Debug/net8.0/FlowTests.dll'),str(R/'Sunward-Unity/Assets')],env=env,check=True)
